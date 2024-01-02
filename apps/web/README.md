@@ -1,6 +1,12 @@
 ## Getting Started
 
-First, run the development server:
+First, create / sync your code to your [Convex](https://www.convex.dev/) backend:
+
+```bash
+npx convex dev
+```
+
+Then, run the development server in a separate terminal:
 
 ```bash
 pnpm dev
