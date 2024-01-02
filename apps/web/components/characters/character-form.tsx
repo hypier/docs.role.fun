@@ -168,6 +168,7 @@ export default function CharacterForm() {
   }
 
   async function handleUploadImage(uploadedImage: File) {
+    const newCharacterId = await onSubmit(form.getValues());
     if (uploadedImage.size > 5242880) {
       toast.error("File size should be less than 5MB");
       return;
@@ -183,7 +184,11 @@ export default function CharacterForm() {
       .then((result) => result.json())
       .then(({ storageId }) =>
         upsert({
-          ...(characterId ? { id: characterId } : {}),
+          ...(characterId
+            ? { id: characterId }
+            : newCharacterId
+              ? { id: newCharacterId as Id<"characters"> }
+              : {}),
           cardImageStorageId: storageId,
         })
       );
