@@ -137,7 +137,7 @@ export const answer = internalAction({
           currentCrystals,
           name: model,
         });
-        throw Error;
+        throw error;
       }
     } catch (error) {
       if (error instanceof ConvexError) {
