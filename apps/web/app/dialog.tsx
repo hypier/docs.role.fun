@@ -171,7 +171,13 @@ export function Dialog({
           </Popover>
         </div>
       )}
-      <div className="flex flex-col lg:h-[calc(100%-16rem)] h-full overflow-y-auto">
+      <div
+        className={`flex flex-col ${
+          inspirations?.followUp3
+            ? "lg:h-[calc(100%-16rem)]"
+            : "lg:h-[calc(100%-12rem)]"
+        } h-full overflow-y-auto`}
+      >
         <div
           className="gap-8 flex h-fit flex-col mx-2 p-4 rounded-lg"
           ref={listRef}
