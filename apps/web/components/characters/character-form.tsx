@@ -105,7 +105,7 @@ export default function CharacterForm() {
     instructions = searchParams.get("instructions") || "",
     greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
-    model = (searchParams.get("model") as any) || "gpt-3.5-turbo-1106",
+    model = (searchParams.get("model") as any) || "gpt-4-1106-preview",
     isDraft = searchParams.get("isDraft") || false,
   } = character || remixCharacter || {};
 
