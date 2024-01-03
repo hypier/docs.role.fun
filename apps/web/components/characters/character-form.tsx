@@ -64,9 +64,9 @@ import Link from "next/link";
 import RemixBadge from "./remix-badge";
 
 const formSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  instructions: z.string(),
+  name: z.string().max(24),
+  description: z.string().max(64),
+  instructions: z.string().max(512),
   greetings: z.optional(z.string()),
   model: z.union([
     z.literal("mistral-7b-instruct"),
