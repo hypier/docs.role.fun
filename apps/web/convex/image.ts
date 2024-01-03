@@ -113,7 +113,7 @@ export const generateWithDalle3 = internalAction(
     });
     const response = await openai.images.generate({
       model: "dall-e-3",
-      prompt: `A portrait image for ${name}, ["${description}"]. When style is not specified, always use anime style. Do not include text on image.`,
+      prompt: `A portrait image for ${name}, (description: "${description}"). When style is not specified, always use anime style. Never include text on image.`,
       n: 1,
       quality: "standard",
       size: "1024x1792",
