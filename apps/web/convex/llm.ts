@@ -142,19 +142,18 @@ export const answer = internalAction({
       }
     } catch (error) {
       if (error instanceof ConvexError) {
+        console.log("catched convex error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: error.data,
+          text: error?.data,
         });
-        console.log("error:::", error);
       } else {
-        console.log("error:::", error);
+        console.log("catched other error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
           text: "I cannot reply at this time. You may have not enough crystals.",
         });
       }
-      throw error;
     }
   },
 });
