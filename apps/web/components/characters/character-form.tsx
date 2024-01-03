@@ -77,8 +77,6 @@ const formSchema = z.object({
     z.literal("pplx-7b-online"),
     z.literal("pplx-70b-chat"),
     z.literal("pplx-70b-online"),
-    z.literal("accounts/fireworks/models/qwen-14b-chat"),
-    z.literal("mistral-tiny"),
     z.literal("mistral-small"),
     z.literal("mistral-medium"),
   ]),
@@ -517,9 +515,6 @@ export default function CharacterForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="mistral-tiny">
-                        Mistral Tiny - Fastest response, provided by Mistral AI
-                      </SelectItem>
                       <SelectItem value="mistral-small">
                         Mistral Small - Faster response, provided by Mistral AI
                       </SelectItem>
@@ -551,10 +546,6 @@ export default function CharacterForm() {
                       <SelectItem value="pplx-70b-chat">
                         Perplexity 70B Chat - Optimized for Knowledge, Faster
                         response, 4096 Context Length, provided by Perplexity AI
-                      </SelectItem>
-                      <SelectItem value="accounts/fireworks/models/qwen-14b-chat">
-                        Qwen 14B Online - Fluent in English and Chinese, Fast
-                        response, provided by Fireworks AI
                       </SelectItem>
                     </SelectContent>
                   </Select>
