@@ -15,7 +15,7 @@ import { Dialog } from "../../dialog";
 import Spinner from "@repo/ui/src/components/spinner";
 import useStoreChatEffect from "../../lib/hooks/use-store-chat-effect";
 import { MessagesSquare } from "lucide-react";
-import { constructMetadata, nFormatter } from "../../lib/utils";
+import { FadeInOut, nFormatter } from "../../lib/utils";
 import { SignIn, useUser } from "@clerk/nextjs";
 import {
   Drawer,
@@ -27,6 +27,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@repo/ui/src/components/drawer";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { user } = useUser();
@@ -119,7 +120,15 @@ export default function Page({ params }: { params: { id: string } }) {
               <Spinner />
             </div>
           ) : (
-            <div className="w-full h-full items-center justify-center flex min-h-[60vh] lg:min-h-fit">
+            <div className="w-full h-full items-center justify-center min-h-[60vh] lg:min-h-fit flex flex-col gap-8">
+              <AnimatePresence>
+                {data?.name && (
+                  <motion.span
+                    {...FadeInOut}
+                    className="font-medium"
+                  >{`Sign in and start chat with ${data?.name}`}</motion.span>
+                )}
+              </AnimatePresence>
               {!user && <SignIn />}
             </div>
           )}
