@@ -4,11 +4,16 @@ import { Crystal } from "@repo/ui/src/components/icons";
 
 const CurrentCrystals = () => {
   const currentUser = useCurrentUser();
+  const crystals = currentUser?.crystals;
   return (
     <Link href="/shop">
-      <div className="text-xs font-medium flex gap-0.5">
+      <div
+        className={`text-xs font-medium flex gap-0.5 ${
+          crystals < 10 ? " text-rose-500 " : ""
+        }`}
+      >
         <Crystal className="w-4 h-4" />
-        {currentUser?.crystals}
+        {crystals}
       </div>
     </Link>
   );
