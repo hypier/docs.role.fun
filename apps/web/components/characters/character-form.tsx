@@ -56,7 +56,7 @@ import {
 import DraftBadge from "./saving-badge";
 import SavingBadge from "./saving-badge";
 import Image from "next/image";
-import { Tooltip } from "@repo/ui/src/components";
+import { InfoTooltip, Tooltip, TooltipContent } from "@repo/ui/src/components";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -105,7 +105,7 @@ export default function CharacterForm() {
     name = searchParams.get("name") || "",
     description = searchParams.get("description") || "",
     instructions = searchParams.get("instructions") || "",
-    greetings = searchParams.get("greetings") || "",
+    greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
     model = (searchParams.get("model") as any) || "gpt-3.5-turbo-1106",
     isDraft = searchParams.get("isDraft") || false,
@@ -143,6 +143,7 @@ export default function CharacterForm() {
       description,
       instructions,
       greetings: Array.isArray(greetings) ? greetings[0] : greetings,
+      model,
     });
   }, [character, remixCharacter]);
 
@@ -358,7 +359,18 @@ export default function CharacterForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel className="flex gap-1 items-center">
+                    Name
+                    <InfoTooltip
+                      content={
+                        <TooltipContent
+                          title={
+                            "Name used by the character in conversations and what other users will see if the character is public."
+                          }
+                        />
+                      }
+                    />
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Name your character" {...field} />
                   </FormControl>
@@ -371,7 +383,18 @@ export default function CharacterForm() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel className="flex gap-1 items-center">
+                    Description
+                    <InfoTooltip
+                      content={
+                        <TooltipContent
+                          title={
+                            "Description is a brief way to describe the Character and scenario. It acts like a Title in character listings."
+                          }
+                        />
+                      }
+                    />
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Add a short description about this character"
@@ -388,7 +411,18 @@ export default function CharacterForm() {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex justify-between items-center">
-                    <FormLabel>Instructions</FormLabel>
+                    <FormLabel className="flex gap-1 items-center">
+                      Instructions
+                      <InfoTooltip
+                        content={
+                          <TooltipContent
+                            title={
+                              "With Instructions, you can have the Character describe themselves (traits, history, example quotes, mannerisms, etc.) and specify the topics they prefer to talk about."
+                            }
+                          />
+                        }
+                      />
+                    </FormLabel>
                     <Tooltip
                       content={
                         isInstructionGenerationDisabled
@@ -445,7 +479,18 @@ export default function CharacterForm() {
               name="greetings"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Greetings</FormLabel>
+                  <FormLabel className="flex gap-1 items-center">
+                    Greeting
+                    <InfoTooltip
+                      content={
+                        <TooltipContent
+                          title={
+                            "Greeting The first thing your Character will say when starting a new conversation. If left blank, the user will need to go first in a new chat. Greeting can have a large impact."
+                          }
+                        />
+                      }
+                    />
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="The first message from character to user"
