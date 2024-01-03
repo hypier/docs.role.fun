@@ -96,4 +96,10 @@ export default defineSchema({
   })
     .index("byStripeId", ["stripeId"])
     .index("byUserId", ["userId"]),
+  checkIn: defineTable({
+    userId: v.id("users"),
+    date: v.string(),
+  })
+    .index("byUserId", ["userId"])
+    .index("byDate", ["date"]),
 });

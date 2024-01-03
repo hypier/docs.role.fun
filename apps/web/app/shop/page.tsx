@@ -1,5 +1,6 @@
 "use client";
 import {
+  Button,
   Card,
   CardFooter,
   CardHeader,
@@ -7,7 +8,7 @@ import {
   Tooltip,
 } from "@repo/ui/src/components";
 import { Crystal } from "@repo/ui/src/components/icons";
-import { useAction, useConvexAuth } from "convex/react";
+import { useAction, useConvexAuth, useMutation, useQuery } from "convex/react";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import { toast } from "sonner";
@@ -123,6 +124,45 @@ const PackageWrapper = ({
   );
 };
 
+const DailyReward = () => {
+  const checkin = useMutation(api.serve.checkin);
+  const checkedIn = useQuery(api.serve.checkedIn);
+  const onClickHandler = async () => {
+    const promise = checkin();
+    toast.promise(promise, {
+      loading: "Claiming your daily reward...",
+      success: () => {
+        return `You've claimed your daily reward!`;
+      },
+      error: (error) => {
+        return error
+          ? (error.data as { message: string }).message
+          : "Unexpected error occurred";
+      },
+    });
+  };
+
+  return (
+    <div className="flex flex-col gap-8 items-center px-5">
+      <h1 className="text-5xl font-display">Daily Rewards</h1>
+      <AnimatePresence>
+        {checkedIn && (
+          <motion.p
+            className="text-muted-foreground text-sm flex gap-1 items-center"
+            {...FadeInOut}
+          >
+            <Crystal className="w-4 h-4 hidden md:inline" />
+            You've already claimed today's reward.
+          </motion.p>
+        )}
+      </AnimatePresence>
+      <Button onClick={onClickHandler} disabled={checkedIn}>
+        Claim 50 Crystals
+      </Button>
+    </div>
+  );
+};
+
 export default function Page() {
   const { isAuthenticated } = useConvexAuth();
   const packages = [
@@ -133,6 +173,7 @@ export default function Page() {
     { src: "/shop/tier5.png", amount: 19400, bonus: 3000, price: 49.99 },
     { src: "/shop/tier6.png", amount: 90000, bonus: 8000, price: 99.99 },
   ];
+
   return (
     <div className="w-full flex flex-col justify-self-start items-center gap-16 pt-16 pb-32 px-2">
       <div className="flex flex-col gap-4 items-start md:items-center px-5">
@@ -176,6 +217,7 @@ export default function Page() {
           </section>
         )}
       </AnimatePresence>
+      <AnimatePresence>{isAuthenticated && <DailyReward />}</AnimatePresence>
     </div>
   );
 }
