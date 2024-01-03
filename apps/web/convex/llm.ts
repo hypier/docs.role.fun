@@ -151,7 +151,7 @@ export const answer = internalAction({
         console.log("error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: "I cannot reply at this time.",
+          text: "I cannot reply at this time. You may have not enough crystals.",
         });
       }
       throw error;
@@ -223,7 +223,7 @@ export const generateInstruction = internalAction({
       } else {
         await ctx.runMutation(internal.llm.updateCharacterInstruction, {
           characterId,
-          text: "I cannot generate instruction at this time.",
+          text: "I cannot generate instruction at this time. You may have not enough crystals.",
         });
       }
       throw error;
