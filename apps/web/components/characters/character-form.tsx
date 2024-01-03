@@ -314,7 +314,7 @@ export default function CharacterForm() {
             content={
               isImageUploadDisabled
                 ? "Write character name and description to generate character card."
-                : "Generate character card"
+                : "Generate character card using character name and description"
             }
           >
             <Button

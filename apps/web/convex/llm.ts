@@ -172,7 +172,7 @@ export const generateInstruction = internalAction({
         baseURL,
         apiKey,
       });
-      const instruction = `Create specific and detailed character instruction (what does the character do, how does they behave, what should they avoid doing) for ${name} (description: ${description}). `;
+      const instruction = `Create specific and detailed character instruction (what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
       const { currentCrystals } = await ctx.runMutation(
         internal.serve.useCrystal,
         {
