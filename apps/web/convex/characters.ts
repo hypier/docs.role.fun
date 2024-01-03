@@ -97,9 +97,9 @@ export const publish = mutation({
         message: "User does not have permission to modify this character.",
       });
     }
-    if (!character.name || !character.instructions) {
+    if (!character.name || !character.instructions || !character.greetings) {
       throw new ConvexError({
-        message: "Character must have a name and instructions.",
+        message: "Character must have a name, instructions and greeting.",
       });
     }
     const updatedAt = new Date().toISOString();
