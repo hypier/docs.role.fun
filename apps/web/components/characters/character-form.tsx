@@ -637,7 +637,6 @@ export default function CharacterForm() {
               onClick={() => {
                 setOpenPopover(!openPopover);
               }}
-              disabled={!form.formState.isDirty}
             >
               Save
             </Button>
