@@ -485,7 +485,7 @@ export default function CharacterForm() {
                       content={
                         <TooltipContent
                           title={
-                            "Greeting The first thing your Character will say when starting a new conversation. If left blank, the user will need to go first in a new chat. Greeting can have a large impact."
+                            "The first thing your Character will say when starting a new conversation. If left blank, the user will need to go first in a new chat. Greeting can have a large impact."
                           }
                         />
                       }
