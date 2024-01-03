@@ -1,4 +1,4 @@
-import { action, mutation, query } from "./_generated/server";
+import { action, internalQuery, mutation, query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { getUser } from "./users";
 import { embedText } from "./ingest/embed";
@@ -146,6 +146,15 @@ export const listMy = query({
 });
 
 export const get = query({
+  args: {
+    id: v.id("characters"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
+  },
+});
+
+export const getCharacter = internalQuery({
   args: {
     id: v.id("characters"),
   },
