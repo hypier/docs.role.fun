@@ -1,4 +1,5 @@
 export const SIGN_UP_FREE_CRYSTALS = 512;
+export const DIVIDEND_RATE = 0.05;
 export const DEFAULT_MODEL = "gpt-3.5-turbo-1106";
 export const PERPLEXITY_API_URL = "https://api.perplexity.ai";
 export const OPENAI_API_URL = "https://api.openai.com/v1";
