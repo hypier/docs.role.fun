@@ -213,7 +213,7 @@ export function Dialog({
                 {message.text === "" ? (
                   <div
                     className={
-                      "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap" +
+                      "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap animate-pulse" +
                       (message?.characterId
                         ? " bg-muted rounded-tl-none "
                         : " bg-foreground text-muted rounded-tr-none ")
@@ -275,10 +275,10 @@ export function Dialog({
         </div>
       </div>
       <form
-        className="border-solid border-0 border-t-[1px] flex flex-col sticky bottom-16 lg:bottom-0 w-full h-48 min-h-fit bg-background items-center rounded-br-lg"
+        className="border-solid border-0 border-t-[1px] flex flex-col sticky bottom-16 lg:bottom-0 w-full min-h-fit bg-background items-center rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
-        <div className="w-full p-4 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md h-30 overflow-x-scroll scrollbar-hide overflow-y-clip">
+        <div className="w-full p-4 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md max-h-36 overflow-x-scroll scrollbar-hide overflow-y-clip">
           <Tooltip
             content={
               <span className="text-xs flex gap-1 text-muted-foreground p-2">
