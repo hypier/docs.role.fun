@@ -60,7 +60,7 @@ export const checkin = mutation({
   args: {},
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
-    const date = new Date().toISOString().split("T")[0];
+    const date = new Date().toISOString().split("T")[0] as string;
     const checkIn = await ctx.db
       .query("checkIn")
       .withIndex("byUserId", (q: any) => q.eq("userId", user._id))
