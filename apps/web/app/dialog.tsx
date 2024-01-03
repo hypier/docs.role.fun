@@ -288,7 +288,7 @@ export function Dialog({
           <Tooltip
             content={
               <span className="text-xs flex gap-1 text-muted-foreground p-2">
-                <Crystal className="w-4 h-4" /> x 5
+                <Crystal className="w-4 h-4" /> x 1
               </span>
             }
             desktopOnly={true}
