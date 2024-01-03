@@ -171,9 +171,9 @@ export function Dialog({
           </Popover>
         </div>
       )}
-      <div className="h-[calc(100%-6rem)] relative flex flex-col ">
+      <div className="flex flex-col lg:h-[calc(100%-14rem)] h-full overflow-y-auto">
         <div
-          className="grow overflow-y-scroll scrollbar-hide h-full gap-8 flex flex-col mx-2 p-4 rounded-lg lg:h-[100vh]"
+          className="gap-8 flex h-fit flex-col mx-2 p-4 rounded-lg"
           ref={listRef}
           onWheel={() => {
             setScrolled(true);
@@ -273,7 +273,12 @@ export function Dialog({
             ))
           )}
         </div>
-        <div className="w-full p-4 pb-16 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md h-fit overflow-x-scroll scrollbar-hide overflow-y-clip">
+      </div>
+      <form
+        className="border-solid border-0 border-t-[1px] flex flex-col sticky bottom-16 lg:bottom-0 w-full h-40 bg-background items-center rounded-br-lg"
+        onSubmit={(event) => void handleSend(event)}
+      >
+        <div className="w-full p-4 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md h-fit overflow-x-scroll scrollbar-hide overflow-y-clip">
           <Tooltip
             content={
               <span className="text-xs flex gap-1 text-muted-foreground p-2">
@@ -291,6 +296,7 @@ export function Dialog({
               className="gap-1"
               size="xs"
               disabled={isGeneratingInspiration}
+              type="button"
             >
               {isGeneratingInspiration ? (
                 <>
@@ -317,6 +323,7 @@ export function Dialog({
                     onClick={() => {
                       sendAndReset(inspirations?.followUp1 as string);
                     }}
+                    type="button"
                   >
                     {inspirations?.followUp1}
                   </Button>
@@ -330,6 +337,7 @@ export function Dialog({
                     onClick={() => {
                       sendAndReset(inspirations?.followUp2 as string);
                     }}
+                    type="button"
                   >
                     {inspirations?.followUp2}
                   </Button>
@@ -343,6 +351,7 @@ export function Dialog({
                     onClick={() => {
                       sendAndReset(inspirations?.followUp3 as string);
                     }}
+                    type="button"
                   >
                     {inspirations?.followUp3}
                   </Button>
@@ -350,10 +359,7 @@ export function Dialog({
             </>
           )}
         </div>
-        <form
-          className="border-solid border-0 border-t-[1px] flex sticky bottom-16 lg:bottom-0 w-full bg-background h-16 items-center rounded-br-lg"
-          onSubmit={(event) => void handleSend(event)}
-        >
+        <div className="flex w-full">
           <input
             className="w-full ml-4 my-3 border-none focus-visible:ring-0 bg-background"
             autoFocus
@@ -365,8 +371,8 @@ export function Dialog({
           <Button disabled={input === ""} variant="ghost" className="my-3 mr-4">
             <Send className="w-5 h-5" />
           </Button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
