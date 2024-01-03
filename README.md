@@ -69,7 +69,10 @@ This is where Open Roleplay steps in. Whether self-hosted or hosted by us, it's 
 
 ### Image generation
 
+Image generation feature is partially implemented at the moment.
+
 - Stable Diffusion XL (Provided by Stability AI)
+- Dall-E 3 (Provided by OpenAI)
 
 ### Built With
 
