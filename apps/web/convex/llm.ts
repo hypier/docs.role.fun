@@ -289,7 +289,7 @@ export const generateFollowups = internalAction({
                 answer2: {
                   type: "string",
                   description:
-                    "Craft an engaging and intriguing follow-up to the previous message, designed to captivate the user's interest.",
+                    "Craft an engaging and intriguing follow-up to the previous message, designed to captivate the user's interest aware of character's background.",
                 },
                 answer3: {
                   type: "string",
