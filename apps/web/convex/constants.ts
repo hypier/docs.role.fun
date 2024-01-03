@@ -79,15 +79,15 @@ export const getCrystalPrice = (modelName: string) => {
     case "pplx-7b-chat":
       return 1;
     case "pplx-7b-online":
-      return 2;
+      return 1;
     case "pplx-70b-online":
-      return 5;
+      return 3;
     case "pplx-70b-chat":
-      return 5;
+      return 3;
     case "accounts/fireworks/models/qwen-14b-chat":
       return 2;
     case "gpt-3.5-turbo-1106":
-      return 5;
+      return 3;
     case "stable-diffusion-xl-1024-v1-0":
       return 30;
     case "gpt-4-1106-preview":
@@ -95,11 +95,11 @@ export const getCrystalPrice = (modelName: string) => {
     case "dalle-3":
       return 75;
     case "mistral-tiny":
-      return 5;
+      return 3;
     case "mistral-small":
-      return 10;
+      return 5;
     case "mistral-medium":
-      return 15;
+      return 10;
     default:
       return 5;
   }
