@@ -89,9 +89,9 @@ export const getCrystalPrice = (modelName: string) => {
     case "gpt-3.5-turbo-1106":
       return 3;
     case "stable-diffusion-xl-1024-v1-0":
-      return 30;
+      return 25;
     case "gpt-4-1106-preview":
-      return 30;
+      return 25;
     case "dalle-3":
       return 75;
     case "mistral-tiny":
