@@ -81,7 +81,6 @@ export const answer = internalAction({
             like *sad*, *laughing*. This can be used to indicate action or emotion in a definition.
 
             Answer shortly.
-
             `;
       const { currentCrystals } = await ctx.runMutation(
         internal.serve.useCrystal,
