@@ -173,7 +173,7 @@ export function Dialog({
       )}
       <div
         className={`flex flex-col ${
-          inspirations?.followUp3
+          inspirations?.followUp3 && !inspirations?.isStale
             ? "lg:h-[calc(100%-16rem)]"
             : "lg:h-[calc(100%-12rem)]"
         } h-full overflow-y-auto`}
