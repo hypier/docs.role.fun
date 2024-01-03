@@ -146,10 +146,13 @@ export const answer = internalAction({
           text: error.data,
         });
       } else {
+        console.log("error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
           text: "I cannot reply at this time.",
         });
+        // @ts-ignore
+        console.log("error.data:::", error?.data);
       }
       throw error;
     }
