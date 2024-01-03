@@ -49,6 +49,13 @@ export const answer = internalAction({
     }
     try {
       const model = character?.model ? character.model : DEFAULT_MODEL;
+      const { currentCrystals } = await ctx.runMutation(
+        internal.serve.useCrystal,
+        {
+          userId,
+          name: model,
+        }
+      );
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
       const openai = new OpenAI({
@@ -82,13 +89,7 @@ export const answer = internalAction({
 
             Answer shortly.
             `;
-      const { currentCrystals } = await ctx.runMutation(
-        internal.serve.useCrystal,
-        {
-          userId,
-          name: model,
-        }
-      );
+
       try {
         const stream = await openai.chat.completions.create({
           model,
@@ -145,14 +146,13 @@ export const answer = internalAction({
           messageId,
           text: error.data,
         });
+        console.log("error:::", error);
       } else {
         console.log("error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
           text: "I cannot reply at this time.",
         });
-        // @ts-ignore
-        console.log("error.data:::", error?.data);
       }
       throw error;
     }
