@@ -73,7 +73,7 @@ export const getRemindInstructionInterval = (modelName: string) => {
 export const getCrystalPrice = (modelName: string) => {
   switch (modelName) {
     case "mixtral-8x7b-instruct":
-      return 3;
+      return 1;
     case "mistral-7b-instruct":
       return 1;
     case "pplx-7b-chat":
@@ -81,23 +81,23 @@ export const getCrystalPrice = (modelName: string) => {
     case "pplx-7b-online":
       return 1;
     case "pplx-70b-online":
-      return 3;
+      return 1;
     case "pplx-70b-chat":
-      return 3;
+      return 1;
     case "accounts/fireworks/models/qwen-14b-chat":
-      return 2;
+      return 1;
     case "gpt-3.5-turbo-1106":
-      return 3;
+      return 1;
     case "stable-diffusion-xl-1024-v1-0":
       return 25;
     case "gpt-4-1106-preview":
-      return 25;
+      return 10;
     case "dalle-3":
       return 75;
     case "mistral-tiny":
-      return 3;
+      return 1;
     case "mistral-small":
-      return 5;
+      return 2;
     case "mistral-medium":
       return 10;
     default:
