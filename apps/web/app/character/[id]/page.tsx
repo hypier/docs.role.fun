@@ -20,7 +20,6 @@ export async function generateMetadata(
       "convex.site"
     )}/character?characterId=${id}`
   ).then((res) => res.json());
-  console.log("character::", character);
 
   return constructMetadata({
     title: character.name,
