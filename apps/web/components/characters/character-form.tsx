@@ -455,7 +455,7 @@ export default function CharacterForm() {
           onOpenChange={() => setOpenPopover(!openPopover)}
         >
           <PopoverContent asChild>
-            <div className="w-full rounded-lg bg-white p-4 sm:w-40">
+            <div className="w-full rounded-lg bg-primary p-4 sm:w-40">
               <RadioGroup
                 defaultValue="public"
                 className="p-1"
