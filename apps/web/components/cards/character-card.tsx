@@ -68,7 +68,7 @@ const CharacterCard = (props: {
           </div>
           <CardHeader className="relative w-full p-4 z-[2]">
             {props.cardImageUrl && (
-              <div className="bg-gradient-to-b from-transparent via-black/60 to-black absolute -left-2 -bottom-2 w-[calc(100%+16px)] h-[calc(100%+2rem)] rounded-b-lg" />
+              <div className="bg-gradient-to-b from-transparent via-black/60 to-black absolute -left-[10px] -bottom-[9px] w-[calc(100%+20px)] h-[calc(100%+2rem)] rounded-b-lg" />
             )}
             <CardTitle
               className={`${
