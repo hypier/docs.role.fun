@@ -219,7 +219,7 @@ export default function CharacterForm() {
           </div>
           <div className="flex items-center gap-2">
             {characterId && <ArchiveButton characterId={characterId} />}
-            {!cardImageUrl && (
+            {!cardImageUrl && !isDraft && (
               <GenerateButton
                 setCharacterId={setCharacterId}
                 cardImageUrl={cardImageUrl}
