@@ -19,27 +19,54 @@ import { useEffect, useState } from "react";
 
 export const GenerateButton = ({
   setCharacterId,
-  isReady,
+  cardImageUrl,
+  name,
 }: {
   setCharacterId: any;
-  isReady: boolean;
+  cardImageUrl: string;
+  name: string;
 }) => {
   const generate = useMutation(api.characters.generate);
   const [isGenerating, setIsGenerating] = useState(false);
+
+  const [generationStep, setGenerationStep] = useState(0);
+  const generationSteps = [
+    "name",
+    "description",
+    "instructions",
+    "greeting",
+    "character",
+    "something",
+    "magic",
+    "wonder",
+    "future",
+  ];
+
   useEffect(() => {
-    isReady && setIsGenerating(false);
-  }, [isReady]);
+    const interval = setInterval(() => {
+      setGenerationStep((prevStep) => (prevStep + 1) % generationSteps.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (name && !cardImageUrl) {
+      toast.success("Character detail is generated.");
+      toast.info("Generating character image...");
+    }
+    cardImageUrl && setIsGenerating(false);
+  }, [cardImageUrl, name]);
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           className="flex gap-1"
-          disabled={Boolean(isReady) || isGenerating}
+          disabled={Boolean(cardImageUrl) || Boolean(name) || isGenerating}
         >
           {isGenerating ? (
             <>
               <Spinner />
-              Generating...
+              Generating {generationSteps[generationStep]}...
             </>
           ) : (
             <>
@@ -63,7 +90,7 @@ export const GenerateButton = ({
               setIsGenerating(true);
               const characterId = await generate();
               setCharacterId(characterId);
-              toast.success("Character will be generated within 30 seconds.");
+              toast.info("Character will be generated within 30 seconds.");
             }}
           >
             Continue

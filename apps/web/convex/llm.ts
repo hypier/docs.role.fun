@@ -379,7 +379,7 @@ export const generateCharacter = internalAction({
         }
       );
       try {
-        const instruction = `generate virtual character, respond in JSON as this will be used for function arguments. random seed:${Math.random()}
+        const instruction = `generate virtual character, respond in JSON. random seed:${Math.random()}
         `;
 
         const functions = [
@@ -408,7 +408,7 @@ export const generateCharacter = internalAction({
                 prompt: {
                   type: "string",
                   description:
-                    "Instruct artist to draw this character, artist can draw in any kind of style, photorealistic, anime, game, pixel art, painting, whatever. make sure instruction does not contain any copyright infringement and NSFW description.",
+                    "Prompt artist to draw this character, artist can draw in any kind of style. prompt does not contain any copyright infringement and NSFW description.",
                 },
               },
               required: [

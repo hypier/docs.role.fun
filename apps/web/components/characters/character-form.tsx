@@ -199,7 +199,6 @@ export default function CharacterForm() {
     !form.getValues().name ||
     !form.getValues().description ||
     isGeneratingInstructions;
-  const isReady = Boolean(cardImageUrl) || Boolean(instructions);
   return (
     <Card className="w-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden h-full rounded-b-none">
       <CardHeader>
@@ -220,10 +219,11 @@ export default function CharacterForm() {
           </div>
           <div className="flex items-center gap-2">
             {characterId && <ArchiveButton characterId={characterId} />}
-            {!isReady && (
+            {!cardImageUrl && (
               <GenerateButton
                 setCharacterId={setCharacterId}
-                isReady={isReady}
+                cardImageUrl={cardImageUrl}
+                name={name}
               />
             )}
           </div>
