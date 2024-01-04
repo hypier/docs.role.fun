@@ -32,15 +32,15 @@ export function Tooltip({
         >
           {children}
         </Drawer.Trigger>
-        <Drawer.Overlay className="fixed inset-0 z-40 bg-gray-100 bg-opacity-10 backdrop-blur" />
+        <Drawer.Overlay className="fixed inset-0 z-40 bg-secondary bg-opacity-10 backdrop-blur" />
         <Drawer.Portal>
-          <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 rounded-t-[10px] border-t border-gray-200 bg-white">
+          <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 rounded-t-[10px] border-t bg-background">
             <div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-t-[10px] bg-inherit">
-              <div className="my-3 h-1 w-12 rounded-full bg-gray-300" />
+              <div className="my-3 h-1 w-12 rounded-full bg-secondary" />
             </div>
-            <div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white align-middle shadow-xl">
+            <div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-background align-middle shadow-xl">
               {typeof content === "string" ? (
-                <span className="block text-center text-sm text-gray-700">
+                <span className="block text-center text-sm text-foreground">
                   {content}
                 </span>
               ) : (
@@ -62,10 +62,10 @@ export function Tooltip({
           <TooltipPrimitive.Content
             sideOffset={8}
             side={side}
-            className="animate-slide-up-fade z-[99] items-center overflow-hidden rounded-md border border-gray-200 bg-white shadow-md md:block"
+            className="animate-slide-up-fade z-[99] items-center overflow-hidden rounded-md border bg-background shadow-md md:block"
           >
             {typeof content === "string" ? (
-              <div className="block max-w-xs px-4 py-2 text-center text-sm text-gray-700">
+              <div className="block max-w-xs px-4 py-2 text-center text-sm text-secondary-foreground">
                 {content}
               </div>
             ) : (
@@ -80,7 +80,7 @@ export function Tooltip({
 
 export function TooltipContent({ title }: { title: string }) {
   return (
-    <div className="max-w-xs px-4 py-2 text-center text-sm text-gray-700">
+    <div className="max-w-xs px-4 py-2 text-center text-sm text-secondary-foreground">
       {title}
     </div>
   );
@@ -89,7 +89,7 @@ export function TooltipContent({ title }: { title: string }) {
 export function InfoTooltip({ content }: { content: ReactNode | string }) {
   return (
     <Tooltip content={content}>
-      <HelpCircle className="h-4 w-4 text-gray-500" />
+      <HelpCircle className="h-4 w-4 text-muted-foreground" />
     </Tooltip>
   );
 }
