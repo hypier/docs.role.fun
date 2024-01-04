@@ -385,21 +385,17 @@ export const generateCharacter = internalAction({
         const functions = [
           {
             name: "generate_character",
-            description: "generate virtual character.",
+            description: "generate random character.",
             parameters: {
               type: "object",
               properties: {
-                description: {
-                  type: "string",
-                  description: "short description (~15 words)",
-                },
-                name: {
-                  type: "string",
-                  description: `creative and short name of the character - random seed:${Math.random()} (~2 words)`,
-                },
                 instructions: {
                   type: "string",
                   description: "instruct how they behave, what they do, quotes",
+                },
+                description: {
+                  type: "string",
+                  description: "short description (~15 words)",
                 },
                 greeting: {
                   type: "string",
@@ -409,6 +405,10 @@ export const generateCharacter = internalAction({
                   type: "string",
                   description:
                     "Prompt artist to draw this character, prompt does not contain any copyright infringement and NSFW description.",
+                },
+                name: {
+                  type: "string",
+                  description: `creative and short name of the character from any language (~2 words)`,
                 },
               },
               required: [
