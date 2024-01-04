@@ -70,7 +70,10 @@ export const answer = internalAction({
                 character?.description &&
                 `description: ${character.description}`
               }
-              instruction: ${character?.instructions}
+              ${
+                character?.instructions &&
+                `instruction: ${character.instructions}`
+              }
             }
 
             ${

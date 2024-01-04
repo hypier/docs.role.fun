@@ -87,7 +87,7 @@ export default function CharacterForm() {
     name = searchParams.get("name") || "",
     description = searchParams.get("description") || "",
     instructions = searchParams.get("instructions") || "",
-    greetings = searchParams.get("greetings") || "Hi.",
+    greetings = searchParams.get("greetings") || "",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
     model = (searchParams.get("model") as any) || "gpt-4-1106-preview",
     isDraft = searchParams.get("isDraft") || false,
@@ -324,16 +324,16 @@ export default function CharacterForm() {
             />
             <FormField
               control={form.control}
-              name="description"
+              name="greetings"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex gap-1 items-center">
-                    Description
+                    Greeting
                     <InfoTooltip
                       content={
                         <TooltipContent
                           title={
-                            "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
+                            "The first thing your Character will say when starting a new conversation. Greeting can have a large impact on chat."
                           }
                         />
                       }
@@ -341,7 +341,7 @@ export default function CharacterForm() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Add a short description about this character"
+                      placeholder="The first message from character to user"
                       {...field}
                     />
                   </FormControl>
@@ -356,7 +356,8 @@ export default function CharacterForm() {
                 <FormItem>
                   <div className="flex justify-between items-center">
                     <FormLabel className="flex gap-1 items-center">
-                      Instructions
+                      Instructions{" "}
+                      <span className="text-muted-foreground">(optional)</span>
                       <InfoTooltip
                         content={
                           <TooltipContent
@@ -420,16 +421,17 @@ export default function CharacterForm() {
             />
             <FormField
               control={form.control}
-              name="greetings"
+              name="description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex gap-1 items-center">
-                    Greeting
+                    Description{" "}
+                    <span className="text-muted-foreground">(optional)</span>
                     <InfoTooltip
                       content={
                         <TooltipContent
                           title={
-                            "The first thing your Character will say when starting a new conversation. If left blank, the user will need to go first in a new chat. Greeting can have a large impact."
+                            "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
                           }
                         />
                       }
@@ -437,7 +439,7 @@ export default function CharacterForm() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="The first message from character to user"
+                      placeholder="Add a short description about this character"
                       {...field}
                     />
                   </FormControl>
@@ -480,12 +482,15 @@ export default function CharacterForm() {
               </RadioGroup>
               <div className="flex justify-center pt-4">
                 <Button
-                  onClick={() => {
-                    onSubmit(form.getValues());
-                    characterId &&
+                  onClick={async () => {
+                    const newCharacterId = await onSubmit(form.getValues());
+                    const charId = characterId
+                      ? characterId
+                      : (newCharacterId as Id<"characters">);
+                    charId &&
                       (() => {
                         const promise = publish({
-                          id: characterId,
+                          id: charId,
                           visibility: visibility as any,
                         });
                         toast.promise(promise, {

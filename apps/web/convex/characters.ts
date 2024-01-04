@@ -97,15 +97,16 @@ export const publish = mutation({
         message: "User does not have permission to modify this character.",
       });
     }
-    if (!character.name || !character.instructions || !character.greetings) {
+    if (!character.name || !character.greetings) {
       throw new ConvexError({
-        message: "Character must have a name, instructions and greeting.",
+        message: "Character must have a name and greeting.",
       });
     }
     const updatedAt = new Date().toISOString();
     const updatedCharacter = await ctx.db.patch(args.id, {
       isDraft: false,
       ...(args.visibility ? { visibility: args.visibility } : {}),
+      ...(character.description ? {} : { description: character.greetings[0] }),
       updatedAt,
     });
     return updatedCharacter;
