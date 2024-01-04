@@ -399,18 +399,16 @@ export const generateCharacter = internalAction({
                 },
                 instructions: {
                   type: "string",
-                  description:
-                    "how they behave, what they do, quotes (~50 words)",
+                  description: "instruct how they behave, what they do, quotes",
                 },
                 greeting: {
                   type: "string",
-                  description:
-                    "first message or prologue for the character (~20 words)",
+                  description: "first message or prologue for the character",
                 },
                 prompt: {
                   type: "string",
                   description:
-                    "Instruct artist to draw this character, make sure instruction does not contain any copyright infringement and NSFW description. (~30 words)",
+                    "Instruct artist to draw this character, artist can draw in any kind of style, photorealistic, anime, game, pixel art, painting, whatever. make sure instruction does not contain any copyright infringement and NSFW description.",
                 },
               },
               required: [
