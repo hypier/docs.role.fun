@@ -15,6 +15,7 @@ import {
   getBaseURL,
   getRemindInstructionInterval,
 } from "./constants";
+import { getRandomGenreAndModality } from "./random";
 
 export const answer = internalAction({
   args: {
@@ -380,7 +381,7 @@ export const generateCharacter = internalAction({
         }
       );
       try {
-        const instruction = `generate character, respond in JSON. seed:${
+        const instruction = `generate ${getRandomGenreAndModality} character, respond in JSON. seed:${
           Math.random() * Date.now()
         } [${generate(5)}]
         `;
@@ -407,7 +408,7 @@ export const generateCharacter = internalAction({
                 prompt: {
                   type: "string",
                   description:
-                    "Prompt artist to draw this character, prompt does not contain any copyright infringement and NSFW description.",
+                    "Describe artist on how to draw this character, do not contain any copyright infringement and NSFW description.",
                 },
                 name: {
                   type: "string",

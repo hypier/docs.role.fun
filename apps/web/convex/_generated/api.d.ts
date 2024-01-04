@@ -28,6 +28,7 @@ import type * as llm from "../llm.js";
 import type * as messages from "../messages.js";
 import type * as payments from "../payments.js";
 import type * as personas from "../personas.js";
+import type * as random from "../random.js";
 import type * as serve from "../serve.js";
 import type * as stripe from "../stripe.js";
 import type * as users from "../users.js";
@@ -55,6 +56,7 @@ declare const fullApi: ApiFromModules<{
   messages: typeof messages;
   payments: typeof payments;
   personas: typeof personas;
+  random: typeof random;
   serve: typeof serve;
   stripe: typeof stripe;
   users: typeof users;
