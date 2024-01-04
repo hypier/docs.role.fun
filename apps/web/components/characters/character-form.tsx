@@ -333,7 +333,7 @@ export default function CharacterForm() {
                       content={
                         <TooltipContent
                           title={
-                            "Description is a brief way to describe the Character and scenario. It acts like a Title in character listings."
+                            "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
                           }
                         />
                       }
