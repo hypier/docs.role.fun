@@ -127,7 +127,7 @@ export default function CharacterForm() {
       greetings: Array.isArray(greetings) ? greetings[0] : greetings,
       model,
     });
-  }, [character, remixCharacter]);
+  }, [character, name, description, instructions, greetings, model]);
 
   useEffect(() => {
     cardImageUrl && setIsGeneratingImage(false);
