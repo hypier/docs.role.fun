@@ -34,17 +34,7 @@ import { RadioGroup, RadioGroupItem } from "@repo/ui/src/components/radio";
 import { Label } from "@repo/ui/src/components/label";
 import { toast } from "sonner";
 import { Id } from "../../convex/_generated/dataModel";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@repo/ui/src/components/alert-dialog";
+
 import DraftBadge from "./saving-badge";
 import SavingBadge from "./saving-badge";
 import Image from "next/image";
@@ -55,6 +45,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import RemixBadge from "./remix-badge";
 import { ModelSelect } from "./model-select";
+import { ArchiveButton } from "./archive-button";
 
 const formSchema = z.object({
   name: z.string().max(24),
@@ -227,45 +218,7 @@ export default function CharacterForm() {
             {remixId && <RemixBadge />}
           </div>
           {characterId && (
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="ghost" className="text-muted-foreground">
-                  Archive character
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    {`This action cannot be undone. Archived characters are not discoverable from the homepage. Users who already interacted with the characters can still see their messages.`}
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      const promise = archive({
-                        id: characterId as Id<"characters">,
-                      });
-                      toast.promise(promise, {
-                        loading: "Archiving character...",
-                        success: () => {
-                          router.back();
-                          return `Character has been archived.`;
-                        },
-                        error: (error) => {
-                          return error?.data
-                            ? (error.data as { message: string })?.message
-                            : "Unexpected error occurred";
-                        },
-                      });
-                    }}
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <ArchiveButton archive={archive} characterId={characterId} />
           )}
         </CardTitle>
         <CardDescription>Configure your character details.</CardDescription>
