@@ -102,4 +102,10 @@ export default defineSchema({
   })
     .index("byUserId", ["userId"])
     .index("byDate", ["date"]),
+  stories: defineTable({
+    userId: v.id("users"),
+    characterId: v.id("characters"),
+    messageIds: v.array(v.id("messages")),
+    isPrivate: v.boolean(),
+  }).index("byUserId", ["userId"]),
 });
