@@ -5,7 +5,7 @@ import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { MoreHorizontal, Send, Sparkles } from "lucide-react";
+import { MoreHorizontal, Send, Share, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { CodeBlock } from "@repo/ui/src/components/codeblock";
@@ -120,55 +120,76 @@ export function Dialog({
             <ModelBadge modelName={model as string} showCredits={true} />
             AI can make mistakes.
           </div>
-          <Popover>
-            <AlertDialog>
-              <AlertDialogTrigger>
-                <PopoverContent asChild>
-                  <Button variant="ghost" className="text-muted-foreground">
-                    Delete Chat
-                  </Button>
-                </PopoverContent>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    {`This action cannot be undone. This will permanently delete chat.`}
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      const promise = remove({
-                        id: chatId as Id<"chats">,
-                      });
-                      toast.promise(promise, {
-                        loading: "Deleting chat...",
-                        success: () => {
-                          goBack();
-                          return `Chat has been deleted.`;
-                        },
-                        error: (error) => {
-                          console.log("error:::", error);
-                          return error
-                            ? (error.data as { message: string })?.message
-                            : "Unexpected error occurred";
-                        },
-                      });
-                    }}
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            <PopoverTrigger
-              className={`flex items-center justify-center overflow-hidden rounded-full border-none outline-none transition-all duration-75 active:scale-95`}
+          <div className="flex gap-1 items-center">
+            <Button
+              variant="ghost"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: document.title,
+                    url: document.location.href,
+                  });
+                } else {
+                  navigator.clipboard.writeText(document.location.href);
+                  toast.success("Link copied to clipboard");
+                }
+              }}
+              size="icon"
             >
-              <MoreHorizontal className="h-4 w-4" />
-            </PopoverTrigger>
-          </Popover>
+              <Share className="w-4 h-4" />
+            </Button>
+            <Popover>
+              <AlertDialog>
+                <AlertDialogTrigger>
+                  <PopoverContent asChild>
+                    <Button variant="ghost" className="text-muted-foreground">
+                      Delete Chat
+                    </Button>
+                  </PopoverContent>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      {`This action cannot be undone. This will permanently delete chat.`}
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => {
+                        const promise = remove({
+                          id: chatId as Id<"chats">,
+                        });
+                        toast.promise(promise, {
+                          loading: "Deleting chat...",
+                          success: () => {
+                            goBack();
+                            return `Chat has been deleted.`;
+                          },
+                          error: (error) => {
+                            console.log("error:::", error);
+                            return error
+                              ? (error.data as { message: string })?.message
+                              : "Unexpected error occurred";
+                          },
+                        });
+                      }}
+                    >
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </PopoverTrigger>
+            </Popover>
+          </div>
         </div>
       )}
       <div
