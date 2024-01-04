@@ -71,7 +71,7 @@ export const GenerateButton = ({
           ) : (
             <>
               Generate character
-              <Crystal className="w-4 h-4" /> x 76
+              <Crystal className="w-4 h-4" /> x 85
             </>
           )}
         </Button>
