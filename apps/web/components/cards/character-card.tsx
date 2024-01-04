@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
   Tooltip,
+  TooltipContent,
 } from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 import { MessagesSquare, Repeat } from "lucide-react";
@@ -48,20 +49,28 @@ const CharacterCard = (props: {
             </Link>
           )}
           {props.showRemix && (
-            <Link
-              href={`/my-characters/create${
-                props.id ? `?remixId=${props.id}` : ""
-              }`}
-              className="absolute z-[4] right-4 top-4 group-hover:flex hidden items-center"
+            <Tooltip
+              content={
+                <TooltipContent
+                  title={"Create new character by remixing this character"}
+                />
+              }
             >
-              <Button
-                variant="outline"
-                className="h-5 rounded-full text-xs md:text-[10px] border-none"
+              <Link
+                href={`/my-characters/create${
+                  props.id ? `?remixId=${props.id}` : ""
+                }`}
+                className="absolute z-[4] right-4 top-4 group-hover:flex hidden items-center"
               >
-                <Repeat className="w-3 h-3 p-0.5" />
-                Remix
-              </Button>
-            </Link>
+                <Button
+                  variant="outline"
+                  className="h-5 rounded-full text-xs md:text-[10px] border-none"
+                >
+                  <Repeat className="w-3 h-3 p-0.5" />
+                  Remix
+                </Button>
+              </Link>
+            </Tooltip>
           )}
           <div className="absolute z-[3] top-4">
             <ModelBadge modelName={props.model as string} />
