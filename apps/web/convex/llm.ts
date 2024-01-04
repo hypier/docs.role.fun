@@ -414,7 +414,7 @@ export const generateCharacter = internalAction({
               required: [
                 "name",
                 "description",
-                "instruction",
+                "instructions",
                 "greeting",
                 "prompt",
               ],
