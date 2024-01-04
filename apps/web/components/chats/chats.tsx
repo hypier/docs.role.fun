@@ -73,7 +73,7 @@ export default function Chats() {
   const { results, status, loadMore } = usePaginatedQuery(
     api.chats.list,
     {},
-    { initialNumItems: 5 }
+    { initialNumItems: 10 }
   );
   const ref = useRef(null);
   const inView = useInView(ref);
