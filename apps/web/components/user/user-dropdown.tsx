@@ -35,7 +35,7 @@ const StyledLink: React.FC<StyledLinkProps> = ({
   return (
     <Link
       href={href}
-      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 sm:p-1"
+      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-secondary sm:p-1"
       onClick={onClick}
     >
       {Icon}
@@ -51,7 +51,7 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
 }) => {
   return (
     <button
-      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 sm:p-1"
+      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-secondary sm:p-1"
       onClick={onClick}
     >
       {Icon}
@@ -73,11 +73,11 @@ export default function UserDropdown() {
         onOpenChange={() => setOpenPopover(!openPopover)}
       >
         <PopoverContent asChild>
-          <div className="w-full rounded-lg bg-white p-2 sm:w-40 sm:p-1">
+          <div className="w-full rounded-lg bg-background p-2 sm:w-40 sm:p-1">
             {user && (
               <div className="p-2">
                 {user?.firstName && (
-                  <p className="truncate text-sm font-medium text-gray-900">
+                  <p className="truncate text-sm font-medium text-foreground">
                     {`${user?.firstName} ${
                       user?.lastName ? user?.lastName : ""
                     }`}
@@ -132,13 +132,13 @@ export default function UserDropdown() {
         <PopoverTrigger
           onClick={() => setOpenPopover(!openPopover)}
           className={`flex items-center justify-center overflow-hidden rounded-full border-none outline-none transition-all duration-75 active:scale-95  ${
-            user ? "border border-gray-300 h-8 w-8 sm:h-9 sm:w-9" : ""
+            user ? "border h-8 w-8 sm:h-9 sm:w-9" : ""
           }`}
         >
           {user ? (
             <button
               onClick={() => setOpenPopover(!openPopover)}
-              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-gray-300 transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
             >
               <Image
                 alt={user?.primaryEmailAddress?.emailAddress as string}

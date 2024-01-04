@@ -57,7 +57,7 @@ const Package = ({
         <div className="absolute bottom-0 h-[50%] w-full bg-gradient-to-b from-transparent via-white/95 to-white rounded-b-lg" />
         <div className="pt-[70%] flex flex-col gap-1">
           <CardHeader className="flex items-center justify-center py-1">
-            <CardTitle className="z-10 text-xl">
+            <CardTitle className="z-10 text-xl text-black">
               {(amount - bonus).toLocaleString()} Crystals
             </CardTitle>
           </CardHeader>
