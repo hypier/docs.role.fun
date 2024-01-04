@@ -402,7 +402,7 @@ export default function CharacterForm() {
                         ) : (
                           <>
                             Generate
-                            <Crystal className="w-4 h-4" /> x 5
+                            <Crystal className="w-4 h-4" /> x 1
                           </>
                         )}
                       </Button>
