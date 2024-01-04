@@ -381,7 +381,7 @@ export const generateCharacter = internalAction({
         }
       );
       try {
-        const instruction = `generate ${getRandomGenreAndModality} character, respond in JSON. seed:${
+        const instruction = `generate ${getRandomGenreAndModality()} character, respond in JSON. seed:${
           Math.random() * Date.now()
         } [${generate(5)}]
         `;
