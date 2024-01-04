@@ -91,7 +91,7 @@ export default function CharacterForm() {
     greetings = searchParams.get("greetings") || "",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
     model = (searchParams.get("model") as any) || "gpt-4-1106-preview",
-    isDraft = searchParams.get("isDraft") || false,
+    isDraft = searchParams.get("isDraft") || true,
   } = character || remixCharacter || {};
 
   const upsert = useMutation(api.characters.upsert);
@@ -219,7 +219,7 @@ export default function CharacterForm() {
           </div>
           <div className="flex items-center gap-2">
             {characterId && <ArchiveButton characterId={characterId} />}
-            {!cardImageUrl && !isDraft && (
+            {!cardImageUrl && isDraft && (
               <GenerateButton
                 setCharacterId={setCharacterId}
                 cardImageUrl={cardImageUrl}
