@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { id: string } }) {
       <Card className="w-full h-full lg:h-[42rem] xl:h-[50rem] shadow-none lg:shadow-xl border-transparent lg:border-border flex lg:flex-row flex-col">
         <Drawer>
           <DrawerTrigger asChild>
-            <CardHeader className="border-b lg:border-b-0 lg:border-r lg:w-96 lg:h-[42rem] xl:h-[50rem] relative justify-end cursor-pointer">
+            <CardHeader className="border-b rounded-l-lg lg:border-r lg:w-96 lg:h-[calc(42rem-1px)] xl:h-[calc(50rem-1px)] relative justify-end cursor-pointer">
               {data?.cardImageUrl && (
                 <Image
                   src={data.cardImageUrl}
