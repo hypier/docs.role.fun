@@ -226,6 +226,79 @@ export default function CharacterForm() {
                 name={name}
               />
             )}
+            <Popover
+              open={openPopover}
+              onOpenChange={() => setOpenPopover(!openPopover)}
+            >
+              <PopoverContent asChild>
+                <div className="w-full rounded-lg bg-background p-4 sm:w-40">
+                  <RadioGroup
+                    defaultValue="public"
+                    className="p-1"
+                    value={visibility}
+                    onValueChange={(value) => setVisibility(value)}
+                  >
+                    <span className="text-muted-foreground text-sm font-medium">
+                      Publish to
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="public" id="public" />
+                      <Label className="font-normal" htmlFor="public">
+                        Public
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="private" id="private" />
+                      <Label className="font-normal" htmlFor="private">
+                        Only me
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                  <div className="flex justify-center pt-4">
+                    <Button
+                      onClick={async () => {
+                        const newCharacterId = await onSubmit(form.getValues());
+                        const charId = characterId
+                          ? characterId
+                          : (newCharacterId as Id<"characters">);
+                        charId &&
+                          (() => {
+                            const promise = publish({
+                              id: charId,
+                              visibility: visibility as any,
+                            });
+                            toast.promise(promise, {
+                              loading: "Publishing character...",
+                              success: (data) => {
+                                router.back();
+                                return `Character has been saved.`;
+                              },
+                              error: (error) => {
+                                return error
+                                  ? (error.data as { message: string }).message
+                                  : "Unexpected error occurred";
+                              },
+                            });
+                          })();
+                      }}
+                      className="h-7 flex gap-1 text-xs w-full"
+                    >
+                      <UploadCloud className="w-4 h-4 text-foreground-primary" />
+                      Publish
+                    </Button>
+                  </div>
+                </div>
+              </PopoverContent>
+              <PopoverTrigger asChild>
+                <Button
+                  onClick={() => {
+                    setOpenPopover(!openPopover);
+                  }}
+                >
+                  Save
+                </Button>
+              </PopoverTrigger>
+            </Popover>
           </div>
         </CardTitle>
         <CardDescription>Configure your character details.</CardDescription>
@@ -458,82 +531,7 @@ export default function CharacterForm() {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="pb-32">
-        <Popover
-          open={openPopover}
-          onOpenChange={() => setOpenPopover(!openPopover)}
-        >
-          <PopoverContent asChild>
-            <div className="w-full rounded-lg bg-background p-4 sm:w-40">
-              <RadioGroup
-                defaultValue="public"
-                className="p-1"
-                value={visibility}
-                onValueChange={(value) => setVisibility(value)}
-              >
-                <span className="text-muted-foreground text-sm font-medium">
-                  Publish to
-                </span>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="public" id="public" />
-                  <Label className="font-normal" htmlFor="public">
-                    Public
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="private" id="private" />
-                  <Label className="font-normal" htmlFor="private">
-                    Only me
-                  </Label>
-                </div>
-              </RadioGroup>
-              <div className="flex justify-center pt-4">
-                <Button
-                  onClick={async () => {
-                    const newCharacterId = await onSubmit(form.getValues());
-                    const charId = characterId
-                      ? characterId
-                      : (newCharacterId as Id<"characters">);
-                    charId &&
-                      (() => {
-                        const promise = publish({
-                          id: charId,
-                          visibility: visibility as any,
-                        });
-                        toast.promise(promise, {
-                          loading: "Publishing character...",
-                          success: (data) => {
-                            router.back();
-                            return `Character has been saved.`;
-                          },
-                          error: (error) => {
-                            return error
-                              ? (error.data as { message: string }).message
-                              : "Unexpected error occurred";
-                          },
-                        });
-                      })();
-                  }}
-                  className="h-7 flex gap-1 text-xs w-full"
-                >
-                  <UploadCloud className="w-4 h-4 text-foreground-primary" />
-                  Publish
-                </Button>
-              </div>
-            </div>
-          </PopoverContent>
-          <PopoverTrigger asChild>
-            <Button
-              className="ml-auto"
-              onClick={() => {
-                setOpenPopover(!openPopover);
-              }}
-            >
-              Save
-            </Button>
-          </PopoverTrigger>
-        </Popover>
-      </CardFooter>
+      <CardFooter className="pb-32"></CardFooter>
     </Card>
   );
 }

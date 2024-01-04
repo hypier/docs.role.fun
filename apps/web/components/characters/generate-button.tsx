@@ -60,6 +60,7 @@ export const GenerateButton = ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
+          variant="outline"
           className="flex gap-1"
           disabled={Boolean(cardImageUrl) || Boolean(name) || isGenerating}
         >
