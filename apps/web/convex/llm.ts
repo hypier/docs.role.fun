@@ -408,7 +408,7 @@ export const generateCharacter = internalAction({
                 prompt: {
                   type: "string",
                   description:
-                    "Prompt artist to draw this character, artist can draw in any kind of style. prompt does not contain any copyright infringement and NSFW description.",
+                    "Prompt artist to draw this character, prompt does not contain any copyright infringement and NSFW description.",
                 },
               },
               required: [
