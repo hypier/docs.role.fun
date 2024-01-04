@@ -67,7 +67,7 @@ const ModelBadge = ({
           alt={alt}
         />
       )}
-      {!src && <Sparkles className="w-4 h-4 p-0.5 text-primary-foreground" />}
+      {!src && <Sparkles className="w-4 h-4 p-0.5 text-white" />}
       <span className="hidden group-hover/badge:inline">{model}</span>
       {crystalUnit}
     </Badge>

@@ -18,9 +18,7 @@ export default function NavBar({}: {}) {
     <>
       <div
         className={`fixed top-0 flex w-full justify-center ${
-          scrolled
-            ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
-            : "bg-white/0"
+          scrolled ? "border-b bg-background/50 backdrop-blur-xl" : "bg-white/0"
         } z-30 transition-opacity`}
       >
         <div className={`mx-5 flex h-16 w-full items-center justify-between `}>
