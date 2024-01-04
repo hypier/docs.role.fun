@@ -46,6 +46,7 @@ import Link from "next/link";
 import RemixBadge from "./remix-badge";
 import { ModelSelect } from "./model-select";
 import { ArchiveButton } from "./archive-button";
+import { GenerateButton } from "./generate-button";
 
 const formSchema = z.object({
   name: z.string().max(24),
@@ -95,7 +96,6 @@ export default function CharacterForm() {
 
   const upsert = useMutation(api.characters.upsert);
   const publish = useMutation(api.characters.publish);
-  const archive = useMutation(api.characters.archive);
   const generateImage = useMutation(api.characterCard.request);
   const generateInstruction = useMutation(api.characters.generateInstruction);
   const generateUploadUrl = useMutation(api.characters.generateUploadUrl);
@@ -199,6 +199,7 @@ export default function CharacterForm() {
     !form.getValues().name ||
     !form.getValues().description ||
     isGeneratingInstructions;
+  const isReady = Boolean(cardImageUrl) || Boolean(instructions);
   return (
     <Card className="w-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden h-full rounded-b-none">
       <CardHeader>
@@ -217,9 +218,15 @@ export default function CharacterForm() {
             ) : null}
             {remixId && <RemixBadge />}
           </div>
-          {characterId && (
-            <ArchiveButton archive={archive} characterId={characterId} />
-          )}
+          <div className="flex items-center gap-2">
+            {characterId && <ArchiveButton characterId={characterId} />}
+            {!isReady && (
+              <GenerateButton
+                setCharacterId={setCharacterId}
+                isReady={isReady}
+              />
+            )}
+          </div>
         </CardTitle>
         <CardDescription>Configure your character details.</CardDescription>
       </CardHeader>

@@ -13,14 +13,15 @@ import {
 import { useRouter } from "next/navigation";
 import { Id } from "../../convex/_generated/dataModel";
 import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 export const ArchiveButton = ({
-  archive,
   characterId,
 }: {
-  archive: any;
   characterId: Id<"characters">;
 }) => {
+  const archive = useMutation(api.characters.archive);
   const router = useRouter();
   return (
     <AlertDialog>

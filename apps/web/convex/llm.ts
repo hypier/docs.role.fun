@@ -357,6 +357,125 @@ export const generateFollowups = internalAction({
   },
 });
 
+export const generateCharacter = internalAction({
+  args: {
+    userId: v.id("users"),
+    characterId: v.id("characters"),
+  },
+  handler: async (ctx, { userId, characterId }) => {
+    try {
+      const model = "gpt-3.5-turbo-1106"; // "gpt-4-1106-preview";
+      const baseURL = getBaseURL(model);
+      const apiKey = getAPIKey(model);
+      const openai = new OpenAI({
+        baseURL,
+        apiKey,
+      });
+      const { currentCrystals } = await ctx.runMutation(
+        internal.serve.useCrystal,
+        {
+          userId,
+          name: model,
+        }
+      );
+      try {
+        const instruction = `generate virtual character, respond in JSON as this will be used for function arguments. random seed:${Math.random()}
+        `;
+
+        const functions = [
+          {
+            name: "generate_character",
+            description: "generate virtual character.",
+            parameters: {
+              type: "object",
+              properties: {
+                description: {
+                  type: "string",
+                  description: "short description (~15 words)",
+                },
+                name: {
+                  type: "string",
+                  description: `creative and short name of the character - random seed:${Math.random()} (~2 words)`,
+                },
+                instructions: {
+                  type: "string",
+                  description:
+                    "how they behave, what they do, quotes (~50 words)",
+                },
+                greeting: {
+                  type: "string",
+                  description:
+                    "first message or prologue for the character (~20 words)",
+                },
+                prompt: {
+                  type: "string",
+                  description:
+                    "Instruct artist to draw this character, make sure instruction does not contain any copyright infringement and NSFW description. (~30 words)",
+                },
+              },
+              required: [
+                "name",
+                "description",
+                "instruction",
+                "greeting",
+                "prompt",
+              ],
+            },
+          },
+        ];
+        const response = await openai.chat.completions.create({
+          model,
+          stream: false,
+          messages: [
+            {
+              role: "system",
+              content: instruction,
+            },
+          ],
+          function_call: "auto",
+          response_format: { type: "json_object" },
+          functions,
+          temperature: 1,
+        });
+        console.log("response:::", response);
+        const responseMessage = (response &&
+          response?.choices &&
+          response.choices[0]?.message) as any;
+        console.log("responseMessage:::", responseMessage);
+        if (responseMessage?.function_call) {
+          const functionArgs = JSON.parse(
+            responseMessage.function_call.arguments
+          );
+          console.log("functionArgs:::", functionArgs);
+          await ctx.runMutation(internal.characters.autofill, {
+            characterId,
+            name: functionArgs?.name,
+            description: functionArgs?.description,
+            instructions: functionArgs?.instructions,
+            greeting: functionArgs?.greeting,
+          });
+          await ctx.scheduler.runAfter(0, internal.image.generateSafeImage, {
+            userId,
+            characterId,
+            prompt: functionArgs?.description,
+          });
+        }
+      } catch (error) {
+        console.log("error:::", error);
+        await ctx.runMutation(internal.serve.refundCrystal, {
+          userId,
+          currentCrystals,
+          name: model,
+        });
+        throw Error;
+      }
+    } catch (error) {
+      console.log("error:::", error);
+      throw error;
+    }
+  },
+});
+
 export const getMessages = internalQuery(
   async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
     return await ctx.db

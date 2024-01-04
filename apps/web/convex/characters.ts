@@ -1,9 +1,16 @@
-import { action, internalQuery, mutation, query } from "./_generated/server";
+import {
+  action,
+  internalMutation,
+  internalQuery,
+  mutation,
+  query,
+} from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { getUser } from "./users";
 import { embedText } from "./ingest/embed";
 import { paginationOptsValidator } from "convex/server";
 import { internal } from "./_generated/api";
+import { Id } from "./_generated/dataModel";
 
 export const upsert = mutation({
   args: {
@@ -216,5 +223,53 @@ export const generateInstruction = mutation({
     });
     const character = await ctx.db.get(characterId);
     return character?.instructions;
+  },
+});
+
+export const autofill = internalMutation(
+  async (
+    ctx,
+    {
+      characterId,
+      name,
+      description,
+      instructions,
+      greeting,
+    }: {
+      characterId: Id<"characters">;
+      name: string;
+      description: string;
+      instructions: string;
+      greeting: string;
+    }
+  ) => {
+    return await ctx.db.patch(characterId, {
+      name,
+      description,
+      instructions,
+      greetings: [greeting],
+    });
+  }
+);
+
+export const generate = mutation({
+  args: {},
+  handler: async (ctx, {}) => {
+    const user = await getUser(ctx);
+    const updatedAt = new Date().toISOString();
+    const character = await ctx.db.insert("characters", {
+      creatorId: user._id,
+      updatedAt,
+      numChats: 0,
+      isDraft: true,
+      isArchived: false,
+      isNSFW: false,
+      isBlacklisted: false,
+    });
+    await ctx.scheduler.runAfter(0, internal.llm.generateCharacter, {
+      userId: user._id,
+      characterId: character,
+    });
+    return character;
   },
 });
