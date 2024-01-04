@@ -379,7 +379,9 @@ export const generateCharacter = internalAction({
         }
       );
       try {
-        const instruction = `generate virtual character, respond in JSON. random seed:${Math.random()}
+        const instruction = `generate virtual character, respond in JSON. random seed:${
+          Math.random() * Date.now()
+        }
         `;
 
         const functions = [
@@ -395,7 +397,7 @@ export const generateCharacter = internalAction({
                 },
                 description: {
                   type: "string",
-                  description: "short description (~15 words)",
+                  description: "short description",
                 },
                 greeting: {
                   type: "string",
@@ -408,7 +410,7 @@ export const generateCharacter = internalAction({
                 },
                 name: {
                   type: "string",
-                  description: `creative and short name of the character from any language (~2 words)`,
+                  description: `creative and short name of the character from any language`,
                 },
               },
               required: [
