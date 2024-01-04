@@ -90,7 +90,7 @@ export const GenerateButton = ({
               setIsGenerating(true);
               const characterId = await generate();
               setCharacterId(characterId);
-              toast.info("Character will be generated within 30 seconds.");
+              toast.info("Character will be generated within a minute.");
             }}
           >
             Continue

@@ -1,4 +1,5 @@
 import { ConvexError, v } from "convex/values";
+import { generate } from "random-words";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/index";
 import {
@@ -379,15 +380,15 @@ export const generateCharacter = internalAction({
         }
       );
       try {
-        const instruction = `generate virtual character, respond in JSON. random seed:${
+        const instruction = `generate character, respond in JSON. seed:${
           Math.random() * Date.now()
-        }
+        } [${generate(5)}]
         `;
 
         const functions = [
           {
             name: "generate_character",
-            description: "generate random character.",
+            description: "generate character.",
             parameters: {
               type: "object",
               properties: {
