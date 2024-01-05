@@ -8,12 +8,15 @@ import {
   TooltipContent,
 } from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
-import { MessagesSquare, Repeat } from "lucide-react";
+import { BookMarked, MessagesSquare, Repeat } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { nFormatter } from "../../app/lib/utils";
 import ModelBadge from "../characters/model-badge";
 import DraftBadge from "../characters/draft-badge";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
+import { Id } from "../../convex/_generated/dataModel";
 
 const CharacterCard = (props: {
   id: string;
@@ -26,6 +29,9 @@ const CharacterCard = (props: {
   showEdit?: any;
   showRemix?: boolean;
 }) => {
+  const numStories = useQuery(api.stories.count, {
+    characterId: props.id as Id<"characters">,
+  });
   return (
     <AspectRatio
       ratio={1 / 1.75}
@@ -82,17 +88,29 @@ const CharacterCard = (props: {
             <CardTitle
               className={`${
                 props.cardImageUrl ? "text-white" : "text-foreground"
-              } z-[3] line-clamp-1 flex select-none justify-between text-base duration-200 hover:line-clamp-none group-hover:opacity-80`}
+              } z-[3] line-clamp-1 flex select-none justify-between text-base duration-200 group-hover:opacity-80`}
             >
               <div className="w-[80%] truncate">{props.name}</div>
-              {(props?.numChats as number) > 0 && (
-                <Tooltip content={`Number of chats with ${props.name}`}>
-                  <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
-                    <MessagesSquare className="aspect-square h-5 w-5 p-1" />
-                    {nFormatter(props?.numChats as number)}
-                  </div>
-                </Tooltip>
-              )}
+              <div className="flex gap-1 font-normal">
+                {(props?.numChats as number) > 0 && (
+                  <Tooltip content={`Number of chats with ${props.name}`}>
+                    <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
+                      <MessagesSquare className="aspect-square h-5 w-5 p-1" />
+                      {nFormatter(props?.numChats as number)}
+                    </div>
+                  </Tooltip>
+                )}
+                {(numStories as number) > 0 && (
+                  <Tooltip
+                    content={`Number of stories made with ${props.name}`}
+                  >
+                    <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
+                      <BookMarked className="aspect-square h-5 w-5 p-1" />
+                      {nFormatter(numStories as number)}
+                    </div>
+                  </Tooltip>
+                )}
+              </div>
               {props.isDraft && <DraftBadge />}
             </CardTitle>
             <CardDescription
