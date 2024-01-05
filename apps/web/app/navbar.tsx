@@ -9,6 +9,7 @@ import { Button, Tooltip } from "@repo/ui/src/components";
 import { SignedOut } from "@clerk/nextjs";
 import CurrentCrystals from "./current-crystals";
 import { useConvexAuth } from "convex/react";
+import { Plus } from "lucide-react";
 
 export default function NavBar({}: {}) {
   const scrolled = useScroll(50);
@@ -22,26 +23,32 @@ export default function NavBar({}: {}) {
         } z-30 transition-opacity`}
       >
         <div className={`mx-5 flex h-16 w-full items-center justify-between `}>
-          <div className="flex text-2xl font-display gap-4 items-center">
+          <div className="flex items-center gap-4 font-display text-2xl">
             <Link href="/">
               <TextLogo />
             </Link>
             <Tooltip content="Star openroleplay.ai on GitHub">
               <Link
-                className="text-muted-foreground text-base hover:opacity-50 gap-2 items-center flex"
+                className="flex items-center gap-2 text-base text-muted-foreground hover:opacity-50"
                 href="/github"
               >
-                <div className="sm:block hidden">opensource ai characters</div>
+                <div className="hidden sm:block">opensource ai characters</div>
                 <Badge className="font-default">alpha</Badge>
               </Link>
             </Tooltip>
           </div>
           <div className="flex items-center gap-2">
+            <Link href="/my-characters/create" className="hidden lg:block">
+              <Button>
+                <Plus className="h-5 w-5 p-1" />
+                Create
+              </Button>
+            </Link>
             {isAuthenticated && <CurrentCrystals />}
             <UserDropdown />
             <SignedOut>
               <Link href="/sign-in">
-                <Button className="rounded-full hidden md:block">Log in</Button>
+                <Button className="hidden rounded-full md:block">Log in</Button>
               </Link>
             </SignedOut>
           </div>

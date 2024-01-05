@@ -72,15 +72,15 @@ export default function CharacterForm() {
   const id = searchParams.get("id") as Id<"characters">;
   const remixId = searchParams.get("remixId") as Id<"characters">;
   const [characterId, setCharacterId] = useState<Id<"characters"> | undefined>(
-    id
+    id,
   );
   const remixCharacter = useQuery(
     api.characters.get,
-    remixId ? { id: remixId } : "skip"
+    remixId ? { id: remixId } : "skip",
   );
   const character = useQuery(
     api.characters.get,
-    id ? { id } : characterId ? { id: characterId } : "skip"
+    id ? { id } : characterId ? { id: characterId } : "skip",
   );
   const isEdit = searchParams.get("isEdit") || false;
   const router = useRouter();
@@ -162,7 +162,7 @@ export default function CharacterForm() {
           method: "POST",
           headers: { "Content-Type": uploadedImage!.type },
           body: uploadedImage,
-        })
+        }),
       )
       .then((result) => result.json())
       .then(({ storageId }) =>
@@ -173,7 +173,7 @@ export default function CharacterForm() {
               ? { id: newCharacterId as Id<"characters"> }
               : {}),
           cardImageStorageId: storageId,
-        })
+        }),
       );
 
     toast.promise(promise, {
@@ -200,13 +200,13 @@ export default function CharacterForm() {
     !form.getValues().description ||
     isGeneratingInstructions;
   return (
-    <Card className="w-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden h-full rounded-b-none">
+    <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
       <CardHeader>
         <CardTitle className="flex justify-between">
           <div className="flex items-center gap-2">
             <Link href="/my-characters">
               <Button variant="ghost" size="icon">
-                <ArrowLeft className="w-5 h-5" />
+                <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
             {isEdit ? "Edit Character" : "New Character"}
@@ -238,7 +238,7 @@ export default function CharacterForm() {
                     value={visibility}
                     onValueChange={(value) => setVisibility(value)}
                   >
-                    <span className="text-muted-foreground text-sm font-medium">
+                    <span className="text-sm font-medium text-muted-foreground">
                       Publish to
                     </span>
                     <div className="flex items-center space-x-2">
@@ -269,8 +269,10 @@ export default function CharacterForm() {
                             });
                             toast.promise(promise, {
                               loading: "Publishing character...",
-                              success: (data) => {
-                                router.back();
+                              success: (data: any) => {
+                                data
+                                  ? router.push(`/character/${data}`)
+                                  : router.back();
                                 return `Character has been saved.`;
                               },
                               error: (error) => {
@@ -281,9 +283,9 @@ export default function CharacterForm() {
                             });
                           })();
                       }}
-                      className="h-7 flex gap-1 text-xs w-full"
+                      className="flex h-7 w-full gap-1 text-xs"
                     >
-                      <UploadCloud className="w-4 h-4 text-foreground-primary" />
+                      <UploadCloud className="text-foreground-primary h-4 w-4" />
                       Publish
                     </Button>
                   </div>
@@ -304,10 +306,10 @@ export default function CharacterForm() {
         <CardDescription>Configure your character details.</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="w-full flex justify-center flex-col my-4 gap-4 items-center">
+        <div className="my-4 flex w-full flex-col items-center justify-center gap-4">
           <Label
             htmlFor="card"
-            className="w-[200px] h-[350px] rounded flex items-center justify-center flex-col relative cursor-pointer border hover:border-border duration-200 border-dashed hover:-translate-y-1 hover:shadow-lg"
+            className="relative flex h-[350px] w-[200px] cursor-pointer flex-col items-center justify-center rounded border border-dashed duration-200 hover:-translate-y-1 hover:border-border hover:shadow-lg"
           >
             <Plus />
             Add character card
@@ -320,7 +322,7 @@ export default function CharacterForm() {
                 alt={"Preview of character card"}
                 width={300}
                 height={525}
-                className="absolute w-full h-full object-cover rounded"
+                className="absolute h-full w-full rounded object-cover"
               />
             )}
           </Label>
@@ -342,7 +344,7 @@ export default function CharacterForm() {
             }
           >
             <Button
-              className="w-[200px] flex gap-1"
+              className="flex w-[200px] gap-1"
               disabled={isImageUploadDisabled}
               onClick={async () => {
                 setIsGeneratingImage(true);
@@ -367,7 +369,7 @@ export default function CharacterForm() {
               ) : (
                 <>
                   Generate
-                  <Crystal className="w-4 h-4" /> x 75
+                  <Crystal className="h-4 w-4" /> x 75
                 </>
               )}
             </Button>
@@ -383,7 +385,7 @@ export default function CharacterForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="flex gap-1 items-center">
+                  <FormLabel className="flex items-center gap-1">
                     Name
                     <InfoTooltip
                       content={
@@ -407,7 +409,7 @@ export default function CharacterForm() {
               name="greetings"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="flex gap-1 items-center">
+                  <FormLabel className="flex items-center gap-1">
                     Greeting
                     <InfoTooltip
                       content={
@@ -434,8 +436,8 @@ export default function CharacterForm() {
               name="instructions"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex justify-between items-center">
-                    <FormLabel className="flex gap-1 items-center">
+                  <div className="flex items-center justify-between">
+                    <FormLabel className="flex items-center gap-1">
                       Instructions{" "}
                       <span className="text-muted-foreground">(optional)</span>
                       <InfoTooltip
@@ -456,7 +458,7 @@ export default function CharacterForm() {
                       }
                     >
                       <Button
-                        className="flex gap-1 h-8"
+                        className="flex h-8 gap-1"
                         variant="ghost"
                         disabled={isInstructionGenerationDisabled}
                         onClick={async () => {
@@ -482,7 +484,7 @@ export default function CharacterForm() {
                         ) : (
                           <>
                             Generate
-                            <Crystal className="w-4 h-4" /> x 1
+                            <Crystal className="h-4 w-4" /> x 1
                           </>
                         )}
                       </Button>
@@ -504,7 +506,7 @@ export default function CharacterForm() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="flex gap-1 items-center">
+                  <FormLabel className="flex items-center gap-1">
                     Description{" "}
                     <span className="text-muted-foreground">(optional)</span>
                     <InfoTooltip

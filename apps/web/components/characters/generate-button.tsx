@@ -50,7 +50,7 @@ export const GenerateButton = ({
   }, []);
 
   useEffect(() => {
-    if (name && !cardImageUrl) {
+    if (name && !cardImageUrl && isGenerating) {
       toast.success("Character detail is generated.");
       toast.info("Generating character image...");
     }
@@ -61,7 +61,7 @@ export const GenerateButton = ({
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className="md:flex gap-1 hidden"
+          className="hidden gap-1 md:flex"
           disabled={Boolean(cardImageUrl) || Boolean(name) || isGenerating}
         >
           {isGenerating ? (
@@ -72,7 +72,7 @@ export const GenerateButton = ({
           ) : (
             <>
               Generate character
-              <Crystal className="w-4 h-4" /> x 85
+              <Crystal className="h-4 w-4" /> x 85
             </>
           )}
         </Button>

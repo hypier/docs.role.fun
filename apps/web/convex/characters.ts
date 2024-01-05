@@ -31,8 +31,8 @@ export const upsert = mutation({
         v.literal("accounts/fireworks/models/qwen-14b-chat"),
         v.literal("mistral-tiny"),
         v.literal("mistral-small"),
-        v.literal("mistral-medium")
-      )
+        v.literal("mistral-medium"),
+      ),
     ),
     instructions: v.optional(v.string()),
     cardImageUrl: v.optional(v.string()),
@@ -57,7 +57,7 @@ export const upsert = mutation({
         ...(cardImageStorageId
           ? {
               cardImageUrl: (await ctx.storage.getUrl(
-                cardImageStorageId
+                cardImageStorageId,
               )) as string,
             }
           : { cardImageUrl }),
@@ -71,7 +71,7 @@ export const upsert = mutation({
         ...(cardImageStorageId
           ? {
               cardImageUrl: (await ctx.storage.getUrl(
-                cardImageStorageId
+                cardImageStorageId,
               )) as string,
             }
           : { cardImageUrl }),
@@ -116,7 +116,7 @@ export const publish = mutation({
       ...(character.description ? {} : { description: character.greetings[0] }),
       updatedAt,
     });
-    return updatedCharacter;
+    return character._id;
   },
 });
 
@@ -241,7 +241,7 @@ export const autofill = internalMutation(
       description: string;
       instructions: string;
       greeting: string;
-    }
+    },
   ) => {
     return await ctx.db.patch(characterId, {
       name,
@@ -249,7 +249,7 @@ export const autofill = internalMutation(
       instructions,
       greetings: [greeting],
     });
-  }
+  },
 );
 
 export const generate = mutation({

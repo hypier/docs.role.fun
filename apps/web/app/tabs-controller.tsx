@@ -18,58 +18,58 @@ function TabsController() {
 
   return (
     <Tabs value={getFirstDirectory(pathname)}>
-      <TabsList className="w-full lg:w-40 lg:rounded-none lg:justify-start h-16 lg:h-full right-0 flex lg:flex-col gap-2 fixed lg:static bottom-0 mx-auto left-0 z-20 rounded-none rounded-t-lg border border-b-none lg:bg-transparent lg:shadow-none lg:border-none lg:items-start shadow-t-2xl bg-background/90 backdrop-blur-md backdrop-saturate-150">
+      <TabsList className="border-b-none shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-16 w-full gap-2 rounded-none rounded-t-lg border bg-background/90 backdrop-blur-md backdrop-saturate-150 lg:static lg:h-full lg:w-40 lg:flex-col lg:items-start lg:justify-start lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none">
         <Link href="/">
           <TabsTrigger
-            className="w-full rounded-full flex gap-0.5 flex-col items-center lg:items-start lg:flex-row"
+            className="flex w-full flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
             value="/"
           >
-            <Home className="w-5 h-5 p-1" />
+            <Home className="h-5 w-5 p-1" />
             Discover
           </TabsTrigger>
         </Link>
         <Link href="/chats">
           <TabsTrigger
-            className="w-full rounded-full flex gap-0.5 flex-col items-center lg:items-start lg:flex-row"
+            className="flex w-full flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
             value="/chats"
           >
-            <MessageSquare className="w-5 h-5 p-1" />
+            <MessageSquare className="h-5 w-5 p-1" />
             Chats
           </TabsTrigger>
         </Link>
         <Link href="/my-characters">
           <TabsTrigger
-            className="w-full rounded-full flex gap-0.5 flex-col items-center lg:items-start lg:flex-row"
+            className="flex w-full flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
             value="/my-characters"
           >
-            <Plus className="w-5 h-5 p-1" />
+            <Plus className="h-5 w-5 p-1" />
             <span className="hidden lg:inline">My </span>Characters
           </TabsTrigger>
         </Link>
         <Link href="/my-personas">
           <TabsTrigger
-            className="w-full rounded-full flex gap-0.5 flex-col items-center lg:items-start lg:flex-row"
+            className="flex w-full flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
             value="/my-personas"
           >
-            <CircleUserRound className="w-5 h-5 p-1" />
+            <CircleUserRound className="h-5 w-5 p-1" />
             <span className="hidden lg:inline">My </span>Personas
           </TabsTrigger>
         </Link>
         <Link href="/shop">
           <TabsTrigger
-            className="w-full rounded-full lg:flex gap-0.5 flex-col items-center lg:items-start lg:flex-row hidden"
+            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/shop"
           >
-            <Store className="w-5 h-5 p-1" />
+            <Store className="h-5 w-5 p-1" />
             Shop
           </TabsTrigger>
         </Link>
         <Link href="/discord">
           <TabsTrigger
-            className="w-full rounded-full lg:flex gap-0.5 flex-col items-center lg:items-start lg:flex-row hidden"
+            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/discord"
           >
-            <Discord className="w-5 h-5 p-1" />
+            <Discord className="h-5 w-5 p-1" />
             Community
           </TabsTrigger>
         </Link>
