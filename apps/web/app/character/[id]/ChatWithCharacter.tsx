@@ -57,18 +57,22 @@ export const Stories = ({
           isHorizontal ? "grid md:grid-cols-2 lg:grid-cols-3" : ""
         }`}
       >
-        {results.map((story, i) => (
-          <Link
-            href={`/character/${characterId}/story/${story._id}`}
-            className="h-96 rounded-lg border p-4 shadow-lg"
-          >
-            <Story
-              name={name}
-              cardImageUrl={cardImageUrl as string}
-              storyId={story._id}
-            />
-          </Link>
-        ))}
+        {results?.length > 0 ? (
+          results.map((story, i) => (
+            <Link
+              href={`/character/${characterId}/story/${story._id}`}
+              className="h-96 rounded-lg border p-4 shadow-lg"
+            >
+              <Story
+                name={name}
+                cardImageUrl={cardImageUrl as string}
+                storyId={story._id}
+              />
+            </Link>
+          ))
+        ) : (
+          <div className="text-sm text-muted-foreground">No stories yet.</div>
+        )}
       </div>
     </section>
   );
