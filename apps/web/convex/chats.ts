@@ -21,12 +21,19 @@ export const create = mutation({
     if (chat) {
       return chat._id;
     }
-    return await ctx.db.insert("chats", {
+    const newChat = await ctx.db.insert("chats", {
       ...args,
       userId: user._id,
       updatedAt: new Date().toISOString(),
       joinedAt: new Date().toISOString(),
     });
+    const character = await ctx.db.get(args.characterId);
+    await ctx.db.insert("messages", {
+      text: character?.greetings ? character.greetings[0] : "",
+      chatId: newChat,
+      characterId: character?._id,
+    });
+    return newChat;
   },
 });
 
