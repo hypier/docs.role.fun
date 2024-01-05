@@ -417,6 +417,12 @@ export function Dialog({
                           router.push(
                             `/character/${characterId}/story/${storyId}`,
                           );
+                          if (navigator?.clipboard) {
+                            navigator.clipboard.writeText(
+                              document.location.href,
+                            );
+                            toast.success("Link copied to clipboard");
+                          }
                           return `Story has been created.`;
                         },
                         error: (error) => {
