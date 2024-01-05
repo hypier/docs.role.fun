@@ -5,6 +5,7 @@ import { Message } from "../../../../dialog";
 import { Button } from "@repo/ui/src/components";
 import { toast } from "sonner";
 import Link from "next/link";
+import Spinner from "@repo/ui/src/components/spinner";
 
 export function Story({
   name,
@@ -24,39 +25,49 @@ export function Story({
       <div className={`flex h-full flex-col overflow-y-auto`}>
         <div className="mx-2 flex h-full flex-col justify-between gap-8 rounded-lg p-4">
           <div className="flex flex-col gap-8">
-            {messages?.map((message, i) => (
-              <Message
-                name={name}
-                message={message}
-                cardImageUrl={cardImageUrl as string}
-              />
-            ))}
+            {messages ? (
+              messages?.map((message, i) => (
+                <Message
+                  name={name}
+                  message={message}
+                  cardImageUrl={cardImageUrl as string}
+                />
+              ))
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <Spinner />
+              </div>
+            )}
           </div>
-          {chatId ? (
-            <Button
-              className="mx-auto w-fit"
-              onClick={() => {
-                const promise = unlock({ chatId, storyId });
-                toast.promise(promise, {
-                  loading: "Unlocking story...",
-                  success: () => {
-                    return `Chat has unlocked.`;
-                  },
-                  error: (error) => {
-                    console.log("error:::", error);
-                    return error
-                      ? (error.data as { message: string })?.message
-                      : "Unexpected error occurred";
-                  },
-                });
-              }}
-            >
-              Continue this story
-            </Button>
-          ) : (
-            <Link href="/sign-in" className="mx-auto">
-              <Button className="w-fit">Continue this story</Button>
-            </Link>
+          {messages && (
+            <>
+              {chatId ? (
+                <Button
+                  className="mx-auto w-fit"
+                  onClick={() => {
+                    const promise = unlock({ chatId, storyId });
+                    toast.promise(promise, {
+                      loading: "Unlocking story...",
+                      success: () => {
+                        return `Chat has unlocked.`;
+                      },
+                      error: (error) => {
+                        console.log("error:::", error);
+                        return error
+                          ? (error.data as { message: string })?.message
+                          : "Unexpected error occurred";
+                      },
+                    });
+                  }}
+                >
+                  Continue this story
+                </Button>
+              ) : (
+                <Link href="/sign-in" className="mx-auto">
+                  <Button className="w-fit">Continue this story</Button>
+                </Link>
+              )}
+            </>
           )}
         </div>
       </div>
