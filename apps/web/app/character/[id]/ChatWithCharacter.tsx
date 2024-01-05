@@ -1,5 +1,5 @@
 "use client";
-import { useConvexAuth, useQuery } from "convex/react";
+import { useConvexAuth, usePaginatedQuery, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import {
@@ -31,6 +31,41 @@ import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import { Story } from "./story/[storyId]/story";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+
+export const Stories = ({
+  characterId,
+  name,
+  cardImageUrl,
+}: {
+  characterId: Id<"characters">;
+  name: string;
+  cardImageUrl: string;
+}) => {
+  const { results, loadMore } = usePaginatedQuery(
+    api.stories.list,
+    { characterId },
+    { initialNumItems: 5 },
+  );
+  return (
+    <section className="flex flex-col gap-4">
+      <div className="font-medium">Stories</div>
+      <div className="grid w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
+          {results.map((story, i) => (
+            <Link href={`/character/${characterId}/story/${story._id}`}>
+              <Story
+                name={name}
+                cardImageUrl={cardImageUrl as string}
+                storyId={story._id}
+              />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default function ChatWithCharacter({
   params,
@@ -57,7 +92,7 @@ export default function ChatWithCharacter({
       <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem]">
         <Drawer>
           <DrawerTrigger asChild>
-            <CardHeader className="relative cursor-pointer justify-end rounded-l-lg border-b lg:h-[calc(42rem-1px)] lg:w-96 lg:border-r xl:h-[calc(50rem-1px)]">
+            <CardHeader className="relative cursor-pointer justify-end rounded-l-lg border-b duration-200 hover:opacity-90 lg:h-[calc(42rem-1px)] lg:w-96 lg:border-r xl:h-[calc(50rem-1px)]">
               {data?.cardImageUrl && (
                 <Image
                   src={data.cardImageUrl}
@@ -126,9 +161,14 @@ export default function ChatWithCharacter({
             </CardHeader>
           </DrawerTrigger>
           <DrawerContent>
-            <DrawerHeader>
+            <DrawerHeader className="gap-4">
               <DrawerTitle>{data?.name}</DrawerTitle>
               <DrawerDescription>{`${data?.description}, created by @${creatorName}`}</DrawerDescription>
+              <Stories
+                characterId={params.id as Id<"characters">}
+                name={data?.name as string}
+                cardImageUrl={data?.cardImageUrl as string}
+              />
             </DrawerHeader>
             <DrawerFooter>
               <DrawerClose>

@@ -108,6 +108,7 @@ export default defineSchema({
     userId: v.id("users"),
     characterId: v.id("characters"),
     messageIds: v.array(v.id("messages")),
+    name: v.optional(v.string()),
     isPrivate: v.boolean(),
   }).index("byUserId", ["userId"]),
 });
