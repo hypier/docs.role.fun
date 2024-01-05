@@ -9,11 +9,11 @@ const Discover = () => {
   const { results, status, loadMore } = usePaginatedQuery(
     api.characters.list,
     {},
-    { initialNumItems: 10 }
+    { initialNumItems: 10 },
   );
   const allCharacters = results || [];
   const characters = allCharacters.filter(
-    (character) => character.name && character.cardImageUrl
+    (character) => character.name && character.cardImageUrl,
   );
   const ref = useRef(null);
   const inView = useInView(ref);
@@ -26,7 +26,7 @@ const Discover = () => {
 
   return (
     <>
-      <div className="px-4 2xl:px-0 flex flex-col sm:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
+      <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:px-0"
         {characters?.length > 0
           ? characters.map(
               (character, index) =>
@@ -41,7 +41,7 @@ const Discover = () => {
                     model={character.model}
                     showRemix={true}
                   />
-                )
+                ),
             )
           : Array.from({ length: 10 }).map((_, index) => (
               <CharacterCardPlaceholder key={index} />
