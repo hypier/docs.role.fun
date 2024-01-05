@@ -36,9 +36,16 @@ http.route({
       id: characterId,
     });
     if (result) {
-      return new Response(JSON.stringify(result), {
-        status: 200,
-      });
+      return new Response(
+        JSON.stringify({
+          name: result.name,
+          description: result.description,
+          cardImageUrl: result.cardImageUrl,
+        }),
+        {
+          status: 200,
+        }
+      );
     } else {
       return new Response("Character not found", {
         status: 404,

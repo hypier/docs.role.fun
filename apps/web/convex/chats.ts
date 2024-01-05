@@ -7,6 +7,7 @@ export const create = mutation({
   args: {
     chatName: v.optional(v.string()),
     characterId: v.id("characters"),
+    storyId: v.optional(v.id("stories")),
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
@@ -14,6 +15,7 @@ export const create = mutation({
       .query("chats")
       .filter((q) => q.eq(q.field("characterId"), args.characterId))
       .filter((q) => q.eq(q.field("userId"), user._id))
+      .filter((q) => q.eq(q.field("storyId"), args.storyId))
       .first();
 
     if (chat) {

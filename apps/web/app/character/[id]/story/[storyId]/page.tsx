@@ -1,9 +1,9 @@
 import { Metadata, ResolvingMetadata } from "next";
-import { constructMetadata } from "../../lib/utils";
-import ChatWithCharacter from "./ChatWithCharacter";
+import { constructMetadata } from "../../../../lib/utils";
+import ChatWithCharacter from "../../ChatWithCharacter";
 
 type Props = {
-  params: { id: string };
+  params: { id: string; storyId: string };
 };
 
 export async function generateMetadata(
@@ -28,6 +28,10 @@ export async function generateMetadata(
   });
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page({
+  params,
+}: {
+  params: { id: string; storyId: string };
+}) {
   return <ChatWithCharacter params={params} />;
 }

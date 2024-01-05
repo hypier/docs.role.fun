@@ -33,8 +33,8 @@ const Chat = ({
     ? (message?._creationTime as number)
     : time;
   return (
-    <Link href={`/character/${characterId}`}>
-      <li className="hover:bg-muted p-4 group">
+    <Link href={`/character/${characterId}?chatId=${chatId}`}>
+      <li className="group p-4 hover:bg-muted">
         <div className="flex items-center space-x-4">
           <Avatar>
             <AvatarImage
@@ -59,7 +59,7 @@ const Chat = ({
                 })}
               </p>
             </div>
-            <p className="text-sm text-muted-foreground line-clamp-1">
+            <p className="line-clamp-1 text-sm text-muted-foreground">
               {message?.text ? message?.text : "Click here to chat."}
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function Chats() {
   const { results, status, loadMore } = usePaginatedQuery(
     api.chats.list,
     {},
-    { initialNumItems: 10 }
+    { initialNumItems: 10 },
   );
   const ref = useRef(null);
   const inView = useInView(ref);
@@ -84,7 +84,7 @@ export default function Chats() {
     }
   }, [inView, loadMore]);
   return (
-    <Card className="w-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden h-full rounded-b-none">
+    <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
       <CardHeader>
         <CardTitle>Chats</CardTitle>
       </CardHeader>
@@ -99,7 +99,7 @@ export default function Chats() {
             />
           ))
         ) : (
-          <div className="w-full h-[100vh] items-center justify-center flex flex-col gap-2">
+          <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-2">
             New chats will appear here.
             <Link href="/">
               <Button>Start Chat</Button>

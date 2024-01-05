@@ -1,29 +1,40 @@
 import { useUser } from "@clerk/nextjs";
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { useEffect, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 
-export default function useStoreChatEffect(characterId: Id<"characters">) {
+export default function useStoreChatEffect(
+  characterId: Id<"characters">,
+  storyId?: Id<"stories">,
+  urlChatId?: Id<"chats">,
+) {
   const { isAuthenticated } = useConvexAuth();
   const { user } = useUser();
-  const [chatId, setChatId] = useState<Id<"chats"> | null>(null);
+  const [chatId, setChatId] = useState<Id<"chats"> | undefined>(urlChatId);
+  const chat = useQuery(
+    api.chats.get,
+    chatId ? { id: chatId as Id<"chats"> } : "skip",
+  );
   const createChat = useMutation(api.chats.create);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || chatId) {
       return;
     }
 
     async function createChatForUser() {
-      const id = await createChat({ characterId });
+      const id = await createChat({
+        characterId,
+        storyId,
+      });
       setChatId(id);
     }
 
     createChatForUser();
-    return () => setChatId(null);
+    return () => setChatId(undefined);
   }, [isAuthenticated, createChat, user?.id]);
 
-  return chatId;
+  return { chatId, isUnlocked: chat?.isUnlocked };
 }
