@@ -40,10 +40,10 @@ export function Story({
             )}
           </div>
           {messages && (
-            <>
+            <div className="mx-auto pb-20 lg:pb-8">
               {chatId ? (
                 <Button
-                  className="mx-auto w-fit"
+                  className="w-fit"
                   onClick={() => {
                     const promise = unlock({ chatId, storyId });
                     toast.promise(promise, {
@@ -67,7 +67,7 @@ export function Story({
                   <Button className="w-fit">Continue this story</Button>
                 </Link>
               )}
-            </>
+            </div>
           )}
         </div>
       </div>
