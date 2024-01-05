@@ -123,7 +123,10 @@ export default function ChatWithCharacter({
                 } z-[1] flex justify-between text-xl`}
               >
                 <div className="w-[80%] truncate">{data?.name}</div>
-                <Tooltip content={`Number of chats with ${data?.name}`}>
+                <Tooltip
+                  content={`Number of chats with ${data?.name}`}
+                  desktopOnly
+                >
                   <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
                     <MessagesSquare className="aspect-square h-5 w-5 p-1" />
                     {nFormatter(data?.numChats as number)}
@@ -149,7 +152,7 @@ export default function ChatWithCharacter({
                     Created by @{creatorName}
                   </p>
                   <div className="z-10 flex items-center gap-1">
-                    <Tooltip content={`About ${data?.name}`}>
+                    <Tooltip content={`About ${data?.name}`} desktopOnly>
                       <Button
                         className="z-10 text-white"
                         variant="ghost"
@@ -158,7 +161,7 @@ export default function ChatWithCharacter({
                         <BookMarked className="h-4 w-4" />
                       </Button>
                     </Tooltip>
-                    <Tooltip content={`Share ${data?.name}`}>
+                    <Tooltip content={`Share ${data?.name}`} desktopOnly>
                       <Button
                         className="z-10 text-white"
                         variant="ghost"
