@@ -50,7 +50,9 @@ export default function NavBar({}: {}) {
             <UserDropdown />
             <SignedOut>
               <Link href="/sign-in">
-                <Button className="hidden rounded-full md:block">Log in</Button>
+                <Button className="hidden rounded-full px-3 md:block">
+                  Log in
+                </Button>
               </Link>
             </SignedOut>
           </div>
