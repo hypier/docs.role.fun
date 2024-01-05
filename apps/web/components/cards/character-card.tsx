@@ -98,7 +98,7 @@ const CharacterCard = (props: {
             <CardDescription
               className={`${
                 props.cardImageUrl ? "text-white" : "text-foreground"
-              } z-[3] line-clamp-3 select-none text-xs duration-200 hover:line-clamp-none group-hover:opacity-80`}
+              } z-[3] line-clamp-2 select-none text-xs duration-200 hover:line-clamp-none group-hover:opacity-80`}
             >
               {props.description}
             </CardDescription>
