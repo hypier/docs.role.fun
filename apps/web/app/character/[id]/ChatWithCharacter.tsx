@@ -37,10 +37,12 @@ export const Stories = ({
   characterId,
   name,
   cardImageUrl,
+  isHorizontal = false,
 }: {
   characterId: Id<"characters">;
   name: string;
   cardImageUrl: string;
+  isHorizontal?: boolean;
 }) => {
   const { results, loadMore } = usePaginatedQuery(
     api.stories.list,
@@ -50,18 +52,23 @@ export const Stories = ({
   return (
     <section className="flex flex-col gap-4">
       <div className="font-medium">Stories</div>
-      <div className="grid w-full md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
-          {results.map((story, i) => (
-            <Link href={`/character/${characterId}/story/${story._id}`}>
-              <Story
-                name={name}
-                cardImageUrl={cardImageUrl as string}
-                storyId={story._id}
-              />
-            </Link>
-          ))}
-        </div>
+      <div
+        className={`flex h-full flex-col gap-4 ${
+          isHorizontal ? "grid md:grid-cols-2 lg:grid-cols-3" : ""
+        }`}
+      >
+        {results.map((story, i) => (
+          <Link
+            href={`/character/${characterId}/story/${story._id}`}
+            className="h-96 rounded-lg border p-4 shadow-lg"
+          >
+            <Story
+              name={name}
+              cardImageUrl={cardImageUrl as string}
+              storyId={story._id}
+            />
+          </Link>
+        ))}
       </div>
     </section>
   );
@@ -168,6 +175,7 @@ export default function ChatWithCharacter({
                 characterId={params.id as Id<"characters">}
                 name={data?.name as string}
                 cardImageUrl={data?.cardImageUrl as string}
+                isHorizontal={true}
               />
             </DrawerHeader>
             <DrawerFooter>

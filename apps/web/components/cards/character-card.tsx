@@ -29,20 +29,20 @@ const CharacterCard = (props: {
   return (
     <AspectRatio
       ratio={1 / 1.75}
-      className="group w-full h-full hover:-translate-y-1 duration-200 shadow hover:shadow-lg place-content-center rounded-lg"
+      className="group h-full w-full place-content-center rounded-lg shadow duration-200 hover:-translate-y-1 hover:shadow-lg"
     >
       <Link href={`/character/${props?.id}`}>
-        <Card className="rounded-lg p-2 w-full h-full flex items-end">
+        <Card className="flex h-full w-full items-end rounded-lg p-2">
           {props.showEdit && (
             <Link
               href={`/my-characters/create${props.id ? `?id=${props.id}` : ""}${
                 props.model ? `&model=${props.model}` : ""
               }`}
-              className="absolute z-[4] right-4 top-4 group-hover:flex hidden items-center"
+              className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
             >
               <Button
                 variant="outline"
-                className="h-5 rounded-full text-xs md:text-[10px] border-none"
+                className="h-5 rounded-full border-none text-xs md:text-[10px]"
               >
                 Edit
               </Button>
@@ -60,35 +60,35 @@ const CharacterCard = (props: {
                 href={`/my-characters/create${
                   props.id ? `?remixId=${props.id}` : ""
                 }`}
-                className="absolute z-[4] right-4 top-4 group-hover:flex hidden items-center"
+                className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
               >
                 <Button
                   variant="outline"
-                  className="h-5 rounded-full text-xs md:text-[10px] border-none"
+                  className="h-5 rounded-full border-none text-xs md:text-[10px]"
                 >
-                  <Repeat className="w-3 h-3 p-0.5" />
+                  <Repeat className="h-3 w-3 p-0.5" />
                   Remix
                 </Button>
               </Link>
             </Tooltip>
           )}
-          <div className="absolute z-[3] top-4">
+          <div className="absolute top-4 z-[3]">
             <ModelBadge modelName={props.model as string} />
           </div>
-          <CardHeader className="relative w-full p-4 z-[2]">
+          <CardHeader className="relative z-[2] w-full p-4">
             {props.cardImageUrl && (
-              <div className="bg-gradient-to-b from-transparent via-black/60 to-black absolute -left-[10px] -bottom-[9px] w-[calc(100%+20px)] h-[calc(100%+2rem)] rounded-b-lg" />
+              <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-lg bg-gradient-to-b from-transparent via-black/60 to-black" />
             )}
             <CardTitle
               className={`${
                 props.cardImageUrl ? "text-white" : "text-foreground"
-              } text-base line-clamp-1 hover:line-clamp-none select-none group-hover:opacity-80 duration-200 z-[3] flex justify-between`}
+              } z-[3] line-clamp-1 flex select-none justify-between text-base duration-200 hover:line-clamp-none group-hover:opacity-80`}
             >
               <div className="w-[80%] truncate">{props.name}</div>
               {(props?.numChats as number) > 0 && (
                 <Tooltip content={`Number of chats with ${props.name}`}>
-                  <div className="text-white text-xs rounded-full group-hover:opacity-80 duration-200 z-[3] flex gap-0.5 items-center">
-                    <MessagesSquare className="w-5 h-5 p-1 aspect-square" />
+                  <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
+                    <MessagesSquare className="aspect-square h-5 w-5 p-1" />
                     {nFormatter(props?.numChats as number)}
                   </div>
                 </Tooltip>
@@ -98,7 +98,7 @@ const CharacterCard = (props: {
             <CardDescription
               className={`${
                 props.cardImageUrl ? "text-white" : "text-foreground"
-              } select-none text-xs line-clamp-3 hover:line-clamp-none group-hover:opacity-80 duration-200 z-[3]`}
+              } z-[3] line-clamp-3 select-none text-xs duration-200 hover:line-clamp-none group-hover:opacity-80`}
             >
               {props.description}
             </CardDescription>
@@ -110,7 +110,7 @@ const CharacterCard = (props: {
               width={300}
               height={525}
               quality={60}
-              className="object-cover absolute w-full h-full rounded-lg left-0 top-0 pointer-events-none z-[1]"
+              className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
             />
           )}
         </Card>
