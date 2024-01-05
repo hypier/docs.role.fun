@@ -69,7 +69,7 @@ export function MyPersonas() {
 
             <CardDescription>Create and customize personas.</CardDescription>
           </CardHeader>
-          <CardContent className="px-4 flex flex-col sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full gap-4">
+          <CardContent className="px-4 flex flex-col sm:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
             <NewPersona onClick={() => setDraftPersona(true)} />
             {personas
               ? personas.map(
