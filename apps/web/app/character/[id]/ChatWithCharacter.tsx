@@ -218,9 +218,6 @@ export default function ChatWithCharacter({
           ) : chatId ? (
             <Dialog
               name={data?.name as string}
-              welcomeMessage={
-                data?.greetings ? (data.greetings[0] as string) : undefined
-              }
               model={data?.model as string}
               chatId={chatId}
               characterId={data?._id as any}
