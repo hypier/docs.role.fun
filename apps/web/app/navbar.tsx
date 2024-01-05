@@ -38,12 +38,14 @@ export default function NavBar({}: {}) {
             </Tooltip>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/my-characters/create" className="hidden lg:block">
-              <Button>
-                <Plus className="h-5 w-5 p-1" />
-                Create
-              </Button>
-            </Link>
+            {isAuthenticated && (
+              <Link href="/my-characters/create" className="hidden lg:block">
+                <Button className="rounded-full px-3">
+                  <Plus className="h-5 w-5 p-1" />
+                  Create
+                </Button>
+              </Link>
+            )}
             {isAuthenticated && <CurrentCrystals />}
             <UserDropdown />
             <SignedOut>
