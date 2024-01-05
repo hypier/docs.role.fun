@@ -258,12 +258,20 @@ export function Dialog({
   const remoteMessages = results.reverse();
   const messages = useMemo(
     () =>
-      (remoteMessages ?? []) as {
-        characterId: Id<"characters">;
-        text: string;
-        _id: string;
-      }[],
-    [remoteMessages],
+      (
+        [] as {
+          characterId: Id<"characters">;
+          text: string;
+          _id: string;
+        }[]
+      ).concat(
+        (remoteMessages ?? []) as {
+          characterId: Id<"characters">;
+          text: string;
+          _id: string;
+        }[],
+      ),
+    [remoteMessages, ""],
   );
   const sendMessage = useMutation(api.messages.send);
   const generateInspiration = useMutation(api.followUps.generate);
