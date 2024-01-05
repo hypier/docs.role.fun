@@ -33,6 +33,19 @@ export const list = query({
   },
 });
 
+export const count = query({
+  args: {
+    characterId: v.id("characters"),
+  },
+  handler: async (ctx, args) => {
+    const results = await ctx.db
+      .query("stories")
+      .filter((q) => q.eq(q.field("characterId"), args.characterId))
+      .collect();
+    return results ? results.length : 0;
+  },
+});
+
 export const get = query({
   args: {
     id: v.id("stories"),
