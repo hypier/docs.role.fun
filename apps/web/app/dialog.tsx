@@ -5,8 +5,8 @@ import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { MoreHorizontal, Send, Share, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { MoreHorizontal, Plus, Send, Sparkles } from "lucide-react";
+import { useInView } from "framer-motion";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { CodeBlock } from "@repo/ui/src/components/codeblock";
 import {
@@ -38,6 +38,199 @@ import { Crystal } from "@repo/ui/src/components/icons";
 import { Separator } from "@repo/ui/src/components/separator";
 import Spinner from "@repo/ui/src/components/spinner";
 
+export const Message = ({
+  name,
+  message,
+  cardImageUrl,
+}: {
+  name: string;
+  message: any;
+  cardImageUrl: string;
+}) => {
+  return (
+    <div
+      key={message._id}
+      className={`flex flex-col gap-2 ${
+        message?.characterId ? "self-start" : "self-end"
+      }`}
+    >
+      <div
+        className={`text-sm font-medium flex items-center gap-2 ${
+          message?.characterId ? "justify-start" : "justify-end"
+        }`}
+      >
+        <Avatar className="h-8 w-8">
+          <AvatarImage
+            alt={`Character card of ${name}`}
+            src={message?.characterId ? cardImageUrl : "undefined"}
+            className="object-cover"
+          />
+          <AvatarFallback>Y</AvatarFallback>
+        </Avatar>
+        {message?.characterId ? <>{name}</> : <>You</>}
+      </div>
+      {message.text === "" ? (
+        <div
+          className={
+            "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap animate-pulse" +
+            (message?.characterId
+              ? " bg-muted rounded-tl-none "
+              : " bg-foreground text-muted rounded-tr-none ")
+          }
+        >
+          Thinking...
+        </div>
+      ) : (
+        <div
+          className={
+            "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap" +
+            (message?.characterId
+              ? " bg-muted rounded-tl-none "
+              : " bg-foreground text-muted rounded-tr-none ")
+          }
+        >
+          <MemoizedReactMarkdown
+            className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+            remarkPlugins={[remarkGfm, remarkMath]}
+            components={{
+              a({ children, href, target, rel }) {
+                return (
+                  <a
+                    href={href}
+                    rel={rel}
+                    target={target}
+                    className="hover:opacity-50 underline duration-200"
+                  >
+                    {children}
+                  </a>
+                );
+              },
+              p({ children }) {
+                return <p className="mb-2 last:mb-0">{children}</p>;
+              },
+              code({ node, className, children, ...props }: any) {
+                const match = /language-(\w+)/.exec(className || "");
+
+                return (
+                  <CodeBlock
+                    key={Math.random()}
+                    language={(match && match[1]) || ""}
+                    value={String(children).replace(/\n$/, "")}
+                    {...props}
+                  />
+                );
+              },
+            }}
+          >
+            {message?.text?.startsWith("Not enough crystals.")
+              ? `${message.text} [Visit Shop](/shop)`
+              : message.text}
+          </MemoizedReactMarkdown>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const Inspirations = ({
+  inspirations,
+  setIsGeneratingInspiration,
+  generateInspiration,
+  sendAndReset,
+  chatId,
+  characterId,
+  isGeneratingInspiration,
+}: {
+  inspirations: any;
+  setIsGeneratingInspiration: any;
+  generateInspiration: any;
+  sendAndReset: any;
+  chatId: Id<"chats">;
+  characterId: Id<"characters">;
+  isGeneratingInspiration: boolean;
+}) => {
+  return (
+    <div className="w-full p-4 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md max-h-36 overflow-x-scroll scrollbar-hide overflow-y-clip">
+      <Tooltip
+        content={
+          <span className="text-xs flex gap-1 text-muted-foreground p-2">
+            <Crystal className="w-4 h-4" /> x 1
+          </span>
+        }
+        desktopOnly={true}
+      >
+        <Button
+          variant="ghost"
+          onClick={() => {
+            setIsGeneratingInspiration(true);
+            generateInspiration({ chatId, characterId });
+          }}
+          className="gap-1"
+          size="xs"
+          disabled={isGeneratingInspiration}
+          type="button"
+        >
+          {isGeneratingInspiration ? (
+            <>
+              <Spinner />
+              Generating...
+            </>
+          ) : (
+            <>
+              <Sparkles className="w-5 h-5 p-1" />
+              Inspire
+            </>
+          )}
+        </Button>
+      </Tooltip>
+      {inspirations && !inspirations?.isStale && (
+        <>
+          <Separator className="w-8" />
+          {inspirations?.followUp1 && inspirations.followUp1?.length > 0 && (
+            <Button
+              variant="outline"
+              size="xs"
+              className="font-normal rounded-full px-2"
+              onClick={() => {
+                sendAndReset(inspirations?.followUp1 as string);
+              }}
+              type="button"
+            >
+              {inspirations?.followUp1}
+            </Button>
+          )}
+          {inspirations?.followUp2 && inspirations.followUp2?.length > 0 && (
+            <Button
+              variant="outline"
+              size="xs"
+              className="font-normal rounded-full px-2"
+              onClick={() => {
+                sendAndReset(inspirations?.followUp2 as string);
+              }}
+              type="button"
+            >
+              {inspirations?.followUp2}
+            </Button>
+          )}
+          {inspirations?.followUp3 && inspirations.followUp3?.length > 0 && (
+            <Button
+              variant="outline"
+              size="xs"
+              className="font-normal rounded-full px-2"
+              onClick={() => {
+                sendAndReset(inspirations?.followUp3 as string);
+              }}
+              type="button"
+            >
+              {inspirations?.followUp3}
+            </Button>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
 export function Dialog({
   name,
   model,
@@ -56,7 +249,8 @@ export function Dialog({
   const router = useRouter();
   const goBack = router.back;
   const remove = useMutation(api.chats.remove);
-  const { results, status, loadMore } = usePaginatedQuery(
+  const create = useMutation(api.stories.create);
+  const { results, loadMore } = usePaginatedQuery(
     api.messages.list,
     { chatId },
     { initialNumItems: 5 }
@@ -112,6 +306,15 @@ export function Dialog({
     inspirations && setIsGeneratingInspiration(false);
   }, [inspirations]);
 
+  const ref = useRef(null);
+  const inView = useInView(ref);
+
+  useEffect(() => {
+    if (inView && isScrolled) {
+      loadMore(10);
+    }
+  }, [inView, loadMore]);
+
   return (
     <div className="w-full h-full">
       {chatId && (
@@ -121,23 +324,6 @@ export function Dialog({
             AI can make mistakes.
           </div>
           <div className="flex gap-1 items-center">
-            <Button
-              variant="ghost"
-              onClick={() => {
-                if (navigator.share) {
-                  navigator.share({
-                    title: document.title,
-                    url: document.location.href,
-                  });
-                } else {
-                  navigator.clipboard.writeText(document.location.href);
-                  toast.success("Link copied to clipboard");
-                }
-              }}
-              size="icon"
-            >
-              <Share className="w-4 h-4" />
-            </Button>
             <Popover>
               <AlertDialog>
                 <AlertDialogTrigger>
@@ -189,6 +375,61 @@ export function Dialog({
                 </Button>
               </PopoverTrigger>
             </Popover>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="h-8 gap-1">
+                  <Plus className="w-4 h-4" />
+                  Create story
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Create a story</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {`Anyone will be able to see the story. Messages you send after creating your link won't be shared.`}
+                  </AlertDialogDescription>
+                  <div className="flex flex-col gap-4 h-72 overflow-y-scroll p-4 shadow-lg rounded-lg border scrollbar-hide">
+                    {messages.map((message, i) => (
+                      <Message
+                        key={message._id}
+                        name={name}
+                        message={message}
+                        cardImageUrl={cardImageUrl as string}
+                      />
+                    ))}
+                  </div>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => {
+                      const promise = create({
+                        characterId: characterId as Id<"characters">,
+                        messageIds: messages
+                          .slice(1)
+                          .map((message) => message._id as Id<"messages">),
+                      });
+                      toast.promise(promise, {
+                        loading: "Creating story...",
+                        success: (storyId) => {
+                          router.push(
+                            `/character/${characterId}/story/${storyId}`
+                          );
+                          return `Story has been created.`;
+                        },
+                        error: (error) => {
+                          return error?.data
+                            ? (error.data as { message: string })?.message
+                            : "Unexpected error occurred";
+                        },
+                      });
+                    }}
+                  >
+                    Create
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       )}
@@ -206,6 +447,7 @@ export function Dialog({
             setScrolled(true);
           }}
         >
+          <div ref={ref} />
           {remoteMessages === undefined ? (
             <>
               <div className="animate-pulse rounded-md bg-black/10 h-5" />
@@ -213,90 +455,11 @@ export function Dialog({
             </>
           ) : (
             messages.map((message, i) => (
-              <motion.div
-                key={message._id}
-                className={`flex flex-col gap-2 ${
-                  message?.characterId ? "self-start" : "self-end"
-                }`}
-                onViewportEnter={() => {
-                  if (i === 0 && isScrolled) loadMore(5);
-                }}
-              >
-                <div
-                  className={`text-sm font-medium flex items-center gap-2 ${
-                    message?.characterId ? "justify-start" : "justify-end"
-                  }`}
-                >
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage
-                      alt={`Character card of ${name}`}
-                      src={message?.characterId ? cardImageUrl : "undefined"}
-                      className="object-cover"
-                    />
-                    <AvatarFallback>Y</AvatarFallback>
-                  </Avatar>
-                  {message?.characterId ? <>{name}</> : <>You</>}
-                </div>
-                {message.text === "" ? (
-                  <div
-                    className={
-                      "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap animate-pulse" +
-                      (message?.characterId
-                        ? " bg-muted rounded-tl-none "
-                        : " bg-foreground text-muted rounded-tr-none ")
-                    }
-                  >
-                    Thinking...
-                  </div>
-                ) : (
-                  <div
-                    className={
-                      "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap" +
-                      (message?.characterId
-                        ? " bg-muted rounded-tl-none "
-                        : " bg-foreground text-muted rounded-tr-none ")
-                    }
-                  >
-                    <MemoizedReactMarkdown
-                      className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
-                      remarkPlugins={[remarkGfm, remarkMath]}
-                      components={{
-                        a({ children, href, target, rel }) {
-                          return (
-                            <a
-                              href={href}
-                              rel={rel}
-                              target={target}
-                              className="hover:opacity-50 underline duration-200"
-                            >
-                              {children}
-                            </a>
-                          );
-                        },
-                        p({ children }) {
-                          return <p className="mb-2 last:mb-0">{children}</p>;
-                        },
-                        code({ node, className, children, ...props }: any) {
-                          const match = /language-(\w+)/.exec(className || "");
-
-                          return (
-                            <CodeBlock
-                              key={Math.random()}
-                              language={(match && match[1]) || ""}
-                              value={String(children).replace(/\n$/, "")}
-                              {...props}
-                            />
-                          );
-                        },
-                      }}
-                    >
-                      {message?.text?.startsWith("Not enough crystals.")
-                        ? `${message.text} [Visit Shop](/shop)`
-                        : message.text}
-                    </MemoizedReactMarkdown>
-                  </div>
-                )}
-              </motion.div>
+              <Message
+                name={name}
+                message={message}
+                cardImageUrl={cardImageUrl as string}
+              />
             ))
           )}
         </div>
@@ -305,87 +468,15 @@ export function Dialog({
         className="border-solid border-0 border-t-[1px] flex flex-col sticky bottom-16 lg:bottom-0 w-full min-h-fit bg-background items-center rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
-        <div className="w-full p-4 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md max-h-36 overflow-x-scroll scrollbar-hide overflow-y-clip">
-          <Tooltip
-            content={
-              <span className="text-xs flex gap-1 text-muted-foreground p-2">
-                <Crystal className="w-4 h-4" /> x 1
-              </span>
-            }
-            desktopOnly={true}
-          >
-            <Button
-              variant="ghost"
-              onClick={() => {
-                setIsGeneratingInspiration(true);
-                generateInspiration({ chatId, characterId });
-              }}
-              className="gap-1"
-              size="xs"
-              disabled={isGeneratingInspiration}
-              type="button"
-            >
-              {isGeneratingInspiration ? (
-                <>
-                  <Spinner />
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-5 h-5 p-1" />
-                  Inspire
-                </>
-              )}
-            </Button>
-          </Tooltip>
-          {inspirations && !inspirations?.isStale && (
-            <>
-              <Separator className="w-8" />
-              {inspirations?.followUp1 &&
-                inspirations.followUp1?.length > 0 && (
-                  <Button
-                    variant="outline"
-                    size="xs"
-                    className="font-normal rounded-full px-2"
-                    onClick={() => {
-                      sendAndReset(inspirations?.followUp1 as string);
-                    }}
-                    type="button"
-                  >
-                    {inspirations?.followUp1}
-                  </Button>
-                )}
-              {inspirations?.followUp2 &&
-                inspirations.followUp2?.length > 0 && (
-                  <Button
-                    variant="outline"
-                    size="xs"
-                    className="font-normal rounded-full px-2"
-                    onClick={() => {
-                      sendAndReset(inspirations?.followUp2 as string);
-                    }}
-                    type="button"
-                  >
-                    {inspirations?.followUp2}
-                  </Button>
-                )}
-              {inspirations?.followUp3 &&
-                inspirations.followUp3?.length > 0 && (
-                  <Button
-                    variant="outline"
-                    size="xs"
-                    className="font-normal rounded-full px-2"
-                    onClick={() => {
-                      sendAndReset(inspirations?.followUp3 as string);
-                    }}
-                    type="button"
-                  >
-                    {inspirations?.followUp3}
-                  </Button>
-                )}
-            </>
-          )}
-        </div>
+        <Inspirations
+          inspirations={inspirations}
+          setIsGeneratingInspiration={setIsGeneratingInspiration}
+          generateInspiration={generateInspiration}
+          sendAndReset={sendAndReset}
+          chatId={chatId}
+          characterId={characterId}
+          isGeneratingInspiration={isGeneratingInspiration}
+        />
         <div className="flex w-full">
           <input
             className="w-full ml-4 my-3 border-none focus-visible:ring-0 bg-background"

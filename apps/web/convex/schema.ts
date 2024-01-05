@@ -46,8 +46,8 @@ export default defineSchema({
         v.literal("accounts/fireworks/models/qwen-14b-chat"),
         v.literal("mistral-tiny"),
         v.literal("mistral-small"),
-        v.literal("mistral-medium")
-      )
+        v.literal("mistral-medium"),
+      ),
     ),
     updatedAt: v.string(),
   })
@@ -71,6 +71,8 @@ export default defineSchema({
     chatName: v.optional(v.string()),
     updatedAt: v.string(),
     userId: v.optional(v.id("users")),
+    storyId: v.optional(v.id("stories")),
+    isUnlocked: v.optional(v.boolean()),
     characterId: v.optional(v.id("characters")),
     joinedAt: v.string(),
   })

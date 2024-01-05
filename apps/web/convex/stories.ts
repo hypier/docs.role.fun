@@ -77,3 +77,47 @@ export const remove = mutation({
     }
   },
 });
+
+export const messages = query({
+  args: {
+    storyId: v.id("stories"),
+  },
+  handler: async (ctx, args) => {
+    const story = await ctx.db
+      .query("stories")
+      .filter((q) => q.eq(q.field("_id"), args.storyId))
+      .order("desc")
+      .first();
+    const messages = await Promise.all(
+      (story?.messageIds ?? []).map((messageId) => ctx.db.get(messageId)),
+    );
+    return messages;
+  },
+});
+
+export const unlock = mutation({
+  args: {
+    storyId: v.id("stories"),
+    chatId: v.id("chats"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.chatId, { isUnlocked: true });
+    const story = await ctx.db
+      .query("stories")
+      .filter((q) => q.eq(q.field("_id"), args.storyId))
+      .order("desc")
+      .first();
+    const messages = await Promise.all(
+      (story?.messageIds ?? []).map((messageId) => ctx.db.get(messageId)),
+    );
+    await Promise.all(
+      messages.map((message) =>
+        ctx.db.insert("messages", {
+          chatId: args.chatId,
+          characterId: message?.characterId,
+          text: message?.text as string,
+        }),
+      ),
+    );
+  },
+});
