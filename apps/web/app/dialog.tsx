@@ -236,14 +236,12 @@ export const Inspirations = ({
 export function Dialog({
   name,
   model,
-  welcomeMessage,
   cardImageUrl,
   chatId,
   characterId,
 }: {
   name: string;
   model: string;
-  welcomeMessage?: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
@@ -260,14 +258,12 @@ export function Dialog({
   const remoteMessages = results.reverse();
   const messages = useMemo(
     () =>
-      [{ text: welcomeMessage, characterId, _id: "0" }].concat(
-        (remoteMessages ?? []) as {
-          characterId: Id<"characters">;
-          text: string;
-          _id: string;
-        }[],
-      ),
-    [remoteMessages, welcomeMessage],
+      (remoteMessages ?? []) as {
+        characterId: Id<"characters">;
+        text: string;
+        _id: string;
+      }[],
+    [remoteMessages],
   );
   const sendMessage = useMutation(api.messages.send);
   const generateInspiration = useMutation(api.followUps.generate);
