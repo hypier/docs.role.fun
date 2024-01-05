@@ -26,7 +26,7 @@ const Discover = () => {
 
   return (
     <>
-      <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:px-0"
+      <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:px-0">
         {characters?.length > 0
           ? characters.map(
               (character, index) =>
