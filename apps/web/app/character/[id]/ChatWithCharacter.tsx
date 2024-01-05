@@ -14,7 +14,7 @@ import Image from "next/image";
 import { Dialog } from "../../dialog";
 import Spinner from "@repo/ui/src/components/spinner";
 import useStoreChatEffect from "../../lib/hooks/use-store-chat-effect";
-import { MessagesSquare, Share } from "lucide-react";
+import { BookMarked, MessagesSquare, Share } from "lucide-react";
 import { FadeInOut, nFormatter } from "../../lib/utils";
 import { SignIn, useUser } from "@clerk/nextjs";
 import {
@@ -128,8 +128,10 @@ export default function ChatWithCharacter({
               </CardTitle>
               <p
                 className={`${
-                  data?.cardImageUrl ? "text-white" : "text-foreground"
-                } z-[1] line-clamp-3 text-sm hover:line-clamp-none lg:line-clamp-5`}
+                  data?.cardImageUrl
+                    ? "text-muted-foreground"
+                    : "text-muted-foreground"
+                } z-[1] line-clamp-2 text-sm lg:line-clamp-3`}
               >
                 {data?.description}
               </p>
@@ -138,31 +140,46 @@ export default function ChatWithCharacter({
                   <p
                     className={`${
                       data?.cardImageUrl
-                        ? "text-muted dark:text-gray-500"
+                        ? "text-secondary dark:text-gray-500"
                         : "text-muted-foreground"
-                    } z-[1] line-clamp-3 text-xs hover:line-clamp-none lg:line-clamp-5`}
+                    } z-[1] line-clamp-1 text-xs`}
                   >
                     Created by @{creatorName}
                   </p>
-                  <Button
-                    className="z-10 text-white"
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (navigator.share) {
-                        navigator.share({
-                          title: document.title,
-                          url: document.location.href,
-                        });
-                      } else {
-                        navigator.clipboard.writeText(document.location.href);
-                        toast.success("Link copied to clipboard");
-                      }
-                    }}
-                  >
-                    <Share className="h-4 w-4" />
-                  </Button>
+                  <div className="z-10 flex items-center gap-1">
+                    <Tooltip content={`About ${data?.name}`}>
+                      <Button
+                        className="z-10 text-white"
+                        variant="ghost"
+                        size="icon"
+                      >
+                        <BookMarked className="h-4 w-4" />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip content={`Share ${data?.name}`}>
+                      <Button
+                        className="z-10 text-white"
+                        variant="ghost"
+                        size="icon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (navigator.share) {
+                            navigator.share({
+                              title: document.title,
+                              url: document.location.href,
+                            });
+                          } else {
+                            navigator.clipboard.writeText(
+                              document.location.href,
+                            );
+                            toast.success("Link copied to clipboard");
+                          }
+                        }}
+                      >
+                        <Share className="h-4 w-4" />
+                      </Button>
+                    </Tooltip>
+                  </div>
                 </div>
               )}
             </CardHeader>
