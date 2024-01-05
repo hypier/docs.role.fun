@@ -55,7 +55,7 @@ export const Message = ({
       }`}
     >
       <div
-        className={`text-sm font-medium flex items-center gap-2 ${
+        className={`flex items-center gap-2 text-sm font-medium ${
           message?.characterId ? "justify-start" : "justify-end"
         }`}
       >
@@ -65,17 +65,19 @@ export const Message = ({
             src={message?.characterId ? cardImageUrl : "undefined"}
             className="object-cover"
           />
-          <AvatarFallback>Y</AvatarFallback>
+          <AvatarFallback>
+            {message?.characterId ? name[0] : "Y"}
+          </AvatarFallback>
         </Avatar>
         {message?.characterId ? <>{name}</> : <>You</>}
       </div>
       {message.text === "" ? (
         <div
           className={
-            "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap animate-pulse" +
+            "max-w-[20rem] animate-pulse whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
             (message?.characterId
-              ? " bg-muted rounded-tl-none "
-              : " bg-foreground text-muted rounded-tr-none ")
+              ? " rounded-tl-none bg-muted "
+              : " rounded-tr-none bg-foreground text-muted ")
           }
         >
           Thinking...
@@ -83,14 +85,14 @@ export const Message = ({
       ) : (
         <div
           className={
-            "lg:max-w-[40rem] md:max-w-[30rem] max-w-[20rem] rounded-xl px-3 py-2 whitespace-pre-wrap" +
+            "max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
             (message?.characterId
-              ? " bg-muted rounded-tl-none "
-              : " bg-foreground text-muted rounded-tr-none ")
+              ? " rounded-tl-none bg-muted "
+              : " rounded-tr-none bg-foreground text-muted ")
           }
         >
           <MemoizedReactMarkdown
-            className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+            className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
             remarkPlugins={[remarkGfm, remarkMath]}
             components={{
               a({ children, href, target, rel }) {
@@ -99,7 +101,7 @@ export const Message = ({
                     href={href}
                     rel={rel}
                     target={target}
-                    className="hover:opacity-50 underline duration-200"
+                    className="underline duration-200 hover:opacity-50"
                   >
                     {children}
                   </a>
@@ -150,11 +152,11 @@ export const Inspirations = ({
   isGeneratingInspiration: boolean;
 }) => {
   return (
-    <div className="w-full p-4 flex items-center gap-1 flex-wrap text-xs bg-background/90 backdrop-blur-md max-h-36 overflow-x-scroll scrollbar-hide overflow-y-clip">
+    <div className="flex max-h-36 w-full flex-wrap items-center gap-1 overflow-y-clip overflow-x-scroll bg-background/90 p-4 text-xs backdrop-blur-md scrollbar-hide">
       <Tooltip
         content={
-          <span className="text-xs flex gap-1 text-muted-foreground p-2">
-            <Crystal className="w-4 h-4" /> x 1
+          <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+            <Crystal className="h-4 w-4" /> x 1
           </span>
         }
         desktopOnly={true}
@@ -177,7 +179,7 @@ export const Inspirations = ({
             </>
           ) : (
             <>
-              <Sparkles className="w-5 h-5 p-1" />
+              <Sparkles className="h-5 w-5 p-1" />
               Inspire
             </>
           )}
@@ -190,7 +192,7 @@ export const Inspirations = ({
             <Button
               variant="outline"
               size="xs"
-              className="font-normal rounded-full px-2"
+              className="rounded-full px-2 font-normal"
               onClick={() => {
                 sendAndReset(inspirations?.followUp1 as string);
               }}
@@ -203,7 +205,7 @@ export const Inspirations = ({
             <Button
               variant="outline"
               size="xs"
-              className="font-normal rounded-full px-2"
+              className="rounded-full px-2 font-normal"
               onClick={() => {
                 sendAndReset(inspirations?.followUp2 as string);
               }}
@@ -216,7 +218,7 @@ export const Inspirations = ({
             <Button
               variant="outline"
               size="xs"
-              className="font-normal rounded-full px-2"
+              className="rounded-full px-2 font-normal"
               onClick={() => {
                 sendAndReset(inspirations?.followUp3 as string);
               }}
@@ -253,7 +255,7 @@ export function Dialog({
   const { results, loadMore } = usePaginatedQuery(
     api.messages.list,
     { chatId },
-    { initialNumItems: 5 }
+    { initialNumItems: 5 },
   );
   const remoteMessages = results.reverse();
   const messages = useMemo(
@@ -263,9 +265,9 @@ export function Dialog({
           characterId: Id<"characters">;
           text: string;
           _id: string;
-        }[]
+        }[],
       ),
-    [remoteMessages, welcomeMessage]
+    [remoteMessages, welcomeMessage],
   );
   const sendMessage = useMutation(api.messages.send);
   const generateInspiration = useMutation(api.followUps.generate);
@@ -316,14 +318,14 @@ export function Dialog({
   }, [inView, loadMore]);
 
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       {chatId && (
-        <div className="w-full flex items-center justify-between p-2 sticky top-0 bg-background border-b h-12 rounded-t-lg px-6">
-          <div className="text-muted-foreground font-medium text-xs flex items-center gap-2">
+        <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 px-6">
+          <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
             <ModelBadge modelName={model as string} showCredits={true} />
             AI can make mistakes.
           </div>
-          <div className="flex gap-1 items-center">
+          <div className="flex items-center gap-1">
             <Popover>
               <AlertDialog>
                 <AlertDialogTrigger>
@@ -378,7 +380,7 @@ export function Dialog({
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button className="h-8 gap-1">
-                  <Plus className="w-4 h-4" />
+                  <Plus className="h-4 w-4" />
                   Create story
                 </Button>
               </AlertDialogTrigger>
@@ -388,7 +390,7 @@ export function Dialog({
                   <AlertDialogDescription>
                     {`Anyone will be able to see the story. Messages you send after creating your link won't be shared.`}
                   </AlertDialogDescription>
-                  <div className="flex flex-col gap-4 h-72 overflow-y-scroll p-4 shadow-lg rounded-lg border scrollbar-hide">
+                  <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
                     {messages.map((message, i) => (
                       <Message
                         key={message._id}
@@ -413,7 +415,7 @@ export function Dialog({
                         loading: "Creating story...",
                         success: (storyId) => {
                           router.push(
-                            `/character/${characterId}/story/${storyId}`
+                            `/character/${characterId}/story/${storyId}`,
                           );
                           return `Story has been created.`;
                         },
@@ -441,7 +443,7 @@ export function Dialog({
         } h-full overflow-y-auto`}
       >
         <div
-          className="gap-8 flex h-fit flex-col mx-2 p-4 rounded-lg"
+          className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
           ref={listRef}
           onWheel={() => {
             setScrolled(true);
@@ -450,8 +452,8 @@ export function Dialog({
           <div ref={ref} />
           {remoteMessages === undefined ? (
             <>
-              <div className="animate-pulse rounded-md bg-black/10 h-5" />
-              <div className="animate-pulse rounded-md bg-black/10 h-9" />
+              <div className="h-5 animate-pulse rounded-md bg-black/10" />
+              <div className="h-9 animate-pulse rounded-md bg-black/10" />
             </>
           ) : (
             messages.map((message, i) => (
@@ -465,7 +467,7 @@ export function Dialog({
         </div>
       </div>
       <form
-        className="border-solid border-0 border-t-[1px] flex flex-col sticky bottom-16 lg:bottom-0 w-full min-h-fit bg-background items-center rounded-br-lg"
+        className="sticky bottom-16 flex min-h-fit w-full flex-col items-center rounded-br-lg border-0 border-t-[1px] border-solid bg-background lg:bottom-0"
         onSubmit={(event) => void handleSend(event)}
       >
         <Inspirations
@@ -479,7 +481,7 @@ export function Dialog({
         />
         <div className="flex w-full">
           <input
-            className="w-full ml-4 my-3 border-none focus-visible:ring-0 bg-background"
+            className="my-3 ml-4 w-full border-none bg-background focus-visible:ring-0"
             autoFocus
             name="message"
             placeholder="Send a message"
@@ -487,7 +489,7 @@ export function Dialog({
             onChange={(event) => setInput(event.target.value)}
           />
           <Button disabled={input === ""} variant="ghost" className="my-3 mr-4">
-            <Send className="w-5 h-5" />
+            <Send className="h-5 w-5" />
           </Button>
         </div>
       </form>
