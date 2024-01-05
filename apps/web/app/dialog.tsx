@@ -299,6 +299,7 @@ export function Dialog({
     if (isScrolled) {
       return;
     }
+    console.log("scrolling...");
     // Using `setTimeout` to make sure scrollTo works on button click in Chrome
     setTimeout(() => {
       listRef.current?.scrollTo({
@@ -451,6 +452,10 @@ export function Dialog({
             ? "lg:h-[calc(100%-16rem)]"
             : "lg:h-[calc(100%-12rem)]"
         } h-full overflow-y-auto`}
+        ref={listRef}
+        onWheel={() => {
+          setScrolled(true);
+        }}
       >
         <div
           className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
