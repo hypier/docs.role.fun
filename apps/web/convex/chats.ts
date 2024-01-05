@@ -28,8 +28,9 @@ export const create = mutation({
       joinedAt: new Date().toISOString(),
     });
     const character = await ctx.db.get(args.characterId);
+    const greeting = character?.greetings ? character.greetings[0] : "";
     await ctx.db.insert("messages", {
-      text: character?.greetings ? character.greetings[0] : "",
+      text: greeting as string,
       chatId: newChat,
       characterId: character?._id,
     });
