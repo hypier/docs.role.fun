@@ -5,7 +5,7 @@ import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { MoreHorizontal, Plus, Send, Sparkles } from "lucide-react";
+import { MoreHorizontal, Plus, RefreshCw, Send, Sparkles } from "lucide-react";
 import { useInView } from "framer-motion";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { CodeBlock } from "@repo/ui/src/components/codeblock";
@@ -38,15 +38,60 @@ import { Crystal } from "@repo/ui/src/components/icons";
 import { Separator } from "@repo/ui/src/components/separator";
 import Spinner from "@repo/ui/src/components/spinner";
 
+export const FormattedMessage = ({ message }: { message: any }) => {
+  return (
+    <MemoizedReactMarkdown
+      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
+      remarkPlugins={[remarkGfm, remarkMath]}
+      components={{
+        a({ children, href, target, rel }) {
+          return (
+            <a
+              href={href}
+              rel={rel}
+              target={target}
+              className="underline duration-200 hover:opacity-50"
+            >
+              {children}
+            </a>
+          );
+        },
+        p({ children }) {
+          return <p className="mb-2 last:mb-0">{children}</p>;
+        },
+        code({ node, className, children, ...props }: any) {
+          const match = /language-(\w+)/.exec(className || "");
+
+          return (
+            <CodeBlock
+              key={Math.random()}
+              language={(match && match[1]) || ""}
+              value={String(children).replace(/\n$/, "")}
+              {...props}
+            />
+          );
+        },
+      }}
+    >
+      {message?.text?.startsWith("Not enough crystals.")
+        ? `${message.text} [Visit Shop](/shop)`
+        : message.text}
+    </MemoizedReactMarkdown>
+  );
+};
+
 export const Message = ({
   name,
   message,
   cardImageUrl,
+  chatId,
 }: {
   name: string;
   message: any;
   cardImageUrl: string;
+  chatId?: Id<"chats">;
 }) => {
+  const regenerate = useMutation(api.messages.regenerate);
   return (
     <div
       key={message._id}
@@ -85,49 +130,29 @@ export const Message = ({
       ) : (
         <div
           className={
-            "max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
+            "relative max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
             (message?.characterId
               ? " rounded-tl-none bg-muted "
               : " rounded-tr-none bg-foreground text-muted ")
           }
         >
-          <MemoizedReactMarkdown
-            className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
-            remarkPlugins={[remarkGfm, remarkMath]}
-            components={{
-              a({ children, href, target, rel }) {
-                return (
-                  <a
-                    href={href}
-                    rel={rel}
-                    target={target}
-                    className="underline duration-200 hover:opacity-50"
-                  >
-                    {children}
-                  </a>
-                );
-              },
-              p({ children }) {
-                return <p className="mb-2 last:mb-0">{children}</p>;
-              },
-              code({ node, className, children, ...props }: any) {
-                const match = /language-(\w+)/.exec(className || "");
-
-                return (
-                  <CodeBlock
-                    key={Math.random()}
-                    language={(match && match[1]) || ""}
-                    value={String(children).replace(/\n$/, "")}
-                    {...props}
-                  />
-                );
-              },
-            }}
-          >
-            {message?.text?.startsWith("Not enough crystals.")
-              ? `${message.text} [Visit Shop](/shop)`
-              : message.text}
-          </MemoizedReactMarkdown>
+          {message?.characterId && chatId && (
+            <Button
+              size="icon"
+              variant="outline"
+              className="absolute -bottom-2 -right-2 h-5 w-5 rounded-full p-1"
+              onClick={() =>
+                regenerate({
+                  messageId: message?._id as Id<"messages">,
+                  chatId,
+                  characterId: message?.characterId,
+                })
+              }
+            >
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          )}
+          <FormattedMessage message={message} />
         </div>
       )}
     </div>
@@ -476,6 +501,7 @@ export function Dialog({
                 name={name}
                 message={message}
                 cardImageUrl={cardImageUrl as string}
+                chatId={chatId}
               />
             ))
           )}

@@ -110,5 +110,13 @@ export default defineSchema({
     messageIds: v.array(v.id("messages")),
     name: v.optional(v.string()),
     isPrivate: v.boolean(),
-  }).index("byUserId", ["userId"]),
+  })
+    .index("byUserId", ["userId"])
+    .index("byCharacterId", ["characterId"]),
+  regeneratedMessages: defineTable({
+    messageId: v.id("messages"),
+    query: v.optional(v.string()),
+    rejectedMessage: v.optional(v.string()),
+    regeneratedMessage: v.optional(v.string()),
+  }),
 });

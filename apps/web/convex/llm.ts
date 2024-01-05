@@ -23,8 +23,12 @@ export const answer = internalAction({
     chatId: v.id("chats"),
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
+    messageId: v.optional(v.id("messages")),
   },
-  handler: async (ctx, { userId, chatId, characterId, personaId }) => {
+  handler: async (
+    ctx,
+    { userId, chatId, characterId, personaId, messageId },
+  ) => {
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
     });
@@ -37,10 +41,18 @@ export const answer = internalAction({
         })
       : undefined;
 
-    const messageId = await ctx.runMutation(internal.llm.addCharacterMessage, {
-      chatId,
-      characterId,
-    });
+    const message = messageId
+      ? await ctx.runQuery(internal.messages.get, {
+          id: messageId,
+        })
+      : undefined;
+
+    messageId = messageId
+      ? messageId
+      : await ctx.runMutation(internal.llm.addCharacterMessage, {
+          chatId,
+          characterId,
+        });
 
     if (character?.isArchived) {
       await ctx.runMutation(internal.llm.updateCharacterMessage, {
@@ -56,7 +68,7 @@ export const answer = internalAction({
         {
           userId,
           name: model,
-        }
+        },
       );
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
@@ -137,6 +149,13 @@ export const answer = internalAction({
             });
           }
         }
+        message &&
+          (await ctx.runMutation(internal.messages.save, {
+            messageId,
+            query: messages[messages.length - 2].text,
+            rejectedMessage: message.text,
+            regeneratedMessage: text,
+          }));
       } catch (error) {
         await ctx.runMutation(internal.serve.refundCrystal, {
           userId,
@@ -156,7 +175,7 @@ export const answer = internalAction({
         console.log("catched other error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: "I cannot reply at this time. You may have not enough crystals.",
+          text: "I cannot reply at this time.",
         });
       }
     }
@@ -185,7 +204,7 @@ export const generateInstruction = internalAction({
         {
           userId,
           name: model,
-        }
+        },
       );
       try {
         const stream = await openai.chat.completions.create({
@@ -267,7 +286,7 @@ export const generateFollowups = internalAction({
         {
           userId,
           name: model,
-        }
+        },
       );
       try {
         const instruction = `You are ${
@@ -334,7 +353,7 @@ export const generateFollowups = internalAction({
           response.choices[0]?.message) as any;
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
-            responseMessage.function_call.arguments
+            responseMessage.function_call.arguments,
           );
           await ctx.runMutation(internal.followUps.create, {
             chatId,
@@ -378,7 +397,7 @@ export const generateCharacter = internalAction({
         {
           userId,
           name: model,
-        }
+        },
       );
       try {
         const instruction = `generate ${getRandomGenreAndModality()} character, respond in JSON. seed:${
@@ -446,7 +465,7 @@ export const generateCharacter = internalAction({
         console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
-            responseMessage.function_call.arguments
+            responseMessage.function_call.arguments,
           );
           console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.characters.autofill, {
@@ -484,7 +503,7 @@ export const getMessages = internalQuery(
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", chatId))
       .take(256);
-  }
+  },
 );
 
 export const addCharacterMessage = internalMutation(
@@ -493,30 +512,30 @@ export const addCharacterMessage = internalMutation(
     {
       chatId,
       characterId,
-    }: { chatId: Id<"chats">; characterId: Id<"characters"> }
+    }: { chatId: Id<"chats">; characterId: Id<"characters"> },
   ) => {
     return await ctx.db.insert("messages", {
       text: "",
       chatId,
       characterId,
     });
-  }
+  },
 );
 
 export const updateCharacterMessage = internalMutation(
   async (
     ctx,
-    { messageId, text }: { messageId: Id<"messages">; text: string }
+    { messageId, text }: { messageId: Id<"messages">; text: string },
   ) => {
     await ctx.db.patch(messageId, { text });
-  }
+  },
 );
 
 export const updateCharacterInstruction = internalMutation(
   async (
     ctx,
-    { characterId, text }: { characterId: Id<"characters">; text: string }
+    { characterId, text }: { characterId: Id<"characters">; text: string },
   ) => {
     await ctx.db.patch(characterId, { instructions: text });
-  }
+  },
 );
