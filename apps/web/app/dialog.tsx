@@ -92,6 +92,7 @@ export const Message = ({
   chatId?: Id<"chats">;
 }) => {
   const regenerate = useMutation(api.messages.regenerate);
+  const [isRegenerating, setIsRegenerating] = useState(false);
   return (
     <div
       key={message._id}
@@ -141,15 +142,21 @@ export const Message = ({
               size="icon"
               variant="outline"
               className="absolute -bottom-2 -right-2 h-5 w-5 rounded-full p-1"
-              onClick={() =>
-                regenerate({
+              onClick={async () => {
+                setIsRegenerating(true);
+                await regenerate({
                   messageId: message?._id as Id<"messages">,
                   chatId,
                   characterId: message?.characterId,
-                })
-              }
+                });
+                setIsRegenerating(false);
+              }}
             >
-              <RefreshCw className="h-4 w-4" />
+              {isRegenerating ? (
+                <Spinner className="h-4 w-4" />
+              ) : (
+                <RefreshCw className="h-4 w-4" />
+              )}
             </Button>
           )}
           <FormattedMessage message={message} />
