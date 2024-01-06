@@ -148,15 +148,26 @@ export const answer = internalAction({
         });
 
         let text = "";
+        let mutationCounter = 0;
         for await (const { choices } of stream) {
           const replyDelta = choices[0] && choices[0].delta.content;
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
-            await ctx.runMutation(internal.llm.updateCharacterMessage, {
-              messageId,
-              text,
-            });
+            mutationCounter++;
+            if (mutationCounter % 2 === 0) {
+              await ctx.runMutation(internal.llm.updateCharacterMessage, {
+                messageId,
+                text,
+              });
+            }
           }
+        }
+        // Ensure the last mutation is run if the text was updated an odd number of times
+        if (mutationCounter % 2 !== 0) {
+          await ctx.runMutation(internal.llm.updateCharacterMessage, {
+            messageId,
+            text,
+          });
         }
         if (
           message &&
