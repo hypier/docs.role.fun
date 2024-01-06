@@ -108,6 +108,8 @@ export const answer = internalAction({
             `;
 
       try {
+        const conversations =
+          message === undefined ? messages : messages.slice(0, -2);
         const stream = await openai.chat.completions.create({
           model,
           stream: true,
@@ -116,7 +118,7 @@ export const answer = internalAction({
               role: "system",
               content: instruction,
             },
-            ...(messages
+            ...(conversations
               .map(({ characterId, text }: any, index: any) => {
                 const message = {
                   role: characterId ? "assistant" : "user",
