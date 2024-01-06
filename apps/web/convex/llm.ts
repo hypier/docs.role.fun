@@ -117,6 +117,13 @@ export const answer = internalAction({
           : -1;
         const conversations =
           message === undefined ? messages : messages.slice(0, lastIndice);
+        if (
+          conversations.length > 0 &&
+          conversations[conversations.length - 1].characterId
+        ) {
+          conversations.pop();
+        }
+
         const stream = await openai.chat.completions.create({
           model,
           stream: true,
@@ -133,11 +140,11 @@ export const answer = internalAction({
                 };
                 if ((index + 1) % remindInstructionInterval === 0) {
                   return [
-                    message,
                     {
                       role: "system",
                       content: instruction,
                     },
+                    message,
                   ];
                 } else {
                   return message;
