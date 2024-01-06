@@ -506,6 +506,111 @@ export const generateCharacter = internalAction({
   },
 });
 
+export const generateTags = internalAction({
+  args: {
+    userId: v.id("users"),
+    characterId: v.id("characters"),
+  },
+  handler: async (ctx, { userId, characterId }) => {
+    try {
+      const model = "gpt-4-1106-preview";
+      const baseURL = getBaseURL(model);
+      const apiKey = getAPIKey(model);
+      const openai = new OpenAI({
+        baseURL,
+        apiKey,
+      });
+      const character = await ctx.runQuery(api.characters.get, {
+        id: characterId,
+      });
+      try {
+        const instruction = `Tag the character, respond in JSON.
+        Following is the detail of character.
+        {
+          name: ${character?.name},
+          description: ${character?.description},
+          greetings: ${character?.greetings},
+          instruction: ${character?.instructions},
+        }
+        `;
+
+        const functions = [
+          {
+            name: "tag_character",
+            description: "generate character tags.",
+            parameters: {
+              type: "object",
+              properties: {
+                languageTag: {
+                  type: "string",
+                  description:
+                    "ISO 639 Set 1 two-letter language code for character, Example: en, ko, ja, ar",
+                },
+                genreTag: {
+                  type: "string",
+                  description: `Genre define the character's genre, it can be "Anime", "Game", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Assistant", anything.`,
+                },
+                personalityTag: {
+                  type: "string",
+                  description: `These tags describe the character's personality traits. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
+                },
+                roleTag: {
+                  type: "string",
+                  description: `Role define the character's role or function in the story. Common examples are "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", "Comic relief", etc.`,
+                },
+              },
+              required: [
+                "languageTag",
+                "genreTag",
+                "personalityTag",
+                "roleTag",
+              ],
+            },
+          },
+        ];
+        const response = await openai.chat.completions.create({
+          model,
+          stream: false,
+          messages: [
+            {
+              role: "system",
+              content: instruction,
+            },
+          ],
+          function_call: "auto",
+          response_format: { type: "json_object" },
+          functions,
+          temperature: 1,
+        });
+        console.log("response:::", response);
+        const responseMessage = (response &&
+          response?.choices &&
+          response.choices[0]?.message) as any;
+        console.log("responseMessage:::", responseMessage);
+        if (responseMessage?.function_call) {
+          const functionArgs = JSON.parse(
+            responseMessage.function_call.arguments,
+          );
+          console.log("functionArgs:::", functionArgs);
+          await ctx.runMutation(internal.characters.tag, {
+            characterId,
+            languageTag: functionArgs?.languageTag,
+            genreTag: functionArgs?.genreTag,
+            personalityTag: functionArgs?.personalityTag,
+            roleTag: functionArgs?.roleTag,
+          });
+        }
+      } catch (error) {
+        console.log("error:::", error);
+        throw Error;
+      }
+    } catch (error) {
+      console.log("error:::", error);
+      throw error;
+    }
+  },
+});
+
 export const getMessages = internalQuery(
   async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
     return await ctx.db

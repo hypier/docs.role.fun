@@ -49,6 +49,10 @@ export default defineSchema({
         v.literal("mistral-medium"),
       ),
     ),
+    languageTag: v.optional(v.string()), // ISO 639 Set 1 two-letter language code
+    genreTag: v.optional(v.string()), // Genre define the character's genre, it can be "Anime", "Game", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Assistant", anything.
+    personalityTag: v.optional(v.string()), // These tags describe the character's personality traits. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.
+    roleTag: v.optional(v.string()), // Role define the character's role or function in the story. Common examples are "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", "Comic relief", etc.
     updatedAt: v.string(),
   })
     .index("byUserId", ["creatorId"])
