@@ -4,9 +4,10 @@ import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 
 const Discover = () => {
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.list,
     {},
     { initialNumItems: 10 },
