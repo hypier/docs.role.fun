@@ -149,13 +149,20 @@ export const answer = internalAction({
             });
           }
         }
-        message &&
-          (await ctx.runMutation(internal.messages.save, {
+        if (
+          message &&
+          messages &&
+          messages.length >= 2 &&
+          message.text &&
+          messages[messages.length - 2]
+        ) {
+          await ctx.runMutation(internal.messages.save, {
             messageId,
-            query: messages[messages.length - 2].text,
+            query: messages[messages.length - 2]?.text as string,
             rejectedMessage: message.text,
             regeneratedMessage: text,
-          }));
+          });
+        }
       } catch (error) {
         await ctx.runMutation(internal.serve.refundCrystal, {
           userId,
