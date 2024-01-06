@@ -108,8 +108,15 @@ export const answer = internalAction({
             `;
 
       try {
+        const lastIndice = message
+          ? messages.reduce((lastIndex, msg: any, index) => {
+              return msg._creationTime < message?._creationTime
+                ? index
+                : lastIndex;
+            }, -1)
+          : -1;
         const conversations =
-          message === undefined ? messages : messages.slice(0, -2);
+          message === undefined ? messages : messages.slice(0, lastIndice);
         const stream = await openai.chat.completions.create({
           model,
           stream: true,
