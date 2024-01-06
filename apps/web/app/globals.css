@@ -73,7 +73,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background lg:bg-sheet text-foreground;
+    @apply bg-background text-foreground lg:bg-sheet;
   }
 
   ::-moz-selection {
@@ -89,7 +89,7 @@
   }
 
   em {
-    @apply text-muted-foreground;
+    @apply select-text text-muted-foreground;
   }
 
   p,
