@@ -116,6 +116,11 @@ export const publish = mutation({
       ...(character.description ? {} : { description: character.greetings[0] }),
       updatedAt,
     });
+    !character.languageTag &&
+      (await ctx.scheduler.runAfter(0, internal.llm.generateTags, {
+        userId: user._id,
+        characterId: character._id,
+      }));
     return character._id;
   },
 });
@@ -248,6 +253,32 @@ export const autofill = internalMutation(
       description,
       instructions,
       greetings: [greeting],
+    });
+  },
+);
+
+export const tag = internalMutation(
+  async (
+    ctx,
+    {
+      characterId,
+      languageTag,
+      genreTag,
+      personalityTag,
+      roleTag,
+    }: {
+      characterId: Id<"characters">;
+      languageTag: string;
+      genreTag: string;
+      personalityTag: string;
+      roleTag: string;
+    },
+  ) => {
+    return await ctx.db.patch(characterId, {
+      languageTag,
+      genreTag,
+      personalityTag,
+      roleTag,
     });
   },
 );
