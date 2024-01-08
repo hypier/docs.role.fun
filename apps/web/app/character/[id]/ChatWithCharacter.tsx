@@ -145,7 +145,7 @@ export default function ChatWithCharacter({
                   <p
                     className={`${
                       data?.cardImageUrl
-                        ? "text-secondary dark:text-gray-500"
+                        ? "text-white/60"
                         : "text-muted-foreground"
                     } z-[1] line-clamp-1 text-xs`}
                   >
