@@ -80,7 +80,7 @@ const Discover = () => {
       <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
         <Carousel
           opts={{ align: "center" }}
-          className="mx-12 max-w-sm md:max-w-screen-xl 2xl:max-w-screen-2xl"
+          className="mx-12 max-w-xs sm:max-w-sm md:max-w-screen-xl 2xl:max-w-screen-2xl"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
