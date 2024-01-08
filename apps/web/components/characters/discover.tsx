@@ -8,12 +8,7 @@ import { useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button, Tooltip } from "@repo/ui/src/components";
-import {
-  ChevronLeft,
-  ChevronRight,
-  FilterIcon,
-  ListFilter,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ListFilter } from "lucide-react";
 import { FadeInOut } from "../../app/lib/utils";
 
 const Discover = () => {
@@ -46,7 +41,7 @@ const Discover = () => {
       loadMore(10);
     }
   }, [inView, loadMore]);
-  const tagsPerPage = 8;
+  const tagsPerPage = 10;
   const flattenedTags = Object.entries(popularTags).flatMap(([key, values]) =>
     values.map((value) => ({ ...value, tagKey: key })),
   );
@@ -79,7 +74,7 @@ const Discover = () => {
               <Toggle
                 aria-label={`Toggle ${tag.tagName}`}
                 variant="filled"
-                className="inline h-8 max-w-40 truncate rounded-full px-2 text-xs"
+                className="inline h-7 max-w-40 truncate px-2 text-xs"
                 defaultPressed={searchQuery.get(tag.tagKey) === tag.tagName}
                 pressed={searchQuery.get(tag.tagKey) === tag.tagName}
                 onPressedChange={(pressed) => {
