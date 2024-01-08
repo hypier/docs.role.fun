@@ -114,11 +114,11 @@ const Discover = () => {
           </Button>
         )}
       </div>
-      <div className="border-y bg-background p-2 py-12 lg:w-[90%] lg:rounded-lg lg:border lg:shadow-lg xl:w-[80%]">
+      <div className="border-y bg-background p-2 py-12 lg:w-[90%] lg:rounded-lg lg:border lg:shadow-lg">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="mx-12 max-w-screen-xl"
+          className="mx-12 max-w-screen-xl xl:max-w-screen-2xl"
         >
           <CarouselContent className="w-full">
             {characters?.length > 0
