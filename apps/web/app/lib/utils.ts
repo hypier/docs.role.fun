@@ -16,7 +16,7 @@ export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,
-  init?: RequestInit
+  init?: RequestInit,
 ): Promise<JSON> {
   const res = await fetch(input, init);
 
@@ -81,8 +81,8 @@ export const FadeInOut = {
 };
 
 export function constructMetadata({
-  title = "openroleplay.ai",
-  description = "openroleplay.ai is an AI characters and roleplaying platform for everyone.",
+  title = "Openroleplay.ai: AI characters for everyone.",
+  description = "Openroleplay.ai is an AI characters and roleplaying platform for everyone.",
   image = "/og.jpg",
   icons = "/favicon.ico",
   noIndex = false,
