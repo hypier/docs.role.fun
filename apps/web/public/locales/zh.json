@@ -3,6 +3,7 @@
   "alpha": "阿尔法",
   "Create": "创建",
   "Log in": "登录",
+  "Logout": "注销",
   "Discover": "发现",
   "Chats": "聊天",
   "My": "我的",
@@ -20,5 +21,12 @@
   "Visit Shop": "访问商店",
   "Join community": "加入社区",
   "Filter characters": "过滤字符",
-  "Stories": "故事"
+  "Stories": "故事",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "名称",
+  "Greeting": "Greeting",
+  "Instructions": "说明",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }

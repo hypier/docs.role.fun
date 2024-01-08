@@ -3,6 +3,7 @@
   "alpha": "alfa",
   "Create": "Opret",
   "Log in": "Log ind",
+  "Logout": "Log Ud",
   "Discover": "Opdag",
   "Chats": "Chat",
   "My": "Min",
@@ -20,5 +21,12 @@
   "Visit Shop": "Besøg Butik",
   "Join community": "Deltag i fællesskab",
   "Filter characters": "Filtrer tegn",
-  "Stories": "Historier"
+  "Stories": "Historier",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "Navn",
+  "Greeting": "Greeting",
+  "Instructions": "Instruktioner",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }

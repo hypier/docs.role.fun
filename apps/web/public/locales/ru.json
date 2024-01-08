@@ -3,6 +3,7 @@
   "alpha": "альфа",
   "Create": "Создать",
   "Log in": "Вход",
+  "Logout": "Выйти",
   "Discover": "Узнайте",
   "Chats": "Чаты",
   "My": "Мои",
@@ -20,5 +21,12 @@
   "Visit Shop": "Посетить магазин",
   "Join community": "Присоединиться к сообществу",
   "Filter characters": "Фильтр символов",
-  "Stories": "Истории"
+  "Stories": "Истории",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "Наименование",
+  "Greeting": "Greeting",
+  "Instructions": "Инструкции",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
