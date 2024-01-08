@@ -35,7 +35,7 @@ export function Story({
         <Image
           src={character.cardImageUrl}
           fill={true}
-          className="-z-10 object-cover opacity-15 duration-200 group-hover:opacity-0"
+          className="-z-10 object-cover opacity-15 duration-200 group-hover:opacity-30"
           alt="image of character"
         />
       )}
