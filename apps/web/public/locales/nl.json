@@ -3,6 +3,7 @@
   "alpha": "alfabetisch",
   "Create": "Aanmaken",
   "Log in": "Log in",
+  "Logout": "Afmelden",
   "Discover": "Ontdek",
   "Chats": "Chats",
   "My": "Mijn",
@@ -20,5 +21,12 @@
   "Visit Shop": "Bezoek de winkel",
   "Join community": "Word lid van community",
   "Filter characters": "Tekens filteren",
-  "Stories": "Verhalen"
+  "Stories": "Verhalen",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "naam",
+  "Greeting": "Greeting",
+  "Instructions": "Instructies",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
