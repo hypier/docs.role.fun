@@ -44,7 +44,10 @@ const Discover = () => {
       <div className="flex w-full flex-wrap gap-1">
         {Object.entries(popularTags).map(([tagKey, tagValues]) =>
           tagValues.map((tagValue, i) => (
-            <Tooltip content={`Filter by ${tagValue.tagName}`} desktopOnly>
+            <Tooltip
+              content={`Filter by ${tagKey}: ${tagValue.tagName}`}
+              desktopOnly
+            >
               <Toggle
                 key={i}
                 aria-label={`Toggle ${tagValue.tagName}`}

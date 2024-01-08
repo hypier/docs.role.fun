@@ -338,6 +338,7 @@ export const listPopularTags = query({
           const tagValue = character[tag];
           if (tagValue) {
             acc[tag] = acc[tag] || {};
+            // @ts-ignore
             acc[tag][tagValue] = (acc[tag][tagValue] || 0) + 1;
           }
         });
@@ -350,6 +351,7 @@ export const listPopularTags = query({
     };
     const mostFrequentTags: MostFrequentTags = Object.keys(tagCounts).reduce(
       (acc: MostFrequentTags, tag) => {
+        // @ts-ignore
         const sortedTags = Object.entries(tagCounts[tag])
           .sort((a, b) => b[1] - a[1])
           .slice(0, 20)
