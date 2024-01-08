@@ -8,6 +8,7 @@ import { useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Tooltip } from "@repo/ui/src/components";
+import { FilterIcon, ListFilter } from "lucide-react";
 
 const Discover = () => {
   const router = useRouter();
@@ -41,32 +42,31 @@ const Discover = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex w-full flex-wrap gap-1 px-4 lg:px-0">
+      <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
+        <Tooltip content="Filter characters">
+          <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
+        </Tooltip>
         {Object.entries(popularTags).map(([tagKey, tagValues]) =>
           tagValues.map((tagValue, i) => (
-            <Tooltip
-              content={`Filter by ${tagKey}: ${tagValue.tagName}`}
-              desktopOnly
+            <Toggle
+              key={i}
+              aria-label={`Toggle ${tagValue.tagName}`}
+              variant="filled"
+              className="inline max-w-40 truncate rounded-full px-2 text-xs lg:px-3 lg:text-sm"
+              defaultPressed={searchQuery.get(tagKey) === tagValue.tagName}
+              pressed={searchQuery.get(tagKey) === tagValue.tagName}
+              onPressedChange={(pressed) => {
+                const query = new URLSearchParams(searchQuery);
+                if (pressed) {
+                  query.set(tagKey, tagValue.tagName);
+                } else {
+                  query.delete(tagKey);
+                }
+                router.push(`${pathname}?${query.toString()}`);
+              }}
             >
-              <Toggle
-                key={i}
-                aria-label={`Toggle ${tagValue.tagName}`}
-                variant="filled"
-                className="inline max-w-40 truncate rounded-full px-2 text-xs lg:px-3 lg:text-sm"
-                pressed={searchQuery.get(tagKey) === tagValue.tagName}
-                onPressedChange={(pressed) => {
-                  const query = new URLSearchParams(searchQuery);
-                  if (pressed) {
-                    query.set(tagKey, tagValue.tagName);
-                  } else {
-                    query.delete(tagKey);
-                  }
-                  router.push(`${pathname}?${query.toString()}`);
-                }}
-              >
-                {tagValue.tagName}
-              </Toggle>
-            </Tooltip>
+              {tagValue.tagName}
+            </Toggle>
           )),
         )}
       </div>
