@@ -3,6 +3,7 @@
   "alpha": "ألفا",
   "Create": "إنشاء",
   "Log in": "تسجيل الدخول",
+  "Logout": "تسجيل الخروج",
   "Discover": "اكتشف",
   "Chats": "الدردشة",
   "My": "بلدي",
@@ -20,5 +21,12 @@
   "Visit Shop": "زيارة المتجر",
   "Join community": "الانضمام إلى المجتمع",
   "Filter characters": "تصفية الأحرف",
-  "Stories": "قصص"
+  "Stories": "قصص",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "الاسم",
+  "Greeting": "Greeting",
+  "Instructions": "تعليمات",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
