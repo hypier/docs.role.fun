@@ -57,6 +57,10 @@ export default defineSchema({
   })
     .index("byUserId", ["creatorId"])
     .index("byNumChats", ["numChats"])
+    .index("byLanguage", ["languageTag"])
+    .index("byGenre", ["genreTag"])
+    .index("byPersonality", ["personalityTag"])
+    .index("byRole", ["roleTag"])
     .vectorIndex("byEmbedding", {
       vectorField: "embedding",
       dimensions: 512,
