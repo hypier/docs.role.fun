@@ -47,7 +47,7 @@ export const MainStories = () => {
           opts={{
             align: "center",
           }}
-          className="mx-12 max-w-screen-xl xl:max-w-screen-xl"
+          className="mx-12 max-w-screen-xl xl:max-w-screen-2xl"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
