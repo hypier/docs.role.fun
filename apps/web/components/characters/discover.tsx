@@ -1,15 +1,13 @@
 import { api } from "../../convex/_generated/api";
 import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button, Tooltip } from "@repo/ui/src/components";
-import { ChevronLeft, ChevronRight, ListFilter } from "lucide-react";
-import { FadeInOut } from "../../app/lib/utils";
+import { ChevronLeft, ListFilter } from "lucide-react";
 import { MainStories } from "./main-stories";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -20,8 +18,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
+import { useTranslation } from "react-i18next";
 
 const Discover = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchParams();
@@ -71,8 +71,8 @@ const Discover = () => {
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
-        Characters
-        <Tooltip content="Filter characters">
+        {t("Characters")}
+        <Tooltip content={t("Filter characters")}>
           <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
         </Tooltip>
       </div>
