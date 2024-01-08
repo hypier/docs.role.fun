@@ -33,6 +33,20 @@ export const list = query({
   },
 });
 
+export const listAll = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+  },
+  handler: async (ctx, args) => {
+    const results = await ctx.db
+      .query("stories")
+      .withIndex("byNumChats")
+      .order("desc")
+      .paginate(args.paginationOpts);
+    return results;
+  },
+});
+
 export const count = query({
   args: {
     characterId: v.id("characters"),
@@ -120,6 +134,7 @@ export const unlock = mutation({
       .filter((q) => q.eq(q.field("_id"), args.storyId))
       .order("desc")
       .first();
+    await ctx.db.patch(args.storyId, { numChats: (story?.numChats || 0) + 1 });
     const messages = await Promise.all(
       (story?.messageIds ?? []).map((messageId) => ctx.db.get(messageId)),
     );
