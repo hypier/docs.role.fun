@@ -3,6 +3,7 @@
   "alpha": "アルファ",
   "Create": "作成",
   "Log in": "ログイン",
+  "Logout": "ログアウト",
   "Discover": "発見",
   "Chats": "チャット",
   "My": "マイ",
@@ -20,5 +21,12 @@
   "Visit Shop": "ショップを訪問",
   "Join community": "コミュニティに参加",
   "Filter characters": "文字をフィルターする",
-  "Stories": "ストーリー"
+  "Stories": "ストーリー",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "名前",
+  "Greeting": "Greeting",
+  "Instructions": "説明",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
