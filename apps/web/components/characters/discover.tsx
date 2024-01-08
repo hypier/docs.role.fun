@@ -10,6 +10,15 @@ import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { ChevronLeft, ChevronRight, ListFilter } from "lucide-react";
 import { FadeInOut } from "../../app/lib/utils";
+import { MainStories } from "./main-stories";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@repo/ui/src/components/carousel";
 
 const Discover = () => {
   const router = useRouter();
@@ -51,9 +60,11 @@ const Discover = () => {
   );
   const nextPageNotExists =
     tagPage === Math.ceil(flattenedTags.length / tagsPerPage) - 1;
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4 lg:gap-8">
+      <div className="self-center px-4 font-medium lg:px-0">Characters</div>
       <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
         <Tooltip content="Filter characters">
           <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
@@ -103,32 +114,60 @@ const Discover = () => {
           </Button>
         )}
       </div>
-      <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:px-0">
-        {characters?.length > 0
-          ? characters.map(
-              (character, index) =>
-                character.name && (
-                  <CharacterCard
-                    id={character._id}
-                    key={character._id}
-                    name={character.name}
-                    numChats={character.numChats as number}
-                    cardImageUrl={character.cardImageUrl as string}
-                    description={character.description}
-                    model={character.model}
-                    showRemix={true}
-                  />
-                ),
-            )
-          : Array.from({ length: 10 }).map((_, index) => (
-              <CharacterCardPlaceholder key={index} />
-            ))}
-        {status === "LoadingMore" &&
-          Array.from({ length: 10 }).map((_, index) => (
-            <CharacterCardPlaceholder key={index} />
-          ))}
-        <div ref={ref} />
+      <div className="border-y bg-background p-2 py-12 lg:rounded-lg lg:border lg:shadow-lg">
+        <Carousel
+          plugins={[plugin.current]}
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+          className="mx-12"
+        >
+          <CarouselContent className="w-full">
+            {characters?.length > 0
+              ? characters.map(
+                  (character, index) =>
+                    character.name && (
+                      <CarouselItem
+                        className="xl:basis-1/ md:basis-1/3 lg:basis-1/4"
+                        key={character._id}
+                      >
+                        <div
+                          ref={
+                            index === characters.length - 1 ? ref : undefined
+                          }
+                        >
+                          <CharacterCard
+                            id={character._id}
+                            name={character.name}
+                            numChats={character.numChats as number}
+                            cardImageUrl={character.cardImageUrl as string}
+                            description={character.description}
+                            model={character.model}
+                            showRemix={true}
+                          />
+                        </div>
+                      </CarouselItem>
+                    ),
+                )
+              : Array.from({ length: 10 }).map((_, index) => (
+                  <CarouselItem className="md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                    <CharacterCardPlaceholder key={index} />
+                  </CarouselItem>
+                ))}
+            {status === "LoadingMore" &&
+              Array.from({ length: 10 }).map((_, index) => (
+                <CarouselItem className="md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                  <CharacterCardPlaceholder key={index} />
+                </CarouselItem>
+              ))}
+            <div ref={ref} />
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
+      <MainStories />
     </div>
   );
 };

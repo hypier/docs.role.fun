@@ -118,9 +118,11 @@ export default defineSchema({
     characterId: v.id("characters"),
     messageIds: v.array(v.id("messages")),
     name: v.optional(v.string()),
+    numChats: v.optional(v.number()),
     isPrivate: v.boolean(),
   })
     .index("byUserId", ["userId"])
+    .index("byNumChats", ["numChats"])
     .index("byCharacterId", ["characterId"]),
   regeneratedMessages: defineTable({
     messageId: v.id("messages"),
