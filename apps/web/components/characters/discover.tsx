@@ -64,7 +64,7 @@ const Discover = () => {
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
-      <div className="self-center px-4 font-medium lg:px-0">Characters</div>
+      <div className="px-4 font-medium lg:mt-2 lg:px-0">Characters</div>
       <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
         <Tooltip content="Filter characters">
           <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
@@ -117,10 +117,7 @@ const Discover = () => {
       <div className="border-y bg-background p-2 py-12 lg:rounded-lg lg:border lg:shadow-lg">
         <Carousel
           plugins={[plugin.current]}
-          opts={{
-            align: "center",
-            loop: true,
-          }}
+          opts={{ align: "center" }}
           className="mx-12"
         >
           <CarouselContent className="w-full">
