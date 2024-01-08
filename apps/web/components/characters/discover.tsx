@@ -46,12 +46,16 @@ const Discover = () => {
       loadMore(10);
     }
   }, [inView, loadMore]);
-  const paginatedTags = Object.entries(popularTags).slice(
-    tagPage * 10,
-    (tagPage + 1) * 10,
+  const tagsPerPage = 8;
+  const flattenedTags = Object.entries(popularTags).flatMap(([key, values]) =>
+    values.map((value) => ({ ...value, tagKey: key })),
+  );
+  const paginatedTags = flattenedTags.slice(
+    tagPage * tagsPerPage,
+    (tagPage + 1) * tagsPerPage,
   );
   const nextPageNotExists =
-    tagPage === Math.ceil(Object.entries(popularTags).length / 10) - 1;
+    tagPage === Math.ceil(flattenedTags.length / tagsPerPage) - 1;
 
   return (
     <div className="flex flex-col gap-8">
@@ -70,31 +74,28 @@ const Discover = () => {
           </Button>
         )}
         <AnimatePresence>
-          {paginatedTags.map(([tagKey, tagValues]) =>
-            tagValues.map((tagValue, i) => (
-              <motion.div {...FadeInOut}>
-                <Toggle
-                  key={i}
-                  aria-label={`Toggle ${tagValue.tagName}`}
-                  variant="filled"
-                  className="inline max-w-40 truncate rounded-full px-2 text-xs lg:px-3 lg:text-sm"
-                  defaultPressed={searchQuery.get(tagKey) === tagValue.tagName}
-                  pressed={searchQuery.get(tagKey) === tagValue.tagName}
-                  onPressedChange={(pressed) => {
-                    const query = new URLSearchParams(searchQuery);
-                    if (pressed) {
-                      query.set(tagKey, tagValue.tagName);
-                    } else {
-                      query.delete(tagKey);
-                    }
-                    router.push(`${pathname}?${query.toString()}`);
-                  }}
-                >
-                  {tagValue.tagName}
-                </Toggle>
-              </motion.div>
-            )),
-          )}
+          {paginatedTags.map((tag, index) => (
+            <motion.div key={index} {...FadeInOut}>
+              <Toggle
+                aria-label={`Toggle ${tag.tagName}`}
+                variant="filled"
+                className="inline h-8 max-w-40 truncate rounded-full px-2 text-xs"
+                defaultPressed={searchQuery.get(tag.tagKey) === tag.tagName}
+                pressed={searchQuery.get(tag.tagKey) === tag.tagName}
+                onPressedChange={(pressed) => {
+                  const query = new URLSearchParams(searchQuery);
+                  if (pressed) {
+                    query.set(tag.tagKey, tag.tagName);
+                  } else {
+                    query.delete(tag.tagKey);
+                  }
+                  router.push(`${pathname}?${query.toString()}`);
+                }}
+              >
+                {tag.tagName}
+              </Toggle>
+            </motion.div>
+          ))}
         </AnimatePresence>
         {!nextPageNotExists && (
           <Button
