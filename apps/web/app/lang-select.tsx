@@ -43,6 +43,8 @@ export function LanguageSelect() {
           <SelectLabel>Languages</SelectLabel>
           <SelectItem value="en">English</SelectItem>
           <SelectItem value="ko">한국어</SelectItem>
+          <SelectItem value="cn">中文</SelectItem>
+          <SelectItem value="ja">日本語</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
