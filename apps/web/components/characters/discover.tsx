@@ -41,7 +41,7 @@ const Discover = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex w-full flex-wrap gap-1">
+      <div className="flex w-full flex-wrap gap-1 px-4 lg:px-0">
         {Object.entries(popularTags).map(([tagKey, tagValues]) =>
           tagValues.map((tagValue, i) => (
             <Tooltip
@@ -52,7 +52,7 @@ const Discover = () => {
                 key={i}
                 aria-label={`Toggle ${tagValue.tagName}`}
                 variant="filled"
-                className="inline max-w-40 truncate rounded-full px-3"
+                className="inline max-w-40 truncate rounded-full px-2 text-xs lg:px-3 lg:text-sm"
                 pressed={searchQuery.get(tagKey) === tagValue.tagName}
                 onPressedChange={(pressed) => {
                   const query = new URLSearchParams(searchQuery);
