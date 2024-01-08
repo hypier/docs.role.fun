@@ -3,6 +3,7 @@
   "alpha": "alfa",
   "Create": "Crează",
   "Log in": "Autentificare",
+  "Logout": "Deconectare",
   "Discover": "Descoperă",
   "Chats": "Conversații",
   "My": "Meu",
@@ -20,5 +21,12 @@
   "Visit Shop": "Vizitează magazinul",
   "Join community": "Alătură-te comunității",
   "Filter characters": "Filtrare caractere",
-  "Stories": "Povestiri"
+  "Stories": "Povestiri",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "Nume",
+  "Greeting": "Greeting",
+  "Instructions": "Instrucţiuni",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
