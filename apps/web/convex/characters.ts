@@ -135,21 +135,34 @@ export const list = query({
     model: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    return await ctx.db
+    let query = ctx.db
       .query("characters")
       .withIndex("byNumChats")
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
       .filter((q) => q.neq(q.field("isNSFW"), true))
-      .filter((q) => q.neq(q.field("visibility"), "private"))
-      .filter((q) => q.eq(q.field("genreTag"), args.genreTag))
-      .filter((q) => q.eq(q.field("personalityTag"), args.personalityTag))
-      .filter((q) => q.eq(q.field("roleTag"), args.roleTag))
-      .filter((q) => q.eq(q.field("languageTag"), args.languageTag))
-      .filter((q) => q.eq(q.field("model"), args.model))
-      .order("desc")
-      .paginate(args.paginationOpts);
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+    if (args.genreTag) {
+      query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
+    }
+    if (args.personalityTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("personalityTag"), args.personalityTag),
+      );
+    }
+    if (args.roleTag) {
+      query = query.filter((q) => q.eq(q.field("roleTag"), args.roleTag));
+    }
+    if (args.languageTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("languageTag"), args.languageTag),
+      );
+    }
+    if (args.model) {
+      query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+    return await query.order("desc").paginate(args.paginationOpts);
   },
 });
 
