@@ -43,8 +43,25 @@ export function LanguageSelect() {
           <SelectLabel>{t("Languages")}</SelectLabel>
           <SelectItem value="en">English</SelectItem>
           <SelectItem value="ko">한국어</SelectItem>
-          <SelectItem value="cn">中文</SelectItem>
           <SelectItem value="ja">日本語</SelectItem>
+          <SelectItem value="zh">中文</SelectItem>
+          <SelectItem value="ar">العربية</SelectItem>
+          <SelectItem value="cs">Čeština</SelectItem>
+          <SelectItem value="da">Dansk</SelectItem>
+          <SelectItem value="de">Deutsch</SelectItem>
+          <SelectItem value="el">Ελληνικά</SelectItem>
+          <SelectItem value="es">Español</SelectItem>
+          <SelectItem value="fi">Suomi</SelectItem>
+          <SelectItem value="fr">Français</SelectItem>
+          <SelectItem value="it">Italiano</SelectItem>
+          <SelectItem value="nl">Nederlands</SelectItem>
+          <SelectItem value="no">Norsk</SelectItem>
+          <SelectItem value="pl">Polski</SelectItem>
+          <SelectItem value="pt">Português</SelectItem>
+          <SelectItem value="ro">Română</SelectItem>
+          <SelectItem value="ru">Русский</SelectItem>
+          <SelectItem value="sv">Svenska</SelectItem>
+          <SelectItem value="uk">Українська</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
