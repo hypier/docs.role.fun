@@ -577,11 +577,11 @@ export const generateTags = internalAction({
                 },
                 personalityTag: {
                   type: "string",
-                  description: `These tags describe the character's personality traits. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
+                  description: `This tag describe the character's personality trait. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
                 },
                 roleTag: {
                   type: "string",
-                  description: `Role define the character's role or function in the story. Common examples are "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", "Comic relief", etc.`,
+                  description: `Role define the character's role or function in the story. Common examples are "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
                 },
               },
               required: [
