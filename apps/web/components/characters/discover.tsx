@@ -2,13 +2,18 @@ import { api } from "../../convex/_generated/api";
 import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
-import { Tooltip } from "@repo/ui/src/components";
-import { FilterIcon, ListFilter } from "lucide-react";
+import { Button, Tooltip } from "@repo/ui/src/components";
+import {
+  ChevronLeft,
+  ChevronRight,
+  FilterIcon,
+  ListFilter,
+} from "lucide-react";
 import { FadeInOut } from "../../app/lib/utils";
 
 const Discover = () => {
@@ -23,6 +28,7 @@ const Discover = () => {
     model: searchQuery.get("model") || undefined,
   };
   const popularTags = useQuery(api.characters.listPopularTags) || {};
+  const [tagPage, setTagPage] = useState(0);
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.list,
     filters,
@@ -40,6 +46,12 @@ const Discover = () => {
       loadMore(10);
     }
   }, [inView, loadMore]);
+  const paginatedTags = Object.entries(popularTags).slice(
+    tagPage * 10,
+    (tagPage + 1) * 10,
+  );
+  const nextPageNotExists =
+    tagPage === Math.ceil(Object.entries(popularTags).length / 10) - 1;
 
   return (
     <div className="flex flex-col gap-8">
@@ -47,8 +59,18 @@ const Discover = () => {
         <Tooltip content="Filter characters">
           <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
         </Tooltip>
+        {tagPage > 0 && (
+          <Button
+            variant="ghost"
+            aria-label="Previous tags"
+            onClick={() => setTagPage(tagPage - 1)}
+            disabled={tagPage === 0}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+        )}
         <AnimatePresence>
-          {Object.entries(popularTags).map(([tagKey, tagValues]) =>
+          {paginatedTags.map(([tagKey, tagValues]) =>
             tagValues.map((tagValue, i) => (
               <motion.div {...FadeInOut}>
                 <Toggle
@@ -74,6 +96,16 @@ const Discover = () => {
             )),
           )}
         </AnimatePresence>
+        {!nextPageNotExists && (
+          <Button
+            variant="ghost"
+            aria-label="Next tags"
+            onClick={() => setTagPage(tagPage + 1)}
+            disabled={nextPageNotExists}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        )}
       </div>
       <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:px-0">
         {characters?.length > 0
