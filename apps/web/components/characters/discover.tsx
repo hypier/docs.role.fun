@@ -114,11 +114,11 @@ const Discover = () => {
           </Button>
         )}
       </div>
-      <div className="border-y bg-background p-2 py-12 lg:rounded-lg lg:border lg:shadow-lg">
+      <div className="border-y bg-background p-2 py-12 lg:w-[90%] lg:rounded-lg lg:border lg:shadow-lg xl:w-[80%]">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="mx-12"
+          className="mx-12 max-w-screen-xl"
         >
           <CarouselContent className="w-full">
             {characters?.length > 0
@@ -126,7 +126,7 @@ const Discover = () => {
                   (character, index) =>
                     character.name && (
                       <CarouselItem
-                        className="xl:basis-1/ md:basis-1/3 lg:basis-1/4"
+                        className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
                         key={character._id}
                       >
                         <div
@@ -148,13 +148,13 @@ const Discover = () => {
                     ),
                 )
               : Array.from({ length: 10 }).map((_, index) => (
-                  <CarouselItem className="md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                  <CarouselItem className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5">
                     <CharacterCardPlaceholder key={index} />
                   </CarouselItem>
                 ))}
             {status === "LoadingMore" &&
               Array.from({ length: 10 }).map((_, index) => (
-                <CarouselItem className="md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                <CarouselItem className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5">
                   <CharacterCardPlaceholder key={index} />
                 </CarouselItem>
               ))}
