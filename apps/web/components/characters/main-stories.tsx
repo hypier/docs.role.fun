@@ -17,7 +17,7 @@ export const MainStories = () => {
   const { results, status, loadMore } = usePaginatedQuery(
     api.stories.listAll,
     {},
-    { initialNumItems: 5 },
+    { initialNumItems: 4 },
   );
   const [_api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -30,18 +30,14 @@ export const MainStories = () => {
 
     setCount(_api.scrollSnapList().length);
     setCurrent(_api.selectedScrollSnap() + 1);
+    if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 5) {
+      loadMore(10);
+    }
 
     _api.on("select", () => {
       setCurrent(_api.selectedScrollSnap() + 1);
     });
   }, [_api, results]);
-
-  useEffect(() => {
-    console.log("current,count", current, count);
-    if (current >= count - 5) {
-      loadMore(10);
-    }
-  }, [current, count]);
 
   return (
     <section className="flex flex-col gap-4 lg:gap-8">

@@ -1,7 +1,7 @@
 import { api } from "../../convex/_generated/api";
 import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useQuery } from "convex/react";
@@ -14,6 +14,7 @@ import { MainStories } from "./main-stories";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -42,14 +43,27 @@ const Discover = () => {
   const characters = allCharacters.filter(
     (character) => character.name && character.cardImageUrl,
   );
-  const ref = useRef(null);
-  const inView = useInView(ref);
+
+  const [_api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (inView) {
+    if (!_api) {
+      return;
+    }
+
+    setCount(_api.scrollSnapList().length);
+    setCurrent(_api.selectedScrollSnap() + 1);
+    if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
       loadMore(10);
     }
-  }, [inView, loadMore]);
+
+    _api.on("select", () => {
+      setCurrent(_api.selectedScrollSnap() + 1);
+    });
+  }, [_api, characters]);
+
   const tagsPerPage = 10;
   const flattenedTags = Object.entries(popularTags).flatMap(([key, values]) =>
     values.map((value) => ({ ...value, tagKey: key })),
@@ -60,7 +74,9 @@ const Discover = () => {
   );
   const nextPageNotExists =
     tagPage === Math.ceil(flattenedTags.length / tagsPerPage) - 1;
-  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const plugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true }),
+  );
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
@@ -119,6 +135,7 @@ const Discover = () => {
           plugins={[plugin.current]}
           opts={{ align: "center" }}
           className="mx-12 max-w-screen-xl xl:max-w-screen-2xl"
+          setApi={setApi}
         >
           <CarouselContent className="w-full">
             {characters?.length > 0
@@ -129,21 +146,15 @@ const Discover = () => {
                         className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
                         key={character._id}
                       >
-                        <div
-                          ref={
-                            index === characters.length - 1 ? ref : undefined
-                          }
-                        >
-                          <CharacterCard
-                            id={character._id}
-                            name={character.name}
-                            numChats={character.numChats as number}
-                            cardImageUrl={character.cardImageUrl as string}
-                            description={character.description}
-                            model={character.model}
-                            showRemix={true}
-                          />
-                        </div>
+                        <CharacterCard
+                          id={character._id}
+                          name={character.name}
+                          numChats={character.numChats as number}
+                          cardImageUrl={character.cardImageUrl as string}
+                          description={character.description}
+                          model={character.model}
+                          showRemix={true}
+                        />
                       </CarouselItem>
                     ),
                 )
@@ -158,7 +169,6 @@ const Discover = () => {
                   <CharacterCardPlaceholder key={index} />
                 </CarouselItem>
               ))}
-            <div ref={ref} />
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
