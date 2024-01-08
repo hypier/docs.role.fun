@@ -16,7 +16,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning={true} lang="en">
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -24,7 +24,7 @@ export default async function RootLayout({
       <body className={cx(calSans.variable, inter.variable)}>
         <Providers>
           <NavBar />
-          <main className="lg:pt-32 pt-16 font-default w-full flex">
+          <main className="flex w-full pt-16 font-default lg:pt-32">
             <TabsController />
             {children}
           </main>

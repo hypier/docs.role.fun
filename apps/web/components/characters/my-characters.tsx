@@ -16,17 +16,19 @@ import { useEffect, useRef } from "react";
 import { InfoTooltip, TooltipContent } from "@repo/ui/src/components/tooltip";
 import { useInView } from "framer-motion";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const NewCharacter = () => {
+  const { t } = useTranslation();
   return (
     <Link href="/my-characters/create">
       <AspectRatio
         ratio={1 / 1.75}
-        className="group w-full h-full hover:-translate-y-1 duration-200 border border-dashed hover:shadow-lg place-content-center rounded-lg"
+        className="group h-full w-full place-content-center rounded-lg border border-dashed duration-200 hover:-translate-y-1 hover:shadow-lg"
         role="button"
       >
-        <Card className="rounded-lg p-2 w-full h-full flex items-center justify-center border-none gap-2">
-          <Plus /> Create character
+        <Card className="flex h-full w-full items-center justify-center gap-2 rounded-lg border-none p-2">
+          <Plus /> {t("Create character")}
         </Card>
       </AspectRatio>
     </Link>
@@ -34,10 +36,11 @@ const NewCharacter = () => {
 };
 
 export function MyCharacters() {
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { t } = useTranslation();
+  const { results, loadMore } = usePaginatedQuery(
     api.characters.listMy,
     {},
-    { initialNumItems: 10 }
+    { initialNumItems: 10 },
   );
   const allCharacters = results || [];
   const characters = allCharacters.filter((character) => character.name);
@@ -50,10 +53,10 @@ export function MyCharacters() {
     }
   }, [inView, loadMore]);
   return (
-    <Card className="w-full h-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden">
+    <Card className="h-full w-full overflow-hidden border-transparent shadow-none lg:border-border lg:shadow-xl">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          My Characters
+          {t("My Characters")}
           <InfoTooltip
             content={
               <TooltipContent
@@ -64,9 +67,11 @@ export function MyCharacters() {
             }
           />
         </CardTitle>
-        <CardDescription>Create and customize characters.</CardDescription>
+        <CardDescription>
+          {t("Create and customize characters.")}
+        </CardDescription>
       </CardHeader>
-      <CardContent className="px-4 flex flex-col sm:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
+      <CardContent className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         <NewCharacter />
         {characters
           ? characters.map(
@@ -83,7 +88,7 @@ export function MyCharacters() {
                     isDraft={character.isDraft}
                     model={character.model}
                   />
-                )
+                ),
             )
           : Array.from({ length: 12 }).map((_, index) => (
               <CharacterCardPlaceholder key={index} />

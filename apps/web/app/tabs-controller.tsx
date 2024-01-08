@@ -10,11 +10,14 @@ import { usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/src/components/tabs";
 import Link from "next/link";
 import { Discord } from "@repo/ui/src/components/social-icons";
+import { LanguageSelect } from "./lang-select";
+import { useTranslation } from "react-i18next";
 
 function TabsController() {
   const pathname = usePathname();
   const getFirstDirectory = (urlString: string): string =>
     `/${new URL(urlString, "http://example.com").pathname.split("/")[1] || ""}`;
+  const { t } = useTranslation();
 
   return (
     <Tabs value={getFirstDirectory(pathname)}>
@@ -25,7 +28,7 @@ function TabsController() {
             value="/"
           >
             <Home className="h-5 w-5 p-1" />
-            Discover
+            {t("Discover")}
           </TabsTrigger>
         </Link>
         <Link href="/chats">
@@ -34,7 +37,7 @@ function TabsController() {
             value="/chats"
           >
             <MessageSquare className="h-5 w-5 p-1" />
-            Chats
+            {t("Chats")}
           </TabsTrigger>
         </Link>
         <Link href="/my-characters">
@@ -43,7 +46,8 @@ function TabsController() {
             value="/my-characters"
           >
             <Plus className="h-5 w-5 p-1" />
-            <span className="hidden lg:inline">My </span>Characters
+            <span className="hidden lg:inline">{t("My")} </span>
+            {t("Characters")}
           </TabsTrigger>
         </Link>
         <Link href="/my-personas">
@@ -52,7 +56,8 @@ function TabsController() {
             value="/my-personas"
           >
             <CircleUserRound className="h-5 w-5 p-1" />
-            <span className="hidden lg:inline">My </span>Personas
+            <span className="hidden lg:inline">{t("My")} </span>
+            {t("Personas")}
           </TabsTrigger>
         </Link>
         <Link href="/shop">
@@ -61,7 +66,7 @@ function TabsController() {
             value="/shop"
           >
             <Store className="h-5 w-5 p-1" />
-            Shop
+            {t("Shop")}
           </TabsTrigger>
         </Link>
         <Link href="/discord">
@@ -70,9 +75,12 @@ function TabsController() {
             value="/discord"
           >
             <Discord className="h-5 w-5 p-1" />
-            Community
+            {t("Community")}
           </TabsTrigger>
         </Link>
+        <div className="hidden w-full px-2 lg:flex">
+          <LanguageSelect />
+        </div>
       </TabsList>
     </Tabs>
   );

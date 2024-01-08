@@ -27,7 +27,7 @@ export const store = mutation({
     const user = await ctx.db
       .query("users")
       .withIndex("byToken", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
+        q.eq("tokenIdentifier", identity.tokenIdentifier),
       )
       .unique();
     if (user !== null) {
@@ -52,13 +52,13 @@ export const getUserInternal = internalQuery({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error(
-        "Called getUserFromTokenIdentifier without authentication present"
+        "Called getUserFromTokenIdentifier without authentication present",
       );
     }
     const user = await ctx.db
       .query("users")
       .withIndex("byToken", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
+        q.eq("tokenIdentifier", identity.tokenIdentifier),
       )
       .unique();
     if (user === null) {
@@ -72,13 +72,13 @@ export const getUser = async (ctx: any) => {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
     throw new Error(
-      "Called getUserFromTokenIdentifier without authentication present"
+      "Called getUserFromTokenIdentifier without authentication present",
     );
   }
   const user = await ctx.db
     .query("users")
     .withIndex("byToken", (q: any) =>
-      q.eq("tokenIdentifier", identity.tokenIdentifier)
+      q.eq("tokenIdentifier", identity.tokenIdentifier),
     )
     .unique();
   if (user === null) {
@@ -101,5 +101,19 @@ export const me = query({
   args: {},
   handler: async (ctx, args) => {
     return await getUser(ctx);
+  },
+});
+
+export const setLanguage = mutation({
+  args: {
+    languageTag: v.string(),
+  },
+  handler: async (ctx, { languageTag }) => {
+    const user = await getUser(ctx);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    await ctx.db.patch(user._id, { languageTag });
+    return user;
   },
 });

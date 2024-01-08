@@ -10,10 +10,12 @@ import { SignedOut } from "@clerk/nextjs";
 import CurrentCrystals from "./current-crystals";
 import { useConvexAuth } from "convex/react";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function NavBar({}: {}) {
   const scrolled = useScroll(50);
   const { isAuthenticated } = useConvexAuth();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -32,8 +34,10 @@ export default function NavBar({}: {}) {
                 className="flex items-center gap-2 text-base text-muted-foreground hover:opacity-50"
                 href="/github"
               >
-                <div className="hidden sm:block">opensource ai characters</div>
-                <Badge className="font-default">alpha</Badge>
+                <div className="hidden sm:block">
+                  {t("opensource ai characters")}
+                </div>
+                <Badge className="font-default">{t("alpha")}</Badge>
               </Link>
             </Tooltip>
           </div>
@@ -42,7 +46,7 @@ export default function NavBar({}: {}) {
               <Link href="/my-characters/create" className="hidden lg:block">
                 <Button className="rounded-full px-3">
                   <Plus className="h-5 w-5 p-1" />
-                  Create
+                  {t("Create")}
                 </Button>
               </Link>
             )}
@@ -51,7 +55,7 @@ export default function NavBar({}: {}) {
             <SignedOut>
               <Link href="/sign-in">
                 <Button className="hidden rounded-full px-3 md:block">
-                  Log in
+                  {t("Log in")}
                 </Button>
               </Link>
             </SignedOut>

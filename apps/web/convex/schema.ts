@@ -15,6 +15,7 @@ export default defineSchema({
     primaryPersonaId: v.optional(v.id("personas")),
     crystals: v.optional(v.number()),
     tokenIdentifier: v.string(),
+    languageTag: v.optional(v.string()),
   }).index("byToken", ["tokenIdentifier"]),
   characters: defineTable({
     name: v.optional(v.string()),
