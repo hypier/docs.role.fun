@@ -15,7 +15,7 @@ import { useMutation } from "convex/react";
 import { useEffect } from "react";
 
 export function LanguageSelect() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const currentUser = useCurrentUser();
   const setLanguage = useMutation(api.users.setLanguage);
   const userLanguage = currentUser?.languageTag;
@@ -36,11 +36,11 @@ export function LanguageSelect() {
       value={currentLanguage}
     >
       <SelectTrigger>
-        <SelectValue placeholder="Select a language" />
+        <SelectValue placeholder={t("Select a language")} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Languages</SelectLabel>
+          <SelectLabel>{t("Languages")}</SelectLabel>
           <SelectItem value="en">English</SelectItem>
           <SelectItem value="ko">한국어</SelectItem>
           <SelectItem value="cn">中文</SelectItem>

@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/src/components";
+import { useTranslation } from "react-i18next";
 
 type StyledLinkProps = {
   href: string;
@@ -61,6 +62,7 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
 };
 
 export default function UserDropdown() {
+  const { t } = useTranslation();
   const { user } = useUser();
 
   const [openPopover, setOpenPopover] = useState(false);
@@ -83,7 +85,7 @@ export default function UserDropdown() {
                     }`}
                   </p>
                 )}
-                <p className="text-muted-foreground truncate text-sm">
+                <p className="truncate text-sm text-muted-foreground">
                   {user?.primaryEmailAddress?.emailAddress}
                 </p>
               </div>
@@ -100,7 +102,7 @@ export default function UserDropdown() {
             ) : (
               <div className="md:hidden">
                 <StyledLink
-                  text="Login"
+                  text={t("Login")}
                   Icon={<LogIn className="h-4 w-4 text-muted-foreground" />}
                   onClick={() => {
                     setOpenPopover(false);
@@ -111,19 +113,19 @@ export default function UserDropdown() {
             )}
             <StyledLink
               href="/github"
-              text="Star on GitHub"
+              text={t("Star on GitHub")}
               Icon={<Star className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />
             <StyledLink
               href="/discord"
-              text="Join Discord"
+              text={t("Join Discord")}
               Icon={<Discord className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />
             <StyledLink
               href="/shop"
-              text="Visit shop"
+              text={t("Visit Shop")}
               Icon={<Store className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />
@@ -132,7 +134,7 @@ export default function UserDropdown() {
         <PopoverTrigger
           onClick={() => setOpenPopover(!openPopover)}
           className={`flex items-center justify-center overflow-hidden rounded-full border-none outline-none transition-all duration-75 active:scale-95  ${
-            user ? "border h-8 w-8 sm:h-9 sm:w-9" : ""
+            user ? "h-8 w-8 border sm:h-9 sm:w-9" : ""
           }`}
         >
           {user ? (
@@ -157,12 +159,13 @@ export default function UserDropdown() {
               <SignedOut>
                 <Button
                   variant="ghost"
-                  className="rounded-full md:flex items-center gap-2 hidden"
+                  className="hidden items-center gap-2 rounded-full md:flex"
                 >
-                  Join community <ChevronDown className="w-4 h-4" />
+                  {t("Join community")}
+                  <ChevronDown className="h-4 w-4" />
                 </Button>
               </SignedOut>
-              <Menu className="h-4 w-4 block md:hidden" />
+              <Menu className="block h-4 w-4 md:hidden" />
             </>
           )}
         </PopoverTrigger>
