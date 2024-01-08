@@ -130,7 +130,7 @@ const Discover = () => {
           </Button>
         )}
       </div>
-      <div className="border-y bg-background p-2 py-12 lg:w-[90%] lg:rounded-lg lg:border lg:shadow-lg">
+      <div className="border-y py-4 lg:w-[90%] lg:border-none lg:py-0">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
