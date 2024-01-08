@@ -19,7 +19,7 @@ export const MainStories = () => {
   const { results, status, loadMore } = usePaginatedQuery(
     api.stories.listAll,
     {},
-    { initialNumItems: 4 },
+    { initialNumItems: 10 },
   );
   const [_api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -32,7 +32,7 @@ export const MainStories = () => {
 
     setCount(_api.scrollSnapList().length);
     setCurrent(_api.selectedScrollSnap() + 1);
-    if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 5) {
+    if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
       loadMore(10);
     }
 
