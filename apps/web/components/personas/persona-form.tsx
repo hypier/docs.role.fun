@@ -82,7 +82,7 @@ export default function PersonaForm({
   const [personaId, setPersonaId] = useState<Id<"personas"> | undefined>(id);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [visibility, setVisibility] = useState(
-    isPrivate ? "private" : "public"
+    isPrivate ? "private" : "public",
   );
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -133,6 +133,18 @@ export default function PersonaForm({
   }
 
   async function handleUploadImage(uploadedImage: File) {
+    const validImageTypes = [
+      "image/gif",
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+    if (!validImageTypes.includes(uploadedImage.type)) {
+      toast.error(
+        "Invalid file type. Please upload a valid image file (gif, jpeg, png)",
+      );
+      return;
+    }
     if (uploadedImage.size > 5242880) {
       toast.error("File size should be less than 5MB");
       return;
@@ -143,7 +155,7 @@ export default function PersonaForm({
           method: "POST",
           headers: { "Content-Type": uploadedImage!.type },
           body: uploadedImage,
-        })
+        }),
       )
       .then((result) => result.json())
       .then(async ({ storageId }) => {
@@ -180,13 +192,13 @@ export default function PersonaForm({
 
   return (
     <>
-      <Card className="w-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden h-full rounded-b-none">
+      <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
         <CardHeader>
           <CardTitle className="flex justify-between">
             <div className="flex items-center gap-2">
               {onClickGoBack && (
                 <Button variant="ghost" onClick={onClickGoBack} size="icon">
-                  <ArrowLeft className="w-5 h-5" />
+                  <ArrowLeft className="h-5 w-5" />
                 </Button>
               )}
               {isEdit ? `Edit persona` : "My persona"}
@@ -239,10 +251,10 @@ export default function PersonaForm({
           <CardDescription>Configure persona details.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="w-full flex justify-center my-4">
+          <div className="my-4 flex w-full justify-center">
             <Label
               htmlFor="card"
-              className="w-[200px] h-[350px] rounded flex items-center justify-center flex-col relative cursor-pointer border hover:border-border duration-200 border-dashed hover:-translate-y-1 hover:shadow-lg"
+              className="relative flex h-[350px] w-[200px] cursor-pointer flex-col items-center justify-center rounded border border-dashed duration-200 hover:-translate-y-1 hover:border-border hover:shadow-lg"
             >
               <Plus />
               Add persona card
@@ -255,7 +267,7 @@ export default function PersonaForm({
                   alt={"Preview of character card"}
                   width={300}
                   height={525}
-                  className="absolute w-full h-full object-cover rounded pointer-events-none"
+                  className="pointer-events-none absolute h-full w-full rounded object-cover"
                 />
               )}
             </Label>
@@ -278,9 +290,9 @@ export default function PersonaForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="space-y-2 flex flex-col">
+                    <div className="flex flex-col space-y-2">
                       <FormLabel>Name</FormLabel>
-                      <span className="text-muted-foreground text-xs">
+                      <span className="text-xs text-muted-foreground">
                         What do characters refer to you as?
                       </span>
                     </div>
@@ -296,9 +308,9 @@ export default function PersonaForm({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="space-y-2 flex flex-col">
+                    <div className="flex flex-col space-y-2">
                       <FormLabel>Description</FormLabel>
-                      <span className="text-muted-foreground text-xs">
+                      <span className="text-xs text-muted-foreground">
                         What information would you like to share with
                         Characters?
                       </span>
@@ -325,9 +337,9 @@ Talents: Painting, Cooking, and Chess.
                   </FormItem>
                 )}
               />
-              <div className="space-y-2 flex flex-col">
+              <div className="flex flex-col space-y-2">
                 <FormLabel>Publish to</FormLabel>
-                <span className="text-muted-foreground text-xs">
+                <span className="text-xs text-muted-foreground">
                   Public persona will be visible to other users.
                 </span>
                 <RadioGroup
@@ -352,7 +364,7 @@ Talents: Painting, Cooking, and Chess.
                 control={form.control}
                 name="isDefault"
                 render={({ field }) => (
-                  <div className="space-y-2 flex flex-col">
+                  <div className="flex flex-col space-y-2">
                     <FormLabel>Default persona</FormLabel>
                     <FormItem className="flex items-center space-x-2 pt-2">
                       <FormControl>

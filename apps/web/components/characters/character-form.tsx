@@ -152,6 +152,18 @@ export default function CharacterForm() {
 
   async function handleUploadImage(uploadedImage: File) {
     const newCharacterId = await onSubmit(form.getValues());
+    const validImageTypes = [
+      "image/gif",
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+    if (!validImageTypes.includes(uploadedImage.type)) {
+      toast.error(
+        "Invalid file type. Please upload a valid image file (gif, jpeg, png)",
+      );
+      return;
+    }
     if (uploadedImage.size > 5242880) {
       toast.error("File size should be less than 5MB");
       return;
