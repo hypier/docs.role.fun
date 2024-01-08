@@ -22,11 +22,11 @@
   "Join community": "Junte-se à comunidade",
   "Filter characters": "Filtrar caracteres",
   "Stories": "Histórias",
-  "New Character": "New character",
-  "Configure your character details.": "Configure your character details.",
+  "New Character": "Novo caractere",
+  "Configure your character details.": "Configure os detalhes do seu personagem.",
   "Name": "Nome:",
-  "Greeting": "Greeting",
+  "Greeting": "Saudação",
   "Instructions": "Instruções",
-  "Description": "Description",
-  "AI Model": "AI Model"
+  "Description": "Descrição:",
+  "AI Model": "Modelo IA"
 }
