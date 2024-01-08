@@ -128,6 +128,11 @@ export const publish = mutation({
 export const list = query({
   args: {
     paginationOpts: paginationOptsValidator,
+    genreTag: v.optional(v.string()),
+    personalityTag: v.optional(v.string()),
+    roleTag: v.optional(v.string()),
+    languageTag: v.optional(v.string()),
+    model: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     return await ctx.db
@@ -138,6 +143,11 @@ export const list = query({
       .filter((q) => q.neq(q.field("isArchived"), true))
       .filter((q) => q.neq(q.field("isNSFW"), true))
       .filter((q) => q.neq(q.field("visibility"), "private"))
+      .filter((q) => q.eq(q.field("genreTag"), args.genreTag))
+      .filter((q) => q.eq(q.field("personalityTag"), args.personalityTag))
+      .filter((q) => q.eq(q.field("roleTag"), args.roleTag))
+      .filter((q) => q.eq(q.field("languageTag"), args.languageTag))
+      .filter((q) => q.eq(q.field("model"), args.model))
       .order("desc")
       .paginate(args.paginationOpts);
   },
@@ -302,5 +312,56 @@ export const generate = mutation({
       characterId: character,
     });
     return character;
+  },
+});
+
+export const listPopularTags = query({
+  handler: async (ctx) => {
+    const popularCharacters = await ctx.db
+      .query("characters")
+      .withIndex("byNumChats")
+      .order("desc")
+      .take(50);
+    type TagCount = { [key: string]: number };
+    type TagCounts = { [key: string]: TagCount };
+    const tagCounts: TagCounts = popularCharacters.reduce(
+      (acc: TagCounts, character) => {
+        (
+          [
+            "languageTag",
+            "genreTag",
+            "personalityTag",
+            "roleTag",
+            "model",
+          ] as const
+        ).forEach((tag) => {
+          const tagValue = character[tag];
+          if (tagValue) {
+            acc[tag] = acc[tag] || {};
+            // @ts-ignore
+            acc[tag][tagValue] = (acc[tag][tagValue] || 0) + 1;
+          }
+        });
+        return acc;
+      },
+      {},
+    );
+    type MostFrequentTags = {
+      [key: string]: { tagName: string; count: number }[];
+    };
+    const mostFrequentTags: MostFrequentTags = Object.keys(tagCounts).reduce(
+      (acc: MostFrequentTags, tag) => {
+        // @ts-ignore
+        const sortedTags = Object.entries(tagCounts[tag])
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 20)
+          .map(([tagName, count]) => ({ tagName, count }));
+        acc[tag] = sortedTags;
+        return acc;
+      },
+      {},
+    );
+
+    return mostFrequentTags;
   },
 });
