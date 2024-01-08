@@ -4,9 +4,11 @@ import { ClerkProvider, useAuth } from "@clerk/nextjs";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { ConvexReactClient } from "convex/react";
 import { useTheme } from "next-themes";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
 
 const convex = new ConvexReactClient(
-  process.env.NEXT_PUBLIC_CONVEX_URL as string
+  process.env.NEXT_PUBLIC_CONVEX_URL as string,
 );
 
 export function AuthenticationProvider({
@@ -27,8 +29,10 @@ export function AuthenticationProvider({
       }}
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-        <Toaster />
-        <TooltipProvider>{children}</TooltipProvider>
+        <I18nextProvider i18n={i18n} defaultNS={"translation"}>
+          <Toaster />
+          <TooltipProvider>{children}</TooltipProvider>
+        </I18nextProvider>
       </ConvexProviderWithClerk>
     </ClerkProvider>
   );
