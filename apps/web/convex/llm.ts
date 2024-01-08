@@ -581,7 +581,7 @@ export const generateTags = internalAction({
                 },
                 roleTag: {
                   type: "string",
-                  description: `Role define the character's role or function in the story. Common examples are "Assistant", "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
+                  description: `Role define the character's role or function in the story. Common examples are "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
                 },
               },
               required: [
