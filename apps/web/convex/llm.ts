@@ -577,7 +577,7 @@ export const generateTags = internalAction({
                 },
                 personalityTag: {
                   type: "string",
-                  description: `These tags describe the character's personality traits. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
+                  description: `This tag describe the character's personality trait. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
                 },
                 roleTag: {
                   type: "string",
