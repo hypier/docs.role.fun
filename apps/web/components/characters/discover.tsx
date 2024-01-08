@@ -64,71 +64,64 @@ const Discover = () => {
     });
   }, [_api, characters]);
 
-  const tagsPerPage = 10;
-  const flattenedTags = Object.entries(popularTags).flatMap(([key, values]) =>
-    values.map((value) => ({ ...value, tagKey: key })),
-  );
-  const paginatedTags = flattenedTags.slice(
-    tagPage * tagsPerPage,
-    (tagPage + 1) * tagsPerPage,
-  );
-  const nextPageNotExists =
-    tagPage === Math.ceil(flattenedTags.length / tagsPerPage) - 1;
   const plugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true }),
   );
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
-      <div className="px-4 font-medium lg:mt-2 lg:px-0">Characters</div>
-      <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
+      <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
+        Characters
         <Tooltip content="Filter characters">
           <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
         </Tooltip>
-        {tagPage > 0 && (
-          <Button
-            variant="ghost"
-            aria-label="Previous tags"
-            onClick={() => setTagPage(tagPage - 1)}
-            disabled={tagPage === 0}
-          >
-            <ChevronLeft className="h-4 w-4 p-0.5 text-muted-foreground" />
-          </Button>
-        )}
-        <AnimatePresence>
-          {paginatedTags.map((tag, index) => (
-            <motion.div key={index} {...FadeInOut}>
-              <Toggle
-                aria-label={`Toggle ${tag.tagName}`}
-                variant="filled"
-                className="inline h-7 max-w-40 truncate px-2 text-xs"
-                defaultPressed={searchQuery.get(tag.tagKey) === tag.tagName}
-                pressed={searchQuery.get(tag.tagKey) === tag.tagName}
-                onPressedChange={(pressed) => {
-                  const query = new URLSearchParams(searchQuery);
-                  if (pressed) {
-                    query.set(tag.tagKey, tag.tagName);
-                  } else {
-                    query.delete(tag.tagKey);
-                  }
-                  router.push(`${pathname}?${query.toString()}`);
-                }}
+      </div>
+
+      <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
+        <Carousel
+          opts={{ align: "center" }}
+          className="mx-12 max-w-sm lg:max-w-screen-xl xl:max-w-screen-2xl"
+          setApi={setApi}
+        >
+          <CarouselContent className="w-full">
+            {tagPage > 0 && (
+              <Button
+                variant="ghost"
+                aria-label="Previous tags"
+                onClick={() => setTagPage(tagPage - 1)}
+                disabled={tagPage === 0}
               >
-                {tag.tagName}
-              </Toggle>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-        {!nextPageNotExists && (
-          <Button
-            variant="ghost"
-            aria-label="Next tags"
-            onClick={() => setTagPage(tagPage + 1)}
-            disabled={nextPageNotExists}
-          >
-            <ChevronRight className="h-4 w-4 p-0.5 text-muted-foreground" />
-          </Button>
-        )}
+                <ChevronLeft className="h-4 w-4 p-0.5 text-muted-foreground" />
+              </Button>
+            )}
+            {Object.entries(popularTags).map(([tagKey, tagValues]) =>
+              tagValues.map((tag, index) => (
+                <CarouselItem key={index} className="basis-1/3 md:basis-1/12">
+                  <Toggle
+                    aria-label={`Toggle ${tag.tagName}`}
+                    variant="filled"
+                    className="inline h-7 w-full truncate px-2 text-xs"
+                    defaultPressed={searchQuery.get(tagKey) === tag.tagName}
+                    pressed={searchQuery.get(tagKey) === tag.tagName}
+                    onPressedChange={(pressed) => {
+                      const query = new URLSearchParams(searchQuery);
+                      if (pressed) {
+                        query.set(tagKey, tag.tagName);
+                      } else {
+                        query.delete(tagKey);
+                      }
+                      router.push(`${pathname}?${query.toString()}`);
+                    }}
+                  >
+                    {tag.tagName}
+                  </Toggle>
+                </CarouselItem>
+              )),
+            )}
+          </CarouselContent>
+          <CarouselPrevious variant="ghost" />
+          <CarouselNext variant="ghost" />
+        </Carousel>
       </div>
       <div className="border-y py-4 lg:w-[90%] lg:border-none lg:py-0">
         <Carousel
@@ -170,8 +163,8 @@ const Discover = () => {
                 </CarouselItem>
               ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious variant="ghost" />
+          <CarouselNext variant="ghost" />
         </Carousel>
       </div>
       <MainStories />
