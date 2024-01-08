@@ -81,8 +81,8 @@ export const MainStories = () => {
                 </CarouselItem>
               ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious variant="ghost" />
+          <CarouselNext variant="ghost" />
         </Carousel>
       </div>
     </section>
