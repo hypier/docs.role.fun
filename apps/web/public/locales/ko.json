@@ -13,10 +13,12 @@
   "My Characters": "내 캐릭터",
   "Create character": "캐릭터 만들기",
   "Create and customize characters.": "캐릭터를 만들고 설정해보세요.",
-  "Select a language": "Select a language",
-  "Languages": "Languages",
-  "Star on GitHub": "Join community",
-  "Join Discord": "Join Discord",
-  "Visit Shop": "Visit Shop",
-  "Join community": "Join community"
+  "Select a language": "언어를 설정",
+  "Languages": "언어",
+  "Star on GitHub": "커뮤니티 가입하기",
+  "Join Discord": "디스코드 가입하기",
+  "Visit Shop": "상점 둘러보기",
+  "Join community": "커뮤니티 가입하기",
+  "Filter characters": "Filter characters",
+  "Stories": "Stories"
 }
