@@ -3,6 +3,7 @@
   "alpha": "альфа",
   "Create": "Створити",
   "Log in": "Ввійти",
+  "Logout": "Вихід із системи",
   "Discover": "Відкрийте для себе",
   "Chats": "Чати",
   "My": "Мої",
@@ -20,5 +21,12 @@
   "Visit Shop": "Відвідати магазин",
   "Join community": "Приєднатися до спільноти",
   "Filter characters": "Фільтр ієрогліфів",
-  "Stories": "Оповідання"
+  "Stories": "Оповідання",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "Ім'я",
+  "Greeting": "Greeting",
+  "Instructions": "Інструкції",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
