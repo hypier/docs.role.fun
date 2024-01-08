@@ -1,7 +1,7 @@
 import { api } from "../../convex/_generated/api";
 import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
-import { useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useQuery } from "convex/react";
@@ -9,6 +9,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Tooltip } from "@repo/ui/src/components";
 import { FilterIcon, ListFilter } from "lucide-react";
+import { FadeInOut } from "../../app/lib/utils";
 
 const Discover = () => {
   const router = useRouter();
@@ -46,29 +47,33 @@ const Discover = () => {
         <Tooltip content="Filter characters">
           <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
         </Tooltip>
-        {Object.entries(popularTags).map(([tagKey, tagValues]) =>
-          tagValues.map((tagValue, i) => (
-            <Toggle
-              key={i}
-              aria-label={`Toggle ${tagValue.tagName}`}
-              variant="filled"
-              className="inline max-w-40 truncate rounded-full px-2 text-xs lg:px-3 lg:text-sm"
-              defaultPressed={searchQuery.get(tagKey) === tagValue.tagName}
-              pressed={searchQuery.get(tagKey) === tagValue.tagName}
-              onPressedChange={(pressed) => {
-                const query = new URLSearchParams(searchQuery);
-                if (pressed) {
-                  query.set(tagKey, tagValue.tagName);
-                } else {
-                  query.delete(tagKey);
-                }
-                router.push(`${pathname}?${query.toString()}`);
-              }}
-            >
-              {tagValue.tagName}
-            </Toggle>
-          )),
-        )}
+        <AnimatePresence>
+          {Object.entries(popularTags).map(([tagKey, tagValues]) =>
+            tagValues.map((tagValue, i) => (
+              <motion.div {...FadeInOut}>
+                <Toggle
+                  key={i}
+                  aria-label={`Toggle ${tagValue.tagName}`}
+                  variant="filled"
+                  className="inline max-w-40 truncate rounded-full px-2 text-xs lg:px-3 lg:text-sm"
+                  defaultPressed={searchQuery.get(tagKey) === tagValue.tagName}
+                  pressed={searchQuery.get(tagKey) === tagValue.tagName}
+                  onPressedChange={(pressed) => {
+                    const query = new URLSearchParams(searchQuery);
+                    if (pressed) {
+                      query.set(tagKey, tagValue.tagName);
+                    } else {
+                      query.delete(tagKey);
+                    }
+                    router.push(`${pathname}?${query.toString()}`);
+                  }}
+                >
+                  {tagValue.tagName}
+                </Toggle>
+              </motion.div>
+            )),
+          )}
+        </AnimatePresence>
       </div>
       <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:px-0">
         {characters?.length > 0

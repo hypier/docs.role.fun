@@ -334,7 +334,7 @@ export const listPopularTags = query({
       .query("characters")
       .withIndex("byNumChats")
       .order("desc")
-      .take(50);
+      .take(100);
     type TagCount = { [key: string]: number };
     type TagCounts = { [key: string]: TagCount };
     const tagCounts: TagCounts = popularCharacters.reduce(
