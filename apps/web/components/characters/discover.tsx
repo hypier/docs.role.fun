@@ -66,7 +66,7 @@ const Discover = () => {
             onClick={() => setTagPage(tagPage - 1)}
             disabled={tagPage === 0}
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 p-0.5 text-muted-foreground" />
           </Button>
         )}
         <AnimatePresence>
@@ -103,7 +103,7 @@ const Discover = () => {
             onClick={() => setTagPage(tagPage + 1)}
             disabled={nextPageNotExists}
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 p-0.5 text-muted-foreground" />
           </Button>
         )}
       </div>
