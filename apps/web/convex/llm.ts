@@ -638,10 +638,12 @@ export const generateTags = internalAction({
 
 export const getMessages = internalQuery(
   async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
-    return await ctx.db
+    const messages = await ctx.db
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", chatId))
-      .take(256);
+      .order("desc")
+      .take(128);
+    return messages.reverse();
   },
 );
 
