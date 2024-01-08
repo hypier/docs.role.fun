@@ -3,6 +3,7 @@
   "alpha": "알파",
   "Create": "만들기",
   "Log in": "로그인",
+  "Logout": "Logout",
   "Discover": "발견",
   "Chats": "채팅",
   "My": "내",
@@ -19,6 +20,13 @@
   "Join Discord": "디스코드 가입하기",
   "Visit Shop": "상점 둘러보기",
   "Join community": "커뮤니티 가입하기",
-  "Filter characters": "Filter characters",
-  "Stories": "Stories"
+  "Filter characters": "캐릭터 필터 설정",
+  "Stories": "스토리",
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "Name",
+  "Greeting": "Greeting",
+  "Instructions": "Instructions",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }
