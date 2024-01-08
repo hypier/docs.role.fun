@@ -80,7 +80,7 @@ const Discover = () => {
       <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
         <Carousel
           opts={{ align: "center" }}
-          className="mx-12 max-w-sm lg:max-w-screen-xl xl:max-w-screen-2xl"
+          className="mx-12 max-w-sm md:max-w-screen-xl 2xl:max-w-screen-2xl"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -96,7 +96,10 @@ const Discover = () => {
             )}
             {Object.entries(popularTags).map(([tagKey, tagValues]) =>
               tagValues.map((tag, index) => (
-                <CarouselItem key={index} className="basis-1/3 md:basis-1/12">
+                <CarouselItem
+                  key={index}
+                  className="basis-1/3 md:basis-1/6 xl:basis-1/12"
+                >
                   <Toggle
                     aria-label={`Toggle ${tag.tagName}`}
                     variant="filled"
