@@ -117,10 +117,7 @@ const Discover = () => {
       <div className="border-y bg-background p-2 py-12 lg:rounded-lg lg:border lg:shadow-lg">
         <Carousel
           plugins={[plugin.current]}
-          opts={{
-            align: "center",
-            loop: true,
-          }}
+          opts={{ align: "center" }}
           className="mx-12"
         >
           <CarouselContent className="w-full">
