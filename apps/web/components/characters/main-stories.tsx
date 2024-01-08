@@ -28,7 +28,7 @@ export const MainStories = () => {
   }, [inView, loadMore]);
   return (
     <section className="flex flex-col gap-4 lg:gap-8">
-      <div className="self-center px-4 font-medium lg:px-0">Stories</div>
+      <div className="px-4 font-medium lg:px-0">Stories</div>
       <div className="border-y bg-background p-2 py-12 !text-xs lg:rounded-lg lg:border lg:shadow-lg">
         <Carousel
           opts={{
