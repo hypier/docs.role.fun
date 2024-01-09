@@ -80,7 +80,7 @@ export function MainChats() {
   const [_api, setApi] = useState<CarouselApi>();
   return (
     <>
-      {results?.length && (
+      {results?.length > 0 && (
         <>
           <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
             {t("Continue chat")}
