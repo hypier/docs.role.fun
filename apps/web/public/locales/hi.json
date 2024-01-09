@@ -22,11 +22,18 @@
   "Join community": "Join community",
   "Filter characters": "Filter characters",
   "Stories": "Stories",
+  "Stories are chats with characters, shared by users.": "Stories are chats with characters, shared by users.",
+  "Continue chat": "Continue chat",
   "New Character": "New character",
   "Configure your character details.": "Configure your character details.",
   "Name": "Name",
   "Greeting": "Greeting",
   "Instructions": "Instructions",
   "Description": "Description",
-  "AI Model": "AI Model"
+  "AI Model": "AI Model",
+  "Crystal Top-Up": "Crystal Top-Up",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal is an universal currency for calling AI features in openroleplay.ai.",
+  "Daily Rewards": "Daily Rewards",
+  "Claim 50 Crystals": "Claim 50 Crystals",
+  "Search": "Search"
 }
