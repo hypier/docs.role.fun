@@ -92,7 +92,7 @@ export default function UserDropdown() {
             )}
             {user ? (
               <StyledButton
-                text="Logout"
+                text={t("Logout")}
                 Icon={<LogOut className="h-4 w-4 text-muted-foreground" />}
                 onClick={() => {
                   setOpenPopover(false);

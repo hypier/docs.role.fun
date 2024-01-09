@@ -84,11 +84,13 @@ export const Message = ({
   name,
   message,
   cardImageUrl,
+  username = "You",
   chatId,
 }: {
   name: string;
   message: any;
   cardImageUrl: string;
+  username?: string;
   chatId?: Id<"chats">;
 }) => {
   const regenerate = useMutation(api.messages.regenerate);
@@ -112,10 +114,10 @@ export const Message = ({
             className="object-cover"
           />
           <AvatarFallback>
-            {message?.characterId ? name[0] : "Y"}
+            {message?.characterId ? name[0] : username[0]}
           </AvatarFallback>
         </Avatar>
-        {message?.characterId ? <>{name}</> : <>You</>}
+        {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
       {message.text === "" ? (
         <div
