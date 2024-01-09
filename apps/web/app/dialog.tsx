@@ -362,7 +362,7 @@ export function Dialog({
   return (
     <div className="h-full w-full">
       {chatId && (
-        <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 px-6">
+        <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 lg:px-6">
           <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
             <ModelBadge modelName={model as string} showCredits={true} />
             AI can make mistakes.
