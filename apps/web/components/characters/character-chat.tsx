@@ -13,6 +13,8 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import { Input } from "@repo/ui/src/components/input";
 import { useDebouncedCallback } from "use-debounce";
+import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Chat = ({
   name,
@@ -62,6 +64,7 @@ export const Chat = ({
 };
 
 export default function CharacterChat() {
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState("");
   const { results, status, loadMore } = usePaginatedQuery(
     api.characters.search,
@@ -100,7 +103,15 @@ export default function CharacterChat() {
             />
           ))
         ) : (
-          <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-2"></div>
+          <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-2">
+            {`No search results were found for "${inputValue}".`}
+            <Link href="/my-characters/create" className="hidden lg:block">
+              <Button className="rounded-full px-3" type="button">
+                <Plus className="h-5 w-5 p-1" />
+                {t("Create")}
+              </Button>
+            </Link>
+          </div>
         )}
         <div ref={ref} />
       </ul>
