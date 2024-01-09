@@ -194,6 +194,7 @@ export const search = query({
       query = ctx.db
         .query("characters")
         .withIndex("byNumChats")
+        .order("desc")
         .filter((q) => q.eq(q.field("isDraft"), false))
         .filter((q) => q.eq(q.field("isBlacklisted"), false))
         .filter((q) => q.neq(q.field("isArchived"), true))
