@@ -67,6 +67,9 @@ export default defineSchema({
       vectorField: "embedding",
       dimensions: 512,
       filterFields: ["name", "description", "instructions"],
+    })
+    .searchIndex("searchName", {
+      searchField: "name",
     }),
   personas: defineTable({
     name: v.optional(v.string()),

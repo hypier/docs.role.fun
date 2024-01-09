@@ -9,7 +9,7 @@ import { Button, Tooltip } from "@repo/ui/src/components";
 import { SignedOut } from "@clerk/nextjs";
 import CurrentCrystals from "./current-crystals";
 import { useConvexAuth } from "convex/react";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function NavBar({}: {}) {
@@ -42,6 +42,11 @@ export default function NavBar({}: {}) {
             </Tooltip>
           </div>
           <div className="flex items-center gap-2">
+            <Link href="/search">
+              <Button className="rounded-full p-2" variant="ghost" size="icon">
+                <Search className="h-5 w-5 p-px text-black" />
+              </Button>
+            </Link>
             {isAuthenticated && (
               <Link href="/my-characters/create" className="hidden lg:block">
                 <Button className="rounded-full px-3">

@@ -162,7 +162,65 @@ export const list = query({
     if (args.model) {
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
+
     return await query.order("desc").paginate(args.paginationOpts);
+  },
+});
+
+export const search = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+    genreTag: v.optional(v.string()),
+    personalityTag: v.optional(v.string()),
+    roleTag: v.optional(v.string()),
+    languageTag: v.optional(v.string()),
+    model: v.optional(v.string()),
+    query: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let query;
+    if (args.query) {
+      query = ctx.db
+        .query("characters")
+        .withSearchIndex("searchName", (q) =>
+          q.search("name", args.query as string),
+        )
+        .filter((q) => q.eq(q.field("isDraft"), false))
+        .filter((q) => q.eq(q.field("isBlacklisted"), false))
+        .filter((q) => q.neq(q.field("isArchived"), true))
+        .filter((q) => q.neq(q.field("isNSFW"), true))
+        .filter((q) => q.neq(q.field("visibility"), "private"));
+    } else {
+      query = ctx.db
+        .query("characters")
+        .withIndex("byNumChats")
+        .filter((q) => q.eq(q.field("isDraft"), false))
+        .filter((q) => q.eq(q.field("isBlacklisted"), false))
+        .filter((q) => q.neq(q.field("isArchived"), true))
+        .filter((q) => q.neq(q.field("isNSFW"), true))
+        .filter((q) => q.neq(q.field("visibility"), "private"));
+    }
+    if (args.genreTag) {
+      query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
+    }
+    if (args.personalityTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("personalityTag"), args.personalityTag),
+      );
+    }
+    if (args.roleTag) {
+      query = query.filter((q) => q.eq(q.field("roleTag"), args.roleTag));
+    }
+    if (args.languageTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("languageTag"), args.languageTag),
+      );
+    }
+    if (args.model) {
+      query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+
+    return await query.paginate(args.paginationOpts);
   },
 });
 
