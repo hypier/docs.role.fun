@@ -49,7 +49,7 @@ export default function NavBar({}: {}) {
                   variant="ghost"
                   size="icon"
                 >
-                  <Search className="h-5 w-5 p-px text-black" />
+                  <Search className="h-5 w-5 p-px text-foreground" />
                 </Button>
               </Link>
             </Tooltip>
