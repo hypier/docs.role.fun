@@ -22,11 +22,18 @@
   "Join community": "Присоединиться к сообществу",
   "Filter characters": "Фильтр символов",
   "Stories": "Истории",
+  "Stories are chats with characters, shared by users.": "Истории - это чаты с символами, которые разделяют пользователи.",
+  "Continue chat": "Продолжить чат",
   "New Character": "Новый символ",
   "Configure your character details.": "Настройте параметры вашего персонажа.",
   "Name": "Наименование",
   "Greeting": "Приветствие",
   "Instructions": "Инструкции",
   "Description": "Описание",
-  "AI Model": "Модель ИИ"
+  "AI Model": "Модель ИИ",
+  "Crystal Top-Up": "Кристалл сверху",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal - это универсальная валюта для вызова AI функций openroleplay.ai.",
+  "Daily Rewards": "Ежедневные награды",
+  "Claim 50 Crystals": "Получить 50 кристаллов",
+  "Search": "Искать"
 }
