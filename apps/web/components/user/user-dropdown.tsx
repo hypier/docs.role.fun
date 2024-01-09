@@ -83,9 +83,6 @@ export default function UserDropdown() {
                     {`@${user?.username}`}
                   </p>
                 )}
-                <p className="truncate text-sm text-muted-foreground">
-                  {user?.primaryEmailAddress?.emailAddress}
-                </p>
               </div>
             )}
             {user ? (
