@@ -16,6 +16,7 @@ import useCurrentUser from "../lib/hooks/use-current-user";
 import { AnimatePresence, motion } from "framer-motion";
 import { FadeInOut } from "../lib/utils";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const Package = ({
   src,
@@ -39,7 +40,7 @@ const Package = ({
       desktopOnly
     >
       <Card
-        className="hover:shadow-lg aspect-square rounded-lg duration-200 relative md:w-64 md:h-64 w-[23rem] h-[23rem] tabular-nums"
+        className="relative aspect-square h-[23rem] w-[23rem] rounded-lg tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
         role="button"
         onClick={
           handlePurchaseClick
@@ -52,25 +53,25 @@ const Package = ({
           width={256}
           height={256}
           alt={"image for pricing"}
-          className="absolute top-0 h-full w-full object-cover rounded-lg"
+          className="absolute top-0 h-full w-full rounded-lg object-cover"
         />
-        <div className="absolute bottom-0 h-[50%] w-full bg-gradient-to-b from-transparent via-white/95 to-white rounded-b-lg" />
-        <div className="pt-[70%] flex flex-col gap-1">
+        <div className="absolute bottom-0 h-[50%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-white/95 to-white" />
+        <div className="flex flex-col gap-1 pt-[70%]">
           <CardHeader className="flex items-center justify-center py-1">
             <CardTitle className="z-10 text-xl text-black">
               {(amount - bonus).toLocaleString()} Crystals
             </CardTitle>
           </CardHeader>
-          <CardFooter className="flex items-center w-full justify-center">
-            <p className="font-semibold z-10 w-full text-center bg-sky-100 text-sky-900 rounded-full">
+          <CardFooter className="flex w-full items-center justify-center">
+            <p className="z-10 w-full rounded-full bg-sky-100 text-center font-semibold text-sky-900">
               {price}$
             </p>
           </CardFooter>
         </div>
         {bonus > 0 && (
-          <div className="absolute -top-2 -left-2 w-fit p-1 bg-rose-500 rounded-full px-2 text-sm flex items-center gap-0.5 text-white font-medium">
+          <div className="absolute -left-2 -top-2 flex w-fit items-center gap-0.5 rounded-full bg-rose-500 p-1 px-2 text-sm font-medium text-white">
             <span className="text-amber-200">{"Bonus "}</span>
-            <Crystal className="w-4 h-4" /> {bonus}
+            <Crystal className="h-4 w-4" /> {bonus}
           </div>
         )}
       </Card>
@@ -124,6 +125,7 @@ const PackageWrapper = ({
 };
 
 const DailyReward = () => {
+  const { t } = useTranslation();
   const checkin = useMutation(api.serve.checkin);
   const checkedIn = useQuery(api.serve.checkedIn);
   const onClickHandler = async () => {
@@ -142,27 +144,28 @@ const DailyReward = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 items-center px-5">
-      <h1 className="text-5xl font-display">Daily Rewards</h1>
+    <div className="flex flex-col items-center gap-8 px-5">
+      <h1 className="font-display text-5xl">{t("Daily Rewards")}</h1>
       <AnimatePresence>
         {checkedIn && (
           <motion.p
-            className="text-muted-foreground text-sm flex gap-1 items-center"
+            className="flex items-center gap-1 text-sm text-muted-foreground"
             {...FadeInOut}
           >
-            <Crystal className="w-4 h-4 hidden md:inline" />
-            You've already claimed today's reward.
+            <Crystal className="hidden h-4 w-4 md:inline" />
+            {t("You've already claimed today's reward.")}
           </motion.p>
         )}
       </AnimatePresence>
       <Button onClick={onClickHandler} disabled={checkedIn}>
-        Claim 50 Crystals
+        {t("Claim 50 Crystals")}
       </Button>
     </div>
   );
 };
 
 export default function Page() {
+  const { t } = useTranslation();
   const { isAuthenticated } = useConvexAuth();
   const packages = [
     { src: "/shop/tier1.png", amount: 300, bonus: 0, price: 0.99 },
@@ -174,23 +177,24 @@ export default function Page() {
   ];
 
   return (
-    <div className="w-full flex flex-col justify-self-start items-center gap-16 pt-16 pb-32 px-2">
-      <div className="flex flex-col gap-4 items-start md:items-center px-5">
-        <h1 className="text-5xl font-display">Shop</h1>
-        <h2 className="text-3xl font-display bg-gradient-to-b from-gray-400 to-gray-600 text-transparent bg-clip-text">
-          Crystal Top-Up
+    <div className="flex w-full flex-col items-center gap-16 justify-self-start px-2 pb-32 pt-16">
+      <div className="flex flex-col items-start gap-4 px-5 md:items-center">
+        <h1 className="font-display text-5xl">{t("Shop")}</h1>
+        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          {t("Crystal Top-Up")}
         </h2>
-        <p className="text-muted-foreground text-sm flex gap-1 items-center">
-          <Crystal className="w-4 h-4 hidden md:inline" />
-          Crystal is an universal currency for calling AI features in
-          openroleplay.ai.
+        <p className="flex items-center gap-1 text-sm text-muted-foreground">
+          <Crystal className="hidden h-4 w-4 md:inline" />
+          {t(
+            "Crystal is an universal currency for calling AI features in openroleplay.ai.",
+          )}
         </p>
       </div>
       <AnimatePresence>
         {isAuthenticated ? (
           <motion.section
             {...FadeInOut}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
           >
             {packages.map((pkg) => (
               <PackageWrapper
@@ -203,7 +207,7 @@ export default function Page() {
             ))}
           </motion.section>
         ) : (
-          <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {packages.map((pkg) => (
               <Package
                 key={pkg.src}
