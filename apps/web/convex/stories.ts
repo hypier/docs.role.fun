@@ -2,6 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getUser } from "./users";
 import { paginationOptsValidator } from "convex/server";
+import { Id } from "./_generated/dataModel";
 
 export const create = mutation({
   args: {
@@ -119,6 +120,20 @@ export const messages = query({
       (story?.messageIds ?? []).map((messageId) => ctx.db.get(messageId)),
     );
     return messages;
+  },
+});
+
+export const creatorName = query({
+  args: {
+    storyId: v.id("stories"),
+  },
+  handler: async (ctx, args) => {
+    const story = await ctx.db
+      .query("stories")
+      .filter((q) => q.eq(q.field("_id"), args.storyId))
+      .first();
+    const user = await ctx.db.get(story?.userId as Id<"users">);
+    return user?.name;
   },
 });
 

@@ -28,6 +28,7 @@ export function Story({
     characterId ? { id: characterId } : "skip",
   );
   const messages = useQuery(api.stories.messages, { storyId });
+  const creatorName = useQuery(api.stories.creatorName, { storyId });
   const unlock = useMutation(api.stories.unlock);
   return (
     <div className="relative h-full w-full">
@@ -47,6 +48,7 @@ export function Story({
                 <Message
                   name={name || (character?.name as string)}
                   message={message}
+                  username={creatorName || "You"}
                   cardImageUrl={
                     (cardImageUrl as string) ||
                     (character?.cardImageUrl as string)
