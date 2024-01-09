@@ -22,11 +22,18 @@
   "Join community": "加入社区",
   "Filter characters": "过滤字符",
   "Stories": "故事",
+  "Stories are chats with characters, shared by users.": "故事是由用户共享的有字符的聊天。",
+  "Continue chat": "继续聊天",
   "New Character": "新字符",
   "Configure your character details.": "配置您的角色详细信息。",
   "Name": "名称",
   "Greeting": "问候中",
   "Instructions": "说明",
   "Description": "描述",
-  "AI Model": "AI 模型"
+  "AI Model": "AI 模型",
+  "Crystal Top-Up": "水晶充值",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal 是通用货币在 openroleplay.ai 中调用 AI 功能。",
+  "Daily Rewards": "每日奖励",
+  "Claim 50 Crystals": "索赔50 晶体",
+  "Search": "搜索"
 }
