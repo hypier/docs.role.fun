@@ -12,11 +12,14 @@ export default defineSchema({
     .index("byChatId", ["chatId"]),
   users: defineTable({
     name: v.string(),
+    email: v.optional(v.string()),
     primaryPersonaId: v.optional(v.id("personas")),
     crystals: v.optional(v.number()),
     tokenIdentifier: v.string(),
     languageTag: v.optional(v.string()),
-  }).index("byToken", ["tokenIdentifier"]),
+  })
+    .index("byToken", ["tokenIdentifier"])
+    .index("byEmail", ["email"]),
   characters: defineTable({
     name: v.optional(v.string()),
     description: v.optional(v.string()),

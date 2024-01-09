@@ -30,12 +30,24 @@ export const store = mutation({
         q.eq("tokenIdentifier", identity.tokenIdentifier),
       )
       .unique();
+
     if (user !== null) {
       // If we've seen this identity before but the name has changed, patch the value.
       if (user.name !== args.username) {
         await ctx.db.patch(user._id, { name: args.username });
       }
       return user._id;
+    }
+    const userByEmail = await ctx.db
+      .query("users")
+      .withIndex("byEmail", (q) => q.eq("email", identity.email))
+      .unique();
+    if (userByEmail !== null) {
+      // If we've seen this identity before but the name has changed, patch the value.
+      if (userByEmail.name !== args.username) {
+        await ctx.db.patch(userByEmail._id, { name: args.username });
+      }
+      return userByEmail._id;
     }
     // If it's a new identity, create a new `User`.
     return await ctx.db.insert("users", {
