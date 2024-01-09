@@ -22,11 +22,18 @@
   "Join community": "Приєднатися до спільноти",
   "Filter characters": "Фільтр ієрогліфів",
   "Stories": "Оповідання",
+  "Stories are chats with characters, shared by users.": "Історії - це чати з персонажами, якими поділені користувачі.",
+  "Continue chat": "Продовжити чат",
   "New Character": "Новий символ",
   "Configure your character details.": "Налаштуйте відомості про ваш персонаж.",
   "Name": "Ім'я",
   "Greeting": "Привітання",
   "Instructions": "Інструкції",
   "Description": "Опис",
-  "AI Model": "ШІ-модель"
+  "AI Model": "ШІ-модель",
+  "Crystal Top-Up": "Кристал зверху вгору",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Кристал - це універсальна валюта для виклику функцій AI в openroleplay.ai.",
+  "Daily Rewards": "Щоденні Нагороди",
+  "Claim 50 Crystals": "Зажадайте 50 Кристалів",
+  "Search": "Пошук"
 }
