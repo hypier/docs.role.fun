@@ -45,7 +45,7 @@ export const MainStories = () => {
   return (
     <section className="flex flex-col gap-4 lg:gap-8">
       <div className="flex items-center gap-1 px-4 font-medium lg:px-0">
-        {t("Stories")}
+        {t("Continue stories")}
         <InfoTooltip
           content={
             <TooltipContent
