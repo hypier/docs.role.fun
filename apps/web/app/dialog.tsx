@@ -37,6 +37,8 @@ import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Separator } from "@repo/ui/src/components/separator";
 import Spinner from "@repo/ui/src/components/spinner";
+import useUsername from "./lib/hooks/use-my-username";
+import useMyUsername from "./lib/hooks/use-my-username";
 
 export const FormattedMessage = ({ message }: { message: any }) => {
   return (
@@ -307,6 +309,7 @@ export function Dialog({
       ),
     [remoteMessages, ""],
   );
+  const username = useMyUsername();
   const sendMessage = useMutation(api.messages.send);
   const generateInspiration = useMutation(api.followUps.generate);
   const inspirations = useQuery(api.followUps.get, {
@@ -423,7 +426,7 @@ export function Dialog({
                   Create story
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="max-w-fit">
                 <AlertDialogHeader>
                   <AlertDialogTitle>Create a story</AlertDialogTitle>
                   <AlertDialogDescription>
@@ -435,6 +438,7 @@ export function Dialog({
                         key={message._id}
                         name={name}
                         message={message}
+                        username={(username as string) || "You"}
                         cardImageUrl={cardImageUrl as string}
                       />
                     ))}
@@ -510,6 +514,7 @@ export function Dialog({
                 name={name}
                 message={message}
                 cardImageUrl={cardImageUrl as string}
+                username={(username as string) || "You"}
                 chatId={chatId}
               />
             ))
