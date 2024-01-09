@@ -8,11 +8,11 @@ export default function Page(): JSX.Element {
   const { user } = useUser();
   const { isAuthenticated } = useConvexAuth();
   return (
-    <div className="w-full h-[100vh] flex flex-col justify-self-start lg:pr-6">
-      {isAuthenticated ? (
+    <div className="flex h-[100vh] w-full flex-col justify-self-start lg:pr-6">
+      {isAuthenticated && user ? (
         <Chats />
       ) : (
-        <div className="w-full h-full items-start justify-center flex py-32">
+        <div className="flex h-full w-full items-start justify-center py-32">
           {!user && <SignIn />}
         </div>
       )}
