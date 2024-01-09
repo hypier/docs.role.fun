@@ -29,7 +29,7 @@ export default function NavBar({}: {}) {
             <Link href="/">
               <TextLogo />
             </Link>
-            <Tooltip content="Star openroleplay.ai on GitHub">
+            <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
               <Link
                 className="flex items-center gap-2 text-base text-muted-foreground hover:opacity-50"
                 href="/github"
@@ -42,11 +42,17 @@ export default function NavBar({}: {}) {
             </Tooltip>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/search">
-              <Button className="rounded-full p-2" variant="ghost" size="icon">
-                <Search className="h-5 w-5 p-px text-black" />
-              </Button>
-            </Link>
+            <Tooltip content="Search characters" desktopOnly>
+              <Link href="/search">
+                <Button
+                  className="rounded-full p-2"
+                  variant="ghost"
+                  size="icon"
+                >
+                  <Search className="h-5 w-5 p-px text-black" />
+                </Button>
+              </Link>
+            </Tooltip>
             {isAuthenticated && (
               <Link href="/my-characters/create" className="hidden lg:block">
                 <Button className="rounded-full px-3">
