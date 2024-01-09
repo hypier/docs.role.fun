@@ -22,11 +22,18 @@
   "Join community": "Deltag i fællesskab",
   "Filter characters": "Filtrer tegn",
   "Stories": "Historier",
+  "Stories are chats with characters, shared by users.": "Historier er chats med tegn, der deles af brugere.",
+  "Continue chat": "Fortsæt chat",
   "New Character": "Nyt tegn",
   "Configure your character details.": "Konfigurer dine karakterdetaljer.",
   "Name": "Navn",
   "Greeting": "Hilsen",
   "Instructions": "Instruktioner",
   "Description": "Varebeskrivelse",
-  "AI Model": "AI Model"
+  "AI Model": "AI Model",
+  "Crystal Top-Up": "Krystal Top-Up",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal er en universel valuta for at kalde AI funktioner i openroleplay.ai.",
+  "Daily Rewards": "Daglige Belønninger",
+  "Claim 50 Crystals": "Anprisning 50 Krystaller",
+  "Search": "Søg"
 }
