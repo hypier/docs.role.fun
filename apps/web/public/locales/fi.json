@@ -22,11 +22,18 @@
   "Join community": "Liity yhteisöön",
   "Filter characters": "Suodata merkkejä",
   "Stories": "Tarinat",
+  "Stories are chats with characters, shared by users.": "Tarinat ovat hahmoja sisältäviä chatteja, joita käyttäjät jakavat.",
+  "Continue chat": "Jatka keskustelua",
   "New Character": "Uusi merkki",
   "Configure your character details.": "Määritä hahmosi tiedot.",
   "Name": "Nimi",
   "Greeting": "Tervehdys",
   "Instructions": "Ohjeet",
   "Description": "Kuvaus",
-  "AI Model": "AI Malli"
+  "AI Model": "AI Malli",
+  "Crystal Top-Up": "Kristalli Ylös",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal on universaali valuutta soittaa tekoälyn ominaisuuksia openroleplay.ai.",
+  "Daily Rewards": "Päivittäiset Palkinnot",
+  "Claim 50 Crystals": "Lunasta 50 Kristallia",
+  "Search": "Etsi"
 }
