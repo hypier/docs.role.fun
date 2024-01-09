@@ -22,11 +22,18 @@
   "Join community": "Word lid van community",
   "Filter characters": "Tekens filteren",
   "Stories": "Verhalen",
+  "Stories are chats with characters, shared by users.": "Verhalen zijn chats met karakters, gedeeld door gebruikers.",
+  "Continue chat": "Chat voortzetten",
   "New Character": "Nieuw teken",
   "Configure your character details.": "Configureer je karakter gegevens.",
   "Name": "naam",
   "Greeting": "Begroeting",
   "Instructions": "Instructies",
   "Description": "Beschrijving",
-  "AI Model": "AI model"
+  "AI Model": "AI model",
+  "Crystal Top-Up": "Kristal Top-Up",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal is een universele valuta voor het aanroepen van AI functies in openroleplay.ai.",
+  "Daily Rewards": "Dagelijkse Beloningen",
+  "Claim 50 Crystals": "Claim 50 Kristallen",
+  "Search": "Zoeken"
 }
