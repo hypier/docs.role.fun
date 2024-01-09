@@ -22,11 +22,19 @@
   "Join community": "Dołącz do społeczności",
   "Filter characters": "Filtruj znaki",
   "Stories": "Opowieści",
+  "Continue stories": "Kontynuuj historie",
+  "Stories are chats with characters, shared by users.": "Opowieści to czaty ze znakami, udostępnione przez użytkowników.",
+  "Continue chat": "Kontynuuj czat",
   "New Character": "Nowy znak",
   "Configure your character details.": "Skonfiguruj dane swojej postaci.",
   "Name": "Nazwisko",
   "Greeting": "Powitanie",
   "Instructions": "Instrukcje",
   "Description": "Opis",
-  "AI Model": "Model SI"
+  "AI Model": "Model SI",
+  "Crystal Top-Up": "Kryształowy top-Up",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Kryształ jest uniwersalną walutą do wywoływania funkcji AI w openroleplay.ai.",
+  "Daily Rewards": "Dzienne Nagrody",
+  "Claim 50 Crystals": "Zbierz 50 Kryształów",
+  "Search": "Szukaj"
 }

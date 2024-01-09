@@ -22,11 +22,19 @@
   "Join community": "コミュニティに参加",
   "Filter characters": "文字をフィルターする",
   "Stories": "ストーリー",
+  "Continue stories": "ストーリーを続ける",
+  "Stories are chats with characters, shared by users.": "ストーリーはチャットに文字が含まれ、ユーザーが共有します。",
+  "Continue chat": "チャットを続ける",
   "New Character": "新しい文字",
   "Configure your character details.": "キャラクターの詳細を設定します。",
   "Name": "名前",
   "Greeting": "あいさつ中",
   "Instructions": "説明",
   "Description": "説明",
-  "AI Model": "AIモデル"
+  "AI Model": "AIモデル",
+  "Crystal Top-Up": "クリスタルチャージ",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "クリスタルは、openroleplay.aiでAI機能を呼び出すための普遍的な通貨です。",
+  "Daily Rewards": "デイリーボーナス",
+  "Claim 50 Crystals": "50クリスタルを受け取る",
+  "Search": "検索"
 }

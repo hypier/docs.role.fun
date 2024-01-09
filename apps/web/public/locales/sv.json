@@ -22,11 +22,19 @@
   "Join community": "Gå med i community",
   "Filter characters": "Filtrera tecken",
   "Stories": "Berättelser",
+  "Continue stories": "Fortsätt berättelser",
+  "Stories are chats with characters, shared by users.": "Berättelser är chattar med tecken, som delas av användare.",
+  "Continue chat": "Fortsätt chatten",
   "New Character": "Nytt tecken",
   "Configure your character details.": "Konfigurera dina karaktärsdetaljer.",
   "Name": "Namn",
   "Greeting": "Hälsning",
   "Instructions": "Instruktioner",
   "Description": "Beskrivning",
-  "AI Model": "AI Modell"
+  "AI Model": "AI Modell",
+  "Crystal Top-Up": "Kristall påfyllning",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal är en universell valuta för att kalla AI funktioner i openroleplay.ai.",
+  "Daily Rewards": "Dagliga belöningar",
+  "Claim 50 Crystals": "Hämta 50 kristaller",
+  "Search": "Sök"
 }
