@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
+import { InfoTooltip, TooltipContent } from "@repo/ui/src/components";
 
 export const MainStories = () => {
   const { t } = useTranslation();
@@ -43,7 +44,16 @@ export const MainStories = () => {
 
   return (
     <section className="flex flex-col gap-4 lg:gap-8">
-      <div className="px-4 font-medium lg:px-0">{t("Stories")}</div>
+      <div className="flex items-center gap-1 px-4 font-medium lg:px-0">
+        {t("Stories")}
+        <InfoTooltip
+          content={
+            <TooltipContent
+              title={t("Stories are chats with characters, shared by users.")}
+            />
+          }
+        />
+      </div>
       <div className="border-y py-4 lg:w-[90%] lg:border-none lg:py-0">
         <Carousel
           opts={{
