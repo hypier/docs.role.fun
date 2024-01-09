@@ -22,11 +22,18 @@
   "Join community": "Připojit se ke komunitě",
   "Filter characters": "Filtrovat znaky",
   "Stories": "Příběhy",
+  "Stories are chats with characters, shared by users.": "Příběhy jsou chaty s znaky, sdílené uživateli.",
+  "Continue chat": "Pokračovat v chatu",
   "New Character": "Nový znak",
   "Configure your character details.": "Nakonfigurujte detaily své postavy.",
   "Name": "Název",
   "Greeting": "Zdravím",
   "Instructions": "1 písm. a) nařízení o kapitálových požadavcích.",
   "Description": "L 343, 22.12.2009, s. 1).",
-  "AI Model": "AI model"
+  "AI Model": "AI model",
+  "Crystal Top-Up": "Krystal nahoře",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal je univerzální měna pro volání AI funkcí v openroplay.ai.",
+  "Daily Rewards": "Denní odměny",
+  "Claim 50 Crystals": "Tvrzení 50 krystalů",
+  "Search": "Hledat"
 }
