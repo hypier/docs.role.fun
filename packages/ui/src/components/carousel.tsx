@@ -11,6 +11,7 @@ import {
 
 import { cn } from "../utils";
 import { Button } from ".";
+import useMediaQuery from "../hooks/use-media-query";
 
 type CarouselProps = {
   opts?: CarouselOptions;
@@ -197,6 +198,7 @@ const CarouselPrevious = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+  const { width = 0 } = useMediaQuery();
 
   return (
     <Button
@@ -211,7 +213,12 @@ const CarouselPrevious = React.forwardRef<
         className
       )}
       disabled={!canScrollPrev}
-      onClick={scrollPrev}
+      onClick={() => {
+        scrollPrev();
+        width > 640 && scrollPrev();
+        width > 1024 && scrollPrev();
+        width > 1280 && scrollPrev();
+      }}
       {...props}
     >
       <ArrowLeftIcon className="h-4 w-4" />
@@ -226,6 +233,7 @@ const CarouselNext = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const { width = 0 } = useMediaQuery();
 
   return (
     <Button
@@ -240,7 +248,12 @@ const CarouselNext = React.forwardRef<
         className
       )}
       disabled={!canScrollNext}
-      onClick={scrollNext}
+      onClick={() => {
+        scrollNext();
+        width > 640 && scrollNext();
+        width > 1024 && scrollNext();
+        width > 1280 && scrollNext();
+      }}
       {...props}
     >
       <ArrowRightIcon className="h-4 w-4" />
