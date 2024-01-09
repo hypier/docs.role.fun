@@ -66,7 +66,7 @@ export const MainStories = () => {
             {results?.length > 0
               ? results.map((story, i) => (
                   <CarouselItem
-                    className="group ml-4 h-[32rem] overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                    className="group ml-4 h-[32rem] overflow-hidden rounded-lg border pl-0 !text-sm shadow-lg md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                     key={story._id}
                   >
                     <Link
