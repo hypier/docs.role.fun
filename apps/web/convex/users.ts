@@ -43,15 +43,16 @@ export const store = mutation({
       .withIndex("byEmail", (q) => q.eq("email", identity.email))
       .unique();
     if (userByEmail !== null) {
-      // If we've seen this identity before but the name has changed, patch the value.
-      if (userByEmail.name !== args.username) {
-        await ctx.db.patch(userByEmail._id, { name: args.username });
-      }
-      return userByEmail._id;
+      return await ctx.db.insert("users", {
+        name: args.username,
+        tokenIdentifier: identity.tokenIdentifier,
+        crystals: 0,
+      });
     }
     // If it's a new identity, create a new `User`.
     return await ctx.db.insert("users", {
       name: args.username,
+      email: identity?.email,
       tokenIdentifier: identity.tokenIdentifier,
       crystals: SIGN_UP_FREE_CRYSTALS,
     });

@@ -78,11 +78,9 @@ export default function UserDropdown() {
           <div className="w-full rounded-lg bg-background p-2 sm:w-40 sm:p-1">
             {user && (
               <div className="p-2">
-                {user?.firstName && (
+                {user?.username && (
                   <p className="truncate text-sm font-medium text-foreground">
-                    {`${user?.firstName} ${
-                      user?.lastName ? user?.lastName : ""
-                    }`}
+                    {`@${user?.username}`}
                   </p>
                 )}
                 <p className="truncate text-sm text-muted-foreground">
