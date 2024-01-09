@@ -22,11 +22,18 @@
   "Join community": "الانضمام إلى المجتمع",
   "Filter characters": "تصفية الأحرف",
   "Stories": "قصص",
+  "Stories are chats with characters, shared by users.": "القصص هي محادثة مع شخصيات، يشاركها المستخدمون.",
+  "Continue chat": "متابعة المحادثة",
   "New Character": "حرف جديد",
   "Configure your character details.": "تكوين تفاصيل الشخصية الخاصة بك.",
   "Name": "الاسم",
   "Greeting": "تحية",
   "Instructions": "تعليمات",
   "Description": "الوصف",
-  "AI Model": "نموذج AI"
+  "AI Model": "نموذج AI",
+  "Crystal Top-Up": "أعلى البلورة",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "البلورة هي عملة عامة للاتصال بميزات AI في openroleplay.ai.",
+  "Daily Rewards": "المكافآت اليومية",
+  "Claim 50 Crystals": "مطالبة 50 بلورة",
+  "Search": "البحث"
 }
