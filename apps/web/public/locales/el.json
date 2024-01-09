@@ -22,11 +22,18 @@
   "Join community": "Γίνετε μέλος κοινότητας",
   "Filter characters": "Φίλτρο χαρακτήρων",
   "Stories": "Ιστορίες",
+  "Stories are chats with characters, shared by users.": "Οι ιστορίες είναι συνομιλίες με χαρακτήρες, τις οποίες μοιράζονται οι χρήστες.",
+  "Continue chat": "Συνέχεια συνομιλίας",
   "New Character": "Νέος χαρακτήρας",
   "Configure your character details.": "Ρυθμίστε τα στοιχεία του χαρακτήρα σας.",
   "Name": "Όνομα",
   "Greeting": "Χαιρετισμός",
   "Instructions": "Οδηγίες",
   "Description": "Περιγραφή",
-  "AI Model": "Μοντέλο Τεχνητής Νοημοσύνης"
+  "AI Model": "Μοντέλο Τεχνητής Νοημοσύνης",
+  "Crystal Top-Up": "Ανανέωση Κρυστάλλου",
+  "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal είναι ένα καθολικό νόμισμα για την κλήση AI χαρακτηριστικά σε openroleplay.ai.",
+  "Daily Rewards": "Ημερήσιες Ανταμοιβές",
+  "Claim 50 Crystals": "Διεκδικήστε 50 Κρύσταλλα",
+  "Search": "Αναζήτηση"
 }
