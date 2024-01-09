@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 
-const Chat = ({
+export const Chat = ({
   name,
   time,
   chatId,

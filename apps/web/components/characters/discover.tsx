@@ -3,7 +3,7 @@ import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
-import { useQuery } from "convex/react";
+import { useConvexAuth, usePaginatedQuery, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button, Tooltip } from "@repo/ui/src/components";
@@ -19,6 +19,7 @@ import {
   CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
 import { useTranslation } from "react-i18next";
+import { MainChats } from "./main-chat";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -67,9 +68,12 @@ const Discover = () => {
   const plugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true }),
   );
+  const { isAuthenticated } = useConvexAuth();
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8">
+      {isAuthenticated && <MainChats />}
+
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         {t("Characters")}
         <Tooltip content={t("Filter characters")}>
