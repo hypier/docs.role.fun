@@ -137,7 +137,7 @@ export const list = query({
   handler: async (ctx, args) => {
     let query = ctx.db
       .query("characters")
-      .withIndex("byNumChats")
+      .withIndex("byUpdatedAt")
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))

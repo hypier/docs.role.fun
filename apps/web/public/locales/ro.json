@@ -3,6 +3,7 @@
   "alpha": "alfa",
   "Create": "Crează",
   "Log in": "Autentificare",
+  "Logout": "Deconectare",
   "Discover": "Descoperă",
   "Chats": "Conversații",
   "My": "Meu",
@@ -19,6 +20,13 @@
   "Join Discord": "Alătură-te Discord",
   "Visit Shop": "Vizitează magazinul",
   "Join community": "Alătură-te comunității",
-  "Filter characters": "Filter characters",
-  "Stories": "Stories"
+  "Filter characters": "Filtrare caractere",
+  "Stories": "Povestiri",
+  "New Character": "Caracter nou",
+  "Configure your character details.": "Configurați detaliile personajului.",
+  "Name": "Nume",
+  "Greeting": "Salutare",
+  "Instructions": "Instrucţiuni",
+  "Description": "Descriere",
+  "AI Model": "Modelul AI"
 }

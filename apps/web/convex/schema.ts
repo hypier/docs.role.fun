@@ -58,6 +58,7 @@ export default defineSchema({
   })
     .index("byUserId", ["creatorId"])
     .index("byNumChats", ["numChats"])
+    .index("byUpdatedAt", ["updatedAt"])
     .index("byLanguage", ["languageTag"])
     .index("byGenre", ["genreTag"])
     .index("byPersonality", ["personalityTag"])

@@ -3,6 +3,7 @@
   "alpha": "alpha",
   "Create": "Create",
   "Log in": "Log in",
+  "Logout": "Logout",
   "Discover": "Discover",
   "Chats": "Chats",
   "My": "My",
@@ -22,4 +23,11 @@
   "Filter characters": "Filter characters",
   "Stories": "Stories",
   "Stories are chats with characters, shared by users.": "Stories are chats with characters, shared by users."
+  "New Character": "New character",
+  "Configure your character details.": "Configure your character details.",
+  "Name": "Name",
+  "Greeting": "Greeting",
+  "Instructions": "Instructions",
+  "Description": "Description",
+  "AI Model": "AI Model"
 }

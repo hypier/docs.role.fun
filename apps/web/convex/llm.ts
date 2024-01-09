@@ -538,7 +538,7 @@ export const generateTags = internalAction({
   },
   handler: async (ctx, { userId, characterId }) => {
     try {
-      const model = "gpt-4-1106-preview";
+      const model = "gpt-3.5-turbo-1106";
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
       const openai = new OpenAI({
@@ -569,7 +569,7 @@ export const generateTags = internalAction({
                 languageTag: {
                   type: "string",
                   description:
-                    "ISO 639 Set 1 two-letter language code for character, Example: en, ko, ja, ar",
+                    "ISO 639 Set 1 two-letter language code for character, Example: en, ko, ja, ar, zh",
                 },
                 genreTag: {
                   type: "string",
@@ -581,7 +581,7 @@ export const generateTags = internalAction({
                 },
                 roleTag: {
                   type: "string",
-                  description: `Role define the character's role or function in the story. Common examples are "Teacher", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
+                  description: `Role define the character's role or function in the story. Common examples are "Teacher", "Student", "Friend", "Enemy", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
                 },
               },
               required: [
@@ -638,10 +638,12 @@ export const generateTags = internalAction({
 
 export const getMessages = internalQuery(
   async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
-    return await ctx.db
+    const messages = await ctx.db
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", chatId))
-      .take(256);
+      .order("desc")
+      .take(128);
+    return messages.reverse();
   },
 );
 

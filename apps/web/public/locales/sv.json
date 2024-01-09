@@ -3,6 +3,7 @@
   "alpha": "alfa",
   "Create": "Skapa",
   "Log in": "Logga in",
+  "Logout": "Utloggning",
   "Discover": "Upptäck",
   "Chats": "Chattar",
   "My": "Min",
@@ -20,5 +21,12 @@
   "Visit Shop": "Besök butik",
   "Join community": "Gå med i community",
   "Filter characters": "Filtrera tecken",
-  "Stories": "Berättelser"
+  "Stories": "Berättelser",
+  "New Character": "Nytt tecken",
+  "Configure your character details.": "Konfigurera dina karaktärsdetaljer.",
+  "Name": "Namn",
+  "Greeting": "Hälsning",
+  "Instructions": "Instruktioner",
+  "Description": "Beskrivning",
+  "AI Model": "AI Modell"
 }

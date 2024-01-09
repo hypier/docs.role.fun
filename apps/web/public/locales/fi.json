@@ -3,6 +3,7 @@
   "alpha": "alfa",
   "Create": "Luo",
   "Log in": "Kirjaudu sisään",
+  "Logout": "Kirjaudu Ulos",
   "Discover": "Löydä",
   "Chats": "Keskustelut",
   "My": "Oma",
@@ -20,5 +21,12 @@
   "Visit Shop": "Vieraile Kauppa",
   "Join community": "Liity yhteisöön",
   "Filter characters": "Suodata merkkejä",
-  "Stories": "Tarinat"
+  "Stories": "Tarinat",
+  "New Character": "Uusi merkki",
+  "Configure your character details.": "Määritä hahmosi tiedot.",
+  "Name": "Nimi",
+  "Greeting": "Tervehdys",
+  "Instructions": "Ohjeet",
+  "Description": "Kuvaus",
+  "AI Model": "AI Malli"
 }

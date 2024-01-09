@@ -3,6 +3,7 @@
   "alpha": "Alfa",
   "Create": "Crio",
   "Log in": "Efetuar Login",
+  "Logout": "Desconectar",
   "Discover": "Pendentes",
   "Chats": "Bate-papos",
   "My": "Minhas",
@@ -20,5 +21,12 @@
   "Visit Shop": "Visitar a Loja",
   "Join community": "Junte-se à comunidade",
   "Filter characters": "Filtrar caracteres",
-  "Stories": "Histórias"
+  "Stories": "Histórias",
+  "New Character": "Novo caractere",
+  "Configure your character details.": "Configure os detalhes do seu personagem.",
+  "Name": "Nome:",
+  "Greeting": "Saudação",
+  "Instructions": "Instruções",
+  "Description": "Descrição:",
+  "AI Model": "Modelo IA"
 }

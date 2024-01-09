@@ -3,6 +3,7 @@
   "alpha": "alfa",
   "Create": "Crear",
   "Log in": "Iniciar sesión",
+  "Logout": "Cerrar sesión",
   "Discover": "Descubre",
   "Chats": "Chats",
   "My": "Mi",
@@ -20,5 +21,12 @@
   "Visit Shop": "Visitar tienda",
   "Join community": "Unirse a la comunidad",
   "Filter characters": "Filtrar caracteres",
-  "Stories": "Historias"
+  "Stories": "Historias",
+  "New Character": "Nuevo carácter",
+  "Configure your character details.": "Configura los detalles de tu personaje.",
+  "Name": "Nombre",
+  "Greeting": "Saludos",
+  "Instructions": "Instrucciones",
+  "Description": "Descripción",
+  "AI Model": "Modelo AI"
 }

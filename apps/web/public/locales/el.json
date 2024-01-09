@@ -3,6 +3,7 @@
   "alpha": "άλφα",
   "Create": "Δημιουργία",
   "Log in": "Σύνδεση",
+  "Logout": "Αποσύνδεση",
   "Discover": "Ανακαλύψτε",
   "Chats": "Συζητήσεις",
   "My": "Μου",
@@ -20,5 +21,12 @@
   "Visit Shop": "Επίσκεψη Καταστήματος",
   "Join community": "Γίνετε μέλος κοινότητας",
   "Filter characters": "Φίλτρο χαρακτήρων",
-  "Stories": "Ιστορίες"
+  "Stories": "Ιστορίες",
+  "New Character": "Νέος χαρακτήρας",
+  "Configure your character details.": "Ρυθμίστε τα στοιχεία του χαρακτήρα σας.",
+  "Name": "Όνομα",
+  "Greeting": "Χαιρετισμός",
+  "Instructions": "Οδηγίες",
+  "Description": "Περιγραφή",
+  "AI Model": "Μοντέλο Τεχνητής Νοημοσύνης"
 }

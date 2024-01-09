@@ -64,8 +64,10 @@ export const send = mutation({
       userId: user._id,
     });
     const character = await ctx.db.get(characterId);
+    const updatedAt = new Date().toISOString();
     await ctx.db.patch(characterId, {
       numChats: character?.numChats ? character?.numChats + 1 : 1,
+      updatedAt,
     });
     const followUp = await ctx.db
       .query("followUps")
