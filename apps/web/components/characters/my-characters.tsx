@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
@@ -18,7 +17,7 @@ import { useInView } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
-const NewCharacter = () => {
+export const NewCharacter = () => {
   const { t } = useTranslation();
   return (
     <Link href="/my-characters/create">

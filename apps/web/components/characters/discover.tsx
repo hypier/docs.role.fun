@@ -21,6 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { MainChats } from "./main-chat";
 import useMyUsername from "../../app/lib/hooks/use-my-username";
+import { NewCharacter } from "./my-characters";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -143,20 +144,30 @@ const Discover = () => {
               ? characters.map(
                   (character, index) =>
                     character.name && (
-                      <CarouselItem
-                        className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
-                        key={character._id}
-                      >
-                        <CharacterCard
-                          id={character._id}
-                          name={character.name}
-                          numChats={character.numChats as number}
-                          cardImageUrl={character.cardImageUrl as string}
-                          description={character.description}
-                          model={character.model}
-                          showRemix={true}
-                        />
-                      </CarouselItem>
+                      <>
+                        <CarouselItem
+                          className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
+                          key={character._id}
+                        >
+                          <CharacterCard
+                            id={character._id}
+                            name={character.name}
+                            numChats={character.numChats as number}
+                            cardImageUrl={character.cardImageUrl as string}
+                            description={character.description}
+                            model={character.model}
+                            showRemix={true}
+                          />
+                        </CarouselItem>
+                        {index === 5 && (
+                          <CarouselItem
+                            className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
+                            key={character._id}
+                          >
+                            <NewCharacter />
+                          </CarouselItem>
+                        )}
+                      </>
                     ),
                 )
               : Array.from({ length: 10 }).map((_, index) => (
