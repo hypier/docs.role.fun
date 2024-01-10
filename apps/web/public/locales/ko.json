@@ -38,6 +38,7 @@
   "Instructions": "명령",
   "Description": "설명",
   "AI Model": "AI 모델",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "크리스탈 충전",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "크리스탈은 openroleplay.ai에서 AI 기능을 호출하기 위한 범용 통화입니다.",
   "Daily Rewards": "일일 보상",
@@ -58,5 +59,7 @@
   "Courageous": "용기있는",
   "Playful": "장난기있는",
   "Cunning": "교활한",
-  "Adventurous": "모험적인"
+  "Adventurous": "모험적인",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }
