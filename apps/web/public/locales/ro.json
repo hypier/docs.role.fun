@@ -38,6 +38,7 @@
   "Instructions": "Instrucţiuni",
   "Description": "Descriere",
   "AI Model": "Modelul AI",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "Deasupra cristalului",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Cristalul este o monedă universală pentru a numi caracteristici AI în openroleplay.ai.",
   "Daily Rewards": "Recompense zilnice",
@@ -58,5 +59,7 @@
   "Courageous": "Curios",
   "Playful": "Jucat",
   "Cunning": "Cunning",
-  "Adventurous": "Aventuros"
+  "Adventurous": "Aventuros",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Recompensa zilnică revendicată cu succes! Nu uita să te întorci mâine pentru mai multe recompense.",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }
