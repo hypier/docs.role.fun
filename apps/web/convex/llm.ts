@@ -80,7 +80,6 @@ export const answer = internalAction({
           "X-Title": "openroleplay.ai",
         },
       });
-      const remindInstructionInterval = getRemindInstructionInterval(model);
       const instruction = character?.isModel
         ? "You are a helpful AI assistant"
         : `You are 
@@ -134,32 +133,17 @@ export const answer = internalAction({
               role: "system",
               content: instruction,
             },
-            ...(conversations
-              .map(({ characterId, text }: any, index: any) => {
-                const message = {
-                  role: characterId ? "assistant" : "user",
-                  content: text,
-                };
-                if ((index + 1) % remindInstructionInterval === 0) {
-                  return [
-                    {
-                      role: "system",
-                      content: instruction,
-                    },
-                    message,
-                  ];
-                } else {
-                  return message;
-                }
-              })
-              .flat() as ChatCompletionMessageParam[]),
+            ...(conversations.map(({ characterId, text }: any) => ({
+              role: characterId ? "assistant" : "user",
+              content: text,
+            })) as ChatCompletionMessageParam[]),
           ],
         });
 
         let text = "";
         let mutationCounter = 0;
         for await (const { choices } of stream) {
-          const replyDelta = choices[0] && choices[0].delta.content;
+          const replyDelta = choices[0] && choices[0].delta?.content;
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
             mutationCounter++;
