@@ -90,7 +90,7 @@ export default function Chats() {
       <CardHeader>
         <CardTitle>{t("Chats")}</CardTitle>
       </CardHeader>
-      <ul className="divide-y divide-border">
+      <ul>
         {results?.length ? (
           results.map((chat) => (
             <Chat

@@ -167,6 +167,29 @@ export const list = query({
   },
 });
 
+export const listModels = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+    model: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byUpdatedAt")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isModel"), true))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isNSFW"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+    if (args.model) {
+      query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+
+    return await query.order("desc").paginate(args.paginationOpts);
+  },
+});
+
 export const search = query({
   args: {
     paginationOpts: paginationOptsValidator,

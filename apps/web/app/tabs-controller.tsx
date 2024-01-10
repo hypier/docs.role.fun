@@ -3,6 +3,7 @@ import {
   CircleUserRound,
   Home,
   MessageSquare,
+  Package,
   Plus,
   Store,
 } from "lucide-react";
@@ -58,6 +59,15 @@ function TabsController() {
             <CircleUserRound className="h-5 w-5 p-1" />
             <span className="hidden lg:inline">{t("My")} </span>
             {t("Personas")}
+          </TabsTrigger>
+        </Link>
+        <Link href="/models">
+          <TabsTrigger
+            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
+            value="/models"
+          >
+            <Package className="h-5 w-5 p-1" />
+            {t("Models")}
           </TabsTrigger>
         </Link>
         <Link href="/shop">
