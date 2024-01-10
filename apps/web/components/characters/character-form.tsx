@@ -223,7 +223,7 @@ export default function CharacterForm() {
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
-            {isEdit ? "Edit Character" : "New Character"}
+            {isEdit ? t("Edit Character") : t("New Character")}
             {form.formState.isSubmitting ? (
               <SavingBadge />
             ) : form.formState.isDirty && isDraft ? (
@@ -300,7 +300,7 @@ export default function CharacterForm() {
                       className="flex h-7 w-full gap-1 text-xs"
                     >
                       <UploadCloud className="text-foreground-primary h-4 w-4" />
-                      Publish
+                      {t("Publish")}
                     </Button>
                   </div>
                 </div>
@@ -311,7 +311,7 @@ export default function CharacterForm() {
                     setOpenPopover(!openPopover);
                   }}
                 >
-                  Save
+                  {t("Save")}
                 </Button>
               </PopoverTrigger>
             </Popover>
@@ -402,7 +402,7 @@ export default function CharacterForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
-                    Name
+                    {t("Name")}
                     <InfoTooltip
                       content={
                         <TooltipContent
@@ -455,7 +455,9 @@ export default function CharacterForm() {
                   <div className="flex items-center justify-between">
                     <FormLabel className="flex items-center gap-1">
                       {t("Instructions")}{" "}
-                      <span className="text-muted-foreground">(optional)</span>
+                      <span className="text-muted-foreground">
+                        {t("(optional)")}
+                      </span>
                       <InfoTooltip
                         content={
                           <TooltipContent
@@ -499,7 +501,7 @@ export default function CharacterForm() {
                           </>
                         ) : (
                           <>
-                            Generate
+                            {t("Generate")}
                             <Crystal className="h-4 w-4" /> x 1
                           </>
                         )}
@@ -524,7 +526,9 @@ export default function CharacterForm() {
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
                     {t("Description")}{" "}
-                    <span className="text-muted-foreground">(optional)</span>
+                    <span className="text-muted-foreground">
+                      {t("(optional)")}
+                    </span>
                     <InfoTooltip
                       content={
                         <TooltipContent

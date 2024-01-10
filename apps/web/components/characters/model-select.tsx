@@ -13,15 +13,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/src/components/select";
+import { useTranslation } from "react-i18next";
 
 export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
+  const { t } = useTranslation();
   return (
     <FormField
       control={form.control}
       name="model"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>AI Model</FormLabel>
+          <FormLabel>{t("AI Model")}</FormLabel>
           <Select
             onValueChange={field.onChange}
             defaultValue={field.value ? field.value : model}
