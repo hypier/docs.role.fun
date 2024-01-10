@@ -11,6 +11,7 @@ import { Id } from "../../convex/_generated/dataModel";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const Chat = ({
   name,
@@ -70,6 +71,7 @@ export const Chat = ({
 };
 
 export default function Chats() {
+  const { t } = useTranslation();
   const { results, status, loadMore } = usePaginatedQuery(
     api.chats.list,
     {},
@@ -86,7 +88,7 @@ export default function Chats() {
   return (
     <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
       <CardHeader>
-        <CardTitle>Chats</CardTitle>
+        <CardTitle>{t("Chats")}</CardTitle>
       </CardHeader>
       <ul className="divide-y divide-border">
         {results?.length ? (
@@ -100,9 +102,9 @@ export default function Chats() {
           ))
         ) : (
           <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-2">
-            New chats will appear here.
+            {t("New chats will appear here.")}
             <Link href="/">
-              <Button>Start Chat</Button>
+              <Button>{t("Start Chat")}</Button>
             </Link>
           </div>
         )}
