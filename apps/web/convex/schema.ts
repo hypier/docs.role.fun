@@ -34,6 +34,7 @@ export default defineSchema({
     isBlacklisted: v.boolean(),
     isNSFW: v.optional(v.boolean()), // NSFW characters are filtered unless the adult user has explicitly opted in.
     isArchived: v.optional(v.boolean()),
+    isModel: v.optional(v.boolean()),
     visibility: v.optional(v.union(v.literal("private"), v.literal("public"))),
     numChats: v.optional(v.number()),
     embedding: v.optional(v.array(v.float64())),

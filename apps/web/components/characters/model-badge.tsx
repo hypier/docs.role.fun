@@ -4,6 +4,7 @@ import { Sparkles } from "lucide-react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
+import Link from "next/link";
 
 const ModelBadge = ({
   modelName,
@@ -18,7 +19,7 @@ const ModelBadge = ({
   const price = useQuery(api.crystals.price, { modelName: model });
   const crystalUnit = showCredits && price && (
     <div className="flex gap-[0.5]">
-      /<Crystal className="w-4 h-4 p-0.5" />
+      /<Crystal className="h-4 w-4 p-0.5" />
       {`x ${price}`}
     </div>
   );
@@ -57,20 +58,22 @@ const ModelBadge = ({
   };
 
   return (
-    <Badge className="flex gap-1 w-fit group/badge" variant="model">
-      {src && (
-        <Image
-          src={src}
-          width={32}
-          height={32}
-          className="w-4 h-4 p-0.5"
-          alt={alt}
-        />
-      )}
-      {!src && <Sparkles className="w-4 h-4 p-0.5 text-white" />}
-      <span className="hidden group-hover/badge:inline">{model}</span>
-      {crystalUnit}
-    </Badge>
+    <Link href={`/?model=${model}`}>
+      <Badge className="group/badge flex w-fit gap-1" variant="model">
+        {src && (
+          <Image
+            src={src}
+            width={32}
+            height={32}
+            className="h-4 w-4 p-0.5"
+            alt={alt}
+          />
+        )}
+        {!src && <Sparkles className="h-4 w-4 p-0.5 text-white" />}
+        <span className="hidden group-hover/badge:inline">{model}</span>
+        {crystalUnit}
+      </Badge>
+    </Link>
   );
 };
 
