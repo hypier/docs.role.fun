@@ -1,7 +1,7 @@
 import { Badge } from "@repo/ui/src/components/badge";
 import { useQuery } from "convex/react";
-import { Package, Sparkles } from "lucide-react";
-import { Crystal } from "@repo/ui/src/components/icons";
+import { AlertCircle, Package, Sparkles } from "lucide-react";
+import { Crystal, Rating } from "@repo/ui/src/components/icons";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import Link from "next/link";
@@ -26,12 +26,12 @@ const ModelBadge = ({
     </div>
   );
   const modelInfo = modelData.find((item: any) => item.value === model) || {};
-  const { src, alt } = modelInfo;
+  const { src, alt, isNSFW } = modelInfo;
 
   return (
     <Link href={`/?model=${model}`}>
       <Badge className="group/badge flex w-fit gap-1" variant="model">
-        {src && (
+        {src ? (
           <Image
             src={src}
             width={32}
@@ -39,8 +39,11 @@ const ModelBadge = ({
             className="h-4 w-4 p-0.5"
             alt={alt}
           />
+        ) : isNSFW ? (
+          <span className="text-yellow-500">18+</span>
+        ) : (
+          <Package className="h-4 w-4 p-0.5 text-white" />
         )}
-        {!src && <Package className="h-4 w-4 p-0.5 text-white" />}
         <span className="hidden group-hover/badge:inline">{model}</span>
         {crystalUnit}
       </Badge>

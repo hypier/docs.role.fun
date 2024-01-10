@@ -37,8 +37,8 @@ import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Separator } from "@repo/ui/src/components/separator";
 import Spinner from "@repo/ui/src/components/spinner";
-import useUsername from "./lib/hooks/use-my-username";
 import useMyUsername from "./lib/hooks/use-my-username";
+import { useTranslation } from "react-i18next";
 
 export const FormattedMessage = ({ message }: { message: any }) => {
   return (
@@ -95,8 +95,31 @@ export const Message = ({
   username?: string;
   chatId?: Id<"chats">;
 }) => {
+  const { t } = useTranslation();
   const regenerate = useMutation(api.messages.regenerate);
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [thinkingDots, setThinkingDots] = useState("");
+  const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
+
+  useEffect(() => {
+    const startTime = Date.now();
+    const interval = setInterval(() => {
+      setThinkingDots((prevDots) => {
+        if (prevDots.length < 3) {
+          return prevDots + ".";
+        } else {
+          return "";
+        }
+      });
+      if (Date.now() - startTime >= 3000) {
+        setThinkingMessage(
+          t("Thinking (Warming up AI model, it could take upto 30 seconds)"),
+        );
+      }
+    }, 200);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div
       key={message._id}
@@ -130,7 +153,8 @@ export const Message = ({
               : " rounded-tr-none bg-foreground text-muted ")
           }
         >
-          Thinking...
+          {thinkingMessage}
+          {thinkingDots}
         </div>
       ) : (
         <div
@@ -187,6 +211,7 @@ export const Inspirations = ({
   characterId: Id<"characters">;
   isGeneratingInspiration: boolean;
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="flex max-h-36 w-full flex-wrap items-center gap-1 overflow-y-clip overflow-x-scroll bg-background/90 p-4 text-xs backdrop-blur-md scrollbar-hide">
       <Tooltip
@@ -211,12 +236,12 @@ export const Inspirations = ({
           {isGeneratingInspiration ? (
             <>
               <Spinner />
-              Generating...
+              {t("Generating")}...
             </>
           ) : (
             <>
               <Sparkles className="h-5 w-5 p-1" />
-              Inspire
+              {t("Inspire")}
             </>
           )}
         </Button>
