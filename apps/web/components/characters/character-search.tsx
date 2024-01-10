@@ -63,7 +63,7 @@ export const Chat = ({
   );
 };
 
-export default function CharacterChat() {
+export default function CharacterSearch() {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState("");
   const { results, status, loadMore } = usePaginatedQuery(
