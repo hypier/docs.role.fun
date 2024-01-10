@@ -17,6 +17,7 @@ import DraftBadge from "../characters/draft-badge";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
+import { useTranslation } from "react-i18next";
 
 const CharacterCard = (props: {
   id: string;
@@ -29,6 +30,7 @@ const CharacterCard = (props: {
   showEdit?: any;
   showRemix?: boolean;
 }) => {
+  const { t } = useTranslation();
   const numStories = useQuery(api.stories.count, {
     characterId: props.id as Id<"characters">,
   });
@@ -50,7 +52,7 @@ const CharacterCard = (props: {
                 variant="outline"
                 className="h-5 rounded-full border-none text-xs md:text-[10px]"
               >
-                Edit
+                {t("Edit")}
               </Button>
             </Link>
           )}
@@ -73,7 +75,7 @@ const CharacterCard = (props: {
                   className="h-5 rounded-full border-none text-xs md:text-[10px]"
                 >
                   <Repeat className="h-3 w-3 p-0.5" />
-                  Remix
+                  {t("Remix")}
                 </Button>
               </Link>
             </Tooltip>
