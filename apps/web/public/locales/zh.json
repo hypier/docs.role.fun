@@ -38,6 +38,7 @@
   "Instructions": "说明",
   "Description": "描述",
   "AI Model": "AI 模型",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "水晶充值",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal 是通用货币在 openroleplay.ai 中调用 AI 功能。",
   "Daily Rewards": "每日奖励",
@@ -58,5 +59,7 @@
   "Courageous": "华丽的",
   "Playful": "正在播放",
   "Cunning": "Cunning",
-  "Adventurous": "冒险的"
+  "Adventurous": "冒险的",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "每天领取奖励成功！别忘了明天回来获得更多奖励。",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }
