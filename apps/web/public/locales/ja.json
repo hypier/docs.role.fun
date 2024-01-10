@@ -38,7 +38,7 @@
   "Instructions": "説明",
   "Description": "説明",
   "AI Model": "AIモデル",
-  "Crystals": "Crystals",
+  "Crystals": "クリスタル",
   "Crystal Top-Up": "クリスタルチャージ",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "クリスタルは、openroleplay.aiでAI機能を呼び出すための普遍的な通貨です。",
   "Daily Rewards": "デイリーボーナス",
@@ -61,5 +61,5 @@
   "Cunning": "Cunning",
   "Adventurous": "冒険的",
   "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "デイリー報酬は正常に獲得されました。明日また報酬を獲得するのを忘れないでください。",
-  "You've already claimed today's reward.": "You've already claimed today's reward."
+  "You've already claimed today's reward.": "本日の報酬は既に受け取りました。"
 }
