@@ -38,6 +38,7 @@
   "Instructions": "Інструкції",
   "Description": "Опис",
   "AI Model": "ШІ-модель",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "Кристал зверху вгору",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Кристал - це універсальна валюта для виклику функцій AI в openroleplay.ai.",
   "Daily Rewards": "Щоденні Нагороди",
@@ -58,5 +59,7 @@
   "Courageous": "мужній",
   "Playful": "Грайливий",
   "Cunning": "Cunning",
-  "Adventurous": "Бурливий пригод"
+  "Adventurous": "Бурливий пригод",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Щоденна нагорода зарахована успішно! Не забудьте повернутися завтра для більшої кількості нагород.",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }
