@@ -38,6 +38,7 @@
   "Instructions": "تعليمات",
   "Description": "الوصف",
   "AI Model": "نموذج AI",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "أعلى البلورة",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "البلورة هي عملة عامة للاتصال بميزات AI في openroleplay.ai.",
   "Daily Rewards": "المكافآت اليومية",
@@ -58,5 +59,7 @@
   "Courageous": "شجاعة",
   "Playful": "لاعب",
   "Cunning": "Cunning",
-  "Adventurous": "المغامرات"
+  "Adventurous": "المغامرات",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "تم الحصول على المكافأة اليومية بنجاح! لا تنسى العودة غدا للحصول على المزيد من المكافآت.",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }
