@@ -59,14 +59,14 @@ export const MainStories = () => {
           opts={{
             align: "center",
           }}
-          className="w-[75%] md:w-[80%]"
+          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
             {results?.length > 0
               ? results.map((story, i) => (
                   <CarouselItem
-                    className="group ml-4 h-[32rem] overflow-hidden rounded-lg border pl-0 !text-sm md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                    className="group ml-4 h-[32rem] overflow-hidden rounded-lg border pl-0 !text-sm md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
                     key={story._id}
                   >
                     <Link
@@ -82,13 +82,13 @@ export const MainStories = () => {
                   </CarouselItem>
                 ))
               : Array.from({ length: 10 }).map((_, index) => (
-                  <CarouselItem className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <CarouselItem className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
                     <CharacterCardPlaceholder key={index} />
                   </CarouselItem>
                 ))}
             {status === "LoadingMore" &&
               Array.from({ length: 10 }).map((_, index) => (
-                <CarouselItem className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <CarouselItem className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
                   <CharacterCardPlaceholder key={index} />
                 </CarouselItem>
               ))}

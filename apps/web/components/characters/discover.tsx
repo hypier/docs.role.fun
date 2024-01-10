@@ -86,7 +86,7 @@ const Discover = () => {
       <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%]"
+          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -136,7 +136,7 @@ const Discover = () => {
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%]"
+          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
