@@ -54,12 +54,12 @@ export const MainStories = () => {
           }
         />
       </div>
-      <div className="border-y py-4 lg:w-[90%] lg:border-none lg:py-0">
+      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           opts={{
             align: "center",
           }}
-          className="mx-12 max-w-screen-xl xl:max-w-screen-2xl"
+          className="w-[75%] md:w-[80%]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">

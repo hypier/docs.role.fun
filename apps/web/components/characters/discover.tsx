@@ -73,7 +73,7 @@ const Discover = () => {
   const username = useMyUsername("");
 
   return (
-    <div className="flex flex-col gap-4 lg:gap-8">
+    <div className="relative flex flex-col gap-4 lg:gap-8">
       {username && <MainChats />}
 
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
@@ -83,10 +83,10 @@ const Discover = () => {
         </Tooltip>
       </div>
 
-      <div className="flex w-full flex-wrap items-center gap-1 px-4 lg:px-0">
+      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           opts={{ align: "center" }}
-          className="mx-12 max-w-xs sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl"
+          className="w-[75%] md:w-[80%]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -132,11 +132,11 @@ const Discover = () => {
           <CarouselNext variant="ghost" />
         </Carousel>
       </div>
-      <div className="border-y py-4 lg:w-[90%] lg:border-none lg:py-0">
+      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="mx-12 max-w-screen-xl xl:max-w-screen-2xl"
+          className="w-[75%] md:w-[80%]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">

@@ -31,6 +31,7 @@ const Package = ({
   price: number;
   handlePurchaseClick?: any;
 }) => {
+  const { t } = useTranslation();
   const router = useRouter();
   return (
     <Tooltip
@@ -59,7 +60,7 @@ const Package = ({
         <div className="flex flex-col gap-1 pt-[70%]">
           <CardHeader className="flex items-center justify-center py-1">
             <CardTitle className="z-10 text-xl text-black">
-              {(amount - bonus).toLocaleString()} Crystals
+              {(amount - bonus).toLocaleString()} {t("Crystals")}
             </CardTitle>
           </CardHeader>
           <CardFooter className="flex w-full items-center justify-center">
@@ -70,7 +71,7 @@ const Package = ({
         </div>
         {bonus > 0 && (
           <div className="absolute -left-2 -top-2 flex w-fit items-center gap-0.5 rounded-full bg-rose-500 p-1 px-2 text-sm font-medium text-white">
-            <span className="text-amber-200">{"Bonus "}</span>
+            <span className="text-amber-200">{t("Bonus")} </span>
             <Crystal className="h-4 w-4" /> {bonus}
           </div>
         )}

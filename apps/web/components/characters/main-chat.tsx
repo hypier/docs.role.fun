@@ -85,14 +85,11 @@ export function MainChats() {
           <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
             {t("Continue chat")}
           </div>
-          <div className="border-y py-4 lg:w-[90%] lg:border-none lg:py-0">
-            <Carousel
-              className="3xl:max-w-screen-2xl mx-12 max-w-xs sm:max-w-sm md:max-w-screen-xl"
-              setApi={setApi}
-            >
+          <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+            <Carousel className="w-[75%] md:w-[80%]" setApi={setApi}>
               <CarouselContent className="w-full">
                 {results.map((chat) => (
-                  <CarouselItem className="group m-4 basis-1/2 rounded-lg border bg-background p-4 sm:basis-1/3 md:basis-1/6">
+                  <CarouselItem className="group m-4 basis-1/2 rounded-lg border bg-background p-4 sm:basis-1/3 lg:basis-1/4">
                     <Chat
                       name={chat.chatName as string}
                       time={chat.updatedAt}
