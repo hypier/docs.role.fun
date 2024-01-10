@@ -81,7 +81,7 @@ export default function CharacterForm() {
     instructions = searchParams.get("instructions") || "",
     greetings = searchParams.get("greetings") || "",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
-    model = (searchParams.get("model") as any) || "gpt-4-1106-preview",
+    model = (searchParams.get("model") as any) || "openrouter/auto",
     isDraft = searchParams.get("isDraft") || true,
   } = character || remixCharacter || {};
 
@@ -403,7 +403,7 @@ export default function CharacterForm() {
                     />
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Name your character" {...field} />
+                    <Input placeholder={t("Name your character")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -356,12 +356,14 @@ export const tag = internalMutation(
       genreTag,
       personalityTag,
       roleTag,
+      isNSFW,
     }: {
       characterId: Id<"characters">;
       languageTag: string;
       genreTag: string;
       personalityTag: string;
       roleTag: string;
+      isNSFW: boolean;
     },
   ) => {
     return await ctx.db.patch(characterId, {
@@ -369,6 +371,7 @@ export const tag = internalMutation(
       genreTag,
       personalityTag,
       roleTag,
+      ...(isNSFW ? { isNSFW } : {}),
     });
   },
 );

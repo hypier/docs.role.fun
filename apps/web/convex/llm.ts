@@ -104,11 +104,9 @@ export const answer = internalAction({
                 : ""
             }
 
-            (You can use parentheses to indicate different types of things the Character might say,
-            narrator type descriptions of actions, muttering asides or emotional reactions.)
+            (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
-            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase,
-            like *sad*, *laughing*.
+            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.
             `;
 
       try {
@@ -587,12 +585,17 @@ export const generateTags = internalAction({
                   type: "string",
                   description: `Role define the character's role or function in the story. Common examples are "Teacher", "Student", "Friend", "Enemy", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
                 },
+                isNSFW: {
+                  type: "boolean",
+                  description: `True if character's detail metadata is explicitly sexual content, otherwise false.`,
+                },
               },
               required: [
                 "languageTag",
                 "genreTag",
                 "personalityTag",
                 "roleTag",
+                "isNSFW",
               ],
             },
           },
@@ -627,6 +630,7 @@ export const generateTags = internalAction({
             genreTag: functionArgs?.genreTag,
             personalityTag: functionArgs?.personalityTag,
             roleTag: functionArgs?.roleTag,
+            isNSFW: functionArgs?.isNSFW,
           });
         }
       } catch (error) {
