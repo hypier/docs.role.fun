@@ -38,7 +38,7 @@
   "Instructions": "Οδηγίες",
   "Description": "Περιγραφή",
   "AI Model": "Μοντέλο Τεχνητής Νοημοσύνης",
-  "Crystals": "Crystals",
+  "Crystals": "Κρύσταλλοι",
   "Crystal Top-Up": "Ανανέωση Κρυστάλλου",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal είναι ένα καθολικό νόμισμα για την κλήση AI χαρακτηριστικά σε openroleplay.ai.",
   "Daily Rewards": "Ημερήσιες Ανταμοιβές",
@@ -61,5 +61,5 @@
   "Cunning": "Cunning",
   "Adventurous": "Περιπέτεια",
   "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Η καθημερινή ανταμοιβή διεκδικήθηκε με επιτυχία! Μην ξεχάσετε να επιστρέψετε αύριο για περισσότερες ανταμοιβές.",
-  "You've already claimed today's reward.": "You've already claimed today's reward."
+  "You've already claimed today's reward.": "Έχετε ήδη ζητήσει τη σημερινή ανταμοιβή."
 }
