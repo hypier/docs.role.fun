@@ -569,7 +569,7 @@ export const generateTags = internalAction({
                 languageTag: {
                   type: "string",
                   description:
-                    "ISO 639 Set 1 two-letter language code for character, Example: en, ko, ja, ar, zh",
+                    "ISO 639 Set 1 two-letter language code for character's detail metadata, Example: en, ko, ja, ar, zh",
                 },
                 genreTag: {
                   type: "string",
