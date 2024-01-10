@@ -122,7 +122,7 @@ const Discover = () => {
                       router.push(`${pathname}?${query.toString()}`);
                     }}
                   >
-                    {tag.tagName}
+                    {t(tag.tagName)}
                   </Toggle>
                 </CarouselItem>
               )),
