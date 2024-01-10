@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "스토리는 사용자들이 공유하는 캐릭터와의 채팅입니다.",
   "Continue chat": "채팅 계속하기",
   "New Character": "새 캐릭터",
+  "Edit Character": "Edit Character",
+  "Save": "Save",
+  "Generate": "Generate",
+  "(optional)": "(optional)",
   "Configure your character details.": "캐릭터를 설정해보세요.",
   "Publish to": "게시하기",
   "Public": "전체 공개",
@@ -38,6 +42,7 @@
   "Instructions": "명령",
   "Description": "설명",
   "AI Model": "AI 모델",
+  "Crystals": "크리스탈",
   "Crystal Top-Up": "크리스탈 충전",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "크리스탈은 openroleplay.ai에서 AI 기능을 호출하기 위한 범용 통화입니다.",
   "Daily Rewards": "일일 보상",
@@ -58,5 +63,7 @@
   "Courageous": "용기있는",
   "Playful": "장난기있는",
   "Cunning": "교활한",
-  "Adventurous": "모험적인"
+  "Adventurous": "모험적인",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "일일 보상을 성공적으로 획득했습니다! 더 많은 보상을 받으려면 내일 다시 방문하세요.",
+  "You've already claimed today's reward.": "오늘의 보상은 이미 수령하셨습니다."
 }

@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "Stories are chats with characters, shared by users.",
   "Continue chat": "Continue chat",
   "New Character": "New Character",
+  "Edit Character": "Edit Character",
+  "Save": "Save",
+  "Generate": "Generate",
+  "(optional)": "(optional)",
   "Configure your character details.": "Configure your character details.",
   "Publish to": "Publish to",
   "Public": "Public",
@@ -38,6 +42,7 @@
   "Instructions": "Instructions",
   "Description": "Description",
   "AI Model": "AI Model",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "Crystal Top-Up",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal is an universal currency for calling AI features in openroleplay.ai.",
   "Daily Rewards": "Daily Rewards",
@@ -58,5 +63,7 @@
   "Courageous": "Courageous",
   "Playful": "Playful",
   "Cunning": "Cunning",
-  "Adventurous": "Adventurous"
+  "Adventurous": "Adventurous",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }

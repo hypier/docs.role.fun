@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "Verhalen zijn chats met karakters, gedeeld door gebruikers.",
   "Continue chat": "Chat voortzetten",
   "New Character": "Nieuw personage",
+  "Edit Character": "Karakter bewerken",
+  "Save": "Opslaan",
+  "Generate": "Genereren",
+  "(optional)": "(optioneel)",
   "Configure your character details.": "Configureer je karakter gegevens.",
   "Publish to": "Publiceer naar",
   "Public": "Openbaar",
@@ -38,6 +42,7 @@
   "Instructions": "Instructies",
   "Description": "Beschrijving",
   "AI Model": "AI model",
+  "Crystals": "Kristallen",
   "Crystal Top-Up": "Kristal Top-Up",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal is een universele valuta voor het aanroepen van AI functies in openroleplay.ai.",
   "Daily Rewards": "Dagelijkse Beloningen",
@@ -58,5 +63,7 @@
   "Courageous": "Moeilijk",
   "Playful": "Speels",
   "Cunning": "Cunning",
-  "Adventurous": "Avontuurlijke"
+  "Adventurous": "Avontuurlijke",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Dagelijkse beloning met succes opgeëist! Vergeet niet om morgen terug te keren voor meer beloningen.",
+  "You've already claimed today's reward.": "Je hebt de beloning van vandaag al opgeëist."
 }

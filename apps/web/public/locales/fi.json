@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "Tarinat ovat hahmoja sisältäviä chatteja, joita käyttäjät jakavat.",
   "Continue chat": "Jatka keskustelua",
   "New Character": "Uusi Merkki",
+  "Edit Character": "Muokkaa Merkkiä",
+  "Save": "Tallenna",
+  "Generate": "Luo",
+  "(optional)": "(valinnainen)",
   "Configure your character details.": "Määritä hahmosi tiedot.",
   "Publish to": "Julkaise kohteeseen",
   "Public": "Julkinen",
@@ -38,6 +42,7 @@
   "Instructions": "Ohjeet",
   "Description": "Kuvaus",
   "AI Model": "AI Malli",
+  "Crystals": "Kiteet",
   "Crystal Top-Up": "Kristalli Ylös",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal on universaali valuutta soittaa tekoälyn ominaisuuksia openroleplay.ai.",
   "Daily Rewards": "Päivittäiset Palkinnot",
@@ -58,5 +63,7 @@
   "Courageous": "Rohkea",
   "Playful": "Playful",
   "Cunning": "Cunning",
-  "Adventurous": "Seikkailu"
+  "Adventurous": "Seikkailu",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Päivittäinen palkinto lunastettiin onnistuneesti! Älä unohda palata huomenna saadaksesi lisää palkintoja.",
+  "You've already claimed today's reward.": "Olet jo lunastanut tämän päivän palkinnon."
 }

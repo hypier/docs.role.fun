@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "Povestirile sunt conversații cu caractere, partajate de utilizatori.",
   "Continue chat": "Continuă conversația",
   "New Character": "Caracter nou",
+  "Edit Character": "Editare caracter",
+  "Save": "Salvează",
+  "Generate": "Genereaza",
+  "(optional)": "(opţional)",
   "Configure your character details.": "Configurați detaliile personajului.",
   "Publish to": "Publică la",
   "Public": "Publice",
@@ -38,6 +42,7 @@
   "Instructions": "Instrucţiuni",
   "Description": "Descriere",
   "AI Model": "Modelul AI",
+  "Crystals": "Cristale",
   "Crystal Top-Up": "Deasupra cristalului",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Cristalul este o monedă universală pentru a numi caracteristici AI în openroleplay.ai.",
   "Daily Rewards": "Recompense zilnice",
@@ -58,5 +63,7 @@
   "Courageous": "Curios",
   "Playful": "Jucat",
   "Cunning": "Cunning",
-  "Adventurous": "Aventuros"
+  "Adventurous": "Aventuros",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Recompensa zilnică revendicată cu succes! Nu uita să te întorci mâine pentru mai multe recompense.",
+  "You've already claimed today's reward.": "Ai susținut deja recompensa de astăzi."
 }

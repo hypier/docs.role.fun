@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "Les histoires sont des chats avec des caractères, partagés par les utilisateurs.",
   "Continue chat": "Continuer le chat",
   "New Character": "Nouveau personnage",
+  "Edit Character": "Modifier le personnage",
+  "Save": "Enregistrer",
+  "Generate": "Générer",
+  "(optional)": "(optionnel)",
   "Configure your character details.": "Configurer les détails de votre personnage.",
   "Publish to": "Publier sur",
   "Public": "Publique",
@@ -38,6 +42,7 @@
   "Instructions": "Instructions",
   "Description": "Libellé",
   "AI Model": "Modèle IA",
+  "Crystals": "Cristaux",
   "Crystal Top-Up": "Recharge du Cristal",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal est une monnaie universelle pour appeler les fonctionnalités AI dans openroleplay.ai.",
   "Daily Rewards": "Récompenses Quotidiennes",
@@ -58,5 +63,7 @@
   "Courageous": "Courageux",
   "Playful": "Joueur",
   "Cunning": "Cunning",
-  "Adventurous": "Aventurier"
+  "Adventurous": "Aventurier",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Récompense Quotidienne réclamée avec succès! N'oubliez pas de revenir demain pour plus de récompenses.",
+  "You've already claimed today's reward.": "Vous avez déjà collecté la récompense du jour."
 }

@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "Истории - это чаты с символами, которые разделяют пользователи.",
   "Continue chat": "Продолжить чат",
   "New Character": "Новый персонаж",
+  "Edit Character": "Изменить персонажа",
+  "Save": "Сохранить",
+  "Generate": "Сгенерировать",
+  "(optional)": "(опционально)",
   "Configure your character details.": "Настройте параметры вашего персонажа.",
   "Publish to": "Опубликовать в",
   "Public": "Публичный",
@@ -38,6 +42,7 @@
   "Instructions": "Инструкции",
   "Description": "Описание",
   "AI Model": "Модель ИИ",
+  "Crystals": "Кристаллы",
   "Crystal Top-Up": "Кристалл сверху",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal - это универсальная валюта для вызова AI функций openroleplay.ai.",
   "Daily Rewards": "Ежедневные награды",
@@ -58,5 +63,7 @@
   "Courageous": "Смелый",
   "Playful": "Сыгранный",
   "Cunning": "Cunning",
-  "Adventurous": "Приключенческий"
+  "Adventurous": "Приключенческий",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Ежедневная награда успешно получена! Больше наград не забудьте вернуться завтра.",
+  "You've already claimed today's reward.": "Вы уже получили сегодняшнюю награду."
 }

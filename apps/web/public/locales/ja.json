@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "ストーリーはチャットに文字が含まれ、ユーザーが共有します。",
   "Continue chat": "チャットを続ける",
   "New Character": "新しい文字",
+  "Edit Character": "キャラクターを編集",
+  "Save": "保存",
+  "Generate": "生成",
+  "(optional)": "(オプション)",
   "Configure your character details.": "キャラクターの詳細を設定します。",
   "Publish to": "公開先",
   "Public": "公開",
@@ -38,6 +42,7 @@
   "Instructions": "説明",
   "Description": "説明",
   "AI Model": "AIモデル",
+  "Crystals": "クリスタル",
   "Crystal Top-Up": "クリスタルチャージ",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "クリスタルは、openroleplay.aiでAI機能を呼び出すための普遍的な通貨です。",
   "Daily Rewards": "デイリーボーナス",
@@ -58,5 +63,7 @@
   "Courageous": "勇敢な",
   "Playful": "<unk>",
   "Cunning": "Cunning",
-  "Adventurous": "冒険的"
+  "Adventurous": "冒険的",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "デイリー報酬は正常に獲得されました。明日また報酬を獲得するのを忘れないでください。",
+  "You've already claimed today's reward.": "本日の報酬は既に受け取りました。"
 }

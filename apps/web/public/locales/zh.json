@@ -28,6 +28,10 @@
   "Stories are chats with characters, shared by users.": "故事是由用户共享的有字符的聊天。",
   "Continue chat": "继续聊天",
   "New Character": "新字符",
+  "Edit Character": "编辑字符",
+  "Save": "保存",
+  "Generate": "生成",
+  "(optional)": "(可选)",
   "Configure your character details.": "配置您的角色详细信息。",
   "Publish to": "发布到",
   "Public": "公开的",
@@ -38,6 +42,7 @@
   "Instructions": "说明",
   "Description": "描述",
   "AI Model": "AI 模型",
+  "Crystals": "水晶体",
   "Crystal Top-Up": "水晶充值",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Crystal 是通用货币在 openroleplay.ai 中调用 AI 功能。",
   "Daily Rewards": "每日奖励",
@@ -58,5 +63,7 @@
   "Courageous": "华丽的",
   "Playful": "正在播放",
   "Cunning": "Cunning",
-  "Adventurous": "冒险的"
+  "Adventurous": "冒险的",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "每天领取奖励成功！别忘了明天回来获得更多奖励。",
+  "You've already claimed today's reward.": "您已经领取了今天的奖励。"
 }
