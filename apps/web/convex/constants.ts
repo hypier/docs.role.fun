@@ -53,6 +53,7 @@ export const getBaseURL = (modelName: string) => {
     case "teknium/openhermes-2-mistral-7b":
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
+    case "lizpreciatior/lzlv-70b-fp16-hf":
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
     case "neversleep/noromaid-20b":
@@ -116,6 +117,7 @@ export const getAPIKey = (modelName: string) => {
     case "teknium/openhermes-2-mistral-7b":
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
+    case "lizpreciatior/lzlv-70b-fp16-hf":
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
     case "neversleep/noromaid-20b":
@@ -200,6 +202,7 @@ export const getCrystalPrice = (modelName: string) => {
     case "teknium/openhermes-2-mistral-7b":
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
+    case "lizpreciatior/lzlv-70b-fp16-hf":
       return 1;
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
@@ -297,6 +300,11 @@ export const modelData = [
   {
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
+    isNSFW: true,
+  },
+  {
+    value: "lizpreciatior/lzlv-70b-fp16-hf",
+    description: "Uncensored, lzlv 70B by lizpreciatior",
     isNSFW: true,
   },
   {
