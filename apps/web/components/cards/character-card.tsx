@@ -80,7 +80,7 @@ const CharacterCard = (props: {
               </Link>
             </Tooltip>
           )}
-          <div className="absolute top-4 z-[3]">
+          <div className="absolute top-4 z-[3] hover:z-[4]">
             <ModelBadge modelName={props.model as string} />
           </div>
           <CardHeader className="relative z-[2] w-full p-4">

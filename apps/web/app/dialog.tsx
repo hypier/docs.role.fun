@@ -112,9 +112,7 @@ export const Message = ({
         }
       });
       if (Date.now() - startTime >= 3000) {
-        setThinkingMessage(
-          t("Thinking (Warming up AI model, it could take upto 30 seconds)"),
-        );
+        setThinkingMessage(t("Warming up AI"));
       }
     }, 200);
     return () => clearInterval(interval);
