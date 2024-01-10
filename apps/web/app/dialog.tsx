@@ -275,12 +275,14 @@ export function Dialog({
   cardImageUrl,
   chatId,
   characterId,
+  isPublic,
 }: {
   name: string;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
+  isPublic?: boolean;
 }) {
   const router = useRouter();
   const goBack = router.back;
@@ -419,68 +421,70 @@ export function Dialog({
                 </Button>
               </PopoverTrigger>
             </Popover>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button className="h-8 gap-1">
-                  <Plus className="h-4 w-4" />
-                  Create story
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="max-w-fit">
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Create a story</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    {`Anyone will be able to see the story. Messages you send after creating your story won't be shared.`}
-                  </AlertDialogDescription>
-                  <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
-                    {messages.map((message, i) => (
-                      <Message
-                        key={message._id}
-                        name={name}
-                        message={message}
-                        username={(username as string) || "You"}
-                        cardImageUrl={cardImageUrl as string}
-                      />
-                    ))}
-                  </div>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      const promise = create({
-                        characterId: characterId as Id<"characters">,
-                        messageIds: messages
-                          .slice(1)
-                          .map((message) => message._id as Id<"messages">),
-                      });
-                      toast.promise(promise, {
-                        loading: "Creating story...",
-                        success: (storyId) => {
-                          router.push(
-                            `/character/${characterId}/story/${storyId}`,
-                          );
-                          if (navigator?.clipboard) {
-                            navigator.clipboard.writeText(
-                              document.location.href,
+            {isPublic && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button className="h-8 gap-1">
+                    <Plus className="h-4 w-4" />
+                    Create story
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="max-w-fit">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Create a story</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      {`Anyone will be able to see the story. Messages you send after creating your story won't be shared.`}
+                    </AlertDialogDescription>
+                    <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
+                      {messages.map((message, i) => (
+                        <Message
+                          key={message._id}
+                          name={name}
+                          message={message}
+                          username={(username as string) || "You"}
+                          cardImageUrl={cardImageUrl as string}
+                        />
+                      ))}
+                    </div>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => {
+                        const promise = create({
+                          characterId: characterId as Id<"characters">,
+                          messageIds: messages
+                            .slice(1)
+                            .map((message) => message._id as Id<"messages">),
+                        });
+                        toast.promise(promise, {
+                          loading: "Creating story...",
+                          success: (storyId) => {
+                            router.push(
+                              `/character/${characterId}/story/${storyId}`,
                             );
-                            toast.success("Link copied to clipboard");
-                          }
-                          return `Story has been created.`;
-                        },
-                        error: (error) => {
-                          return error?.data
-                            ? (error.data as { message: string })?.message
-                            : "Unexpected error occurred";
-                        },
-                      });
-                    }}
-                  >
-                    Create
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                            if (navigator?.clipboard) {
+                              navigator.clipboard.writeText(
+                                document.location.href,
+                              );
+                              toast.success("Link copied to clipboard");
+                            }
+                            return `Story has been created.`;
+                          },
+                          error: (error) => {
+                            return error?.data
+                              ? (error.data as { message: string })?.message
+                              : "Unexpected error occurred";
+                          },
+                        });
+                      }}
+                    >
+                      Create
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
           </div>
         </div>
       )}

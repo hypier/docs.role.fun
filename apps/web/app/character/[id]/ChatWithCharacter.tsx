@@ -222,6 +222,7 @@ export default function ChatWithCharacter({
               chatId={chatId}
               characterId={data?._id as any}
               cardImageUrl={data?.cardImageUrl}
+              isPublic={data?.visibility === "public"}
             />
           ) : isAuthenticated && !isLoading ? (
             <div className="flex h-full w-full items-center justify-center">
