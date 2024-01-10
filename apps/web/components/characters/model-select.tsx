@@ -13,14 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/src/components/select";
-import { useQuery } from "convex/react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { api } from "../../convex/_generated/api";
+import useModelData from "../../app/lib/hooks/use-model-data";
 
 export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
   const { t } = useTranslation();
-  const modelData = useQuery(api.models.list);
+  const modelData = useModelData();
   return (
     <FormField
       control={form.control}

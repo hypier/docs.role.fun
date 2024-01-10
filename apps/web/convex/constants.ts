@@ -230,6 +230,7 @@ export const getCrystalPrice = (modelName: string) => {
   }
 };
 
+// Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
     value: "openrouter/auto",
@@ -238,26 +239,38 @@ export const modelData = [
   {
     value: "gpt-3.5-turbo-1106",
     description: "GPT-3.5 Turbo by OpenAI",
+    src: "/models/openai.png",
+    alt: "Company logo of Open AI",
   },
   {
     value: "gpt-4-1106-preview",
     description: "GPT-4 Turbo by OpenAI",
+    src: "/models/openai.png",
+    alt: "Company logo of Open AI",
   },
   {
     value: "mistral-small",
     description: "Mistral Small by Mistral AI",
+    src: "/models/mistral.png",
+    alt: "Company logo of Mistral AI",
   },
   {
     value: "mistral-medium",
     description: "Mistral Medium by Mistral AI",
+    src: "/models/mistral.png",
+    alt: "Company logo of Mistral AI",
   },
   {
     value: "pplx-70b-online",
     description: "Perplexity 70B Online by Perplexity AI",
+    src: "/models/perplexity.png",
+    alt: "Company logo of Perplexity AI",
   },
   {
     value: "pplx-70b-chat",
     description: "Perplexity 70B Chat by Perplexity AI",
+    src: "/models/perplexity.png",
+    alt: "Company logo of Perplexity AI",
   },
   {
     value: "google/gemini-pro",
@@ -274,14 +287,17 @@ export const modelData = [
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
     description: "Uncensored, Noromaid 8x7B by Never Sleep",
+    isNSFW: true,
   },
   {
     value: "neversleep/noromaid-20b",
     description: "Uncensored, Noromaid 20B by Never Sleep",
+    isNSFW: true,
   },
   {
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
+    isNSFW: true,
   },
   {
     value: "nousresearch/nous-capybara-7b",
