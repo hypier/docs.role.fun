@@ -134,7 +134,9 @@ const DailyReward = () => {
     toast.promise(promise, {
       loading: "Claiming your daily reward...",
       success: () => {
-        return `You've claimed your daily reward!`;
+        return t(
+          `Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.`,
+        );
       },
       error: (error) => {
         return error
