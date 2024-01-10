@@ -75,6 +75,10 @@ export const answer = internalAction({
       const openai = new OpenAI({
         baseURL,
         apiKey,
+        defaultHeaders: {
+          "HTTP-Referer": "openroleplay.ai",
+          "X-Title": "openroleplay.ai",
+        },
       });
       const remindInstructionInterval = getRemindInstructionInterval(model);
       const instruction = character?.isModel
