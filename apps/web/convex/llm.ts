@@ -77,7 +77,9 @@ export const answer = internalAction({
         apiKey,
       });
       const remindInstructionInterval = getRemindInstructionInterval(model);
-      const instruction = `You are 
+      const instruction = character?.isModel
+        ? "You are a helpful AI assistant"
+        : `You are 
             {
               name: ${character?.name}
               ${
@@ -101,10 +103,8 @@ export const answer = internalAction({
             (You can use parentheses to indicate different types of things the Character might say,
             narrator type descriptions of actions, muttering asides or emotional reactions.)
 
-            You can indicate italics by putting a single asterisk * on each side of a phrase,
-            like *sad*, *laughing*. This can be used to indicate action or emotion in a definition.
-
-            Answer shortly.
+            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase,
+            like *sad*, *laughing*.
             `;
 
       try {

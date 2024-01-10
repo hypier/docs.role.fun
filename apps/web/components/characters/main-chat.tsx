@@ -82,8 +82,8 @@ export function MainChats() {
   return (
     <AnimatePresence>
       {results?.length > 0 && (
-        <motion.div {...FadeInOut}>
-          <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
+        <motion.div {...FadeInOut} className="flex flex-col gap-4">
+          <div className="flex items-center gap-1 border-y px-4 py-4 font-medium lg:mt-2 lg:border-none lg:px-0">
             {t("Continue chat")}
           </div>
           <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
@@ -93,7 +93,7 @@ export function MainChats() {
             >
               <CarouselContent className="w-full">
                 {results.map((chat) => (
-                  <CarouselItem className="group m-4 basis-1/2 rounded-lg border bg-background p-4 sm:basis-1/3 lg:basis-1/4">
+                  <CarouselItem className="group ml-4 basis-1/2 rounded-lg border bg-background p-4 sm:basis-1/3 lg:basis-1/4">
                     <Chat
                       name={chat.chatName as string}
                       time={chat.updatedAt}

@@ -23,10 +23,10 @@ export const NewCharacter = () => {
     <Link href="/my-characters/create">
       <AspectRatio
         ratio={1 / 1.75}
-        className="group h-full w-full place-content-center rounded-lg border border-dashed duration-200 hover:-translate-y-1 hover:shadow-lg"
+        className="group group h-full w-full place-content-center rounded-lg border border-dashed"
         role="button"
       >
-        <Card className="flex h-full w-full items-center justify-center gap-2 rounded-lg border-none p-2">
+        <Card className="flex h-full w-full items-center justify-center gap-2 rounded-lg border-none p-2 duration-200 group-hover:opacity-50">
           <Plus /> {t("Create character")}
         </Card>
       </AspectRatio>
