@@ -54,18 +54,7 @@ const formSchema = z.object({
   description: z.string().max(64),
   instructions: z.string().max(512),
   greetings: z.optional(z.string()),
-  model: z.union([
-    z.literal("mistral-7b-instruct"),
-    z.literal("mixtral-8x7b-instruct"),
-    z.literal("gpt-3.5-turbo-1106"),
-    z.literal("gpt-4-1106-preview"),
-    z.literal("pplx-7b-chat"),
-    z.literal("pplx-7b-online"),
-    z.literal("pplx-70b-chat"),
-    z.literal("pplx-70b-online"),
-    z.literal("mistral-small"),
-    z.literal("mistral-medium"),
-  ]),
+  model: z.any(),
 });
 
 export default function CharacterForm() {
