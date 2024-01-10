@@ -47,6 +47,7 @@ import RemixBadge from "./remix-badge";
 import { ModelSelect } from "./model-select";
 import { ArchiveButton } from "./archive-button";
 import { GenerateButton } from "./generate-button";
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
   name: z.string().max(24),
@@ -68,6 +69,7 @@ const formSchema = z.object({
 });
 
 export default function CharacterForm() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const id = searchParams.get("id") as Id<"characters">;
   const remixId = searchParams.get("remixId") as Id<"characters">;
@@ -251,18 +253,18 @@ export default function CharacterForm() {
                     onValueChange={(value) => setVisibility(value)}
                   >
                     <span className="text-sm font-medium text-muted-foreground">
-                      Publish to
+                      {t("Publish to")}
                     </span>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="public" id="public" />
                       <Label className="font-normal" htmlFor="public">
-                        Public
+                        {t("Public")}
                       </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="private" id="private" />
                       <Label className="font-normal" htmlFor="private">
-                        Only me
+                        {t("Only me")}
                       </Label>
                     </div>
                   </RadioGroup>
@@ -315,7 +317,9 @@ export default function CharacterForm() {
             </Popover>
           </div>
         </CardTitle>
-        <CardDescription>Configure your character details.</CardDescription>
+        <CardDescription>
+          {t("Configure your character details.")}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="my-4 flex w-full flex-col items-center justify-center gap-4">
@@ -324,7 +328,7 @@ export default function CharacterForm() {
             className="relative flex h-[350px] w-[200px] cursor-pointer flex-col items-center justify-center rounded border border-dashed duration-200 hover:-translate-y-1 hover:border-border hover:shadow-lg"
           >
             <Plus />
-            Add character card
+            {t("Add character card")}
             <span className="text-xs text-muted-foreground">
               Best size: 1024x1792
             </span>
@@ -376,11 +380,11 @@ export default function CharacterForm() {
               {isGeneratingImage ? (
                 <>
                   <Spinner />
-                  Generating...
+                  {t("Generating...")}
                 </>
               ) : (
                 <>
-                  Generate
+                  {t("Generate")}
                   <Crystal className="h-4 w-4" /> x 75
                 </>
               )}
@@ -422,7 +426,7 @@ export default function CharacterForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
-                    Greeting
+                    {t("Greeting")}
                     <InfoTooltip
                       content={
                         <TooltipContent
@@ -450,7 +454,7 @@ export default function CharacterForm() {
                 <FormItem>
                   <div className="flex items-center justify-between">
                     <FormLabel className="flex items-center gap-1">
-                      Instructions{" "}
+                      {t("Instructions")}{" "}
                       <span className="text-muted-foreground">(optional)</span>
                       <InfoTooltip
                         content={
@@ -519,7 +523,7 @@ export default function CharacterForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
-                    Description{" "}
+                    {t("Description")}{" "}
                     <span className="text-muted-foreground">(optional)</span>
                     <InfoTooltip
                       content={
