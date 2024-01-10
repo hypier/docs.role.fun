@@ -38,6 +38,7 @@
   "Instructions": "Instrukcje",
   "Description": "Opis",
   "AI Model": "Model SI",
+  "Crystals": "Crystals",
   "Crystal Top-Up": "Kryształowy top-Up",
   "Crystal is an universal currency for calling AI features in openroleplay.ai.": "Kryształ jest uniwersalną walutą do wywoływania funkcji AI w openroleplay.ai.",
   "Daily Rewards": "Dzienne Nagrody",
@@ -58,5 +59,7 @@
   "Courageous": "Odwaga",
   "Playful": "Zabawne",
   "Cunning": "Cunning",
-  "Adventurous": "Przygoda"
+  "Adventurous": "Przygoda",
+  "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Dzienna nagroda została odebrana pomyślnie! Nie zapomnij wrócić jutro, aby otrzymać więcej nagród.",
+  "You've already claimed today's reward.": "You've already claimed today's reward."
 }
