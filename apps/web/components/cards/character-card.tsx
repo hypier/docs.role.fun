@@ -35,7 +35,7 @@ const CharacterCard = (props: {
   return (
     <AspectRatio
       ratio={1 / 1.75}
-      className="group h-full w-full place-content-center rounded-lg shadow duration-200 hover:shadow-lg"
+      className="group h-full w-full place-content-center rounded-lg duration-200 hover:shadow-lg"
     >
       <Link href={`/character/${props?.id}`}>
         <Card className="flex h-full w-full items-end rounded-lg p-2">
