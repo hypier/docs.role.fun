@@ -1,7 +1,7 @@
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@repo/ui/src/components";
 import { Id } from "../../convex/_generated/dataModel";
@@ -19,6 +19,7 @@ import {
   CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
 import { useTranslation } from "react-i18next";
+import { FadeInOut } from "../../app/lib/utils";
 
 export const Chat = ({
   name,
@@ -79,9 +80,9 @@ export function MainChats() {
   );
   const [_api, setApi] = useState<CarouselApi>();
   return (
-    <>
+    <AnimatePresence>
       {results?.length > 0 && (
-        <>
+        <motion.div {...FadeInOut}>
           <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
             {t("Continue chat")}
           </div>
@@ -103,8 +104,8 @@ export function MainChats() {
               <CarouselNext variant="ghost" />
             </Carousel>
           </div>
-        </>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 }
