@@ -93,7 +93,10 @@ export const answer = internalAction({
 
             (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
-            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.`
+            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.
+            
+            When same conversation is repeated, come up with fresh and engaging topic.
+            `
           : `You are 
             {
               name: ${character?.name}
