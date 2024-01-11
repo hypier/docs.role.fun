@@ -53,7 +53,7 @@ function TabsController() {
         </Link>
         <Link href="/my-personas">
           <TabsTrigger
-            className="flex w-full flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
+            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/my-personas"
           >
             <CircleUserRound className="h-5 w-5 p-1" />
@@ -63,7 +63,7 @@ function TabsController() {
         </Link>
         <Link href="/models">
           <TabsTrigger
-            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
+            className="w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/models"
           >
             <Package className="h-5 w-5 p-1" />
