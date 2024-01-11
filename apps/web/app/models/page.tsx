@@ -1,5 +1,3 @@
-"use client";
-
 import { constructMetadata } from "../lib/utils";
 import Models from "./models";
 
