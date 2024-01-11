@@ -70,5 +70,10 @@
   "Cunning": "Cunning",
   "Adventurous": "Seikkailu",
   "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Päivittäinen palkinto lunastettiin onnistuneesti! Älä unohda palata huomenna saadaksesi lisää palkintoja.",
-  "You've already claimed today's reward.": "Olet jo lunastanut tämän päivän palkinnon."
+  "You've already claimed today's reward.": "Olet jo lunastanut tämän päivän palkinnon.",
+  "Mature Content": "Kypsä Sisältö",
+  "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "Tämä malli, merkki tai sisältö on sensuroimaton. Ottamalla käyttöön Mature Contentin vahvistat, että olet yli 18-vuotias.",
+  "Always allow": "Salli aina",
+  "Go back": "Mene takaisin",
+  "Confirm": "Confirm"
 }
