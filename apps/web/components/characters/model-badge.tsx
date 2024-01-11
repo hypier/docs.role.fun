@@ -47,7 +47,13 @@ const ModelBadge = ({
           <Package className="h-4 w-4 p-0.5 text-white" />
         )}
         <span className="hidden group-hover/badge:inline">{model}</span>
-        {price ? crystalUnit : <span className="text-teal-500">free</span>}
+        {price ? (
+          crystalUnit
+        ) : price === 0 ? (
+          <span className="text-teal-500">free</span>
+        ) : (
+          <></>
+        )}
       </Badge>
     </Link>
   );
