@@ -85,7 +85,7 @@ export default function CharacterSearch() {
     <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
       <CardHeader>
         <CardTitle className="flex w-full items-center">
-          {t("Search")}
+          {t("Search")}{" "}
           <Input
             autoFocus
             onChange={(e) => debouncedSetInput(e.target.value)}
