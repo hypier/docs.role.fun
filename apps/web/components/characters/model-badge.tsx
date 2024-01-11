@@ -1,6 +1,6 @@
 import { Badge } from "@repo/ui/src/components/badge";
 import { useQuery } from "convex/react";
-import { AlertCircle, Package, Sparkles } from "lucide-react";
+import { Package } from "lucide-react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
