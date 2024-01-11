@@ -216,6 +216,8 @@ export const getCrystalPrice = (modelName: string) => {
     // 10 crytstal models
     case "anthropic/claude-2":
       return 10;
+    case "openrouter/auto":
+      return 9;
     case "stable-diffusion-xl-1024-v1-0":
       return 25;
     case "gpt-4-1106-preview":
