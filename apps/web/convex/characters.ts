@@ -165,7 +165,6 @@ export const listModels = query({
       .filter((q) => q.eq(q.field("isModel"), true))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
-      .filter((q) => q.neq(q.field("isNSFW"), true))
       .filter((q) => q.neq(q.field("visibility"), "private"));
     if (args.model) {
       query = query.filter((q) => q.eq(q.field("model"), args.model));
