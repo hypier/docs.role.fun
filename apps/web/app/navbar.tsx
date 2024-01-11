@@ -37,7 +37,10 @@ export default function NavBar({}: {}) {
                 <div className="hidden sm:block">
                   {t("opensource ai characters")}
                 </div>
-                <Badge className="font-default">{t("alpha")}</Badge>
+                <Badge className="font-default">
+                  <span className="inline lg:hidden">α</span>
+                  <span className="hidden lg:inline">{t("alpha")}</span>
+                </Badge>
               </Link>
             </Tooltip>
           </div>
