@@ -48,31 +48,7 @@ This is where Open Roleplay steps in. Whether self-hosted or hosted by us, it's 
 
 ## Supported Models
 
-### Smaller, Faster Models
-
-- OpenAI gpt-3.5-turbo-1106 (16k context window, proivded by OpenAI)
-- Mistral tiny (Provided by Mistral AI)
-- Mistral small (Provided by Mistral AI)
-- Perplexity pplx-7b-online (4k context window, provided by Perplexity AI)
-- Perplexity pplx-7b-chat (8k context window, provided by Perplexity AI)
-- Alibaba qwen-14b-chat (English and Chinese, provided by Fireworks AI)
-- Anthropic Claude Instant (Coming Soon, 128k context window, proivded by OpenAI)
-- ...and more!
-
-### Larger, Accurate Models
-
-- OpenAI gpt-4-1106-preview (32k context window, proivded by OpenAI)
-- Perplexity pplx-70b-chat (4k context window, provided by Perplexity AI)
-- Perplexity pplx-70b-online (4k context window, provided by Perplexity AI)
-- Mistral medium (Provided by Mistral AI)
-- ...and more!
-
-### Image generation
-
-Image generation feature is partially implemented at the moment.
-
-- Stable Diffusion XL (Provided by Stability AI)
-- Dall-E 3 (Provided by OpenAI)
+Check out [here](https://openroleplay.ai/models) for supported models.
 
 ### Built With
 
