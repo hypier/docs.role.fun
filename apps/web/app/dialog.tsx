@@ -220,7 +220,7 @@ export const Inspirations = ({
         >
           <>
             <Sparkles className="h-5 w-5 p-1" />
-            {t("Autopilot")}
+            {t("Continue")}
           </>
         </Button>
       </Tooltip>
