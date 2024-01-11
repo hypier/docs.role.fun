@@ -35,7 +35,6 @@ import { useRouter } from "next/navigation";
 import { MemoizedReactMarkdown } from "./markdown";
 import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
-import { Separator } from "@repo/ui/src/components/separator";
 import Spinner from "@repo/ui/src/components/spinner";
 import useMyUsername from "./lib/hooks/use-my-username";
 import { useTranslation } from "react-i18next";
@@ -63,7 +62,6 @@ export const FormattedMessage = ({ message }: { message: any }) => {
         },
         code({ node, className, children, ...props }: any) {
           const match = /language-(\w+)/.exec(className || "");
-
           return (
             <CodeBlock
               key={Math.random()}
@@ -76,8 +74,8 @@ export const FormattedMessage = ({ message }: { message: any }) => {
       }}
     >
       {message?.text?.startsWith("Not enough crystals.")
-        ? `${message.text} [Visit Shop](/shop)`
-        : message.text}
+        ? `${message?.text} [Visit Shop](/shop)`
+        : message?.text}
     </MemoizedReactMarkdown>
   );
 };
@@ -120,7 +118,7 @@ export const Message = ({
 
   return (
     <div
-      key={message._id}
+      key={message?._id}
       className={`flex flex-col gap-2 ${
         message?.characterId ? "self-start" : "self-end"
       }`}
@@ -142,7 +140,7 @@ export const Message = ({
         </Avatar>
         {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
-      {message.text === "" ? (
+      {message?.text === "" ? (
         <div
           className={
             "max-w-[20rem] animate-pulse whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
@@ -193,29 +191,20 @@ export const Message = ({
 };
 
 export const Inspirations = ({
-  inspirations,
-  setIsGeneratingInspiration,
-  generateInspiration,
-  sendAndReset,
   chatId,
   characterId,
-  isGeneratingInspiration,
 }: {
-  inspirations: any;
-  setIsGeneratingInspiration: any;
-  generateInspiration: any;
-  sendAndReset: any;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
-  isGeneratingInspiration: boolean;
 }) => {
   const { t } = useTranslation();
+  const autopilot = useMutation(api.followUps.autopilot);
   return (
     <div className="flex max-h-36 w-full flex-wrap items-center gap-1 overflow-y-clip overflow-x-scroll bg-background/90 p-4 text-xs backdrop-blur-md scrollbar-hide">
       <Tooltip
         content={
           <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-            <Crystal className="h-4 w-4" /> x 1
+            <Crystal className="h-4 w-4" /> crystals are used.
           </span>
         }
         desktopOnly={true}
@@ -223,71 +212,18 @@ export const Inspirations = ({
         <Button
           variant="ghost"
           onClick={() => {
-            setIsGeneratingInspiration(true);
-            generateInspiration({ chatId, characterId });
+            autopilot({ chatId, characterId });
           }}
           className="gap-1"
           size="xs"
-          disabled={isGeneratingInspiration}
           type="button"
         >
-          {isGeneratingInspiration ? (
-            <>
-              <Spinner />
-              {t("Generating")}...
-            </>
-          ) : (
-            <>
-              <Sparkles className="h-5 w-5 p-1" />
-              {t("Inspire")}
-            </>
-          )}
+          <>
+            <Sparkles className="h-5 w-5 p-1" />
+            {t("Autopilot")}
+          </>
         </Button>
       </Tooltip>
-      {inspirations && !inspirations?.isStale && (
-        <>
-          <Separator className="w-8" />
-          {inspirations?.followUp1 && inspirations.followUp1?.length > 0 && (
-            <Button
-              variant="outline"
-              size="xs"
-              className="rounded-full px-2 font-normal"
-              onClick={() => {
-                sendAndReset(inspirations?.followUp1 as string);
-              }}
-              type="button"
-            >
-              {inspirations?.followUp1}
-            </Button>
-          )}
-          {inspirations?.followUp2 && inspirations.followUp2?.length > 0 && (
-            <Button
-              variant="outline"
-              size="xs"
-              className="rounded-full px-2 font-normal"
-              onClick={() => {
-                sendAndReset(inspirations?.followUp2 as string);
-              }}
-              type="button"
-            >
-              {inspirations?.followUp2}
-            </Button>
-          )}
-          {inspirations?.followUp3 && inspirations.followUp3?.length > 0 && (
-            <Button
-              variant="outline"
-              size="xs"
-              className="rounded-full px-2 font-normal"
-              onClick={() => {
-                sendAndReset(inspirations?.followUp3 as string);
-              }}
-              type="button"
-            >
-              {inspirations?.followUp3}
-            </Button>
-          )}
-        </>
-      )}
     </div>
   );
 };
@@ -336,12 +272,6 @@ export function Dialog({
   );
   const username = useMyUsername();
   const sendMessage = useMutation(api.messages.send);
-  const generateInspiration = useMutation(api.followUps.generate);
-  const inspirations = useQuery(api.followUps.get, {
-    chatId,
-  });
-
-  const [isGeneratingInspiration, setIsGeneratingInspiration] = useState(false);
   const [isScrolled, setScrolled] = useState(false);
   const [input, setInput] = useState("");
 
@@ -361,7 +291,6 @@ export function Dialog({
     if (isScrolled) {
       return;
     }
-    console.log("scrolling...");
     // Using `setTimeout` to make sure scrollTo works on button click in Chrome
     setTimeout(() => {
       listRef.current?.scrollTo({
@@ -370,11 +299,6 @@ export function Dialog({
       });
     }, 0);
   }, [messages, isScrolled]);
-
-  useEffect(() => {
-    inspirations && setIsGeneratingInspiration(false);
-  }, [inspirations]);
-
   const ref = useRef(null);
   const inView = useInView(ref);
 
@@ -512,11 +436,7 @@ export function Dialog({
         </div>
       )}
       <div
-        className={`flex flex-col ${
-          inspirations?.followUp3 && !inspirations?.isStale
-            ? "lg:h-[calc(100%-16rem)]"
-            : "lg:h-[calc(100%-12rem)]"
-        } h-full overflow-y-auto`}
+        className={`flex h-full flex-col overflow-y-auto lg:h-[calc(100%-12rem)]`}
         ref={listRef}
         onWheel={() => {
           setScrolled(true);
@@ -552,15 +472,7 @@ export function Dialog({
         className="sticky bottom-16 flex min-h-fit w-full flex-col items-center rounded-br-lg border-0 border-t-[1px] border-solid bg-background lg:bottom-0"
         onSubmit={(event) => void handleSend(event)}
       >
-        <Inspirations
-          inspirations={inspirations}
-          setIsGeneratingInspiration={setIsGeneratingInspiration}
-          generateInspiration={generateInspiration}
-          sendAndReset={sendAndReset}
-          chatId={chatId}
-          characterId={characterId}
-          isGeneratingInspiration={isGeneratingInspiration}
-        />
+        <Inspirations chatId={chatId} characterId={characterId} />
         <div className="flex w-full">
           <input
             className="my-3 ml-4 w-full border-none bg-background focus-visible:ring-0"

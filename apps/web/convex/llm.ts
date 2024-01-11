@@ -9,12 +9,7 @@ import {
 } from "./_generated/server";
 import { api, internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
-import {
-  DEFAULT_MODEL,
-  getAPIKey,
-  getBaseURL,
-  getRemindInstructionInterval,
-} from "./constants";
+import { DEFAULT_MODEL, getAPIKey, getBaseURL } from "./constants";
 import { getRandomGenreAndModality } from "./random";
 
 export const answer = internalAction({
@@ -24,10 +19,11 @@ export const answer = internalAction({
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
     messageId: v.optional(v.id("messages")),
+    reverseRole: v.optional(v.boolean()),
   },
   handler: async (
     ctx,
-    { userId, chatId, characterId, personaId, messageId },
+    { userId, chatId, characterId, personaId, messageId, reverseRole },
   ) => {
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
@@ -49,10 +45,14 @@ export const answer = internalAction({
 
     messageId = messageId
       ? messageId
-      : await ctx.runMutation(internal.llm.addCharacterMessage, {
-          chatId,
-          characterId,
-        });
+      : reverseRole
+        ? await ctx.runMutation(internal.llm.addUserMessage, {
+            chatId,
+          })
+        : await ctx.runMutation(internal.llm.addCharacterMessage, {
+            chatId,
+            characterId,
+          });
 
     if (character?.isArchived) {
       await ctx.runMutation(internal.llm.updateCharacterMessage, {
@@ -134,7 +134,13 @@ export const answer = internalAction({
               content: instruction,
             },
             ...(conversations.map(({ characterId, text }: any) => ({
-              role: characterId ? "assistant" : "user",
+              role: reverseRole
+                ? characterId
+                  ? "user"
+                  : "assistant"
+                : characterId
+                  ? "assistant"
+                  : "user",
               content: text,
             })) as ChatCompletionMessageParam[]),
           ],
@@ -198,6 +204,16 @@ export const answer = internalAction({
           text: "I cannot reply at this time.",
         });
       }
+    }
+
+    if (reverseRole) {
+      await ctx.scheduler.runAfter(0, internal.llm.answer, {
+        chatId,
+        characterId,
+        personaId,
+        userId,
+        reverseRole: false,
+      });
     }
   },
 });
@@ -651,6 +667,15 @@ export const addCharacterMessage = internalMutation(
       text: "",
       chatId,
       characterId,
+    });
+  },
+);
+
+export const addUserMessage = internalMutation(
+  async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
+    return await ctx.db.insert("messages", {
+      text: "",
+      chatId,
     });
   },
 );

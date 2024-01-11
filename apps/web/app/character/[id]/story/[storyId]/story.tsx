@@ -43,7 +43,7 @@ export function Story({
       <div className={`flex h-full flex-col overflow-y-auto scrollbar-hide`}>
         <div className="mx-2 flex h-full flex-col justify-between gap-8 rounded-lg p-4">
           <div className="flex flex-col gap-8">
-            {messages ? (
+            {messages && messages?.length > 0 ? (
               messages?.map((message, i) => (
                 <Message
                   name={name || (character?.name as string)}
