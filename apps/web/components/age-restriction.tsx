@@ -17,9 +17,11 @@ import { useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AgeRestriction = () => {
   const me = useCurrentUser();
+  const { t } = useTranslation();
   const [showDialog, setShowDialog] = useState(false);
   const updateNSFWPreference = useMutation(api.users.updateNSFWPreference);
   const router = useRouter();
@@ -38,12 +40,13 @@ const AgeRestriction = () => {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-1">
-              <Rating18Plus className="h-5 w-5" />
-              Mature Content
+              <Rating18Plus className="h-5 w-5 text-amber-500" />
+              {t("Mature Content")}
             </AlertDialogTitle>
             <AlertDialogDescription className="flex">
-              By enabling Mature Content, you confirm you are over the age of
-              18.
+              {t(
+                "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.",
+              )}
             </AlertDialogDescription>
             {me && (
               <div className="flex items-center space-x-2 pt-4">
@@ -61,15 +64,15 @@ const AgeRestriction = () => {
                     });
                   }}
                 />
-                <Label htmlFor="allow">Always allow</Label>
+                <Label htmlFor="allow">{t("Always allow")}</Label>
               </div>
             )}
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => router.back()}>
-              Cancel
+              {t("Go back")}
             </AlertDialogCancel>
-            <AlertDialogAction>Confirm</AlertDialogAction>
+            <AlertDialogAction>{t("Confirm")}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
