@@ -107,7 +107,7 @@ Check out [Convex Clerk](https://docs.convex.dev/auth/clerk) for detailed guide.
 
 ## Roadmap and Feedback
 
-Giving perfect memory for agents, adding voice capabilities and image generation, improving user interactions, possibilities are endless. We value your [feedback](https://github.com/open-roleplay-ai/openroleplay.ai/issues).
+Let's shape our roadmap [together](https://github.com/open-roleplay-ai/openroleplay.ai/issues).
 
 ## Support This Project
 
