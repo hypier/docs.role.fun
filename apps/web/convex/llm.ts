@@ -82,31 +82,32 @@ export const answer = internalAction({
       });
       const instruction = character?.isModel
         ? `You are ${character?.name}.`
-        : `You are 
+        : reverseRole
+          ? `You are 
+            {
+              name: ${persona?.name}
+              ${persona?.description && `description: ${persona.description}`}
+            }
+
+            and you are talking with ${character?.name} (${character?.description})
+
+            (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
+
+            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.`
+          : `You are 
             {
               name: ${character?.name}
               ${
                 character?.description &&
                 `description: ${character.description}`
               }
-              ${
-                character?.instructions &&
-                `instruction: ${character.instructions}`
-              }
             }
 
-            ${
-              persona
-                ? `
-              and you are talking with ${persona?.name} (${persona?.description})
-              `
-                : ""
-            }
+            and you are talking with ${persona?.name} (${persona?.description})
 
             (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
-            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.
-            `;
+            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.`;
 
       try {
         const lastIndice = message
