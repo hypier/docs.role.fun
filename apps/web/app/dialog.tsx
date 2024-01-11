@@ -312,9 +312,9 @@ export function Dialog({
     <div className="h-full w-full">
       {chatId && (
         <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 lg:px-6">
-          <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+          <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
-            AI can make mistakes.
+            Everything AI says is made up.
           </div>
           <div className="flex items-center gap-1">
             <Popover>
@@ -373,7 +373,7 @@ export function Dialog({
                 <AlertDialogTrigger asChild>
                   <Button className="h-8 gap-1">
                     <Plus className="h-4 w-4" />
-                    Create story
+                    <span className="hidden lg:inline">Create story</span>
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="max-w-fit">
