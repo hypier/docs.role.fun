@@ -130,8 +130,8 @@ const CharacterCard = (props: {
                 <Image
                   src={props.cardImageUrl}
                   alt={""}
-                  width={10}
-                  height={18}
+                  width={7.5}
+                  height={13}
                   quality={50}
                   className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
                 />
