@@ -121,7 +121,8 @@ export const answer = internalAction({
           message === undefined ? messages : messages.slice(0, lastIndice);
         if (
           conversations.length > 0 &&
-          conversations[conversations.length - 1]?.characterId
+          conversations[conversations.length - 1]?.characterId &&
+          !reverseRole
         ) {
           conversations.pop();
         }
