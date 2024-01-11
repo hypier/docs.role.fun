@@ -81,7 +81,7 @@ export const answer = internalAction({
         },
       });
       const instruction = character?.isModel
-        ? "You are a helpful AI assistant"
+        ? `You are ${character?.name}.`
         : `You are 
             {
               name: ${character?.name}

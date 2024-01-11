@@ -82,7 +82,7 @@ export default function CharacterForm() {
     name = searchParams.get("name") || "",
     description = searchParams.get("description") || "",
     instructions = searchParams.get("instructions") || "",
-    greetings = searchParams.get("greetings") || "",
+    greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
     model = (searchParams.get("model") as any) || "openrouter/auto",
     isDraft = searchParams.get("isDraft") || true,

@@ -3,7 +3,7 @@ import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
-import { useConvexAuth, usePaginatedQuery, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button, Tooltip } from "@repo/ui/src/components";
@@ -20,7 +20,6 @@ import {
 } from "@repo/ui/src/components/carousel";
 import { useTranslation } from "react-i18next";
 import { MainChats } from "./main-chat";
-import useMyUsername from "../../app/lib/hooks/use-my-username";
 import { NewCharacter } from "./my-characters";
 import useCurrentUser from "../../app/lib/hooks/use-current-user";
 
