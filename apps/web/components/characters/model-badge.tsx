@@ -15,7 +15,9 @@ const ModelBadge = ({
   showCredits?: boolean;
 }) => {
   const model = modelName
-    ? modelName.replace("accounts/fireworks/models/", "")
+    ? modelName
+        .replace("accounts/fireworks/models/", "")
+        .replace("openrouter/auto", "auto")
     : "gpt-3.5-turbo-1106";
   const modelData = useModelData();
   const price = useQuery(api.crystals.price, { modelName: model });
