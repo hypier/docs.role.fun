@@ -45,23 +45,25 @@ const AgeRestriction = () => {
               By enabling Mature Content, you confirm you are over the age of
               18.
             </AlertDialogDescription>
-            <div className="flex items-center space-x-2 pt-4">
-              <Switch
-                id="allow"
-                checked={me?.nsfwPreference === "allow"}
-                onCheckedChange={(checked: boolean) => {
-                  const promise = updateNSFWPreference({
-                    nsfwPreference: checked ? "allow" : "auto",
-                  });
-                  toast.promise(promise, {
-                    loading: "Updating preference...",
-                    success: "Preference updated successfully",
-                    error: "Failed to update preference",
-                  });
-                }}
-              />
-              <Label htmlFor="allow">Always allow</Label>
-            </div>
+            {me && (
+              <div className="flex items-center space-x-2 pt-4">
+                <Switch
+                  id="allow"
+                  checked={me?.nsfwPreference === "allow"}
+                  onCheckedChange={(checked: boolean) => {
+                    const promise = updateNSFWPreference({
+                      nsfwPreference: checked ? "allow" : "auto",
+                    });
+                    toast.promise(promise, {
+                      loading: "Updating preference...",
+                      success: "Preference updated successfully",
+                      error: "Failed to update preference",
+                    });
+                  }}
+                />
+                <Label htmlFor="allow">Always allow</Label>
+              </div>
+            )}
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => router.back()}>
