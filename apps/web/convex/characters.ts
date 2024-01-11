@@ -126,6 +126,7 @@ export const list = query({
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isModel"), true))
       .filter((q) => q.neq(q.field("visibility"), "private"));
     if (args.genreTag) {
       query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
