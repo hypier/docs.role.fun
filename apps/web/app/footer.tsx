@@ -23,7 +23,7 @@ export default function Footer() {
   const showFooter = pathname === "/" || pathname === "/shop";
   if (!showFooter) return null;
   return (
-    <footer className="flex w-full items-center justify-center px-6 py-4 text-xs 2xl:px-0">
+    <footer className="flex w-full items-center justify-center overflow-x-hidden px-6 py-4 text-xs 2xl:px-0">
       <div className="flex w-full flex-col items-center gap-8">
         <div className="flex flex-col gap-8 sm:flex-row xl:gap-24">
           <div className="flex gap-8">
