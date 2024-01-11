@@ -25,7 +25,7 @@ const ModelBadge = ({
       {`x ${price}`}
     </div>
   );
-  const modelInfo = modelData.find((item: any) => item.value === model) || {};
+  const modelInfo = modelData?.find((item: any) => item.value === model) || {};
   const { src, alt, isNSFW } = modelInfo;
 
   return (
