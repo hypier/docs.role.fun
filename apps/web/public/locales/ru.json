@@ -70,5 +70,10 @@
   "Cunning": "Cunning",
   "Adventurous": "Приключенческий",
   "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "Ежедневная награда успешно получена! Больше наград не забудьте вернуться завтра.",
-  "You've already claimed today's reward.": "Вы уже получили сегодняшнюю награду."
+  "You've already claimed today's reward.": "Вы уже получили сегодняшнюю награду.",
+  "Mature Content": "Содержание для взросления",
+  "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "Эта модель, персонаж или контент цензуры нецензурены. Включив контент Mature, вы подтверждаете, что вы старше 18 лет.",
+  "Always allow": "Всегда разрешать",
+  "Go back": "Вернуться",
+  "Confirm": "Confirm"
 }
