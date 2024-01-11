@@ -32,15 +32,10 @@
 Open Roleplay is an open-source alternative to Character.ai.
 You have full control over your data, model, and visual presentation.
 
-Platforms like Character.ai and other AI agent platforms are fantastic. However, these platforms often lack flexibility, transparency and customization options.
-
-This is where Open Roleplay steps in. Whether self-hosted or hosted by us, it's ready to be deployed on your own domain with your personalized model and data.
-
 ## Features
 
-- **Bring your own model or choose from wide variety of models:** Choose from a variety of AI models, making it easy to interact with your favorite AI characters.
-- **Highly Customizable:** Make your characters, personas and UI unique, for a one-of-a-kind roleplaying experience.
-- **Roleplay-Focused:** Designed with roleplaying and storytelling in mind, it ensures an immersive and engaging experience.
+- **Open source models:** Choose from a variety of AI models, making it easy to interact with your favorite AI characters.
+- **Customizability:** Make your characters, personas and UI unique, for a one-of-a-kind roleplaying experience.
 - **Group Chat (Coming soon):** Invite your favorite characters to one chat room and chat together.
 - **Extended Memory (Coming soon):** The character instructions and previous conversations are reminded to characters when the context window reaches its limit.
 - **Image Generation (Coming soon):** Allow your character to generate their own selfies, drawings, and photos for a more immersive experience.
