@@ -16,6 +16,13 @@ import {
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import useModelData from "../../app/lib/hooks/use-model-data";
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  PromiseLikeOfReactNode,
+} from "react";
 
 export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
   const { t } = useTranslation();
@@ -38,7 +45,7 @@ export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
             </FormControl>
             <SelectContent>
               {modelData && modelData?.length > 0 ? (
-                modelData.map((model) => (
+                modelData.map((model: { value: string; description: any }) => (
                   <SelectItem value={model.value}>
                     {model.description}
                   </SelectItem>
