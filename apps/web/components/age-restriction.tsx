@@ -21,7 +21,7 @@ import { toast } from "sonner";
 const AgeRestriction = () => {
   const me = useCurrentUser();
   const [showDialog, setShowDialog] = useState(false);
-  const updateNSFWPreference = useMutation(api.users.updateNSFWPreference, {});
+  const updateNSFWPreference = useMutation(api.users.updateNSFWPreference);
   const router = useRouter();
 
   useEffect(() => {
