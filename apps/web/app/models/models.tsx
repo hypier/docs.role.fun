@@ -6,6 +6,7 @@ import { useStablePaginatedQuery } from "../lib/hooks/use-stable-query";
 import CharacterCard from "../../components/cards/character-card";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
+import useCurrentUser from "../lib/hooks/use-current-user";
 
 const Models = () => {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ const Models = () => {
   );
   const ref = useRef(null);
   const inView = useInView(ref);
+  const me = useCurrentUser();
 
   useEffect(() => {
     if (inView) {
@@ -46,7 +48,7 @@ const Models = () => {
                     description={character.description}
                     model={character.model}
                     showRemix={true}
-                    isNSFW={character.isNSFW}
+                    isNSFW={character?.isNSFW && me?.nsfwPreference !== "allow"}
                   />
                 ),
             )
