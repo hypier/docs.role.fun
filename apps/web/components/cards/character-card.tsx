@@ -27,6 +27,7 @@ const CharacterCard = (props: {
   cardImageUrl?: string;
   model?: any;
   isDraft?: boolean;
+  isNSFW?: boolean;
   showEdit?: any;
   showRemix?: boolean;
 }) => {
@@ -37,7 +38,7 @@ const CharacterCard = (props: {
   return (
     <AspectRatio
       ratio={1 / 1.75}
-      className="group h-full w-full place-content-center rounded-lg duration-200 hover:shadow-lg"
+      className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
     >
       <Link href={`/character/${props?.id}`}>
         <Card className="flex h-full w-full items-end rounded-lg p-2">
@@ -124,14 +125,27 @@ const CharacterCard = (props: {
             </CardDescription>
           </CardHeader>
           {props.cardImageUrl && (
-            <Image
-              src={props.cardImageUrl}
-              alt={""}
-              width={300}
-              height={525}
-              quality={60}
-              className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
-            />
+            <>
+              {props?.isNSFW ? (
+                <Image
+                  src={props.cardImageUrl}
+                  alt={""}
+                  width={10}
+                  height={18}
+                  quality={50}
+                  className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
+                />
+              ) : (
+                <Image
+                  src={props.cardImageUrl}
+                  alt={""}
+                  width={300}
+                  height={525}
+                  quality={60}
+                  className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
+                />
+              )}
+            </>
           )}
         </Card>
       </Link>

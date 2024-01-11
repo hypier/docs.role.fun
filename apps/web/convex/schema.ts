@@ -17,6 +17,9 @@ export default defineSchema({
     crystals: v.optional(v.number()),
     tokenIdentifier: v.string(),
     languageTag: v.optional(v.string()),
+    nsfwPreference: v.optional(
+      v.union(v.literal("block"), v.literal("auto"), v.literal("allow")),
+    ),
   })
     .index("byToken", ["tokenIdentifier"])
     .index("byEmail", ["email"]),
@@ -113,6 +116,7 @@ export default defineSchema({
     name: v.optional(v.string()),
     numChats: v.optional(v.number()),
     isPrivate: v.boolean(),
+    isNSFW: v.optional(v.boolean()),
   })
     .index("byUserId", ["userId"])
     .index("byNumChats", ["numChats"])

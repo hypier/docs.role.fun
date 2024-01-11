@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import { MainChats } from "./main-chat";
 import useMyUsername from "../../app/lib/hooks/use-my-username";
 import { NewCharacter } from "./my-characters";
+import useCurrentUser from "../../app/lib/hooks/use-current-user";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -70,7 +71,8 @@ const Discover = () => {
   const plugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true }),
   );
-  const username = useMyUsername("");
+  const me = useCurrentUser();
+  const username = me?.name;
 
   return (
     <div className="relative flex flex-col gap-4 lg:gap-8">
@@ -157,6 +159,10 @@ const Discover = () => {
                             description={character.description}
                             model={character.model}
                             showRemix={true}
+                            isNSFW={
+                              character?.isNSFW &&
+                              me?.nsfwPreference !== "allow"
+                            }
                           />
                         </CarouselItem>
                         {index === 5 && (

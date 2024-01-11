@@ -25,6 +25,7 @@ export const upsert = mutation({
     greetings: v.optional(v.array(v.string())),
     knowledge: v.optional(v.string()),
     capabilities: v.optional(v.array(v.string())),
+    isNSFW: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
@@ -65,7 +66,6 @@ export const upsert = mutation({
         numChats: 0,
         isDraft: true,
         isArchived: false,
-        isNSFW: false,
         isBlacklisted: false,
       });
       return character;
@@ -126,7 +126,6 @@ export const list = query({
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
-      .filter((q) => q.neq(q.field("isNSFW"), true))
       .filter((q) => q.neq(q.field("visibility"), "private"));
     if (args.genreTag) {
       query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
