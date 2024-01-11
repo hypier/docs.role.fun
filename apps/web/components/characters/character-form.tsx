@@ -16,6 +16,7 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -48,24 +49,15 @@ import { ModelSelect } from "./model-select";
 import { ArchiveButton } from "./archive-button";
 import { GenerateButton } from "./generate-button";
 import { useTranslation } from "react-i18next";
+import { Checkbox } from "@repo/ui/src/components/checkbox";
 
 const formSchema = z.object({
   name: z.string().max(24),
   description: z.string().max(64),
   instructions: z.string().max(512),
   greetings: z.optional(z.string()),
-  model: z.union([
-    z.literal("mistral-7b-instruct"),
-    z.literal("mixtral-8x7b-instruct"),
-    z.literal("gpt-3.5-turbo-1106"),
-    z.literal("gpt-4-1106-preview"),
-    z.literal("pplx-7b-chat"),
-    z.literal("pplx-7b-online"),
-    z.literal("pplx-70b-chat"),
-    z.literal("pplx-70b-online"),
-    z.literal("mistral-small"),
-    z.literal("mistral-medium"),
-  ]),
+  model: z.any(),
+  isNSFW: z.boolean(),
 });
 
 export default function CharacterForm() {
@@ -90,10 +82,11 @@ export default function CharacterForm() {
     name = searchParams.get("name") || "",
     description = searchParams.get("description") || "",
     instructions = searchParams.get("instructions") || "",
-    greetings = searchParams.get("greetings") || "",
+    greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
-    model = (searchParams.get("model") as any) || "gpt-4-1106-preview",
+    model = (searchParams.get("model") as any) || "openrouter/auto",
     isDraft = searchParams.get("isDraft") || true,
+    isNSFW = Boolean(searchParams.get("isNSFW")) || false,
   } = character || remixCharacter || {};
 
   const upsert = useMutation(api.characters.upsert);
@@ -118,6 +111,7 @@ export default function CharacterForm() {
       instructions,
       greetings: Array.isArray(greetings) ? greetings[0] : greetings,
       model,
+      isNSFW,
     },
   });
 
@@ -128,8 +122,9 @@ export default function CharacterForm() {
       instructions,
       greetings: Array.isArray(greetings) ? greetings[0] : greetings,
       model,
+      isNSFW,
     });
-  }, [character, name, description, instructions, greetings, model]);
+  }, [character, name, description, instructions, greetings, model, isNSFW]);
 
   useEffect(() => {
     cardImageUrl && setIsGeneratingImage(false);
@@ -414,7 +409,7 @@ export default function CharacterForm() {
                     />
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Name your character" {...field} />
+                    <Input placeholder={t("Name your character")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -550,6 +545,31 @@ export default function CharacterForm() {
               )}
             />
             <ModelSelect form={form} model={model} />
+            <FormField
+              control={form.control}
+              name="isNSFW"
+              render={({ field }) => (
+                <div className="flex flex-col space-y-2">
+                  <FormLabel className="flex gap-1">
+                    {t("Mature content")}
+                    <span className="text-muted-foreground">
+                      {t("(optional)")}
+                    </span>
+                  </FormLabel>
+                  <FormItem className="flex items-center space-x-2 pt-2">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormLabel className="pb-2 font-normal">
+                      {t("This character is intended for adult.")}
+                    </FormLabel>
+                  </FormItem>
+                </div>
+              )}
+            />
           </form>
         </Form>
       </CardContent>

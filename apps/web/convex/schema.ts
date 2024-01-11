@@ -17,6 +17,9 @@ export default defineSchema({
     crystals: v.optional(v.number()),
     tokenIdentifier: v.string(),
     languageTag: v.optional(v.string()),
+    nsfwPreference: v.optional(
+      v.union(v.literal("block"), v.literal("auto"), v.literal("allow")),
+    ),
   })
     .index("byToken", ["tokenIdentifier"])
     .index("byEmail", ["email"]),
@@ -34,25 +37,11 @@ export default defineSchema({
     isBlacklisted: v.boolean(),
     isNSFW: v.optional(v.boolean()), // NSFW characters are filtered unless the adult user has explicitly opted in.
     isArchived: v.optional(v.boolean()),
+    isModel: v.optional(v.boolean()),
     visibility: v.optional(v.union(v.literal("private"), v.literal("public"))),
     numChats: v.optional(v.number()),
     embedding: v.optional(v.array(v.float64())),
-    model: v.optional(
-      v.union(
-        v.literal("gpt-3.5-turbo-1106"),
-        v.literal("gpt-4-1106-preview"),
-        v.literal("mistral-7b-instruct"),
-        v.literal("mixtral-8x7b-instruct"),
-        v.literal("pplx-7b-chat"),
-        v.literal("pplx-7b-online"),
-        v.literal("pplx-70b-chat"),
-        v.literal("pplx-70b-online"),
-        v.literal("accounts/fireworks/models/qwen-14b-chat"),
-        v.literal("mistral-tiny"),
-        v.literal("mistral-small"),
-        v.literal("mistral-medium"),
-      ),
-    ),
+    model: v.optional(v.string()),
     languageTag: v.optional(v.string()), // ISO 639 Set 1 two-letter language code
     genreTag: v.optional(v.string()), // Genre define the character's genre, it can be "Anime", "Game", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Assistant", anything.
     personalityTag: v.optional(v.string()), // These tags describe the character's personality traits. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.
@@ -127,6 +116,7 @@ export default defineSchema({
     name: v.optional(v.string()),
     numChats: v.optional(v.number()),
     isPrivate: v.boolean(),
+    isNSFW: v.optional(v.boolean()),
   })
     .index("byUserId", ["userId"])
     .index("byNumChats", ["numChats"])

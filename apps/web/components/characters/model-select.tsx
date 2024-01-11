@@ -13,10 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/src/components/select";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import useModelData from "../../app/lib/hooks/use-model-data";
 
 export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
   const { t } = useTranslation();
+  const modelData = useModelData();
   return (
     <FormField
       control={form.control}
@@ -34,42 +37,27 @@ export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              <SelectItem value="mistral-small">
-                Mistral Small - Faster response, provided by Mistral AI
-              </SelectItem>
-              <SelectItem value="mistral-medium">
-                Mistral Medium - Accurate response, provided by Mistral AI
-              </SelectItem>
-              <SelectItem value="gpt-3.5-turbo-1106">
-                GPT-3.5 Turbo - Capable of generating realistic text, 16,384
-                Context Length, provided by OpenAI
-              </SelectItem>
-              <SelectItem value="gpt-4-1106-preview">
-                GPT-4 Turbo - Capable of generating realistic text, 32,768
-                Context Length, provided by OpenAI
-              </SelectItem>
-              <SelectItem value="pplx-7b-online">
-                Perplexity 7B Online - Latest Internet Knowledge, Faster
-                response, 4096 Context Length, provided by Perplexity AI
-              </SelectItem>
-              <SelectItem value="pplx-70b-online">
-                Perplexity 70B Online - Latest Internet Knowledge, Faster
-                response, 4096 Context Length, provided by Perplexity AI
-              </SelectItem>
-              <SelectItem value="pplx-7b-chat">
-                Perplexity 7B Chat - Optimized for Knowledge, Faster response,
-                8192 Context Length, provided by Perplexity AI
-              </SelectItem>
-              <SelectItem value="pplx-70b-chat">
-                Perplexity 70B Chat - Optimized for Knowledge, Faster response,
-                4096 Context Length, provided by Perplexity AI
-              </SelectItem>
+              {modelData && modelData?.length > 0 ? (
+                modelData.map((model) => (
+                  <SelectItem value={model.value}>
+                    {model.description}
+                  </SelectItem>
+                ))
+              ) : (
+                <SelectItem value="openrouter/auto">Loading...</SelectItem>
+              )}
             </SelectContent>
           </Select>
           <FormDescription>
-            Customize the AI model for your characters. Each model has unique
-            performance characteristics, response speeds, and conversation
-            domains.
+            {t(
+              "Choose an AI model for your character. Each model has unique traits.",
+            )}{" "}
+            <Link
+              href="/models"
+              className="text-foreground underline duration-200 hover:opacity-50"
+            >
+              {t("Test your model here.")}
+            </Link>
           </FormDescription>
           <FormMessage />
         </FormItem>

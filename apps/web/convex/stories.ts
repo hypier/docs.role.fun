@@ -11,10 +11,12 @@ export const create = mutation({
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
+    const character = await ctx.db.get(args.characterId);
     return await ctx.db.insert("stories", {
       ...args,
       userId: user._id,
       isPrivate: false,
+      isNSFW: character?.isNSFW,
     });
   },
 });
@@ -43,6 +45,7 @@ export const listAll = query({
       .query("stories")
       .withIndex("byNumChats")
       .order("desc")
+      .filter((q) => q.neq(q.field("isNSFW"), true))
       .paginate(args.paginationOpts);
     return results;
   },

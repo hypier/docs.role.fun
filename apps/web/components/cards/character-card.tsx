@@ -17,6 +17,7 @@ import DraftBadge from "../characters/draft-badge";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
+import { useTranslation } from "react-i18next";
 
 const CharacterCard = (props: {
   id: string;
@@ -26,16 +27,18 @@ const CharacterCard = (props: {
   cardImageUrl?: string;
   model?: any;
   isDraft?: boolean;
+  isNSFW?: boolean;
   showEdit?: any;
   showRemix?: boolean;
 }) => {
+  const { t } = useTranslation();
   const numStories = useQuery(api.stories.count, {
     characterId: props.id as Id<"characters">,
   });
   return (
     <AspectRatio
       ratio={1 / 1.75}
-      className="group h-full w-full place-content-center rounded-lg shadow duration-200 hover:shadow-lg"
+      className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
     >
       <Link href={`/character/${props?.id}`}>
         <Card className="flex h-full w-full items-end rounded-lg p-2">
@@ -50,7 +53,7 @@ const CharacterCard = (props: {
                 variant="outline"
                 className="h-5 rounded-full border-none text-xs md:text-[10px]"
               >
-                Edit
+                {t("Edit")}
               </Button>
             </Link>
           )}
@@ -73,12 +76,12 @@ const CharacterCard = (props: {
                   className="h-5 rounded-full border-none text-xs md:text-[10px]"
                 >
                   <Repeat className="h-3 w-3 p-0.5" />
-                  Remix
+                  {t("Remix")}
                 </Button>
               </Link>
             </Tooltip>
           )}
-          <div className="absolute top-4 z-[3]">
+          <div className="absolute top-4 z-[3] hover:z-[4]">
             <ModelBadge modelName={props.model as string} />
           </div>
           <CardHeader className="relative z-[2] w-full p-4">
@@ -122,14 +125,27 @@ const CharacterCard = (props: {
             </CardDescription>
           </CardHeader>
           {props.cardImageUrl && (
-            <Image
-              src={props.cardImageUrl}
-              alt={""}
-              width={300}
-              height={525}
-              quality={60}
-              className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
-            />
+            <>
+              {props?.isNSFW ? (
+                <Image
+                  src={props.cardImageUrl}
+                  alt={""}
+                  width={10}
+                  height={18}
+                  quality={50}
+                  className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
+                />
+              ) : (
+                <Image
+                  src={props.cardImageUrl}
+                  alt={""}
+                  width={300}
+                  height={525}
+                  quality={60}
+                  className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
+                />
+              )}
+            </>
           )}
         </Card>
       </Link>

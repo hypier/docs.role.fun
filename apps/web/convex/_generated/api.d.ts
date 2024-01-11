@@ -26,6 +26,7 @@ import type * as image from "../image.js";
 import type * as ingest_embed from "../ingest/embed.js";
 import type * as llm from "../llm.js";
 import type * as messages from "../messages.js";
+import type * as models from "../models.js";
 import type * as payments from "../payments.js";
 import type * as personas from "../personas.js";
 import type * as random from "../random.js";
@@ -55,6 +56,7 @@ declare const fullApi: ApiFromModules<{
   "ingest/embed": typeof ingest_embed;
   llm: typeof llm;
   messages: typeof messages;
+  models: typeof models;
   payments: typeof payments;
   personas: typeof personas;
   random: typeof random;

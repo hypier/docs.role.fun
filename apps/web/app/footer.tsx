@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@repo/ui/src/components";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,8 +10,11 @@ interface FooterLinkProps {
 }
 
 const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (
-  <Link href={href} className="duration-200 hover:opacity-50 underline">
-    {children}
+  <Link
+    href={href}
+    className="text-muted-foreground duration-200 hover:opacity-50"
+  >
+    <Button variant="ghost">{children}</Button>
   </Link>
 );
 
@@ -19,22 +23,20 @@ export default function Footer() {
   const showFooter = pathname === "/" || pathname === "/shop";
   if (!showFooter) return null;
   return (
-    <footer className="flex w-full items-center justify-center px-6 py-2 2xl:px-0 text-xs">
-      <div className="flex w-full flex-col gap-8 items-center">
+    <footer className="flex w-full items-center justify-center px-6 py-4 text-xs 2xl:px-0">
+      <div className="flex w-full flex-col items-center gap-8">
         <div className="flex flex-col gap-8 sm:flex-row xl:gap-24">
-          <div className="flex gap-2">
-            <div className="text-muted-foreground">
+          <div className="flex gap-8">
+            <FooterLink href="/">
               © {new Date().getFullYear()} Empty Canvas, Inc.
-            </div>
+            </FooterLink>
             <FooterLink href="/github">
-              <Github className="w-4 h-4 p-[2px] inline" />
-              Star on GitHub
+              <Github className="inline h-4 w-4 p-[2px]" />
+              GitHub
             </FooterLink>
-            <FooterLink href="/privacy.html">Privacy Policy</FooterLink>
-            <FooterLink href="/terms.html">Terms of Service</FooterLink>
-            <FooterLink href="/crystal/terms">
-              Crystal Terms and Conditions
-            </FooterLink>
+            <FooterLink href="/privacy.html">Privacy</FooterLink>
+            <FooterLink href="/terms.html">Terms</FooterLink>
+            <FooterLink href="/crystal/terms">Crystal Terms</FooterLink>
           </div>
         </div>
       </div>

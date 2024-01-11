@@ -130,3 +130,19 @@ export const setLanguage = mutation({
     return user;
   },
 });
+
+export const updateNSFWPreference = mutation({
+  args: {
+    nsfwPreference: v.optional(
+      v.union(v.literal("block"), v.literal("auto"), v.literal("allow")),
+    ),
+  },
+  handler: async (ctx, { nsfwPreference }) => {
+    const user = await getUser(ctx);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    await ctx.db.patch(user._id, { nsfwPreference });
+    return user;
+  },
+});

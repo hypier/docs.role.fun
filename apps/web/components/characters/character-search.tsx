@@ -84,15 +84,15 @@ export default function CharacterSearch() {
   return (
     <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
       <CardHeader>
-        <CardTitle className="flex items-center gap-4">
-          Search
+        <CardTitle className="flex w-full items-center">
+          {t("Search")}
           <Input
             autoFocus
             onChange={(e) => debouncedSetInput(e.target.value)}
           />
         </CardTitle>
       </CardHeader>
-      <ul className="divide-y divide-border">
+      <ul>
         {results?.length ? (
           results.map((character) => (
             <Chat

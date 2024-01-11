@@ -32,6 +32,7 @@ import { toast } from "sonner";
 import { Story } from "./story/[storyId]/story";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import AgeRestriction from "../../../components/age-restriction";
 
 export const Stories = ({
   characterId,
@@ -100,6 +101,7 @@ export default function ChatWithCharacter({
   );
   return (
     <div className="flex w-full flex-col justify-self-start lg:pr-6">
+      {data?.isNSFW && <AgeRestriction />}
       <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem]">
         <Drawer>
           <DrawerTrigger asChild>
@@ -222,6 +224,7 @@ export default function ChatWithCharacter({
               chatId={chatId}
               characterId={data?._id as any}
               cardImageUrl={data?.cardImageUrl}
+              isPublic={data?.visibility === "public"}
             />
           ) : isAuthenticated && !isLoading ? (
             <div className="flex h-full w-full items-center justify-center">

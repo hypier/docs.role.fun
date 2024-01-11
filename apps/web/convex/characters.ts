@@ -18,28 +18,14 @@ export const upsert = mutation({
     remixId: v.optional(v.id("characters")),
     name: v.optional(v.string()),
     description: v.optional(v.string()),
-    model: v.optional(
-      v.union(
-        v.literal("gpt-3.5-turbo-1106"),
-        v.literal("gpt-4-1106-preview"),
-        v.literal("mistral-7b-instruct"),
-        v.literal("mixtral-8x7b-instruct"),
-        v.literal("pplx-7b-chat"),
-        v.literal("pplx-7b-online"),
-        v.literal("pplx-70b-chat"),
-        v.literal("pplx-70b-online"),
-        v.literal("accounts/fireworks/models/qwen-14b-chat"),
-        v.literal("mistral-tiny"),
-        v.literal("mistral-small"),
-        v.literal("mistral-medium"),
-      ),
-    ),
+    model: v.optional(v.string()),
     instructions: v.optional(v.string()),
     cardImageUrl: v.optional(v.string()),
     cardImageStorageId: v.optional(v.id("_storage")),
     greetings: v.optional(v.array(v.string())),
     knowledge: v.optional(v.string()),
     capabilities: v.optional(v.array(v.string())),
+    isNSFW: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
@@ -80,7 +66,6 @@ export const upsert = mutation({
         numChats: 0,
         isDraft: true,
         isArchived: false,
-        isNSFW: false,
         isBlacklisted: false,
       });
       return character;
@@ -141,7 +126,6 @@ export const list = query({
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
-      .filter((q) => q.neq(q.field("isNSFW"), true))
       .filter((q) => q.neq(q.field("visibility"), "private"));
     if (args.genreTag) {
       query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
@@ -159,6 +143,29 @@ export const list = query({
         q.eq(q.field("languageTag"), args.languageTag),
       );
     }
+    if (args.model) {
+      query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+
+    return await query.order("desc").paginate(args.paginationOpts);
+  },
+});
+
+export const listModels = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+    model: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byUpdatedAt")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isModel"), true))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isNSFW"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
     if (args.model) {
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
@@ -348,12 +355,14 @@ export const tag = internalMutation(
       genreTag,
       personalityTag,
       roleTag,
+      isNSFW,
     }: {
       characterId: Id<"characters">;
       languageTag: string;
       genreTag: string;
       personalityTag: string;
       roleTag: string;
+      isNSFW: boolean;
     },
   ) => {
     return await ctx.db.patch(characterId, {
@@ -361,6 +370,7 @@ export const tag = internalMutation(
       genreTag,
       personalityTag,
       roleTag,
+      ...(isNSFW ? { isNSFW } : {}),
     });
   },
 );

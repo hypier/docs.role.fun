@@ -3,7 +3,7 @@ import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
-import { useConvexAuth, usePaginatedQuery, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button, Tooltip } from "@repo/ui/src/components";
@@ -20,8 +20,8 @@ import {
 } from "@repo/ui/src/components/carousel";
 import { useTranslation } from "react-i18next";
 import { MainChats } from "./main-chat";
-import useMyUsername from "../../app/lib/hooks/use-my-username";
 import { NewCharacter } from "./my-characters";
+import useCurrentUser from "../../app/lib/hooks/use-current-user";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -70,7 +70,8 @@ const Discover = () => {
   const plugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true }),
   );
-  const username = useMyUsername("");
+  const me = useCurrentUser();
+  const username = me?.name;
 
   return (
     <div className="relative flex flex-col gap-4 lg:gap-8">
@@ -86,7 +87,7 @@ const Discover = () => {
       <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%]"
+          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -136,7 +137,7 @@ const Discover = () => {
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%]"
+          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -157,6 +158,10 @@ const Discover = () => {
                             description={character.description}
                             model={character.model}
                             showRemix={true}
+                            isNSFW={
+                              character?.isNSFW &&
+                              me?.nsfwPreference !== "allow"
+                            }
                           />
                         </CarouselItem>
                         {index === 5 && (

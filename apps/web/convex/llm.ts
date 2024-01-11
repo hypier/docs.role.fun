@@ -9,12 +9,7 @@ import {
 } from "./_generated/server";
 import { api, internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
-import {
-  DEFAULT_MODEL,
-  getAPIKey,
-  getBaseURL,
-  getRemindInstructionInterval,
-} from "./constants";
+import { DEFAULT_MODEL, getAPIKey, getBaseURL } from "./constants";
 import { getRandomGenreAndModality } from "./random";
 
 export const answer = internalAction({
@@ -24,10 +19,11 @@ export const answer = internalAction({
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
     messageId: v.optional(v.id("messages")),
+    reverseRole: v.optional(v.boolean()),
   },
   handler: async (
     ctx,
-    { userId, chatId, characterId, personaId, messageId },
+    { userId, chatId, characterId, personaId, messageId, reverseRole },
   ) => {
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
@@ -49,10 +45,14 @@ export const answer = internalAction({
 
     messageId = messageId
       ? messageId
-      : await ctx.runMutation(internal.llm.addCharacterMessage, {
-          chatId,
-          characterId,
-        });
+      : reverseRole
+        ? await ctx.runMutation(internal.llm.addUserMessage, {
+            chatId,
+          })
+        : await ctx.runMutation(internal.llm.addCharacterMessage, {
+            chatId,
+            characterId,
+          });
 
     if (character?.isArchived) {
       await ctx.runMutation(internal.llm.updateCharacterMessage, {
@@ -75,9 +75,14 @@ export const answer = internalAction({
       const openai = new OpenAI({
         baseURL,
         apiKey,
+        defaultHeaders: {
+          "HTTP-Referer": "openroleplay.ai",
+          "X-Title": "openroleplay.ai",
+        },
       });
-      const remindInstructionInterval = getRemindInstructionInterval(model);
-      const instruction = `You are 
+      const instruction = character?.isModel
+        ? `You are ${character?.name}.`
+        : `You are 
             {
               name: ${character?.name}
               ${
@@ -98,13 +103,9 @@ export const answer = internalAction({
                 : ""
             }
 
-            (You can use parentheses to indicate different types of things the Character might say,
-            narrator type descriptions of actions, muttering asides or emotional reactions.)
+            (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
-            You can indicate italics by putting a single asterisk * on each side of a phrase,
-            like *sad*, *laughing*. This can be used to indicate action or emotion in a definition.
-
-            Answer shortly.
+            You can indicate action or emotion in a definition by putting a single asterisk * on each side of a phrase, like *sad*, *laughing*.
             `;
 
       try {
@@ -132,32 +133,23 @@ export const answer = internalAction({
               role: "system",
               content: instruction,
             },
-            ...(conversations
-              .map(({ characterId, text }: any, index: any) => {
-                const message = {
-                  role: characterId ? "assistant" : "user",
-                  content: text,
-                };
-                if ((index + 1) % remindInstructionInterval === 0) {
-                  return [
-                    {
-                      role: "system",
-                      content: instruction,
-                    },
-                    message,
-                  ];
-                } else {
-                  return message;
-                }
-              })
-              .flat() as ChatCompletionMessageParam[]),
+            ...(conversations.map(({ characterId, text }: any) => ({
+              role: reverseRole
+                ? characterId
+                  ? "user"
+                  : "assistant"
+                : characterId
+                  ? "assistant"
+                  : "user",
+              content: text,
+            })) as ChatCompletionMessageParam[]),
           ],
         });
 
         let text = "";
         let mutationCounter = 0;
         for await (const { choices } of stream) {
-          const replyDelta = choices[0] && choices[0].delta.content;
+          const replyDelta = choices[0] && choices[0].delta?.content;
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
             mutationCounter++;
@@ -212,6 +204,16 @@ export const answer = internalAction({
           text: "I cannot reply at this time.",
         });
       }
+    }
+
+    if (reverseRole) {
+      await ctx.scheduler.runAfter(0, internal.llm.answer, {
+        chatId,
+        characterId,
+        personaId,
+        userId,
+        reverseRole: false,
+      });
     }
   },
 });
@@ -583,12 +585,17 @@ export const generateTags = internalAction({
                   type: "string",
                   description: `Role define the character's role or function in the story. Common examples are "Teacher", "Student", "Friend", "Enemy", "Protagonist", "Antagonist", "Sidekick", "Mentor", etc.`,
                 },
+                isNSFW: {
+                  type: "boolean",
+                  description: `True if character's detail metadata is explicitly sexual content, otherwise false.`,
+                },
               },
               required: [
                 "languageTag",
                 "genreTag",
                 "personalityTag",
                 "roleTag",
+                "isNSFW",
               ],
             },
           },
@@ -623,6 +630,7 @@ export const generateTags = internalAction({
             genreTag: functionArgs?.genreTag,
             personalityTag: functionArgs?.personalityTag,
             roleTag: functionArgs?.roleTag,
+            isNSFW: functionArgs?.isNSFW,
           });
         }
       } catch (error) {
@@ -659,6 +667,15 @@ export const addCharacterMessage = internalMutation(
       text: "",
       chatId,
       characterId,
+    });
+  },
+);
+
+export const addUserMessage = internalMutation(
+  async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
+    return await ctx.db.insert("messages", {
+      text: "",
+      chatId,
     });
   },
 );
