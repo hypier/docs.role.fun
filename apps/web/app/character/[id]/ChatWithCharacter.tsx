@@ -236,7 +236,7 @@ export default function ChatWithCharacter({
                 {data?.name && (
                   <motion.span
                     {...FadeInOut}
-                    className="font-medium"
+                    className="mt-16 font-medium lg:mt-0"
                   >{`Sign in and start chat with ${data?.name}`}</motion.span>
                 )}
               </AnimatePresence>
