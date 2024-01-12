@@ -8,13 +8,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@repo/ui/src/components/alert-dialog";
-import useCurrentUser from "../app/lib/hooks/use-current-user";
+import useCurrentUser from "../../app/lib/hooks/use-current-user";
 import { useEffect, useState } from "react";
 import { Rating18Plus } from "@repo/ui/src/components/icons";
 import { Label } from "@repo/ui/src/components/label";
 import { Switch } from "@repo/ui/src/components/switch";
 import { useMutation } from "convex/react";
-import { api } from "../convex/_generated/api";
+import { api } from "../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";

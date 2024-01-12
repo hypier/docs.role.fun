@@ -32,7 +32,7 @@ import { toast } from "sonner";
 import { Story } from "./story/[storyId]/story";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import AgeRestriction from "../../../components/age-restriction";
+import AgeRestriction from "../../../components/characters/age-restriction";
 
 export const Stories = ({
   characterId,
