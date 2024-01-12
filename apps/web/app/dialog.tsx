@@ -12,6 +12,7 @@ import {
   Plus,
   Repeat,
   Send,
+  Share,
   Sparkles,
   ThumbsDown,
   ThumbsUp,
@@ -268,11 +269,13 @@ export const Inspirations = ({
 interface ChatOptionsPopoverProps {
   characterId: Id<"characters">;
   chatId: Id<"chats">;
+  name: string;
 }
 
 const ChatOptionsPopover = ({
   characterId,
   chatId,
+  name,
 }: ChatOptionsPopoverProps) => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -313,6 +316,25 @@ const ChatOptionsPopover = ({
               {t("Delete chat")}
             </Button>
           </AlertDialogTrigger>
+          <Button
+            variant="ghost"
+            className="w-full justify-start gap-1 text-muted-foreground"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (navigator.share) {
+                navigator.share({
+                  title: document.title,
+                  url: document.location.href,
+                });
+              } else {
+                navigator.clipboard.writeText(document.location.href);
+                toast.success("Link copied to clipboard");
+              }
+            }}
+          >
+            <Share className="h-4 w-4 p-0.5" />
+            {t("Share")} {name}
+          </Button>
         </PopoverContent>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -446,7 +468,11 @@ export function Dialog({
             {t("Everything AI says is made up.")}
           </div>
           <div className="flex items-center gap-1">
-            <ChatOptionsPopover characterId={characterId} chatId={chatId} />
+            <ChatOptionsPopover
+              characterId={characterId}
+              chatId={chatId}
+              name={name}
+            />
             {isPublic && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
