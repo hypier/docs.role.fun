@@ -171,7 +171,7 @@ export const Message = ({
           }
         >
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="absolute -bottom-2 -right-2 z-10 flex items-center justify-center rounded-full border bg-background p-1">
+            <div className="absolute -bottom-5 -right-5 z-10 flex items-center justify-center rounded-full border bg-background p-1">
               <Button
                 size="icon"
                 variant="ghost"
