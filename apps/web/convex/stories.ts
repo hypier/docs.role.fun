@@ -143,7 +143,7 @@ export const metadata = query({
     );
     const character = await ctx.db.get(story?.characterId as Id<"characters">);
     return {
-      title: `${messages[0]?.text} ${character?.name}`,
+      title: `${messages[0]?.text} ${character?.name} AI`,
       description: messages[1]?.text,
       cardImageUrl: character?.cardImageUrl,
     };
