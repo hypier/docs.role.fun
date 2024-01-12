@@ -166,7 +166,7 @@ export const getCrystalPrice = (modelName: string) => {
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
-    value: "openrouter/auto",
+    value: "auto",
     description: "Auto",
     crystalPrice: 9,
   },
