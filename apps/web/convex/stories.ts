@@ -126,6 +126,30 @@ export const messages = query({
   },
 });
 
+export const metadata = query({
+  args: {
+    storyId: v.id("stories"),
+  },
+  handler: async (ctx, args) => {
+    const story = await ctx.db
+      .query("stories")
+      .filter((q) => q.eq(q.field("_id"), args.storyId))
+      .order("desc")
+      .first();
+    const messages = await Promise.all(
+      (story?.messageIds.slice(0, 2) ?? []).map((messageId) =>
+        ctx.db.get(messageId),
+      ),
+    );
+    const character = await ctx.db.get(story?.characterId as Id<"characters">);
+    return {
+      title: messages[0]?.text,
+      description: messages[1]?.text,
+      cardImageUrl: character?.cardImageUrl,
+    };
+  },
+});
+
 export const creatorName = query({
   args: {
     storyId: v.id("stories"),

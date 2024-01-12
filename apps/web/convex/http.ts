@@ -44,7 +44,35 @@ http.route({
         }),
         {
           status: 200,
-        }
+        },
+      );
+    } else {
+      return new Response("Character not found", {
+        status: 404,
+      });
+    }
+  }),
+});
+
+http.route({
+  path: "/story",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    const url = new URL(request.url);
+    const storyId = url.searchParams.get("storyId") as Id<"stories">;
+    const result = await ctx.runQuery(api.stories.metadata, {
+      storyId,
+    });
+    if (result) {
+      return new Response(
+        JSON.stringify({
+          title: result.title,
+          description: result.description,
+          cardImageUrl: result.cardImageUrl,
+        }),
+        {
+          status: 200,
+        },
       );
     } else {
       return new Response("Character not found", {
