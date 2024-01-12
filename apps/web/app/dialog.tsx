@@ -304,7 +304,9 @@ const ChatOptionsPopover = ({
               className="w-full justify-start gap-1 text-muted-foreground"
             >
               <CircleUserRound className="h-4 w-4 p-0.5" />
-              {t("Edit my persona")}
+              <span className="w-40 truncate text-left">
+                {t("Edit my persona")}
+              </span>
             </Button>
           </Link>
           <AlertDialogTrigger asChild>
@@ -313,7 +315,10 @@ const ChatOptionsPopover = ({
               className="w-full justify-start gap-1 text-muted-foreground"
             >
               <Delete className="h-4 w-4 p-0.5" />
-              {t("Delete chat")}
+              <span className="w-40 truncate text-left">
+                {" "}
+                {t("Delete chat")}
+              </span>
             </Button>
           </AlertDialogTrigger>
           <Button
@@ -333,7 +338,9 @@ const ChatOptionsPopover = ({
             }}
           >
             <Share className="h-4 w-4 p-0.5" />
-            {t("Share")} {name}
+            <span className="w-40 truncate text-left">
+              {t("Share")} {name}
+            </span>
           </Button>
         </PopoverContent>
         <AlertDialogContent>
