@@ -11,9 +11,11 @@ import { Tooltip } from "@repo/ui/src/components";
 const ModelBadge = ({
   modelName,
   showCredits,
+  collapse = true,
 }: {
   modelName: string;
   showCredits?: boolean;
+  collapse?: boolean;
 }) => {
   const model = modelName
     ? modelName
@@ -50,7 +52,9 @@ const ModelBadge = ({
       ) : (
         <Package className="h-4 w-4 p-0.5 text-white" />
       )}
-      <span className="hidden group-hover/badge:inline">{model}</span>
+      <span className={collapse ? "hidden group-hover/badge:inline" : ""}>
+        {model}
+      </span>
       {price ? (
         crystalUnit
       ) : price === 0 ? (
