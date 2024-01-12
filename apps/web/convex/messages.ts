@@ -65,8 +65,17 @@ export const send = mutation({
     });
     const character = await ctx.db.get(characterId);
     const updatedAt = new Date().toISOString();
+    const newNumChats = character?.numChats ? character?.numChats + 1 : 1;
+    const createdAt = character?._creationTime as number;
     await ctx.db.patch(characterId, {
-      numChats: character?.numChats ? character?.numChats + 1 : 1,
+      numChats: newNumChats,
+      score:
+        newNumChats /
+        Math.pow(
+          (new Date().getTime() - createdAt + 2 * 60 * 60 * 1000) /
+            (7 * 24 * 60 * 60 * 1000),
+          1.8,
+        ),
       updatedAt,
     });
     const followUp = await ctx.db

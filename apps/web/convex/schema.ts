@@ -49,6 +49,7 @@ export default defineSchema({
     isModel: v.optional(v.boolean()),
     visibility: v.optional(v.union(v.literal("private"), v.literal("public"))),
     numChats: v.optional(v.number()),
+    score: v.optional(v.number()),
     embedding: v.optional(v.array(v.float64())),
     model: v.optional(v.string()),
     languageTag: v.optional(v.string()), // ISO 639 Set 1 two-letter language code
@@ -59,6 +60,7 @@ export default defineSchema({
   })
     .index("byUserId", ["creatorId"])
     .index("byNumChats", ["numChats"])
+    .index("byScore", ["score"])
     .index("byUpdatedAt", ["updatedAt"])
     .index("byLanguage", ["languageTag"])
     .index("byGenre", ["genreTag"])
