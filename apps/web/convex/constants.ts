@@ -160,13 +160,13 @@ export const getRemindInstructionInterval = (modelName: string) => {
 export const getCrystalPrice = (modelName: string) => {
   const allModels = [...modelData, ...imageModelData];
   const model = allModels.find((m) => m.value === modelName);
-  return model ? model.crystalPrice : 5;
+  return model ? model.crystalPrice : model === "auto" ? 9 : 5;
 };
 
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
-    value: "auto",
+    value: "openrouter/auto",
     description: "Auto",
     crystalPrice: 9,
   },
