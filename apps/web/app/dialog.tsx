@@ -6,9 +6,11 @@ import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import {
+  CircleUserRound,
+  Delete,
   MoreHorizontal,
   Plus,
-  RefreshCw,
+  Repeat,
   Send,
   Sparkles,
   ThumbsDown,
@@ -46,6 +48,7 @@ import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
 import useMyUsername from "./lib/hooks/use-my-username";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 export const FormattedMessage = ({ message }: { message: any }) => {
   return (
@@ -262,6 +265,98 @@ export const Inspirations = ({
   );
 };
 
+interface ChatOptionsPopoverProps {
+  characterId: Id<"characters">;
+  chatId: Id<"chats">;
+}
+
+const ChatOptionsPopover = ({
+  characterId,
+  chatId,
+}: ChatOptionsPopoverProps) => {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const goBack = router.back;
+  const remove = useMutation(api.chats.remove);
+  return (
+    <Popover>
+      <AlertDialog>
+        <PopoverContent className="w-52 p-2">
+          <Link
+            href={`/my-characters/create${
+              characterId ? `?remixId=${characterId}` : ""
+            }`}
+          >
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-1 text-muted-foreground"
+            >
+              <Repeat className="h-4 w-4 p-0.5" />
+              {t("Remix character")}
+            </Button>
+          </Link>
+          <Link href={`/my-personas`}>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-1 text-muted-foreground"
+            >
+              <CircleUserRound className="h-4 w-4 p-0.5" />
+              {t("Edit my persona")}
+            </Button>
+          </Link>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-1 text-muted-foreground"
+            >
+              <Delete className="h-4 w-4 p-0.5" />
+              {t("Delete chat")}
+            </Button>
+          </AlertDialogTrigger>
+        </PopoverContent>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("Are you absolutely sure?")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {`This action cannot be undone. This will permanently delete chat.`}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("Cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                const promise = remove({
+                  id: chatId as Id<"chats">,
+                });
+                toast.promise(promise, {
+                  loading: "Deleting chat...",
+                  success: () => {
+                    goBack();
+                    return `Chat has been deleted.`;
+                  },
+                  error: (error) => {
+                    console.log("error:::", error);
+                    return error
+                      ? (error.data as { message: string })?.message
+                      : "Unexpected error occurred";
+                  },
+                });
+              }}
+            >
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <MoreHorizontal className="h-4 w-4" />
+        </Button>
+      </PopoverTrigger>
+    </Popover>
+  );
+};
+
 export function Dialog({
   name,
   model,
@@ -277,9 +372,9 @@ export function Dialog({
   characterId: Id<"characters">;
   isPublic?: boolean;
 }) {
+  const { t } = useTranslation();
   const router = useRouter();
   const goBack = router.back;
-  const remove = useMutation(api.chats.remove);
   const create = useMutation(api.stories.create);
   const { results, loadMore } = usePaginatedQuery(
     api.messages.list,
@@ -348,60 +443,10 @@ export function Dialog({
         <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
-            Everything AI says is made up.
+            {t("Everything AI says is made up.")}
           </div>
           <div className="flex items-center gap-1">
-            <Popover>
-              <AlertDialog>
-                <AlertDialogTrigger>
-                  <PopoverContent asChild>
-                    <Button variant="ghost" className="text-muted-foreground">
-                      Delete Chat
-                    </Button>
-                  </PopoverContent>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Are you absolutely sure?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      {`This action cannot be undone. This will permanently delete chat.`}
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={() => {
-                        const promise = remove({
-                          id: chatId as Id<"chats">,
-                        });
-                        toast.promise(promise, {
-                          loading: "Deleting chat...",
-                          success: () => {
-                            goBack();
-                            return `Chat has been deleted.`;
-                          },
-                          error: (error) => {
-                            console.log("error:::", error);
-                            return error
-                              ? (error.data as { message: string })?.message
-                              : "Unexpected error occurred";
-                          },
-                        });
-                      }}
-                    >
-                      Continue
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-              <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </PopoverTrigger>
-            </Popover>
+            <ChatOptionsPopover characterId={characterId} chatId={chatId} />
             {isPublic && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
