@@ -152,6 +152,47 @@ export const list = query({
   },
 });
 
+export const listBackend = query({
+  args: {
+    genreTag: v.optional(v.string()),
+    personalityTag: v.optional(v.string()),
+    roleTag: v.optional(v.string()),
+    languageTag: v.optional(v.string()),
+    model: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byScore")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isModel"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+    if (args.genreTag) {
+      query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
+    }
+    if (args.personalityTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("personalityTag"), args.personalityTag),
+      );
+    }
+    if (args.roleTag) {
+      query = query.filter((q) => q.eq(q.field("roleTag"), args.roleTag));
+    }
+    if (args.languageTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("languageTag"), args.languageTag),
+      );
+    }
+    if (args.model) {
+      query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+
+    return await query.order("desc").take(100);
+  },
+});
+
 export const listModels = query({
   args: {
     paginationOpts: paginationOptsValidator,
