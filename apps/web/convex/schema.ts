@@ -7,6 +7,15 @@ export default defineSchema({
     characterId: v.optional(v.id("characters")),
     personaId: v.optional(v.id("personas")),
     text: v.string(),
+    reaction: v.optional(
+      v.union(
+        v.literal("like"),
+        v.literal("dislike"),
+        v.literal("lol"),
+        v.literal("cry"),
+        v.literal("smirk"),
+      ),
+    ),
   })
     .index("byCharacterId", ["characterId"])
     .index("byChatId", ["chatId"]),
@@ -127,4 +136,15 @@ export default defineSchema({
     rejectedMessage: v.optional(v.string()),
     regeneratedMessage: v.optional(v.string()),
   }),
+  messageReaction: defineTable({
+    messageId: v.id("messages"),
+    text: v.optional(v.string()),
+    type: v.union(
+      v.literal("like"),
+      v.literal("dislike"),
+      v.literal("lol"),
+      v.literal("cry"),
+      v.literal("smirk"),
+    ),
+  }).index("byMessageId", ["messageId"]),
 });

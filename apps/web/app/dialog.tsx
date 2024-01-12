@@ -5,7 +5,15 @@ import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { MoreHorizontal, Plus, RefreshCw, Send, Sparkles } from "lucide-react";
+import {
+  MoreHorizontal,
+  Plus,
+  RefreshCw,
+  Send,
+  Sparkles,
+  ThumbsDown,
+  ThumbsUp,
+} from "lucide-react";
 import { useInView } from "framer-motion";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { CodeBlock } from "@repo/ui/src/components/codeblock";
@@ -95,6 +103,7 @@ export const Message = ({
 }) => {
   const { t } = useTranslation();
   const regenerate = useMutation(api.messages.regenerate);
+  const react = useMutation(api.messages.react);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [thinkingDots, setThinkingDots] = useState("");
   const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
@@ -161,27 +170,52 @@ export const Message = ({
               : " rounded-tr-none bg-foreground text-muted ")
           }
         >
-          {message?.characterId && chatId && (
-            <Button
-              size="icon"
-              variant="outline"
-              className="absolute -bottom-2 -right-2 h-5 w-5 rounded-full p-1"
-              onClick={async () => {
-                setIsRegenerating(true);
-                await regenerate({
-                  messageId: message?._id as Id<"messages">,
-                  chatId,
-                  characterId: message?.characterId,
-                });
-                setIsRegenerating(false);
-              }}
-            >
-              {isRegenerating ? (
-                <Spinner className="h-4 w-4" />
-              ) : (
-                <RefreshCw className="h-4 w-4" />
-              )}
-            </Button>
+          {message?.characterId && chatId && !isRegenerating && (
+            <div className="absolute -bottom-2 -right-2 z-10 flex items-center justify-center rounded-full border bg-background p-1">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="h-5 w-5 rounded-full p-1"
+                onClick={async () => {
+                  await react({
+                    messageId: message?._id as Id<"messages">,
+                    type: "like",
+                  });
+                }}
+              >
+                {message?.reaction === "like" ? (
+                  <ThumbsUp className="h-4 w-4 text-green-500" />
+                ) : (
+                  <ThumbsUp className="h-4 w-4" />
+                )}
+              </Button>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="h-5 w-5 rounded-full p-1"
+                onClick={async () => {
+                  await react({
+                    messageId: message?._id as Id<"messages">,
+                    type: "dislike",
+                  });
+                  setIsRegenerating(true);
+                  await regenerate({
+                    messageId: message?._id as Id<"messages">,
+                    chatId,
+                    characterId: message?.characterId,
+                  });
+                  setIsRegenerating(false);
+                }}
+              >
+                {isRegenerating ? (
+                  <Spinner className="h-4 w-4" />
+                ) : message?.reaction === "dislike" ? (
+                  <ThumbsDown className="h-4 w-4 text-rose-500" />
+                ) : (
+                  <ThumbsDown className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
           )}
           <FormattedMessage message={message} />
         </div>

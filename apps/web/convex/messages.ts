@@ -142,3 +142,40 @@ export const regenerate = mutation({
       }));
   },
 });
+
+export const react = mutation({
+  args: {
+    messageId: v.id("messages"),
+    type: v.union(
+      v.literal("like"),
+      v.literal("dislike"),
+      v.literal("lol"),
+      v.literal("cry"),
+      v.literal("smirk"),
+    ),
+  },
+  handler: async (ctx, { messageId, type }) => {
+    const existingReaction = await ctx.db
+      .query("messageReaction")
+      .withIndex("byMessageId", (q) => q.eq("messageId", messageId))
+      .first();
+
+    if (existingReaction) {
+      if (existingReaction.type === type) {
+        await ctx.db.delete(existingReaction._id);
+        await ctx.db.patch(messageId, { reaction: undefined });
+      } else {
+        await ctx.db.patch(existingReaction._id, { type });
+        await ctx.db.patch(messageId, { reaction: type });
+      }
+    } else {
+      const message = await ctx.db.get(messageId);
+      await ctx.db.insert("messageReaction", {
+        messageId,
+        text: message?.text,
+        type,
+      });
+      await ctx.db.patch(messageId, { reaction: type });
+    }
+  },
+});
