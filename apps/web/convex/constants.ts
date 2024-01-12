@@ -196,7 +196,7 @@ export const modelData = [
     description: "Mistral Medium by Mistral AI",
     src: "/models/mistral.png",
     alt: "Company logo of Mistral AI",
-    crystalPrice: 10,
+    crystalPrice: 5,
   },
   {
     value: "pplx-70b-online",
