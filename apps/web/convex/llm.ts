@@ -25,6 +25,7 @@ export const answer = internalAction({
     ctx,
     { userId, chatId, characterId, personaId, messageId, reverseRole },
   ) => {
+    const username = await ctx.runQuery(api.users.getUsername, { id: userId });
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
     });
@@ -106,7 +107,9 @@ export const answer = internalAction({
               }
             }
 
-            and you are talking with ${persona?.name} (${persona?.description})
+            and you are talking with ${
+              persona?.name ? persona.name : username
+            } ${persona?.description ? `(${persona.description})` : ""}
 
             (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
