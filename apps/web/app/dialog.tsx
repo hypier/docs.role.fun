@@ -485,7 +485,7 @@ export function Dialog({
                   <AlertDialogHeader>
                     <AlertDialogTitle>Create a story</AlertDialogTitle>
                     <AlertDialogDescription>
-                      {`Anyone will be able to see the story. Messages you send after creating your story won't be shared.`}
+                      {`When you create a story, anyone will be able to see and continue the story. Messages you send after creating your story won't be shared.`}
                     </AlertDialogDescription>
                     <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
                       {messages.map((message, i) => (
