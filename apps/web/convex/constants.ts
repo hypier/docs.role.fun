@@ -158,252 +158,230 @@ export const getRemindInstructionInterval = (modelName: string) => {
 };
 
 export const getCrystalPrice = (modelName: string) => {
-  switch (modelName) {
-    case "mixtral-8x7b-instruct":
-      return 1;
-    case "mistral-7b-instruct":
-      return 1;
-    case "pplx-7b-chat":
-      return 1;
-    case "pplx-7b-online":
-      return 1;
-    case "pplx-70b-online":
-      return 1;
-    case "pplx-70b-chat":
-      return 1;
-    case "accounts/fireworks/models/qwen-14b-chat":
-      return 1;
-    case "gpt-3.5-turbo-1106":
-      return 1;
-    // free models
-    case "nousresearch/nous-capybara-7b":
-    case "mistralai/mistral-7b-instruct":
-    case "huggingfaceh4/zephyr-7b-beta":
-    case "openchat/openchat-7b":
-    case "gryphe/mythomist-7b":
-    case "openrouter/cinematika-7b":
-      return 0;
-    // 1 crystal models
-    case "nousresearch/nous-hermes-llama2-13b":
-    case "austism/chronos-hermes-13b":
-    case "jebcarter/psyfighter-13b":
-    case "koboldai/psyfighter-13b-2":
-    case "meta-llama/codellama-34b-instruct":
-    case "phind/phind-codellama-34b":
-    case "intel/neural-chat-7b":
-    case "mistralai/mixtral-8x7b-instruct":
-    case "meta-llama/llama-2-13b-chat":
-    case "meta-llama/llama-2-70b-chat":
-    case "nousresearch/nous-hermes-llama2-70b":
-    case "nousresearch/nous-capybara-34b":
-    case "gryphe/mythomax-l2-13b-8k":
-    case "jondurbin/airoboros-l2-70b":
-    case "google/gemini-pro":
-    case "teknium/openhermes-2-mistral-7b":
-    case "anthropic/claude-instant-v1":
-    case "cognitivecomputations/dolphin-mixtral-8x7b":
-    case "lizpreciatior/lzlv-70b-fp16-hf":
-      return 1;
-    // 3 crystal models
-    case "neversleep/noromaid-mixtral-8x7b-instruct":
-    case "neversleep/noromaid-20b":
-    case "migtissera/synthia-70b":
-      return 3;
-    // 5 crystal models
-    case "haotian-liu/llava-13b":
-    case "nousresearch/nous-hermes-2-vision-7b":
-      return 5;
-    // 10 crytstal models
-    case "anthropic/claude-2":
-      return 10;
-    case "stable-diffusion-xl-1024-v1-0":
-      return 25;
-    case "gpt-4-1106-preview":
-      return 10;
-    case "dalle-3":
-      return 75;
-    case "mistral-tiny":
-      return 1;
-    case "mistral-small":
-      return 2;
-    case "mistral-medium":
-      return 10;
-    case "auto":
-      return 9;
-    default:
-      return 5;
-  }
+  const allModels = [...modelData, ...imageModelData];
+  const model = allModels.find((m) => m.value === modelName);
+  return model ? model.crystalPrice : 5;
 };
 
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
     value: "openrouter/auto",
-    description: "Auto - State of the art models for various purposes.",
+    description: "Auto",
+    crystalPrice: 9,
   },
   {
     value: "gpt-3.5-turbo-1106",
     description: "GPT-3.5 Turbo by OpenAI",
     src: "/models/openai.png",
     alt: "Company logo of Open AI",
+    crystalPrice: 1,
   },
   {
     value: "gpt-4-1106-preview",
     description: "GPT-4 Turbo by OpenAI",
     src: "/models/openai.png",
     alt: "Company logo of Open AI",
+    crystalPrice: 10,
   },
   {
     value: "mistral-small",
     description: "Mistral Small by Mistral AI",
     src: "/models/mistral.png",
     alt: "Company logo of Mistral AI",
+    crystalPrice: 2,
   },
   {
     value: "mistral-medium",
     description: "Mistral Medium by Mistral AI",
     src: "/models/mistral.png",
     alt: "Company logo of Mistral AI",
+    crystalPrice: 10,
   },
   {
     value: "pplx-70b-online",
     description: "Perplexity 70B Online by Perplexity AI",
     src: "/models/perplexity.png",
     alt: "Company logo of Perplexity AI",
+    crystalPrice: 1,
   },
   {
     value: "pplx-70b-chat",
     description: "Perplexity 70B Chat by Perplexity AI",
     src: "/models/perplexity.png",
     alt: "Company logo of Perplexity AI",
+    crystalPrice: 1,
   },
   {
     value: "google/gemini-pro",
     description: "Gemini Pro by Google",
+    crystalPrice: 1,
   },
   {
     value: "anthropic/claude-instant-v1",
     description: "Claude Instant by Anthropic",
+    crystalPrice: 1,
   },
   {
     value: "anthropic/claude-2",
     description: "Claude 2 by Anthropic",
+    crystalPrice: 10,
   },
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
     description: "Uncensored, Noromaid 8x7B by Never Sleep",
     isNSFW: true,
+    crystalPrice: 3,
   },
   {
     value: "neversleep/noromaid-20b",
     description: "Uncensored, Noromaid 20B by Never Sleep",
     isNSFW: true,
+    crystalPrice: 3,
   },
   {
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
     isNSFW: true,
+    crystalPrice: 1,
   },
   {
     value: "lizpreciatior/lzlv-70b-fp16-hf",
     description: "Uncensored, lzlv 70B by lizpreciatior",
     isNSFW: true,
+    crystalPrice: 1,
   },
   {
     value: "nousresearch/nous-capybara-7b",
     description: "Copybara 7B by Nous Research",
+    crystalPrice: 1,
   },
   {
     value: "mistralai/mistral-7b-instruct",
     description: "Mistral 7B by Mistral AI",
+    crystalPrice: 0,
   },
   {
     value: "huggingfaceh4/zephyr-7b-beta",
     description: "Zephyr 7B by Hugging Face",
+    crystalPrice: 0,
   },
   {
     value: "openchat/openchat-7b",
     description: "Openchat 7B by Open Chat",
+    crystalPrice: 0,
   },
   {
     value: "gryphe/mythomist-7b",
     description: "Mythomist 7B by Gryphe",
+    crystalPrice: 0,
   },
   {
     value: "openrouter/cinematika-7b",
     description: "Cinematika 7B by Open Router",
+    crystalPrice: 0,
   },
   {
     value: "nousresearch/nous-hermes-llama2-13b",
     description: "LLama2 13B by Nous Research",
+    crystalPrice: 1,
   },
   {
     value: "austism/chronos-hermes-13b",
     description: "Chronos Hermes by Austism",
+    crystalPrice: 1,
   },
   {
     value: "jebcarter/psyfighter-13b",
     description: "Psyfighter 13B by Jeb Carter",
+    crystalPrice: 1,
   },
   {
     value: "koboldai/psyfighter-13b-2",
     description: "Psyfighter 13B 2 by Kobold AI",
+    crystalPrice: 1,
   },
   {
     value: "meta-llama/codellama-34b-instruct",
     description: "CodeLlama2 34B by Meta Llama",
+    crystalPrice: 1,
   },
   {
     value: "phind/phind-codellama-34b",
     description: "Phind CodeLlama2 34B by Phind",
+    crystalPrice: 1,
   },
   {
     value: "intel/neural-chat-7b",
     description: "Neural Chat 7B by Intel",
+    crystalPrice: 1,
   },
   {
     value: "mistralai/mixtral-8x7b-instruct",
     description: "Mixtral 8x7B by Mistral AI",
+    crystalPrice: 1,
   },
   {
     value: "meta-llama/llama-2-13b-chat",
     description: "Llama 2 13B by Meta Llama",
+    crystalPrice: 1,
   },
   {
     value: "meta-llama/llama-2-70b-chat",
     description: "Llama 2 70B by Meta Llama",
+    crystalPrice: 1,
   },
   {
     value: "nousresearch/nous-hermes-llama2-70b",
     description: "Llama 2 70B by Nous Research",
+    crystalPrice: 1,
   },
   {
     value: "nousresearch/nous-capybara-34b",
-    description: "Copybara 34B by Nous Research",
+    description: "Capybara 34B by Nous Research",
+    crystalPrice: 1,
   },
   {
     value: "gryphe/mythomax-l2-13b-8k",
     description: "Mythomax L2 13B by Gryphe",
+    crystalPrice: 1,
   },
   {
     value: "jondurbin/airoboros-l2-70b",
     description: "Airobos L2 70B by Jon Durbin",
+    crystalPrice: 1,
   },
   {
     value: "teknium/openhermes-2-mistral-7b",
     description: "Openhermes 2 7B by Teknium",
+    crystalPrice: 1,
   },
   {
     value: "migtissera/synthia-70b",
     description: "Synthia 70B by Migtissera",
+    crystalPrice: 3,
   },
   {
     value: "haotian-liu/llava-13b",
     description: "Llava 13B by Haotian Liu",
+    crystalPrice: 5,
   },
   {
     value: "nousresearch/nous-hermes-2-vision-7b",
     description: "Hermes 2 Vision 7B by Nous Research",
+    crystalPrice: 5,
+  },
+];
+export const imageModelData = [
+  {
+    value: "dalle-3",
+    description: "Dall-E 3 by Open AI",
+    crystalPrice: 75,
+  },
+  {
+    value: "stable-diffusion-xl-1024-v1-0",
+    description: "Stable Diffusion XL by Stability AI",
+    crystalPrice: 25,
   },
 ];
 
