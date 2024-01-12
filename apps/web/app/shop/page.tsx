@@ -240,6 +240,12 @@ export default function Page() {
         <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
           {t("Text models")}
         </h2>
+        <p className="flex items-center gap-1 text-sm text-muted-foreground">
+          <Crystal className="hidden h-4 w-4 md:inline" />
+          {t(
+            "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
+          )}
+        </p>
       </div>
       <Card>
         <Table>
