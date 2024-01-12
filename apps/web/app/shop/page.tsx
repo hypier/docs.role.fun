@@ -27,6 +27,7 @@ import {
   TableCaption,
   TableHead,
 } from "@repo/ui/src/components/table";
+import ModelBadge from "../../components/characters/model-badge";
 
 const Package = ({
   src,
@@ -245,7 +246,7 @@ export default function Page() {
           <TableCaption>Model Data</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Model</TableHead>
+              <TableHead>Badge</TableHead>
               <TableHead>Name</TableHead>
               <TableHead className="text-right">Price (Crystals)</TableHead>
             </TableRow>
@@ -255,10 +256,12 @@ export default function Page() {
               .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
               .map((model: any) => (
                 <TableRow key={model.value}>
+                  <TableCell>
+                    <ModelBadge modelName={model.value} collapse={false} />
+                  </TableCell>
                   <TableCell className="font-medium">
                     {model.description}
                   </TableCell>
-                  <TableCell>{model.value}</TableCell>
                   <TableCell className="text-right">
                     {model.crystalPrice ? (
                       model.crystalPrice
