@@ -17,6 +17,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FadeInOut } from "../lib/utils";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import useModelData from "../lib/hooks/use-model-data";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableCell,
+  TableRow,
+  TableCaption,
+  TableHead,
+} from "@repo/ui/src/components/table";
 
 const Package = ({
   src,
@@ -168,6 +178,7 @@ const DailyReward = () => {
 };
 
 export default function Page() {
+  const modelData = useModelData();
   const { t } = useTranslation();
   const { isAuthenticated } = useConvexAuth();
   const packages = [
@@ -223,6 +234,44 @@ export default function Page() {
           </section>
         )}
       </AnimatePresence>
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="font-display text-5xl">{t("Crystal Price Table")}</h1>
+        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          {t("Text models")}
+        </h2>
+      </div>
+      <Card>
+        <Table>
+          <TableCaption>Model Data</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Model</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead className="text-right">Price (Crystals)</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {modelData
+              .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
+              .map((model: any) => (
+                <TableRow key={model.value}>
+                  <TableCell className="font-medium">
+                    {model.description}
+                  </TableCell>
+                  <TableCell>{model.value}</TableCell>
+                  <TableCell className="text-right">
+                    {model.crystalPrice ? (
+                      model.crystalPrice
+                    ) : (
+                      <span className="font-medium text-teal-500">FREE</span>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </Card>
+
       <AnimatePresence>{isAuthenticated && <DailyReward />}</AnimatePresence>
     </div>
   );
