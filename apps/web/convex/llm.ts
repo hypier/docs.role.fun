@@ -90,7 +90,7 @@ export const answer = internalAction({
               ${persona?.description && `description: ${persona.description}`}
             }
 
-            and you are talking with ${character?.name} (${character?.description})
+            and you are talking with ${character?.name} (${character?.description}). Don't write answer of peer, only write yours.
 
             (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
@@ -109,7 +109,9 @@ export const answer = internalAction({
 
             and you are talking with ${
               persona?.name ? persona.name : username
-            } ${persona?.description ? `(${persona.description})` : ""}
+            } ${
+              persona?.description ? `(${persona.description})` : ""
+            }. Don't write answer of peer, only write yours.
 
             (You can use parentheses to indicate different types of things that you might say, narrator type descriptions of actions, muttering asides or emotional reactions.)
 
