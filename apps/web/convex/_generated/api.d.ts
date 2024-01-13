@@ -18,6 +18,7 @@ import type * as characterCard from "../characterCard.js";
 import type * as characters from "../characters.js";
 import type * as chats from "../chats.js";
 import type * as constants from "../constants.js";
+import type * as crons from "../crons.js";
 import type * as crystals from "../crystals.js";
 import type * as followUps from "../followUps.js";
 import type * as helpers from "../helpers.js";
@@ -48,6 +49,7 @@ declare const fullApi: ApiFromModules<{
   characters: typeof characters;
   chats: typeof chats;
   constants: typeof constants;
+  crons: typeof crons;
   crystals: typeof crystals;
   followUps: typeof followUps;
   helpers: typeof helpers;

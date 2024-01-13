@@ -488,3 +488,32 @@ export const listPopularTags = query({
     return mostFrequentTags;
   },
 });
+
+export const scoreAll = internalMutation({
+  args: {},
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byUpdatedAt")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isModel"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+    const characters = await query.order("desc").take(500);
+    characters.forEach(async (character) => {
+      const createdAt = character?._creationTime as number;
+      const numChats = character?.numChats || 1;
+      await ctx.db.patch(character._id, {
+        score:
+          numChats /
+          Math.pow(
+            (new Date().getTime() - createdAt + 2 * 60 * 60 * 1000) /
+              (7 * 24 * 60 * 60 * 1000),
+            1.8,
+          ),
+        updatedAt: new Date().toISOString(),
+      });
+    });
+  },
+});
