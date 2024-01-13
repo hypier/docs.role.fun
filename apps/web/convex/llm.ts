@@ -138,8 +138,10 @@ export const answer = internalAction({
           message &&
           message?.text &&
           conversations[conversations.length - 1] &&
-          conversations[conversations.length - 1]?.text
+          conversations[conversations.length - 1]?.text &&
+          typeof conversations[conversations.length - 1]?.text === "string"
         ) {
+          // @ts-ignore
           conversations[conversations.length - 1].text +=
             ` (don't answer like "${message.text})"`;
           console.log("conversations edited::", conversations);
