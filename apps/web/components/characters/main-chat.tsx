@@ -38,9 +38,6 @@ export const Chat = ({
   const message = useQuery(api.messages.mostRecentMessage, {
     chatId,
   });
-  const recentMessageAt = message?._creationTime
-    ? (message?._creationTime as number)
-    : time;
   return (
     <Link href={`/character/${characterId}?chatId=${chatId}`}>
       <div className="flex flex-col items-start justify-start">
@@ -58,7 +55,7 @@ export const Chat = ({
         </Avatar>
         <div className="flex-1 duration-200 group-hover:opacity-75">
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-medium">
+            <h2 className="w-32 truncate text-lg font-medium lg:w-64">
               {name ? name : character?.name ? character?.name : "Loading"}
             </h2>
           </div>

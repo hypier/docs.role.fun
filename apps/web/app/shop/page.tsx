@@ -235,8 +235,8 @@ export default function Page() {
           </section>
         )}
       </AnimatePresence>
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="font-display text-5xl">{t("Crystal Price Table")}</h1>
+      <div className="flex flex-col items-start gap-4 px-5 md:items-center">
+        <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
         <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
           {t("Text models")}
         </h2>
@@ -249,19 +249,21 @@ export default function Page() {
       </div>
       <Card>
         <Table>
-          <TableCaption>Model Data</TableCaption>
+          <TableCaption className="text-xs lg:text-sm">
+            {t("Crystal Price Table")}
+          </TableCaption>
           <TableHeader>
-            <TableRow>
-              <TableHead>Badge</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead className="text-right">Price (Crystals)</TableHead>
+            <TableRow className="text-xs lg:text-sm">
+              <TableHead>{t("Badge")}</TableHead>
+              <TableHead>{t("Name")}</TableHead>
+              <TableHead className="text-right">{t("Crystals")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {modelData
               .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
               .map((model: any) => (
-                <TableRow key={model.value}>
+                <TableRow key={model.value} className="text-xs lg:text-sm">
                   <TableCell>
                     <ModelBadge modelName={model.value} collapse={false} />
                   </TableCell>
