@@ -137,7 +137,8 @@ export const answer = internalAction({
         if (
           message &&
           message?.text &&
-          conversations[conversations.length - 1]
+          conversations[conversations.length - 1] &&
+          conversations[conversations.length - 1]?.text
         ) {
           conversations[conversations.length - 1].text +=
             ` (don't answer like "${message.text})"`;
