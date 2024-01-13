@@ -118,19 +118,30 @@ export const answer = internalAction({
       try {
         const lastIndice = message
           ? messages.reduce((lastIndex, msg: any, index) => {
-              return msg._creationTime < message?._creationTime
+              return msg._creationTime > message?._creationTime
                 ? index
                 : lastIndex;
             }, -1)
           : -1;
-        const conversations =
+        let conversations =
           message === undefined ? messages : messages.slice(0, lastIndice);
+        console.log("messages before pop::", messages);
+        console.log("conversations before pop::", conversations);
         if (
           conversations.length > 0 &&
           conversations[conversations.length - 1]?.characterId &&
           !reverseRole
         ) {
           conversations.pop();
+        }
+        if (
+          message &&
+          message?.text &&
+          conversations[conversations.length - 1]
+        ) {
+          conversations[conversations.length - 1].text +=
+            ` (don't answer like "${message.text})"`;
+          console.log("conversations edited::", conversations);
         }
 
         const stream = await openai.chat.completions.create({

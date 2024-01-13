@@ -179,7 +179,7 @@ export const Message = ({
               <Button
                 size="icon"
                 variant="ghost"
-                className="h-5 w-5 rounded-full p-1"
+                className="group h-5 w-5 rounded-full p-1 hover:bg-transparent"
                 onClick={async () => {
                   await react({
                     messageId: message?._id as Id<"messages">,
@@ -188,7 +188,7 @@ export const Message = ({
                 }}
               >
                 {message?.reaction === "like" ? (
-                  <ThumbsUp className="h-4 w-4 text-green-500" />
+                  <ThumbsUp className="h-4 w-4 text-green-500 group-hover:text-green-500" />
                 ) : (
                   <ThumbsUp className="h-4 w-4" />
                 )}
@@ -196,7 +196,7 @@ export const Message = ({
               <Button
                 size="icon"
                 variant="ghost"
-                className="h-5 w-5 rounded-full p-1"
+                className="group h-5 w-5 rounded-full p-1 hover:bg-transparent"
                 onClick={async () => {
                   await react({
                     messageId: message?._id as Id<"messages">,
@@ -214,7 +214,7 @@ export const Message = ({
                 {isRegenerating ? (
                   <Spinner className="h-4 w-4" />
                 ) : message?.reaction === "dislike" ? (
-                  <ThumbsDown className="h-4 w-4 text-rose-500" />
+                  <ThumbsDown className="h-4 w-4 text-rose-500 group-hover:text-rose-500" />
                 ) : (
                   <ThumbsDown className="h-4 w-4" />
                 )}
