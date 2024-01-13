@@ -216,16 +216,22 @@ export const modelData = [
     value: "google/gemini-pro",
     description: "Gemini Pro by Google",
     crystalPrice: 1,
+    src: "/models/google.png",
+    alt: "Company logo of Google",
   },
   {
     value: "anthropic/claude-instant-v1",
     description: "Claude Instant by Anthropic",
     crystalPrice: 1,
+    src: "/models/claude.png",
+    alt: "Company logo of Anthropic AI",
   },
   {
     value: "anthropic/claude-2",
     description: "Claude 2 by Anthropic",
     crystalPrice: 10,
+    src: "/models/claude.png",
+    alt: "Company logo of Anthropic AI",
   },
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
@@ -305,6 +311,8 @@ export const modelData = [
     value: "meta-llama/codellama-34b-instruct",
     description: "CodeLlama2 34B by Meta Llama",
     crystalPrice: 1,
+    src: "/models/meta.png",
+    alt: "Company logo of Meta",
   },
   {
     value: "phind/phind-codellama-34b",
@@ -325,11 +333,15 @@ export const modelData = [
     value: "meta-llama/llama-2-13b-chat",
     description: "Llama 2 13B by Meta Llama",
     crystalPrice: 1,
+    src: "/models/meta.png",
+    alt: "Company logo of Meta",
   },
   {
     value: "meta-llama/llama-2-70b-chat",
     description: "Llama 2 70B by Meta Llama",
     crystalPrice: 1,
+    src: "/models/meta.png",
+    alt: "Company logo of Meta",
   },
   {
     value: "nousresearch/nous-hermes-llama2-70b",
