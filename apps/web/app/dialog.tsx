@@ -284,7 +284,7 @@ const ChatOptionsPopover = ({
   return (
     <Popover>
       <AlertDialog>
-        <PopoverContent className="w-52 p-2">
+        <PopoverContent className="w-52 p-1">
           <Link
             href={`/my-characters/create${
               characterId ? `?remixId=${characterId}` : ""
