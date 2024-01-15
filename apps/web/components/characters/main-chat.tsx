@@ -40,7 +40,7 @@ export const Chat = ({
   });
   return (
     <Link href={`/character/${characterId}?chatId=${chatId}`}>
-      <div className="flex flex-col items-start justify-start">
+      <div className="flex flex-col items-start justify-start overflow-hidden">
         <Avatar>
           <AvatarImage
             alt={`preview of chat ${name}`}
