@@ -34,9 +34,6 @@ export default function NavBar({}: {}) {
                 className="flex items-center gap-2 text-base text-muted-foreground hover:opacity-50"
                 href="/github"
               >
-                <div className="hidden sm:block">
-                  {t("opensource ai characters")}
-                </div>
                 <Badge className="font-default">
                   <span className="inline lg:hidden">α</span>
                   <span className="hidden lg:inline">{t("alpha")}</span>
