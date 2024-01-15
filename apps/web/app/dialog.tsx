@@ -175,7 +175,7 @@ export const Message = ({
           }
         >
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="absolute -bottom-5 -right-5 z-10 flex items-center justify-center rounded-full border bg-background p-1">
+            <div className="absolute -bottom-5 -right-5 flex items-center justify-center rounded-full border bg-background p-1">
               <Button
                 size="icon"
                 variant="ghost"
@@ -550,7 +550,7 @@ export function Dialog({
         </div>
       )}
       <div
-        className={`flex h-full flex-col overflow-y-auto lg:h-[calc(100%-12rem)]`}
+        className={`flex h-full min-h-full flex-col overflow-y-auto lg:h-[calc(100%-12rem)] lg:min-h-fit`}
         ref={listRef}
         onWheel={() => {
           setScrolled(true);
