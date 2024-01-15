@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../convex/_generated/api";
-import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
+import { useMutation, usePaginatedQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -50,6 +50,7 @@ import Spinner from "@repo/ui/src/components/spinner";
 import useMyUsername from "./lib/hooks/use-my-username";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const FormattedMessage = ({ message }: { message: any }) => {
   return (
@@ -175,7 +176,7 @@ export const Message = ({
           }
         >
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="absolute -bottom-5 -right-5 z-10 flex items-center justify-center rounded-full border bg-background p-1">
+            <div className="absolute -bottom-5 -right-5 flex items-center justify-center rounded-full border bg-background p-1">
               <Button
                 size="icon"
                 variant="ghost"
@@ -240,7 +241,7 @@ export const Inspirations = ({
   const { t } = useTranslation();
   const autopilot = useMutation(api.followUps.autopilot);
   return (
-    <div className="flex max-h-36 w-full flex-wrap items-center gap-1 overflow-y-clip overflow-x-scroll bg-background/90 p-4 text-xs backdrop-blur-md scrollbar-hide">
+    <div className="flex max-h-28 w-full flex-wrap items-center gap-1 overflow-y-clip overflow-x-scroll bg-background/90 p-4 text-xs backdrop-blur-md scrollbar-hide">
       <Tooltip
         content={
           <span className="flex gap-1 p-2 text-xs text-muted-foreground">
@@ -470,6 +471,16 @@ export function Dialog({
 
   return (
     <div className="h-full w-full">
+      {cardImageUrl && (
+        <Image
+          src={cardImageUrl}
+          alt={`Character card of ${name}`}
+          width={300}
+          height={525}
+          quality={60}
+          className="pointer-events-none fixed left-0 top-16 h-[100vh] w-[100vw] object-cover opacity-50 lg:hidden"
+        />
+      )}
       {chatId && (
         <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
@@ -550,7 +561,7 @@ export function Dialog({
         </div>
       )}
       <div
-        className={`flex h-full flex-col overflow-y-auto lg:h-[calc(100%-12rem)]`}
+        className={`flex h-full min-h-[60vh] flex-col overflow-y-auto lg:h-[calc(100%-12rem)] lg:min-h-fit`}
         ref={listRef}
         onWheel={() => {
           setScrolled(true);
