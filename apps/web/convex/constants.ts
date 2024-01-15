@@ -234,10 +234,10 @@ export const modelData = [
     alt: "Company logo of Anthropic AI",
   },
   {
-    value: "neversleep/noromaid-mixtral-8x7b-instruct",
-    description: "Uncensored, Noromaid 8x7B by Never Sleep",
+    value: "lizpreciatior/lzlv-70b-fp16-hf",
+    description: "Uncensored, lzlv 70B by lizpreciatior",
     isNSFW: true,
-    crystalPrice: 3,
+    crystalPrice: 1,
   },
   {
     value: "neversleep/noromaid-20b",
@@ -252,10 +252,10 @@ export const modelData = [
     crystalPrice: 1,
   },
   {
-    value: "lizpreciatior/lzlv-70b-fp16-hf",
-    description: "Uncensored, lzlv 70B by lizpreciatior",
+    value: "neversleep/noromaid-mixtral-8x7b-instruct",
+    description: "Uncensored, Noromaid 8x7B by Never Sleep",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 3,
   },
   {
     value: "nousresearch/nous-capybara-7b",
