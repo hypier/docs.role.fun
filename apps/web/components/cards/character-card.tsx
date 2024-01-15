@@ -104,7 +104,7 @@ const CharacterCard = (props: {
                     </div>
                   </Tooltip>
                 )}
-                {(numStories as number) > 0 && (
+                {/* {(numStories as number) > 0 && (
                   <Tooltip
                     content={`Number of stories made with ${props.name}`}
                   >
@@ -113,7 +113,7 @@ const CharacterCard = (props: {
                       {nFormatter(numStories as number)}
                     </div>
                   </Tooltip>
-                )}
+                )} */}
               </div>
               {props.isDraft && <DraftBadge />}
             </CardTitle>
