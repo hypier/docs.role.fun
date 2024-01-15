@@ -11,7 +11,7 @@ export const useCrystal = internalMutation(
     const currentCrystals = user?.crystals || 0;
     if (currentCrystals - price < 0) {
       throw new ConvexError(
-        `Not enough crystals. You need ${price} crystals to use ${name}.`
+        `Not enough crystals. You need ${price} crystals to use ${name}.`,
       );
     }
     await ctx.db.patch(userId, { crystals: currentCrystals - price });
@@ -20,7 +20,7 @@ export const useCrystal = internalMutation(
       name,
     });
     return { currentCrystals, remainingCrystals: currentCrystals - price };
-  }
+  },
 );
 
 export const refundCrystal = internalMutation(
@@ -30,28 +30,32 @@ export const refundCrystal = internalMutation(
       userId,
       name,
       currentCrystals,
-    }: { userId: Id<"users">; name: string; currentCrystals: number }
+    }: { userId: Id<"users">; name: string; currentCrystals: number },
   ) => {
     await ctx.db.patch(userId, { crystals: currentCrystals });
     await ctx.db.insert("usage", {
       userId,
       name: name + "-refund",
     });
-  }
+  },
 );
 
 export const checkedIn = query({
   args: {},
   handler: async (ctx, args) => {
-    const user = await getUser(ctx);
-    const date = new Date().toISOString().split("T")[0];
-    const checkIn = await ctx.db
-      .query("checkIn")
-      .withIndex("byUserId", (q: any) => q.eq("userId", user._id))
-      .filter((q) => q.eq(q.field("date"), date))
-      .first();
+    try {
+      const user = await getUser(ctx);
+      const date = new Date().toISOString().split("T")[0];
+      const checkIn = await ctx.db
+        .query("checkIn")
+        .withIndex("byUserId", (q: any) => q.eq("userId", user._id))
+        .filter((q) => q.eq(q.field("date"), date))
+        .first();
 
-    if (checkIn) return true;
+      if (checkIn) return true;
+    } catch (error) {
+      return false;
+    }
     return false;
   },
 });
