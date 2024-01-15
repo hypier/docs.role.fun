@@ -32,9 +32,10 @@ const CharacterCard = (props: {
   showRemix?: boolean;
 }) => {
   const { t } = useTranslation();
-  const numStories = useQuery(api.stories.count, {
-    characterId: props.id as Id<"characters">,
-  });
+  // temporarily disable since api is not optimized
+  // const numStories = useQuery(api.stories.count, {
+  //   characterId: props.id as Id<"characters">,
+  // });
   return (
     <AspectRatio
       ratio={1 / 1.75}
