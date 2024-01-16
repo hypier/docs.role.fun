@@ -24,12 +24,13 @@ import React from "react";
 import { toast } from "sonner";
 import { ConvexError } from "convex/values";
 import Gallery from "./gallery";
+import { ModelSelect } from "./model-select";
 
 const formSchema = z.object({
   prompt: z.string().max(512),
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
-    z.literal("dalle-3"),
+    z.literal("dall-e-3"),
   ]),
 });
 
@@ -43,7 +44,6 @@ const Images = () => {
     api.images.get,
     imageId ? { imageId } : "skip",
   );
-
   const me = useCurrentUser();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,6 +51,9 @@ const Images = () => {
       prompt: "",
       model: "stable-diffusion-xl-1024-v1-0",
     },
+  });
+  const price = useQuery(api.crystals.imageModelPrice, {
+    modelName: form.getValues("model"),
   });
 
   const onSubmitHandler = (values: z.infer<typeof formSchema>) => {
@@ -79,9 +82,6 @@ const Images = () => {
 
   const InputField = React.memo(({ field }: { field: any }) => (
     <FormItem className="relative w-full">
-      <FormLabel className="flex items-center gap-1 text-xl font-medium">
-        {t("Imagine anything")}
-      </FormLabel>
       <FormControl>
         <Input
           placeholder="a pixel room for gamer girl"
@@ -103,7 +103,7 @@ const Images = () => {
         ) : (
           <>
             {t("Generate")}
-            <Crystal className="h-4 w-4" /> x 25
+            <Crystal className="h-4 w-4" /> x {price}
           </>
         )}
       </Button>
@@ -118,9 +118,13 @@ const Images = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmitHandler)}
-              className="w-full"
+              className="mt-1 flex w-full flex-col gap-4"
               autoFocus
             >
+              <div className="flex w-full items-center gap-2 text-xl font-medium">
+                {t("Imagine anything")}
+                <ModelSelect form={form} model={form.getValues("model")} />
+              </div>
               <FormField
                 control={form.control}
                 name="prompt"

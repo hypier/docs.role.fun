@@ -13,6 +13,7 @@ export const getBaseURL = (modelName: string) => {
   switch (modelName) {
     case "gpt-3.5-turbo-1106":
     case "gpt-4-1106-preview":
+    case "dall-e-3":
       return OPENAI_API_URL;
     case "mixtral-8x7b-instruct":
     case "mistral-7b-instruct":
@@ -75,6 +76,7 @@ export const getAPIKey = (modelName: string) => {
   switch (modelName) {
     case "gpt-3.5-turbo-1106":
     case "gpt-4-1106-preview":
+    case "dall-e-3":
       return process.env.OPENAI_API_KEY;
     case "mixtral-8x7b-instruct":
     case "mistral-7b-instruct":
@@ -161,6 +163,11 @@ export const getCrystalPrice = (modelName: string) => {
   const allModels = [...modelData, ...imageModelData];
   const model = allModels.find((m) => m.value === modelName);
   return model ? model.crystalPrice : modelName === "auto" ? 9 : 5;
+};
+
+export const getImageModelCrystalPrice = (modelName: string) => {
+  const model = imageModelData.find((m) => m.value === modelName);
+  return model ? model.crystalPrice : 25;
 };
 
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
@@ -386,7 +393,7 @@ export const modelData = [
 ];
 export const imageModelData = [
   {
-    value: "dalle-3",
+    value: "dall-e-3",
     description: "Dall-E 3 by Open AI",
     crystalPrice: 75,
   },
