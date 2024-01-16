@@ -96,6 +96,7 @@ const Images = () => {
       <Button
         className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs"
         type="submit"
+        disabled={isGenerating}
       >
         {isGenerating ? (
           <>
