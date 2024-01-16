@@ -43,7 +43,7 @@ export const listAll = query({
   handler: async (ctx, args) => {
     const results = await ctx.db
       .query("stories")
-      .withIndex("byNumChats")
+      .withIndex("by_creation_time")
       .order("desc")
       .filter((q) => q.neq(q.field("isNSFW"), true))
       .paginate(args.paginationOpts);
