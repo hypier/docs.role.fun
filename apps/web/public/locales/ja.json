@@ -37,7 +37,7 @@
   "Delete chat": "チャットを削除",
   "Save": "保存",
   "Generate": "生成",
-  "(optional)": "(オプション)",
+  "(optional)": "(任意)",
   "Configure your character details.": "キャラクターの詳細を設定します。",
   "Publish to": "公開先",
   "Public": "公開",
@@ -45,7 +45,7 @@
   "Add character card": "キャラクターカードを追加",
   "Name": "名前",
   "Name your character": "キャラクターの名前",
-  "Greeting": "あいさつ中",
+  "Greeting": "挨拶",
   "Instructions": "説明",
   "Description": "説明",
   "AI Model": "AIモデル",
@@ -80,7 +80,7 @@
   "Friend": "友達",
   "Mentor": "Mentor",
   "Courageous": "勇敢な",
-  "Playful": "<unk>",
+  "Playful": "遊び心",
   "Cunning": "Cunning",
   "Adventurous": "冒険的",
   "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "デイリー報酬は正常に獲得されました。明日また報酬を獲得するのを忘れないでください。",
@@ -89,5 +89,7 @@
   "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "このモデル、キャラクターまたはコンテンツは無修正です。成熟コンテンツを有効にすると、18歳以上であることを確認します。",
   "Always allow": "常に許可する",
   "Go back": "戻る",
-  "Confirm": "確認する"
+  "Confirm": "確認する",
+  "Imagine": "想像してください",
+  "Imagine anything": "想像してみてください"
 }
