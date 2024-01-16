@@ -228,13 +228,6 @@ export default function CharacterForm() {
           </div>
           <div className="flex items-center gap-2">
             {characterId && <ArchiveButton characterId={characterId} />}
-            {!cardImageUrl && isDraft && (
-              <GenerateButton
-                setCharacterId={setCharacterId}
-                cardImageUrl={cardImageUrl}
-                name={name}
-              />
-            )}
             <Popover
               open={openPopover}
               onOpenChange={() => setOpenPopover(!openPopover)}
@@ -347,44 +340,6 @@ export default function CharacterForm() {
             }}
             className="hidden"
           />
-          <Tooltip
-            content={
-              isImageUploadDisabled
-                ? "Write character name and description to generate character card."
-                : "Generate character card using character name and description"
-            }
-          >
-            <Button
-              className="flex w-[200px] gap-1"
-              disabled={isImageUploadDisabled}
-              onClick={async () => {
-                setIsGeneratingImage(true);
-                const formValues = form.getValues();
-                const newCharacterId = await onSubmit(formValues);
-                await generateImage({
-                  characterId: characterId
-                    ? characterId
-                    : (newCharacterId as Id<"characters">),
-                  name: formValues.name ? formValues.name : name,
-                  description: formValues.description
-                    ? formValues.description
-                    : description,
-                });
-              }}
-            >
-              {isGeneratingImage ? (
-                <>
-                  <Spinner />
-                  {t("Generating...")}
-                </>
-              ) : (
-                <>
-                  {t("Generate")}
-                  <Crystal className="h-4 w-4" /> x 75
-                </>
-              )}
-            </Button>
-          </Tooltip>
         </div>
         <Form {...form}>
           <form

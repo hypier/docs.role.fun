@@ -132,7 +132,7 @@ const Images = () => {
               className="mt-1 flex w-full flex-col gap-4"
               autoFocus
             >
-              <div className="flex w-full items-center gap-2 text-xl font-medium">
+              <div className="flex w-full items-center gap-2 text-base font-medium lg:text-xl">
                 {t("Imagine anything")}
                 <ModelSelect form={form} model={form.getValues("model")} />
               </div>
