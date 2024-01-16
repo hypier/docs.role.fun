@@ -1,7 +1,8 @@
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
-import { internalMutation, mutation } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { getUser } from "./users";
+import { paginationOptsValidator } from "convex/server";
 
 export const generate = mutation({
   args: {
@@ -16,6 +17,7 @@ export const generate = mutation({
     const image = await ctx.db.insert("images", {
       prompt,
       model,
+      imageUrl: "",
       creatorId: user._id,
       numLikes: 0,
       isNSFW: false,
@@ -47,5 +49,35 @@ export const uploadImage = internalMutation({
       imageUrl,
     });
     return updatedCharacter;
+  },
+});
+
+export const listImages = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+  },
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("images")
+      .withIndex("by_creation_time")
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.eq(q.field("isNSFW"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("imageUrl"), ""));
+
+    return await query.order("desc").paginate(args.paginationOpts);
+  },
+});
+
+export const get = query({
+  args: {
+    imageId: v.id("images"),
+  },
+  handler: async (ctx, args) => {
+    const image = await ctx.db.get(args.imageId);
+    if (!image) {
+      throw new ConvexError({ message: "Image does not exist." });
+    }
+    return image;
   },
 });

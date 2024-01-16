@@ -152,11 +152,11 @@ export default defineSchema({
   images: defineTable({
     prompt: v.string(),
     model: v.string(),
-    imageUrl: v.optional(v.string()),
+    imageUrl: v.string(),
     creatorId: v.id("users"),
     numLikes: v.number(),
     isBlacklisted: v.boolean(),
-    isNSFW: v.optional(v.boolean()), // NSFW characters are filtered unless the adult user has explicitly opted in.
+    isNSFW: v.boolean(), // NSFW characters are filtered unless the adult user has explicitly opted in.
     isArchived: v.optional(v.boolean()),
   }).index("byUserId", ["creatorId"]),
 });

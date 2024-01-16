@@ -234,7 +234,7 @@ export const generateByPrompt = internalAction(
       });
       const response = await openai.images.generate({
         model: model,
-        prompt: `${prompt}`,
+        prompt: prompt,
         n: 1,
         quality: "standard",
         size: "1024x1792",
@@ -261,7 +261,7 @@ export const generateByPrompt = internalAction(
         samples: 1,
         text_prompts: [
           {
-            text: `${prompt}`,
+            text: prompt,
             weight: 1,
           },
         ],

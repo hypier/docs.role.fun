@@ -2,6 +2,7 @@
 import {
   CircleUserRound,
   Home,
+  Image,
   MessageSquare,
   Package,
   Plus,
@@ -51,16 +52,6 @@ function TabsController() {
             {t("Characters")}
           </TabsTrigger>
         </Link>
-        <Link href="/my-personas">
-          <TabsTrigger
-            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
-            value="/my-personas"
-          >
-            <CircleUserRound className="h-5 w-5 p-1" />
-            <span className="hidden lg:inline">{t("My")} </span>
-            {t("Personas")}
-          </TabsTrigger>
-        </Link>
         <Link href="/models">
           <TabsTrigger
             className="w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
@@ -68,6 +59,15 @@ function TabsController() {
           >
             <Package className="h-5 w-5 p-1" />
             {t("Models")}
+          </TabsTrigger>
+        </Link>
+        <Link href="/imagine">
+          <TabsTrigger
+            className="w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
+            value="/imagine"
+          >
+            <Image className="h-5 w-5 p-1" />
+            {t("Imagine")}
           </TabsTrigger>
         </Link>
         <Link href="/shop">

@@ -2,7 +2,15 @@
 
 import { ReactElement, useState } from "react";
 import Image from "next/image";
-import { ChevronDown, LogIn, LogOut, Menu, Star, Store } from "lucide-react";
+import {
+  ChevronDown,
+  CircleUserRound,
+  LogIn,
+  LogOut,
+  Menu,
+  Star,
+  Store,
+} from "lucide-react";
 import { Discord } from "@repo/ui/src/components/social-icons";
 import {
   Popover,
@@ -86,14 +94,23 @@ export default function UserDropdown() {
               </div>
             )}
             {user ? (
-              <StyledButton
-                text={t("Logout")}
-                Icon={<LogOut className="h-4 w-4 text-muted-foreground" />}
-                onClick={() => {
-                  setOpenPopover(false);
-                  signOut();
-                }}
-              />
+              <>
+                <StyledButton
+                  text={t("Logout")}
+                  Icon={<LogOut className="h-4 w-4 text-muted-foreground" />}
+                  onClick={() => {
+                    setOpenPopover(false);
+                    signOut();
+                  }}
+                />
+                <StyledLink
+                  text={t("Personas")}
+                  Icon={
+                    <CircleUserRound className="h-4 w-4 text-muted-foreground" />
+                  }
+                  href="/my-personas"
+                />
+              </>
             ) : (
               <div className="md:hidden">
                 <StyledLink
