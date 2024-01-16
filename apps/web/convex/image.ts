@@ -102,11 +102,11 @@ export const generateWithDalle3 = internalAction(
       internal.serve.useCrystal,
       {
         userId,
-        name: "dalle-3",
+        name: "dall-e-3",
       },
     );
-    const baseURL = getBaseURL("dalle-3");
-    const apiKey = getAPIKey("dalle-3");
+    const baseURL = getBaseURL("dall-e-3");
+    const apiKey = getAPIKey("dall-e-3");
     const openai = new OpenAI({
       baseURL,
       apiKey,
@@ -137,7 +137,7 @@ export const generateWithDalle3 = internalAction(
     } catch (error) {
       await ctx.runMutation(internal.serve.refundCrystal, {
         userId,
-        name: "dalle-3",
+        name: "dall-e-3",
         currentCrystals,
       });
     }
@@ -161,11 +161,11 @@ export const generateSafeImage = internalAction(
       internal.serve.useCrystal,
       {
         userId,
-        name: "dalle-3",
+        name: "dall-e-3",
       },
     );
-    const baseURL = getBaseURL("dalle-3");
-    const apiKey = getAPIKey("dalle-3");
+    const baseURL = getBaseURL("dall-e-3");
+    const apiKey = getAPIKey("dall-e-3");
     const openai = new OpenAI({
       baseURL,
       apiKey,
@@ -196,7 +196,7 @@ export const generateSafeImage = internalAction(
     } catch (error) {
       await ctx.runMutation(internal.serve.refundCrystal, {
         userId,
-        name: "dalle-3",
+        name: "dall-e-3",
         currentCrystals,
       });
     }
@@ -240,6 +240,7 @@ export const generateByPrompt = internalAction(
         size: "1024x1792",
         response_format: "b64_json",
       });
+      console.log("!!!openai response:::", response);
       return response && response.data && response.data[0]
         ? (response.data[0].b64_json as string)
         : "";
@@ -284,7 +285,7 @@ export const generateByPrompt = internalAction(
     };
 
     let base64Data = "";
-    if (model === "dalle-3") {
+    if (model === "dall-e-3") {
       base64Data = await generateDalle3();
     } else if (model === "stable-diffusion-xl-1024-v1-0") {
       base64Data = await generateStableDiffusion();

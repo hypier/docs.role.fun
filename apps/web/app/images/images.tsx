@@ -30,7 +30,7 @@ const formSchema = z.object({
   prompt: z.string().max(512),
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
-    z.literal("dalle-3"),
+    z.literal("dall-e-3"),
   ]),
 });
 

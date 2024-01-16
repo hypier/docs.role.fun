@@ -10,7 +10,7 @@ export const generate = mutation({
     prompt: v.string(),
     model: v.union(
       v.literal("stable-diffusion-xl-1024-v1-0"),
-      v.literal("dalle-3"),
+      v.literal("dall-e-3"),
     ),
   },
   handler: async (ctx, { prompt, model }) => {
