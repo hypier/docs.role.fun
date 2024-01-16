@@ -155,6 +155,7 @@ export default defineSchema({
     imageUrl: v.string(),
     creatorId: v.id("users"),
     numLikes: v.number(),
+    tag: v.optional(v.string()),
     isBlacklisted: v.boolean(),
     isNSFW: v.boolean(), // NSFW characters are filtered unless the adult user has explicitly opted in.
     isArchived: v.optional(v.boolean()),

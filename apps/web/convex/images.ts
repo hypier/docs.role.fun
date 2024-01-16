@@ -4,6 +4,7 @@ import { internalMutation, mutation, query } from "./_generated/server";
 import { getUser } from "./users";
 import { paginationOptsValidator } from "convex/server";
 import { getCrystalPrice } from "./constants";
+import { Id } from "./_generated/dataModel";
 
 export const generate = mutation({
   args: {
@@ -37,6 +38,10 @@ export const generate = mutation({
       prompt,
       model,
     });
+    await ctx.scheduler.runAfter(0, internal.llm.generateImageTags, {
+      userId: user._id,
+      imageId: image,
+    });
     return image;
   },
 });
@@ -68,7 +73,6 @@ export const listImages = query({
       .query("images")
       .withIndex("by_creation_time")
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
-      .filter((q) => q.eq(q.field("isNSFW"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
@@ -88,3 +92,23 @@ export const get = query({
     return image;
   },
 });
+
+export const tag = internalMutation(
+  async (
+    ctx,
+    {
+      imageId,
+      tag,
+      isNSFW,
+    }: {
+      imageId: Id<"images">;
+      tag: string;
+      isNSFW: boolean;
+    },
+  ) => {
+    return await ctx.db.patch(imageId, {
+      tag,
+      ...(isNSFW ? { isNSFW } : {}),
+    });
+  },
+);

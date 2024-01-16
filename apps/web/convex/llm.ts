@@ -668,6 +668,92 @@ export const generateTags = internalAction({
   },
 });
 
+export const generateImageTags = internalAction({
+  args: {
+    userId: v.id("users"),
+    imageId: v.id("images"),
+  },
+  handler: async (ctx, { userId, imageId }) => {
+    try {
+      const model = "gpt-3.5-turbo-1106";
+      const baseURL = getBaseURL(model);
+      const apiKey = getAPIKey(model);
+      const openai = new OpenAI({
+        baseURL,
+        apiKey,
+      });
+      const image = await ctx.runQuery(api.images.get, {
+        imageId,
+      });
+      try {
+        const instruction = `Tag the image, respond in JSON.
+        Following is the detail of an image.
+        {
+          altText: ${image?.prompt},
+        }
+        `;
+
+        const functions = [
+          {
+            name: "tag_image",
+            description: "generate image tags.",
+            parameters: {
+              type: "object",
+              properties: {
+                tag: {
+                  type: "string",
+                  description: `Tag the image. it can be "Anime", "Game", "Characters", "Landscape", "Cyberpunk", "Space", "Paintings", "Modern", anything.`,
+                },
+                isNSFW: {
+                  type: "boolean",
+                  description: `True if character's detail metadata is explicitly sexual content, otherwise false.`,
+                },
+              },
+              required: ["tag", "isNSFW"],
+            },
+          },
+        ];
+        const response = await openai.chat.completions.create({
+          model,
+          stream: false,
+          messages: [
+            {
+              role: "system",
+              content: instruction,
+            },
+          ],
+          function_call: "auto",
+          response_format: { type: "json_object" },
+          functions,
+          temperature: 1,
+        });
+        console.log("response:::", response);
+        const responseMessage = (response &&
+          response?.choices &&
+          response.choices[0]?.message) as any;
+        console.log("responseMessage:::", responseMessage);
+        if (responseMessage?.function_call) {
+          const functionArgs = JSON.parse(
+            responseMessage.function_call.arguments,
+          );
+          console.log("functionArgs:::", functionArgs);
+          await ctx.runMutation(internal.images.tag, {
+            imageId,
+            tag: functionArgs?.tag,
+            isNSFW: functionArgs?.isNSFW,
+          });
+        }
+      } catch (error) {
+        console.log("error:::", error);
+        throw Error;
+      }
+    } catch (error) {
+      console.log("error:::", error);
+      throw error;
+    }
+  },
+});
+
 export const getMessages = internalQuery(
   async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
     const messages = await ctx.db

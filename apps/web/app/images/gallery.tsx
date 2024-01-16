@@ -44,7 +44,9 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
               key={image._id}
               imageUrl={image.imageUrl as string}
               model={image.model}
+              prompt={image.prompt}
               isNSFW={image?.isNSFW && me?.nsfwPreference !== "allow"}
+              creatorId={image?.creatorId}
             />
           ))
         : Array.from({ length: 10 }).map((_, index) => (
