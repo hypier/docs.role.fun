@@ -149,4 +149,14 @@ export default defineSchema({
       v.literal("smirk"),
     ),
   }).index("byMessageId", ["messageId"]),
+  images: defineTable({
+    prompt: v.string(),
+    model: v.string(),
+    imageUrl: v.string(),
+    creatorId: v.id("users"),
+    numLikes: v.number(),
+    isBlacklisted: v.boolean(),
+    isNSFW: v.boolean(), // NSFW characters are filtered unless the adult user has explicitly opted in.
+    isArchived: v.optional(v.boolean()),
+  }).index("byUserId", ["creatorId"]),
 });

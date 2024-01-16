@@ -8,15 +8,12 @@ import {
   TooltipContent,
 } from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
-import { BookMarked, MessagesSquare, Repeat } from "lucide-react";
+import { MessagesSquare, Repeat } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { nFormatter } from "../../app/lib/utils";
 import ModelBadge from "../characters/model-badge";
 import DraftBadge from "../characters/draft-badge";
-import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { Id } from "../../convex/_generated/dataModel";
 import { useTranslation } from "react-i18next";
 
 const CharacterCard = (props: {
