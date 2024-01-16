@@ -337,7 +337,13 @@ export const generateByPrompt = internalAction(
         const binaryData = Buffer.from(base64Data, "base64");
         image = new Blob([binaryData], { type: "image/png" });
       } else if (model === "cagliostrolab/animagine-xl-3.0") {
-        image = await generateHuggingFace();
+        try {
+          image = await generateHuggingFace();
+        } catch (error) {
+          const base64Data = await generateReplicate();
+          const binaryData = Buffer.from(base64Data, "base64");
+          image = new Blob([binaryData], { type: "image/png" });
+        }
       } else {
         const base64Data = await generateReplicate();
         const binaryData = Buffer.from(base64Data, "base64");
