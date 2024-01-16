@@ -6,8 +6,13 @@ import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
-import { Button, Tooltip } from "@repo/ui/src/components";
-import { ChevronLeft, ListFilter } from "lucide-react";
+import {
+  Button,
+  InfoTooltip,
+  Tooltip,
+  TooltipContent,
+} from "@repo/ui/src/components";
+import { ChevronLeft, ChevronRight, ListFilter } from "lucide-react";
 import { MainStories } from "./main-stories";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -23,6 +28,8 @@ import { MainChats } from "./main-chat";
 import { NewCharacter } from "./my-characters";
 import useCurrentUser from "../../app/lib/hooks/use-current-user";
 import CheckinDialog from "../checkin-dialog";
+import Gallery from "../../app/imagine/gallery";
+import Link from "next/link";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -195,6 +202,17 @@ const Discover = () => {
         </Carousel>
       </div>
       <MainStories />
+      <section className="flex flex-col gap-4 md:w-[80%] lg:w-[calc(80%+4rem)] lg:gap-8">
+        <div className="flex items-center gap-1 border-b px-4 pb-4 font-medium lg:border-none lg:px-0 lg:pb-0">
+          <Link href="/imagine" className="flex items-center gap-1">
+            {t("Imagine")}
+            <Button variant="ghost" size="icon">
+              <ChevronRight />
+            </Button>
+          </Link>
+        </div>
+        <Gallery isGenerating={false} />
+      </section>
     </div>
   );
 };

@@ -1,12 +1,8 @@
 "use client";
 import { api } from "../../convex/_generated/api";
-import { useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { useStablePaginatedQuery } from "../lib/hooks/use-stable-query";
-import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useCurrentUser from "../lib/hooks/use-current-user";
-import ImageCard from "./image-card";
 import { Input } from "@repo/ui/src/components/input";
 import {
   FormControl,
@@ -27,6 +23,7 @@ import { Id } from "../../convex/_generated/dataModel";
 import React from "react";
 import { toast } from "sonner";
 import { ConvexError } from "convex/values";
+import Gallery from "./gallery";
 
 const formSchema = z.object({
   prompt: z.string().max(512),
@@ -38,11 +35,7 @@ const formSchema = z.object({
 
 const Images = () => {
   const { t } = useTranslation();
-  const { results, status, loadMore } = useStablePaginatedQuery(
-    api.imagine.listImages,
-    {},
-    { initialNumItems: 10 },
-  );
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [imageId, setImageID] = useState("" as Id<"images">);
   const generate = useMutation(api.imagine.generate);
@@ -50,10 +43,7 @@ const Images = () => {
     api.imagine.get,
     imageId ? { imageId } : "skip",
   );
-  const allImages = results || [];
-  const images = allImages.filter((image) => image.imageUrl);
-  const ref = useRef(null);
-  const inView = useInView(ref);
+
   const me = useCurrentUser();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -86,12 +76,6 @@ const Images = () => {
       setIsGenerating(false);
     }
   }, [generatedImage]);
-
-  useEffect(() => {
-    if (inView) {
-      loadMore(10);
-    }
-  }, [inView, loadMore]);
 
   const InputField = React.memo(({ field }: { field: any }) => (
     <FormItem className="relative w-full">
@@ -146,37 +130,7 @@ const Images = () => {
           </Form>
         </div>
       </div>
-
-      <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 lg:pl-0 xl:grid-cols-5">
-        {isGenerating && (
-          <div className="relative animate-pulse">
-            <div className="absolute inset-0 z-10 m-auto flex items-center justify-center gap-2 text-sm">
-              <Spinner />
-              {t("Generating...")}
-            </div>
-            <CharacterCardPlaceholder key={"my"} />
-          </div>
-        )}
-        {images?.length > 0
-          ? images.map((image, index) => (
-              <ImageCard
-                id={image._id}
-                key={image._id}
-                imageUrl={image.imageUrl as string}
-                model={image.model}
-                isNSFW={image?.isNSFW && me?.nsfwPreference !== "allow"}
-              />
-            ))
-          : Array.from({ length: 10 }).map((_, index) => (
-              <CharacterCardPlaceholder key={index} />
-            ))}
-        {status === "LoadingMore" &&
-          Array.from({ length: 10 }).map((_, index) => (
-            <CharacterCardPlaceholder key={index} />
-          ))}
-
-        <div ref={ref} />
-      </div>
+      <Gallery isGenerating={isGenerating} />
     </div>
   );
 };
