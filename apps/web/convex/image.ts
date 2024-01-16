@@ -326,24 +326,24 @@ export const generateByPrompt = internalAction(
       return await response.blob();
     }
 
-    let image;
-    if (model === "dall-e-3") {
-      const base64Data = await generateDalle3();
-      const binaryData = Buffer.from(base64Data, "base64");
-      image = new Blob([binaryData], { type: "image/png" });
-    } else if (model === "stable-diffusion-xl-1024-v1-0") {
-      const base64Data = await generateStableDiffusion();
-      const binaryData = Buffer.from(base64Data, "base64");
-      image = new Blob([binaryData], { type: "image/png" });
-    } else if (model === "cagliostrolab/animagine-xl-3.0") {
-      image = await generateHuggingFace();
-    } else {
-      const base64Data = await generateReplicate();
-      const binaryData = Buffer.from(base64Data, "base64");
-      image = new Blob([binaryData], { type: "image/png" });
-    }
-
     try {
+      let image;
+      if (model === "dall-e-3") {
+        const base64Data = await generateDalle3();
+        const binaryData = Buffer.from(base64Data, "base64");
+        image = new Blob([binaryData], { type: "image/png" });
+      } else if (model === "stable-diffusion-xl-1024-v1-0") {
+        const base64Data = await generateStableDiffusion();
+        const binaryData = Buffer.from(base64Data, "base64");
+        image = new Blob([binaryData], { type: "image/png" });
+      } else if (model === "cagliostrolab/animagine-xl-3.0") {
+        image = await generateHuggingFace();
+      } else {
+        const base64Data = await generateReplicate();
+        const binaryData = Buffer.from(base64Data, "base64");
+        image = new Blob([binaryData], { type: "image/png" });
+      }
+
       // Update storage.store to accept whatever kind of Blob is returned from node-fetch
       const imageStorageId = await ctx.storage.store(image as Blob);
       // Write storageId as the body of the message to the Convex database.
