@@ -24,7 +24,7 @@ import type * as followUps from "../followUps.js";
 import type * as helpers from "../helpers.js";
 import type * as http from "../http.js";
 import type * as image from "../image.js";
-import type * as imagine from "../imagine.js";
+import type * as images from "../images.js";
 import type * as ingest_embed from "../ingest/embed.js";
 import type * as llm from "../llm.js";
 import type * as messages from "../messages.js";
@@ -56,7 +56,7 @@ declare const fullApi: ApiFromModules<{
   helpers: typeof helpers;
   http: typeof http;
   image: typeof image;
-  imagine: typeof imagine;
+  images: typeof images;
   "ingest/embed": typeof ingest_embed;
   llm: typeof llm;
   messages: typeof messages;

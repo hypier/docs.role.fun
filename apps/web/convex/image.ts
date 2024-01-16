@@ -297,7 +297,7 @@ export const generateByPrompt = internalAction(
       // Update storage.store to accept whatever kind of Blob is returned from node-fetch
       const imageStorageId = await ctx.storage.store(image as Blob);
       // Write storageId as the body of the message to the Convex database.
-      await ctx.runMutation(internal.imagine.uploadImage, {
+      await ctx.runMutation(internal.images.uploadImage, {
         imageId,
         imageStorageId,
       });

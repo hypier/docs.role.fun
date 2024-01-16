@@ -28,7 +28,7 @@ import { MainChats } from "./main-chat";
 import { NewCharacter } from "./my-characters";
 import useCurrentUser from "../../app/lib/hooks/use-current-user";
 import CheckinDialog from "../checkin-dialog";
-import Gallery from "../../app/imagine/gallery";
+import Gallery from "../../app/images/gallery";
 import Link from "next/link";
 
 const Discover = () => {

@@ -61,13 +61,13 @@ function TabsController() {
             {t("Models")}
           </TabsTrigger>
         </Link>
-        <Link href="/imagine">
+        <Link href="/images">
           <TabsTrigger
             className="w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
-            value="/imagine"
+            value="/images"
           >
             <Image className="h-5 w-5 p-1" />
-            {t("Imagine")}
+            {t("Images")}
           </TabsTrigger>
         </Link>
         <Link href="/shop">

@@ -38,9 +38,9 @@ const Images = () => {
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [imageId, setImageID] = useState("" as Id<"images">);
-  const generate = useMutation(api.imagine.generate);
+  const generate = useMutation(api.images.generate);
   const generatedImage = useQuery(
-    api.imagine.get,
+    api.images.get,
     imageId ? { imageId } : "skip",
   );
 

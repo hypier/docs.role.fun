@@ -14,7 +14,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const inView = useInView(ref);
   const me = useCurrentUser();
   const { results, status, loadMore } = useStablePaginatedQuery(
-    api.imagine.listImages,
+    api.images.listImages,
     {},
     { initialNumItems: 10 },
   );
