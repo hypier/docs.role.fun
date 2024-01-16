@@ -98,11 +98,6 @@ const ImageCard = (props: {
             <div className="absolute top-4 z-[3] hover:z-[4]">
               <ModelBadge modelName={props.model as string} />
             </div>
-            <CardHeader className="relative z-[2] w-full p-4">
-              {props.imageUrl && (
-                <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-lg bg-gradient-to-b from-transparent via-black/60 to-black" />
-              )}
-            </CardHeader>
             {props.imageUrl && (
               <>
                 {props?.isNSFW ? (
