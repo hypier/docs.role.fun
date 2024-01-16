@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { ConvexError } from "convex/values";
 import Gallery from "./gallery";
 import { ModelSelect } from "./model-select";
+import Link from "next/link";
 
 const formSchema = z.object({
   prompt: z.string().max(512),
@@ -91,23 +92,31 @@ const Images = () => {
           autoFocus
         />
       </FormControl>
-      <Button
-        className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs"
-        type="submit"
-        disabled={isGenerating}
-      >
-        {isGenerating ? (
-          <>
-            <Spinner />
-            {t("Generating...")}
-          </>
-        ) : (
-          <>
+      {me?.name ? (
+        <Button
+          className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs"
+          type="submit"
+          disabled={isGenerating}
+        >
+          {isGenerating ? (
+            <>
+              <Spinner />
+              {t("Generating...")}
+            </>
+          ) : (
+            <>
+              {t("Generate")}
+              <Crystal className="h-4 w-4" /> x {price}
+            </>
+          )}
+        </Button>
+      ) : (
+        <Link href="/sign-in">
+          <Button className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs">
             {t("Generate")}
-            <Crystal className="h-4 w-4" /> x {price}
-          </>
-        )}
-      </Button>
+          </Button>
+        </Link>
+      )}
       <FormMessage />
     </FormItem>
   ));
