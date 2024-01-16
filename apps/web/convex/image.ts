@@ -6,6 +6,7 @@ import { Id } from "./_generated/dataModel";
 import { STABILITY_AI_API_URL, getAPIKey, getBaseURL } from "./constants";
 import { Buffer } from "buffer";
 import { OpenAI } from "openai";
+import { ConvexError } from "convex/values";
 
 export const generate = internalAction(
   async (
@@ -326,7 +327,12 @@ export const generateByPrompt = internalAction(
           body: JSON.stringify(data),
         },
       );
-      return await response.blob();
+      const result = await response.blob();
+      const resultJSON = await response.json();
+      if (resultJSON.error) {
+        throw new ConvexError("Model is not warm.");
+      }
+      return result;
     }
 
     try {
