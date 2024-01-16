@@ -136,7 +136,6 @@ const Images = () => {
                 key={image._id}
                 imageUrl={image.imageUrl as string}
                 model={image.model}
-                showRemix={true}
                 isNSFW={image?.isNSFW && me?.nsfwPreference !== "allow"}
               />
             ))
