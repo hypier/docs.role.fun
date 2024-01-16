@@ -26,7 +26,7 @@ import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
 
 const formSchema = z.object({
-  prompt: z.string().max(256),
+  prompt: z.string().max(512),
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
     z.literal("dalle-3"),
