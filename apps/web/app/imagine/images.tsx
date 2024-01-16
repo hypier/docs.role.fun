@@ -24,6 +24,7 @@ import { useMutation, useQuery } from "convex/react";
 import Spinner from "@repo/ui/src/components/spinner";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
+import React from "react";
 
 const formSchema = z.object({
   prompt: z.string().max(512),
@@ -79,6 +80,39 @@ const Images = () => {
     }
   }, [inView, loadMore]);
 
+  const InputField = React.memo(({ field }: { field: any }) => (
+    <FormItem className="relative w-full">
+      <FormLabel className="flex items-center gap-1 text-xl font-medium">
+        {t("Imagine anything")}
+      </FormLabel>
+      <FormControl>
+        <Input
+          placeholder="a pixel room for gamer girl"
+          className="w-full truncate"
+          {...field}
+          autoFocus
+        />
+      </FormControl>
+      <Button
+        className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs"
+        type="submit"
+      >
+        {isGenerating ? (
+          <>
+            <Spinner />
+            {t("Generating...")}
+          </>
+        ) : (
+          <>
+            {t("Generate")}
+            <Crystal className="h-4 w-4" /> x 25
+          </>
+        )}
+      </Button>
+      <FormMessage />
+    </FormItem>
+  ));
+
   return (
     <div className="flex flex-col gap-8">
       <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 border-t bg-background p-4 lg:static lg:border-none lg:bg-transparent lg:p-0">
@@ -87,41 +121,12 @@ const Images = () => {
             <form
               onSubmit={form.handleSubmit(onSubmitHandler)}
               className="w-full"
+              autoFocus
             >
               <FormField
                 control={form.control}
                 name="prompt"
-                render={({ field }) => (
-                  <FormItem className="relative w-full">
-                    <FormLabel className="flex items-center gap-1 text-xl font-medium">
-                      {t("Imagine anything")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="a pixel room for gamer girl"
-                        className="w-full truncate"
-                        {...field}
-                      />
-                    </FormControl>
-                    <Button
-                      className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs"
-                      type="submit"
-                    >
-                      {isGenerating ? (
-                        <>
-                          <Spinner />
-                          {t("Generating...")}
-                        </>
-                      ) : (
-                        <>
-                          {t("Generate")}
-                          <Crystal className="h-4 w-4" /> x 25
-                        </>
-                      )}
-                    </Button>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                render={({ field }) => <InputField field={field} />}
               />
             </form>
           </Form>
