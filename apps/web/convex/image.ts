@@ -1,4 +1,5 @@
 "use node";
+import Replicate from "replicate";
 import { internalAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
@@ -284,11 +285,34 @@ export const generateByPrompt = internalAction(
       return responseJSON.artifacts[0].base64;
     };
 
+    async function generateReplicate() {
+      const replicate = new Replicate({
+        auth: process.env.REPLICATE_API_TOKEN,
+      });
+
+      const output: any = await replicate.run(
+        "charlesmccarthy/animagine-xl:db29f76d40ecf86335295ca5b24ed95e6b1eca4e29239c47cfefa68f408cbf5e",
+        {
+          input: {
+            prompt,
+            width: 768,
+            height: 1344,
+            disable_safety_checker: true,
+          },
+        },
+      );
+      const response = await fetch(output[0]);
+      const buffer = await response.arrayBuffer();
+      return Buffer.from(buffer).toString("base64");
+    }
+
     let base64Data = "";
     if (model === "dall-e-3") {
       base64Data = await generateDalle3();
     } else if (model === "stable-diffusion-xl-1024-v1-0") {
       base64Data = await generateStableDiffusion();
+    } else {
+      base64Data = await generateReplicate();
     }
 
     const binaryData = Buffer.from(base64Data, "base64");

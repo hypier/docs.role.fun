@@ -11,6 +11,7 @@ export const generate = mutation({
     model: v.union(
       v.literal("stable-diffusion-xl-1024-v1-0"),
       v.literal("dall-e-3"),
+      v.literal("charlesmccarthy/animagine-xl"),
     ),
   },
   handler: async (ctx, { prompt, model }) => {

@@ -30,6 +30,7 @@ const formSchema = z.object({
   prompt: z.string().max(512),
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
+    z.literal("charlesmccarthy/animagine-xl"),
     z.literal("dall-e-3"),
   ]),
 });
@@ -49,7 +50,7 @@ const Images = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "stable-diffusion-xl-1024-v1-0",
+      model: "charlesmccarthy/animagine-xl",
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
