@@ -71,7 +71,7 @@ const Images = () => {
       loading: "Generating image...",
       success: (image) => {
         setImageID(image);
-        return "Image generated successfully!";
+        return "Your request has been queued";
       },
       error: (error) => {
         return error instanceof ConvexError
