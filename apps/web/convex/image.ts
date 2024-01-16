@@ -306,17 +306,42 @@ export const generateByPrompt = internalAction(
       return Buffer.from(buffer).toString("base64");
     }
 
-    let base64Data = "";
-    if (model === "dall-e-3") {
-      base64Data = await generateDalle3();
-    } else if (model === "stable-diffusion-xl-1024-v1-0") {
-      base64Data = await generateStableDiffusion();
-    } else {
-      base64Data = await generateReplicate();
+    async function generateHuggingFace() {
+      const data = {
+        inputs: prompt,
+        parameters: {},
+      };
+      const response = await fetch(
+        "https://quan92wcmuust3h0.us-east-1.aws.endpoints.huggingface.cloud",
+        {
+          headers: {
+            Accept: "image/png",
+            Authorization: `Bearer ${process.env.HUGGINGFACE_API_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(data),
+        },
+      );
+      return await response.blob();
     }
 
-    const binaryData = Buffer.from(base64Data, "base64");
-    const image = new Blob([binaryData], { type: "image/png" });
+    let image;
+    if (model === "dall-e-3") {
+      const base64Data = await generateDalle3();
+      const binaryData = Buffer.from(base64Data, "base64");
+      image = new Blob([binaryData], { type: "image/png" });
+    } else if (model === "stable-diffusion-xl-1024-v1-0") {
+      const base64Data = await generateStableDiffusion();
+      const binaryData = Buffer.from(base64Data, "base64");
+      image = new Blob([binaryData], { type: "image/png" });
+    } else if (model === "cagliostrolab/animagine-xl-3.0") {
+      image = await generateHuggingFace();
+    } else {
+      const base64Data = await generateReplicate();
+      const binaryData = Buffer.from(base64Data, "base64");
+      image = new Blob([binaryData], { type: "image/png" });
+    }
 
     try {
       // Update storage.store to accept whatever kind of Blob is returned from node-fetch
