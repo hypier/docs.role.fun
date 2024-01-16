@@ -3,6 +3,7 @@ import { internal } from "./_generated/api";
 import { internalMutation, mutation, query } from "./_generated/server";
 import { getUser } from "./users";
 import { paginationOptsValidator } from "convex/server";
+import { getCrystalPrice } from "./constants";
 
 export const generate = mutation({
   args: {
@@ -14,6 +15,10 @@ export const generate = mutation({
   },
   handler: async (ctx, { prompt, model }) => {
     const user = await getUser(ctx);
+    const crystalPrice = getCrystalPrice(model);
+    if (user?.crystals < crystalPrice) {
+      throw new ConvexError("Not enough crystals.");
+    }
     const image = await ctx.db.insert("images", {
       prompt,
       model,

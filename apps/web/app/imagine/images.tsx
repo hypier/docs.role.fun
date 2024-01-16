@@ -25,6 +25,8 @@ import Spinner from "@repo/ui/src/components/spinner";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
 import React from "react";
+import { toast } from "sonner";
+import { ConvexError } from "convex/values";
 
 const formSchema = z.object({
   prompt: z.string().max(512),
@@ -61,11 +63,22 @@ const Images = () => {
     },
   });
 
-  const onSubmitHandler = async (values: z.infer<typeof formSchema>) => {
-    setIsGenerating(true);
+  const onSubmitHandler = (values: z.infer<typeof formSchema>) => {
     const { prompt, model } = values;
-    const image = await generate({ prompt, model });
-    setImageID(image);
+    const promise = generate({ prompt, model });
+    setIsGenerating(true);
+    toast.promise(promise, {
+      loading: "Generating image...",
+      success: (image) => {
+        setImageID(image);
+        return "Image generated successfully!";
+      },
+      error: (error) => {
+        return error instanceof ConvexError
+          ? (error.data as { message: string }).message
+          : "Unexpected error occurred";
+      },
+    });
   };
 
   useEffect(() => {
@@ -135,6 +148,15 @@ const Images = () => {
       </div>
 
       <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 lg:pl-0 xl:grid-cols-5">
+        {isGenerating && (
+          <div className="relative animate-pulse">
+            <div className="absolute inset-0 z-10 m-auto flex items-center justify-center gap-2 text-sm">
+              <Spinner />
+              {t("Generating...")}
+            </div>
+            <CharacterCardPlaceholder key={"my"} />
+          </div>
+        )}
         {images?.length > 0
           ? images.map((image, index) => (
               <ImageCard
@@ -152,6 +174,7 @@ const Images = () => {
           Array.from({ length: 10 }).map((_, index) => (
             <CharacterCardPlaceholder key={index} />
           ))}
+
         <div ref={ref} />
       </div>
     </div>
