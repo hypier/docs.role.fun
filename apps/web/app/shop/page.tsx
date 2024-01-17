@@ -27,7 +27,14 @@ import {
   TableCaption,
   TableHead,
 } from "@repo/ui/src/components/table";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@repo/ui/src/components/collapsible";
 import ModelBadge from "../../components/characters/model-badge";
+import { useState } from "react";
+import { ChevronsUpDown } from "lucide-react";
 
 const Package = ({
   src,
@@ -158,7 +165,7 @@ const DailyReward = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 px-5">
+    <div className="flex flex-col items-center gap-4 px-5">
       <h1 className="font-display text-5xl">{t("Daily Rewards")}</h1>
       <AnimatePresence>
         {checkedIn && (
@@ -190,6 +197,7 @@ export default function Page() {
     { src: "/shop/tier5.png", amount: 19400, bonus: 3000, price: 49.99 },
     { src: "/shop/tier6.png", amount: 90000, bonus: 8000, price: 99.99 },
   ];
+  const [isTableOpen, setIsTableOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-col items-center gap-16 justify-self-start px-2 pb-32 pt-16">
@@ -246,42 +254,67 @@ export default function Page() {
             "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
           )}
         </p>
+        <Collapsible
+          open={isTableOpen}
+          onOpenChange={setIsTableOpen}
+          className="flex flex-col items-center gap-4"
+        >
+          <CollapsibleTrigger asChild>
+            <Button variant="outline" className="gap-2">
+              {isTableOpen ? t("Hide") : t("Show")}
+
+              <ChevronsUpDown className="h-4 w-4 p-0.5 opacity-50" />
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <Card>
+              <Table>
+                <TableCaption className="text-xs lg:text-sm">
+                  {t("Crystal Price Table")}
+                </TableCaption>
+                <TableHeader>
+                  <TableRow className="text-xs lg:text-sm">
+                    <TableHead>{t("Badge")}</TableHead>
+                    <TableHead>{t("Name")}</TableHead>
+                    <TableHead className="text-right">
+                      {t("Crystals")}
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {modelData
+                    .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
+                    .map((model: any) => (
+                      <TableRow
+                        key={model.value}
+                        className="text-xs lg:text-sm"
+                      >
+                        <TableCell>
+                          <ModelBadge
+                            modelName={model.value}
+                            collapse={false}
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          {model.description}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {model.crystalPrice ? (
+                            model.crystalPrice
+                          ) : (
+                            <span className="font-medium text-teal-500">
+                              FREE
+                            </span>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </Card>
+          </CollapsibleContent>
+        </Collapsible>
       </div>
-      <Card>
-        <Table>
-          <TableCaption className="text-xs lg:text-sm">
-            {t("Crystal Price Table")}
-          </TableCaption>
-          <TableHeader>
-            <TableRow className="text-xs lg:text-sm">
-              <TableHead>{t("Badge")}</TableHead>
-              <TableHead>{t("Name")}</TableHead>
-              <TableHead className="text-right">{t("Crystals")}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {modelData
-              .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
-              .map((model: any) => (
-                <TableRow key={model.value} className="text-xs lg:text-sm">
-                  <TableCell>
-                    <ModelBadge modelName={model.value} collapse={false} />
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    {model.description}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {model.crystalPrice ? (
-                      model.crystalPrice
-                    ) : (
-                      <span className="font-medium text-teal-500">FREE</span>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </Card>
 
       <AnimatePresence>{isAuthenticated && <DailyReward />}</AnimatePresence>
     </div>
