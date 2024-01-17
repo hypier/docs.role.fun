@@ -51,7 +51,7 @@ const Images = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "cagliostrolab/animagine-xl-3.0",
+      model: "charlesmccarthy/animagine-xl",
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
