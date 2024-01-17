@@ -70,15 +70,6 @@ function TabsController() {
             {t("Images")}
           </TabsTrigger>
         </Link>
-        <Link href="/shop">
-          <TabsTrigger
-            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
-            value="/shop"
-          >
-            <Store className="h-5 w-5 p-1" />
-            {t("Shop")}
-          </TabsTrigger>
-        </Link>
         <Link href="/discord">
           <TabsTrigger
             className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
