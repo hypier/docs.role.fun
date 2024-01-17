@@ -128,6 +128,7 @@ export const answer = internalAction({
           : -1;
         let conversations =
           message === undefined ? messages : messages.slice(0, lastIndice);
+        let originalQuery;
         console.log("messages before pop::", messages);
         console.log("conversations before pop::", conversations);
         if (
@@ -145,6 +146,7 @@ export const answer = internalAction({
           typeof conversations[conversations.length - 1]?.text === "string"
         ) {
           // @ts-ignore
+          originalQuery = conversations[conversations.length - 1].text;
           conversations[conversations.length - 1].text +=
             ` (don't answer like "${message.text})"`;
           console.log("conversations edited::", conversations);
@@ -202,7 +204,7 @@ export const answer = internalAction({
         ) {
           await ctx.runMutation(internal.messages.save, {
             messageId,
-            query: messages[messages.length - 2]?.text as string,
+            query: originalQuery as string,
             rejectedMessage: message.text,
             regeneratedMessage: text,
           });
