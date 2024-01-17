@@ -1,11 +1,18 @@
 import { ConvexError } from "convex/values";
 import { internalMutation, mutation, query } from "./_generated/server";
-import { getCrystalPrice } from "./constants";
+import { DIVIDEND_RATE, getCrystalPrice } from "./constants";
 import { Id } from "./_generated/dataModel";
 import { getUser } from "./users";
 
 export const useCrystal = internalMutation(
-  async (ctx, { userId, name }: { userId: Id<"users">; name: string }) => {
+  async (
+    ctx,
+    {
+      userId,
+      name,
+      creatorId,
+    }: { userId: Id<"users">; name: string; creatorId?: Id<"users"> },
+  ) => {
     const user = await ctx.db.get(userId);
     const price = getCrystalPrice(name);
     const currentCrystals = user?.crystals || 0;
@@ -19,6 +26,12 @@ export const useCrystal = internalMutation(
       userId,
       name,
     });
+    if (creatorId && creatorId !== userId) {
+      const creator = await ctx.db.get(creatorId);
+      const creatorCrystals = creator?.crystals || 0;
+      const dividend = price * DIVIDEND_RATE;
+      await ctx.db.patch(creatorId, { crystals: creatorCrystals + dividend });
+    }
     return { currentCrystals, remainingCrystals: currentCrystals - price };
   },
 );

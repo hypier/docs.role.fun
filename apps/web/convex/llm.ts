@@ -69,6 +69,7 @@ export const answer = internalAction({
         {
           userId,
           name: model,
+          creatorId: character?.creatorId,
         },
       );
       const baseURL = getBaseURL(model);
