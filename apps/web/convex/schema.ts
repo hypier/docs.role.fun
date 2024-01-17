@@ -111,6 +111,7 @@ export default defineSchema({
     numCrystals: v.number(),
     stripeId: v.optional(v.string()),
     userId: v.id("users"),
+    isPurchased: v.optional(v.boolean()),
   })
     .index("byStripeId", ["stripeId"])
     .index("byUserId", ["userId"]),

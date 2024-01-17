@@ -5,7 +5,7 @@ import { Id } from "./_generated/dataModel";
 export const create = internalMutation({
   handler: async (
     ctx,
-    { numCrystals, userId }: { numCrystals: number; userId: Id<"users"> }
+    { numCrystals, userId }: { numCrystals: number; userId: Id<"users"> },
   ) => {
     return await ctx.db.insert("payments", { numCrystals, userId });
   },
@@ -21,7 +21,11 @@ export const markPending = internalMutation({
 export const fulfill = internalMutation({
   args: { stripeId: v.string() },
   handler: async (ctx, { stripeId }) => {
-    const { userId, numCrystals } = (await ctx.db
+    const {
+      userId,
+      numCrystals,
+      _id: paymentId,
+    } = (await ctx.db
       .query("payments")
       .withIndex("byStripeId", (q) => q.eq("stripeId", stripeId))
       .unique())!;
@@ -29,6 +33,9 @@ export const fulfill = internalMutation({
     const currentCrystals = user?.crystals || 0;
     await ctx.db.patch(userId as Id<"users">, {
       crystals: currentCrystals + numCrystals,
+    });
+    await ctx.db.patch(paymentId, {
+      isPurchased: true,
     });
   },
 });
