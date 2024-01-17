@@ -260,8 +260,8 @@ export const modelData = [
   },
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
-    description: "Uncensored, Noromaid 8x7B by Never Sleep",
-    isNSFW: true,
+    description: "Noromaid 8x7B by Never Sleep",
+    isNSFW: false,
     crystalPrice: 3,
   },
   {
