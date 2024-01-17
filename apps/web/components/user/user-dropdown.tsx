@@ -114,7 +114,7 @@ export default function UserDropdown() {
             ) : (
               <div className="md:hidden">
                 <StyledLink
-                  text={t("Login")}
+                  text={t("Log in")}
                   Icon={<LogIn className="h-4 w-4 text-muted-foreground" />}
                   onClick={() => {
                     setOpenPopover(false);
