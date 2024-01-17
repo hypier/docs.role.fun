@@ -69,6 +69,7 @@ const Images = () => {
         return "Your request has been queued";
       },
       error: (error) => {
+        setIsGenerating(false);
         return error instanceof ConvexError
           ? (error.data as { message: string }).message
           : "Unexpected error occurred";
