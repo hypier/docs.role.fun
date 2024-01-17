@@ -25,7 +25,7 @@
   "Join community": "커뮤니티 가입하기",
   "Filter characters": "캐릭터 필터 설정",
   "Stories": "스토리",
-  "Continue": "Continue",
+  "Continue": "계속",
   "Continue stories": "스토리 계속하기",
   "Stories are chats with characters, shared by users.": "스토리는 사용자들이 공유하는 캐릭터와의 채팅입니다.",
   "Continue chat": "채팅 계속하기",
@@ -93,6 +93,15 @@
   "Imagine": "상상",
   "Images": "이미지",
   "Imagine anything": "무엇이든 상상해보세요",
-  "Show": "Show",
-  "Hide": "Hide"
+  "Show": "보이기",
+  "Hide": "숨기기",
+  "Sign up and continue browsing": "가입하고 더 둘러보기",
+  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Openroleplay.ai 계정을 만들어 캐릭터와 상호작용하고 마음에 드는 AI 크리에이터를 찾아보세요.",
+  "Join a community of hundreds of AI enthusiasts like you.": "여러분과 같은 수백 명의 AI 팬으로 구성된 커뮤니티에 참여하세요.",
+  "Already have an account?": "이미 계정이 있나요?",
+  "Sign up": "가입",
+  "Sign in": "로그인",
+  "Free Crystals": "Free Crystals",
+  "Create characters and earn crystals.": "Create characters and earn crystals.",
+  "You can earn crystals whenever other users interact with the characters you've created.": "You can earn crystals whenever other users interact with the characters you've created."
 }
