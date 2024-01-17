@@ -34,8 +34,9 @@ You have full control over your data, model, and visual presentation.
 
 ## Features
 
-- **Open source models:** Choose from a variety of AI models, making it easy to interact with your favorite AI characters.
-- **Customizability:** Make your characters, personas and UI unique, for a one-of-a-kind roleplaying experience.
+- **Open source models:** Choose from a variety of AI models or bring yours, create your very own AI characters.
+- **Customizability:** Create your own characters, personas and UI unique.
+- **Image Generation:** Create images with open-source AI models.
 - **Group Chat (Coming soon):** Invite your favorite characters to one chat room and chat together.
 - **Extended Memory (Coming soon):** The character instructions and previous conversations are reminded to characters when the context window reaches its limit.
 - **Image Generation (Coming soon):** Allow your character to generate their own selfies, drawings, and photos for a more immersive experience.
