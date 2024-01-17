@@ -8,12 +8,12 @@ const CurrentCrystals = () => {
   return (
     <Link href="/shop">
       <div
-        className={`text-xs font-medium flex gap-0.5 ${
+        className={`flex gap-0.5 text-xs font-medium ${
           crystals < 10 ? " text-rose-500 " : ""
         }`}
       >
-        <Crystal className="w-4 h-4" />
-        {crystals}
+        <Crystal className="h-4 w-4" />
+        {Math.floor(crystals)}
       </div>
     </Link>
   );
