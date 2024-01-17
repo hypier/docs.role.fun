@@ -26,8 +26,13 @@ export const NewCharacter = () => {
         className="group group h-full w-full place-content-center rounded-lg border border-dashed"
         role="button"
       >
-        <Card className="flex h-full w-full items-center justify-center gap-2 rounded-lg border-none p-2 duration-200 group-hover:opacity-50">
-          <Plus /> {t("Create character")}
+        <Card className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-lg border-none p-2 duration-200 group-hover:opacity-50">
+          <div className="flex gap-2">
+            <Plus /> {t("Create character")}
+          </div>
+          <span className="text-center text-xs text-muted-foreground">
+            {t("Create characters and earn crystals.")}
+          </span>
         </Card>
       </AspectRatio>
     </Link>

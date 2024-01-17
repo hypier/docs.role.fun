@@ -252,7 +252,7 @@ export default function Page() {
         <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
           <Crystal className="hidden h-4 w-4 md:inline" />
           {t(
-            "You can earn crystals whenever users interact with characters that you've created.",
+            "You can earn crystals whenever other users interact with the characters you've created.",
           )}
         </p>
         <Link href="/my-characters/create" className="hidden lg:block">
