@@ -201,7 +201,7 @@ export default function Page() {
   const [isTableOpen, setIsTableOpen] = useState(false);
 
   return (
-    <div className="flex w-full flex-col items-center gap-24 justify-self-start px-2 pb-32 pt-16">
+    <div className="flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Shop")}</h1>
         <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
@@ -246,7 +246,7 @@ export default function Page() {
       </AnimatePresence>
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
           {t("Create characters and earn crystals.")}
         </h2>
         <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
