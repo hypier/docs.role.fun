@@ -103,5 +103,9 @@
   "Sign in": "サインイン",
   "Free Crystals": "フリークリスタル",
   "Create characters and earn crystals.": "キャラクターを作成してクリスタルを手に入れよう。",
-  "You can earn crystals whenever other users interact with the characters you've created.": "他のユーザーが作成したキャラクターとやり取りするたびにクリスタルを獲得できます。"
+  "You can earn crystals whenever other users interact with the characters you've created.": "他のユーザーが作成したキャラクターとやり取りするたびにクリスタルを獲得できます。",
+  "Choose an AI model for your character. Each model has unique traits.": "キャラクターの AI モデルを選択します。各モデルには固有の特性があります。",
+  "Test your model here.": "ここでモデルをテストします。",
+  "Mature content": "成熟したコンテンツ",
+  "This character is intended for adult": "This character is intended for adult"
 }
