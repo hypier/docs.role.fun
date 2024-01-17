@@ -2,7 +2,7 @@ import { constructMetadata } from "../lib/utils";
 import Images from "./images";
 
 export const metadata = constructMetadata({
-  title: "Imagine - Generate AI Art",
+  title: "Images - Generate AI Art",
   description: "Explore, find and generate best AI art.",
 });
 
