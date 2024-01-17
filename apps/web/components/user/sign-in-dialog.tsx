@@ -54,9 +54,6 @@ const SignInDialog = ({
                   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.",
                 )}
               </div>
-              <div>
-                {t("Join a community of hundreds of AI enthusiasts like you.")}
-              </div>
             </AlertDialogDescription>
           </div>
           <div className="flex flex-col items-center gap-4">
