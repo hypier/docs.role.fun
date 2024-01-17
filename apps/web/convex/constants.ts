@@ -178,6 +178,11 @@ export const modelData = [
     crystalPrice: 9,
   },
   {
+    value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
+    description: "Nous Hermes 2 Mixtral 8x7B DPO",
+    crystalPrice: 1,
+  },
+  {
     value: "gpt-3.5-turbo-1106",
     description: "GPT-3.5 Turbo by OpenAI",
     src: "/models/openai.png",
