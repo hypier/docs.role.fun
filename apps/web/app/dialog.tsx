@@ -53,6 +53,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const FormattedMessage = ({ message }: { message: any }) => {
+  const { t } = useTranslation();
   return (
     <MemoizedReactMarkdown
       className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
@@ -87,7 +88,7 @@ export const FormattedMessage = ({ message }: { message: any }) => {
       }}
     >
       {message?.text?.startsWith("Not enough crystals.")
-        ? `${message?.text} [Visit Shop](/shop)`
+        ? `${message?.text} [${t("Visit Shop")}](/shop)`
         : message?.text}
     </MemoizedReactMarkdown>
   );
