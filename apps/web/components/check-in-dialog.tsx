@@ -4,7 +4,6 @@ import {
   AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@repo/ui/src/components/alert-dialog";
