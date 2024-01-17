@@ -1,12 +1,13 @@
 import Spinner from "@repo/ui/src/components/spinner";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import ImageCard from "./image-card";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import { useStablePaginatedQuery } from "../lib/hooks/use-stable-query";
 import { api } from "../../convex/_generated/api";
 import useCurrentUser from "../lib/hooks/use-current-user";
 import { useTranslation } from "react-i18next";
+import SignInDialog from "../../components/user/sign-in-dialog";
 
 const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const { t } = useTranslation();
@@ -22,12 +23,22 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const images = allImages.filter((image) => image.imageUrl);
   useEffect(() => {
     if (inView) {
-      loadMore(10);
+      if (!me?.name) {
+        setIsSignInModalOpen(true);
+      } else {
+        loadMore(10);
+      }
     }
   }, [inView, loadMore]);
 
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
   return (
     <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 lg:pl-0 xl:grid-cols-5">
+      <SignInDialog
+        isOpen={isSignInModalOpen}
+        setIsOpen={setIsSignInModalOpen}
+      />
       {isGenerating && (
         <div className="relative animate-pulse">
           <div className="absolute inset-0 z-10 m-auto flex items-center justify-center gap-2 text-sm">

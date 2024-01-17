@@ -27,9 +27,10 @@ import { useTranslation } from "react-i18next";
 import { MainChats } from "./main-chat";
 import { NewCharacter } from "./my-characters";
 import useCurrentUser from "../../app/lib/hooks/use-current-user";
-import CheckinDialog from "../checkin-dialog";
+import CheckinDialog from "../check-in-dialog";
 import Gallery from "../../app/images/gallery";
 import Link from "next/link";
+import SignInDialog from "../user/sign-in-dialog";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -59,6 +60,7 @@ const Discover = () => {
   const [_api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   useEffect(() => {
     if (!_api) {
@@ -68,7 +70,11 @@ const Discover = () => {
     setCount(_api.scrollSnapList().length);
     setCurrent(_api.selectedScrollSnap() + 1);
     if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
-      loadMore(10);
+      if (!me?.name && count > 10) {
+        setIsSignInModalOpen(true);
+      } else {
+        loadMore(10);
+      }
     }
 
     _api.on("select", () => {
@@ -86,6 +92,10 @@ const Discover = () => {
     <div className="relative flex flex-col gap-4 lg:gap-8">
       {isAuthenticated && <CheckinDialog />}
       {username && <MainChats />}
+      <SignInDialog
+        isOpen={isSignInModalOpen}
+        setIsOpen={setIsSignInModalOpen}
+      />
 
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         {t("Characters")}
