@@ -30,7 +30,7 @@
 # AI characters and roleplay for everyone
 
 Open Roleplay is an open-source alternative to Character.ai.
-You have full control over your data, model, and visual presentation.
+You have full control over your data, model, and characters.
 
 ## Features
 
