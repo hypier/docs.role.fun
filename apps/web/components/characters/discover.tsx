@@ -202,7 +202,7 @@ const Discover = () => {
         </Carousel>
       </div>
       <MainStories />
-      <section className="flex flex-col gap-4 md:w-[80%] lg:w-[calc(80%+4rem)] lg:gap-8">
+      <section className="flex flex-col gap-4 lg:w-[calc(80%+4rem)] lg:gap-8">
         <div className="flex items-center gap-1 border-b px-4 pb-4 font-medium lg:border-none lg:px-0 lg:pb-0">
           <Link href="/images" className="flex items-center gap-1">
             {t("Images")}
