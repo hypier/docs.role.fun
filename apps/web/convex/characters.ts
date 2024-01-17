@@ -201,7 +201,7 @@ export const listModels = query({
   handler: async (ctx, args) => {
     let query = ctx.db
       .query("characters")
-      .withIndex("byNumChats")
+      .withIndex("byScore")
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isModel"), true))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
