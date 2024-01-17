@@ -46,6 +46,7 @@ export const listAll = query({
       .withIndex("by_creation_time")
       .order("desc")
       .filter((q) => q.neq(q.field("isNSFW"), true))
+      .filter((q) => q.neq(q.field("messageIds"), []))
       .paginate(args.paginationOpts);
     return results;
   },
