@@ -55,6 +55,7 @@ export const getBaseURL = (modelName: string) => {
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
     case "lizpreciatior/lzlv-70b-fp16-hf":
+    case "nousresearch/nous-hermes-2-mixtral-8x7b-dpo":
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
     case "neversleep/noromaid-20b":
@@ -120,6 +121,7 @@ export const getAPIKey = (modelName: string) => {
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
     case "lizpreciatior/lzlv-70b-fp16-hf":
+    case "nousresearch/nous-hermes-2-mixtral-8x7b-dpo":
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
     case "neversleep/noromaid-20b":
