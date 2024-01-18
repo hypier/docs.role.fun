@@ -413,13 +413,13 @@ export const imageModelData = [
     value: "charlesmccarthy/animagine-xl",
     description:
       "Animagine XL 2.0 - Advanced model to create high-resolution, detailed anime images.",
-    crystalPrice: 50,
+    crystalPrice: 25,
   },
   {
     value: "cagliostrolab/animagine-xl-3.0",
     description:
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
-    crystalPrice: 50,
+    crystalPrice: 25,
   },
 ];
 
