@@ -147,6 +147,7 @@ export const answer = internalAction({
         ) {
           // @ts-ignore
           originalQuery = conversations[conversations.length - 1].text;
+          // @ts-ignore
           conversations[conversations.length - 1].text +=
             ` (don't answer like "${message.text})"`;
           console.log("conversations edited::", conversations);
