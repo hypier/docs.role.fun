@@ -31,6 +31,8 @@
   "Continue chat": "متابعة المحادثة",
   "New Character": "حرف جديد",
   "Edit Character": "تعديل الحرف",
+  "Edit Persona": "تحرير شخصية",
+  "Share": "مشاركة",
   "Edit": "تحرير",
   "Remix": "ريمكس",
   "Remix character": "ريمكس الحرف",
@@ -97,7 +99,6 @@
   "Hide": "إخفاء",
   "Sign up and continue browsing": "قم بالتسجيل ومواصلة التصفح",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "إنشاء حساب Openroleplay.ai للتفاعل مع الأحرف واكتشف منشئي الذكاء الاصطناعي الذي ستحبه.",
-  "Join a community of hundreds of AI enthusiasts like you.": "انضم إلى مجتمع من المئات من متحمسي الذات مثلك.",
   "Already have an account?": "لديك حساب بالفعل؟",
   "Sign up": "تسجيل الدخول",
   "Sign in": "تسجيل الدخول",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "اختر نموذج الذكاء الاصطناعي للشخصية الخاصة بك. كل موديل له سمات فريدة.",
   "Test your model here.": "اختبر نموذجك هنا.",
   "Mature content": "محتوى ناضج",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "هذا الحرف مخصص للبالغين"
 }

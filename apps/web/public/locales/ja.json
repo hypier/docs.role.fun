@@ -31,6 +31,8 @@
   "Continue chat": "チャットを続ける",
   "New Character": "新しい文字",
   "Edit Character": "キャラクターを編集",
+  "Edit Persona": "ペルソナを編集",
+  "Share": "共有",
   "Edit": "編集",
   "Remix": "Remix",
   "Remix character": "Remix character",
@@ -97,7 +99,6 @@
   "Hide": "非表示",
   "Sign up and continue browsing": "サインアップしてブラウジングを続ける",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Openroleplay.aiアカウントを作成して、キャラクターと交流し、あなたが愛するAIクリエイターを発見しましょう。",
-  "Join a community of hundreds of AI enthusiasts like you.": "あなたのような何百ものAI愛好家のコミュニティに参加しましょう。",
   "Already have an account?": "既にアカウントをお持ちですか？",
   "Sign up": "新規登録",
   "Sign in": "サインイン",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "キャラクターの AI モデルを選択します。各モデルには固有の特性があります。",
   "Test your model here.": "ここでモデルをテストします。",
   "Mature content": "成熟したコンテンツ",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "このキャラクターは大人向けです"
 }

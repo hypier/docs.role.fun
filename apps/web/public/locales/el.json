@@ -31,6 +31,8 @@
   "Continue chat": "Συνέχεια συνομιλίας",
   "New Character": "Νέος Χαρακτήρας",
   "Edit Character": "Επεξεργασία Χαρακτήρα",
+  "Edit Persona": "Επεξεργασία Persona",
+  "Share": "Κοινοποίηση",
   "Edit": "Επεξεργασία",
   "Remix": "Remix",
   "Remix character": "Χαρακτήρας Remix",
@@ -97,7 +99,6 @@
   "Hide": "Απόκρυψη",
   "Sign up and continue browsing": "Εγγραφείτε και συνεχίστε την περιήγηση",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Δημιουργήστε ένα λογαριασμό Openroleplay.ai για να αλληλεπιδράσετε με καροτσάκια και ανακαλύψτε δημιουργούς AI που θα αγαπήσετε.",
-  "Join a community of hundreds of AI enthusiasts like you.": "Γίνετε μέλος μιας κοινότητας από εκατοντάδες λάτρεις της AI όπως εσείς.",
   "Already have an account?": "Έχετε ήδη λογαριασμό?",
   "Sign up": "Εγγραφείτε",
   "Sign in": "Σύνδεση",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "Επιλέξτε ένα μοντέλο τεχνητής νοημοσύνης για τον χαρακτήρα σας. Κάθε μοντέλο έχει μοναδικά χαρακτηριστικά.",
   "Test your model here.": "Δοκιμάστε το μοντέλο σας εδώ.",
   "Mature content": "Ώριμο περιεχόμενο",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "Αυτός ο χαρακτήρας προορίζεται για ενήλικες"
 }

@@ -31,6 +31,8 @@
   "Continue chat": "Fortsett chat",
   "New Character": "Ny karakter",
   "Edit Character": "Rediger karakter",
+  "Edit Persona": "Rediger person",
+  "Share": "Del",
   "Edit": "Rediger",
   "Remix": "Remiks",
   "Remix character": "Remiks tegn",
@@ -97,7 +99,6 @@
   "Hide": "Skjul",
   "Sign up and continue browsing": "Registrer deg og fortsett surfing",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Lag en Openroleplay.ai konto for å samhandle med karakterer og oppdag AI skapere du vil elske.",
-  "Join a community of hundreds of AI enthusiasts like you.": "Bli med i et samfunn av hundrevis av Isaivere som deg.",
   "Already have an account?": "Har du allerede en konto?",
   "Sign up": "Registrer deg",
   "Sign in": "Logg inn",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "Velg en AI modell for din karakter. Hver modell har unike egenskaper.",
   "Test your model here.": "Test modellen din her.",
   "Mature content": "Voksent innhold",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "Dette tegnet er beregnet på voksen"
 }

@@ -31,6 +31,8 @@
   "Continue chat": "채팅 계속하기",
   "New Character": "새 캐릭터",
   "Edit Character": "캐릭터 수정",
+  "Edit Persona": "Edit Persona",
+  "Share": "Share",
   "Edit": "수정",
   "Remix": "리믹스",
   "Remix character": "캐릭터 리믹스",
@@ -97,15 +99,14 @@
   "Hide": "숨기기",
   "Sign up and continue browsing": "가입하고 더 둘러보기",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Openroleplay.ai 계정을 만들어 캐릭터와 상호작용하고 마음에 드는 AI 크리에이터를 찾아보세요.",
-  "Join a community of hundreds of AI enthusiasts like you.": "여러분과 같은 수백 명의 AI 팬으로 구성된 커뮤니티에 참여하세요.",
   "Already have an account?": "이미 계정이 있나요?",
   "Sign up": "가입",
   "Sign in": "로그인",
   "Free Crystals": "무료 크리스탈",
   "Create characters and earn crystals.": "캐릭터를 생성하고 크리스탈을 얻으세요.",
   "You can earn crystals whenever other users interact with the characters you've created.": "다른 사용자가 내가 만든 캐릭터와 상호작용할 때마다 크리스탈을 얻을 수 있습니다.",
-  "Choose an AI model for your character. Each model has unique traits.": "Choose an AI model for your character. Each model has unique traits.",
-  "Test your model here.": "Test your model here.",
-  "Mature content": "Mature content",
-  "This character is intended for adult": "This character is intended for adult"
+  "Choose an AI model for your character. Each model has unique traits.": "캐릭터의 AI 모델을 선택합니다. 각 모델에는 고유한 특성이 있습니다.",
+  "Test your model here.": "여기에서 모델을 테스트하세요.",
+  "Mature content": "성인 컨텐츠",
+  "This character is intended for adult": "이 캐릭터는 성인용입니다."
 }

@@ -31,6 +31,8 @@
   "Continue chat": "Kontynuuj czat",
   "New Character": "Nowy znak",
   "Edit Character": "Edytuj znak",
+  "Edit Persona": "Edytuj Osobę",
+  "Share": "Udostępnij",
   "Edit": "Edytuj",
   "Remix": "Remiks",
   "Remix character": "Zremiksowy znak",
@@ -97,7 +99,6 @@
   "Hide": "Ukryj",
   "Sign up and continue browsing": "Zarejestruj się i kontynuuj przeglądanie",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Utwórz konto Openroleplay.ai, aby wchodzić w interakcje z samochodami i odkryć twórców AI, których pokochasz.",
-  "Join a community of hundreds of AI enthusiasts like you.": "Dołącz do społeczności setek entuzjastów AI takich jak ty.",
   "Already have an account?": "Masz już konto?",
   "Sign up": "Zarejestruj",
   "Sign in": "Zaloguj się",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "Wybierz model AI dla swojej postaci. Każdy model ma unikalne cechy.",
   "Test your model here.": "Przetestuj swój model tutaj.",
   "Mature content": "Zawartość przyrody",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "Ten znak jest przeznaczony dla dorosłych"
 }

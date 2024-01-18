@@ -31,6 +31,8 @@
   "Continue chat": "Продолжить чат",
   "New Character": "Новый персонаж",
   "Edit Character": "Изменить персонажа",
+  "Edit Persona": "Изменить Персону",
+  "Share": "Поделиться",
   "Edit": "Редактирование",
   "Remix": "Ремикс",
   "Remix character": "Символ Remix",
@@ -97,7 +99,6 @@
   "Hide": "Скрыть",
   "Sign up and continue browsing": "Зарегистрироваться и продолжить просмотр",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Создайте учётную запись Openroleplay.ai, чтобы взаимодействовать с caracters и открыть для себя AI создателей, которые вы любите.",
-  "Join a community of hundreds of AI enthusiasts like you.": "Присоединяйтесь к сообществу из сотен таких энтузиастов, как вы.",
   "Already have an account?": "Уже зарегистрированы?",
   "Sign up": "Регистрация",
   "Sign in": "Войти",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "Выберите модель ИИ для вашего персонажа. Каждая модель имеет уникальные черты.",
   "Test your model here.": "Проверьте модель здесь.",
   "Mature content": "Содержание зрелости",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "Этот символ предназначен для взрослых"
 }

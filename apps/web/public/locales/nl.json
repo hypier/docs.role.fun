@@ -31,6 +31,8 @@
   "Continue chat": "Chat voortzetten",
   "New Character": "Nieuw personage",
   "Edit Character": "Karakter bewerken",
+  "Edit Persona": "Persoon bewerken",
+  "Share": "Delen",
   "Edit": "Bewerken",
   "Remix": "Remix",
   "Remix character": "Remix karakter",
@@ -97,7 +99,6 @@
   "Hide": "Verbergen",
   "Sign up and continue browsing": "Meld je aan en ga verder met browsen",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Maak een Openroleplay.ai account aan om interactie te hebben met tekens en ontdek AI makers waar je van zult houden.",
-  "Join a community of hundreds of AI enthusiasts like you.": "Doe mee met een gemeenschap van honderden AI-liefhebbers zoals jij.",
   "Already have an account?": "Heeft u al een account?",
   "Sign up": "Registreer nu",
   "Sign in": "Log in",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "Kies een AI-model voor je karakter. Elk model heeft unieke eigenschappen.",
   "Test your model here.": "Test je model hier.",
   "Mature content": "Volwassen inhoud",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "Dit karakter is bedoeld voor volwassenen"
 }

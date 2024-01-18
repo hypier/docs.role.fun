@@ -31,6 +31,8 @@
   "Continue chat": "继续聊天",
   "New Character": "新字符",
   "Edit Character": "编辑字符",
+  "Edit Persona": "编辑Persona",
+  "Share": "分享",
   "Edit": "编辑",
   "Remix": "调节器",
   "Remix character": "重置字符",
@@ -97,7 +99,6 @@
   "Hide": "隐藏",
   "Sign up and continue browsing": "注册并继续浏览",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "创建一个 Openroleplay.ai 帐户来与caracters 交互并发现您将喜欢的 AI 创建者。",
-  "Join a community of hundreds of AI enthusiasts like you.": "加入一个由数以百计的 AI 爱好者组成的社区。",
   "Already have an account?": "已经有一个帐户？",
   "Sign up": "注册",
   "Sign in": "登录",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "为您的角色选择一个 AI 模型。每个模型都有独特的特性。",
   "Test your model here.": "在此测试您的模型。",
   "Mature content": "成熟内容",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "此字符是针对成年人的"
 }

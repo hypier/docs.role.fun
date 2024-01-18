@@ -31,6 +31,8 @@
   "Continue chat": "Continuă conversația",
   "New Character": "Caracter nou",
   "Edit Character": "Editare caracter",
+  "Edit Persona": "Editează Persoana",
+  "Share": "Distribuie",
   "Edit": "Editare",
   "Remix": "Remix",
   "Remix character": "Caracterul Remix",
@@ -97,7 +99,6 @@
   "Hide": "Ascunde",
   "Sign up and continue browsing": "Înregistrează-te și continuă navigarea",
   "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Creează un cont Openroleplay.ai pentru a interacționa cu caractere și descoperă creatorii de AI pe care îi vei iubi.",
-  "Join a community of hundreds of AI enthusiasts like you.": "Alătură-te unei comunități de sute de entuziaști AI ca tine.",
   "Already have an account?": "Ai deja un cont?",
   "Sign up": "Înscrie-te",
   "Sign in": "Autentificare",
@@ -107,5 +108,5 @@
   "Choose an AI model for your character. Each model has unique traits.": "Alege un model AI pentru caracterul tău. Fiecare model are trăsături unice.",
   "Test your model here.": "Testează-ți modelul aici.",
   "Mature content": "Conținutul naturii",
-  "This character is intended for adult": "This character is intended for adult"
+  "This character is intended for adult": "Acest caracter este destinat adulţilor"
 }
