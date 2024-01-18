@@ -1,6 +1,6 @@
 import { Badge } from "@repo/ui/src/components/badge";
 import { useQuery } from "convex/react";
-import { Package } from "lucide-react";
+import { FilterX, Package } from "lucide-react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
@@ -48,7 +48,7 @@ const ModelBadge = ({
           alt={alt}
         />
       ) : isNSFW ? (
-        <span className="text-yellow-500">18+</span>
+        <FilterX className="h-4 w-4 p-0.5 text-yellow-500" />
       ) : (
         <Package className="h-4 w-4 p-0.5 text-white" />
       )}
