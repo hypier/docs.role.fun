@@ -479,11 +479,11 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-16 h-[100vh] w-[100vw] object-cover opacity-50 lg:hidden"
+          className="pointer-events-none fixed left-0 top-16 h-[100vh] w-[100vw] object-cover opacity-50 md:hidden"
         />
       )}
       {chatId && (
-        <div className="sticky top-0 flex h-12 w-full items-center justify-between rounded-t-lg border-b bg-background p-2 lg:px-6">
+        <div className="sticky top-0 flex h-12 w-full items-center justify-between border-b bg-background p-2 lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
             {t("Everything AI says is made up.")}
