@@ -9,7 +9,7 @@ import {
 import { Input } from "@repo/ui/src/components/input";
 import { Textarea } from "@repo/ui/src/components/textarea";
 import { Button } from "@repo/ui/src/components/button";
-import { ArrowLeft, Plus, UploadCloud } from "lucide-react";
+import { ArrowLeft, HelpCircle, Info, Plus, UploadCloud } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -233,7 +233,7 @@ export default function CharacterForm() {
               onOpenChange={() => setOpenPopover(!openPopover)}
             >
               <PopoverContent asChild>
-                <div className="w-full rounded-lg bg-background p-4 sm:w-40">
+                <div className="w-full rounded-lg bg-background p-2 sm:w-40">
                   <RadioGroup
                     defaultValue="public"
                     className="p-1"
@@ -245,8 +245,22 @@ export default function CharacterForm() {
                     </span>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="public" id="public" />
-                      <Label className="font-normal" htmlFor="public">
+                      <Label
+                        className="flex items-center justify-center gap-1 font-normal"
+                        htmlFor="public"
+                      >
                         {t("Public")}
+                        <Tooltip
+                          content={t(
+                            "You can earn crystals whenever other users interact with the characters you've created.",
+                          )}
+                        >
+                          <div className="flex items-center justify-center text-[8px] text-muted-foreground">
+                            ({t("Earn")}{" "}
+                            <Crystal className="h-3 w-3 text-muted-foreground" />
+                            )
+                          </div>
+                        </Tooltip>
                       </Label>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -256,7 +270,7 @@ export default function CharacterForm() {
                       </Label>
                     </div>
                   </RadioGroup>
-                  <div className="flex justify-center pt-4">
+                  <div className="flex flex-col justify-center pt-4">
                     <Button
                       onClick={async () => {
                         const newCharacterId = await onSubmit(form.getValues());
@@ -313,22 +327,28 @@ export default function CharacterForm() {
         <div className="my-4 flex w-full flex-col items-center justify-center gap-4">
           <Label
             htmlFor="card"
-            className="relative flex h-[350px] w-[200px] cursor-pointer flex-col items-center justify-center rounded border border-dashed duration-200 hover:-translate-y-1 hover:border-border hover:shadow-lg"
+            className="relative flex h-[350px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded border border-dashed duration-200 hover:-translate-y-1 hover:border-border hover:shadow-lg"
           >
             <Plus />
-            {t("Add character card")}
-            <span className="text-xs text-muted-foreground">
-              Best size: 1024x1792
-            </span>
-            {cardImageUrl && (
-              <Image
-                src={cardImageUrl}
-                alt={"Preview of character card"}
-                width={300}
-                height={525}
-                className="absolute h-full w-full rounded object-cover"
-              />
-            )}
+            <div className="flex flex-col items-center justify-center">
+              {t("Add character card")}
+              <span className="text-xs text-muted-foreground">
+                Best size: 1024x1792
+              </span>
+              {cardImageUrl && (
+                <Image
+                  src={cardImageUrl}
+                  alt={"Preview of character card"}
+                  width={300}
+                  height={525}
+                  className="absolute h-full w-full rounded object-cover"
+                />
+              )}
+            </div>
+            <span className="text-xs">or</span>
+            <Link href="/images">
+              <Button variant="outline">{t("Generate")}</Button>
+            </Link>
           </Label>
           <Input
             id="card"
@@ -372,16 +392,19 @@ export default function CharacterForm() {
             />
             <FormField
               control={form.control}
-              name="greetings"
+              name="description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
-                    {t("Greeting")}
+                    {t("Description")}{" "}
+                    <span className="text-muted-foreground">
+                      {t("(optional)")}
+                    </span>
                     <InfoTooltip
                       content={
                         <TooltipContent
                           title={
-                            "The first thing your Character will say when starting a new conversation. Greeting can have a large impact on chat."
+                            "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
                           }
                         />
                       }
@@ -389,7 +412,9 @@ export default function CharacterForm() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="The first message from character to user"
+                      placeholder={t(
+                        "Add a short description about this character",
+                      )}
                       {...field}
                     />
                   </FormControl>
@@ -461,7 +486,9 @@ export default function CharacterForm() {
                   <FormControl>
                     <Textarea
                       className="min-h-[100px]"
-                      placeholder="What does this character do? How does they behave? What should they avoid doing?"
+                      placeholder={t(
+                        "What does this character do? How does they behave? What should they avoid doing?",
+                      )}
                       {...field}
                     />
                   </FormControl>
@@ -471,19 +498,16 @@ export default function CharacterForm() {
             />
             <FormField
               control={form.control}
-              name="description"
+              name="greetings"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
-                    {t("Description")}{" "}
-                    <span className="text-muted-foreground">
-                      {t("(optional)")}
-                    </span>
+                    {t("Greeting")}
                     <InfoTooltip
                       content={
                         <TooltipContent
                           title={
-                            "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
+                            "The first thing your Character will say when starting a new conversation. Greeting can have a large impact on chat."
                           }
                         />
                       }
@@ -491,7 +515,7 @@ export default function CharacterForm() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Add a short description about this character"
+                      placeholder="The first message from character to user"
                       {...field}
                     />
                   </FormControl>

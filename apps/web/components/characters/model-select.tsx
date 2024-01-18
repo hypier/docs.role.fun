@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import useModelData from "../../app/lib/hooks/use-model-data";
+import { Crystal } from "@repo/ui/src/components/icons";
 
 export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
   const { t } = useTranslation();
@@ -38,11 +39,18 @@ export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
             </FormControl>
             <SelectContent>
               {modelData && modelData?.length > 0 ? (
-                modelData.map((model: { value: string; description: any }) => (
-                  <SelectItem value={model.value}>
-                    {model.description}
-                  </SelectItem>
-                ))
+                modelData.map(
+                  (model: {
+                    value: string;
+                    description: any;
+                    crystalPrice: number;
+                  }) => (
+                    <SelectItem value={model.value}>
+                      {model.description} ({model.crystalPrice}x Crystals per
+                      message)
+                    </SelectItem>
+                  ),
+                )
               ) : (
                 <SelectItem value="openrouter/auto">Loading...</SelectItem>
               )}

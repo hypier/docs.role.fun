@@ -30,7 +30,7 @@ export const NewCharacter = () => {
           <div className="flex gap-2">
             <Plus /> {t("Create character")}
           </div>
-          <span className="text-center text-xs text-muted-foreground">
+          <span className="text-center text-[10px] text-muted-foreground">
             {t("Create characters and earn crystals.")}
           </span>
         </Card>
