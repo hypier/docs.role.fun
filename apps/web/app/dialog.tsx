@@ -594,7 +594,7 @@ export function Dialog({
         <div className="flex w-full items-center justify-center gap-4 px-4">
           <Inspirations chatId={chatId} characterId={characterId} />
           <input
-            className="my-3 w-full border-none focus-visible:ring-0"
+            className="my-3 w-full border-none bg-background focus-visible:ring-0"
             autoFocus
             name="message"
             placeholder="Send a message"
