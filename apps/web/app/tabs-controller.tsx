@@ -23,7 +23,7 @@ function TabsController() {
 
   return (
     <Tabs value={getFirstDirectory(pathname)}>
-      <TabsList className="border-b-none shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-16 w-full gap-2 rounded-none rounded-t-lg border bg-background/90 backdrop-blur-md backdrop-saturate-150 lg:static lg:h-full lg:w-40 lg:flex-col lg:items-start lg:justify-start lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none">
+      <TabsList className="shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-16 w-full gap-2 rounded-none border-t bg-background/90 backdrop-blur-md backdrop-saturate-150 dark:bg-sheet/90 lg:static lg:h-full lg:w-40 lg:flex-col lg:items-start lg:justify-start lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none">
         <Link href="/">
           <TabsTrigger
             className="flex w-full flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"

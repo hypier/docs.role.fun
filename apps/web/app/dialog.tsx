@@ -242,31 +242,25 @@ export const Inspirations = ({
   const { t } = useTranslation();
   const autopilot = useMutation(api.followUps.autopilot);
   return (
-    <div className="flex max-h-28 w-full flex-wrap items-center gap-1 overflow-y-clip overflow-x-scroll bg-background/90 p-4 text-xs backdrop-blur-md scrollbar-hide">
-      <Tooltip
-        content={
-          <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-            <Crystal className="h-4 w-4" /> crystals are used.
-          </span>
-        }
-        desktopOnly={true}
+    <Tooltip
+      content={
+        <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+          <Crystal className="h-4 w-4" /> {t("Continue")}
+        </span>
+      }
+      desktopOnly={true}
+    >
+      <Button
+        variant="outline"
+        onClick={() => {
+          autopilot({ chatId, characterId });
+        }}
+        size="icon"
+        type="button"
       >
-        <Button
-          variant="ghost"
-          onClick={() => {
-            autopilot({ chatId, characterId });
-          }}
-          className="gap-1"
-          size="xs"
-          type="button"
-        >
-          <>
-            <Sparkles className="h-5 w-5 p-1" />
-            {t("Continue")}
-          </>
-        </Button>
-      </Tooltip>
-    </div>
+        <Sparkles className="h-4 w-4" />
+      </Button>
+    </Tooltip>
   );
 };
 
@@ -479,14 +473,13 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-16 h-[100vh] w-[100vw] object-cover opacity-50 md:hidden"
+          className="pointer-events-none fixed left-0 top-16 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
         />
       )}
       {chatId && (
-        <div className="sticky top-0 flex h-12 w-full items-center justify-between border-b bg-background p-2 lg:rounded-t-lg lg:px-6">
+        <div className="sticky top-0 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
-            {t("Everything AI says is made up.")}
           </div>
           <div className="flex items-center gap-1">
             <ChatOptionsPopover
@@ -595,21 +588,21 @@ export function Dialog({
         </div>
       </div>
       <form
-        className="sticky bottom-16 flex min-h-fit w-full flex-col items-center rounded-br-lg border-0 border-t-[1px] border-solid bg-background lg:bottom-0"
+        className="sticky bottom-16 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:bottom-0 lg:rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
-        <Inspirations chatId={chatId} characterId={characterId} />
-        <div className="flex w-full">
+        <div className="flex w-full items-center justify-center gap-4 px-4">
+          <Inspirations chatId={chatId} characterId={characterId} />
           <input
-            className="my-3 ml-4 w-full border-none bg-background focus-visible:ring-0"
+            className="my-3 w-full border-none focus-visible:ring-0"
             autoFocus
             name="message"
             placeholder="Send a message"
             value={input}
             onChange={(event) => setInput(event.target.value)}
           />
-          <Button disabled={input === ""} variant="ghost" className="my-3 mr-4">
-            <Send className="h-5 w-5" />
+          <Button disabled={input === ""} size="icon">
+            <Send className="h-4 w-4" />
           </Button>
         </div>
       </form>
