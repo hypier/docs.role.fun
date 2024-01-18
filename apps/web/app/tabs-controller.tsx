@@ -76,7 +76,7 @@ function TabsController() {
             value="/discord"
           >
             <Discord className="h-5 w-5 p-1" />
-            {t("Community")}
+            {t("Discord")}
           </TabsTrigger>
         </Link>
         <div className="hidden w-full px-2 lg:flex">
