@@ -93,10 +93,12 @@ const Discover = () => {
       />
 
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
-        {t("Characters")}
-        <Tooltip content={t("Filter characters")}>
-          <ListFilter className="h-4 w-4 p-0.5 text-muted-foreground" />
-        </Tooltip>
+        <Link href="/characters" className="flex items-center gap-1">
+          {t("Characters")}
+          <Button variant="ghost" size="icon">
+            <ChevronRight />
+          </Button>
+        </Link>
       </div>
 
       <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
