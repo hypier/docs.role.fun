@@ -186,7 +186,7 @@ export const answer = internalAction({
                 text,
               });
             }
-            if (mutationCounter >= 64) {
+            if (mutationCounter >= 128) {
               break;
             }
           }
