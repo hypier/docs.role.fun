@@ -16,9 +16,12 @@ import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
 import { Button } from "@repo/ui/src/components";
 import { ChevronRight } from "lucide-react";
+import useCurrentUser from "../../app/lib/hooks/use-current-user";
 
 export const MainStories = () => {
   const { t } = useTranslation();
+  const me = useCurrentUser();
+
   const { results, status, loadMore } = usePaginatedQuery(
     api.stories.listAll,
     {},
@@ -71,7 +74,11 @@ export const MainStories = () => {
                   >
                     <Link
                       href={`/character/${story.characterId}/story/${story._id}`}
-                      className={`${story.isNSFW ? "blur-md" : ""}`}
+                      className={`${
+                        story?.isNSFW && me?.nsfwPreference !== "allow"
+                          ? "blur-md"
+                          : ""
+                      }`}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Story
