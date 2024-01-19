@@ -20,7 +20,6 @@ import useCurrentUser from "../../app/lib/hooks/use-current-user";
 
 export const MainStories = () => {
   const { t } = useTranslation();
-  const me = useCurrentUser();
 
   const { results, status, loadMore } = usePaginatedQuery(
     api.stories.listAll,
@@ -74,17 +73,13 @@ export const MainStories = () => {
                   >
                     <Link
                       href={`/character/${story.characterId}/story/${story._id}`}
-                      className={`${
-                        story?.isNSFW && me?.nsfwPreference !== "allow"
-                          ? "blur-md"
-                          : ""
-                      }`}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Story
                         isCard={true}
                         storyId={story._id}
                         characterId={story.characterId}
+                        isNSFW={story.isNSFW}
                       />
                     </Link>
                   </CarouselItem>

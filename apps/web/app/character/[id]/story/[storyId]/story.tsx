@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import Link from "next/link";
 import Spinner from "@repo/ui/src/components/spinner";
+import useCurrentUser from "../../../../lib/hooks/use-current-user";
 
 export function Story({
   name = "",
@@ -15,6 +16,7 @@ export function Story({
   chatId,
   characterId,
   isCard,
+  isNSFW,
 }: {
   name?: string;
   cardImageUrl?: string;
@@ -22,6 +24,7 @@ export function Story({
   chatId?: Id<"chats">;
   characterId?: Id<"characters">;
   isCard?: boolean;
+  isNSFW?: boolean;
 }) {
   const character = useQuery(
     api.characters.get,
@@ -30,19 +33,27 @@ export function Story({
   const messages = useQuery(api.stories.messages, { storyId });
   const creatorName = useQuery(api.stories.creatorName, { storyId });
   const unlock = useMutation(api.stories.unlock);
+  const me = useCurrentUser();
+
   return (
     <div className="relative h-full w-full">
       {character?.cardImageUrl && (
         <Image
           src={character.cardImageUrl}
           fill={true}
-          className="-z-10 object-cover opacity-10 duration-200 group-hover:opacity-50"
+          className={`-z-10 object-cover opacity-10 duration-200 group-hover:opacity-50 ${
+            isNSFW && me?.nsfwPreference !== "allow" ? "blur-md" : ""
+          }`}
           alt="image of character"
         />
       )}
       <div className={`flex h-full flex-col overflow-y-auto scrollbar-hide`}>
         <div className="mx-2 flex h-full flex-col justify-between gap-8 rounded-lg p-4">
-          <div className="flex flex-col gap-8">
+          <div
+            className={`flex flex-col gap-8
+${isNSFW && me?.nsfwPreference !== "allow" ? "blur-md" : ""}
+          `}
+          >
             {messages && messages?.length > 0 ? (
               messages?.map((message, i) => (
                 <Message

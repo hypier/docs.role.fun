@@ -48,16 +48,13 @@ export const StoriesGrid = () => {
               <Link
                 href={`/character/${story.characterId}/story/${story._id}`}
                 onClick={(e) => e.stopPropagation()}
-                className={`h-[32rem] overflow-hidden rounded-lg border duration-200 hover:shadow-lg ${
-                  story?.isNSFW && me?.nsfwPreference !== "allow"
-                    ? "blur-md"
-                    : ""
-                }`}
+                className={`h-[32rem] overflow-hidden rounded-lg border duration-200 hover:shadow-lg`}
               >
                 <Story
                   isCard={true}
                   storyId={story._id}
                   characterId={story.characterId}
+                  isNSFW={story.isNSFW}
                 />
               </Link>
             ))
