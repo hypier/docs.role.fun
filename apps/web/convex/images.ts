@@ -83,6 +83,10 @@ export const listImages = query({
       .filter((q) => q.neq(q.field("isArchived"), true))
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
+    if (user?.nsfwPreference === "block") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+
     const paginationResult = await query
       .order("desc")
       .paginate(args.paginationOpts);

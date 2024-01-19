@@ -12,12 +12,18 @@ import useCurrentUser from "../../app/lib/hooks/use-current-user";
 import { useEffect, useState } from "react";
 import { Rating18Plus } from "@repo/ui/src/components/icons";
 import { Label } from "@repo/ui/src/components/label";
-import { Switch } from "@repo/ui/src/components/switch";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/src/components/select";
 
 const AgeRestriction = () => {
   const me = useCurrentUser();
@@ -50,21 +56,31 @@ const AgeRestriction = () => {
             </AlertDialogDescription>
             {me && (
               <div className="flex items-center space-x-2 pt-4">
-                <Switch
-                  id="allow"
-                  checked={me?.nsfwPreference === "allow"}
-                  onCheckedChange={(checked: boolean) => {
+                <Label htmlFor="nsfwPreference">{t("Preference")}</Label>
+                <Select
+                  onValueChange={(value: "allow" | "auto" | "block") => {
                     const promise = updateNSFWPreference({
-                      nsfwPreference: checked ? "allow" : "auto",
+                      nsfwPreference: value,
                     });
                     toast.promise(promise, {
                       loading: "Updating preference...",
                       success: "Preference updated successfully",
-                      error: "Failed to update preference",
+                      error: me?.name
+                        ? "Failed to update preference."
+                        : "Log in to save your preference.",
                     });
                   }}
-                />
-                <Label htmlFor="allow">{t("Always allow")}</Label>
+                  defaultValue={me?.nsfwPreference}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t("Select a preference")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="allow">{t("Always allow")}</SelectItem>
+                    <SelectItem value="auto">{t("Always ask")}</SelectItem>
+                    <SelectItem value="block">{t("Always block")}</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             )}
           </AlertDialogHeader>
@@ -72,7 +88,13 @@ const AgeRestriction = () => {
             <AlertDialogCancel onClick={() => router.back()}>
               {t("Go back")}
             </AlertDialogCancel>
-            <AlertDialogAction>{t("Confirm")}</AlertDialogAction>
+            <AlertDialogAction
+              onClick={
+                me?.nsfwPreference === "block" ? () => router.back() : undefined
+              }
+            >
+              {t("Confirm")}
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -27,11 +27,20 @@ export const list = query({
     characterId: v.id("characters"),
   },
   handler: async (ctx, args) => {
-    const results = await ctx.db
+    let user: any;
+    try {
+      user = await getUser(ctx);
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
+    let query = ctx.db
       .query("stories")
       .filter((q) => q.eq(q.field("characterId"), args.characterId))
-      .order("desc")
-      .paginate(args.paginationOpts);
+      .order("desc");
+    if (user?.nsfwPreference === "block") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+    const results = await query.paginate(args.paginationOpts);
     return results;
   },
 });
@@ -41,12 +50,21 @@ export const listAll = query({
     paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
-    const results = await ctx.db
+    let user: any;
+    try {
+      user = await getUser(ctx);
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
+    let query = ctx.db
       .query("stories")
       .withIndex("by_creation_time")
       .order("desc")
-      .filter((q) => q.neq(q.field("messageIds"), []))
-      .paginate(args.paginationOpts);
+      .filter((q) => q.neq(q.field("messageIds"), []));
+    if (user?.nsfwPreference === "block") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+    const results = await query.paginate(args.paginationOpts);
     return results;
   },
 });

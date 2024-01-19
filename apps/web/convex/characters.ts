@@ -148,6 +148,16 @@ export const list = query({
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
 
+    let user: any;
+    try {
+      user = await getUser(ctx);
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
+    if (user?.nsfwPreference === "block") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+
     return await query.order("desc").paginate(args.paginationOpts);
   },
 });
