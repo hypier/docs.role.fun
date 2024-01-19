@@ -61,12 +61,7 @@ export const FormattedMessage = ({ message }: { message: any }) => {
       components={{
         a({ children, href, target, rel }) {
           return (
-            <a
-              href={href}
-              rel={rel}
-              target={target}
-              className="underline duration-200 hover:opacity-50"
-            >
+            <a href={href} rel={rel} target={target} className="underline">
               {children}
             </a>
           );
