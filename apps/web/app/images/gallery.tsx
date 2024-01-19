@@ -23,7 +23,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const images = allImages.filter((image) => image.imageUrl);
   useEffect(() => {
     if (inView) {
-      if (!me?.name) {
+      if (!me?.name && results?.length > 21) {
         setIsSignInModalOpen(true);
       } else {
         loadMore(10);
