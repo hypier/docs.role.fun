@@ -426,7 +426,7 @@ export const imageModelData = [
     value: "pagebrain/dreamshaper-v8",
     description:
       "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
-    crystalPrice: 50,
+    crystalPrice: 25,
   },
 ];
 
