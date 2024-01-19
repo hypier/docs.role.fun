@@ -405,11 +405,6 @@ export const imageModelData = [
     crystalPrice: 75,
   },
   {
-    value: "stable-diffusion-xl-1024-v1-0",
-    description: "Stable Diffusion XL by Stability AI",
-    crystalPrice: 25,
-  },
-  {
     value: "charlesmccarthy/animagine-xl",
     description:
       "Animagine XL 2.0 - Advanced model to create high-resolution, detailed anime images.",
@@ -428,9 +423,9 @@ export const imageModelData = [
     crystalPrice: 50,
   },
   {
-    value: "brewwh/cog-a1111-ui",
+    value: "pagebrain/dreamshaper-v8",
     description:
-      "XXMix Realistic - Advanced model for photorealistic, high quality images.",
+      "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
     crystalPrice: 50,
   },
 ];

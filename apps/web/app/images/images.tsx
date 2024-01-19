@@ -34,7 +34,7 @@ const formSchema = z.object({
     z.literal("cagliostrolab/animagine-xl-3.0"),
     z.literal("asiryan/juggernaut-xl-v7"),
     z.literal("dall-e-3"),
-    z.literal("brewwh/cog-a1111-ui"),
+    z.literal("pagebrain/dreamshaper-v8"),
   ]),
 });
 

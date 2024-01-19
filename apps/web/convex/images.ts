@@ -15,7 +15,7 @@ export const generate = mutation({
       v.literal("charlesmccarthy/animagine-xl"),
       v.literal("asiryan/juggernaut-xl-v7"),
       v.literal("cagliostrolab/animagine-xl-3.0"),
-      v.literal("brewwh/cog-a1111-ui"),
+      v.literal("pagebrain/dreamshaper-v8"),
     ),
   },
   handler: async (ctx, { prompt, model }) => {
