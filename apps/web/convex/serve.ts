@@ -90,6 +90,6 @@ export const checkin = mutation({
       date,
     });
     const currentCrystals = user?.crystals || 0;
-    await ctx.db.patch(user._id, { crystals: currentCrystals + 50 });
+    await ctx.db.patch(user._id, { crystals: currentCrystals + 25 });
   },
 });
