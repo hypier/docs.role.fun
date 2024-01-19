@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: "https://openroleplay.ai/shop",
+      url: "https://openroleplay.ai/crystals",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

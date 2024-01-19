@@ -28,6 +28,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/shop",
+        destination: "/crystals",
+        permanent: true,
+      },
+      {
         source: "/star",
         destination:
           "https://github.com/open-roleplay-ai/openroleplay.ai/stargazers",

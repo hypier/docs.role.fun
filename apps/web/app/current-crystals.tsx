@@ -6,7 +6,7 @@ const CurrentCrystals = () => {
   const currentUser = useCurrentUser();
   const crystals = currentUser?.crystals;
   return (
-    <Link href="/shop">
+    <Link href="/crystals">
       <div
         className={`flex gap-0.5 text-xs font-medium ${
           crystals < 10 ? " text-rose-500 " : ""

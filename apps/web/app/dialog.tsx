@@ -83,7 +83,7 @@ export const FormattedMessage = ({ message }: { message: any }) => {
       }}
     >
       {message?.text?.startsWith("Not enough crystals.")
-        ? `${message?.text} [${t("Crystal Top-up")}](/shop)`
+        ? `${message?.text} [${t("Crystal Top-up")}](/crystals)`
         : message?.text}
     </MemoizedReactMarkdown>
   );

@@ -21,6 +21,7 @@ import Link from "next/link";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/src/components";
 import { useTranslation } from "react-i18next";
+import { Crystal } from "@repo/ui/src/components/icons";
 
 type StyledLinkProps = {
   href: string;
@@ -136,9 +137,9 @@ export default function UserDropdown() {
               onClick={() => setOpenPopover(false)}
             />
             <StyledLink
-              href="/shop"
-              text={t("Visit Shop")}
-              Icon={<Store className="h-4 w-4 text-muted-foreground" />}
+              href="/crystals"
+              text={t("Crystals")}
+              Icon={<Crystal className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />
           </div>
