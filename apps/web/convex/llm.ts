@@ -186,6 +186,9 @@ export const answer = internalAction({
                 text,
               });
             }
+            if (mutationCounter >= 128) {
+              break;
+            }
           }
         }
         // Ensure the last mutation is run if the text was updated an odd number of times
