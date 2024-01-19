@@ -1,7 +1,6 @@
 import { Button, Card, CardHeader, CardTitle } from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 import Image from "next/image";
-import { useTranslation } from "react-i18next";
 import ModelBadge from "../../components/characters/model-badge";
 import {
   Dialog,
@@ -11,7 +10,7 @@ import {
   DialogTrigger,
 } from "@repo/ui/src/components/dialog";
 import { toast } from "sonner";
-import { ClipboardIcon, Heart, MessagesSquare } from "lucide-react";
+import { ClipboardIcon, Download, Heart } from "lucide-react";
 import AgeRestriction from "../../components/characters/age-restriction";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -34,7 +33,7 @@ const ImageDetail = (props: {
       {props?.isNSFW && <AgeRestriction />}
       <DialogHeader className="flex flex-col gap-4 lg:flex-row">
         {props.imageUrl && (
-          <>
+          <div className="flex h-full w-full flex-col gap-2">
             <Image
               src={props.imageUrl}
               alt={props.prompt}
@@ -43,7 +42,20 @@ const ImageDetail = (props: {
               quality={60}
               className="h-full w-full object-cover"
             />
-          </>
+            {props.imageUrl && (
+              <a
+                href={props.imageUrl}
+                download={true}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Button className="h-7 w-full gap-1" variant="outline">
+                  <Download className="h-4 w-4" />
+                  Download
+                </Button>
+              </a>
+            )}
+          </div>
         )}
         <div className="flex w-full flex-col gap-8">
           <div className="flex w-full flex-col gap-2">
