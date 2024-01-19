@@ -31,7 +31,7 @@ const ImageDetail = (props: {
   return (
     <DialogContent className="max-w-3xl">
       {props?.isNSFW && <AgeRestriction />}
-      <DialogHeader className="flex flex-row gap-4">
+      <DialogHeader className="flex flex-col gap-4 lg:flex-row">
         {props.imageUrl && (
           <>
             <Image
