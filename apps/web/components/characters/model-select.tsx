@@ -16,7 +16,6 @@ import {
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import useModelData from "../../app/lib/hooks/use-model-data";
-import { Crystal } from "@repo/ui/src/components/icons";
 
 export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
   const { t } = useTranslation();

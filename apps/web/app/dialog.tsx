@@ -6,6 +6,7 @@ import { Id } from "../convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import {
+  BookMarked,
   CircleUserRound,
   Delete,
   MoreHorizontal,
@@ -278,6 +279,17 @@ const ChatOptionsPopover = ({
     <Popover>
       <AlertDialog>
         <PopoverContent className="w-52 p-1">
+          <Link href={`/character/${characterId}/stories`}>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-1 text-muted-foreground"
+            >
+              <BookMarked className="h-4 w-4 p-0.5" />
+              <span className="w-40 truncate text-left">
+                {t(`Stories of ${name}`)}
+              </span>
+            </Button>
+          </Link>
           <Link
             href={`/my-characters/create${
               characterId ? `?remixId=${characterId}` : ""
