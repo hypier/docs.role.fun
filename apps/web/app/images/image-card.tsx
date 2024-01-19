@@ -1,4 +1,4 @@
-import { Button, Card, CardHeader } from "@repo/ui/src/components";
+import { Button, Card, CardHeader, CardTitle } from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -11,11 +11,12 @@ import {
   DialogTrigger,
 } from "@repo/ui/src/components/dialog";
 import { toast } from "sonner";
-import { ClipboardIcon } from "lucide-react";
+import { ClipboardIcon, Heart, MessagesSquare } from "lucide-react";
 import AgeRestriction from "../../components/characters/age-restriction";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
+import { nFormatter } from "../lib/utils";
 
 const ImageDetail = (props: {
   prompt: string;
@@ -84,9 +85,11 @@ const ImageCard = (props: {
   model?: any;
   isDraft?: boolean;
   isNSFW?: boolean;
+  isLiked?: boolean;
+  numLikes?: number;
   creatorId?: Id<"users">;
 }) => {
-  const { t } = useTranslation();
+  const like = useMutation(api.images.like);
   return (
     <Dialog>
       <DialogTrigger>
@@ -121,6 +124,34 @@ const ImageCard = (props: {
                 )}
               </>
             )}
+            <CardHeader className="relative z-[2] w-full p-4">
+              {props.imageUrl && (
+                <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-lg bg-gradient-to-b from-transparent via-black/30 to-black" />
+              )}
+              <CardTitle
+                className={`${
+                  props.imageUrl ? "text-white" : "text-foreground"
+                } z-[3] line-clamp-1 flex select-none justify-between text-base duration-200 group-hover:opacity-80`}
+              >
+                <div className="flex gap-1 font-normal">
+                  <div
+                    className="group/like z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80"
+                    role="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      like({ imageId: props.id as Id<"images"> });
+                    }}
+                  >
+                    {props.isLiked ? (
+                      <Heart className="aspect-square h-5 w-5 fill-red-500 stroke-red-500 p-1 group-hover/like:fill-transparent group-hover/like:stroke-white" />
+                    ) : (
+                      <Heart className="aspect-square h-5 w-5 p-1 group-hover/like:fill-red-500 group-hover/like:stroke-red-500" />
+                    )}
+                    {nFormatter(props?.numLikes as number)}
+                  </div>
+                </div>
+              </CardTitle>
+            </CardHeader>
           </Card>
         </AspectRatio>
       </DialogTrigger>

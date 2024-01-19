@@ -56,6 +56,8 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
               imageUrl={image.imageUrl as string}
               model={image.model}
               prompt={image.prompt}
+              numLikes={image?.numLikes}
+              isLiked={image?.isLiked}
               isNSFW={image?.isNSFW && me?.nsfwPreference !== "allow"}
               creatorId={image?.creatorId}
             />

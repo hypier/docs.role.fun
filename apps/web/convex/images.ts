@@ -70,6 +70,12 @@ export const listImages = query({
     paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
+    let user: any;
+    try {
+      user = await getUser(ctx);
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
     let query = ctx.db
       .query("images")
       .withIndex("by_creation_time")
@@ -77,7 +83,31 @@ export const listImages = query({
       .filter((q) => q.neq(q.field("isArchived"), true))
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
-    return await query.order("desc").paginate(args.paginationOpts);
+    const paginationResult = await query
+      .order("desc")
+      .paginate(args.paginationOpts);
+    const likes = user
+      ? await ctx.db
+          .query("imageLikes")
+          .withIndex("byUserId", (q) => q.eq("userId", user._id))
+          .order("desc")
+          .collect()
+      : [];
+    console.log("likes:", likes);
+    const likedImageIds = likes
+      .filter((like) => like && like !== null)
+      .map((like: any) => like.imageId);
+    console.log("likedImageIds:", likedImageIds);
+
+    const pageWithIsLiked = paginationResult.page.map((image) => ({
+      ...image,
+      isLiked: likedImageIds.includes(image._id),
+    }));
+
+    return {
+      ...paginationResult,
+      page: pageWithIsLiked,
+    };
   },
 });
 
@@ -111,5 +141,37 @@ export const tag = internalMutation(
       tag,
       ...(isNSFW ? { isNSFW } : {}),
     });
+  },
+);
+
+export const like = mutation(
+  async (
+    ctx,
+    {
+      imageId,
+    }: {
+      imageId: Id<"images">;
+    },
+  ) => {
+    const user = await getUser(ctx);
+    const existingLike = await ctx.db
+      .query("imageLikes")
+      .withIndex("byImageId")
+      .filter((q) => q.eq(q.field("imageId"), imageId))
+      .filter((q) => q.eq(q.field("userId"), user._id))
+      .first();
+    if (existingLike) {
+      console.log("existing like:::", existingLike);
+      await ctx.db.delete(existingLike._id);
+      const image = (await ctx.db.get(imageId)) as any;
+      await ctx.db.patch(imageId, { numLikes: image.numLikes - 1 });
+    } else {
+      await ctx.db.insert("imageLikes", {
+        imageId,
+        userId: user._id,
+      });
+      const image = (await ctx.db.get(imageId)) as any;
+      await ctx.db.patch(imageId, { numLikes: image.numLikes + 1 });
+    }
   },
 );
