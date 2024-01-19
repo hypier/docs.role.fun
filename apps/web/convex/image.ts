@@ -309,18 +309,21 @@ export const generateByPrompt = internalAction(
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
       }
+      console.log("using model hash:", modelHash);
 
       const output: any = await replicate.run(modelHash as any, {
         input: {
           prompt,
           width: 768,
-          height: 1344,
+          height: model === "pagebrain/dreamshaper-v8" ? 1024 : 1344,
           disable_safety_checker: true,
           negative_prompt:
             "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
         },
       });
+      console.log("replicate output:::", output);
       const response = await fetch(output[0]);
+      console.log("replicate response:::", response);
       const buffer = await response.arrayBuffer();
       return Buffer.from(buffer).toString("base64");
     }
@@ -354,6 +357,7 @@ export const generateByPrompt = internalAction(
     }
 
     try {
+      console.log("processing model:", model);
       let image;
       if (model === "dall-e-3") {
         const base64Data = await generateDalle3();
@@ -385,6 +389,7 @@ export const generateByPrompt = internalAction(
         imageStorageId,
       });
     } catch (error) {
+      console.log("error:::", error);
       await ctx.runMutation(internal.serve.refundCrystal, {
         userId,
         name: model,
