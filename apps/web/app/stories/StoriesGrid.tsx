@@ -3,48 +3,42 @@ import { api } from "../../convex/_generated/api";
 import { usePaginatedQuery } from "convex/react";
 import Link from "next/link";
 import { Story } from "../../app/character/[id]/story/[storyId]/story";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@repo/ui/src/components/carousel";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { InfoTooltip, TooltipContent } from "@repo/ui/src/components";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
+import { useEffect, useRef, useState } from "react";
+import useCurrentUser from "../lib/hooks/use-current-user";
+import { useInView } from "framer-motion";
+import SignInDialog from "../../components/user/sign-in-dialog";
 
 export const StoriesGrid = () => {
   const { t } = useTranslation();
+
   const { results, status, loadMore } = usePaginatedQuery(
     api.stories.listAll,
     {},
     { initialNumItems: 10 },
   );
-  const [_api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref);
+  const me = useCurrentUser();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   useEffect(() => {
-    if (!_api) {
-      return;
+    if (inView) {
+      if (!me?.name) {
+        setIsSignInModalOpen(true);
+      } else {
+        loadMore(10);
+      }
     }
-
-    setCount(_api.scrollSnapList().length);
-    setCurrent(_api.selectedScrollSnap() + 1);
-    if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
-      loadMore(10);
-    }
-
-    _api.on("select", () => {
-      setCurrent(_api.selectedScrollSnap() + 1);
-    });
-  }, [_api, results]);
+  }, [inView, loadMore]);
 
   return (
     <section className="flex flex-col gap-4 lg:gap-8">
+      <SignInDialog
+        isOpen={isSignInModalOpen}
+        setIsOpen={setIsSignInModalOpen}
+      />
       <div className="flex items-center gap-1 px-4 font-medium lg:px-0">
         {t("Stories")}
       </div>
@@ -72,6 +66,7 @@ export const StoriesGrid = () => {
           Array.from({ length: 10 }).map((_, index) => (
             <CharacterCardPlaceholder key={index} />
           ))}
+        <div ref={ref} />
       </div>
     </section>
   );
