@@ -25,6 +25,7 @@ import { ConvexError } from "convex/values";
 import Gallery from "./gallery";
 import { ModelSelect } from "./model-select";
 import Link from "next/link";
+import { Textarea } from "@repo/ui/src/components/textarea";
 
 const formSchema = z.object({
   prompt: z.string().max(512),
@@ -85,9 +86,9 @@ const Images = () => {
   }, [generatedImage]);
 
   const InputField = React.memo(({ field }: { field: any }) => (
-    <FormItem className="relative w-full">
+    <FormItem className="flex w-full flex-col">
       <FormControl>
-        <Input
+        <Textarea
           placeholder="a pixel room for gamer girl"
           className="w-full truncate"
           {...field}
@@ -96,7 +97,7 @@ const Images = () => {
       </FormControl>
       {me?.name ? (
         <Button
-          className="absolute bottom-1.5 right-1.5 flex h-7 gap-1 text-xs"
+          className="h-7 gap-1 text-xs"
           type="submit"
           disabled={isGenerating}
         >

@@ -29,11 +29,11 @@ export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
             defaultValue={field.value ? field.value : model}
           >
             <FormControl>
-              <SelectTrigger className="max-w-xs bg-background text-xs lg:w-72">
+              <SelectTrigger className="max-w-xs bg-background text-xs lg:max-w-xl">
                 <SelectValue placeholder={t("Select an image model")} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="max-w-xs lg:w-72">
+            <SelectContent className="max-w-xs lg:max-w-xl">
               {modelData && modelData?.length > 0 ? (
                 modelData.map((model: { value: string; description: any }) => (
                   <SelectItem value={model.value}>
