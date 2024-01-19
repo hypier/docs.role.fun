@@ -763,8 +763,8 @@ export const getMessages = internalQuery(
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", chatId))
       .order("desc")
-      .take(64);
-    return messages.reverse();
+      .collect();
+    return messages.slice(0, 64).reverse();
   },
 );
 
