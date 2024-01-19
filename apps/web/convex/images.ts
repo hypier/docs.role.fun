@@ -13,6 +13,7 @@ export const generate = mutation({
       v.literal("stable-diffusion-xl-1024-v1-0"),
       v.literal("dall-e-3"),
       v.literal("charlesmccarthy/animagine-xl"),
+      v.literal("asiryan/juggernaut-xl-v7"),
       v.literal("cagliostrolab/animagine-xl-3.0"),
     ),
   },

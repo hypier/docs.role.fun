@@ -421,6 +421,12 @@ export const imageModelData = [
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
     crystalPrice: 25,
   },
+  {
+    value: "asiryan/juggernaut-xl-v7",
+    description:
+      "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
+    crystalPrice: 50,
+  },
 ];
 
 export const crystalDollarPrice = {

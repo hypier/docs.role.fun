@@ -291,19 +291,31 @@ export const generateByPrompt = internalAction(
         auth: process.env.REPLICATE_API_TOKEN,
       });
 
-      const output: any = await replicate.run(
-        "charlesmccarthy/animagine-xl:db29f76d40ecf86335295ca5b24ed95e6b1eca4e29239c47cfefa68f408cbf5e",
-        {
-          input: {
-            prompt,
-            width: 768,
-            height: 1344,
-            disable_safety_checker: true,
-            negative_prompt:
-              "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
-          },
+      let modelHash;
+      switch (model) {
+        case "charlesmccarthy/animagine-xl":
+          modelHash =
+            "charlesmccarthy/animagine-xl:db29f76d40ecf86335295ca5b24ed95e6b1eca4e29239c47cfefa68f408cbf5e";
+          break;
+        case "asiryan/juggernaut-xl-v7":
+          modelHash =
+            "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
+          break;
+        default:
+          modelHash =
+            "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
+      }
+
+      const output: any = await replicate.run(modelHash as any, {
+        input: {
+          prompt,
+          width: 768,
+          height: 1344,
+          disable_safety_checker: true,
+          negative_prompt:
+            "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
         },
-      );
+      });
       const response = await fetch(output[0]);
       const buffer = await response.arrayBuffer();
       return Buffer.from(buffer).toString("base64");

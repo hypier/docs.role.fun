@@ -32,6 +32,7 @@ const formSchema = z.object({
     z.literal("stable-diffusion-xl-1024-v1-0"),
     z.literal("charlesmccarthy/animagine-xl"),
     z.literal("cagliostrolab/animagine-xl-3.0"),
+    z.literal("asiryan/juggernaut-xl-v7"),
     z.literal("dall-e-3"),
   ]),
 });
