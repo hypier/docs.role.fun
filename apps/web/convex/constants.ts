@@ -427,6 +427,12 @@ export const imageModelData = [
       "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
     crystalPrice: 50,
   },
+  {
+    value: "brewwh/cog-a1111-ui",
+    description:
+      "XXMix Realistic - Advanced model for photorealistic, high quality images.",
+    crystalPrice: 50,
+  },
 ];
 
 export const crystalDollarPrice = {

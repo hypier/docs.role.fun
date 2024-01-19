@@ -301,6 +301,10 @@ export const generateByPrompt = internalAction(
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
           break;
+        case "brewwh/cog-a1111-ui":
+          modelHash =
+            "brewwh/cog-a1111-ui:181fdde502e52ce3df9c8e6626b549019e4d81a13971a5ea93874898ba4b3e32";
+          break;
         default:
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
@@ -309,6 +313,7 @@ export const generateByPrompt = internalAction(
       const output: any = await replicate.run(modelHash as any, {
         input: {
           prompt,
+          model: "brewwh/cog-a1111-ui" ? "xxmix.safetensors" : undefined,
           width: 768,
           height: 1344,
           disable_safety_checker: true,

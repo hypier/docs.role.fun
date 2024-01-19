@@ -15,6 +15,7 @@ export const generate = mutation({
       v.literal("charlesmccarthy/animagine-xl"),
       v.literal("asiryan/juggernaut-xl-v7"),
       v.literal("cagliostrolab/animagine-xl-3.0"),
+      v.literal("brewwh/cog-a1111-ui"),
     ),
   },
   handler: async (ctx, { prompt, model }) => {
@@ -97,11 +98,9 @@ export const listImages = query({
           .order("desc")
           .collect()
       : [];
-    console.log("likes:", likes);
     const likedImageIds = likes
       .filter((like) => like && like !== null)
       .map((like: any) => like.imageId);
-    console.log("likedImageIds:", likedImageIds);
 
     const pageWithIsLiked = paginationResult.page.map((image) => ({
       ...image,
