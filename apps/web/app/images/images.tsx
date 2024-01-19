@@ -114,7 +114,7 @@ const Images = () => {
         </Button>
       ) : (
         <Link href="/sign-in" className="w-full">
-          <Button className="h-7 gap-1 text-xs">{t("Generate")}</Button>
+          <Button className="h-7 w-full gap-1 text-xs">{t("Generate")}</Button>
         </Link>
       )}
       <FormMessage />
