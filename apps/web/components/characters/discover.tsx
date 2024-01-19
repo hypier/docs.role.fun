@@ -6,12 +6,7 @@ import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
-import {
-  Button,
-  InfoTooltip,
-  Tooltip,
-  TooltipContent,
-} from "@repo/ui/src/components";
+import { Button, Tooltip } from "@repo/ui/src/components";
 import { ChevronLeft, ChevronRight, ListFilter } from "lucide-react";
 import { MainStories } from "./main-stories";
 import Autoplay from "embla-carousel-autoplay";

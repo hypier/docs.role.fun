@@ -1,3 +1,4 @@
+"use client";
 import { api } from "../../convex/_generated/api";
 import { usePaginatedQuery } from "convex/react";
 import Link from "next/link";
@@ -13,7 +14,8 @@ import {
 import { useEffect, useState } from "react";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
-import { InfoTooltip, TooltipContent } from "@repo/ui/src/components";
+import { Button } from "@repo/ui/src/components";
+import { ChevronRight } from "lucide-react";
 
 export const MainStories = () => {
   const { t } = useTranslation();
@@ -45,14 +47,12 @@ export const MainStories = () => {
   return (
     <section className="flex flex-col gap-4 lg:gap-8">
       <div className="flex items-center gap-1 px-4 font-medium lg:px-0">
-        {t("Continue stories")}
-        <InfoTooltip
-          content={
-            <TooltipContent
-              title={t("Stories are chats with characters, shared by users.")}
-            />
-          }
-        />
+        <Link href="/stories" className="flex items-center gap-1">
+          {t("Stories")}
+          <Button variant="ghost" size="icon">
+            <ChevronRight />
+          </Button>
+        </Link>
       </div>
       <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
@@ -71,6 +71,7 @@ export const MainStories = () => {
                   >
                     <Link
                       href={`/character/${story.characterId}/story/${story._id}`}
+                      className={`${story.isNSFW ? "blur-md" : ""}`}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Story
