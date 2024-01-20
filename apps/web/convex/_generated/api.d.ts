@@ -33,6 +33,8 @@ import type * as payments from "../payments.js";
 import type * as personas from "../personas.js";
 import type * as random from "../random.js";
 import type * as serve from "../serve.js";
+import type * as speech from "../speech.js";
+import type * as speeches from "../speeches.js";
 import type * as stories from "../stories.js";
 import type * as stripe from "../stripe.js";
 import type * as users from "../users.js";
@@ -65,6 +67,8 @@ declare const fullApi: ApiFromModules<{
   personas: typeof personas;
   random: typeof random;
   serve: typeof serve;
+  speech: typeof speech;
+  speeches: typeof speeches;
   stories: typeof stories;
   stripe: typeof stripe;
   users: typeof users;

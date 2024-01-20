@@ -37,8 +37,8 @@ You have full control over your data, model, and characters.
 - **Open source models:** Choose from a variety of AI models or bring yours, create your very own AI characters.
 - **Customize Characters:** Create your own characters, personas and UI unique.
 - **Generate Images:** Create images with open-source AI models.
+- **Voice:** Create characters that can talk to users with a realistic voice.
 - **Group Chat (Coming soon):** Invite your favorite characters to one chat room and chat together.
-- **Voice (Coming soon):** Create characters that can talk to users with a realistic voice.
 
 ## Supported Models
 

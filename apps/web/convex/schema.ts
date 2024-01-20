@@ -16,6 +16,7 @@ export default defineSchema({
         v.literal("smirk"),
       ),
     ),
+    speechUrl: v.optional(v.string()),
   })
     .index("byCharacterId", ["characterId"])
     .index("byChatId", ["chatId"]),
@@ -41,6 +42,7 @@ export default defineSchema({
     knowledge: v.optional(v.string()),
     capabilities: v.optional(v.array(v.string())),
     creatorId: v.id("users"),
+    voiceId: v.optional(v.string()),
     remixId: v.optional(v.id("characters")),
     isDraft: v.boolean(),
     isBlacklisted: v.boolean(),
@@ -167,4 +169,16 @@ export default defineSchema({
   })
     .index("byImageId", ["imageId"])
     .index("byUserId", ["userId"]),
+  speeches: defineTable({
+    text: v.string(),
+    voiceId: v.string(),
+    speechUrl: v.optional(v.string()),
+  }).index("byVoiceId", ["voiceId"]),
+  models: defineTable({
+    value: v.string(),
+    description: v.string(),
+    crystalPrice: v.number(),
+    src: v.string(),
+    alt: v.string(),
+  }),
 });

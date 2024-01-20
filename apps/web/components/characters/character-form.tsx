@@ -16,7 +16,6 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -50,14 +49,16 @@ import { ArchiveButton } from "./archive-button";
 import { GenerateButton } from "./generate-button";
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "@repo/ui/src/components/checkbox";
+import { VoiceSelect } from "./voice-select";
 
 const formSchema = z.object({
   name: z.string().max(24),
   description: z.string().max(64),
   instructions: z.string().max(512),
   greetings: z.optional(z.string()),
-  model: z.any(),
+  model: z.string(),
   isNSFW: z.boolean(),
+  voiceId: z.string(),
 });
 
 export default function CharacterForm() {
@@ -85,6 +86,7 @@ export default function CharacterForm() {
     greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
     model = (searchParams.get("model") as any) || "openrouter/auto",
+    voiceId = (searchParams.get("voiceId") as any) || "MjxppkSa4IoDSRGySayZ",
     isDraft = searchParams.get("isDraft") || true,
     isNSFW = Boolean(searchParams.get("isNSFW")) || false,
   } = character || remixCharacter || {};
@@ -111,6 +113,7 @@ export default function CharacterForm() {
       instructions,
       greetings: Array.isArray(greetings) ? greetings[0] : greetings,
       model,
+      voiceId,
       isNSFW,
     },
   });
@@ -122,9 +125,19 @@ export default function CharacterForm() {
       instructions,
       greetings: Array.isArray(greetings) ? greetings[0] : greetings,
       model,
+      voiceId,
       isNSFW,
     });
-  }, [character, name, description, instructions, greetings, model, isNSFW]);
+  }, [
+    character,
+    name,
+    description,
+    instructions,
+    greetings,
+    model,
+    voiceId,
+    isNSFW,
+  ]);
 
   useEffect(() => {
     cardImageUrl && setIsGeneratingImage(false);
@@ -524,6 +537,7 @@ export default function CharacterForm() {
               )}
             />
             <ModelSelect form={form} model={model} />
+            <VoiceSelect form={form} voiceId={voiceId} />
             <FormField
               control={form.control}
               name="isNSFW"
