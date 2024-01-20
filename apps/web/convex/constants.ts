@@ -414,7 +414,7 @@ export const imageModelData = [
     value: "cagliostrolab/animagine-xl-3.0",
     description:
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
-    crystalPrice: 17,
+    crystalPrice: 34,
   },
   {
     value: "asiryan/juggernaut-xl-v7",
