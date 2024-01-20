@@ -1,12 +1,13 @@
 "use client";
 import { api } from "../../convex/_generated/api";
 import { useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStablePaginatedQuery } from "../lib/hooks/use-stable-query";
 import CharacterCard from "../../components/cards/character-card";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
 import useCurrentUser from "../lib/hooks/use-current-user";
+import SignInDialog from "../../components/user/sign-in-dialog";
 
 const Models = () => {
   const { t } = useTranslation();
@@ -22,15 +23,24 @@ const Models = () => {
   const ref = useRef(null);
   const inView = useInView(ref);
   const me = useCurrentUser();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   useEffect(() => {
     if (inView) {
-      loadMore(10);
+      if (!me?.name) {
+        setIsSignInModalOpen(true);
+      } else {
+        loadMore(10);
+      }
     }
   }, [inView, loadMore]);
 
   return (
     <div className="flex flex-col gap-8">
+      <SignInDialog
+        isOpen={isSignInModalOpen}
+        setIsOpen={setIsSignInModalOpen}
+      />
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         {t("Models")}
       </div>
