@@ -20,6 +20,7 @@ import {
 import { Button } from "@repo/ui/src/components";
 import { ChevronLeft } from "lucide-react";
 import { Toggle } from "@repo/ui/src/components/toggle";
+import SignInDialog from "../../components/user/sign-in-dialog";
 
 const Characters = () => {
   const { t } = useTranslation();
@@ -48,15 +49,24 @@ const Characters = () => {
   const ref = useRef(null);
   const inView = useInView(ref);
   const me = useCurrentUser();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   useEffect(() => {
     if (inView) {
-      loadMore(10);
+      if (!me?.name) {
+        setIsSignInModalOpen(true);
+      } else {
+        loadMore(10);
+      }
     }
   }, [inView, loadMore]);
 
   return (
     <div className="flex flex-col gap-8">
+      <SignInDialog
+        isOpen={isSignInModalOpen}
+        setIsOpen={setIsSignInModalOpen}
+      />
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         {t("Characters")}
       </div>
