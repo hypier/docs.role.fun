@@ -60,7 +60,7 @@ const CheckinDialog = () => {
               <AlertDialogDescription className="flex flex-col items-center justify-center gap-1">
                 <div className="flex items-center gap-1 text-lg text-foreground">
                   <Crystal className="h-5 w-5" />
-                  {`50 ${t("Crystals")}`}
+                  {`25 ${t("Crystals")}`}
                 </div>
                 <div className="flex text-center">
                   {t(
