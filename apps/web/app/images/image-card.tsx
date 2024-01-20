@@ -3,12 +3,12 @@ import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 import Image from "next/image";
 import ModelBadge from "../../components/characters/model-badge";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTrigger,
-} from "@repo/ui/src/components/dialog";
+  DialogOrDrawer,
+  DialogOrDrawerContent,
+  DialogOrDrawerDescription,
+  DialogOrDrawerHeader,
+  DialogOrDrawerTrigger,
+} from "@repo/ui/src/components/dialog-or-drawer";
 import { toast } from "sonner";
 import { ClipboardIcon, Download, Heart } from "lucide-react";
 import AgeRestriction from "../../components/characters/age-restriction";
@@ -29,9 +29,9 @@ const ImageDetail = (props: {
     id: props.creatorId as Id<"users">,
   });
   return (
-    <DialogContent className="max-w-3xl">
+    <DialogOrDrawerContent className="max-w-3xl">
       {props?.isNSFW && <AgeRestriction />}
-      <DialogHeader className="flex flex-col gap-4 lg:flex-row">
+      <DialogOrDrawerHeader className="flex flex-col gap-4 lg:flex-row">
         {props.imageUrl && (
           <div className="flex h-full w-full flex-col gap-2">
             <Image
@@ -60,7 +60,7 @@ const ImageDetail = (props: {
         <div className="flex w-full flex-col gap-8">
           <div className="flex w-full flex-col gap-2">
             Prompt
-            <DialogDescription>{props?.prompt}</DialogDescription>
+            <DialogOrDrawerDescription>{props?.prompt}</DialogOrDrawerDescription>
             <Button
               onClick={async () => {
                 try {
@@ -78,15 +78,15 @@ const ImageDetail = (props: {
           </div>
           <div className="flex w-full flex-col gap-2">
             Model
-            <DialogDescription>{props?.model}</DialogDescription>
+            <DialogOrDrawerDescription>{props?.model}</DialogOrDrawerDescription>
           </div>
           <div className="flex w-full flex-col gap-2">
             Created by
-            <DialogDescription>@{creatorName}</DialogDescription>
+            <DialogOrDrawerDescription>@{creatorName}</DialogOrDrawerDescription>
           </div>
         </div>
-      </DialogHeader>
-    </DialogContent>
+      </DialogOrDrawerHeader>
+    </DialogOrDrawerContent>
   );
 };
 
@@ -103,8 +103,8 @@ const ImageCard = (props: {
 }) => {
   const like = useMutation(api.images.like);
   return (
-    <Dialog>
-      <DialogTrigger>
+    <DialogOrDrawer>
+      <DialogOrDrawerTrigger>
         <AspectRatio
           ratio={1 / 1.75}
           className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
@@ -166,7 +166,7 @@ const ImageCard = (props: {
             </CardHeader>
           </Card>
         </AspectRatio>
-      </DialogTrigger>
+      </DialogOrDrawerTrigger>
       <ImageDetail
         prompt={props?.prompt}
         imageUrl={props?.imageUrl}
@@ -174,7 +174,7 @@ const ImageCard = (props: {
         model={props?.model}
         creatorId={props?.creatorId}
       />
-    </Dialog>
+    </DialogOrDrawer>
   );
 };
 
