@@ -247,6 +247,23 @@ export default function Page() {
           </section>
         )}
       </AnimatePresence>
+      <div className="flex flex-col items-center justify-center gap-4">
+        {t("If you prefer, you can also support us through Patreon.")}
+        <Button className="flex w-fit gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1080 1080"
+            className="h-4 w-4 fill-black"
+          >
+            <path
+              d="M1033.05,324.45c-0.19-137.9-107.59-250.92-233.6-291.7c-156.48-50.64-362.86-43.3-512.28,27.2
+    C106.07,145.41,49.18,332.61,47.06,519.31c-1.74,153.5,13.58,557.79,241.62,560.67c169.44,2.15,194.67-216.18,273.07-321.33
+    c55.78-74.81,127.6-95.94,216.01-117.82C929.71,603.22,1033.27,483.3,1033.05,324.45z"
+            />
+          </svg>
+          Become a Patreon
+        </Button>
+      </div>
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
         <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
