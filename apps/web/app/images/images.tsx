@@ -27,7 +27,7 @@ import { ModelSelect } from "./model-select";
 import Link from "next/link";
 
 const formSchema = z.object({
-  prompt: z.string().max(512).min(5),
+  prompt: z.string().max(1024).min(5),
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
     z.literal("charlesmccarthy/animagine-xl"),
