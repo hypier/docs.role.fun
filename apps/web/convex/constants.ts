@@ -55,6 +55,7 @@ export const getBaseURL = (modelName: string) => {
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
     case "lizpreciatior/lzlv-70b-fp16-hf":
+    case "pygmalionai/mythalion-13b":
     case "nousresearch/nous-hermes-2-mixtral-8x7b-dpo":
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
@@ -121,6 +122,7 @@ export const getAPIKey = (modelName: string) => {
     case "anthropic/claude-instant-v1":
     case "cognitivecomputations/dolphin-mixtral-8x7b":
     case "lizpreciatior/lzlv-70b-fp16-hf":
+    case "pygmalionai/mythalion-13b":
     case "nousresearch/nous-hermes-2-mixtral-8x7b-dpo":
     // 3 crystal models
     case "neversleep/noromaid-mixtral-8x7b-instruct":
@@ -246,6 +248,12 @@ export const modelData = [
     crystalPrice: 10,
     src: "/models/claude.png",
     alt: "Company logo of Anthropic AI",
+  },
+  {
+    value: "pygmalionai/mythalion-13b",
+    description: "Uncensored, Mythalion 13B by PygmalionAI",
+    isNSFW: true,
+    crystalPrice: 1,
   },
   {
     value: "lizpreciatior/lzlv-70b-fp16-hf",
