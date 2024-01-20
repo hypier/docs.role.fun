@@ -1,5 +1,5 @@
 import { query } from "./_generated/server";
-import { imageModelData, modelData } from "./constants";
+import { imageModelData, modelData, voiceData } from "./constants";
 
 export const list = query({
   args: {},
@@ -12,5 +12,12 @@ export const listImageModels = query({
   args: {},
   handler: async (ctx, args) => {
     return imageModelData;
+  },
+});
+
+export const listVoices = query({
+  args: {},
+  handler: async (ctx, args) => {
+    return voiceData;
   },
 });

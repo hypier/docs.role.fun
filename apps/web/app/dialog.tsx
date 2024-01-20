@@ -10,6 +10,8 @@ import {
   CircleUserRound,
   Delete,
   MoreHorizontal,
+  Pause,
+  Play,
   Plus,
   Repeat,
   Send,
@@ -52,6 +54,7 @@ import useMyUsername from "./lib/hooks/use-my-username";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
+import { Badge } from "@repo/ui/src/components/badge";
 
 export const FormattedMessage = ({ message }: { message: any }) => {
   const { t } = useTranslation();
@@ -106,7 +109,9 @@ export const Message = ({
   const { t } = useTranslation();
   const regenerate = useMutation(api.messages.regenerate);
   const react = useMutation(api.messages.react);
+  const speech = useMutation(api.speeches.generate);
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [thinkingDots, setThinkingDots] = useState("");
   const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
 
@@ -129,7 +134,6 @@ export const Message = ({
 
   return (
     <div
-      key={message?._id}
       className={`flex flex-col gap-2 ${
         message?.characterId ? "self-start" : "self-end"
       }`}
@@ -164,20 +168,23 @@ export const Message = ({
           {thinkingDots}
         </div>
       ) : (
-        <div
-          className={
-            "relative max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
-            (message?.characterId
-              ? " rounded-tl-none bg-muted "
-              : " rounded-tr-none bg-foreground text-muted ")
-          }
-        >
+        <>
+          <div
+            className={
+              "relative max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
+              (message?.characterId
+                ? " rounded-tl-none bg-muted "
+                : " rounded-tr-none bg-foreground text-muted ")
+            }
+          >
+            <FormattedMessage message={message} />
+          </div>
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="absolute -bottom-5 -right-5 flex items-center justify-center rounded-full border bg-background p-1">
+            <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1">
               <Button
                 size="icon"
                 variant="ghost"
-                className="h-5 w-5 rounded-full p-1 hover:bg-transparent disabled:opacity-90"
+                className="h-6 w-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
                 disabled={message?.reaction === "like"}
                 onClick={async () => {
                   await react({
@@ -195,7 +202,7 @@ export const Message = ({
               <Button
                 size="icon"
                 variant="ghost"
-                className="h-5 w-5 rounded-full p-1 hover:bg-transparent disabled:opacity-90"
+                className="h-6 w-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
                 disabled={message?.reaction === "dislike"}
                 onClick={async () => {
                   await react({
@@ -219,10 +226,53 @@ export const Message = ({
                   <ThumbsDown className="h-4 w-4" />
                 )}
               </Button>
+              <Tooltip
+                content={
+                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    {t("Play audio")} (<Crystal className="h-4 w-4" /> x 10 )
+                  </span>
+                }
+                desktopOnly={true}
+              >
+                <Button
+                  variant="ghost"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  onClick={async () => {
+                    if (isSpeaking) {
+                      setIsSpeaking(false);
+                    } else {
+                      await speech({
+                        messageId: message?._id as Id<"messages">,
+                        characterId: message?.characterId,
+                        text: message?.text,
+                      });
+                      setIsSpeaking(true);
+                    }
+                  }}
+                >
+                  {isSpeaking ? (
+                    <Pause className="h-4 w-4" />
+                  ) : (
+                    <span className="flex w-full items-center justify-center gap-1">
+                      <Play className="h-4 w-4" />
+                    </span>
+                  )}
+                </Button>
+              </Tooltip>
+
+              {message?.speechUrl && isSpeaking && (
+                <audio
+                  autoPlay
+                  controls
+                  hidden
+                  onEnded={() => setIsSpeaking(false)}
+                >
+                  <source src={message?.speechUrl} type="audio/mpeg" />
+                </audio>
+              )}
             </div>
           )}
-          <FormattedMessage message={message} />
-        </div>
+        </>
       )}
     </div>
   );
@@ -487,6 +537,10 @@ export function Dialog({
         <div className="sticky top-0 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
+            <Badge variant="model" className="bg-gray-500">
+              <Play className="h-4 w-4 p-0.5" /> /
+              <Crystal className="h-4 w-4 p-0.5" /> x 10
+            </Badge>
           </div>
           <div className="flex items-center gap-1">
             <ChatOptionsPopover

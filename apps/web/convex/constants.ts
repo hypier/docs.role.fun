@@ -162,7 +162,7 @@ export const getRemindInstructionInterval = (modelName: string) => {
 };
 
 export const getCrystalPrice = (modelName: string) => {
-  const allModels = [...modelData, ...imageModelData];
+  const allModels = [...modelData, ...imageModelData, ...voiceData];
   const model = allModels.find((m) => m.value === modelName);
   return model ? model.crystalPrice : modelName === "auto" ? 9 : 5;
 };
@@ -398,6 +398,7 @@ export const modelData = [
     crystalPrice: 5,
   },
 ];
+
 export const imageModelData = [
   {
     value: "dall-e-3",
@@ -428,6 +429,31 @@ export const imageModelData = [
       "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
     crystalPrice: 17,
   },
+];
+
+export const voiceData = [
+  { value: "MjxppkSa4IoDSRGySayZ", description: "Sally", crystalPrice: 10 },
+  {
+    value: "Rs8KSvytt4yKbvZosLTw",
+    description: "Bria",
+    crystalPrice: 10,
+  },
+  {
+    value: "piTKgcLEGmPE4e6mEKli",
+    description: "Nicole",
+    crystalPrice: 10,
+  },
+  {
+    value: "YzIAMwXBjRJLLSZR1E4O",
+    description: "Alex",
+    crystalPrice: 10,
+  },
+  {
+    value: "TX3LPaxmHKxFdv7VOQHJ",
+    description: "Liam",
+    crystalPrice: 10,
+  },
+  { value: "SOYHLrjzK2X1ezoPC6cr", description: "Harry", crystalPrice: 10 },
 ];
 
 export const crystalDollarPrice = {

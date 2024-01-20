@@ -16,6 +16,7 @@ export const upsert = mutation({
   args: {
     id: v.optional(v.id("characters")),
     remixId: v.optional(v.id("characters")),
+    voiceId: v.optional(v.string()),
     name: v.optional(v.string()),
     description: v.optional(v.string()),
     model: v.optional(v.string()),
