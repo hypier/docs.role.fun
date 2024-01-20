@@ -20,6 +20,7 @@ import {
 } from "@repo/ui/src/components/carousel";
 import { useTranslation } from "react-i18next";
 import { FadeInOut } from "../../app/lib/utils";
+import { ChevronRight } from "lucide-react";
 
 export const Chat = ({
   name,
@@ -81,8 +82,14 @@ export function MainChats() {
       {results?.length > 0 && (
         <motion.div {...FadeInOut} className="flex flex-col gap-4">
           <div className="flex items-center gap-1 border-y px-4 py-4 font-medium lg:mt-2 lg:border-none lg:px-0">
-            {t("Continue chat")}
+            <Link href="/chats" className="flex items-center gap-1">
+              {t("Continue chat")}
+              <Button variant="ghost" size="icon">
+                <ChevronRight />
+              </Button>
+            </Link>
           </div>
+
           <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
             <Carousel
               className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
