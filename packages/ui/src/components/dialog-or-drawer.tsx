@@ -14,21 +14,17 @@ import {
 } from "./drawer";
 import useMediaQuery from "../hooks/use-media-query";
 
-const DialogOrDrawer: React.FC<React.PropsWithChildren<{}>> = (props) => {
+const DialogOrDrawer: React.FC<any> = (props) => {
   const { isMobile } = useMediaQuery();
   return isMobile ? <Drawer {...props} /> : <Dialog {...props} />;
 };
 
-const DialogOrDrawerContent: React.FC<React.PropsWithChildren<{}>> = (
-  props
-) => {
+const DialogOrDrawerContent: React.FC<any> = (props) => {
   const { isMobile } = useMediaQuery();
   return isMobile ? <DrawerContent {...props} /> : <DialogContent {...props} />;
 };
 
-const DialogOrDrawerDescription: React.FC<React.PropsWithChildren<{}>> = (
-  props
-) => {
+const DialogOrDrawerDescription: React.FC<any> = (props) => {
   const { isMobile } = useMediaQuery();
   return isMobile ? (
     <DrawerDescription {...props} />
@@ -37,14 +33,12 @@ const DialogOrDrawerDescription: React.FC<React.PropsWithChildren<{}>> = (
   );
 };
 
-const DialogOrDrawerHeader: React.FC<React.PropsWithChildren<{}>> = (props) => {
+const DialogOrDrawerHeader: React.FC<any> = (props) => {
   const { isMobile } = useMediaQuery();
   return isMobile ? <DrawerHeader {...props} /> : <DialogHeader {...props} />;
 };
 
-const DialogOrDrawerTrigger: React.FC<React.PropsWithChildren<{}>> = (
-  props
-) => {
+const DialogOrDrawerTrigger: React.FC<any> = (props) => {
   const { isMobile } = useMediaQuery();
   return isMobile ? <DrawerTrigger {...props} /> : <DialogTrigger {...props} />;
 };
