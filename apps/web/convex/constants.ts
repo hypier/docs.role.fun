@@ -408,25 +408,25 @@ export const imageModelData = [
     value: "charlesmccarthy/animagine-xl",
     description:
       "Animagine XL 2.0 - Advanced model to create high-resolution, detailed anime images.",
-    crystalPrice: 25,
+    crystalPrice: 17,
   },
   {
     value: "cagliostrolab/animagine-xl-3.0",
     description:
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
-    crystalPrice: 25,
+    crystalPrice: 17,
   },
   {
     value: "asiryan/juggernaut-xl-v7",
     description:
       "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
-    crystalPrice: 50,
+    crystalPrice: 34,
   },
   {
     value: "pagebrain/dreamshaper-v8",
     description:
       "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
-    crystalPrice: 25,
+    crystalPrice: 17,
   },
 ];
 
