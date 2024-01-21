@@ -258,7 +258,7 @@ export default function Page() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1080 1080"
-              className="h-4 w-4 fill-black"
+              className="h-4 w-4 fill-white dark:fill-black"
             >
               <path
                 d="M1033.05,324.45c-0.19-137.9-107.59-250.92-233.6-291.7c-156.48-50.64-362.86-43.3-512.28,27.2
@@ -267,24 +267,6 @@ export default function Page() {
               />
             </svg>
             Become a Patreon
-          </Button>
-        </Link>
-      </div>
-      <div className="flex flex-col items-center gap-4 px-5">
-        <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
-          {t("Create characters and earn crystals.")}
-        </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
-          {t(
-            "You can earn crystals whenever other users interact with the characters you've created.",
-          )}
-        </p>
-        <Link href="/my-characters/create" className="hidden lg:block">
-          <Button className="rounded-full px-3">
-            <Plus className="h-5 w-5 p-1" />
-            {t("Create")}
           </Button>
         </Link>
       </div>
@@ -360,6 +342,25 @@ export default function Page() {
             </Card>
           </CollapsibleContent>
         </Collapsible>
+      </div>
+
+      <div className="flex flex-col items-center gap-4 px-5">
+        <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
+        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+          {t("Create characters and earn crystals.")}
+        </h2>
+        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
+          <Crystal className="hidden h-4 w-4 md:inline" />
+          {t(
+            "You can earn crystals whenever other users interact with the characters you've created.",
+          )}
+        </p>
+        <Link href="/my-characters/create" className="hidden lg:block">
+          <Button className="rounded-full px-3">
+            <Plus className="h-5 w-5 p-1" />
+            {t("Create")}
+          </Button>
+        </Link>
       </div>
 
       <AnimatePresence>{isAuthenticated && <DailyReward />}</AnimatePresence>
