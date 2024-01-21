@@ -187,6 +187,12 @@ export const modelData = [
     crystalPrice: 1,
   },
   {
+    value: "pygmalionai/mythalion-13b",
+    description: "Uncensored, Mythalion 13B by PygmalionAI",
+    isNSFW: true,
+    crystalPrice: 1,
+  },
+  {
     value: "gpt-3.5-turbo-1106",
     description: "GPT-3.5 Turbo by OpenAI",
     src: "/models/openai.png",
@@ -248,12 +254,6 @@ export const modelData = [
     crystalPrice: 10,
     src: "/models/claude.png",
     alt: "Company logo of Anthropic AI",
-  },
-  {
-    value: "pygmalionai/mythalion-13b",
-    description: "Uncensored, Mythalion 13B by PygmalionAI",
-    isNSFW: true,
-    crystalPrice: 1,
   },
   {
     value: "lizpreciatior/lzlv-70b-fp16-hf",
