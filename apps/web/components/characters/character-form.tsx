@@ -46,7 +46,6 @@ import Link from "next/link";
 import RemixBadge from "./remix-badge";
 import { ModelSelect } from "./model-select";
 import { ArchiveButton } from "./archive-button";
-import { GenerateButton } from "./generate-button";
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "@repo/ui/src/components/checkbox";
 import { VoiceSelect } from "./voice-select";
@@ -527,7 +526,7 @@ export default function CharacterForm() {
                     />
                   </FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
                       placeholder="The first message from character to user"
                       {...field}
                     />

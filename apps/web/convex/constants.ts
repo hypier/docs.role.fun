@@ -440,28 +440,36 @@ export const imageModelData = [
 ];
 
 export const voiceData = [
-  { value: "MjxppkSa4IoDSRGySayZ", description: "Sally", crystalPrice: 10 },
+  {
+    value: "MjxppkSa4IoDSRGySayZ",
+    description: "Sally - Relaxed, Conversational",
+    crystalPrice: 10,
+  },
   {
     value: "Rs8KSvytt4yKbvZosLTw",
-    description: "Bria",
+    description: "Bria - Soft, Narration",
     crystalPrice: 10,
   },
   {
     value: "piTKgcLEGmPE4e6mEKli",
-    description: "Nicole",
+    description: "Nicole - Whisper, Audiobook",
     crystalPrice: 10,
   },
   {
     value: "YzIAMwXBjRJLLSZR1E4O",
-    description: "Alex",
+    description: "Alex - Intense, Narration",
     crystalPrice: 10,
   },
   {
     value: "TX3LPaxmHKxFdv7VOQHJ",
-    description: "Liam",
+    description: "Liam - Neutral, Narration",
     crystalPrice: 10,
   },
-  { value: "SOYHLrjzK2X1ezoPC6cr", description: "Harry", crystalPrice: 10 },
+  {
+    value: "SOYHLrjzK2X1ezoPC6cr",
+    description: "Harry - Anxious, Video Games",
+    crystalPrice: 10,
+  },
 ];
 
 export const crystalDollarPrice = {
