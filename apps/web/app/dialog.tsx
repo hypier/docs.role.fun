@@ -261,7 +261,9 @@ export const Message = ({
                       await speech({
                         messageId: message?._id as Id<"messages">,
                         characterId: message?.characterId,
-                        text: message?.text,
+                        text: message?.translation
+                          ? message?.translation
+                          : message?.text,
                       });
                       setIsSpeaking(true);
                     }
