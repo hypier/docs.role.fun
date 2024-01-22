@@ -81,9 +81,9 @@ export const getUserInternal = internalQuery({
   },
 });
 
-export const getUser = async (ctx: any) => {
+export const getUser = async (ctx: any, doNotThrow?: boolean) => {
   const identity = await ctx.auth.getUserIdentity();
-  if (!identity) {
+  if (!identity && !doNotThrow) {
     throw new Error(
       "Called getUserFromTokenIdentifier without authentication present",
     );

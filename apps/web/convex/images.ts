@@ -68,7 +68,7 @@ export const listImages = query({
   handler: async (ctx, args) => {
     let user: any;
     try {
-      user = await getUser(ctx);
+      user = await getUser(ctx, true);
     } catch (error) {
       console.error("Error getting user:", error);
     }

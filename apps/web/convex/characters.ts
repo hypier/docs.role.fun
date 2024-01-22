@@ -151,7 +151,7 @@ export const list = query({
 
     let user: any;
     try {
-      user = await getUser(ctx);
+      user = await getUser(ctx, true);
     } catch (error) {
       console.log("Error getting user:", error);
     }
