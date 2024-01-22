@@ -2,7 +2,6 @@
 
 import { Button } from "@repo/ui/src/components";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function GlobalError({
   error,
@@ -11,8 +10,6 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const router = useRouter();
-  router.push("/");
   return (
     <html>
       <body>
