@@ -89,13 +89,7 @@ const PreferenceDialog = () => {
           <PreferenceSelect />
         </AlertDialogHeader>
         <AlertDialogFooter className="flex sm:justify-center">
-          <AlertDialogAction
-            onClick={
-              nsfwPreference === "block" ? () => router.back() : undefined
-            }
-          >
-            {t("Confirm")}
-          </AlertDialogAction>
+          <AlertDialogAction>{t("Confirm")}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
