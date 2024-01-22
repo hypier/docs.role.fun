@@ -18,7 +18,7 @@ export default function GlobalError({
       <body>
         <h1>Something went wrong!</h1>
         <Link href="/">
-          <Button>Go to Homepage</Button>
+          <Button onClick={() => reset()}>Go to Homepage</Button>
         </Link>
       </body>
     </html>
