@@ -14,8 +14,8 @@ import { api } from "../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { useEffect } from "react";
 
-export function LanguageSelect() {
-  const { i18n, t } = useTranslation();
+export function useLanguage() {
+  const { i18n } = useTranslation();
   const currentUser = useCurrentUser();
   const setLanguage = useMutation(api.users.setLanguage);
   const userLanguage = currentUser?.languageTag;
@@ -26,6 +26,12 @@ export function LanguageSelect() {
     i18n.changeLanguage(userLanguage);
   }, [userLanguage]);
 
+  return { currentLanguage, setLanguage, i18n };
+}
+
+export function LanguageSelect() {
+  const { t } = useTranslation();
+  const { currentLanguage, setLanguage, i18n } = useLanguage();
   return (
     <Select
       onValueChange={(value) => {
