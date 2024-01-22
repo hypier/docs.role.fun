@@ -308,7 +308,7 @@ export const Message = ({
               >
                 <Button
                   variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
                   onClick={async () => {
                     setIsTranslating(true);
                     await translate({
@@ -317,6 +317,7 @@ export const Message = ({
                     });
                     setIsTranslating(false);
                   }}
+                  disabled={message?.translation || isTranslating}
                 >
                   {isTranslating ? (
                     <Spinner className="h-4 w-4" />
