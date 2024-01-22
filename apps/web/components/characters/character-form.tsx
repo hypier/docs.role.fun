@@ -41,7 +41,7 @@ import Image from "next/image";
 import { InfoTooltip, Tooltip, TooltipContent } from "@repo/ui/src/components";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import RemixBadge from "./remix-badge";
 import { ModelSelect } from "./model-select";
@@ -62,6 +62,7 @@ const formSchema = z.object({
 
 export default function CharacterForm() {
   const { t } = useTranslation();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const id = searchParams.get("id") as Id<"characters">;
   const remixId = searchParams.get("remixId") as Id<"characters">;
@@ -92,7 +93,6 @@ export default function CharacterForm() {
 
   const upsert = useMutation(api.characters.upsert);
   const publish = useMutation(api.characters.publish);
-  const generateImage = useMutation(api.characterCard.request);
   const generateInstruction = useMutation(api.characters.generateInstruction);
   const generateUploadUrl = useMutation(api.characters.generateUploadUrl);
   const [visibility, setVisibility] = useState("public");
@@ -212,10 +212,6 @@ export default function CharacterForm() {
   }
 
   const debouncedSubmitHandle = useDebouncedCallback(onSubmit, 1000);
-  const isImageUploadDisabled =
-    !form.getValues().name ||
-    !form.getValues().description ||
-    isGeneratingImage;
   const isInstructionGenerationDisabled =
     !form.getValues().name ||
     !form.getValues().description ||
@@ -535,7 +531,11 @@ export default function CharacterForm() {
                 </FormItem>
               )}
             />
-            <ModelSelect form={form} model={model} />
+            <ModelSelect
+              form={form}
+              model={model}
+              isNSFW={form.getValues("isNSFW")}
+            />
             <VoiceSelect form={form} voiceId={voiceId} />
             <FormField
               control={form.control}

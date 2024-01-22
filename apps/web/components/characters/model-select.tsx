@@ -17,11 +17,26 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import useModelData from "../../app/lib/hooks/use-model-data";
 
-export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
+export const ModelSelect = ({
+  form,
+  model,
+  isNSFW,
+}: {
+  form: any;
+  model: string;
+  isNSFW?: boolean;
+}) => {
   const { t } = useTranslation();
-  const modelData = useModelData();
+  let modelData = useModelData();
+  if (isNSFW) {
+    modelData = modelData.filter((model: any) => model.isNSFW);
+  }
+  if (modelData.every((modelItem: any) => modelItem.value !== model)) {
+    form.setValue("model", modelData[0].value);
+  }
   return (
     <FormField
+      key={modelData}
       control={form.control}
       name="model"
       render={({ field }) => (
