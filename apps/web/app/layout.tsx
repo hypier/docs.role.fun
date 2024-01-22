@@ -7,6 +7,8 @@ import NavBar from "./navbar";
 import { constructMetadata } from "./lib/utils";
 import Footer from "./footer";
 import TabsController from "./tabs-controller";
+import { Suspense } from "react";
+import Spinner from "@repo/ui/src/components/spinner";
 
 export const metadata = constructMetadata();
 
@@ -22,15 +24,17 @@ export default async function RootLayout({
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
       <body className={cx(calSans.variable, inter.variable)}>
-        <Providers>
-          <NavBar />
-          <main className="flex w-full pt-16 font-default lg:pt-32">
-            <TabsController />
-            {children}
-          </main>
-          <Analytics />
-          <Footer />
-        </Providers>
+        <Suspense fallback={<Spinner />}>
+          <Providers>
+            <NavBar />
+            <main className="flex w-full pt-16 font-default lg:pt-32">
+              <TabsController />
+              {children}
+            </main>
+            <Analytics />
+            <Footer />
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );
