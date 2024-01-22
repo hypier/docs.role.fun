@@ -1,3 +1,4 @@
+"use client";
 import {
   Button,
   Card,
@@ -123,7 +124,7 @@ const CharacterCard = (props: {
           </CardHeader>
           {props.cardImageUrl && (
             <>
-              {props?.isNSFW && !nsfwPreference ? (
+              {props?.isNSFW && nsfwPreference !== "allow" ? (
                 <Image
                   src={props.cardImageUrl}
                   alt={""}
