@@ -69,7 +69,7 @@ export const FormattedMessage = ({
     : message?.text;
   return (
     <MemoizedReactMarkdown
-      className="break-words"
+      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words "
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
         a({ children, href, target, rel }) {
@@ -95,7 +95,7 @@ export const FormattedMessage = ({
         },
       }}
     >
-      {textContent.replace("{{user}}", username)}
+      {textContent?.replace("{{user}}", username)}
     </MemoizedReactMarkdown>
   );
 };
@@ -168,7 +168,7 @@ export const Message = ({
             "max-w-[20rem] animate-pulse whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
             (message?.characterId
               ? " rounded-tl-none bg-muted "
-              : " rounded-tr-none bg-foreground text-muted ")
+              : " rounded-tr-none bg-muted text-muted ")
           }
         >
           {thinkingMessage}
@@ -181,7 +181,7 @@ export const Message = ({
               "relative max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
               (message?.characterId
                 ? " rounded-tl-none bg-muted "
-                : " rounded-tr-none bg-foreground text-muted ")
+                : " rounded-tr-none bg-muted text-muted ")
             }
           >
             <FormattedMessage message={message} username={username} />

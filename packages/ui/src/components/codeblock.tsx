@@ -93,34 +93,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
   };
 
   return (
-    <div className="relative w-full font-sans codeblock bg-gray-950 rounded-lg">
-      <div className="flex items-center justify-between w-full px-6 py-2 pr-4 bg-gray-800 text-gray-100 rounded-t-lg">
-        <span className="text-xs lowercase">{language}</span>
-        <div className="flex items-center space-x-1">
-          <Button
-            variant="ghost"
-            onClick={downloadAsFile}
-            size="icon"
-            className="hover:bg-black"
-          >
-            <Download className="text-background w-5 h-5 p-1" />
-            <span className="sr-only">Download</span>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onCopy}
-            className="hover:bg-black"
-          >
-            {isCopied ? (
-              <Check className="text-background w-5 h-5 p-1" />
-            ) : (
-              <Copy className="text-background w-5 h-5 p-1" />
-            )}
-            <span className="sr-only">Copy code</span>
-          </Button>
-        </div>
-      </div>
+    <div className="relative w-full font-sans codeblock rounded-lg">
       <SyntaxHighlighter
         language={language}
         style={coldarkDark}
@@ -130,7 +103,6 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
           margin: 0,
           width: "100%",
           background: "transparent",
-          padding: "1.5rem 1rem",
         }}
         lineNumberStyle={{
           userSelect: "none",
