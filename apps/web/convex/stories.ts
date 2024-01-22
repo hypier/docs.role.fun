@@ -25,6 +25,7 @@ export const list = query({
   args: {
     paginationOpts: paginationOptsValidator,
     characterId: v.id("characters"),
+    nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     let user: any;
@@ -36,7 +37,7 @@ export const list = query({
     let query = ctx.db
       .query("stories")
       .filter((q) => q.eq(q.field("characterId"), args.characterId));
-    if (user?.nsfwPreference === "block") {
+    if (args.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
     const results = await query.order("desc").paginate(args.paginationOpts);
@@ -47,19 +48,14 @@ export const list = query({
 export const listAll = query({
   args: {
     paginationOpts: paginationOptsValidator,
+    nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    let user: any;
-    try {
-      user = await getUser(ctx, true);
-    } catch (error) {
-      console.error("Error getting user:", error);
-    }
     let query = ctx.db
       .query("stories")
       .withIndex("by_creation_time")
       .filter((q) => q.neq(q.field("messageIds"), []));
-    if (user?.nsfwPreference === "block") {
+    if (args.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
     const results = await query.order("desc").paginate(args.paginationOpts);

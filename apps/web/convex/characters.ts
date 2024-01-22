@@ -119,6 +119,7 @@ export const list = query({
     roleTag: v.optional(v.string()),
     languageTag: v.optional(v.string()),
     model: v.optional(v.string()),
+    nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     let query = ctx.db
@@ -149,13 +150,7 @@ export const list = query({
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
 
-    let user: any;
-    try {
-      user = await getUser(ctx, true);
-    } catch (error) {
-      console.log("Error getting user:", error);
-    }
-    if (user?.nsfwPreference === "block") {
+    if (args.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
 
@@ -235,6 +230,7 @@ export const search = query({
     languageTag: v.optional(v.string()),
     model: v.optional(v.string()),
     query: v.optional(v.string()),
+    nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     let query;
@@ -278,6 +274,9 @@ export const search = query({
     }
     if (args.model) {
       query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+    if (args.nsfwPreference === "block") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
 
     return await query.paginate(args.paginationOpts);

@@ -1,6 +1,5 @@
 "use client";
 import { api } from "../../convex/_generated/api";
-import { usePaginatedQuery } from "convex/react";
 import Link from "next/link";
 import { Story } from "../../app/character/[id]/story/[storyId]/story";
 import {
@@ -16,14 +15,16 @@ import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
 import { Button } from "@repo/ui/src/components";
 import { ChevronRight } from "lucide-react";
-import useCurrentUser from "../../app/lib/hooks/use-current-user";
+import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
+import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 
 export const MainStories = () => {
   const { t } = useTranslation();
 
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { nsfwPreference } = useNsfwPreference();
+  const { results, status, loadMore } = useStablePaginatedQuery(
     api.stories.listAll,
-    {},
+    { nsfwPreference },
     { initialNumItems: 10 },
   );
   const [_api, setApi] = useState<CarouselApi>();

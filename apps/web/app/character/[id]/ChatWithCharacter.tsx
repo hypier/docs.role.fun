@@ -1,5 +1,5 @@
 "use client";
-import { useConvexAuth, usePaginatedQuery, useQuery } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import {
@@ -34,6 +34,8 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import AgeRestriction from "../../../components/characters/age-restriction";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
+import { useNsfwPreference } from "../../lib/hooks/use-nsfw-preference";
+import { useStablePaginatedQuery } from "../../lib/hooks/use-stable-query";
 
 export const Stories = ({
   characterId,
@@ -46,9 +48,10 @@ export const Stories = ({
   cardImageUrl: string;
   isHorizontal?: boolean;
 }) => {
-  const { results } = usePaginatedQuery(
+  const { nsfwPreference } = useNsfwPreference();
+  const { results } = useStablePaginatedQuery(
     api.stories.list,
-    { characterId },
+    { characterId, nsfwPreference },
     { initialNumItems: 5 },
   );
   return (

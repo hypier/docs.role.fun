@@ -64,14 +64,9 @@ export const uploadImage = internalMutation({
 export const listImages = query({
   args: {
     paginationOpts: paginationOptsValidator,
+    nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    let user: any;
-    try {
-      user = await getUser(ctx, true);
-    } catch (error) {
-      console.error("Error getting user:", error);
-    }
     let query = ctx.db
       .query("images")
       .withIndex("by_creation_time")
@@ -79,8 +74,14 @@ export const listImages = query({
       .filter((q) => q.neq(q.field("isArchived"), true))
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
-    if (user?.nsfwPreference === "block") {
+    if (args.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+    let user: any;
+    try {
+      user = await getUser(ctx, true);
+    } catch (error) {
+      console.error("Error getting user:", error);
     }
 
     const paginationResult = await query

@@ -26,6 +26,7 @@ import CheckinDialog from "../check-in-dialog";
 import Gallery from "../../app/images/gallery";
 import Link from "next/link";
 import SignInDialog from "../user/sign-in-dialog";
+import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -33,12 +34,14 @@ const Discover = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchParams();
+  const { nsfwPreference } = useNsfwPreference();
   const filters = {
     languageTag: searchQuery.get("languageTag") || undefined,
     genreTag: searchQuery.get("genreTag") || undefined,
     personalityTag: searchQuery.get("personalityTag") || undefined,
     roleTag: searchQuery.get("roleTag") || undefined,
     model: searchQuery.get("model") || undefined,
+    nsfwPreference,
   };
   const popularTags = useQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);

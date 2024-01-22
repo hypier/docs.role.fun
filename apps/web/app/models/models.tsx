@@ -58,7 +58,7 @@ const Models = () => {
                     description={character.description}
                     model={character.model}
                     showRemix={true}
-                    isNSFW={character?.isNSFW && me?.nsfwPreference !== "allow"}
+                    isNSFW={character?.isNSFW}
                   />
                 ),
             )

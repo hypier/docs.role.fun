@@ -21,18 +21,21 @@ import { Button } from "@repo/ui/src/components";
 import { ChevronLeft } from "lucide-react";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import SignInDialog from "../../components/user/sign-in-dialog";
+import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
 
 const Characters = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchParams();
+  const { nsfwPreference } = useNsfwPreference();
   const filters = {
     languageTag: searchQuery.get("languageTag") || undefined,
     genreTag: searchQuery.get("genreTag") || undefined,
     personalityTag: searchQuery.get("personalityTag") || undefined,
     roleTag: searchQuery.get("roleTag") || undefined,
     model: searchQuery.get("model") || undefined,
+    nsfwPreference,
   };
   const popularTags = useQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);
@@ -133,7 +136,7 @@ const Characters = () => {
                     description={character.description}
                     model={character.model}
                     showRemix={true}
-                    isNSFW={character?.isNSFW && me?.nsfwPreference !== "allow"}
+                    isNSFW={character?.isNSFW}
                   />
                 ),
             )

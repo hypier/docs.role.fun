@@ -1,6 +1,5 @@
 "use client";
 import { api } from "../../convex/_generated/api";
-import { usePaginatedQuery } from "convex/react";
 import Link from "next/link";
 import { Story } from "../../app/character/[id]/story/[storyId]/story";
 import { useTranslation } from "react-i18next";
@@ -9,13 +8,16 @@ import { useEffect, useRef, useState } from "react";
 import useCurrentUser from "../lib/hooks/use-current-user";
 import { useInView } from "framer-motion";
 import SignInDialog from "../../components/user/sign-in-dialog";
+import { useStablePaginatedQuery } from "../lib/hooks/use-stable-query";
+import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
 
 export const StoriesGrid = () => {
   const { t } = useTranslation();
+  const { nsfwPreference } = useNsfwPreference();
 
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { results, status, loadMore } = useStablePaginatedQuery(
     api.stories.listAll,
-    {},
+    { nsfwPreference },
     { initialNumItems: 10 },
   );
   const ref = useRef(null);

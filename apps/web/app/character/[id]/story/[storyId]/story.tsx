@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Spinner from "@repo/ui/src/components/spinner";
 import useCurrentUser from "../../../../lib/hooks/use-current-user";
+import { useNsfwPreference } from "../../../../lib/hooks/use-nsfw-preference";
 
 export function Story({
   name = "",
@@ -33,7 +34,7 @@ export function Story({
   const messages = useQuery(api.stories.messages, { storyId });
   const creatorName = useQuery(api.stories.creatorName, { storyId });
   const unlock = useMutation(api.stories.unlock);
-  const me = useCurrentUser();
+  const { nsfwPreference } = useNsfwPreference();
 
   return (
     <div className="relative h-full w-full">
@@ -42,7 +43,7 @@ export function Story({
           src={character.cardImageUrl}
           fill={true}
           className={`-z-10 object-cover opacity-10 duration-200 group-hover:opacity-50 ${
-            isNSFW && me?.nsfwPreference !== "allow" ? "blur-md" : ""
+            isNSFW && nsfwPreference !== "allow" ? "blur-md" : ""
           }`}
           alt="image of character"
         />
@@ -51,7 +52,7 @@ export function Story({
         <div className="mx-2 flex h-full flex-col justify-between gap-8 rounded-lg p-4">
           <div
             className={`flex flex-col gap-8
-${isNSFW && me?.nsfwPreference !== "allow" ? "blur-md" : ""}
+${isNSFW && nsfwPreference !== "allow" ? "blur-md" : ""}
           `}
           >
             {messages && messages?.length > 0 ? (

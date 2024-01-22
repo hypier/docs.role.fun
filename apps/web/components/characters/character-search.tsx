@@ -5,7 +5,7 @@ import {
   Avatar,
 } from "@repo/ui/src/components/avatar";
 import { api } from "../../convex/_generated/api";
-import { usePaginatedQuery, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
 import { formatDistanceToNow } from "date-fns";
 import { Id } from "../../convex/_generated/dataModel";
 import Link from "next/link";
@@ -15,6 +15,8 @@ import { Input } from "@repo/ui/src/components/input";
 import { useDebouncedCallback } from "use-debounce";
 import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
+import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 
 export const Chat = ({
   name,
@@ -66,9 +68,10 @@ export const Chat = ({
 export default function CharacterSearch() {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState("");
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { nsfwPreference } = useNsfwPreference();
+  const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.search,
-    { query: inputValue },
+    { query: inputValue, nsfwPreference },
     { initialNumItems: 10 },
   );
   const ref = useRef(null);

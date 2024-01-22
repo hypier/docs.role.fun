@@ -15,6 +15,7 @@ import { nFormatter } from "../../app/lib/utils";
 import ModelBadge from "../characters/model-badge";
 import DraftBadge from "../characters/draft-badge";
 import { useTranslation } from "react-i18next";
+import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 
 const CharacterCard = (props: {
   id: string;
@@ -29,10 +30,8 @@ const CharacterCard = (props: {
   showRemix?: boolean;
 }) => {
   const { t } = useTranslation();
-  // temporarily disable since api is not optimized
-  // const numStories = useQuery(api.stories.count, {
-  //   characterId: props.id as Id<"characters">,
-  // });
+  const { nsfwPreference } = useNsfwPreference();
+
   return (
     <AspectRatio
       ratio={1 / 1.75}
@@ -124,7 +123,7 @@ const CharacterCard = (props: {
           </CardHeader>
           {props.cardImageUrl && (
             <>
-              {props?.isNSFW ? (
+              {props?.isNSFW && !nsfwPreference ? (
                 <Image
                   src={props.cardImageUrl}
                   alt={""}

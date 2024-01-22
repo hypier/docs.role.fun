@@ -8,16 +8,17 @@ import { api } from "../../convex/_generated/api";
 import useCurrentUser from "../lib/hooks/use-current-user";
 import { useTranslation } from "react-i18next";
 import SignInDialog from "../../components/user/sign-in-dialog";
-import { Info } from "lucide-react";
+import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
 
 const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
   const inView = useInView(ref);
   const me = useCurrentUser();
+  const { nsfwPreference } = useNsfwPreference();
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.images.listImages,
-    {},
+    { nsfwPreference },
     { initialNumItems: 10 },
   );
   const allImages = results || [];
@@ -66,7 +67,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
               prompt={image.prompt}
               numLikes={image?.numLikes}
               isLiked={image?.isLiked}
-              isNSFW={image?.isNSFW && me?.nsfwPreference !== "allow"}
+              isNSFW={image?.isNSFW && nsfwPreference !== "allow"}
               creatorId={image?.creatorId}
             />
           ))

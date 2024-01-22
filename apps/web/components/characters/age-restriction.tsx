@@ -24,11 +24,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/src/components/select";
+import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 
 export const PreferenceSelect = () => {
   const me = useCurrentUser();
   const { t } = useTranslation();
-  const updateNSFWPreference = useMutation(api.users.updateNSFWPreference);
+  const { nsfwPreference, updatePreference } = useNsfwPreference();
 
   return (
     me && (
@@ -38,9 +39,7 @@ export const PreferenceSelect = () => {
         </Label>
         <Select
           onValueChange={(value: "allow" | "auto" | "block") => {
-            const promise = updateNSFWPreference({
-              nsfwPreference: value,
-            });
+            const promise = updatePreference(value);
             toast.promise(promise, {
               loading: "Updating preference...",
               success: "Preference updated successfully",
@@ -49,7 +48,7 @@ export const PreferenceSelect = () => {
                 : "Log in to save your preference.",
             });
           }}
-          defaultValue={me?.nsfwPreference}
+          defaultValue={nsfwPreference as string}
         >
           <SelectTrigger>
             <SelectValue placeholder={t("Select a preference")} />
