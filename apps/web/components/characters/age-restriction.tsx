@@ -12,8 +12,6 @@ import useCurrentUser from "../../app/lib/hooks/use-current-user";
 import { useEffect, useState } from "react";
 import { Rating18Plus } from "@repo/ui/src/components/icons";
 import { Label } from "@repo/ui/src/components/label";
-import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
@@ -32,35 +30,33 @@ export const PreferenceSelect = () => {
   const { nsfwPreference, updatePreference } = useNsfwPreference();
 
   return (
-    me && (
-      <div className="flex flex-col gap-2 pt-4">
-        <Label htmlFor="nsfwPreference" className="text-[10px]">
-          {t("Mature Content")}
-        </Label>
-        <Select
-          onValueChange={(value: "allow" | "auto" | "block") => {
-            const promise = updatePreference(value);
-            toast.promise(promise, {
-              loading: "Updating preference...",
-              success: "Preference updated successfully",
-              error: me?.name
-                ? "Failed to update preference."
-                : "Log in to save your preference.",
-            });
-          }}
-          defaultValue={nsfwPreference as string}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder={t("Select a preference")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="allow">{t("Always allow")}</SelectItem>
-            <SelectItem value="auto">{t("Always ask")}</SelectItem>
-            <SelectItem value="block">{t("Always block")}</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    )
+    <div className="flex flex-col gap-2 pt-4">
+      <Label htmlFor="nsfwPreference" className="text-[10px]">
+        {t("Mature Content")}
+      </Label>
+      <Select
+        onValueChange={(value: "allow" | "auto" | "block") => {
+          const promise = updatePreference(value);
+          toast.promise(promise, {
+            loading: "Updating preference...",
+            success: "Preference updated successfully",
+            error: me?.name
+              ? "Failed to update preference."
+              : "Log in to save your preference.",
+          });
+        }}
+        defaultValue={nsfwPreference as string}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder={t("Select a preference")} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="allow">{t("Always allow")}</SelectItem>
+          <SelectItem value="auto">{t("Always ask")}</SelectItem>
+          <SelectItem value="block">{t("Always block")}</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 

@@ -1,4 +1,7 @@
 {
+  "Openroleplay.ai": "Openroleplay.ai",
+  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Welcome to Openroleplay.ai, your open-source AI character platform.",
+
   "opensource ai characters": "opensource ai characters",
   "alpha": "alpha",
   "Create": "Create",
@@ -19,6 +22,7 @@
   "Create character": "Create character",
   "Create and customize characters.": "Create and customize characters.",
   "Select a language": "Select a language",
+  "Language": "Language",
   "Languages": "Languages",
   "Star on GitHub": "Star on GitHub",
   "Join Discord": "Join Discord",
@@ -95,6 +99,7 @@
   "You've already claimed today's reward.": "You've already claimed today's reward.",
   "Mature Content": "Mature Content",
   "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.",
+  "Some AI model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "Some AI model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.",
   "Always allow": "Always allow",
   "Always ask": "Always ask",
   "Always block": "Always block",

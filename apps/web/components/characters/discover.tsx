@@ -27,6 +27,7 @@ import Gallery from "../../app/images/gallery";
 import Link from "next/link";
 import SignInDialog from "../user/sign-in-dialog";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
+import PreferenceDialog from "../user/preference-dialog";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -68,7 +69,7 @@ const Discover = () => {
     setCount(_api.scrollSnapList().length);
     setCurrent(_api.selectedScrollSnap() + 1);
     if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
-      if (!me?.name && count > 15) {
+      if (!me?.name && count > 21) {
         setIsSignInModalOpen(true);
       } else {
         loadMore(10);
@@ -90,6 +91,7 @@ const Discover = () => {
     <div className="relative flex flex-col gap-4 lg:gap-8">
       {isAuthenticated && <CheckinDialog />}
       {username && <MainChats />}
+      {<PreferenceDialog />}
       <SignInDialog
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}
