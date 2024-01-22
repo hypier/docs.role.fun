@@ -274,7 +274,7 @@ export default function Page() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center gap-4 px-5">
+      <div className="flex flex-col items-center gap-4 rounded-lg px-5">
         <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
         <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
           {t("Text models")}
@@ -416,11 +416,18 @@ export default function Page() {
           {t("AI Voice")}
         </h2>
         <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <span>
-            <Crystal className="hidden h-4 w-4 md:inline" /> x 10
-          </span>
+          <Crystal className="hidden h-4 w-4 md:inline" />
           {t(
             "Crystal is used whenever you request voice playback for a specific message.",
+          )}
+        </p>
+        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          {t("Machine Translation")}
+        </h2>
+        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
+          <Crystal className="hidden h-4 w-4 md:inline" />
+          {t(
+            "Crystal is used whenever you request a translation for a message",
           )}
         </p>
       </div>
