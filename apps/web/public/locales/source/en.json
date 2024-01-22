@@ -70,6 +70,8 @@
   "Crystal Price Table": "Crystal Price Table",
   "Text models": "Text models",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
+  "Crystal is used whenever you generate an image.": "Crystal is used whenever you generate an image.",
+  "Crystal is used whenever you request voice playback for a specific message.": "Crystal is used whenever you request voice playback for a specific message.",
   "Badge": "Badge",
   "Daily Rewards": "Daily Rewards",
   "Claim 25 Crystals": "Claim 25 Crystals",
