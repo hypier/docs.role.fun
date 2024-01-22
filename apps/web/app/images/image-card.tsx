@@ -60,7 +60,9 @@ const ImageDetail = (props: {
         <div className="flex w-full flex-col gap-8">
           <div className="flex w-full flex-col gap-2">
             Prompt
-            <DialogOrDrawerDescription>{props?.prompt}</DialogOrDrawerDescription>
+            <DialogOrDrawerDescription>
+              {props?.prompt}
+            </DialogOrDrawerDescription>
             <Button
               onClick={async () => {
                 try {
@@ -78,11 +80,15 @@ const ImageDetail = (props: {
           </div>
           <div className="flex w-full flex-col gap-2">
             Model
-            <DialogOrDrawerDescription>{props?.model}</DialogOrDrawerDescription>
+            <DialogOrDrawerDescription>
+              {props?.model}
+            </DialogOrDrawerDescription>
           </div>
           <div className="flex w-full flex-col gap-2">
             Created by
-            <DialogOrDrawerDescription>@{creatorName}</DialogOrDrawerDescription>
+            <DialogOrDrawerDescription>
+              @{creatorName}
+            </DialogOrDrawerDescription>
           </div>
         </div>
       </DialogOrDrawerHeader>
@@ -121,7 +127,7 @@ const ImageCard = (props: {
                     alt={""}
                     width={7.5}
                     height={13}
-                    quality={50}
+                    quality={25}
                     className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
                   />
                 ) : (
