@@ -25,6 +25,7 @@ import { ConvexError } from "convex/values";
 import Gallery from "./gallery";
 import { ModelSelect } from "./model-select";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -40,6 +41,7 @@ const formSchema = z.object({
 
 const Images = () => {
   const { t } = useTranslation();
+  const searchQuery = useSearchParams();
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [imageId, setImageID] = useState("" as Id<"images">);
@@ -52,7 +54,7 @@ const Images = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: "",
+      prompt: searchQuery.get("prompt") || "",
       model: "charlesmccarthy/animagine-xl",
     },
   });
@@ -84,6 +86,13 @@ const Images = () => {
       setIsGenerating(false);
     }
   }, [generatedImage]);
+
+  useEffect(() => {
+    form.reset({
+      prompt: searchQuery.get("prompt") || "",
+      model: "charlesmccarthy/animagine-xl",
+    });
+  }, [searchQuery]);
 
   const InputField = React.memo(({ field }: { field: any }) => (
     <FormItem className="flex w-full flex-col">

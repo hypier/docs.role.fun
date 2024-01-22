@@ -1,4 +1,11 @@
-import { Button, Card, CardHeader, CardTitle } from "@repo/ui/src/components";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  Tooltip,
+  TooltipContent,
+} from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 import Image from "next/image";
 import ModelBadge from "../../components/characters/model-badge";
@@ -10,12 +17,14 @@ import {
   DialogOrDrawerTrigger,
 } from "@repo/ui/src/components/dialog-or-drawer";
 import { toast } from "sonner";
-import { ClipboardIcon, Download, Heart } from "lucide-react";
+import { ClipboardIcon, Download, Heart, Repeat } from "lucide-react";
 import AgeRestriction from "../../components/characters/age-restriction";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import { nFormatter } from "../lib/utils";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const ImageDetail = (props: {
   prompt: string;
@@ -107,6 +116,7 @@ const ImageCard = (props: {
   numLikes?: number;
   creatorId?: Id<"users">;
 }) => {
+  const { t } = useTranslation();
   const like = useMutation(api.images.like);
   return (
     <DialogOrDrawer>
@@ -119,6 +129,26 @@ const ImageCard = (props: {
             <div className="absolute top-4 z-[3] hover:z-[4]">
               <ModelBadge modelName={props.model as string} />
             </div>
+            <Tooltip
+              content={
+                <TooltipContent
+                  title={"Create new character by remixing this character"}
+                />
+              }
+            >
+              <Link
+                href={`/images?prompt=${props.prompt}`}
+                className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
+              >
+                <Button
+                  variant="outline"
+                  className="h-5 rounded-full border-none text-xs md:text-[10px]"
+                >
+                  <Repeat className="h-3 w-3 p-0.5" />
+                  {t("Remix")}
+                </Button>
+              </Link>
+            </Tooltip>
             {props.imageUrl && (
               <>
                 {props?.isNSFW ? (
