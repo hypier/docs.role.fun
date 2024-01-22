@@ -192,7 +192,12 @@ export const translate = mutation({
     await ctx.scheduler.runAfter(0, internal.translate.translate, {
       userId: user._id,
       messageId,
-      targetLanguage,
+      targetLanguage:
+        targetLanguage === "en"
+          ? "en-US"
+          : targetLanguage === "pt"
+            ? "pt-PT"
+            : targetLanguage,
     });
   },
 });
