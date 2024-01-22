@@ -56,8 +56,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@repo/ui/src/components/badge";
 
-export const FormattedMessage = ({ message }: { message: any }) => {
+export const FormattedMessage = ({
+  message,
+  username,
+}: {
+  message: any;
+  username?: string;
+}) => {
   const { t } = useTranslation();
+  const textContent = message?.text?.startsWith("Not enough crystals.")
+    ? `${message?.text} [${t("Crystal Top-up")}](/crystals)`
+    : message?.text;
   return (
     <MemoizedReactMarkdown
       className="break-words"
@@ -86,9 +95,7 @@ export const FormattedMessage = ({ message }: { message: any }) => {
         },
       }}
     >
-      {message?.text?.startsWith("Not enough crystals.")
-        ? `${message?.text} [${t("Crystal Top-up")}](/crystals)`
-        : message?.text}
+      {textContent.replace("{{user}}", username)}
     </MemoizedReactMarkdown>
   );
 };
@@ -177,7 +184,7 @@ export const Message = ({
                 : " rounded-tr-none bg-foreground text-muted ")
             }
           >
-            <FormattedMessage message={message} />
+            <FormattedMessage message={message} username={username} />
           </div>
           {message?.characterId && chatId && !isRegenerating && (
             <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1">
