@@ -21,6 +21,8 @@ import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/src/components";
 import { useTranslation } from "react-i18next";
 import { Crystal } from "@repo/ui/src/components/icons";
+import { LanguageSelect } from "../../app/lang-select";
+import { PreferenceSelect } from "../characters/age-restriction";
 
 type StyledLinkProps = {
   href: string;
@@ -141,6 +143,10 @@ export default function UserDropdown() {
               Icon={<Crystal className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />
+            <div className="flex flex-col gap-2">
+              <PreferenceSelect />
+              <LanguageSelect />
+            </div>
           </div>
         </PopoverContent>
         <PopoverTrigger
