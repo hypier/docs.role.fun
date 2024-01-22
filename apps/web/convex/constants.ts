@@ -164,7 +164,12 @@ export const getRemindInstructionInterval = (modelName: string) => {
 };
 
 export const getCrystalPrice = (modelName: string) => {
-  const allModels = [...modelData, ...imageModelData, ...voiceData];
+  const allModels = [
+    ...modelData,
+    ...imageModelData,
+    ...voiceData,
+    ...TranslationModelData,
+  ];
   const model = allModels.find((m) => m.value === modelName);
   return model ? model.crystalPrice : modelName === "auto" ? 9 : 5;
 };
@@ -469,6 +474,14 @@ export const voiceData = [
     value: "SOYHLrjzK2X1ezoPC6cr",
     description: "Harry - Anxious, Video Games",
     crystalPrice: 10,
+  },
+];
+
+export const TranslationModelData = [
+  {
+    value: "deepl",
+    description: "DeepL - Machine Translation API",
+    crystalPrice: 1,
   },
 ];
 

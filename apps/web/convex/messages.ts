@@ -4,6 +4,7 @@ import { query } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { getUser } from "./users";
 import { paginationOptsValidator } from "convex/server";
+import { Id } from "./_generated/dataModel";
 
 export const get = internalQuery({
   args: {
@@ -180,3 +181,32 @@ export const react = mutation({
     }
   },
 });
+
+export const translate = mutation({
+  args: {
+    messageId: v.id("messages"),
+    targetLanguage: v.optional(v.string()),
+  },
+  handler: async (ctx, { messageId, targetLanguage }) => {
+    const user = await getUser(ctx);
+    await ctx.scheduler.runAfter(0, internal.translate.translate, {
+      userId: user._id,
+      messageId,
+      targetLanguage,
+    });
+  },
+});
+
+export const addTranslation = internalMutation(
+  async (
+    ctx,
+    {
+      messageId,
+      translation,
+    }: { messageId: Id<"messages">; translation: string },
+  ) => {
+    return await ctx.db.patch(messageId, {
+      translation,
+    });
+  },
+);

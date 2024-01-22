@@ -7,6 +7,7 @@ export default defineSchema({
     characterId: v.optional(v.id("characters")),
     personaId: v.optional(v.id("personas")),
     text: v.string(),
+    translation: v.optional(v.string()),
     reaction: v.optional(
       v.union(
         v.literal("like"),

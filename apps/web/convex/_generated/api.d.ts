@@ -37,6 +37,7 @@ import type * as speech from "../speech.js";
 import type * as speeches from "../speeches.js";
 import type * as stories from "../stories.js";
 import type * as stripe from "../stripe.js";
+import type * as translate from "../translate.js";
 import type * as users from "../users.js";
 
 /**
@@ -71,6 +72,7 @@ declare const fullApi: ApiFromModules<{
   speeches: typeof speeches;
   stories: typeof stories;
   stripe: typeof stripe;
+  translate: typeof translate;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

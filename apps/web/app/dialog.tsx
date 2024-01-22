@@ -11,6 +11,7 @@ import {
   ClipboardIcon,
   Delete,
   Headphones,
+  Languages,
   MoreHorizontal,
   Pause,
   Plus,
@@ -56,6 +57,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@repo/ui/src/components/badge";
+import { useLanguage } from "./lang-select";
 
 export const FormattedMessage = ({
   message,
@@ -65,9 +67,13 @@ export const FormattedMessage = ({
   username?: string;
 }) => {
   const { t } = useTranslation();
-  const textContent = message?.text?.startsWith("Not enough crystals.")
+  const baseText = message?.text?.startsWith("Not enough crystals.")
     ? `${message?.text} [${t("Crystal Top-up")}](/crystals)`
     : message?.text;
+  const translationText = message?.translation
+    ? `\n${message?.translation}`
+    : "";
+  const textContent = translationText ? translationText : baseText;
   return (
     <MemoizedReactMarkdown
       className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words "
@@ -114,12 +120,15 @@ export const Message = ({
   username?: string;
   chatId?: Id<"chats">;
 }) => {
+  const { currentLanguage: targetLanguage } = useLanguage();
   const { t } = useTranslation();
   const regenerate = useMutation(api.messages.regenerate);
   const react = useMutation(api.messages.react);
   const speech = useMutation(api.speeches.generate);
+  const translate = useMutation(api.messages.translate);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
   const [thinkingDots, setThinkingDots] = useState("");
   const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
 
@@ -284,6 +293,34 @@ export const Message = ({
                   }}
                 >
                   <ClipboardIcon className="h-4 w-4" />
+                </Button>
+              </Tooltip>
+              <Tooltip
+                content={
+                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    {t(`Translate message to ${targetLanguage}`)} (
+                    <Crystal className="h-4 w-4" /> x 1 )
+                  </span>
+                }
+                desktopOnly={true}
+              >
+                <Button
+                  variant="ghost"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  onClick={async () => {
+                    setIsTranslating(true);
+                    await translate({
+                      messageId: message?._id as Id<"messages">,
+                      targetLanguage,
+                    });
+                    setIsTranslating(false);
+                  }}
+                >
+                  {isTranslating ? (
+                    <Spinner className="h-4 w-4" />
+                  ) : (
+                    <Languages className="h-4 w-4" />
+                  )}
                 </Button>
               </Tooltip>
 
@@ -485,7 +522,6 @@ export function Dialog({
 }) {
   const { t } = useTranslation();
   const router = useRouter();
-  const goBack = router.back;
   const create = useMutation(api.stories.create);
   const { results, loadMore } = usePaginatedQuery(
     api.messages.list,
