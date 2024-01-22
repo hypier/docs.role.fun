@@ -35,12 +35,11 @@ export const list = query({
     }
     let query = ctx.db
       .query("stories")
-      .filter((q) => q.eq(q.field("characterId"), args.characterId))
-      .order("desc");
+      .filter((q) => q.eq(q.field("characterId"), args.characterId));
     if (user?.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
-    const results = await query.paginate(args.paginationOpts);
+    const results = await query.order("desc").paginate(args.paginationOpts);
     return results;
   },
 });
@@ -59,12 +58,11 @@ export const listAll = query({
     let query = ctx.db
       .query("stories")
       .withIndex("by_creation_time")
-      .order("desc")
       .filter((q) => q.neq(q.field("messageIds"), []));
     if (user?.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
-    const results = await query.paginate(args.paginationOpts);
+    const results = await query.order("desc").paginate(args.paginationOpts);
     return results;
   },
 });
