@@ -76,7 +76,7 @@ const Images = () => {
         setIsGenerating(false);
         return error instanceof ConvexError
           ? (error.data as { message: string }).message
-          : "Unexpected error occurred";
+          : "Not enough crystals";
       },
     });
   };
