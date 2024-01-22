@@ -787,7 +787,7 @@ export const generateImageTags = internalAction({
             userId,
             imageId,
             prompt: image?.prompt,
-            model,
+            model: image?.model,
           });
         }
       } catch (error) {
