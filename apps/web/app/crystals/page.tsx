@@ -85,7 +85,7 @@ const Package = ({
           </CardHeader>
           <CardFooter className="flex w-full items-center justify-center">
             <p className="z-10 w-full rounded-full bg-sky-100 text-center font-semibold text-sky-900">
-              {price}$
+              {price}$ <span className="text-xs">+VAT</span>
             </p>
           </CardFooter>
         </div>
