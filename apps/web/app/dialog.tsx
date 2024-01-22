@@ -60,7 +60,7 @@ export const FormattedMessage = ({ message }: { message: any }) => {
   const { t } = useTranslation();
   return (
     <MemoizedReactMarkdown
-      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
+      className="break-words"
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
         a({ children, href, target, rel }) {

@@ -144,6 +144,12 @@ const Images = () => {
             </form>
           </Form>
         </div>
+        <span className="text-xs text-muted-foreground underline">
+          <Link href="/content-rules">
+            By clicking 'Generate', you agree to our content rules. Offending
+            content will be removed.
+          </Link>
+        </span>
       </div>
       <Gallery isGenerating={isGenerating} />
     </div>
