@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@repo/ui/src/components";
-import Link from "next/link";
 
 export default function GlobalError({
   error,
@@ -14,9 +13,7 @@ export default function GlobalError({
     <html>
       <body>
         <h1>Something went wrong!</h1>
-        <Link href="/">
-          <Button onClick={() => reset()}>Go to Homepage</Button>
-        </Link>
+        <Button onClick={() => reset()}>Retry</Button>
       </body>
     </html>
   );
