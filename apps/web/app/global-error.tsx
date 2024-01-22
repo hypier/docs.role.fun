@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@repo/ui/src/components";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function GlobalError({
@@ -14,7 +16,10 @@ export default function GlobalError({
   return (
     <html>
       <body>
-        <h2>Something went wrong! Redirecting to Homepage...</h2>
+        <h1>Something went wrong!</h1>
+        <Link href="/">
+          <Button>Go to Homepage</Button>
+        </Link>
       </body>
     </html>
   );

@@ -153,7 +153,7 @@ export const list = query({
     try {
       user = await getUser(ctx);
     } catch (error) {
-      console.error("Error getting user:", error);
+      console.log("Error getting user:", error);
     }
     if (user?.nsfwPreference === "block") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
