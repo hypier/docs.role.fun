@@ -1,5 +1,5 @@
 import { constructMetadata } from "../lib/utils";
-import Models from "./models";
+import Characters from "./characters";
 
 export const metadata = constructMetadata({
   title: "Models - Discover Best AI Models",
@@ -9,7 +9,7 @@ export const metadata = constructMetadata({
 export default function Page(): JSX.Element {
   return (
     <div className="h-full w-full overflow-x-hidden pb-8 lg:pl-16">
-      <Models />
+      <Characters />
     </div>
   );
 }
