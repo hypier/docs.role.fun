@@ -2,7 +2,6 @@
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -25,7 +24,7 @@ const PreferenceDialog = () => {
   const { nsfwPreference } = useNsfwPreference();
   const router = useRouter();
   const [isPreferenceReady, setIsPreferenceReady] = useLocalStorage(
-    "isPreferenceReady",
+    "isPreferenceReadyas",
     false,
   );
   const [isOpen, setIsOpen] = useState(true);
@@ -80,6 +79,11 @@ const PreferenceDialog = () => {
           <AlertDialogDescription className="flex">
             {t(
               "Some AI model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.",
+            )}
+          </AlertDialogDescription>
+          <AlertDialogDescription className="flex rounded-lg bg-amber-100 p-2 text-amber-500 dark:bg-amber-800">
+            {t(
+              "Despite AI and community moderation efforts, some content is not always accurately classified, so you may still see content you wanted hidden.",
             )}
           </AlertDialogDescription>
           <PreferenceSelect />
