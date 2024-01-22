@@ -25,11 +25,50 @@ import {
   SelectValue,
 } from "@repo/ui/src/components/select";
 
+export const PreferenceSelect = () => {
+  const me = useCurrentUser();
+  const { t } = useTranslation();
+  const updateNSFWPreference = useMutation(api.users.updateNSFWPreference);
+
+  return (
+    me && (
+      <div className="flex flex-col gap-2 pt-4">
+        <Label htmlFor="nsfwPreference" className="text-[10px]">
+          {t("Mature Content")}
+        </Label>
+        <Select
+          onValueChange={(value: "allow" | "auto" | "block") => {
+            const promise = updateNSFWPreference({
+              nsfwPreference: value,
+            });
+            toast.promise(promise, {
+              loading: "Updating preference...",
+              success: "Preference updated successfully",
+              error: me?.name
+                ? "Failed to update preference."
+                : "Log in to save your preference.",
+            });
+          }}
+          defaultValue={me?.nsfwPreference}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder={t("Select a preference")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="allow">{t("Always allow")}</SelectItem>
+            <SelectItem value="auto">{t("Always ask")}</SelectItem>
+            <SelectItem value="block">{t("Always block")}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    )
+  );
+};
+
 const AgeRestriction = () => {
   const me = useCurrentUser();
   const { t } = useTranslation();
   const [showDialog, setShowDialog] = useState(false);
-  const updateNSFWPreference = useMutation(api.users.updateNSFWPreference);
   const router = useRouter();
 
   useEffect(() => {
@@ -54,35 +93,7 @@ const AgeRestriction = () => {
                 "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.",
               )}
             </AlertDialogDescription>
-            {me && (
-              <div className="flex items-center space-x-2 pt-4">
-                <Label htmlFor="nsfwPreference">{t("Preference")}</Label>
-                <Select
-                  onValueChange={(value: "allow" | "auto" | "block") => {
-                    const promise = updateNSFWPreference({
-                      nsfwPreference: value,
-                    });
-                    toast.promise(promise, {
-                      loading: "Updating preference...",
-                      success: "Preference updated successfully",
-                      error: me?.name
-                        ? "Failed to update preference."
-                        : "Log in to save your preference.",
-                    });
-                  }}
-                  defaultValue={me?.nsfwPreference}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder={t("Select a preference")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="allow">{t("Always allow")}</SelectItem>
-                    <SelectItem value="auto">{t("Always ask")}</SelectItem>
-                    <SelectItem value="block">{t("Always block")}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
+            <PreferenceSelect />
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => router.back()}>
@@ -101,5 +112,4 @@ const AgeRestriction = () => {
     )
   );
 };
-
 export default AgeRestriction;
