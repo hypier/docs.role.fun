@@ -8,6 +8,7 @@ import remarkMath from "remark-math";
 import {
   BookMarked,
   CircleUserRound,
+  ClipboardIcon,
   Delete,
   Headphones,
   MoreHorizontal,
@@ -264,6 +265,25 @@ export const Message = ({
                       <Headphones className="h-4 w-4" />
                     </span>
                   )}
+                </Button>
+              </Tooltip>
+              <Tooltip
+                content={
+                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    {t("Copy message to clipboard")}
+                  </span>
+                }
+                desktopOnly={true}
+              >
+                <Button
+                  variant="ghost"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  onClick={() => {
+                    navigator.clipboard.writeText(message?.text);
+                    toast.success("Message copied to clipboard");
+                  }}
+                >
+                  <ClipboardIcon className="h-4 w-4" />
                 </Button>
               </Tooltip>
 
