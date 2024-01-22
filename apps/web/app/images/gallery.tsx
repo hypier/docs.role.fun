@@ -40,7 +40,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}
       />
-      {!isGenerating && (
+      {isGenerating && (
         <div className="relative animate-pulse">
           <div className="absolute inset-0 z-10 m-auto flex flex-col items-center justify-center gap-2 text-sm">
             <div className="flex gap-2">
