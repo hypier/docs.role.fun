@@ -132,7 +132,7 @@ const ImageCard = (props: {
             <Tooltip
               content={
                 <TooltipContent
-                  title={"Create new character by remixing this character"}
+                  title={"Create new image by remixing this image"}
                 />
               }
             >
