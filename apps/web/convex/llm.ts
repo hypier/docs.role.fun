@@ -720,7 +720,7 @@ export const generateImageTags = internalAction({
         imageId,
       });
       try {
-        const instruction = `Tag the image, respond in JSON.
+        const instruction = `You are a content moderator. Tag the image, respond in JSON.
         Following is the detail of an image.
         {
           altText: ${image?.prompt},
@@ -740,7 +740,11 @@ export const generateImageTags = internalAction({
                 },
                 isNSFW: {
                   type: "boolean",
-                  description: `True if character's detail metadata is explicitly sexual content, otherwise false.`,
+                  description: `True if altText is explicitly sexual content, otherwise false.`,
+                },
+                isRestricted: {
+                  type: "boolean",
+                  description: `True if altText is depicting minor, gore or real person.`,
                 },
               },
               required: ["tag", "isNSFW"],
@@ -775,6 +779,15 @@ export const generateImageTags = internalAction({
             imageId,
             tag: functionArgs?.tag,
             isNSFW: functionArgs?.isNSFW,
+          });
+          if (functionArgs?.isRestricted) {
+            throw new ConvexError("This prompt is prohibited.");
+          }
+          await ctx.scheduler.runAfter(0, internal.image.generateByPrompt, {
+            userId,
+            imageId,
+            prompt: image?.prompt,
+            model,
           });
         }
       } catch (error) {

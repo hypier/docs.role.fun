@@ -34,16 +34,11 @@ export const generate = mutation({
       isBlacklisted: false,
       isArchived: false,
     });
-    await ctx.scheduler.runAfter(0, internal.image.generateByPrompt, {
-      userId: user._id,
-      imageId: image,
-      prompt,
-      model,
-    });
     await ctx.scheduler.runAfter(0, internal.llm.generateImageTags, {
       userId: user._id,
       imageId: image,
     });
+
     return image;
   },
 });
