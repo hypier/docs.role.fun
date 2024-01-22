@@ -2,6 +2,7 @@
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
@@ -15,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { CalendarCheck } from "lucide-react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Image from "next/image";
+import Link from "next/link";
 
 const CheckinDialog = () => {
   const { t } = useTranslation();
@@ -69,10 +71,13 @@ const CheckinDialog = () => {
                 </div>
               </AlertDialogDescription>
             </div>
-            <div className="flex w-full items-center justify-center pt-4">
+            <div className="flex w-full flex-col items-center justify-center gap-4 pt-4">
               <AlertDialogAction onClick={onClickHandler}>
                 {t("Claim 25 Crystals")}
               </AlertDialogAction>
+              <Link href="/crystals">
+                <AlertDialogCancel>{t("Visit shop")}</AlertDialogCancel>
+              </Link>
             </div>
           </AlertDialogHeader>
         </AlertDialogContent>

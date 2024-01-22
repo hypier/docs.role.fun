@@ -9,9 +9,9 @@ import {
   BookMarked,
   CircleUserRound,
   Delete,
+  Headphones,
   MoreHorizontal,
   Pause,
-  Play,
   Plus,
   Repeat,
   Send,
@@ -254,7 +254,7 @@ export const Message = ({
                     <Pause className="h-4 w-4" />
                   ) : (
                     <span className="flex w-full items-center justify-center gap-1">
-                      <Play className="h-4 w-4" />
+                      <Headphones className="h-4 w-4" />
                     </span>
                   )}
                 </Button>
@@ -530,15 +530,15 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-16 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
+          className="pointer-events-none fixed left-0 top-16 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
         />
       )}
       {chatId && (
         <div className="sticky top-0 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
-            <Badge variant="model" className="bg-gray-500">
-              <Play className="h-4 w-4 p-0.5" /> /
+            <Badge variant="model">
+              <Headphones className="h-4 w-4 p-0.5" /> /
               <Crystal className="h-4 w-4 p-0.5" /> x 10
             </Badge>
           </div>

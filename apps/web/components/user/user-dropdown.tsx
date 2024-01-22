@@ -9,7 +9,6 @@ import {
   LogOut,
   Menu,
   Star,
-  Store,
 } from "lucide-react";
 import { Discord } from "@repo/ui/src/components/social-icons";
 import {
@@ -138,7 +137,7 @@ export default function UserDropdown() {
             />
             <StyledLink
               href="/crystals"
-              text={t("Crystals")}
+              text={t("Get Crystals")}
               Icon={<Crystal className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />

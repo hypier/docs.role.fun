@@ -31,12 +31,11 @@ export default function NavBar({}: {}) {
             </Link>
             <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
               <Link
-                className="flex items-center gap-2 text-base text-muted-foreground hover:opacity-50"
+                className="hidden items-center gap-2 text-base text-muted-foreground hover:opacity-50 lg:flex"
                 href="/github"
               >
                 <Badge className="font-default">
-                  <span className="inline lg:hidden">α</span>
-                  <span className="hidden lg:inline">{t("alpha")}</span>
+                  <span>{t("alpha")}</span>
                 </Badge>
               </Link>
             </Tooltip>
