@@ -214,7 +214,7 @@ export const answer = internalAction({
                 text,
               });
             }
-            if (mutationCounter >= 256) {
+            if (mutationCounter >= 384) {
               break;
             }
           }
