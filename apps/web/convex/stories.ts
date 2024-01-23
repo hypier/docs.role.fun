@@ -37,7 +37,7 @@ export const list = query({
     let query = ctx.db
       .query("stories")
       .filter((q) => q.eq(q.field("characterId"), args.characterId));
-    if (args.nsfwPreference === "block") {
+    if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
     const results = await query.order("desc").paginate(args.paginationOpts);
@@ -55,7 +55,7 @@ export const listAll = query({
       .query("stories")
       .withIndex("by_creation_time")
       .filter((q) => q.neq(q.field("messageIds"), []));
-    if (args.nsfwPreference === "block") {
+    if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
     const results = await query.order("desc").paginate(args.paginationOpts);

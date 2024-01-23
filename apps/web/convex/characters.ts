@@ -150,7 +150,7 @@ export const list = query({
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
 
-    if (args.nsfwPreference === "block") {
+    if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
 
@@ -274,7 +274,7 @@ export const search = query({
     if (args.model) {
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
-    if (args.nsfwPreference === "block") {
+    if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
 

@@ -75,7 +75,7 @@ export const listImages = query({
       .filter((q) => q.neq(q.field("isPrivate"), true))
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
-    if (args.nsfwPreference === "block") {
+    if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
     let user: any;
