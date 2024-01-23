@@ -14,15 +14,11 @@ import { Button } from "@repo/ui/src/components";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { Rating18Plus } from "@repo/ui/src/components/icons";
 import { PreferenceSelect } from "../characters/age-restriction";
-import { useRouter } from "next/navigation";
-import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 import { useState } from "react";
 import { LanguageSelect } from "../../app/lang-select";
 
 const PreferenceDialog = () => {
   const { t } = useTranslation();
-  const { nsfwPreference } = useNsfwPreference();
-  const router = useRouter();
   const [isPreferenceReady, setIsPreferenceReady] = useLocalStorage(
     "isPreferenceReadyas",
     false,
@@ -86,7 +82,7 @@ const PreferenceDialog = () => {
               "Despite AI and community moderation efforts, some content is not always accurately classified, so you may still see content you wanted hidden.",
             )}
           </AlertDialogDescription>
-          <PreferenceSelect />
+          <PreferenceSelect showLabel={false} />
         </AlertDialogHeader>
         <AlertDialogFooter className="flex sm:justify-center">
           <AlertDialogAction>{t("Confirm")}</AlertDialogAction>

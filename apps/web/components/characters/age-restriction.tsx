@@ -24,16 +24,22 @@ import {
 } from "@repo/ui/src/components/select";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 
-export const PreferenceSelect = () => {
+export const PreferenceSelect = ({
+  showLabel = true,
+}: {
+  showLabel?: boolean;
+}) => {
   const me = useCurrentUser();
   const { t } = useTranslation();
   const { nsfwPreference, updatePreference } = useNsfwPreference();
 
   return (
     <div className="flex flex-col gap-2 pt-4">
-      <Label htmlFor="nsfwPreference" className="text-[10px]">
-        {t("Mature Content")}
-      </Label>
+      {showLabel && (
+        <Label htmlFor="nsfwPreference" className="text-[10px]">
+          {t("Mature Content")}
+        </Label>
+      )}
       <Select
         onValueChange={(value: "allow" | "auto" | "block") => {
           const promise = updatePreference(value);
