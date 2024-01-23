@@ -72,6 +72,7 @@ export const listImages = query({
       .withIndex("by_creation_time")
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isPrivate"), true))
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
     if (args.nsfwPreference === "block") {

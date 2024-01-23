@@ -208,19 +208,19 @@ export const answer = internalAction({
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
             mutationCounter++;
-            if (mutationCounter % 2 === 0) {
+            if (mutationCounter % 5 === 0) {
               await ctx.runMutation(internal.llm.updateCharacterMessage, {
                 messageId,
                 text,
               });
             }
-            if (mutationCounter >= 384) {
+            if (mutationCounter >= 512) {
               break;
             }
           }
         }
         // Ensure the last mutation is run if the text was updated an odd number of times
-        if (mutationCounter % 2 !== 0) {
+        if (mutationCounter % 5 !== 0) {
           await ctx.runMutation(internal.llm.updateCharacterMessage, {
             messageId,
             text,
@@ -720,7 +720,8 @@ export const generateImageTags = internalAction({
         imageId,
       });
       try {
-        const instruction = `You are a content moderator. Tag the image, respond in JSON.
+        const instruction = `You are a content moderator maintaining our platform a safe place for everyone.
+        Tag the image, respond in JSON.
         Following is the detail of an image.
         {
           altText: ${image?.prompt},
@@ -744,7 +745,7 @@ export const generateImageTags = internalAction({
                 },
                 isRestricted: {
                   type: "boolean",
-                  description: `True if altText is depicting minor, gore or real person.`,
+                  description: `True if altText is depicting minor, teenager, gore or real person.`,
                 },
               },
               required: ["tag", "isNSFW"],

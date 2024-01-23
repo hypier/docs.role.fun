@@ -162,6 +162,7 @@ export default defineSchema({
     tag: v.optional(v.string()),
     isBlacklisted: v.boolean(),
     isNSFW: v.boolean(), // NSFW characters are filtered unless the adult user has explicitly opted in.
+    isPrivate: v.optional(v.boolean()),
     isArchived: v.optional(v.boolean()),
   }).index("byUserId", ["creatorId"]),
   imageLikes: defineTable({
