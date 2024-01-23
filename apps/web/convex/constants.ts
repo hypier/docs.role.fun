@@ -1,4 +1,4 @@
-export const SIGN_UP_FREE_CRYSTALS = 50;
+export const SIGN_UP_FREE_CRYSTALS = 25;
 export const DIVIDEND_RATE = 0.25;
 export const DEFAULT_MODEL = "openrouter/auto";
 export const PERPLEXITY_API_URL = "https://api.perplexity.ai";
@@ -15,60 +15,11 @@ export const getBaseURL = (modelName: string) => {
     case "gpt-4-1106-preview":
     case "dall-e-3":
       return OPENAI_API_URL;
-    case "mixtral-8x7b-instruct":
-    case "mistral-7b-instruct":
     case "pplx-7b-online":
     case "pplx-7b-chat":
     case "pplx-70b-online":
     case "pplx-70b-chat":
       return PERPLEXITY_API_URL;
-    case "accounts/fireworks/models/qwen-14b-chat":
-      return FIREWORK_API_URL;
-    case "mistral-tiny":
-    case "mistral-small":
-    case "mistral-medium":
-      return MISTRAL_AI_API_URL;
-    // free models
-    case "nousresearch/nous-capybara-7b":
-    case "mistralai/mistral-7b-instruct":
-    case "huggingfaceh4/zephyr-7b-beta":
-    case "openchat/openchat-7b":
-    case "gryphe/mythomist-7b":
-    case "openrouter/cinematika-7b":
-    // 1 crystal models
-    case "nousresearch/nous-hermes-llama2-13b":
-    case "austism/chronos-hermes-13b":
-    case "jebcarter/psyfighter-13b":
-    case "koboldai/psyfighter-13b-2":
-    case "meta-llama/codellama-34b-instruct":
-    case "phind/phind-codellama-34b":
-    case "intel/neural-chat-7b":
-    case "mistralai/mixtral-8x7b-instruct":
-    case "meta-llama/llama-2-13b-chat":
-    case "meta-llama/llama-2-70b-chat":
-    case "nousresearch/nous-hermes-llama2-70b":
-    case "nousresearch/nous-capybara-34b":
-    case "gryphe/mythomax-l2-13b-8k":
-    case "jondurbin/airoboros-l2-70b":
-    case "google/gemini-pro":
-    case "teknium/openhermes-2-mistral-7b":
-    case "anthropic/claude-instant-v1":
-    case "cognitivecomputations/dolphin-mixtral-8x7b":
-    case "lizpreciatior/lzlv-70b-fp16-hf":
-    case "pygmalionai/mythalion-13b":
-    case "nousresearch/nous-hermes-2-mixtral-8x7b-dpo":
-    // 3 crystal models
-    case "neversleep/noromaid-mixtral-8x7b-instruct":
-    case "neversleep/noromaid-20b":
-    case "migtissera/synthia-70b":
-    // 5 crystal models
-    case "haotian-liu/llava-13b":
-    case "nousresearch/nous-hermes-2-vision-7b":
-    // 10 crytstal models
-    case "anthropic/claude-2":
-    // Auto
-    case "openrouter/auto":
-      return OPENROUTER_API_URL;
     default:
       return OPENROUTER_API_URL;
   }
@@ -80,86 +31,17 @@ export const getAPIKey = (modelName: string) => {
     case "gpt-4-1106-preview":
     case "dall-e-3":
       return process.env.OPENAI_API_KEY;
-    case "mixtral-8x7b-instruct":
-    case "mistral-7b-instruct":
     case "pplx-7b-online":
     case "pplx-7b-chat":
     case "pplx-70b-online":
     case "pplx-70b-chat":
       return process.env.PERPLEXITY_API_KEY;
-    case "accounts/fireworks/models/qwen-14b-chat":
-      return process.env.FIREWORKS_API_KEY;
     case "mistral-tiny":
     case "mistral-small":
     case "mistral-medium":
       return process.env.MISTRAL_API_KEY;
-    // free models
-    case "nousresearch/nous-capybara-7b":
-    case "mistralai/mistral-7b-instruct":
-    case "huggingfaceh4/zephyr-7b-beta":
-    case "openchat/openchat-7b":
-    case "gryphe/mythomist-7b":
-    case "openrouter/cinematika-7b":
-    case "rwkv/rwkv-5-world-3b":
-    case "recursal/rwkv-5-3b-ai-town":
-    // 1 crystal models
-    case "nousresearch/nous-hermes-llama2-13b":
-    case "austism/chronos-hermes-13b":
-    case "jebcarter/psyfighter-13b":
-    case "koboldai/psyfighter-13b-2":
-    case "meta-llama/codellama-34b-instruct":
-    case "phind/phind-codellama-34b":
-    case "intel/neural-chat-7b":
-    case "mistralai/mixtral-8x7b-instruct":
-    case "meta-llama/llama-2-13b-chat":
-    case "meta-llama/llama-2-70b-chat":
-    case "nousresearch/nous-hermes-llama2-70b":
-    case "nousresearch/nous-capybara-34b":
-    case "gryphe/mythomax-l2-13b-8k":
-    case "jondurbin/airoboros-l2-70b":
-    case "google/gemini-pro":
-    case "teknium/openhermes-2-mistral-7b":
-    case "anthropic/claude-instant-v1":
-    case "cognitivecomputations/dolphin-mixtral-8x7b":
-    case "lizpreciatior/lzlv-70b-fp16-hf":
-    case "pygmalionai/mythalion-13b":
-    case "nousresearch/nous-hermes-2-mixtral-8x7b-dpo":
-    // 3 crystal models
-    case "neversleep/noromaid-mixtral-8x7b-instruct":
-    case "neversleep/noromaid-20b":
-    case "migtissera/synthia-70b":
-    // 5 crystal models
-    case "haotian-liu/llava-13b":
-    case "nousresearch/nous-hermes-2-vision-7b":
-    // 10 crytstal models
-    case "anthropic/claude-2":
-    // Auto
-    case "openrouter/auto":
-      return process.env.OPENROUTER_API_KEY;
     default:
       return process.env.OPENROUTER_API_KEY;
-  }
-};
-
-export const getRemindInstructionInterval = (modelName: string) => {
-  switch (modelName) {
-    case "mixtral-8x7b-instruct":
-    case "mistral-7b-instruct":
-    case "pplx-7b-online":
-    case "pplx-7b-chat":
-      return 16;
-    case "accounts/fireworks/models/qwen-14b-chat":
-    case "pplx-70b-online":
-    case "pplx-70b-chat":
-      return 64;
-    case "mistral-tiny":
-    case "mistral-small":
-    case "mistral-medium":
-      return 128;
-    case "gpt-4-1106-preview":
-      return 128;
-    default:
-      return 64;
   }
 };
 
@@ -189,12 +71,6 @@ export const modelData = [
   {
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     description: "Nous Hermes 2 Mixtral 8x7B DPO",
-    crystalPrice: 1,
-  },
-  {
-    value: "pygmalionai/mythalion-13b",
-    description: "Uncensored, Mythalion 13B by PygmalionAI",
-    isNSFW: true,
     crystalPrice: 1,
   },
   {
@@ -247,6 +123,11 @@ export const modelData = [
     alt: "Company logo of Google",
   },
   {
+    value: "01-ai/yi-34b-200k",
+    description: "Yi 34B by 01.AI",
+    crystalPrice: 1,
+  },
+  {
     value: "anthropic/claude-instant-v1",
     description: "Claude Instant by Anthropic",
     crystalPrice: 1,
@@ -259,6 +140,18 @@ export const modelData = [
     crystalPrice: 10,
     src: "/models/claude.png",
     alt: "Company logo of Anthropic AI",
+  },
+  {
+    value: "undi95/toppy-m-7b",
+    description: "Uncensored, Toppy M 7B by undi95",
+    isNSFW: true,
+    crystalPrice: 0.5,
+  },
+  {
+    value: "pygmalionai/mythalion-13b",
+    description: "Uncensored, Mythalion 13B by PygmalionAI",
+    isNSFW: true,
+    crystalPrice: 1,
   },
   {
     value: "lizpreciatior/lzlv-70b-fp16-hf",
