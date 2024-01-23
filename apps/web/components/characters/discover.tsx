@@ -69,7 +69,7 @@ const Discover = () => {
     setCount(_api.scrollSnapList().length);
     setCurrent(_api.selectedScrollSnap() + 1);
     if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
-      if (!me?.name && count > 21) {
+      if (!me?.name && count > 31) {
         setIsSignInModalOpen(true);
       } else {
         loadMore(10);
