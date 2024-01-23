@@ -633,11 +633,11 @@ export const generateTags = internalAction({
                 },
                 genreTag: {
                   type: "string",
-                  description: `Genre define the character's genre, it can be "Anime", "Game", "Original", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Politics", "Assistant", anything.`,
+                  description: `Genre define the character's genre in 1 word, it can be "Anime", "Game", "Original", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Politics", "Assistant", anything.`,
                 },
                 personalityTag: {
                   type: "string",
-                  description: `This tag describe the character's personality trait. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
+                  description: `This tag describe the character's personality trait in 1 word. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
                 },
                 roleTag: {
                   type: "string",

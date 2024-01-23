@@ -214,7 +214,6 @@ export default function Page() {
           {t("Crystal Top-Up")}
         </h2>
         <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
           {t(
             "Crystal is an universal currency for calling AI features in openroleplay.ai.",
           )}
@@ -274,162 +273,166 @@ export default function Page() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center gap-4 rounded-lg px-5">
-        <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
-          {t("Text models")}
-        </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
-          {t(
-            "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
-          )}
-        </p>
-        <Collapsible
-          open={isTableOpen}
-          onOpenChange={setIsTableOpen}
-          className="flex flex-col items-center gap-4"
-        >
-          <CollapsibleTrigger asChild>
-            <Button variant="outline" className="gap-2">
-              {isTableOpen ? t("Hide") : t("Show")}
+      <div className="flex flex-col items-center gap-16 rounded-lg px-5">
+        <div className="flex flex-col items-center gap-4 rounded-lg">
+          <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
+          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+            {t("Text models")}
+          </h2>
+          <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
+            {t(
+              "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
+            )}
+          </p>
+          <Collapsible
+            open={isTableOpen}
+            onOpenChange={setIsTableOpen}
+            className="flex flex-col items-center gap-4"
+          >
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                {isTableOpen ? t("Hide") : t("Show")}
 
-              <ChevronsUpDown className="h-4 w-4 p-0.5 opacity-50" />
-            </Button>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <Card>
-              <Table>
-                <TableCaption className="text-xs lg:text-sm">
-                  {t("Crystal Price Table")}
-                </TableCaption>
-                <TableHeader>
-                  <TableRow className="text-xs lg:text-sm">
-                    <TableHead>{t("Badge")}</TableHead>
-                    <TableHead>{t("Name")}</TableHead>
-                    <TableHead className="text-right">
-                      {t("Crystals")}
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {modelData
-                    .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
-                    .map((model: any) => (
-                      <TableRow
-                        key={model.value}
-                        className="text-xs lg:text-sm"
-                      >
-                        <TableCell>
-                          <ModelBadge
-                            modelName={model.value}
-                            collapse={false}
-                          />
-                        </TableCell>
-                        <TableCell className="font-medium">
-                          {model.description}
-                        </TableCell>
-                        <TableCell className="text-right">
-                          {model.crystalPrice ? (
-                            model.crystalPrice
-                          ) : (
-                            <span className="font-medium text-teal-500">
-                              FREE
-                            </span>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </Card>
-          </CollapsibleContent>
-        </Collapsible>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
-          {t("Image models")}
-        </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
-          {t("Crystal is used whenever you generate an image.")}
-        </p>
-        <Collapsible
-          open={isImageTableOpen}
-          onOpenChange={setIsImageTableOpen}
-          className="flex flex-col items-center gap-4"
-        >
-          <CollapsibleTrigger asChild>
-            <Button variant="outline" className="gap-2">
-              {isTableOpen ? t("Hide") : t("Show")}
+                <ChevronsUpDown className="h-4 w-4 p-0.5 opacity-50" />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <Card>
+                <Table>
+                  <TableCaption className="text-xs lg:text-sm">
+                    {t("Crystal Price Table")}
+                  </TableCaption>
+                  <TableHeader>
+                    <TableRow className="text-xs lg:text-sm">
+                      <TableHead>{t("Badge")}</TableHead>
+                      <TableHead>{t("Name")}</TableHead>
+                      <TableHead className="text-right">
+                        {t("Crystals")}
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {modelData
+                      .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
+                      .map((model: any) => (
+                        <TableRow
+                          key={model.value}
+                          className="text-xs lg:text-sm"
+                        >
+                          <TableCell>
+                            <ModelBadge
+                              modelName={model.value}
+                              collapse={false}
+                            />
+                          </TableCell>
+                          <TableCell className="font-medium">
+                            {model.description}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            {model.crystalPrice ? (
+                              model.crystalPrice
+                            ) : (
+                              <span className="font-medium text-teal-500">
+                                FREE
+                              </span>
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </Card>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+        <div className="flex flex-col items-center gap-4 rounded-lg">
+          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+            {t("Image models")}
+          </h2>
+          <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
+            {t("Crystal is used whenever you generate an image.")}
+          </p>
+          <Collapsible
+            open={isImageTableOpen}
+            onOpenChange={setIsImageTableOpen}
+            className="flex flex-col items-center gap-4"
+          >
+            <CollapsibleTrigger asChild>
+              <Button variant="outline" className="gap-2">
+                {isTableOpen ? t("Hide") : t("Show")}
 
-              <ChevronsUpDown className="h-4 w-4 p-0.5 opacity-50" />
-            </Button>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <Card>
-              <Table>
-                <TableCaption className="text-xs lg:text-sm">
-                  {t("Crystal Price Table")}
-                </TableCaption>
-                <TableHeader>
-                  <TableRow className="text-xs lg:text-sm">
-                    <TableHead>{t("Badge")}</TableHead>
-                    <TableHead>{t("Name")}</TableHead>
-                    <TableHead className="text-right">
-                      {t("Crystals")}
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {imageModelData
-                    .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
-                    .map((model: any) => (
-                      <TableRow
-                        key={model.value}
-                        className="text-xs lg:text-sm"
-                      >
-                        <TableCell>
-                          <ModelBadge
-                            modelName={model.value}
-                            collapse={false}
-                          />
-                        </TableCell>
-                        <TableCell className="font-medium">
-                          {model.description}
-                        </TableCell>
-                        <TableCell className="text-right">
-                          {model.crystalPrice ? (
-                            model.crystalPrice
-                          ) : (
-                            <span className="font-medium text-teal-500">
-                              FREE
-                            </span>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </Card>
-          </CollapsibleContent>
-        </Collapsible>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
-          {t("AI Voice")}
-        </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
-          {t(
-            "Crystal is used whenever you request voice playback for a specific message.",
-          )}
-        </p>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
-          {t("Machine Translation")}
-        </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
-          {t(
-            "Crystal is used whenever you request a translation for a message",
-          )}
-        </p>
+                <ChevronsUpDown className="h-4 w-4 p-0.5 opacity-50" />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <Card>
+                <Table>
+                  <TableCaption className="text-xs lg:text-sm">
+                    {t("Crystal Price Table")}
+                  </TableCaption>
+                  <TableHeader>
+                    <TableRow className="text-xs lg:text-sm">
+                      <TableHead>{t("Badge")}</TableHead>
+                      <TableHead>{t("Name")}</TableHead>
+                      <TableHead className="text-right">
+                        {t("Crystals")}
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {imageModelData
+                      .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
+                      .map((model: any) => (
+                        <TableRow
+                          key={model.value}
+                          className="text-xs lg:text-sm"
+                        >
+                          <TableCell>
+                            <ModelBadge
+                              modelName={model.value}
+                              collapse={false}
+                            />
+                          </TableCell>
+                          <TableCell className="font-medium">
+                            {model.description}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            {model.crystalPrice ? (
+                              model.crystalPrice
+                            ) : (
+                              <span className="font-medium text-teal-500">
+                                FREE
+                              </span>
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </Card>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+        <div className="flex flex-col items-center gap-4 rounded-lg">
+          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+            {t("AI Voice")}
+          </h2>
+          <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
+            {t(
+              "Crystal is used whenever you request voice playback for a specific message.",
+            )}
+          </p>
+        </div>
+        <div className="flex flex-col items-center gap-4 rounded-lg">
+          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+            {t("Machine Translation")}
+          </h2>
+          <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
+            {t(
+              "Crystal is used whenever you request a translation for a message",
+            )}
+          </p>
+        </div>
       </div>
 
       <div className="flex flex-col items-center gap-4 px-5">
