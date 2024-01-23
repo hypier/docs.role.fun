@@ -297,6 +297,10 @@ export const generateByPrompt = internalAction(
           modelHash =
             "charlesmccarthy/animagine-xl:db29f76d40ecf86335295ca5b24ed95e6b1eca4e29239c47cfefa68f408cbf5e";
           break;
+        case "daun-io/animagine-xl-v3":
+          modelHash =
+            "charlesmccarthy/animagine-xl:db29f76d40ecf86335295ca5b24ed95e6b1eca4e29239c47cfefa68f408cbf5e";
+          break;
         case "asiryan/juggernaut-xl-v7":
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
@@ -367,14 +371,6 @@ export const generateByPrompt = internalAction(
         const base64Data = await generateStableDiffusion();
         const binaryData = Buffer.from(base64Data, "base64");
         image = new Blob([binaryData], { type: "image/png" });
-      } else if (model === "cagliostrolab/animagine-xl-3.0") {
-        try {
-          image = await generateHuggingFace();
-        } catch (error) {
-          const base64Data = await generateReplicate();
-          const binaryData = Buffer.from(base64Data, "base64");
-          image = new Blob([binaryData], { type: "image/png" });
-        }
       } else {
         const base64Data = await generateReplicate();
         const binaryData = Buffer.from(base64Data, "base64");

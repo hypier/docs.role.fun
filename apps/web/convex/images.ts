@@ -14,7 +14,7 @@ export const generate = mutation({
       v.literal("dall-e-3"),
       v.literal("charlesmccarthy/animagine-xl"),
       v.literal("asiryan/juggernaut-xl-v7"),
-      v.literal("cagliostrolab/animagine-xl-3.0"),
+      v.literal("daun-io/animagine-xl-v3"),
       v.literal("pagebrain/dreamshaper-v8"),
     ),
   },

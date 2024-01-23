@@ -414,9 +414,10 @@ export const modelData = [
 
 export const imageModelData = [
   {
-    value: "dall-e-3",
-    description: "Dall-E 3 by Open AI",
-    crystalPrice: 75,
+    value: "daun-io/animagine-xl-v3",
+    description:
+      "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
+    crystalPrice: 24,
   },
   {
     value: "charlesmccarthy/animagine-xl",
@@ -425,22 +426,21 @@ export const imageModelData = [
     crystalPrice: 17,
   },
   {
-    value: "cagliostrolab/animagine-xl-3.0",
-    description:
-      "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
-    crystalPrice: 34,
-  },
-  {
-    value: "asiryan/juggernaut-xl-v7",
-    description:
-      "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
-    crystalPrice: 34,
+    value: "dall-e-3",
+    description: "Dall-E 3 by Open AI",
+    crystalPrice: 75,
   },
   {
     value: "pagebrain/dreamshaper-v8",
     description:
       "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
     crystalPrice: 17,
+  },
+  {
+    value: "asiryan/juggernaut-xl-v7",
+    description:
+      "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
+    crystalPrice: 34,
   },
 ];
 

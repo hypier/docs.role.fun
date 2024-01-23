@@ -32,7 +32,7 @@ const formSchema = z.object({
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
     z.literal("charlesmccarthy/animagine-xl"),
-    z.literal("cagliostrolab/animagine-xl-3.0"),
+    z.literal("daun-io/animagine-xl-v3"),
     z.literal("asiryan/juggernaut-xl-v7"),
     z.literal("dall-e-3"),
     z.literal("pagebrain/dreamshaper-v8"),
@@ -55,7 +55,7 @@ const Images = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: searchQuery.get("prompt") || "",
-      model: "charlesmccarthy/animagine-xl",
+      model: "daun-io/animagine-xl-v3",
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
