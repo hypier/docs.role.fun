@@ -315,11 +315,20 @@ export const generateByPrompt = internalAction(
       }
       console.log("using model hash:", modelHash);
 
+      const dimensions = {
+        "pagebrain/dreamshaper-v8": { width: 512, height: 768 },
+        "daun-io/animagine-xl-v3": { width: 768, height: 1024 },
+        default: { width: 768, height: 1344 },
+      };
+
+      const { width, height } =
+        dimensions[model as keyof typeof dimensions] || dimensions["default"];
+
       const output: any = await replicate.run(modelHash as any, {
         input: {
           prompt,
-          width: model === "pagebrain/dreamshaper-v8" ? 512 : 768,
-          height: model === "pagebrain/dreamshaper-v8" ? 768 : 1344,
+          width,
+          height,
           disable_safety_checker: true,
           negative_prompt:
             "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",

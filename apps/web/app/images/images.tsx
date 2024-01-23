@@ -143,7 +143,7 @@ const Images = () => {
             >
               <div className="flex w-full flex-col items-center gap-2 text-base font-medium lg:text-xl">
                 {t("Imagine anything")}
-                <ModelSelect form={form} model={form.getValues("model")} />
+                <ModelSelect form={form} />
               </div>
               <FormField
                 control={form.control}

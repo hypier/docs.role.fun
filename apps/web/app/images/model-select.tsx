@@ -15,7 +15,7 @@ import {
 import { useTranslation } from "react-i18next";
 import useImageModelData from "../lib/hooks/use-image-model-data";
 
-export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
+export const ModelSelect = ({ form }: { form: any }) => {
   const { t } = useTranslation();
   const modelData = useImageModelData();
   return (
@@ -25,9 +25,9 @@ export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
       render={({ field }) => (
         <FormItem>
           <Select
-            value={field.value ? field.value : model}
+            value={field.value ? field.value : form.getValues("model")}
             onValueChange={field.onChange}
-            defaultValue={field.value ? field.value : model}
+            defaultValue={field.value ? field.value : form.getValues("model")}
           >
             <FormControl>
               <SelectTrigger className="max-w-xs bg-background text-xs lg:max-w-xl">
