@@ -417,12 +417,14 @@ export const imageModelData = [
     value: "daun-io/animagine-xl-v3",
     description:
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
+    license: "Fair AI Public License 1.0-SD",
     crystalPrice: 24,
   },
   {
     value: "charlesmccarthy/animagine-xl",
     description:
       "Animagine XL 2.0 - Advanced model to create high-resolution, detailed anime images.",
+    license: "Fair AI Public License 1.0-SD",
     crystalPrice: 17,
   },
   {
@@ -434,12 +436,14 @@ export const imageModelData = [
     value: "pagebrain/dreamshaper-v8",
     description:
       "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
+    license: "creativeml-openrail-ml",
     crystalPrice: 17,
   },
   {
     value: "asiryan/juggernaut-xl-v7",
     description:
       "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
+    license: "creativeml-openrail-ml",
     crystalPrice: 34,
   },
 ];

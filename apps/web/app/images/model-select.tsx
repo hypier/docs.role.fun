@@ -30,17 +30,24 @@ export const ModelSelect = ({ form }: { form: any }) => {
             defaultValue={field.value ? field.value : form.getValues("model")}
           >
             <FormControl>
-              <SelectTrigger className="max-w-xs bg-background text-xs lg:max-w-xl">
+              <SelectTrigger className="max-w-xs bg-background text-xs font-normal">
                 <SelectValue placeholder={t("Select an image model")} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="max-w-xs lg:max-w-xl">
+            <SelectContent className="max-w-xs">
               {modelData && modelData?.length > 0 ? (
-                modelData.map((model: { value: string; description: any }) => (
-                  <SelectItem value={model.value}>
-                    {model.description}
-                  </SelectItem>
-                ))
+                modelData.map(
+                  (model: {
+                    value: string;
+                    description: any;
+                    license: any;
+                  }) => (
+                    <SelectItem value={model.value}>
+                      {model.description}{" "}
+                      {model?.license && `[${model?.license}]`}
+                    </SelectItem>
+                  ),
+                )
               ) : (
                 <SelectItem value="openrouter/auto">Loading...</SelectItem>
               )}

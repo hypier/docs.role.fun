@@ -299,7 +299,7 @@ export const generateByPrompt = internalAction(
           break;
         case "daun-io/animagine-xl-v3":
           modelHash =
-            "daun-io/animagine-xl-v3:943b409b84328abc5486566d23bd4db0eb9dfd20f113eae426606cd3b5d7074b";
+            "daun-io/animagine-xl-v3:52a6432e079358d878875654ffa374766ca2e94ea01dd6779e739a2390edba5a";
           break;
         case "asiryan/juggernaut-xl-v7":
           modelHash =
@@ -313,11 +313,9 @@ export const generateByPrompt = internalAction(
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
       }
-      console.log("using model hash:", modelHash);
 
       const dimensions = {
         "pagebrain/dreamshaper-v8": { width: 512, height: 768 },
-        "daun-io/animagine-xl-v3": { width: 768, height: 1024 },
         default: { width: 768, height: 1344 },
       };
 
