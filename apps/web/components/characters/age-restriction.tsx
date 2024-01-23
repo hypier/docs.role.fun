@@ -102,7 +102,7 @@ const AgeRestriction = () => {
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={
-                me?.nsfwPreference !== "allow" ? () => router.back() : undefined
+                me?.nsfwPreference === "block" ? () => router.back() : undefined
               }
             >
               {t("Confirm")}
