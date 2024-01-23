@@ -145,7 +145,7 @@ export const modelData = [
     value: "undi95/toppy-m-7b",
     description: "Uncensored, Toppy M 7B by undi95",
     isNSFW: true,
-    crystalPrice: 0.5,
+    crystalPrice: 0.1,
   },
   {
     value: "pygmalionai/mythalion-13b",
