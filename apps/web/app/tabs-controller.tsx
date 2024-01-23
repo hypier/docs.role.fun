@@ -82,9 +82,6 @@ function TabsController() {
             {t("Discord")}
           </TabsTrigger>
         </Link>
-        <div className="hidden w-full px-2 lg:flex">
-          <LanguageSelect />
-        </div>
       </TabsList>
     </Tabs>
   );

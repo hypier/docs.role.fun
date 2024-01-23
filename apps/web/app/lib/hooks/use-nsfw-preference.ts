@@ -9,7 +9,7 @@ export const useNsfwPreference = () => {
   const me = useCurrentUser();
   const updateNSFWPreference = useMutation(api.users.updateNSFWPreference);
   const [nsfwPreference, setNsfwPreference] = useLocalStorage<string>(
-    me?.nsfwPreference || "auto",
+    me?.nsfwPreference || "block",
   );
 
   const updatePreference = (value: "allow" | "auto" | "block") => {
