@@ -90,7 +90,7 @@ const Images = () => {
   useEffect(() => {
     form.reset({
       prompt: searchQuery.get("prompt") || "",
-      model: "charlesmccarthy/animagine-xl",
+      model: (searchQuery.get("model") as any) || "daun-io/animagine-xl-v3",
     });
   }, [searchQuery]);
 

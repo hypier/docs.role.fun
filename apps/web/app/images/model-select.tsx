@@ -25,6 +25,7 @@ export const ModelSelect = ({ form, model }: { form: any; model: string }) => {
       render={({ field }) => (
         <FormItem>
           <Select
+            value={field.value ? field.value : model}
             onValueChange={field.onChange}
             defaultValue={field.value ? field.value : model}
           >

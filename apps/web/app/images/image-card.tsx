@@ -103,7 +103,7 @@ const ImageDetail = (props: {
                 }
               >
                 <Link
-                  href={`/images?prompt=${props.prompt}`}
+                  href={`/images?prompt=${props.prompt}&model=${props.model}`}
                   className="w-full"
                 >
                   <Button className="w-full gap-1" variant="outline">
@@ -179,7 +179,7 @@ const ImageCard = (props: {
               }
             >
               <Link
-                href={`/images?prompt=${props.prompt}`}
+                href={`/images?prompt=${props.prompt}&model=${props.model}`}
                 className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
               >
                 <Button
