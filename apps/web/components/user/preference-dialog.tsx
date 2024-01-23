@@ -20,7 +20,7 @@ import { LanguageSelect } from "../../app/lang-select";
 const PreferenceDialog = () => {
   const { t } = useTranslation();
   const [isPreferenceReady, setIsPreferenceReady] = useLocalStorage(
-    "isPreferenceReadyas",
+    "isPreferenceReady",
     false,
   );
   const [isOpen, setIsOpen] = useState(true);

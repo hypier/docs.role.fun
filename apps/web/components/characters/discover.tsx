@@ -91,7 +91,7 @@ const Discover = () => {
     <div className="relative flex flex-col gap-4 lg:gap-8">
       {isAuthenticated && <CheckinDialog />}
       {username && <MainChats />}
-      {<PreferenceDialog />}
+      {!username && <PreferenceDialog />}
       <SignInDialog
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}
