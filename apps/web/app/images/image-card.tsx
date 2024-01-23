@@ -17,7 +17,14 @@ import {
   DialogOrDrawerTrigger,
 } from "@repo/ui/src/components/dialog-or-drawer";
 import { toast } from "sonner";
-import { ClipboardIcon, Download, Heart, Repeat } from "lucide-react";
+import {
+  ClipboardIcon,
+  Download,
+  Heart,
+  Plus,
+  Redo,
+  Repeat,
+} from "lucide-react";
 import AgeRestriction from "../../components/characters/age-restriction";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -37,6 +44,7 @@ const ImageDetail = (props: {
   const creatorName = useQuery(api.users.getUsername, {
     id: props.creatorId as Id<"users">,
   });
+  const { t } = useTranslation();
   return (
     <DialogOrDrawerContent className="max-w-3xl">
       {props?.isNSFW && <AgeRestriction />}
@@ -86,6 +94,40 @@ const ImageDetail = (props: {
               <ClipboardIcon className="h-4 w-4" />
               Copy Prompt
             </Button>
+            <div className="flex w-full gap-2">
+              <Tooltip
+                content={
+                  <TooltipContent
+                    title={"Create new image by remixing this image"}
+                  />
+                }
+              >
+                <Link
+                  href={`/images?prompt=${props.prompt}`}
+                  className="w-full"
+                >
+                  <Button className="w-full gap-1" variant="outline">
+                    <Repeat className="h-4 w-4" />
+                    {t("Remix")}
+                  </Button>
+                </Link>
+              </Tooltip>
+              <Tooltip
+                content={
+                  <TooltipContent title={"Create character using this image"} />
+                }
+              >
+                <Link
+                  href={`/my-characters/create?cardImageUrl=${props.imageUrl}`}
+                  className="w-full"
+                >
+                  <Button className="w-full gap-1" variant="outline">
+                    <Plus className="h-4 w-4" />
+                    {t("New Character")}
+                  </Button>
+                </Link>
+              </Tooltip>
+            </div>
           </div>
           <div className="flex w-full flex-col gap-2">
             Model

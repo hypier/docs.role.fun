@@ -1,3 +1,4 @@
+"use client";
 import { useMutation } from "convex/react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import useCurrentUser from "./use-current-user";
