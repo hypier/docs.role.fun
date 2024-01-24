@@ -107,6 +107,19 @@ Let's shape our roadmap [together](https://github.com/open-roleplay-ai/openrolep
 
 This project is entirely bootstrapped and was initiated out of personal passion and effort. Your contributions are invaluable and will ensure the continued vitality of this project.
 
+Any contributions you make are greatly appreciated. There are many ways to contribute, from improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into Openroleplay.ai itself.
+
 ## License
 
-Distributed under the AGPLv3 License. See LICENSE for more information.
+Openroleplay.ai is open-source under the GNU Affero General Public License Version 3 (AGPLv3). You can find it [here](/LICENSE). The goal of the AGPLv3 license is to:
+
+- Maximize user freedom and to encourage users to contribute to open source.
+- Prevent corporations from taking the code and using it as part of their closed-source proprietary products
+- Prevent corporations from offering Typebot as a service without contributing to the open source project
+- Prevent corporations from confusing people and making them think that the service they sell is in any shape or form approved by the original team
+
+## When you'd like to commercialize your own version of Openroleplay.ai
+
+- You need to open-source your modifications.
+- After your users registration, you should provide a prominent mention and link to the original project (https://openroleplay.ai). You should clearly mention that you provide a modified version of the official project, Typebot. It would be also a good place to explain your version advantages comparing to the original project.
+- You need to provide a link to your forked repository somewhere in the landing page or the app. This way, interested users can easily access and review the modifications you’ve made.

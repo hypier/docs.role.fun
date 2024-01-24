@@ -638,6 +638,7 @@ export function Dialog({
         toast.error("An unknown error occurred");
       }
     }
+    setInput("");
   };
   const handleSend = (event?: FormEvent) => {
     event && event.preventDefault();
