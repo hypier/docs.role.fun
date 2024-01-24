@@ -6,12 +6,12 @@ import {
   DialogOrDrawerDescription,
 } from "@repo/ui/src/components/dialog-or-drawer";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
-import { packages } from "./crystals/page";
 import { useTranslation } from "react-i18next";
 import { Button } from "@repo/ui/src/components";
 import CurrentCrystals from "./current-crystals";
 import { DialogPortal } from "@repo/ui/src/components/dialog";
 import { MobilePackageWrapper } from "./crystals/mobile-package";
+import { packages } from "./crystals/packages";
 
 const CrystalDialog: React.FC = () => {
   const { t } = useTranslation();
