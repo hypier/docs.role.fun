@@ -50,28 +50,15 @@ const ImageDetail = (props: {
       {props?.isNSFW && <AgeRestriction />}
       <DialogOrDrawerHeader className="flex flex-col gap-4 lg:flex-row">
         {props.imageUrl && (
-          <div className="flex h-full w-full flex-col gap-2">
+          <div className="flex h-full w-full flex-col items-center gap-2">
             <Image
               src={props.imageUrl}
               alt={props.prompt}
               width={300}
               height={525}
               quality={60}
-              className="h-full w-full object-cover"
+              className="h-[15rem] w-[10rem] rounded-lg object-cover lg:h-full lg:w-full"
             />
-            {props.imageUrl && (
-              <a
-                href={props.imageUrl}
-                download={true}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <Button className="h-7 w-full gap-1" variant="outline">
-                  <Download className="h-4 w-4" />
-                  Download
-                </Button>
-              </a>
-            )}
           </div>
         )}
         <div className="flex w-full flex-col gap-8">
@@ -80,21 +67,7 @@ const ImageDetail = (props: {
             <DialogOrDrawerDescription>
               {props?.prompt}
             </DialogOrDrawerDescription>
-            <Button
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(props.prompt);
-                  toast.success("Copied to clipboard");
-                } catch (err) {
-                  toast.error("Failed to copy text");
-                }
-              }}
-              className="flex gap-1"
-            >
-              <ClipboardIcon className="h-4 w-4" />
-              Copy Prompt
-            </Button>
-            <div className="flex w-full gap-2">
+            <div className="grid w-full grid-cols-3 justify-between gap-2">
               <Tooltip
                 content={
                   <TooltipContent
@@ -127,7 +100,34 @@ const ImageDetail = (props: {
                   </Button>
                 </Link>
               </Tooltip>
+              {props.imageUrl && (
+                <a
+                  href={props.imageUrl}
+                  download={true}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Button className="h-7 w-full gap-1" variant="outline">
+                    <Download className="h-4 w-4" />
+                    Download
+                  </Button>
+                </a>
+              )}
             </div>
+            <Button
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(props.prompt);
+                  toast.success("Copied to clipboard");
+                } catch (err) {
+                  toast.error("Failed to copy text");
+                }
+              }}
+              className="flex gap-1"
+            >
+              <ClipboardIcon className="h-4 w-4" />
+              Copy Prompt
+            </Button>
           </div>
           <div className="flex w-full flex-col gap-2">
             Model

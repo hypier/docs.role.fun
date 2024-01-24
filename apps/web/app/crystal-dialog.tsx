@@ -20,7 +20,6 @@ const CrystalDialog: React.FC = () => {
   return (
     <DialogOrDrawer
       open={isOpen}
-      shouldScaleBackgound
       onOpenChange={closeDialog}
       onPointerDownOutside={closeDialog}
     >
