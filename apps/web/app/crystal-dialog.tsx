@@ -6,15 +6,16 @@ import {
   DialogOrDrawerDescription,
 } from "@repo/ui/src/components/dialog-or-drawer";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
-import { MobilePackage, packages } from "./crystals/page";
+import { packages } from "./crystals/page";
 import { useTranslation } from "react-i18next";
 import { Button } from "@repo/ui/src/components";
 import CurrentCrystals from "./current-crystals";
 import { DialogPortal } from "@repo/ui/src/components/dialog";
+import { MobilePackageWrapper } from "./crystals/mobile-package";
 
 const CrystalDialog: React.FC = () => {
   const { t } = useTranslation();
-  const { isOpen, openDialog, closeDialog } = useCrystalDialog();
+  const { isOpen, closeDialog } = useCrystalDialog();
   console.log("Crystal Dialog::", isOpen);
 
   return (
@@ -35,7 +36,7 @@ const CrystalDialog: React.FC = () => {
             </DialogOrDrawerDescription>
             <div className="flex items-center justify-center gap-2 sm:flex-row">
               {packages.slice(0, 2).map((pkg) => (
-                <MobilePackage
+                <MobilePackageWrapper
                   key={pkg.src}
                   src={pkg.src}
                   amount={pkg.amount as any}

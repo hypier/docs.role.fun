@@ -21,11 +21,11 @@ import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
 import React from "react";
 import { toast } from "sonner";
-import { ConvexError } from "convex/values";
 import Gallery from "./gallery";
 import { ModelSelect } from "./model-select";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useCrystalDialog } from "../lib/hooks/use-crystal-dialog";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -45,6 +45,7 @@ const Images = () => {
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [imageId, setImageID] = useState("" as Id<"images">);
+  const { openDialog } = useCrystalDialog();
   const generate = useMutation(api.images.generate);
   const generatedImage = useQuery(
     api.images.get,
@@ -66,19 +67,15 @@ const Images = () => {
     const { prompt, model } = values;
     const promise = generate({ prompt, model });
     setIsGenerating(true);
-    toast.promise(promise, {
-      loading: "Generating image...",
-      success: (image) => {
+    promise
+      .then((image) => {
         setImageID(image);
-        return "Your request has been queued";
-      },
-      error: (error) => {
+        toast.success("Your request has been queued");
+      })
+      .catch((error) => {
         setIsGenerating(false);
-        return error instanceof ConvexError
-          ? (error.data as { message: string }).message
-          : "Not enough crystals";
-      },
-    });
+        openDialog();
+      });
   };
 
   useEffect(() => {
