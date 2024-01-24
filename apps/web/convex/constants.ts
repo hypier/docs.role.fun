@@ -143,12 +143,6 @@ export const modelData = [
     alt: "Company logo of Anthropic AI",
   },
   {
-    value: "undi95/toppy-m-7b:free",
-    description: "Uncensored, Toppy M 7B by undi95",
-    isNSFW: true,
-    crystalPrice: 0,
-  },
-  {
     value: "undi95/toppy-m-7b",
     description: "Uncensored, Toppy M 7B by undi95",
     isNSFW: true,
