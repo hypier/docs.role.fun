@@ -149,6 +149,18 @@ export const modelData = [
     crystalPrice: 0,
   },
   {
+    value: "undi95/toppy-m-7b",
+    description: "Uncensored, Toppy M 7B by undi95",
+    isNSFW: true,
+    crystalPrice: 0.1,
+  },
+  {
+    value: "undi95/toppy-m-7b:free",
+    description: "Uncensored, Toppy M 7B by undi95 with Rate Limit",
+    isNSFW: true,
+    crystalPrice: 0,
+  },
+  {
     value: "pygmalionai/mythalion-13b",
     description: "Uncensored, Mythalion 13B by PygmalionAI",
     isNSFW: true,
