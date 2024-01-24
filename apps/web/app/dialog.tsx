@@ -216,6 +216,25 @@ export const Message = ({
           )}
           {message?.characterId && chatId && !isRegenerating && (
             <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1">
+              <Tooltip
+                content={
+                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    {t("Copy message to clipboard")}
+                  </span>
+                }
+                desktopOnly={true}
+              >
+                <Button
+                  variant="ghost"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  onClick={() => {
+                    navigator.clipboard.writeText(message?.text);
+                    toast.success("Message copied to clipboard");
+                  }}
+                >
+                  <ClipboardIcon className="h-4 w-4" />
+                </Button>
+              </Tooltip>
               <Button
                 size="icon"
                 variant="ghost"
@@ -264,6 +283,43 @@ export const Message = ({
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    {t(`Translate message to ${targetLanguage}`)} (
+                    <Crystal className="h-4 w-4" /> x 1 )
+                  </span>
+                }
+                desktopOnly={true}
+              >
+                <Button
+                  variant="ghost"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
+                  onClick={async () => {
+                    setIsTranslating(true);
+                    try {
+                      await translate({
+                        messageId: message?._id as Id<"messages">,
+                        targetLanguage,
+                      });
+                    } catch (error) {
+                      if (error instanceof ConvexError) {
+                        toast.error(error.data);
+                      } else {
+                        toast.error("An unknown error occurred");
+                      }
+                    }
+                    setIsTranslating(false);
+                  }}
+                  disabled={message?.translation || isTranslating}
+                >
+                  {isTranslating ? (
+                    <Spinner className="h-4 w-4" />
+                  ) : (
+                    <Languages className="h-4 w-4" />
+                  )}
+                </Button>
+              </Tooltip>
+              <Tooltip
+                content={
+                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
                     {t("Play audio")} (<Crystal className="h-4 w-4" /> x 10 )
                   </span>
                 }
@@ -305,62 +361,7 @@ export const Message = ({
                   )}
                 </Button>
               </Tooltip>
-              <Tooltip
-                content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t("Copy message to clipboard")}
-                  </span>
-                }
-                desktopOnly={true}
-              >
-                <Button
-                  variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
-                  onClick={() => {
-                    navigator.clipboard.writeText(message?.text);
-                    toast.success("Message copied to clipboard");
-                  }}
-                >
-                  <ClipboardIcon className="h-4 w-4" />
-                </Button>
-              </Tooltip>
-              <Tooltip
-                content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t(`Translate message to ${targetLanguage}`)} (
-                    <Crystal className="h-4 w-4" /> x 1 )
-                  </span>
-                }
-                desktopOnly={true}
-              >
-                <Button
-                  variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
-                  onClick={async () => {
-                    setIsTranslating(true);
-                    try {
-                      await translate({
-                        messageId: message?._id as Id<"messages">,
-                        targetLanguage,
-                      });
-                    } catch (error) {
-                      if (error instanceof ConvexError) {
-                        toast.error(error.data);
-                      } else {
-                        toast.error("An unknown error occurred");
-                      }
-                    }
-                    setIsTranslating(false);
-                  }}
-                  disabled={message?.translation || isTranslating}
-                >
-                  {isTranslating ? (
-                    <Spinner className="h-4 w-4" />
-                  ) : (
-                    <Languages className="h-4 w-4" />
-                  )}
-                </Button>
-              </Tooltip>
+
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
