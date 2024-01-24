@@ -451,9 +451,9 @@ export const listPopularTags = query({
   handler: async (ctx) => {
     const popularCharacters = await ctx.db
       .query("characters")
-      .withIndex("byNumChats")
+      .withIndex("byScore")
       .order("desc")
-      .take(100);
+      .take(300);
     type TagCount = { [key: string]: number };
     type TagCounts = { [key: string]: TagCount };
     const tagCounts: TagCounts = popularCharacters.reduce(
