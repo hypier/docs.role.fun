@@ -54,7 +54,7 @@ export const getCrystalPrice = (modelName: string) => {
   ];
   const model = allModels.find((m) => m.value === modelName);
   console.log("modelName", modelName, model);
-  return model ? model.crystalPrice : modelName === "auto" ? 9 : 5;
+  return model ? model.crystalPrice : modelName === "auto" ? 10 : 5;
 };
 
 export const getImageModelCrystalPrice = (modelName: string) => {
@@ -67,7 +67,7 @@ export const modelData = [
   {
     value: "openrouter/auto",
     description: "Auto",
-    crystalPrice: 9,
+    crystalPrice: 10,
   },
   {
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
