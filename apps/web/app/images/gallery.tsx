@@ -10,6 +10,26 @@ import { useTranslation } from "react-i18next";
 import SignInDialog from "../../components/user/sign-in-dialog";
 import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
 
+export const ImagePlaceholder = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="relative animate-pulse">
+      <div className="absolute inset-0 z-10 m-auto flex flex-col items-center justify-center gap-2 text-sm">
+        <div className="flex gap-2">
+          <Spinner />
+          {t("Generating...")}
+        </div>
+        <span className="w-[80%] text-center text-xs text-muted-foreground">
+          {t(
+            "Normally, image is generated in a minute. When image generation is failed due to an unexpected error, your crystal will be automatically refunded.",
+          )}
+        </span>
+      </div>
+      <CharacterCardPlaceholder key={"my"} />
+    </div>
+  );
+};
+
 const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const { t } = useTranslation();
   const ref = useRef(null);
@@ -41,22 +61,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}
       />
-      {isGenerating && (
-        <div className="relative animate-pulse">
-          <div className="absolute inset-0 z-10 m-auto flex flex-col items-center justify-center gap-2 text-sm">
-            <div className="flex gap-2">
-              <Spinner />
-              {t("Generating...")}
-            </div>
-            <span className="w-[80%] text-center text-xs text-muted-foreground">
-              {t(
-                "Normally, image is generated in a minute. When image generation is failed due to an unexpected error, your crystal will be automatically refunded.",
-              )}
-            </span>
-          </div>
-          <CharacterCardPlaceholder key={"my"} />
-        </div>
-      )}
+      {isGenerating && <ImagePlaceholder />}
       {images?.length > 0
         ? images.map((image, index) => (
             <ImageCard

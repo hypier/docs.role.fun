@@ -7,7 +7,6 @@ import useScroll from "@repo/ui/src/hooks/use-scroll";
 import UserDropdown from "../components/user/user-dropdown";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { SignedOut } from "@clerk/nextjs";
-import CurrentCrystals from "./current-crystals";
 import { useConvexAuth } from "convex/react";
 import { Plus, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
