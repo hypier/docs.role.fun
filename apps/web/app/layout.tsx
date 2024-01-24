@@ -9,8 +9,12 @@ import Footer from "./footer";
 import TabsController from "./tabs-controller";
 import { Suspense } from "react";
 import Spinner from "@repo/ui/src/components/spinner";
+import dynamic from "next/dynamic";
 
 export const metadata = constructMetadata();
+const Pageview = dynamic(() => import("./pageview"), {
+  ssr: false,
+});
 
 export default async function RootLayout({
   children,
@@ -30,8 +34,8 @@ export default async function RootLayout({
             <main className="flex w-full pt-16 font-default lg:pt-32">
               <TabsController />
               {children}
+              <Pageview />
             </main>
-            <Analytics />
             <Footer />
           </Providers>
         </Suspense>

@@ -127,7 +127,7 @@ const Discover = () => {
             {Object.entries(popularTags).map(([tagKey, tagValues]) =>
               tagValues.map((tag, index) => (
                 <CarouselItem
-                  key={index}
+                  key={index + "tag"}
                   className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6 2xl:basis-1/12"
                 >
                   <Toggle
@@ -190,7 +190,7 @@ const Discover = () => {
                         {index === 5 && (
                           <CarouselItem
                             className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
-                            key={character._id}
+                            key={"new-character"}
                           >
                             <NewCharacter />
                           </CarouselItem>
@@ -199,14 +199,20 @@ const Discover = () => {
                     ),
                 )
               : Array.from({ length: 10 }).map((_, index) => (
-                  <CarouselItem className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5">
-                    <CharacterCardPlaceholder key={index} />
+                  <CarouselItem
+                    className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
+                    key={index + "placeholder"}
+                  >
+                    <CharacterCardPlaceholder />
                   </CarouselItem>
                 ))}
             {status === "LoadingMore" &&
               Array.from({ length: 10 }).map((_, index) => (
-                <CarouselItem className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5">
-                  <CharacterCardPlaceholder key={index} />
+                <CarouselItem
+                  className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
+                  key={index + "loader"}
+                >
+                  <CharacterCardPlaceholder />
                 </CarouselItem>
               ))}
           </CarouselContent>

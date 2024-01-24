@@ -77,6 +77,7 @@ export const MainStories = () => {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Story
+                        key={story._id}
                         isCard={true}
                         storyId={story._id}
                         characterId={story.characterId}
@@ -86,14 +87,20 @@ export const MainStories = () => {
                   </CarouselItem>
                 ))
               : Array.from({ length: 10 }).map((_, index) => (
-                  <CarouselItem className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-                    <CharacterCardPlaceholder key={index} />
+                  <CarouselItem
+                    className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
+                    key={index + "placeholder"}
+                  >
+                    <CharacterCardPlaceholder />
                   </CarouselItem>
                 ))}
             {status === "LoadingMore" &&
               Array.from({ length: 10 }).map((_, index) => (
-                <CarouselItem className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-                  <CharacterCardPlaceholder key={index} />
+                <CarouselItem
+                  className="ml-4 overflow-hidden rounded-lg border pl-0 shadow-lg md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
+                  key={index + "loader"}
+                >
+                  <CharacterCardPlaceholder />
                 </CarouselItem>
               ))}
           </CarouselContent>
