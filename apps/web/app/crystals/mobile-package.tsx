@@ -92,7 +92,6 @@ export const MobilePackageWrapper = ({
     toast.promise(promise, {
       loading: "Redirecting to purchase page...",
       success: (paymentUrl) => {
-        console.log("paymentUrl::", paymentUrl);
         window.location.href = paymentUrl!;
         return `Now you can proceed to purchase.`;
       },
