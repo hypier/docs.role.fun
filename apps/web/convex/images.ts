@@ -207,6 +207,7 @@ export const imagine = mutation({
       imageId: image,
       messageId,
       prompt: message?.text as string,
+      referenceImage: character?.cardImageUrl,
       model: "daun-io/animagine-xl-v3",
     });
 
