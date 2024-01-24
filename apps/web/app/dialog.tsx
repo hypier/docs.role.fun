@@ -206,7 +206,7 @@ export const Message = ({
           >
             <FormattedMessage message={message} username={username} />
           </div>
-          {!isImagining ? (
+          {isImagining ? (
             <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-sm">
                 <div className="flex gap-2">
@@ -644,6 +644,7 @@ export function Dialog({
   const { openDialog } = useCrystalDialog();
 
   const sendAndReset = async (input: string) => {
+    setInput("");
     try {
       await sendMessage({ message: input, chatId, characterId });
     } catch (error) {
@@ -653,7 +654,6 @@ export function Dialog({
         toast.error("An unknown error occurred");
       }
     }
-    setInput("");
   };
   const handleSend = (event?: FormEvent) => {
     event && event.preventDefault();
