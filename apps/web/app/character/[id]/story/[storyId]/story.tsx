@@ -58,6 +58,7 @@ ${isNSFW && nsfwPreference !== "allow" ? "blur-md" : ""}
             {messages && messages?.length > 0 ? (
               messages?.map((message, i) => (
                 <Message
+                  key={message?._id}
                   name={name || (character?.name as string)}
                   message={message}
                   username={creatorName || "You"}

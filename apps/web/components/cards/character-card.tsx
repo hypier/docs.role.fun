@@ -17,6 +17,7 @@ import ModelBadge from "../characters/model-badge";
 import DraftBadge from "../characters/draft-badge";
 import { useTranslation } from "react-i18next";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
+import posthog from "posthog-js";
 
 const CharacterCard = (props: {
   id: string;
@@ -38,7 +39,10 @@ const CharacterCard = (props: {
       ratio={1 / 1.75}
       className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
     >
-      <Link href={`/character/${props?.id}`}>
+      <Link
+        href={`/character/${props?.id}`}
+        onClick={() => posthog.capture("click-character-card")}
+      >
         <Card className="flex h-full w-full items-end rounded-lg p-2">
           {props.showEdit && (
             <Link

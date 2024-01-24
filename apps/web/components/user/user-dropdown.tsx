@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { LanguageSelect } from "../../app/lang-select";
 import { PreferenceSelect } from "../characters/age-restriction";
+import { usePostHog } from "posthog-js/react";
 
 type StyledLinkProps = {
   href: string;
@@ -74,6 +75,8 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
 export default function UserDropdown() {
   const { t } = useTranslation();
   const { user } = useUser();
+  const posthog = usePostHog();
+  posthog.identify(user?.id);
 
   const [openPopover, setOpenPopover] = useState(false);
   const { signOut } = useClerk();

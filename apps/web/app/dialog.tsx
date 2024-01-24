@@ -786,6 +786,7 @@ export function Dialog({
           ) : (
             messages.map((message, i) => (
               <Message
+                key={message._id}
                 name={name}
                 message={message}
                 cardImageUrl={cardImageUrl as string}
