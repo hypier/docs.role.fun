@@ -201,12 +201,14 @@ export default function Page() {
 
   return (
     <div className="relative flex w-full flex-col items-center gap-16 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
-      <div
-        className={`absolute right-8 top-8 mx-auto flex items-center gap-0.5 font-medium`}
-      >
-        <Crystal className="h-6 w-6" />
-        {Math.floor(crystals)}
-      </div>
+      {typeof crystals === "number" && (
+        <div
+          className={`absolute right-8 top-8 mx-auto flex items-center gap-0.5 font-medium`}
+        >
+          <Crystal className="h-6 w-6" />
+          {Math.floor(crystals)}
+        </div>
+      )}
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Crystals")}</h1>
 
@@ -276,14 +278,14 @@ export default function Page() {
       <div className="flex flex-col items-center gap-16 rounded-lg px-5">
         <div className="flex flex-col items-center gap-4 rounded-lg">
           <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
-          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Text models")}
+            <InfoTooltip
+              content={t(
+                "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
+              )}
+            />
           </h2>
-          <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            {t(
-              "Crystal is used whenever you send message to character, regenerate response or continue conversation.",
-            )}
-          </p>
           <Collapsible
             open={isTableOpen}
             onOpenChange={setIsTableOpen}
@@ -346,12 +348,12 @@ export default function Page() {
           </Collapsible>
         </div>
         <div className="flex flex-col items-center gap-4 rounded-lg">
-          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Image models")}
+            <InfoTooltip
+              content={t("Crystal is used whenever you generate an image.")}
+            />
           </h2>
-          <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            {t("Crystal is used whenever you generate an image.")}
-          </p>
           <Collapsible
             open={isImageTableOpen}
             onOpenChange={setIsImageTableOpen}
@@ -414,38 +416,43 @@ export default function Page() {
           </Collapsible>
         </div>
         <div className="flex flex-col items-center gap-4 rounded-lg">
-          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("AI Voice")}
+            <InfoTooltip
+              content={t(
+                "Crystal is used whenever you request voice playback for a specific message.",
+              )}
+            />
           </h2>
           <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            {t(
-              "Crystal is used whenever you request voice playback for a specific message.",
-            )}
+            {t("10 crystals / message")}
           </p>
         </div>
         <div className="flex flex-col items-center gap-4 rounded-lg">
-          <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+          <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Machine Translation")}
+            <InfoTooltip
+              content={t(
+                "Crystal is used whenever you request a translation for a message",
+              )}
+            />
           </h2>
           <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            {t(
-              "Crystal is used whenever you request a translation for a message",
-            )}
+            {t("1 crystal / message")}
           </p>
         </div>
       </div>
 
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+        <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
           {t("Create characters and earn crystals.")}
+          <InfoTooltip
+            content={t(
+              "You can earn crystals whenever other users interact with the characters you've created.",
+            )}
+          />
         </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          <Crystal className="hidden h-4 w-4 md:inline" />
-          {t(
-            "You can earn crystals whenever other users interact with the characters you've created.",
-          )}
-        </p>
         <Link href="/my-characters/create" className="hidden lg:block">
           <Button className="rounded-full px-3">
             <Plus className="h-5 w-5 p-1" />
