@@ -38,10 +38,10 @@ function TabsController() {
         </Link>
         <Link href={isMobile ? "/my-characters/create" : "/my-characters"}>
           <TabsTrigger
-            className="flex w-full flex-col items-center gap-0.5 rounded-full border bg-background sm:border-none sm:bg-transparent lg:flex-row lg:items-start"
+            className="flex w-full flex-col items-center gap-0.5 rounded-full border bg-black dark:bg-white sm:border-none sm:bg-transparent lg:flex-row lg:items-start"
             value="/my-characters"
           >
-            <Plus className="h-5 w-5 p-1" />
+            <Plus className="h-5 w-5 p-1 text-white dark:text-black sm:text-foreground" />
             {!isMobile && <span>{t("My Characters")}</span>}
           </TabsTrigger>
         </Link>
