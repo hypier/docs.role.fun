@@ -53,14 +53,14 @@ export const MobilePackage = ({
           className="absolute top-0 h-full w-full rounded-lg object-cover"
         />
         <div className="absolute bottom-0 h-[50%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-white/95 to-white" />
-        <div className="flex flex-col gap-1 pt-[70%]">
+        <div className="flex flex-col gap-1 pt-[60%]">
           <CardHeader className="flex items-center justify-center py-1">
             <CardTitle className="z-10 text-base text-black">
               {amount.toLocaleString()} {t("Crystals")}
             </CardTitle>
           </CardHeader>
           <CardFooter className="flex w-full items-center justify-center">
-            <p className="z-10 w-full rounded-full text-center text-sm font-semibold text-sky-900">
+            <p className="z-10 w-full rounded-full bg-sky-100 text-center text-sm font-semibold text-sky-900">
               {price}$
             </p>
           </CardFooter>

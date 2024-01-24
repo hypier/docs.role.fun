@@ -228,19 +228,19 @@ export const Message = ({
               >
                 <Button
                   variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
                   onClick={() => {
                     navigator.clipboard.writeText(message?.text);
                     toast.success("Message copied to clipboard");
                   }}
                 >
-                  <ClipboardIcon className="h-4 w-4" />
+                  <ClipboardIcon className="h-5 w-5 lg:h-4 lg:w-4" />
                 </Button>
               </Tooltip>
               <Button
                 size="icon"
                 variant="ghost"
-                className="h-6 w-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
                 disabled={message?.reaction === "like"}
                 onClick={async () => {
                   await react({
@@ -250,15 +250,15 @@ export const Message = ({
                 }}
               >
                 {message?.reaction === "like" ? (
-                  <ThumbsUp className="h-4 w-4 text-green-500" />
+                  <ThumbsUp className="h-6 w-6 text-green-500 lg:h-4 lg:w-4" />
                 ) : (
-                  <ThumbsUp className="h-4 w-4" />
+                  <ThumbsUp className="h-5 w-5 lg:h-4 lg:w-4" />
                 )}
               </Button>
               <Button
                 size="icon"
                 variant="ghost"
-                className="h-6 w-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
                 disabled={message?.reaction === "dislike"}
                 onClick={async () => {
                   await react({
@@ -275,11 +275,11 @@ export const Message = ({
                 }}
               >
                 {isRegenerating ? (
-                  <Spinner className="h-4 w-4" />
+                  <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
                 ) : message?.reaction === "dislike" ? (
-                  <ThumbsDown className="h-4 w-4 text-rose-500" />
+                  <ThumbsDown className="h-6 w-6 text-rose-500 lg:h-4 lg:w-4" />
                 ) : (
-                  <ThumbsDown className="h-4 w-4" />
+                  <ThumbsDown className="h-5 w-5 lg:h-4 lg:w-4" />
                 )}
               </Button>
               <Tooltip
@@ -293,7 +293,7 @@ export const Message = ({
               >
                 <Button
                   variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
+                  className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
                   onClick={async () => {
                     setIsTranslating(true);
                     try {
@@ -313,9 +313,9 @@ export const Message = ({
                   disabled={message?.translation || isTranslating}
                 >
                   {isTranslating ? (
-                    <Spinner className="h-4 w-4" />
+                    <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
                   ) : (
-                    <Languages className="h-4 w-4" />
+                    <Languages className="h-5 w-5 lg:h-4 lg:w-4" />
                   )}
                 </Button>
               </Tooltip>
@@ -329,7 +329,7 @@ export const Message = ({
               >
                 <Button
                   variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90"
+                  className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
                   onClick={async () => {
                     if (isSpeaking) {
                       setIsSpeaking(false);
@@ -355,10 +355,10 @@ export const Message = ({
                   }}
                 >
                   {isSpeaking ? (
-                    <Pause className="h-4 w-4" />
+                    <Pause className="h-5 w-5 lg:h-4 lg:w-4" />
                   ) : (
                     <span className="flex w-full items-center justify-center gap-1">
-                      <Headphones className="h-4 w-4" />
+                      <Headphones className="h-5 w-5 lg:h-4 lg:w-4" />
                     </span>
                   )}
                 </Button>
@@ -374,7 +374,7 @@ export const Message = ({
               >
                 <Button
                   variant="ghost"
-                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
+                  className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
                   onClick={async () => {
                     setIsImagining(true);
                     try {
@@ -393,9 +393,9 @@ export const Message = ({
                   disabled={message?.imageUrl || isImagining}
                 >
                   {isImagining ? (
-                    <Spinner className="h-4 w-4" />
+                    <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
                   ) : (
-                    <ImageIcon className="h-4 w-4" />
+                    <ImageIcon className="h-5 w-5 lg:h-4 lg:w-4" />
                   )}
                 </Button>
               </Tooltip>
