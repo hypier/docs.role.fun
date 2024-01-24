@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import {
   BookMarked,
+  Camera,
   CircleUserRound,
   ClipboardIcon,
   Delete,
@@ -206,12 +207,13 @@ export const Message = ({
           >
             <FormattedMessage message={message} username={username} />
           </div>
-          {isImagining ? (
+          {!isImagining ? (
             <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-sm">
-                <div className="flex gap-2">
-                  <Spinner />
-                  {name} is taking selfie...
+                <Spinner />
+                <div className="flex items-center gap-2">
+                  <Camera className="h-4 w-4" />
+                  {name} is taking selfie
                 </div>
                 <span className="w-[80%] text-center text-xs text-muted-foreground">
                   {t(
@@ -337,7 +339,7 @@ export const Message = ({
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t("Play audio")} (<Crystal className="h-4 w-4" /> x 10 )
+                    {t("Listen")} (<Crystal className="h-4 w-4" /> x 10 )
                   </span>
                 }
                 desktopOnly={true}
@@ -382,7 +384,7 @@ export const Message = ({
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t(`Imagine`)} ( <Crystal className="h-4 w-4" /> x 24 )
+                    {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 24 )
                   </span>
                 }
                 desktopOnly={true}
@@ -410,7 +412,7 @@ export const Message = ({
                   {isImagining ? (
                     <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
                   ) : (
-                    <ImageIcon className="h-5 w-5 lg:h-4 lg:w-4" />
+                    <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
                   )}
                 </Button>
               </Tooltip>
