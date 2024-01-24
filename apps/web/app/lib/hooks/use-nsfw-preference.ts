@@ -24,6 +24,7 @@ export const useNsfwPreference = () => {
     me?.nsfwPreference
       ? setNsfwPreference(me?.nsfwPreference)
       : nsfwPreference &&
+        me?.name &&
         updateNSFWPreference({
           nsfwPreference: nsfwPreference as "allow" | "block" | "auto",
         });
