@@ -54,7 +54,9 @@ export const PreferenceSelect = ({
         defaultValue={nsfwPreference as string}
       >
         <SelectTrigger>
-          <SelectValue placeholder={t("Select a preference")} />
+          <SelectValue
+            placeholder={t("Select a preference (Current: Block)")}
+          />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="allow">{t("Always allow")}</SelectItem>
