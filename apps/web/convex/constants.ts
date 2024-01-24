@@ -123,11 +123,11 @@ export const modelData = [
     src: "/models/google.png",
     alt: "Company logo of Google",
   },
-  {
-    value: "01-ai/yi-34b-200k",
-    description: "Yi 34B by 01.AI",
-    crystalPrice: 1,
-  },
+  // {
+  //   value: "01-ai/yi-34b-200k",
+  //   description: "Yi 34B by 01.AI",
+  //   crystalPrice: 1,
+  // },
   {
     value: "anthropic/claude-instant-v1",
     description: "Claude Instant by Anthropic",
