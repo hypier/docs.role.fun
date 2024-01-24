@@ -36,8 +36,63 @@ import ModelBadge from "../../components/characters/model-badge";
 import { useState } from "react";
 import { ChevronsUpDown, Plus } from "lucide-react";
 import Link from "next/link";
-import CurrentCrystals from "../current-crystals";
 import useImageModelData from "../lib/hooks/use-image-model-data";
+
+export const MobilePackage = ({
+  src,
+  amount,
+  bonus,
+  price,
+  handlePurchaseClick,
+}: {
+  src: string;
+  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  bonus: number;
+  price: number;
+  handlePurchaseClick?: any;
+}) => {
+  const { t } = useTranslation();
+  const router = useRouter();
+  return (
+    <Tooltip
+      content={`Buy ${amount - bonus} ${
+        bonus > 0 ? `(+ Bonus ${bonus})` : ""
+      } crystals`}
+      desktopOnly
+    >
+      <Card
+        className="relative aspect-square h-full w-full rounded-lg tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
+        role="button"
+        onClick={
+          handlePurchaseClick
+            ? (e) => handlePurchaseClick(e)
+            : () => router.push("/sign-in")
+        }
+      >
+        <Image
+          src={src}
+          width={256}
+          height={256}
+          alt={"image for pricing"}
+          className="absolute top-0 h-full w-full rounded-lg object-cover"
+        />
+        <div className="absolute bottom-0 h-[50%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-white/95 to-white" />
+        <div className="flex flex-col gap-1 pt-[70%]">
+          <CardHeader className="flex items-center justify-center py-1">
+            <CardTitle className="z-10 text-base text-black">
+              {amount.toLocaleString()} {t("Crystals")}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter className="flex w-full items-center justify-center">
+            <p className="z-10 w-full rounded-full text-center text-sm font-semibold text-sky-900">
+              {price}$
+            </p>
+          </CardFooter>
+        </div>
+      </Card>
+    </Tooltip>
+  );
+};
 
 const Package = ({
   src,
@@ -188,19 +243,20 @@ const DailyReward = () => {
   );
 };
 
+export const packages = [
+  { src: "/shop/tier1.png", amount: 300, bonus: 0, price: 0.99 },
+  { src: "/shop/tier2.png", amount: 1650, bonus: 150, price: 4.99 },
+  { src: "/shop/tier3.png", amount: 5450, bonus: 550, price: 14.99 },
+  { src: "/shop/tier4.png", amount: 11200, bonus: 1300, price: 29.99 },
+  { src: "/shop/tier5.png", amount: 19400, bonus: 3000, price: 49.99 },
+  { src: "/shop/tier6.png", amount: 90000, bonus: 8000, price: 99.99 },
+];
+
 export default function Page() {
   const modelData = useModelData();
   const imageModelData = useImageModelData();
   const { t } = useTranslation();
   const { isAuthenticated } = useConvexAuth();
-  const packages = [
-    { src: "/shop/tier1.png", amount: 300, bonus: 0, price: 0.99 },
-    { src: "/shop/tier2.png", amount: 1650, bonus: 150, price: 4.99 },
-    { src: "/shop/tier3.png", amount: 5450, bonus: 550, price: 14.99 },
-    { src: "/shop/tier4.png", amount: 11200, bonus: 1300, price: 29.99 },
-    { src: "/shop/tier5.png", amount: 19400, bonus: 3000, price: 49.99 },
-    { src: "/shop/tier6.png", amount: 90000, bonus: 8000, price: 99.99 },
-  ];
   const [isTableOpen, setIsTableOpen] = useState(false);
   const [isImageTableOpen, setIsImageTableOpen] = useState(false);
   const currentUser = useCurrentUser();

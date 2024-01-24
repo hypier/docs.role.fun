@@ -60,6 +60,7 @@ import Image from "next/image";
 import { Badge } from "@repo/ui/src/components/badge";
 import { useLanguage } from "./lang-select";
 import { ConvexError } from "convex/values";
+import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 
 export const FormattedMessage = ({
   message,
@@ -135,6 +136,7 @@ export const Message = ({
   const [isImagining, setIsImagining] = useState(false);
   const [thinkingDots, setThinkingDots] = useState("");
   const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
+  const { openDialog } = useCrystalDialog();
 
   useEffect(() => {
     const startTime = Date.now();
@@ -301,7 +303,7 @@ export const Message = ({
                       });
                     } catch (error) {
                       if (error instanceof ConvexError) {
-                        toast.error(error.data);
+                        openDialog();
                       } else {
                         toast.error("An unknown error occurred");
                       }
@@ -344,7 +346,7 @@ export const Message = ({
                       } catch (error) {
                         setIsSpeaking(false);
                         if (error instanceof ConvexError) {
-                          toast.error(error.data);
+                          openDialog();
                         } else {
                           toast.error("An unknown error occurred");
                         }
@@ -382,7 +384,7 @@ export const Message = ({
                     } catch (error) {
                       setIsImagining(false);
                       if (error instanceof ConvexError) {
-                        toast.error(error.data);
+                        openDialog();
                       } else {
                         toast.error("An unknown error occurred");
                       }

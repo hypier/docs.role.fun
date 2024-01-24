@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/src/components/tabs";
 import Link from "next/link";
 import { Discord } from "@repo/ui/src/components/social-icons";
-import { LanguageSelect } from "./lang-select";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { Crystal } from "@repo/ui/src/components/icons";

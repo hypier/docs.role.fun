@@ -6,6 +6,7 @@ import { ConvexReactClient } from "convex/react";
 import { useTheme } from "next-themes";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import CrystalDialog from "./crystal-dialog";
 
 const convex = new ConvexReactClient(
   process.env.NEXT_PUBLIC_CONVEX_URL as string,
@@ -31,6 +32,7 @@ export function AuthenticationProvider({
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <I18nextProvider i18n={i18n} defaultNS={"translation"}>
           <Toaster />
+          <CrystalDialog />
           <TooltipProvider>{children}</TooltipProvider>
         </I18nextProvider>
       </ConvexProviderWithClerk>
