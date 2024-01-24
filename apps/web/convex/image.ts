@@ -303,7 +303,7 @@ export const generateByPrompt = internalAction(
           break;
         case "daun-io/animagine-xl-v3":
           modelHash =
-            "daun-io/animagine-xl-v3:d6f9644c586556cf0e09d136f7198becf2da31d1955160b2308545e21234ffa9";
+            "daun-io/animagine-xl-v3:361b1f0a540dc67b8adb949f5eb0379c38cdb654bd2ab36e400bf03b7964ffa4";
           break;
         case "asiryan/juggernaut-xl-v7":
           modelHash =
