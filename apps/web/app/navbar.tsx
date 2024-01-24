@@ -60,7 +60,6 @@ export default function NavBar({}: {}) {
                 </Button>
               </Link>
             )}
-            {isAuthenticated && <CurrentCrystals />}
             <UserDropdown />
             <SignedOut>
               <Link href="/sign-in">

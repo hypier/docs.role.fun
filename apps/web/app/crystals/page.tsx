@@ -5,6 +5,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  InfoTooltip,
   Tooltip,
 } from "@repo/ui/src/components";
 import { Crystal } from "@repo/ui/src/components/icons";
@@ -38,6 +39,7 @@ import { ChevronsUpDown, Plus } from "lucide-react";
 import Link from "next/link";
 import useImageModelData from "../lib/hooks/use-image-model-data";
 import { packages } from "./packages";
+import CurrentCrystals from "../current-crystals";
 
 const Package = ({
   src,
@@ -198,17 +200,24 @@ export default function Page() {
   const crystals = currentUser?.crystals;
 
   return (
-    <div className="flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
+    <div className="relative flex w-full flex-col items-center gap-16 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
+      <div
+        className={`absolute right-8 top-8 mx-auto flex items-center gap-0.5 font-medium`}
+      >
+        <Crystal className="h-6 w-6" />
+        {Math.floor(crystals)}
+      </div>
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Crystals")}</h1>
-        <h2 className="bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
+
+        <h2 className="flex items-center justify-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
           {t("Crystal Top-Up")}
+          <InfoTooltip
+            content={t(
+              "Crystal is an universal currency for calling AI features in openroleplay.ai.",
+            )}
+          />
         </h2>
-        <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-          {t(
-            "Crystal is an universal currency for calling AI features in openroleplay.ai.",
-          )}
-        </p>
       </div>
       <AnimatePresence>
         {isAuthenticated ? (

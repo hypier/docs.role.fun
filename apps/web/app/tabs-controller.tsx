@@ -20,7 +20,7 @@ function TabsController() {
       <TabsList className="shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-16 w-full gap-2 rounded-none border-t bg-background/90 backdrop-blur-md backdrop-saturate-150 dark:bg-sheet/90 lg:static lg:h-full lg:w-40 lg:flex-col lg:items-start lg:justify-start lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none">
         <Link href="/">
           <TabsTrigger
-            className="flex basis-1/5 flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
+            className="flex w-16 flex-col items-center gap-0.5 rounded-full lg:w-full lg:flex-row lg:items-start"
             value="/"
           >
             <Home className="h-5 w-5 p-1" />
@@ -29,7 +29,7 @@ function TabsController() {
         </Link>
         <Link href="/chats">
           <TabsTrigger
-            className="flex basis-1/5 flex-col items-center gap-0.5 rounded-full lg:flex-row lg:items-start"
+            className="flex w-16 flex-col items-center gap-0.5 rounded-full lg:w-full lg:flex-row lg:items-start"
             value="/chats"
           >
             <MessageSquare className="h-5 w-5 p-1" />
@@ -56,7 +56,7 @@ function TabsController() {
         </Link>
         <Link href="/images">
           <TabsTrigger
-            className="basis-1/5 flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
+            className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
             value="/images"
           >
             <Image className="h-5 w-5 p-1" />
@@ -65,7 +65,7 @@ function TabsController() {
         </Link>
         <Link href="/crystals">
           <TabsTrigger
-            className="basis-1/5 flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
+            className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
             value="/crystals"
           >
             <Crystal className="h-5 w-5 p-1" />
