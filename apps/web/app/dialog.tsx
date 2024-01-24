@@ -207,7 +207,7 @@ export const Message = ({
           >
             <FormattedMessage message={message} username={username} />
           </div>
-          {!isImagining ? (
+          {isImagining ? (
             <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-sm">
                 <Spinner />
