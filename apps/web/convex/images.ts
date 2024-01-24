@@ -57,7 +57,7 @@ export const uploadImage = internalMutation({
     const updatedCharacter = await ctx.db.patch(args.imageId, {
       imageUrl,
     });
-    return updatedCharacter;
+    return imageUrl;
   },
 });
 
@@ -175,3 +175,41 @@ export const like = mutation(
     }
   },
 );
+
+export const imagine = mutation({
+  args: {
+    messageId: v.id("messages"),
+  },
+  handler: async (ctx, { messageId }) => {
+    const user = await getUser(ctx);
+    const message = await ctx.db.get(messageId);
+    const character = await ctx.db.get(
+      message?.characterId as Id<"characters">,
+    );
+    const crystalPrice = getCrystalPrice("daun-io/animagine-xl-v3");
+    if (user?.crystals < crystalPrice) {
+      throw new ConvexError("Not enough crystals.");
+    }
+    const image = await ctx.db.insert("images", {
+      prompt: message?.text as string,
+      model: "daun-io/animagine-xl-v3",
+      imageUrl: "",
+      referenceImage: character?.cardImageUrl,
+      creatorId: user._id,
+      numLikes: 0,
+      isNSFW: false,
+      isBlacklisted: false,
+      isArchived: false,
+      isPrivate: true,
+    });
+    await ctx.scheduler.runAfter(0, internal.image.generateByPrompt, {
+      userId: user._id,
+      imageId: image,
+      messageId,
+      prompt: message?.text as string,
+      model: "daun-io/animagine-xl-v3",
+    });
+
+    return image;
+  },
+});

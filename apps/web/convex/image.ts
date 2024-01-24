@@ -210,12 +210,16 @@ export const generateByPrompt = internalAction(
     {
       userId,
       imageId,
+      messageId,
       prompt,
+      referenceImage,
       model,
     }: {
       userId: Id<"users">;
       imageId: Id<"images">;
+      messageId?: Id<"messages">;
       prompt: string;
+      referenceImage?: string;
       model: string;
     },
   ) => {
@@ -327,6 +331,7 @@ export const generateByPrompt = internalAction(
           prompt,
           width,
           height,
+          referenceImage: referenceImage ?? undefined,
           disable_safety_checker: true,
           negative_prompt:
             "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
@@ -337,34 +342,6 @@ export const generateByPrompt = internalAction(
       console.log("replicate response:::", response);
       const buffer = await response.arrayBuffer();
       return Buffer.from(buffer).toString("base64");
-    }
-
-    async function generateHuggingFace() {
-      const data = {
-        inputs: prompt,
-        parameters: {
-          negative_prompt:
-            "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
-        },
-      };
-      const response = await fetch(
-        "https://quan92wcmuust3h0.us-east-1.aws.endpoints.huggingface.cloud",
-        {
-          headers: {
-            Accept: "image/png",
-            Authorization: `Bearer ${process.env.HUGGINGFACE_API_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(data),
-        },
-      );
-      const result = await response.blob();
-      const resultJSON = await response.json();
-      if (resultJSON.error) {
-        throw new ConvexError("Model is not warm.");
-      }
-      return result;
     }
 
     try {
@@ -387,10 +364,16 @@ export const generateByPrompt = internalAction(
       // Update storage.store to accept whatever kind of Blob is returned from node-fetch
       const imageStorageId = await ctx.storage.store(image as Blob);
       // Write storageId as the body of the message to the Convex database.
-      await ctx.runMutation(internal.images.uploadImage, {
+      const imageUrl = await ctx.runMutation(internal.images.uploadImage, {
         imageId,
         imageStorageId,
       });
+      if (messageId) {
+        await ctx.runMutation(internal.messages.addImage, {
+          messageId,
+          imageUrl,
+        });
+      }
     } catch (error) {
       console.log("error:::", error);
       await ctx.runMutation(internal.serve.refundCrystal, {

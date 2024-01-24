@@ -53,6 +53,7 @@ export const getCrystalPrice = (modelName: string) => {
     ...TranslationModelData,
   ];
   const model = allModels.find((m) => m.value === modelName);
+  console.log("modelName", modelName, model);
   return model ? model.crystalPrice : modelName === "auto" ? 9 : 5;
 };
 
@@ -142,10 +143,10 @@ export const modelData = [
     alt: "Company logo of Anthropic AI",
   },
   {
-    value: "undi95/toppy-m-7b",
+    value: "undi95/toppy-m-7b:free",
     description: "Uncensored, Toppy M 7B by undi95",
     isNSFW: true,
-    crystalPrice: 0.1,
+    crystalPrice: 0,
   },
   {
     value: "pygmalionai/mythalion-13b",
@@ -178,27 +179,27 @@ export const modelData = [
     crystalPrice: 3,
   },
   {
-    value: "nousresearch/nous-capybara-7b",
+    value: "nousresearch/nous-capybara-7b:free",
     description: "Copybara 7B by Nous Research",
-    crystalPrice: 1,
+    crystalPrice: 0,
   },
   {
-    value: "mistralai/mistral-7b-instruct",
+    value: "mistralai/mistral-7b-instruct:free",
     description: "Mistral 7B by Mistral AI",
     crystalPrice: 0,
   },
   {
-    value: "huggingfaceh4/zephyr-7b-beta",
+    value: "huggingfaceh4/zephyr-7b-beta:free",
     description: "Zephyr 7B by Hugging Face",
     crystalPrice: 0,
   },
   {
-    value: "openchat/openchat-7b",
+    value: "openchat/openchat-7b:free",
     description: "Openchat 7B by Open Chat",
     crystalPrice: 0,
   },
   {
-    value: "gryphe/mythomist-7b",
+    value: "gryphe/mythomist-7b:free",
     description: "Mythomist 7B by Gryphe",
     crystalPrice: 0,
   },
