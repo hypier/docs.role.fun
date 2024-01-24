@@ -206,15 +206,30 @@ export const Message = ({
           >
             <FormattedMessage message={message} username={username} />
           </div>
-
-          {message?.imageUrl && (
-            <Image
-              src={message.imageUrl}
-              alt={message?.text}
-              width={525}
-              height={300}
-              className="h-[36rem] w-[24rem] rounded-lg"
-            />
+          {!isImagining ? (
+            <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
+              <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-sm">
+                <div className="flex gap-2">
+                  <Spinner />
+                  {name} is taking selfie...
+                </div>
+                <span className="w-[80%] text-center text-xs text-muted-foreground">
+                  {t(
+                    "Normally, image is generated in a minute. When image generation is failed due to an unexpected error, your crystal will be automatically refunded.",
+                  )}
+                </span>
+              </div>
+            </div>
+          ) : (
+            message?.imageUrl && (
+              <Image
+                src={message.imageUrl}
+                alt={message?.text}
+                width={525}
+                height={300}
+                className="h-[30rem] w-[20rem] rounded-lg"
+              />
+            )
           )}
           {message?.characterId && chatId && !isRegenerating && (
             <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1">
