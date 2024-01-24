@@ -115,7 +115,7 @@ Openroleplay.ai is open-source under the GNU Affero General Public License Versi
 
 - Maximize user freedom and to encourage users to contribute to open source.
 - Prevent corporations from taking the code and using it as part of their closed-source proprietary products
-- Prevent corporations from offering Typebot as a service without contributing to the open source project
+- Prevent corporations from offering Openroleplay.ai as a service without contributing to the open source project
 - Prevent corporations from confusing people and making them think that the service they sell is in any shape or form approved by the original team
 
 ## When you'd like to commercialize your own version of Openroleplay.ai
