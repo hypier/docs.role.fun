@@ -626,10 +626,18 @@ export function Dialog({
   const sendMessage = useMutation(api.messages.send);
   const [isScrolled, setScrolled] = useState(false);
   const [input, setInput] = useState("");
+  const { openDialog } = useCrystalDialog();
 
-  const sendAndReset = (input: string) => {
-    sendMessage({ message: input, chatId, characterId });
-    setInput("");
+  const sendAndReset = async (input: string) => {
+    try {
+      await sendMessage({ message: input, chatId, characterId });
+    } catch (error) {
+      if (error instanceof ConvexError) {
+        openDialog();
+      } else {
+        toast.error("An unknown error occurred");
+      }
+    }
   };
   const handleSend = (event?: FormEvent) => {
     event && event.preventDefault();

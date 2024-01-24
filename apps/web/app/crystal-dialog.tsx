@@ -16,7 +16,6 @@ import { packages } from "./crystals/packages";
 const CrystalDialog: React.FC = () => {
   const { t } = useTranslation();
   const { isOpen, closeDialog } = useCrystalDialog();
-  console.log("Crystal Dialog::", isOpen);
 
   return (
     <DialogOrDrawer
