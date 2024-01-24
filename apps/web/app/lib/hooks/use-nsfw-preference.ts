@@ -21,7 +21,12 @@ export const useNsfwPreference = () => {
   };
 
   useEffect(() => {
-    me?.nsfwPreference && setNsfwPreference(me?.nsfwPreference);
+    me?.nsfwPreference
+      ? setNsfwPreference(me?.nsfwPreference)
+      : nsfwPreference &&
+        updateNSFWPreference({
+          nsfwPreference: nsfwPreference as "allow" | "block" | "auto",
+        });
   }, [me?.nsfwPreference]);
 
   return { nsfwPreference, updatePreference };
