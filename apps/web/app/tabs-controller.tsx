@@ -41,7 +41,7 @@ function TabsController() {
             className="flex w-full flex-col items-center gap-0.5 rounded-full border bg-black dark:bg-white sm:border-none sm:bg-transparent sm:dark:bg-transparent lg:flex-row lg:items-start"
             value="/my-characters"
           >
-            <Plus className="h-5 w-5 p-1 text-white dark:text-black sm:text-foreground sm:dark:text-foreground" />
+            <Plus className="h-5 w-5 p-1 text-white dark:text-black sm:text-muted-foreground sm:dark:text-muted-foreground" />
             {!isMobile && <span>{t("My Characters")}</span>}
           </TabsTrigger>
         </Link>
