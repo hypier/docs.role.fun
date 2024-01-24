@@ -72,8 +72,8 @@ const initializeModel = async (character: any, userId: string, ctx: any) => {
     baseURL,
     apiKey,
     defaultHeaders: {
-      "HTTP-Referer": "openroleplay.ai",
-      "X-Title": "openroleplay.ai",
+      "HTTP-Referer": "https://openroleplay.ai",
+      "X-Title": "Openroleplay.ai",
     },
   });
   return { openai, model, currentCrystals };
