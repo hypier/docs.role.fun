@@ -270,7 +270,7 @@ export default function Page() {
     c55.78-74.81,127.6-95.94,216.01-117.82C929.71,603.22,1033.27,483.3,1033.05,324.45z"
               />
             </svg>
-            Become a Patreon
+            {t("Become a Patreon")}
           </Button>
         </Link>
       </div>
