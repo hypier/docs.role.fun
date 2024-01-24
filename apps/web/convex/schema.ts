@@ -17,6 +17,7 @@ export default defineSchema({
         v.literal("smirk"),
       ),
     ),
+    imageUrl: v.optional(v.string()),
     speechUrl: v.optional(v.string()),
   })
     .index("byCharacterId", ["characterId"])
@@ -157,6 +158,7 @@ export default defineSchema({
     prompt: v.string(),
     model: v.string(),
     imageUrl: v.string(),
+    referenceImage: v.optional(v.string()),
     creatorId: v.id("users"),
     numLikes: v.number(),
     tag: v.optional(v.string()),

@@ -1,7 +1,8 @@
 import { ConvexError, v } from "convex/values";
 import { internalMutation, mutation } from "./_generated/server";
 import { internal } from "./_generated/api";
-import { getUser, updateNSFWPreference } from "./users";
+import { getUser } from "./users";
+import { getCrystalPrice } from "./constants";
 
 export const generate = mutation({
   args: {
@@ -22,6 +23,10 @@ export const generate = mutation({
       .filter((q) => q.eq(q.field("text"), text))
       .first();
     const user = await getUser(ctx);
+    const crystalPrice = getCrystalPrice(voiceId);
+    if (user?.crystals < crystalPrice) {
+      throw new ConvexError("Not enough crystals.");
+    }
     if (existingSpeech && existingSpeech?.speechUrl) {
       await ctx.db.patch(messageId, { speechUrl: existingSpeech?.speechUrl });
       return;

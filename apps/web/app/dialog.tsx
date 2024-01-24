@@ -11,6 +11,7 @@ import {
   ClipboardIcon,
   Delete,
   Headphones,
+  ImageIcon,
   Languages,
   MoreHorizontal,
   Pause,
@@ -58,6 +59,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@repo/ui/src/components/badge";
 import { useLanguage } from "./lang-select";
+import { ConvexError } from "convex/values";
 
 export const FormattedMessage = ({
   message,
@@ -76,7 +78,7 @@ export const FormattedMessage = ({
   const textContent = translationText ? translationText : baseText;
   return (
     <MemoizedReactMarkdown
-      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words "
+      className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 "
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
         a({ children, href, target, rel }) {
@@ -126,9 +128,11 @@ export const Message = ({
   const react = useMutation(api.messages.react);
   const speech = useMutation(api.speeches.generate);
   const translate = useMutation(api.messages.translate);
+  const imagine = useMutation(api.images.imagine);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [isImagining, setIsImagining] = useState(false);
   const [thinkingDots, setThinkingDots] = useState("");
   const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
 
@@ -148,6 +152,10 @@ export const Message = ({
     }, 200);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    message?.imageUrl && setIsImagining(false);
+  }, [message?.imageUrl]);
 
   return (
     <div
@@ -196,6 +204,16 @@ export const Message = ({
           >
             <FormattedMessage message={message} username={username} />
           </div>
+
+          {message?.imageUrl && (
+            <Image
+              src={message.imageUrl}
+              alt={message?.text}
+              width={525}
+              height={300}
+              className="h-[36rem] w-[24rem] rounded-lg"
+            />
+          )}
           {message?.characterId && chatId && !isRegenerating && (
             <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1">
               <Button
@@ -258,14 +276,23 @@ export const Message = ({
                     if (isSpeaking) {
                       setIsSpeaking(false);
                     } else {
-                      await speech({
-                        messageId: message?._id as Id<"messages">,
-                        characterId: message?.characterId,
-                        text: message?.translation
-                          ? message?.translation
-                          : message?.text,
-                      });
-                      setIsSpeaking(true);
+                      try {
+                        await speech({
+                          messageId: message?._id as Id<"messages">,
+                          characterId: message?.characterId,
+                          text: message?.translation
+                            ? message?.translation
+                            : message?.text,
+                        });
+                        setIsSpeaking(true);
+                      } catch (error) {
+                        setIsSpeaking(false);
+                        if (error instanceof ConvexError) {
+                          toast.error(error.data);
+                        } else {
+                          toast.error("An unknown error occurred");
+                        }
+                      }
                     }
                   }}
                 >
@@ -311,10 +338,18 @@ export const Message = ({
                   className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
                   onClick={async () => {
                     setIsTranslating(true);
-                    await translate({
-                      messageId: message?._id as Id<"messages">,
-                      targetLanguage,
-                    });
+                    try {
+                      await translate({
+                        messageId: message?._id as Id<"messages">,
+                        targetLanguage,
+                      });
+                    } catch (error) {
+                      if (error instanceof ConvexError) {
+                        toast.error(error.data);
+                      } else {
+                        toast.error("An unknown error occurred");
+                      }
+                    }
                     setIsTranslating(false);
                   }}
                   disabled={message?.translation || isTranslating}
@@ -323,6 +358,41 @@ export const Message = ({
                     <Spinner className="h-4 w-4" />
                   ) : (
                     <Languages className="h-4 w-4" />
+                  )}
+                </Button>
+              </Tooltip>
+              <Tooltip
+                content={
+                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    {t(`Imagine`)} ( <Crystal className="h-4 w-4" /> x 24 )
+                  </span>
+                }
+                desktopOnly={true}
+              >
+                <Button
+                  variant="ghost"
+                  className="h-6 rounded-full p-1 hover:bg-foreground/10 disabled:bg-foreground/10 disabled:opacity-100"
+                  onClick={async () => {
+                    setIsImagining(true);
+                    try {
+                      await imagine({
+                        messageId: message?._id as Id<"messages">,
+                      });
+                    } catch (error) {
+                      setIsImagining(false);
+                      if (error instanceof ConvexError) {
+                        toast.error(error.data);
+                      } else {
+                        toast.error("An unknown error occurred");
+                      }
+                    }
+                  }}
+                  disabled={message?.imageUrl || isImagining}
+                >
+                  {isImagining ? (
+                    <Spinner className="h-4 w-4" />
+                  ) : (
+                    <ImageIcon className="h-4 w-4" />
                   )}
                 </Button>
               </Tooltip>

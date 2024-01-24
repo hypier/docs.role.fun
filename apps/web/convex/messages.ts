@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { internalMutation, internalQuery, mutation } from "./_generated/server";
 import { query } from "./_generated/server";
 import { internal } from "./_generated/api";
@@ -189,6 +189,9 @@ export const translate = mutation({
   },
   handler: async (ctx, { messageId, targetLanguage }) => {
     const user = await getUser(ctx);
+    if (user?.crystals < 1) {
+      throw new ConvexError("Not enough crystals.");
+    }
     await ctx.scheduler.runAfter(0, internal.translate.translate, {
       userId: user._id,
       messageId,
@@ -212,6 +215,17 @@ export const addTranslation = internalMutation(
   ) => {
     return await ctx.db.patch(messageId, {
       translation,
+    });
+  },
+);
+
+export const addImage = internalMutation(
+  async (
+    ctx,
+    { messageId, imageUrl }: { messageId: Id<"messages">; imageUrl: string },
+  ) => {
+    return await ctx.db.patch(messageId, {
+      imageUrl,
     });
   },
 );
