@@ -425,7 +425,8 @@ export default function Page() {
             />
           </h2>
           <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            {t("10 crystals / message")}
+            10 x
+            <Crystal className="h-4 w-4" />
           </p>
         </div>
         <div className="flex flex-col items-center gap-4 rounded-lg">
@@ -438,7 +439,8 @@ export default function Page() {
             />
           </h2>
           <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            {t("1 crystal / message")}
+            1 x
+            <Crystal className="h-4 w-4" />
           </p>
         </div>
       </div>
