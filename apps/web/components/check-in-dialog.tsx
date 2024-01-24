@@ -75,9 +75,6 @@ const CheckinDialog = () => {
               <AlertDialogAction onClick={onClickHandler}>
                 {t("Claim 25 Crystals")}
               </AlertDialogAction>
-              <Link href="/crystals">
-                <AlertDialogCancel>{t("Visit shop")}</AlertDialogCancel>
-              </Link>
             </div>
           </AlertDialogHeader>
         </AlertDialogContent>

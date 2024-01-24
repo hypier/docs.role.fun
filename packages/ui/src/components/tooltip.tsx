@@ -1,7 +1,7 @@
 "use client";
 
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { HelpCircle } from "lucide-react";
+import { Info } from "lucide-react";
 import { ReactNode } from "react";
 import { Drawer } from "vaul";
 import useMediaQuery from "../hooks/use-media-query";
@@ -88,7 +88,7 @@ export function TooltipContent({ title }: { title: string }) {
 export function InfoTooltip({ content }: { content: ReactNode | string }) {
   return (
     <Tooltip content={content}>
-      <HelpCircle className="h-4 w-4 text-muted-foreground" />
+      <Info className="h-4 w-4 text-muted-foreground" />
     </Tooltip>
   );
 }
