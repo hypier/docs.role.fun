@@ -328,7 +328,7 @@ export const generateByPrompt = internalAction(
 
       const output: any = await replicate.run(modelHash as any, {
         input: {
-          prompt,
+          prompt: referenceImage ? `${prompt}, masterpiece` : prompt,
           width,
           height,
           image: referenceImage ?? undefined,
