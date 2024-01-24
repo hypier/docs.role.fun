@@ -155,8 +155,6 @@ export const answer = internalAction({
         let conversations =
           message === undefined ? messages : messages.slice(0, lastIndice);
         let originalQuery;
-        console.log("messages before pop::", messages);
-        console.log("conversations before pop::", conversations);
         if (
           conversations.length > 0 &&
           conversations[conversations.length - 1]?.characterId &&
