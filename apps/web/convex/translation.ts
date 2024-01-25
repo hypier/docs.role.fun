@@ -55,3 +55,19 @@ export const save = internalMutation({
     ctx.db.insert("translations", { text, translation, languageTag });
   },
 });
+
+export const deleteDuplicate = internalMutation({
+  handler: async (ctx, { text, translation, languageTag }) => {
+    const allTranslations = await ctx.db.query("translations").collect();
+    const uniqueTranslations = new Map();
+
+    allTranslations.forEach((translation) => {
+      const key = `${translation.text}-${translation.languageTag}`;
+      if (!uniqueTranslations.has(key)) {
+        uniqueTranslations.set(key, translation);
+      } else {
+        ctx.db.delete(translation._id);
+      }
+    });
+  },
+});
