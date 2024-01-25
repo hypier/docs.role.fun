@@ -86,7 +86,7 @@ export const intercept = internalAction({
   },
 });
 
-export const string = action({
+export const string = internalAction({
   args: {
     text: v.string(),
     targetLanguage: v.optional(v.string()),

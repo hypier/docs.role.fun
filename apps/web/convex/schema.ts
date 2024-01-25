@@ -189,5 +189,7 @@ export default defineSchema({
     text: v.string(),
     translation: v.string(),
     languageTag: v.string(),
-  }).index("byLanguage", ["languageTag"]),
+  })
+    .index("byLanguage", ["languageTag"])
+    .index("byText", ["text", "languageTag"]),
 });
