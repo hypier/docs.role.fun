@@ -56,28 +56,20 @@ export const save = internalMutation({
   },
 });
 export const deleteDuplicate = internalMutation({
-  handler: async (ctx, { text, translation, languageTag }) => {
-    let continueCursor = null;
-    let isDone = false;
-    let page;
+  args: { languageTag: v.string() },
+  handler: async (ctx, { languageTag }) => {
     const uniqueTranslations = new Map();
-
-    while (!isDone) {
-      const paginationResult = await ctx.db
-        .query("translations")
-        .paginate({ numItems: 2048, cursor: continueCursor });
-      page = paginationResult.page;
-      continueCursor = paginationResult.continueCursor;
-
-      page.forEach((translation) => {
-        const key = `${translation.text}-${translation.languageTag}`;
-        if (!uniqueTranslations.has(key)) {
-          uniqueTranslations.set(key, translation);
-        } else {
-          ctx.db.delete(translation._id);
-        }
-      });
-      isDone = true;
-    }
+    const translations = await ctx.db
+      .query("translations")
+      .filter((q) => q.eq(q.field("languageTag"), languageTag))
+      .collect();
+    translations.forEach((translation) => {
+      const key = `${translation.text}-${translation.languageTag}`;
+      if (!uniqueTranslations.has(key)) {
+        uniqueTranslations.set(key, translation);
+      } else {
+        ctx.db.delete(translation._id);
+      }
+    });
   },
 });
