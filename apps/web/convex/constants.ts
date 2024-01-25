@@ -144,7 +144,7 @@ export const modelData = [
   },
   {
     value: "gryphe/mythomax-l2-13b-8k",
-    description: "Mythomax L2 13B by Gryphe",
+    description: "Uncensored, Mythomax L2 13B by Gryphe",
     crystalPrice: 0.5,
     isNSFW: true,
   },
