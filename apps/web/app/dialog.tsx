@@ -61,6 +61,7 @@ import Image from "next/image";
 import { Badge } from "@repo/ui/src/components/badge";
 import { ConvexError } from "convex/values";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
+import { usePostHog } from "posthog-js/react";
 
 export const FormattedMessage = ({
   message,
@@ -600,6 +601,7 @@ export function Dialog({
   );
   const username = useMyUsername();
   const sendMessage = useMutation(api.messages.send);
+  const posthog = usePostHog();
   const [isScrolled, setScrolled] = useState(false);
   const [input, setInput] = useState("");
   const { openDialog } = useCrystalDialog();
@@ -608,6 +610,7 @@ export function Dialog({
     setInput("");
     try {
       await sendMessage({ message: input, chatId, characterId });
+      posthog.capture("send_message");
     } catch (error) {
       if (error instanceof ConvexError) {
         openDialog();
