@@ -68,7 +68,6 @@ export const deleteDuplicate = internalMutation({
         .paginate({ numItems: 2048, cursor: continueCursor });
       page = paginationResult.page;
       continueCursor = paginationResult.continueCursor;
-      isDone = paginationResult.isDone;
 
       page.forEach((translation) => {
         const key = `${translation.text}-${translation.languageTag}`;
@@ -78,6 +77,7 @@ export const deleteDuplicate = internalMutation({
           ctx.db.delete(translation._id);
         }
       });
+      isDone = true;
     }
   },
 });
