@@ -55,7 +55,9 @@ export const useMachineTranslation = () => {
     if (translations && translations.hasOwnProperty(text)) {
       return translations[text];
     }
-    translate({ text, targetLanguage: currentLanguage });
+    if (Object.keys(translations).length > 0) {
+      translate({ text, targetLanguage: currentLanguage });
+    }
     return text;
   };
 
