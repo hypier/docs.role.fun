@@ -185,4 +185,9 @@ export default defineSchema({
     src: v.string(),
     alt: v.string(),
   }),
+  translations: defineTable({
+    text: v.string(),
+    translation: v.string(),
+    languageTag: v.string(),
+  }).index("byLanguage", ["languageTag"]),
 });

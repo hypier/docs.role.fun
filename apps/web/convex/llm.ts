@@ -93,7 +93,10 @@ export const answer = internalAction({
     { userId, chatId, characterId, personaId, messageId, reverseRole },
   ) => {
     // 1. Fetch data
-    const username = await ctx.runQuery(api.users.getUsername, { id: userId });
+    const user = await ctx.runQuery(internal.users.getUserInternal, {
+      id: userId,
+    });
+    const username = user?.name;
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
     });
@@ -104,7 +107,9 @@ export const answer = internalAction({
       ? await ctx.runQuery(internal.personas.getPersona, {
           id: personaId,
         })
-      : undefined;
+      : user?.primaryPersonaId
+        ? user?.primaryPersonaId
+        : undefined;
 
     const message = messageId
       ? await ctx.runQuery(internal.messages.get, {
@@ -136,7 +141,6 @@ export const answer = internalAction({
         userId,
         ctx,
       );
-
       const instruction = getInstruction(
         character,
         persona,
@@ -206,7 +210,7 @@ export const answer = internalAction({
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
             mutationCounter++;
-            if (mutationCounter % 5 === 0) {
+            if (mutationCounter % 10 === 0) {
               await ctx.runMutation(internal.llm.updateCharacterMessage, {
                 messageId,
                 text,
@@ -218,7 +222,7 @@ export const answer = internalAction({
           }
         }
         // Ensure the last mutation is run if the text was updated an odd number of times
-        if (mutationCounter % 5 !== 0) {
+        if (mutationCounter % 10 !== 0) {
           await ctx.runMutation(internal.llm.updateCharacterMessage, {
             messageId,
             text,
@@ -238,6 +242,19 @@ export const answer = internalAction({
             regeneratedMessage: text,
           });
         }
+        const userLanguage =
+          user?.languageTag === "en"
+            ? "en-US"
+            : user?.languageTag === "pt"
+              ? "pt-PT"
+              : user?.languageTag;
+        user?.languageTag &&
+          user?.languageTag !== "en" &&
+          (await ctx.scheduler.runAfter(0, internal.translate.translate, {
+            targetLanguage: userLanguage,
+            userId: user?._id,
+            messageId,
+          }));
       } catch (error) {
         await ctx.runMutation(internal.serve.refundCrystal, {
           userId,

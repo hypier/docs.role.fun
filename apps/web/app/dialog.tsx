@@ -59,7 +59,6 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@repo/ui/src/components/badge";
-import { useLanguage } from "./lang-select";
 import { ConvexError } from "convex/values";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 
@@ -124,16 +123,13 @@ export const Message = ({
   username?: string;
   chatId?: Id<"chats">;
 }) => {
-  const { currentLanguage: targetLanguage } = useLanguage();
   const { t } = useTranslation();
   const regenerate = useMutation(api.messages.regenerate);
   const react = useMutation(api.messages.react);
   const speech = useMutation(api.speeches.generate);
-  const translate = useMutation(api.messages.translate);
   const imagine = useMutation(api.images.imagine);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isTranslating, setIsTranslating] = useState(false);
   const [isImagining, setIsImagining] = useState(false);
   const [thinkingDots, setThinkingDots] = useState("");
   const [thinkingMessage, setThinkingMessage] = useState(t("Thinking"));
@@ -299,43 +295,6 @@ export const Message = ({
                   <ThumbsDown className="h-5 w-5 lg:h-4 lg:w-4" />
                 )}
               </Button>
-              <Tooltip
-                content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t(`Translate message to ${targetLanguage}`)} (
-                    <Crystal className="h-4 w-4" /> x 1 )
-                  </span>
-                }
-                desktopOnly={true}
-              >
-                <Button
-                  variant="ghost"
-                  className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
-                  onClick={async () => {
-                    setIsTranslating(true);
-                    try {
-                      await translate({
-                        messageId: message?._id as Id<"messages">,
-                        targetLanguage,
-                      });
-                    } catch (error) {
-                      if (error instanceof ConvexError) {
-                        openDialog();
-                      } else {
-                        toast.error("An unknown error occurred");
-                      }
-                    }
-                    setIsTranslating(false);
-                  }}
-                  disabled={message?.translation || isTranslating}
-                >
-                  {isTranslating ? (
-                    <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
-                  ) : (
-                    <Languages className="h-5 w-5 lg:h-4 lg:w-4" />
-                  )}
-                </Button>
-              </Tooltip>
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">

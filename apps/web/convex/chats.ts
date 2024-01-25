@@ -2,6 +2,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { getUser } from "./users";
 import { paginationOptsValidator } from "convex/server";
+import { internal } from "./_generated/api";
 
 export const create = mutation({
   args: {
@@ -29,11 +30,25 @@ export const create = mutation({
     });
     const character = await ctx.db.get(args.characterId);
     const greeting = character?.greetings ? character.greetings[0] : "";
-    await ctx.db.insert("messages", {
+    const messageId = await ctx.db.insert("messages", {
       text: greeting as string,
       chatId: newChat,
       characterId: character?._id,
     });
+
+    const userLanguage =
+      user.languageTag === "en"
+        ? "en-US"
+        : user.languageTag === "pt"
+          ? "pt-PT"
+          : user.languageTag;
+    user.languageTag &&
+      user.languageTag !== "en" &&
+      (await ctx.scheduler.runAfter(0, internal.translate.translate, {
+        targetLanguage: userLanguage,
+        userId: user._id,
+        messageId,
+      }));
     return newChat;
   },
 });

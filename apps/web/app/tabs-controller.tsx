@@ -7,6 +7,7 @@ import { Discord } from "@repo/ui/src/components/social-icons";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { Crystal } from "@repo/ui/src/components/icons";
+import { initializeTranslationStore } from "./lib/hooks/use-machine-translation";
 
 function TabsController() {
   const { isMobile } = useMediaQuery();
@@ -14,6 +15,7 @@ function TabsController() {
   const getFirstDirectory = (urlString: string): string =>
     `/${new URL(urlString, "http://example.com").pathname.split("/")[1] || ""}`;
   const { t } = useTranslation();
+  initializeTranslationStore();
 
   return (
     <Tabs value={getFirstDirectory(pathname)}>

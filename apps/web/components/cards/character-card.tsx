@@ -18,6 +18,10 @@ import DraftBadge from "../characters/draft-badge";
 import { useTranslation } from "react-i18next";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 import posthog from "posthog-js";
+import {
+  useMachineTranslation,
+  useTranslationStore,
+} from "../../app/lib/hooks/use-machine-translation";
 
 const CharacterCard = (props: {
   id: string;
@@ -32,6 +36,8 @@ const CharacterCard = (props: {
   showRemix?: boolean;
 }) => {
   const { t } = useTranslation();
+  const { translations } = useTranslationStore();
+  const { mt } = useMachineTranslation();
   const { nsfwPreference } = useNsfwPreference();
 
   return (
@@ -95,7 +101,9 @@ const CharacterCard = (props: {
                 props.cardImageUrl ? "text-white" : "text-foreground"
               } z-[3] line-clamp-1 flex select-none justify-between text-base duration-200 group-hover:opacity-80`}
             >
-              <div className="w-[80%] truncate">{props.name}</div>
+              <div className="w-[80%] truncate">
+                {mt(props.name, translations)}
+              </div>
               <div className="flex gap-1 font-normal">
                 {(props?.numChats as number) > 10 && (
                   <Tooltip content={`Number of chats with ${props.name}`}>
@@ -123,7 +131,7 @@ const CharacterCard = (props: {
                 props.cardImageUrl ? "text-white" : "text-foreground"
               } z-[3] line-clamp-2 select-none text-xs duration-200 hover:line-clamp-none group-hover:opacity-80`}
             >
-              {props.description}
+              {mt(props.description, translations)}
             </CardDescription>
           </CardHeader>
           {props.cardImageUrl && (

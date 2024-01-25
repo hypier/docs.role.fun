@@ -60,24 +60,12 @@ export const store = mutation({
 });
 
 export const getUserInternal = internalQuery({
-  args: {},
+  args: {
+    id: v.id("users"),
+  },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error(
-        "Called getUserFromTokenIdentifier without authentication present",
-      );
-    }
-    const user = await ctx.db
-      .query("users")
-      .withIndex("byToken", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier),
-      )
-      .unique();
-    if (user === null) {
-      throw new Error("User not found");
-    }
-    return user;
+    const user = await ctx.db.get(args.id);
+    return user ? user : null;
   },
 });
 

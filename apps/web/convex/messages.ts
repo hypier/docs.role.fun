@@ -54,17 +54,30 @@ export const send = mutation({
   },
   handler: async (ctx, { message, chatId, characterId, personaId }) => {
     const user = await getUser(ctx);
-    await ctx.db.insert("messages", {
+    const messageId = await ctx.db.insert("messages", {
       text: message,
       chatId,
       personaId,
     });
-    await ctx.scheduler.runAfter(0, internal.llm.answer, {
+
+    const userLanguage =
+      user.languageTag === "en"
+        ? "en-US"
+        : user.languageTag === "pt"
+          ? "pt-PT"
+          : user.languageTag;
+
+    // write an intercept internal translate action. this will intercept message before answer.
+    await ctx.scheduler.runAfter(0, internal.translate.intercept, {
+      userLanguage: userLanguage,
+      targetLanguage: "en-US",
+      userId: user._id,
       chatId,
       characterId,
-      personaId: personaId ? personaId : user?.primaryPersonaId,
-      userId: user._id,
+      personaId,
+      messageId,
     });
+
     const character = await ctx.db.get(characterId);
     const crystalPrice = getCrystalPrice(character?.model as string);
     if (user?.crystals < crystalPrice) {
@@ -76,15 +89,6 @@ export const send = mutation({
       numChats: newNumChats,
       updatedAt,
     });
-    const followUp = await ctx.db
-      .query("followUps")
-      .withIndex("byChatId", (q) => q.eq("chatId", chatId))
-      .order("desc")
-      .first();
-    followUp &&
-      (await ctx.db.patch(followUp._id, {
-        isStale: true,
-      }));
   },
 });
 
@@ -220,6 +224,22 @@ export const addTranslation = internalMutation(
   ) => {
     return await ctx.db.patch(messageId, {
       translation,
+    });
+  },
+);
+
+export const interceptTranslation = internalMutation(
+  async (
+    ctx,
+    {
+      messageId,
+      translation,
+      text,
+    }: { messageId: Id<"messages">; translation: string; text: string },
+  ) => {
+    return await ctx.db.patch(messageId, {
+      translation,
+      text,
     });
   },
 );
