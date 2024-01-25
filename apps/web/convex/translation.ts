@@ -55,19 +55,29 @@ export const save = internalMutation({
     ctx.db.insert("translations", { text, translation, languageTag });
   },
 });
-
 export const deleteDuplicate = internalMutation({
   handler: async (ctx, { text, translation, languageTag }) => {
-    const allTranslations = await ctx.db.query("translations").collect();
+    let continueCursor = null;
+    let isDone = false;
+    let page;
     const uniqueTranslations = new Map();
 
-    allTranslations.forEach((translation) => {
-      const key = `${translation.text}-${translation.languageTag}`;
-      if (!uniqueTranslations.has(key)) {
-        uniqueTranslations.set(key, translation);
-      } else {
-        ctx.db.delete(translation._id);
-      }
-    });
+    while (!isDone) {
+      const paginationResult = await ctx.db
+        .query("translations")
+        .paginate({ numItems: 2048, cursor: continueCursor });
+      page = paginationResult.page;
+      continueCursor = paginationResult.continueCursor;
+      isDone = paginationResult.isDone;
+
+      page.forEach((translation) => {
+        const key = `${translation.text}-${translation.languageTag}`;
+        if (!uniqueTranslations.has(key)) {
+          uniqueTranslations.set(key, translation);
+        } else {
+          ctx.db.delete(translation._id);
+        }
+      });
+    }
   },
 });
