@@ -49,14 +49,9 @@ export const initializeTranslationStore = () => {
 };
 
 export const useMachineTranslation = () => {
-  const { currentLanguage } = useLanguage();
-  const translate = useAction(api.translate.string);
   const mt = (text: string, translations: Record<string, string>) => {
     if (translations && translations.hasOwnProperty(text)) {
       return translations[text];
-    }
-    if (Object.keys(translations).length > 0) {
-      translate({ text, targetLanguage: currentLanguage });
     }
     return text;
   };
