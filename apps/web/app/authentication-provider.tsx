@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import CrystalDialog from "./crystal-dialog";
+import { initializeTranslationStore } from "./lib/hooks/use-machine-translation";
 
 const convex = new ConvexReactClient(
   process.env.NEXT_PUBLIC_CONVEX_URL as string,
