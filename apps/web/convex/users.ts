@@ -50,11 +50,12 @@ export const store = mutation({
       });
     }
     // If it's a new identity, create a new `User`.
+    const email = identity?.email ?? ""; // Handle potentially undefined email
     return await ctx.db.insert("users", {
       name: args.username,
-      email: identity?.email,
+      email: email,
       tokenIdentifier: identity.tokenIdentifier,
-      crystals: SIGN_UP_FREE_CRYSTALS,
+      crystals: email.includes("secretmail.net") ? 0 : SIGN_UP_FREE_CRYSTALS,
     });
   },
 });
