@@ -250,6 +250,7 @@ export const answer = internalAction({
               : user?.languageTag;
         user?.languageTag &&
           user?.languageTag !== "en" &&
+          user.autoTranslate !== false &&
           (await ctx.scheduler.runAfter(0, internal.translate.translate, {
             targetLanguage: userLanguage,
             userId: user?._id,

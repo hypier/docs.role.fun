@@ -119,6 +119,19 @@ export const setLanguage = mutation({
   },
 });
 
+export const toggleAutoTranslate = mutation({
+  handler: async (ctx) => {
+    const user = await getUser(ctx);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    await ctx.db.patch(user._id, {
+      autoTranslate: user?.autoTranslate ? false : true,
+    });
+    return user;
+  },
+});
+
 export const updateNSFWPreference = mutation({
   args: {
     nsfwPreference: v.optional(

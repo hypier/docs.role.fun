@@ -32,6 +32,7 @@ export default defineSchema({
     nsfwPreference: v.optional(
       v.union(v.literal("block"), v.literal("auto"), v.literal("allow")),
     ),
+    autoTranslate: v.optional(v.boolean()),
   })
     .index("byToken", ["tokenIdentifier"])
     .index("byEmail", ["email"]),
