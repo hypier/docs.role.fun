@@ -64,7 +64,11 @@ const PreferenceDialog = () => {
                 <Languages className="h-5 w-5 text-blue-500" />
                 {t("Language")}
               </div>
-
+              <div className="text-sm font-normal text-muted-foreground">
+                {t(
+                  "When you set your language to a non-English option, AI characters will speak in your selected language.",
+                )}
+              </div>
               <LanguageSelect />
             </AlertDialogTitle>
             <AlertDialogTitle className="flex items-center gap-1">

@@ -434,7 +434,7 @@ export default function Page() {
             {t("Machine Translation")}
             <InfoTooltip
               content={t(
-                "Crystal is used whenever you request a translation for a message",
+                "Crystal is used whenever message is automatically translated.",
               )}
             />
           </h2>

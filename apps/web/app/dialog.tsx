@@ -12,8 +12,6 @@ import {
   ClipboardIcon,
   Delete,
   Headphones,
-  ImageIcon,
-  Languages,
   MoreHorizontal,
   Pause,
   Plus,
@@ -25,7 +23,7 @@ import {
   ThumbsUp,
 } from "lucide-react";
 import { useInView } from "framer-motion";
-import { Button, Tooltip } from "@repo/ui/src/components";
+import { Button, InfoTooltip, Tooltip } from "@repo/ui/src/components";
 import { CodeBlock } from "@repo/ui/src/components/codeblock";
 import {
   Avatar,
@@ -62,6 +60,8 @@ import { Badge } from "@repo/ui/src/components/badge";
 import { ConvexError } from "convex/values";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 import { usePostHog } from "posthog-js/react";
+import { Toggle } from "@repo/ui/src/components/toggle";
+import { useLanguage } from "./lang-select";
 
 export const FormattedMessage = ({
   message,
@@ -581,6 +581,7 @@ export function Dialog({
     { chatId },
     { initialNumItems: 5 },
   );
+  const { currentLanguage } = useLanguage();
   const remoteMessages = results.reverse();
   const messages = useMemo(
     () =>
@@ -749,6 +750,23 @@ export function Dialog({
           setScrolled(true);
         }}
       >
+        {currentLanguage !== "en" && (
+          <div className="flex w-full items-center justify-center pt-8">
+            <div className="flex flex-col items-center gap-1 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <InfoTooltip
+                  content={t(
+                    "Crystal is used when you send message and character answers.",
+                  )}
+                />
+                {t("Automatic translation is activated.")}
+              </div>
+              <span className="text-[10px]">
+                {t("To turn off, change your language settings to English.")}
+              </span>
+            </div>
+          </div>
+        )}
         <div
           className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
           ref={listRef}
