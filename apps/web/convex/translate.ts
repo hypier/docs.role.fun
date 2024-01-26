@@ -16,6 +16,13 @@ export const translate = internalAction({
       id: args.messageId,
     });
     let result;
+    const { currentCrystals } = await ctx.runMutation(
+      internal.serve.useCrystal,
+      {
+        userId: args.userId,
+        name: "deepl",
+      },
+    );
     try {
       const targetLanguage =
         (args.targetLanguage as deepl.TargetLanguageCode) ||
@@ -33,6 +40,11 @@ export const translate = internalAction({
         translation: result.text,
       });
     } catch (error) {
+      await ctx.runMutation(internal.serve.refundCrystal, {
+        userId: args.userId,
+        currentCrystals,
+        name: "deepl",
+      });
       throw error;
     }
     return result.text;
@@ -48,6 +60,7 @@ export const intercept = internalAction({
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
     messageId: v.id("messages"),
+    autoTranslate: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const message: any = await ctx.runQuery(internal.messages.get, {
@@ -56,6 +69,13 @@ export const intercept = internalAction({
     let result;
 
     if (args.userLanguage !== "en-US") {
+      const { currentCrystals } = await ctx.runMutation(
+        internal.serve.useCrystal,
+        {
+          userId: args.userId,
+          name: "deepl",
+        },
+      );
       try {
         const targetLanguage =
           (args.targetLanguage as deepl.TargetLanguageCode) ||
@@ -74,6 +94,12 @@ export const intercept = internalAction({
           text: result.text,
         });
       } catch (error) {
+        await ctx.runMutation(internal.serve.refundCrystal, {
+          userId: args.userId,
+          currentCrystals,
+          name: "deepl",
+        });
+        throw error;
         console.log("translation error:", error);
       }
     }
