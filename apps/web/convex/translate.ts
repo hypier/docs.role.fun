@@ -68,7 +68,7 @@ export const intercept = internalAction({
     });
     let result;
 
-    if (args.userLanguage !== "en-US" && args.autoTranslate) {
+    if (args.userLanguage !== "en-US" && args.autoTranslate !== false) {
       const { currentCrystals } = await ctx.runMutation(
         internal.serve.useCrystal,
         {
