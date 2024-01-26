@@ -241,7 +241,7 @@ export default function CharacterForm() {
               onOpenChange={() => setOpenPopover(!openPopover)}
             >
               <PopoverContent asChild>
-                <div className="w-full rounded-lg bg-background p-2 sm:w-40">
+                <div className="w-full rounded-lg bg-background p-2">
                   <RadioGroup
                     defaultValue="public"
                     className="p-1"
@@ -277,6 +277,11 @@ export default function CharacterForm() {
                         {t("Only me")}
                       </Label>
                     </div>
+                    <span className="text-[10px] text-muted-foreground/75 underline">
+                      <Link href="/content-rules">
+                        By clicking 'Publish', you agree to our content rules.
+                      </Link>
+                    </span>
                   </RadioGroup>
                   <div className="flex flex-col justify-center pt-4">
                     <Button
