@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../convex/_generated/api";
 import { useMutation, usePaginatedQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
+import { Switch } from "@repo/ui/src/components/switch";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import {
@@ -62,6 +63,7 @@ import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 import { usePostHog } from "posthog-js/react";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { useLanguage } from "./lang-select";
+import { Label } from "@repo/ui/src/components/label";
 
 export const FormattedMessage = ({
   message,
@@ -581,7 +583,7 @@ export function Dialog({
     { chatId },
     { initialNumItems: 5 },
   );
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, autoTranslate, toggleAutoTranslate } = useLanguage();
   const remoteMessages = results.reverse();
   const messages = useMemo(
     () =>
@@ -752,18 +754,22 @@ export function Dialog({
       >
         {currentLanguage !== "en" && (
           <div className="flex w-full items-center justify-center pt-8">
-            <div className="flex flex-col items-center gap-1 text-xs text-muted-foreground">
+            <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-1">
+                <Label htmlFor="automatic-translation">
+                  {t("Automatic translation")}
+                </Label>
                 <InfoTooltip
                   content={t(
                     "Crystal is used when you send message and character answers.",
                   )}
                 />
-                {t("Automatic translation is activated.")}
               </div>
-              <span className="text-[10px]">
-                {t("To turn off, change your language settings to English.")}
-              </span>
+              <Switch
+                id="automatic-translation"
+                value={autoTranslate}
+                onCheckedChange={() => toggleAutoTranslate()}
+              />
             </div>
           </div>
         )}

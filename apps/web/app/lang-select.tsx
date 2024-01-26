@@ -17,6 +17,8 @@ import { useEffect } from "react";
 export function useLanguage() {
   const { i18n } = useTranslation();
   const currentUser = useCurrentUser();
+  const autoTranslate = currentUser?.autoTranslate ?? true;
+  const toggleAutoTranslate = useMutation(api.users.toggleAutoTranslate);
   const setLanguage = useMutation(api.users.setLanguage);
   const userLanguage = currentUser?.languageTag;
   const i18nextLanguage = i18next.language || window.localStorage.i18nextLng;
@@ -26,7 +28,13 @@ export function useLanguage() {
     i18n.changeLanguage(userLanguage);
   }, [userLanguage]);
 
-  return { currentLanguage, setLanguage, i18n };
+  return {
+    currentLanguage,
+    setLanguage,
+    i18n,
+    autoTranslate,
+    toggleAutoTranslate,
+  };
 }
 
 export function LanguageSelect() {

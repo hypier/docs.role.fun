@@ -51,12 +51,8 @@ export const send = mutation({
     chatId: v.id("chats"),
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
-    autoTranslate: v.optional(v.boolean()),
   },
-  handler: async (
-    ctx,
-    { message, chatId, characterId, personaId, autoTranslate },
-  ) => {
+  handler: async (ctx, { message, chatId, characterId, personaId }) => {
     const user = await getUser(ctx);
     const messageId = await ctx.db.insert("messages", {
       text: message,
@@ -80,7 +76,7 @@ export const send = mutation({
       characterId,
       personaId,
       messageId,
-      autoTranslate,
+      autoTranslate: user.autoTranslate,
     });
 
     const character = await ctx.db.get(characterId);
