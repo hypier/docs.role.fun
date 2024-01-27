@@ -7,6 +7,7 @@ import { api } from "../../convex/_generated/api";
 import Link from "next/link";
 import useModelData from "../../app/lib/hooks/use-model-data";
 import { Tooltip } from "@repo/ui/src/components";
+import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
 
 const ModelBadge = ({
   modelName,
@@ -23,7 +24,7 @@ const ModelBadge = ({
         .replace("openrouter/auto", "auto")
     : "gpt-3.5-turbo-1106";
   const modelData = useModelData();
-  const price = useQuery(api.crystals.price, { modelName: model });
+  const price = useStableQuery(api.crystals.price, { modelName: model });
   const crystalUnit = showCredits && price && (
     <div className="flex gap-[0.5]">
       /<Crystal className="h-4 w-4 p-0.5" />
