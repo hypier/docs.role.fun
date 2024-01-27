@@ -16,7 +16,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@repo/ui/src/components";
 import { useMutation, useQuery } from "convex/react";
-import Spinner from "@repo/ui/src/components/spinner";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
 import React from "react";
