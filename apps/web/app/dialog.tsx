@@ -64,6 +64,7 @@ import { usePostHog } from "posthog-js/react";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { useLanguage } from "./lang-select";
 import { Label } from "@repo/ui/src/components/label";
+import { useStablePaginatedQuery } from "./lib/hooks/use-stable-query";
 
 export const FormattedMessage = ({
   message,
@@ -578,7 +579,7 @@ export function Dialog({
   const { t } = useTranslation();
   const router = useRouter();
   const create = useMutation(api.stories.create);
-  const { results, loadMore } = usePaginatedQuery(
+  const { results, loadMore } = useStablePaginatedQuery(
     api.messages.list,
     { chatId },
     { initialNumItems: 5 },
