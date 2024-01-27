@@ -25,6 +25,12 @@ import { ModelSelect } from "./model-select";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCrystalDialog } from "../lib/hooks/use-crystal-dialog";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@repo/ui/src/components/collapsible";
+import { ChevronDown } from "lucide-react";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -118,35 +124,47 @@ const Images = () => {
     </FormItem>
   ));
 
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
     <div className="flex flex-col gap-8">
-      <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 border-t bg-background p-4 lg:static lg:border-none lg:bg-transparent lg:p-0">
-        <div className="flex items-center gap-2 lg:pl-0 lg:pr-4">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmitHandler)}
-              className="mt-1 flex w-full flex-col gap-4"
-              autoFocus
-            >
-              <div className="flex w-full flex-col items-center gap-2 text-base font-medium lg:text-xl">
-                {t("Imagine anything")}
-                <ModelSelect form={form} />
-              </div>
-              <FormField
-                control={form.control}
-                name="prompt"
-                render={({ field }) => <InputField field={field} />}
-              />
-            </form>
-          </Form>
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 border-t bg-background p-4 lg:static lg:border-none lg:bg-transparent lg:p-0">
+          <CollapsibleTrigger className="flex w-full items-center justify-center gap-2">
+            {t("Imagine anything")}
+            <ChevronDown
+              className={`h-4 w-4 ${
+                isOpen ? "" : "-rotate-90"
+              } text-muted-foreground duration-200`}
+            />
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="flex items-center gap-2 lg:pl-0 lg:pr-4">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmitHandler)}
+                  className="mt-1 flex w-full flex-col items-center gap-4"
+                  autoFocus
+                >
+                  <ModelSelect form={form} />
+                  <FormField
+                    control={form.control}
+                    name="prompt"
+                    render={({ field }) => <InputField field={field} />}
+                  />
+                </form>
+              </Form>
+            </div>
+            <span className="text-xs text-muted-foreground underline">
+              <Link href="/content-rules">
+                By clicking 'Generate', you agree to our content rules.
+                Offending content will be removed.
+              </Link>
+            </span>
+          </CollapsibleContent>
         </div>
-        <span className="text-xs text-muted-foreground underline">
-          <Link href="/content-rules">
-            By clicking 'Generate', you agree to our content rules. Offending
-            content will be removed.
-          </Link>
-        </span>
-      </div>
+      </Collapsible>
+
       <Gallery isGenerating={isGenerating} />
     </div>
   );

@@ -25,7 +25,7 @@ export default async function RootLayout({
     <html suppressHydrationWarning={true} lang="en">
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, user-scalable=0;"
       />
       <body className={cx(calSans.variable, inter.variable)}>
         <Suspense fallback={<Spinner />}>
