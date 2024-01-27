@@ -109,7 +109,7 @@ export const FormattedMessage = ({
         },
       }}
     >
-      {textContent?.replace("{{user}}", username)}
+      {textContent?.replaceAll("{{user}}", username)}
     </MemoizedReactMarkdown>
   );
 };
