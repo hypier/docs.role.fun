@@ -38,6 +38,7 @@ You have full control over your data, model, and characters.
 - **Customize Characters:** Create your own characters, personas and UI unique.
 - **Generate Images:** Create images with open-source AI models.
 - **ElevenLabs Voice:** Create characters that can talk to users with a realistic voice.
+- **Automatic Translation:** Talk with your favorite AI models in your languages. [Supported Languages](https://support.deepl.com/hc/en-us/articles/360019925219-Languages-included-in-DeepL-Pro)
 - **Group Chat (Coming soon):** Invite your favorite characters to one chat room and chat together.
 
 ## Supported Models
