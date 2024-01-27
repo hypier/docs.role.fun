@@ -103,7 +103,7 @@ const Images = () => {
       <FormControl>
         <Input
           placeholder="a pixel room for gamer girl"
-          className="w-full truncate text-base"
+          className="w-full truncate"
           {...field}
           autoFocus
         />
