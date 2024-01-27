@@ -31,7 +31,7 @@ const formSchema = z.object({
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
     z.literal("charlesmccarthy/animagine-xl"),
-    z.literal("daun-io/animagine-xl-v3"),
+    z.literal("daun-io/openroleplay.ai-animagine-v3"),
     z.literal("asiryan/juggernaut-xl-v7"),
     z.literal("dall-e-3"),
     z.literal("pagebrain/dreamshaper-v8"),
@@ -55,7 +55,7 @@ const Images = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: searchQuery.get("prompt") || "",
-      model: "daun-io/animagine-xl-v3",
+      model: "daun-io/openroleplay.ai-animagine-v3",
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
@@ -86,7 +86,9 @@ const Images = () => {
   useEffect(() => {
     form.reset({
       prompt: searchQuery.get("prompt") || "",
-      model: (searchQuery.get("model") as any) || "daun-io/animagine-xl-v3",
+      model:
+        (searchQuery.get("model") as any) ||
+        "daun-io/openroleplay.ai-animagine-v3",
     });
   }, [searchQuery]);
 

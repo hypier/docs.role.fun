@@ -301,9 +301,9 @@ export const generateByPrompt = internalAction(
           modelHash =
             "charlesmccarthy/animagine-xl:d6f9644c586556cf0e09d136f7198becf2da31d1955160b2308545e21234ffa9";
           break;
-        case "daun-io/animagine-xl-v3":
+        case "daun-io/openroleplay.ai-animagine-v3":
           modelHash =
-            "daun-io/animagine-xl-v3:2a3051675764801df8b260feeaea8e77116126fa0be00202823e72ceca6c16e9";
+            "daun-io/openroleplay.ai-animagine-v3:559becf07bc8ce089dc37afcdaf8f83bf1038ffcee22730ec5d1b42507b5465c";
           break;
         case "asiryan/juggernaut-xl-v7":
           modelHash =
