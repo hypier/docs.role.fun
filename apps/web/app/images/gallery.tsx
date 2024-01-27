@@ -21,7 +21,7 @@ export const ImagePlaceholder = () => {
         </div>
         <span className="w-[80%] text-center text-xs text-muted-foreground">
           {t(
-            "Normally, image is generated in a minute. When image generation is failed due to an unexpected error, your crystal will be automatically refunded.",
+            "This can take a bit of time if your request is in a queue or the model is booting up. When model is ready, image is generated within 30 seconds. When image generation is failed due to an unexpected error, your crystal will be automatically refunded.",
           )}
         </span>
       </div>
