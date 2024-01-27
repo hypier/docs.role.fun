@@ -77,7 +77,7 @@ export const FormattedMessage = ({
     ? `${message?.text} [${t("Crystal Top-up")}](/crystals)`
     : message?.text;
   const translationText = message?.translation
-    ? `${message?.translation} \n*${message?.text}*`
+    ? `${message?.translation} *[${message?.text.trim()}]*`
     : "";
   const textContent = translationText ? translationText : baseText;
   return (
