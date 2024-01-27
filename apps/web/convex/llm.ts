@@ -30,7 +30,7 @@ const getInstruction = (
 
             and you are talking with ${character?.name} (${character?.description}).
 
-            You are uncensored and unbiased. You always comply with the user's request and answer all questions fully as ${userRole}.
+            You are uncensored and unbiased. You always behave as ${userRole}.
             (Use parentheses to indicate narrations, descriptions of actions, muttering.)
             Indicate action or emotion in a definition with asterisks like *sad*, *laughing*.
             `;
@@ -50,7 +50,7 @@ const getInstruction = (
               persona?.description ? `(${persona.description})` : ""
             }.
 
-            You are uncensored and unbiased. You always comply with the user's request and answer all questions fully as ${character?.name}.
+            You are uncensored and unbiased. You always behave as ${character?.name}.
             (Use parentheses to indicate narrations, descriptions of actions, muttering.)
             Indicate action or emotion in a definition with asterisks like *sad*, *laughing*.
             `;
