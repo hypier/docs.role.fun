@@ -20,12 +20,12 @@ const PersonaCard = (props: {
   return (
     <AspectRatio
       ratio={1 / 1.75}
-      className="group w-full h-full hover:-translate-y-1 duration-200 shadow hover:shadow-lg place-content-center rounded-lg"
+      className="group h-full w-full place-content-center rounded-lg shadow duration-200 hover:-translate-y-1 hover:shadow-lg"
     >
-      <Card className="rounded-lg p-2 w-full h-full flex items-end">
+      <Card className="flex h-full w-full items-end rounded-lg p-2">
         {props.onEdit && (
           <Button
-            className="absolute z-[3] right-4 top-4 h-8 rounded-full"
+            className="absolute right-4 top-4 z-[3] h-8 rounded-full"
             variant="outline"
             onClick={(e) => {
               e.preventDefault();
@@ -35,14 +35,14 @@ const PersonaCard = (props: {
             Edit
           </Button>
         )}
-        <CardHeader className="relative w-full p-4 z-[2]">
+        <CardHeader className="relative z-[2] w-full p-4">
           {props.cardImageUrl && (
-            <div className="bg-gradient-to-b from-transparent via-black/60 to-black absolute -left-2 -bottom-2 w-[calc(100%+16px)] h-[calc(100%+2rem)] rounded-b-lg" />
+            <div className="absolute -bottom-2 -left-2 h-[calc(100%+2rem)] w-[calc(100%+16px)] rounded-b-lg bg-gradient-to-b from-transparent via-black/60 to-black" />
           )}
           <CardTitle
             className={`${
               props.cardImageUrl ? "text-white" : "text-black"
-            } text-lg line-clamp-1 select-none group-hover:opacity-80 duration-200 z-[3] flex justify-between`}
+            } z-[3] line-clamp-1 flex select-none justify-between text-lg duration-200 group-hover:opacity-80`}
           >
             <div className="w-[80%] truncate">{props.name}</div>
             {props.isDefault && <Badge>Default</Badge>}
@@ -50,7 +50,7 @@ const PersonaCard = (props: {
           <CardDescription
             className={`${
               props.cardImageUrl ? "text-white" : "text-black"
-            } select-none text-xs line-clamp-3 group-hover:opacity-80 duration-200 z-[3]`}
+            } z-[3] line-clamp-3 select-none text-xs duration-200 group-hover:opacity-80`}
           >
             {props.description}
           </CardDescription>
@@ -62,7 +62,8 @@ const PersonaCard = (props: {
             width={300}
             height={525}
             quality={60}
-            className="object-cover absolute w-full h-full rounded-lg left-0 top-0 pointer-events-none z-[1]"
+            className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
+            unoptimized={props.cardImageUrl.includes("r2.openroleplay.ai")}
           />
         )}
       </Card>

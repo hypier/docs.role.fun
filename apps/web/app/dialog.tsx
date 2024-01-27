@@ -230,6 +230,7 @@ export const Message = ({
                 width={525}
                 height={300}
                 className="h-[30rem] w-[20rem] rounded-lg"
+                unoptimized={message.imageUrl.includes("r2.openroleplay.ai")}
               />
             )
           )}
@@ -662,6 +663,7 @@ export function Dialog({
           height={525}
           quality={60}
           className="pointer-events-none fixed left-0 top-16 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
+          unoptimized={cardImageUrl.includes("r2.openroleplay.ai")}
         />
       )}
       {chatId && (

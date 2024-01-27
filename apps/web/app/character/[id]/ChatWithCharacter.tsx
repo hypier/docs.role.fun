@@ -162,6 +162,9 @@ export default function ChatWithCharacter({
                     height={525}
                     quality={60}
                     className="pointer-events-none absolute left-0 top-0 h-full w-full object-cover lg:rounded-l-lg"
+                    unoptimized={data.cardImageUrl.includes(
+                      "r2.openroleplay.ai",
+                    )}
                   />
                 )}
                 {data?.cardImageUrl && (

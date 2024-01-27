@@ -26,7 +26,7 @@ import {
   Repeat,
 } from "lucide-react";
 import AgeRestriction from "../../components/characters/age-restriction";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import { nFormatter } from "../lib/utils";
@@ -59,6 +59,7 @@ const ImageDetail = (props: {
               height={525}
               quality={60}
               className="h-[15rem] w-[10rem] rounded-lg object-cover lg:h-full lg:w-full"
+              unoptimized={props.imageUrl.includes("r2.openroleplay.ai")}
             />
           </div>
         )}
@@ -202,6 +203,7 @@ const ImageCard = (props: {
                     height={13}
                     quality={25}
                     className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
+                    unoptimized={props.imageUrl.includes("r2.openroleplay.ai")}
                   />
                 ) : (
                   <Image
@@ -211,6 +213,7 @@ const ImageCard = (props: {
                     height={525}
                     quality={60}
                     className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
+                    unoptimized={props.imageUrl.includes("r2.openroleplay.ai")}
                   />
                 )}
               </>

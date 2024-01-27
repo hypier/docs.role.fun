@@ -29,6 +29,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "r2.openroleplay.ai",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {

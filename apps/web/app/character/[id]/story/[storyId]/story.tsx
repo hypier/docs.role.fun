@@ -46,6 +46,7 @@ export function Story({
             isNSFW && nsfwPreference !== "allow" ? "blur-md" : ""
           }`}
           alt="image of character"
+          unoptimized={character.cardImageUrl.includes("r2.openroleplay.ai")}
         />
       )}
       <div className={`flex h-full flex-col overflow-y-auto scrollbar-hide`}>
