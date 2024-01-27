@@ -102,22 +102,11 @@ const Images = () => {
         />
       </FormControl>
       {me?.name ? (
-        <Button
-          className="h-7 gap-1 text-xs"
-          type="submit"
-          disabled={isGenerating}
-        >
-          {isGenerating ? (
-            <>
-              <Spinner />
-              {t("Generating...")}
-            </>
-          ) : (
-            <>
-              {t("Generate")}
-              <Crystal className="h-4 w-4" /> x {price}
-            </>
-          )}
+        <Button className="h-7 gap-1 text-xs" type="submit">
+          <>
+            {t("Generate")}
+            <Crystal className="h-4 w-4" /> x {price}
+          </>
         </Button>
       ) : (
         <Link href="/sign-in" className="w-full">
