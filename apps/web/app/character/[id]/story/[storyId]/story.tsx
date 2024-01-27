@@ -31,8 +31,8 @@ export function Story({
     api.characters.get,
     characterId ? { id: characterId } : "skip",
   );
-  const messages = useQuery(api.stories.messages, { storyId });
-  const creatorName = useQuery(api.stories.creatorName, { storyId });
+  const messages = useStableQuery(api.stories.messages, { storyId });
+  const creatorName = useStableQuery(api.stories.creatorName, { storyId });
   const unlock = useMutation(api.stories.unlock);
   const { nsfwPreference } = useNsfwPreference();
 
