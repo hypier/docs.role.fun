@@ -9,21 +9,25 @@ export const create = mutation({
     chatName: v.optional(v.string()),
     characterId: v.id("characters"),
     storyId: v.optional(v.id("stories")),
+    isNew: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
-    let chat = await ctx.db
-      .query("chats")
-      .filter((q) => q.eq(q.field("characterId"), args.characterId))
-      .filter((q) => q.eq(q.field("userId"), user._id))
-      .filter((q) => q.eq(q.field("storyId"), args.storyId))
-      .first();
+    if (!args.isNew) {
+      let chat = await ctx.db
+        .query("chats")
+        .filter((q) => q.eq(q.field("characterId"), args.characterId))
+        .filter((q) => q.eq(q.field("userId"), user._id))
+        .filter((q) => q.eq(q.field("storyId"), args.storyId))
+        .first();
 
-    if (chat) {
-      return chat._id;
+      if (chat) {
+        return chat._id;
+      }
     }
+    const { isNew, ...rest } = args;
     const newChat = await ctx.db.insert("chats", {
-      ...args,
+      ...rest,
       userId: user._id,
       updatedAt: new Date().toISOString(),
       joinedAt: new Date().toISOString(),

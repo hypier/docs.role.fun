@@ -48,7 +48,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@repo/ui/src/components/popover";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MemoizedReactMarkdown } from "./markdown";
 import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
@@ -445,10 +445,37 @@ const ChatOptionsPopover = ({
   const router = useRouter();
   const goBack = router.back;
   const remove = useMutation(api.chats.remove);
+  const newChat = useMutation(api.chats.create);
   return (
     <Popover>
       <AlertDialog>
         <PopoverContent className="w-52 p-1">
+          <Button
+            variant="ghost"
+            className="w-full justify-start gap-1 text-muted-foreground"
+            onClick={() => {
+              const promise = newChat({
+                characterId,
+                isNew: true,
+              });
+              toast.promise(promise, {
+                loading: "Creating new chat...",
+                success: (chatId) => {
+                  router.push(`/character/${characterId}?chatId=${chatId}`);
+                  return `New chat has been created.`;
+                },
+                error: (error) => {
+                  console.log("error:::", error);
+                  return error
+                    ? (error.data as { message: string })?.message
+                    : "Unexpected error occurred";
+                },
+              });
+            }}
+          >
+            <Plus className="h-4 w-4 p-0.5" />
+            <span className="w-40 truncate text-left"> {t("New chat")}</span>
+          </Button>
           <Link href={`/character/${characterId}/stories`}>
             <Button
               variant="ghost"
@@ -484,6 +511,7 @@ const ChatOptionsPopover = ({
               </span>
             </Button>
           </Link>
+
           <AlertDialogTrigger asChild>
             <Button
               variant="ghost"
@@ -579,6 +607,9 @@ export function Dialog({
   const { t } = useTranslation();
   const router = useRouter();
   const create = useMutation(api.stories.create);
+  const params = useSearchParams();
+  const urlChatId = params.get("chatId") as Id<"chats">;
+  chatId = urlChatId ? urlChatId : chatId;
   const { results, loadMore } = useStablePaginatedQuery(
     api.messages.list,
     { chatId },
