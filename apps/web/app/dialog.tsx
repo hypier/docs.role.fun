@@ -61,7 +61,6 @@ import { Badge } from "@repo/ui/src/components/badge";
 import { ConvexError } from "convex/values";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 import { usePostHog } from "posthog-js/react";
-import { Toggle } from "@repo/ui/src/components/toggle";
 import { useLanguage } from "./lang-select";
 import { Label } from "@repo/ui/src/components/label";
 import { useStablePaginatedQuery } from "./lib/hooks/use-stable-query";
