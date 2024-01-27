@@ -33,9 +33,15 @@ export const create = mutation({
       joinedAt: new Date().toISOString(),
     });
     const character = await ctx.db.get(args.characterId);
-    const greeting = character?.greetings ? character.greetings[0] : "";
+    const greeting = character?.greetings
+      ? (character.greetings[0] as string)
+      : ("" as string);
+    const persona = user?.primaryPersonaId
+      ? await ctx.db.get(user.primaryPersonaId)
+      : undefined;
+    const userRole = persona && "name" in persona ? persona.name : user.name;
     const messageId = await ctx.db.insert("messages", {
-      text: greeting as string,
+      text: greeting.replaceAll("{{user}}", userRole),
       chatId: newChat,
       characterId: character?._id,
     });
