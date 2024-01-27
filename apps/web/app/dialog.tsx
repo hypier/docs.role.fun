@@ -667,12 +667,21 @@ export function Dialog({
     if (isScrolled) {
       return;
     }
+    // Check if the device is mobile
+    const isMobile = window.innerWidth <= 768;
     // Using `setTimeout` to make sure scrollTo works on button click in Chrome
     setTimeout(() => {
-      listRef.current?.scrollTo({
-        top: listRef.current.scrollHeight,
-        behavior: "smooth",
-      });
+      if (isMobile) {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      } else {
+        listRef.current?.scrollTo({
+          top: listRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
     }, 0);
   }, [messages, isScrolled]);
   const ref = useRef(null);
