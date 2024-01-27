@@ -183,27 +183,13 @@ export const Message = ({
         {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
       {message?.text === "" ? (
-        <div
-          className={
-            "max-w-[20rem] animate-pulse whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
-            (message?.characterId
-              ? " rounded-tl-none bg-muted "
-              : " rounded-tr-none bg-muted text-muted ")
-          }
-        >
+        <div className="max-w-[20rem] animate-pulse whitespace-pre-wrap rounded-xl rounded-tr-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
           {thinkingMessage}
           {thinkingDots}
         </div>
       ) : (
         <>
-          <div
-            className={
-              "relative max-w-[20rem] whitespace-pre-wrap rounded-xl px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]" +
-              (message?.characterId
-                ? " rounded-tl-none bg-muted "
-                : " rounded-tr-none bg-muted text-muted ")
-            }
-          >
+          <div className="relative max-w-[20rem] whitespace-pre-wrap rounded-xl rounded-tl-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
             <FormattedMessage message={message} username={username} />
           </div>
           {isImagining ? (
