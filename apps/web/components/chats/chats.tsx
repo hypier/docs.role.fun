@@ -12,7 +12,10 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "../../app/lib/hooks/use-stable-query";
 
 export const Chat = ({
   name,
@@ -73,7 +76,7 @@ export const Chat = ({
 
 export default function Chats() {
   const { t } = useTranslation();
-  const { results, status, loadMore } = usePaginatedQuery(
+  const { results, status, loadMore } = useStablePaginatedQuery(
     api.chats.list,
     {},
     { initialNumItems: 10 },

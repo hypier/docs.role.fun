@@ -15,8 +15,10 @@ export const list = query({
 
     const translations = await ctx.db
       .query("translations")
+      .withIndex("by_creation_time")
       .filter((q) => q.eq(q.field("languageTag"), languageTag))
-      .collect();
+      .order("desc")
+      .take(512);
 
     return translations;
   },

@@ -21,7 +21,10 @@ import {
 import { useTranslation } from "react-i18next";
 import { FadeInOut } from "../../app/lib/utils";
 import { ChevronRight } from "lucide-react";
-import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "../../app/lib/hooks/use-stable-query";
 
 export const Chat = ({
   name,
@@ -72,7 +75,7 @@ export const Chat = ({
 
 export function MainChats() {
   const { t } = useTranslation();
-  const { results } = usePaginatedQuery(
+  const { results } = useStablePaginatedQuery(
     api.chats.list,
     {},
     { initialNumItems: 10 },
