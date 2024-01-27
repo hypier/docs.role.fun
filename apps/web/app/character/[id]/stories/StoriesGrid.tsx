@@ -25,7 +25,7 @@ export const StoriesGrid = ({
   const character = useStableQuery(api.characters.get, {
     id: characterId,
   });
-  const creatorName = useQuery(api.users.getUsername, {
+  const creatorName = useStableQuery(api.users.getUsername, {
     id: character?.creatorId as Id<"users">,
   });
   const { nsfwPreference } = useNsfwPreference();

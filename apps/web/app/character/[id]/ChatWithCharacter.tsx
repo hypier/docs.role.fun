@@ -97,7 +97,7 @@ export default function ChatWithCharacter({
   const data = useStableQuery(api.characters.get, {
     id: params.id as Id<"characters">,
   });
-  const creatorName = useQuery(api.users.getUsername, {
+  const creatorName = useStableQuery(api.users.getUsername, {
     id: data?.creatorId as Id<"users">,
   });
   const searchParams = useSearchParams();

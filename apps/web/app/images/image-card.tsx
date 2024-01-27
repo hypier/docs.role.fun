@@ -32,6 +32,7 @@ import { Id } from "../../convex/_generated/dataModel";
 import { nFormatter } from "../lib/utils";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useStableQuery } from "../lib/hooks/use-stable-query";
 
 const ImageDetail = (props: {
   prompt: string;
@@ -41,7 +42,7 @@ const ImageDetail = (props: {
   isNSFW?: boolean;
   creatorId?: Id<"users">;
 }) => {
-  const creatorName = useQuery(api.users.getUsername, {
+  const creatorName = useStableQuery(api.users.getUsername, {
     id: props.creatorId as Id<"users">,
   });
   const { t } = useTranslation();
