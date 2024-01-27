@@ -16,9 +16,11 @@ export const create = mutation({
     if (!args.isNew) {
       let chat = await ctx.db
         .query("chats")
+        .withIndex("by_creation_time")
         .filter((q) => q.eq(q.field("characterId"), args.characterId))
         .filter((q) => q.eq(q.field("userId"), user._id))
         .filter((q) => q.eq(q.field("storyId"), args.storyId))
+        .order("desc")
         .first();
 
       if (chat) {
