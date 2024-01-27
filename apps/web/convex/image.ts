@@ -6,7 +6,7 @@ import { Id } from "./_generated/dataModel";
 import { STABILITY_AI_API_URL, getAPIKey, getBaseURL } from "./constants";
 import { Buffer } from "buffer";
 import { OpenAI } from "openai";
-import { ConvexError } from "convex/values";
+import { getUploadUrl } from "./r2";
 
 export const generate = internalAction(
   async (
@@ -362,12 +362,22 @@ export const generateByPrompt = internalAction(
         image = new Blob([binaryData], { type: "image/png" });
       }
 
-      // Update storage.store to accept whatever kind of Blob is returned from node-fetch
-      const imageStorageId = await ctx.storage.store(image as Blob);
-      // Write storageId as the body of the message to the Convex database.
-      const imageUrl = await ctx.runMutation(internal.images.uploadImage, {
+      console.log("Getting upload URL for image.png");
+      const uploadUrl = await getUploadUrl("image.png");
+      console.log("Uploading image to obtained URL");
+      const response = await fetch(uploadUrl, {
+        method: "PUT",
+        body: image,
+        headers: {
+          "Content-Type": "image/png",
+        },
+      });
+      console.log("Image uploaded, extracting image URL");
+      const imageUrl = response.url.split("?")[0];
+      console.log(`Image URL extracted: ${imageUrl}`);
+      await ctx.runMutation(internal.images.uploadR2Image, {
         imageId,
-        imageStorageId,
+        imageUrl,
       });
       if (messageId) {
         await ctx.runMutation(internal.messages.addImage, {

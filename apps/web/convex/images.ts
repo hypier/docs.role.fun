@@ -54,7 +54,20 @@ export const uploadImage = internalMutation({
       throw new ConvexError({ message: "Character does not exist." });
     }
     const imageUrl = (await ctx.storage.getUrl(args.imageStorageId)) as string;
-    const updatedCharacter = await ctx.db.patch(args.imageId, {
+    await ctx.db.patch(args.imageId, {
+      imageUrl,
+    });
+    return imageUrl;
+  },
+});
+
+export const uploadR2Image = internalMutation({
+  args: {
+    imageId: v.id("images"),
+    imageUrl: v.string(),
+  },
+  handler: async (ctx, { imageId, imageUrl }) => {
+    await ctx.db.patch(imageId, {
       imageUrl,
     });
     return imageUrl;
