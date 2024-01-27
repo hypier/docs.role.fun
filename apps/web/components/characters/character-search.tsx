@@ -16,7 +16,10 @@ import { useDebouncedCallback } from "use-debounce";
 import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
-import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "../../app/lib/hooks/use-stable-query";
 
 export const Chat = ({
   name,
@@ -29,7 +32,7 @@ export const Chat = ({
   time: string;
   characterId: Id<"characters">;
 }) => {
-  const character = useQuery(api.characters.get, {
+  const character = useStableQuery(api.characters.get, {
     id: characterId as Id<"characters">,
   });
   return (

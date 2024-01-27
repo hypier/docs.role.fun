@@ -10,7 +10,10 @@ import { Story } from "../story/[storyId]/story";
 import CharacterCardPlaceholder from "../../../../components/cards/character-card-placeholder";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { api } from "../../../../convex/_generated/api";
-import { useStablePaginatedQuery } from "../../../lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "../../../lib/hooks/use-stable-query";
 import { useNsfwPreference } from "../../../lib/hooks/use-nsfw-preference";
 
 export const StoriesGrid = ({
@@ -19,7 +22,7 @@ export const StoriesGrid = ({
   characterId: Id<"characters">;
 }) => {
   const { t } = useTranslation();
-  const character = useQuery(api.characters.get, {
+  const character = useStableQuery(api.characters.get, {
     id: characterId,
   });
   const creatorName = useQuery(api.users.getUsername, {

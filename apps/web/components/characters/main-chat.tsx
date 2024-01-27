@@ -21,6 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { FadeInOut } from "../../app/lib/utils";
 import { ChevronRight } from "lucide-react";
+import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
 
 export const Chat = ({
   name,
@@ -33,7 +34,7 @@ export const Chat = ({
   chatId: Id<"chats">;
   characterId: Id<"characters">;
 }) => {
-  const character = useQuery(api.characters.get, {
+  const character = useStableQuery(api.characters.get, {
     id: characterId as Id<"characters">,
   });
   const message = useQuery(api.messages.mostRecentMessage, {

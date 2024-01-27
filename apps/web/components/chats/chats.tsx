@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
 
 export const Chat = ({
   name,
@@ -24,7 +25,7 @@ export const Chat = ({
   chatId: Id<"chats">;
   characterId: Id<"characters">;
 }) => {
-  const character = useQuery(api.characters.get, {
+  const character = useStableQuery(api.characters.get, {
     id: characterId as Id<"characters">,
   });
   const message = useQuery(api.messages.mostRecentMessage, {

@@ -7,8 +7,8 @@ import { toast } from "sonner";
 import Image from "next/image";
 import Link from "next/link";
 import Spinner from "@repo/ui/src/components/spinner";
-import useCurrentUser from "../../../../lib/hooks/use-current-user";
 import { useNsfwPreference } from "../../../../lib/hooks/use-nsfw-preference";
+import { useStableQuery } from "../../../../lib/hooks/use-stable-query";
 
 export function Story({
   name = "",
@@ -27,7 +27,7 @@ export function Story({
   isCard?: boolean;
   isNSFW?: boolean;
 }) {
-  const character = useQuery(
+  const character = useStableQuery(
     api.characters.get,
     characterId ? { id: characterId } : "skip",
   );

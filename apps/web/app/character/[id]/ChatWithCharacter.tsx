@@ -35,7 +35,10 @@ import Link from "next/link";
 import AgeRestriction from "../../../components/characters/age-restriction";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { useNsfwPreference } from "../../lib/hooks/use-nsfw-preference";
-import { useStablePaginatedQuery } from "../../lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "../../lib/hooks/use-stable-query";
 
 export const Stories = ({
   characterId,
@@ -91,7 +94,7 @@ export default function ChatWithCharacter({
   const { user } = useUser();
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { isMobile } = useMediaQuery();
-  const data = useQuery(api.characters.get, {
+  const data = useStableQuery(api.characters.get, {
     id: params.id as Id<"characters">,
   });
   const creatorName = useQuery(api.users.getUsername, {
