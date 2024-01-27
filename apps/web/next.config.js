@@ -54,6 +54,11 @@ const nextConfig = {
         destination: "https://discord.gg/bM5zzMEtdW",
         permanent: true,
       },
+      {
+        source: "/safety",
+        destination: "/content-rules",
+        permanent: true,
+      },
     ];
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
