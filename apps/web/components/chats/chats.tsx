@@ -28,7 +28,7 @@ export const Chat = ({
   const character = useStableQuery(api.characters.get, {
     id: characterId as Id<"characters">,
   });
-  const message = useQuery(api.messages.mostRecentMessage, {
+  const message = useStableQuery(api.messages.mostRecentMessage, {
     chatId,
   });
   const recentMessageAt = message?._creationTime
