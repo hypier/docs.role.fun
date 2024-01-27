@@ -55,8 +55,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/safety",
-        destination: "/content-rules",
+        source: "/content-rules",
+        destination: "/safety",
         permanent: true,
       },
     ];
