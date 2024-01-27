@@ -657,7 +657,7 @@ export const generateTags = internalAction({
                 },
                 roleTag: {
                   type: "string",
-                  description: `Role define the character's gender or specific role in a story. Common examples are "Male", "Female", "Teacher", "Student", "Friend", "Enemy", "Mentor", etc.`,
+                  description: `Role define the character's gender or specific role in a story in 1 word. Common examples are "Male", "Female", "Gay", "Bisexual", "Lesbian", "Teacher", "Student", "Friend", "Enemy", "Mentor", etc.`,
                 },
                 isNSFW: {
                   type: "boolean",
