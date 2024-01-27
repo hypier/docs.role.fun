@@ -16,7 +16,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@repo/ui/src/components";
 import { useMutation, useQuery } from "convex/react";
-import Spinner from "@repo/ui/src/components/spinner";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
 import React from "react";
@@ -32,7 +31,7 @@ const formSchema = z.object({
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
     z.literal("charlesmccarthy/animagine-xl"),
-    z.literal("daun-io/animagine-xl-v3"),
+    z.literal("daun-io/openroleplay.ai-animagine-v3"),
     z.literal("asiryan/juggernaut-xl-v7"),
     z.literal("dall-e-3"),
     z.literal("pagebrain/dreamshaper-v8"),
@@ -56,7 +55,7 @@ const Images = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: searchQuery.get("prompt") || "",
-      model: "daun-io/animagine-xl-v3",
+      model: "daun-io/openroleplay.ai-animagine-v3",
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
@@ -87,7 +86,9 @@ const Images = () => {
   useEffect(() => {
     form.reset({
       prompt: searchQuery.get("prompt") || "",
-      model: (searchQuery.get("model") as any) || "daun-io/animagine-xl-v3",
+      model:
+        (searchQuery.get("model") as any) ||
+        "daun-io/openroleplay.ai-animagine-v3",
     });
   }, [searchQuery]);
 
@@ -102,22 +103,11 @@ const Images = () => {
         />
       </FormControl>
       {me?.name ? (
-        <Button
-          className="h-7 gap-1 text-xs"
-          type="submit"
-          disabled={isGenerating}
-        >
-          {isGenerating ? (
-            <>
-              <Spinner />
-              {t("Generating...")}
-            </>
-          ) : (
-            <>
-              {t("Generate")}
-              <Crystal className="h-4 w-4" /> x {price}
-            </>
-          )}
+        <Button className="h-7 gap-1 text-xs" type="submit">
+          <>
+            {t("Generate")}
+            <Crystal className="h-4 w-4" /> x {price}
+          </>
         </Button>
       ) : (
         <Link href="/sign-in" className="w-full">

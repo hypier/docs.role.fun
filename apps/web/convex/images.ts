@@ -14,7 +14,7 @@ export const generate = mutation({
       v.literal("dall-e-3"),
       v.literal("charlesmccarthy/animagine-xl"),
       v.literal("asiryan/juggernaut-xl-v7"),
-      v.literal("daun-io/animagine-xl-v3"),
+      v.literal("daun-io/openroleplay.ai-animagine-v3"),
       v.literal("pagebrain/dreamshaper-v8"),
     ),
   },
@@ -54,7 +54,20 @@ export const uploadImage = internalMutation({
       throw new ConvexError({ message: "Character does not exist." });
     }
     const imageUrl = (await ctx.storage.getUrl(args.imageStorageId)) as string;
-    const updatedCharacter = await ctx.db.patch(args.imageId, {
+    await ctx.db.patch(args.imageId, {
+      imageUrl,
+    });
+    return imageUrl;
+  },
+});
+
+export const uploadR2Image = internalMutation({
+  args: {
+    imageId: v.id("images"),
+    imageUrl: v.string(),
+  },
+  handler: async (ctx, { imageId, imageUrl }) => {
+    await ctx.db.patch(imageId, {
       imageUrl,
     });
     return imageUrl;
@@ -186,13 +199,15 @@ export const imagine = mutation({
     const character = await ctx.db.get(
       message?.characterId as Id<"characters">,
     );
-    const crystalPrice = getCrystalPrice("daun-io/animagine-xl-v3");
+    const crystalPrice = getCrystalPrice(
+      "daun-io/openroleplay.ai-animagine-v3",
+    );
     if (user?.crystals < crystalPrice) {
       throw new ConvexError("Not enough crystals.");
     }
     const image = await ctx.db.insert("images", {
       prompt: message?.text as string,
-      model: "daun-io/animagine-xl-v3",
+      model: "daun-io/openroleplay.ai-animagine-v3",
       imageUrl: "",
       referenceImage: character?.cardImageUrl,
       creatorId: user._id,
@@ -208,7 +223,7 @@ export const imagine = mutation({
       messageId,
       prompt: message?.text as string,
       referenceImage: character?.cardImageUrl,
-      model: "daun-io/animagine-xl-v3",
+      model: "daun-io/openroleplay.ai-animagine-v3",
     });
 
     return image;

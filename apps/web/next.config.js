@@ -23,6 +23,18 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "*.r2.cloudflarestorage.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "r2.openroleplay.ai",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
@@ -46,6 +58,11 @@ const nextConfig = {
       {
         source: "/discord",
         destination: "https://discord.gg/bM5zzMEtdW",
+        permanent: true,
+      },
+      {
+        source: "/content-rules",
+        destination: "/safety",
         permanent: true,
       },
     ];

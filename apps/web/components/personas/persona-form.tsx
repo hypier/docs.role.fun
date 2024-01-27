@@ -268,6 +268,7 @@ export default function PersonaForm({
                   width={300}
                   height={525}
                   className="pointer-events-none absolute h-full w-full rounded object-cover"
+                  unoptimized={imageUrl.includes("r2.openroleplay.ai")}
                 />
               )}
             </Label>

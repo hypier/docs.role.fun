@@ -649,7 +649,7 @@ export const generateTags = internalAction({
                 },
                 genreTag: {
                   type: "string",
-                  description: `Genre define the character's genre in 1 word, it can be "Anime", "Game", "Original", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Politics", "Assistant", anything.`,
+                  description: `Genre define the character's genre in 1 word, it can be "Anime", "Game", "Original", "VTuber", "History", "Religion", "Language", "LGBTQ+", "Animal", "Philosophy", "Politics", "Assistant", anything.`,
                 },
                 personalityTag: {
                   type: "string",
@@ -657,7 +657,7 @@ export const generateTags = internalAction({
                 },
                 roleTag: {
                   type: "string",
-                  description: `Role define the character's gender or specific role in a story. Common examples are "Male", "Female", "Teacher", "Student", "Friend", "Enemy", "Mentor", etc.`,
+                  description: `Role define the character's gender or specific role in a story in 1 word. Common examples are "Male", "Female", "Gay", "Bisexual", "Lesbian", "Teacher", "Student", "Friend", "Enemy", "Mentor", etc.`,
                 },
                 isNSFW: {
                   type: "boolean",

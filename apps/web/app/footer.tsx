@@ -37,7 +37,7 @@ export default function Footer() {
             <FooterLink href="/privacy.html">Privacy</FooterLink>
             <FooterLink href="/terms.html">Terms</FooterLink>
             <FooterLink href="/crystal/terms">Crystal Terms</FooterLink>
-            <FooterLink href="/content-rules">Content Rules</FooterLink>
+            <FooterLink href="/content-rules">Safety</FooterLink>
           </div>
         </div>
       </div>

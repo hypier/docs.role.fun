@@ -360,6 +360,7 @@ export default function CharacterForm() {
                   width={300}
                   height={525}
                   className="absolute h-full w-full rounded object-cover"
+                  unoptimized={cardImageUrl.includes("r2.openroleplay.ai")}
                 />
               )}
             </div>
