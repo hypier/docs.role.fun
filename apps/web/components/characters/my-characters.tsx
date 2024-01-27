@@ -16,6 +16,7 @@ import { InfoTooltip, TooltipContent } from "@repo/ui/src/components/tooltip";
 import { useInView } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 
 export const NewCharacter = () => {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ export const NewCharacter = () => {
 
 export function MyCharacters() {
   const { t } = useTranslation();
-  const { results, loadMore } = usePaginatedQuery(
+  const { results, loadMore } = useStablePaginatedQuery(
     api.characters.listMy,
     {},
     { initialNumItems: 10 },

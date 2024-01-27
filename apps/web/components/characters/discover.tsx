@@ -3,7 +3,10 @@ import { api } from "../../convex/_generated/api";
 import CharacterCard from "../cards/character-card";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import { useEffect, useRef, useState } from "react";
-import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "../../app/lib/hooks/use-stable-query";
 import { useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
@@ -45,7 +48,7 @@ const Discover = () => {
     model: searchQuery.get("model") || undefined,
     nsfwPreference,
   };
-  const popularTags = useQuery(api.characters.listPopularTags) || {};
+  const popularTags = useStableQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.list,
