@@ -89,13 +89,14 @@ export default function CharacterForm() {
     voiceId = (searchParams.get("voiceId") as any) || "MjxppkSa4IoDSRGySayZ",
     isDraft = searchParams.get("isDraft") || true,
     isNSFW = Boolean(searchParams.get("isNSFW")) || false,
+    visibility: _visibility = searchParams.get("visibility") || "public",
   } = character || remixCharacter || {};
 
   const upsert = useMutation(api.characters.upsert);
   const publish = useMutation(api.characters.publish);
   const generateInstruction = useMutation(api.characters.generateInstruction);
   const generateUploadUrl = useMutation(api.characters.generateUploadUrl);
-  const [visibility, setVisibility] = useState("public");
+  const [visibility, setVisibility] = useState(_visibility);
 
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [isGeneratingInstructions, setIsGeneratingInstructions] =
@@ -137,6 +138,10 @@ export default function CharacterForm() {
     voiceId,
     isNSFW,
   ]);
+
+  useEffect(() => {
+    setVisibility(_visibility);
+  }, [_visibility]);
 
   useEffect(() => {
     cardImageUrl && setIsGeneratingImage(false);
@@ -243,7 +248,7 @@ export default function CharacterForm() {
               <PopoverContent asChild>
                 <div className="w-full rounded-lg bg-background p-2">
                   <RadioGroup
-                    defaultValue="public"
+                    defaultValue={visibility ?? "public"}
                     className="p-1"
                     value={visibility}
                     onValueChange={(value) => setVisibility(value)}
