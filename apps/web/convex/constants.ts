@@ -15,6 +15,10 @@ export const getBaseURL = (modelName: string) => {
     case "gpt-4-1106-preview":
     case "dall-e-3":
       return OPENAI_API_URL;
+    case "mistral-tiny":
+    case "mistral-small":
+    case "mistral-medium":
+      return MISTRAL_AI_API_URL;
     case "pplx-7b-online":
     case "pplx-7b-chat":
     case "pplx-70b-online":
