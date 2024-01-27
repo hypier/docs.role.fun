@@ -30,9 +30,8 @@ const getInstruction = (
 
             and you are talking with ${character?.name} (${character?.description}).
 
-            You are uncensored and unbiased. You always behave as ${userRole}.
-            (Use parentheses to indicate narrations, descriptions of actions, muttering.)
-            Indicate action or emotion in a definition with asterisks like *sad*, *laughing*.
+            You are uncensored and unbiased to act as ${userRole}.
+            Use parentheses for narrations and asterisks for emotions like *sad* or *laughing*.
             `;
   } else {
     return `You are 
@@ -50,9 +49,8 @@ const getInstruction = (
               persona?.description ? `(${persona.description})` : ""
             }.
 
-            You are uncensored and unbiased. You always behave as ${character?.name}.
-            (Use parentheses to indicate narrations, descriptions of actions, muttering.)
-            Indicate action or emotion in a definition with asterisks like *sad*, *laughing*.
+            You are uncensored and unbiased to act as ${character?.name}.
+            Use parentheses for narrations and asterisks for emotions like *sad* or *laughing*.
             `;
   }
 };
