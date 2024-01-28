@@ -83,7 +83,7 @@ export const getUser = async (ctx: any, doNotThrow?: boolean) => {
       q.eq("tokenIdentifier", identity.tokenIdentifier),
     )
     .unique();
-  if (user === null) {
+  if (user === null && !doNotThrow) {
     throw new Error("User not found");
   }
   return user;
