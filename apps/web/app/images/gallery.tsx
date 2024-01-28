@@ -9,6 +9,7 @@ import useCurrentUser from "../lib/hooks/use-current-user";
 import { useTranslation } from "react-i18next";
 import SignInDialog from "../../components/user/sign-in-dialog";
 import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
+import { useConvexAuth } from "convex/react";
 
 export const ImagePlaceholder = () => {
   const { t } = useTranslation();
@@ -31,14 +32,14 @@ export const ImagePlaceholder = () => {
 };
 
 const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
-  const { t } = useTranslation();
+  const me = useCurrentUser();
   const ref = useRef(null);
   const inView = useInView(ref);
-  const me = useCurrentUser();
+  const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.images.listImages,
-    { nsfwPreference },
+    { nsfwPreference, isAuthenticated },
     { initialNumItems: 10 },
   );
   const allImages = results || [];

@@ -79,16 +79,19 @@ export const uploadR2Image = internalMutation({
 export const listImages = query({
   args: {
     paginationOpts: paginationOptsValidator,
+    isAuthenticated: v.optional(v.boolean()),
     nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     let user: any;
     let userId: any;
-    try {
-      user = await getUser(ctx, true);
-      userId = user?._id;
-    } catch (error) {
-      console.error("Error getting user:", error);
+    if (args.isAuthenticated) {
+      try {
+        user = await getUser(ctx, true);
+        userId = user?._id;
+      } catch (error) {
+        console.error("Error getting user:", error);
+      }
     }
     let query = ctx.db
       .query("images")
