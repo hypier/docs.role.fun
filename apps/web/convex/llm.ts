@@ -240,7 +240,7 @@ export const answer = internalAction({
                   .replaceAll(userPrefix, ""),
               });
             }
-            if (mutationCounter >= 512) {
+            if (mutationCounter >= 1024) {
               break;
             }
           }
