@@ -32,6 +32,7 @@ import {
 } from "@repo/ui/src/components/collapsible";
 import { ChevronDown, Lock, Unlock } from "lucide-react";
 import { Toggle } from "@repo/ui/src/components/toggle";
+import { usePostHog } from "posthog-js/react";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -49,6 +50,7 @@ const formSchema = z.object({
 const Images = () => {
   const { t } = useTranslation();
   const searchQuery = useSearchParams();
+  const posthog = usePostHog();
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [imageId, setImageID] = useState("" as Id<"images">);
@@ -74,6 +76,7 @@ const Images = () => {
   const onSubmitHandler = (values: z.infer<typeof formSchema>) => {
     const { prompt, model, isPrivate } = values;
     const promise = generate({ prompt, model, isPrivate });
+    posthog.capture("imagine");
     setIsGenerating(true);
     promise
       .then((image) => {

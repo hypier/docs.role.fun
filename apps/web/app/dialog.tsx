@@ -131,6 +131,8 @@ export const Message = ({
   const react = useMutation(api.messages.react);
   const speech = useMutation(api.speeches.generate);
   const imagine = useMutation(api.images.imagine);
+  const posthog = usePostHog();
+
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isImagining, setIsImagining] = useState(false);
@@ -210,6 +212,7 @@ export const Message = ({
                         await imagine({
                           messageId: message?._id as Id<"messages">,
                         });
+                        posthog.capture("imagine");
                       } catch (error) {
                         setIsImagining(false);
                         if (error instanceof ConvexError) {
