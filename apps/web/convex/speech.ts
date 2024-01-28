@@ -42,6 +42,7 @@ export const convertTextToSpeech = internalAction(
           headers: headers,
           body: JSON.stringify({
             text: text,
+            model_id: "eleven_multilingual_v2",
           }),
         },
       );
