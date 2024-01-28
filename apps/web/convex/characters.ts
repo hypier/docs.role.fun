@@ -116,7 +116,7 @@ export const list = query({
     paginationOpts: paginationOptsValidator,
     genreTag: v.optional(v.string()),
     personalityTag: v.optional(v.string()),
-    roleTag: v.optional(v.string()),
+    genderTag: v.optional(v.string()),
     languageTag: v.optional(v.string()),
     model: v.optional(v.string()),
     nsfwPreference: v.optional(v.string()),
@@ -138,8 +138,8 @@ export const list = query({
         q.eq(q.field("personalityTag"), args.personalityTag),
       );
     }
-    if (args.roleTag) {
-      query = query.filter((q) => q.eq(q.field("roleTag"), args.roleTag));
+    if (args.genderTag) {
+      query = query.filter((q) => q.eq(q.field("genderTag"), args.genderTag));
     }
     if (args.languageTag) {
       query = query.filter((q) =>
@@ -162,7 +162,7 @@ export const listBackend = query({
   args: {
     genreTag: v.optional(v.string()),
     personalityTag: v.optional(v.string()),
-    roleTag: v.optional(v.string()),
+    genderTag: v.optional(v.string()),
     languageTag: v.optional(v.string()),
     model: v.optional(v.string()),
   },
@@ -183,8 +183,8 @@ export const listBackend = query({
         q.eq(q.field("personalityTag"), args.personalityTag),
       );
     }
-    if (args.roleTag) {
-      query = query.filter((q) => q.eq(q.field("roleTag"), args.roleTag));
+    if (args.genderTag) {
+      query = query.filter((q) => q.eq(q.field("genderTag"), args.genderTag));
     }
     if (args.languageTag) {
       query = query.filter((q) =>
@@ -226,7 +226,7 @@ export const search = query({
     paginationOpts: paginationOptsValidator,
     genreTag: v.optional(v.string()),
     personalityTag: v.optional(v.string()),
-    roleTag: v.optional(v.string()),
+    genderTag: v.optional(v.string()),
     languageTag: v.optional(v.string()),
     model: v.optional(v.string()),
     query: v.optional(v.string()),
@@ -263,8 +263,8 @@ export const search = query({
         q.eq(q.field("personalityTag"), args.personalityTag),
       );
     }
-    if (args.roleTag) {
-      query = query.filter((q) => q.eq(q.field("roleTag"), args.roleTag));
+    if (args.genderTag) {
+      query = query.filter((q) => q.eq(q.field("genderTag"), args.genderTag));
     }
     if (args.languageTag) {
       query = query.filter((q) =>
@@ -404,14 +404,14 @@ export const tag = internalMutation(
       languageTag,
       genreTag,
       personalityTag,
-      roleTag,
+      genderTag,
       isNSFW,
     }: {
       characterId: Id<"characters">;
       languageTag: string;
       genreTag: string;
       personalityTag: string;
-      roleTag: string;
+      genderTag: string;
       isNSFW: boolean;
     },
   ) => {
@@ -419,7 +419,7 @@ export const tag = internalMutation(
       languageTag,
       genreTag,
       personalityTag,
-      roleTag,
+      genderTag,
       ...(isNSFW ? { isNSFW } : {}),
     });
   },
@@ -460,10 +460,10 @@ export const listPopularTags = query({
       (acc: TagCounts, character) => {
         (
           [
+            "genderTag",
             "languageTag",
             "genreTag",
             "personalityTag",
-            "roleTag",
             "model",
           ] as const
         ).forEach((tag) => {

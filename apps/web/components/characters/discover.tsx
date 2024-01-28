@@ -41,10 +41,10 @@ const Discover = () => {
   const searchQuery = useSearchParams();
   const { nsfwPreference } = useNsfwPreference();
   const filters = {
+    genderTag: searchQuery.get("genderTag") || undefined,
     languageTag: searchQuery.get("languageTag") || undefined,
     genreTag: searchQuery.get("genreTag") || undefined,
     personalityTag: searchQuery.get("personalityTag") || undefined,
-    roleTag: searchQuery.get("roleTag") || undefined,
     model: searchQuery.get("model") || undefined,
     nsfwPreference,
   };

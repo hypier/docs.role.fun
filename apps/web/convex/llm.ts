@@ -682,9 +682,9 @@ export const generateTags = internalAction({
                   type: "string",
                   description: `This tag describe the character's personality trait in 1 word. Examples include "Introverted," "Brave," "Cunning," "Compassionate," "Sarcastic," etc.`,
                 },
-                roleTag: {
+                genderTag: {
                   type: "string",
-                  description: `Role define the character's gender or specific role in a story in 1 word. Common examples are "Male", "Female", "Gay", "Bisexual", "Lesbian", "Teacher", "Student", "Friend", "Enemy", "Mentor", etc.`,
+                  description: `Define character's gender in 1 word. Common examples are "Male", "Female", "Non-binary", etc`,
                 },
                 isNSFW: {
                   type: "boolean",
@@ -695,7 +695,7 @@ export const generateTags = internalAction({
                 "languageTag",
                 "genreTag",
                 "personalityTag",
-                "roleTag",
+                "genderTag",
                 "isNSFW",
               ],
             },
@@ -730,7 +730,7 @@ export const generateTags = internalAction({
             languageTag: functionArgs?.languageTag,
             genreTag: functionArgs?.genreTag,
             personalityTag: functionArgs?.personalityTag,
-            roleTag: functionArgs?.roleTag,
+            genderTag: functionArgs?.genderTag,
             isNSFW: functionArgs?.isNSFW,
           });
         }
