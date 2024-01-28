@@ -15,7 +15,7 @@ export const pay = action({
       v.literal(5450),
       v.literal(11200),
       v.literal(19400),
-      v.literal(90000)
+      v.literal(90000),
     ),
     userId: v.id("users"),
   },
@@ -27,7 +27,7 @@ export const pay = action({
     }: {
       numCrystals: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
       userId: Id<"users">;
-    }
+    },
   ): Promise<string> => {
     const domain: string =
       process.env.HOSTING_URL ?? "http://localhost:3000/shop";
@@ -37,6 +37,9 @@ export const pay = action({
     const paymentId: string = await ctx.runMutation(internal.payments.create, {
       numCrystals,
       userId,
+    });
+    const user = await ctx.runQuery(internal.users.getUserInternal, {
+      id: userId,
     });
     const session: Stripe.Checkout.Session =
       await stripe.checkout.sessions.create({
@@ -55,6 +58,7 @@ export const pay = action({
             quantity: 1,
           },
         ],
+        ...(user?.email ? { customer_email: user?.email } : {}),
         mode: "payment",
         success_url: `${domain}?paymentId=${paymentId}`,
         cancel_url: `${domain}`,
@@ -80,7 +84,7 @@ export const fulfill = internalAction({
       const event = stripe.webhooks.constructEvent(
         payload,
         signature,
-        webhookSecret
+        webhookSecret,
       );
       console.log("event:::", event);
 
