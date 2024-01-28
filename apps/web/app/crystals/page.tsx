@@ -170,7 +170,9 @@ const DailyReward = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 px-5">
-      <h1 className="font-display text-5xl">{t("Daily Rewards")}</h1>
+      <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+        {t("Daily Rewards")}
+      </h2>
       <AnimatePresence>
         {checkedIn && (
           <motion.p
@@ -309,6 +311,13 @@ export default function Page() {
             </Button>
           </div>
         </Link>
+        <AnimatePresence>
+          {isAuthenticated && (
+            <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+              <DailyReward />
+            </div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="flex flex-col items-center gap-16 rounded-lg px-5">
@@ -480,8 +489,6 @@ export default function Page() {
           </p>
         </div>
       </div>
-
-      <AnimatePresence>{isAuthenticated && <DailyReward />}</AnimatePresence>
     </div>
   );
 }
