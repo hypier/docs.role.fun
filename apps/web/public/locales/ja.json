@@ -130,5 +130,6 @@
   "Choose an AI model for your character. Each model has unique traits.": "キャラクターの AI モデルを選択します。各モデルには固有の特性があります。",
   "Test your model here.": "ここでモデルをテストします。",
   "Mature content": "成熟したコンテンツ",
-  "This character is intended for adult.": "この文字は大人を対象としています。"
+  "This character is intended for adult.": "この文字は大人を対象としています。",
+  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "プライバシーは私たちにとって重要です。すべての会話は休憩と転送中に暗号化されています。"
 }
