@@ -332,7 +332,7 @@ export const Message = ({
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 24 )
+                    {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 14 )
                   </span>
                 }
                 desktopOnly={true}
