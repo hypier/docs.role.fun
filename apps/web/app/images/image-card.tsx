@@ -21,6 +21,7 @@ import {
   ClipboardIcon,
   Download,
   Heart,
+  Lock,
   Plus,
   Redo,
   Repeat,
@@ -33,6 +34,7 @@ import { nFormatter } from "../lib/utils";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useStableQuery } from "../lib/hooks/use-stable-query";
+import { Badge } from "@repo/ui/src/components/badge";
 
 const ImageDetail = (props: {
   prompt: string;
@@ -156,6 +158,7 @@ const ImageCard = (props: {
   isDraft?: boolean;
   isNSFW?: boolean;
   isLiked?: boolean;
+  isPrivate?: boolean;
   numLikes?: number;
   creatorId?: Id<"users">;
 }) => {
@@ -170,7 +173,20 @@ const ImageCard = (props: {
         >
           <Card className="flex h-full w-full items-end rounded-lg p-2">
             <div className="absolute top-4 z-[3] hover:z-[4]">
-              <ModelBadge modelName={props.model as string} />
+              {props?.isPrivate ? (
+                <Tooltip content="This image is private.">
+                  <div>
+                    <Badge
+                      className="group/badge flex w-fit gap-1"
+                      variant="model"
+                    >
+                      <Lock className="h-4 w-4 p-0.5 text-yellow-500" />
+                    </Badge>
+                  </div>
+                </Tooltip>
+              ) : (
+                <ModelBadge modelName={props.model as string} />
+              )}
             </div>
             <Tooltip
               content={

@@ -73,6 +73,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
               numLikes={image?.numLikes}
               isLiked={image?.isLiked}
               isNSFW={image?.isNSFW && nsfwPreference !== "allow"}
+              isPrivate={image?.isPrivate}
               creatorId={image?.creatorId}
             />
           ))

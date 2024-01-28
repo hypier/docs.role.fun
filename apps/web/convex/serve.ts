@@ -11,7 +11,13 @@ export const useCrystal = internalMutation(
       userId,
       name,
       creatorId,
-    }: { userId: Id<"users">; name: string; creatorId?: Id<"users"> },
+      multiplier = 1,
+    }: {
+      userId: Id<"users">;
+      name: string;
+      creatorId?: Id<"users">;
+      multiplier?: number;
+    },
   ) => {
     const user = await ctx.db.get(userId);
     const price = getCrystalPrice(name);
@@ -21,7 +27,9 @@ export const useCrystal = internalMutation(
         `Not enough crystals. You need ${price} crystals to use ${name}.`,
       );
     }
-    await ctx.db.patch(userId, { crystals: currentCrystals - price });
+    await ctx.db.patch(userId, {
+      crystals: currentCrystals - price * multiplier,
+    });
     await ctx.db.insert("usage", {
       userId,
       name,
@@ -32,7 +40,10 @@ export const useCrystal = internalMutation(
       const dividend = price * DIVIDEND_RATE;
       await ctx.db.patch(creatorId, { crystals: creatorCrystals + dividend });
     }
-    return { currentCrystals, remainingCrystals: currentCrystals - price };
+    return {
+      currentCrystals,
+      remainingCrystals: currentCrystals - price * multiplier,
+    };
   },
 );
 

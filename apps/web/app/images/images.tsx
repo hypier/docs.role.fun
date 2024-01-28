@@ -14,7 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@repo/ui/src/components";
+import { Button, Tooltip } from "@repo/ui/src/components";
 import { useMutation, useQuery } from "convex/react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
@@ -30,7 +30,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@repo/ui/src/components/collapsible";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Lock, Unlock } from "lucide-react";
+import { Toggle } from "@repo/ui/src/components/toggle";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -42,6 +43,7 @@ const formSchema = z.object({
     z.literal("dall-e-3"),
     z.literal("pagebrain/dreamshaper-v8"),
   ]),
+  isPrivate: z.boolean(),
 });
 
 const Images = () => {
@@ -62,15 +64,16 @@ const Images = () => {
     defaultValues: {
       prompt: searchQuery.get("prompt") || "",
       model: "daun-io/openroleplay.ai-animagine-v3",
+      isPrivate: false,
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
     modelName: form.getValues("model"),
-  });
+  }) as number;
 
   const onSubmitHandler = (values: z.infer<typeof formSchema>) => {
-    const { prompt, model } = values;
-    const promise = generate({ prompt, model });
+    const { prompt, model, isPrivate } = values;
+    const promise = generate({ prompt, model, isPrivate });
     setIsGenerating(true);
     promise
       .then((image) => {
@@ -108,11 +111,16 @@ const Images = () => {
           autoFocus
         />
       </FormControl>
+      <FormMessage />
+    </FormItem>
+  ));
+  const ToggleField = React.memo(({ field }: { field: any }) => (
+    <div className="flex w-full justify-between gap-1">
       {me?.name ? (
-        <Button className="h-7 gap-1 text-xs" type="submit">
+        <Button className="h-7 w-full gap-1 text-xs" type="submit">
           <>
             {t("Generate")}
-            <Crystal className="h-4 w-4" /> x {price}
+            <Crystal className="h-4 w-4" /> x {field.value ? price * 2 : price}
           </>
         </Button>
       ) : (
@@ -120,8 +128,23 @@ const Images = () => {
           <Button className="h-7 w-full gap-1 text-xs">{t("Generate")}</Button>
         </Link>
       )}
-      <FormMessage />
-    </FormItem>
+      <Toggle
+        className="h-7 gap-1 text-xs"
+        variant="outline"
+        pressed={field.value}
+        onPressedChange={field.onChange}
+      >
+        {field.value ? (
+          <>
+            <Lock className="h-4 w-4 p-0.5" /> {t("Private")}
+          </>
+        ) : (
+          <>
+            <Unlock className="h-4 w-4 p-0.5" /> {t("Public")}
+          </>
+        )}
+      </Toggle>
+    </div>
   ));
 
   const [isOpen, setIsOpen] = useState(true);
@@ -147,11 +170,19 @@ const Images = () => {
                   autoFocus
                 >
                   <ModelSelect form={form} />
-                  <FormField
-                    control={form.control}
-                    name="prompt"
-                    render={({ field }) => <InputField field={field} />}
-                  />
+                  <div className="flex w-full flex-col gap-4">
+                    <FormField
+                      control={form.control}
+                      name="prompt"
+                      render={({ field }) => <InputField field={field} />}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="isPrivate"
+                      render={({ field }) => <ToggleField field={field} />}
+                    />
+                  </div>
                 </form>
               </Form>
             </div>

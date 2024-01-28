@@ -214,6 +214,7 @@ export const generateByPrompt = internalAction(
       prompt,
       referenceImage,
       model,
+      isPrivate,
     }: {
       userId: Id<"users">;
       imageId: Id<"images">;
@@ -221,6 +222,7 @@ export const generateByPrompt = internalAction(
       prompt: string;
       referenceImage?: string;
       model: string;
+      isPrivate?: boolean;
     },
   ) => {
     const { currentCrystals } = await ctx.runMutation(
@@ -228,6 +230,7 @@ export const generateByPrompt = internalAction(
       {
         userId,
         name: model,
+        multiplier: isPrivate ? 2 : 1,
       },
     );
 

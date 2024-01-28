@@ -17,8 +17,9 @@ export const generate = mutation({
       v.literal("daun-io/openroleplay.ai-animagine-v3"),
       v.literal("pagebrain/dreamshaper-v8"),
     ),
+    isPrivate: v.boolean(),
   },
-  handler: async (ctx, { prompt, model }) => {
+  handler: async (ctx, { prompt, model, isPrivate }) => {
     const user = await getUser(ctx);
     const crystalPrice = getCrystalPrice(model);
     if (user?.crystals < crystalPrice) {
@@ -33,6 +34,7 @@ export const generate = mutation({
       isNSFW: false,
       isBlacklisted: false,
       isArchived: false,
+      isPrivate,
     });
     await ctx.scheduler.runAfter(0, internal.llm.generateImageTags, {
       userId: user._id,
@@ -80,22 +82,32 @@ export const listImages = query({
     nsfwPreference: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    let user: any;
+    let userId: any;
+    try {
+      user = await getUser(ctx, true);
+      userId = user?._id;
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
     let query = ctx.db
       .query("images")
       .withIndex("by_creation_time")
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
-      .filter((q) => q.neq(q.field("isPrivate"), true))
+      .filter((q) =>
+        q.or(
+          q.and(
+            q.eq(q.field("isPrivate"), true),
+            q.eq(q.field("creatorId"), userId),
+          ),
+          q.neq(q.field("isPrivate"), true),
+        ),
+      )
       .filter((q) => q.neq(q.field("imageUrl"), ""));
 
     if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
-    }
-    let user: any;
-    try {
-      user = await getUser(ctx, true);
-    } catch (error) {
-      console.error("Error getting user:", error);
     }
 
     const paginationResult = await query
