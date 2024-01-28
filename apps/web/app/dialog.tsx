@@ -191,7 +191,47 @@ export const Message = ({
         <>
           <div className="relative max-w-[20rem] whitespace-pre-wrap rounded-xl rounded-tl-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
             <FormattedMessage message={message} username={username} />
+            {message?.characterId && chatId && !isRegenerating && (
+              <div className="absolute -right-4 -top-4 lg:-right-2.5 lg:-top-2.5">
+                <Tooltip
+                  content={
+                    <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 14 )
+                    </span>
+                  }
+                  desktopOnly={true}
+                >
+                  <Button
+                    className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                    variant="outline"
+                    onClick={async () => {
+                      setIsImagining(true);
+                      try {
+                        await imagine({
+                          messageId: message?._id as Id<"messages">,
+                        });
+                      } catch (error) {
+                        setIsImagining(false);
+                        if (error instanceof ConvexError) {
+                          openDialog();
+                        } else {
+                          toast.error("An unknown error occurred");
+                        }
+                      }
+                    }}
+                    disabled={message?.imageUrl || isImagining}
+                  >
+                    {isImagining ? (
+                      <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
+                    ) : (
+                      <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
+                    )}
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
           </div>
+
           {isImagining ? (
             <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-sm">
@@ -325,42 +365,6 @@ export const Message = ({
                     <span className="flex w-full items-center justify-center gap-1">
                       <Headphones className="h-5 w-5 lg:h-4 lg:w-4" />
                     </span>
-                  )}
-                </Button>
-              </Tooltip>
-
-              <Tooltip
-                content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 14 )
-                  </span>
-                }
-                desktopOnly={true}
-              >
-                <Button
-                  variant="ghost"
-                  className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
-                  onClick={async () => {
-                    setIsImagining(true);
-                    try {
-                      await imagine({
-                        messageId: message?._id as Id<"messages">,
-                      });
-                    } catch (error) {
-                      setIsImagining(false);
-                      if (error instanceof ConvexError) {
-                        openDialog();
-                      } else {
-                        toast.error("An unknown error occurred");
-                      }
-                    }
-                  }}
-                  disabled={message?.imageUrl || isImagining}
-                >
-                  {isImagining ? (
-                    <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
-                  ) : (
-                    <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
                   )}
                 </Button>
               </Tooltip>
