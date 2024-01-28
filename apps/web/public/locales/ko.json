@@ -100,7 +100,7 @@
   "Adventurous": "모험적인",
   "Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.": "일일 보상을 성공적으로 획득했습니다! 더 많은 보상을 받으려면 내일 다시 방문하세요.",
   "You've already claimed today's reward.": "오늘의 보상은 이미 수령하셨습니다.",
-  "When you set your language to a non-English option, AI characters will speak in your selected language.": "When you set your language to a non-English option, AI characters will speak in your selected language.",
+  "When you set your language to a non-English option, AI characters will speak in your selected language.": "언어를 영어 이외의 옵션으로 설정하면 AI 캐릭터가 선택한 언어로 말하게 됩니다.",
   "Mature Content": "성인 컨텐츠",
   "This model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "이 모델, 캐릭터 또는 콘텐츠는 검열되지 않았습니다. 성인용 콘텐츠를 사용하도록 설정하면 18세 이상임을 확인하는 것입니다.",
   "Some AI model, character or content is uncensored. By enabling Mature Content, you confirm you are over the age of 18.": "일부 AI 모델, 캐릭터 또는 콘텐츠는 검열되지 않았습니다. 성인용 콘텐츠를 사용하도록 설정하면 18세 이상임을 확인하는 것입니다.",
@@ -123,8 +123,8 @@
   "Sign up": "가입",
   "Sign in": "로그인",
   "Free Crystals": "무료 크리스탈",
-  "Buy Crystals": "Buy Crystals",
-  "Crystals are used per AI features you have used.": "Crystals are used per AI features you have used.",
+  "Buy Crystals": "크리스탈 구매",
+  "Crystals are used per AI features you have used.": "크리스탈은 사용한 AI 기능에 따라 사용됩니다.",
   "Create characters and earn crystals.": "캐릭터를 생성하고 크리스탈을 얻으세요.",
   "If you prefer, you can also support us through Patreon.": "원하신다면 Patreon을 통해서도 후원하실 수 있습니다.",
   "Become a Patreon": "Patreon으로 후원하기",
@@ -134,5 +134,5 @@
   "Test your model here.": "여기에서 모델을 테스트하세요.",
   "Mature content": "성인 컨텐츠",
   "This character is intended for adult.": "이 캐릭터는 성인용입니다.",
-  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit."
+  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "저희는 사용자의 개인정보를 중요하게 생각합니다. 모든 대화는 저장 중이거나 전송 중일 때 암호화됩니다."
 }
