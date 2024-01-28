@@ -12,6 +12,7 @@ import CurrentCrystals from "./current-crystals";
 import { DialogPortal } from "@repo/ui/src/components/dialog";
 import { MobilePackageWrapper } from "./crystals/mobile-package";
 import { packages } from "./crystals/packages";
+import Link from "next/link";
 
 const CrystalDialog: React.FC = () => {
   const { t } = useTranslation();
@@ -26,11 +27,11 @@ const CrystalDialog: React.FC = () => {
       <DialogPortal>
         <DialogOrDrawerContent className="min-w-fit p-8">
           <DialogOrDrawerHeader className="p-0 text-left">
-            <h2>Buy Crystals</h2>
+            <h2>{t("Buy Crystals")}</h2>
           </DialogOrDrawerHeader>
           <div className="flex flex-col gap-4">
             <DialogOrDrawerDescription>
-              Crystals are used per AI features you have used.
+              {t("Crystals are used per AI features you have used.")}
             </DialogOrDrawerDescription>
             <div className="flex items-center justify-center gap-2 sm:flex-row">
               {packages.slice(0, 2).map((pkg) => (
@@ -46,9 +47,11 @@ const CrystalDialog: React.FC = () => {
           </div>
           <div className="flex items-center justify-between">
             <CurrentCrystals />
-            <Button variant="ghost" className="w-fit">
-              {t("Shop")}
-            </Button>
+            <Link href="/crystals">
+              <Button variant="ghost" className="w-fit" onClick={closeDialog}>
+                {t("Shop")}
+              </Button>
+            </Link>
           </div>
         </DialogOrDrawerContent>
       </DialogPortal>

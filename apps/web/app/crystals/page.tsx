@@ -200,7 +200,7 @@ export default function Page() {
   const crystals = currentUser?.crystals;
 
   return (
-    <div className="relative flex w-full flex-col items-center gap-16 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
+    <div className="relative flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
       {typeof crystals === "number" && (
         <div
           className={`absolute right-8 top-8 mx-auto flex items-center gap-0.5 font-medium`}
@@ -272,6 +272,42 @@ export default function Page() {
             </svg>
             {t("Become a Patreon")}
           </Button>
+        </Link>
+      </div>
+
+      <div className="flex flex-col items-center gap-4 px-5">
+        <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
+        <Link href="/my-characters/create" className="group w-full lg:block">
+          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+            <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+              {t("Create characters and earn crystals.")}
+              <InfoTooltip
+                content={t(
+                  "You can earn crystals whenever other users interact with the characters you've created.",
+                )}
+              />
+            </h2>
+            <Button className="rounded-full px-3">
+              <Plus className="h-5 w-5 p-1" />
+              {t("Create")}
+            </Button>
+          </div>
+        </Link>
+        <Link href="/my-characters/create" className="group w-full lg:block">
+          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+            <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+              {t("Create a story and earn crystals")}
+              <InfoTooltip
+                content={t(
+                  "You can earn crystals whenever other users unlock stories you have created.",
+                )}
+              />
+            </h2>
+            <Button className="rounded-full px-3">
+              <BookMarked className="h-5 w-5 p-1" />
+              {t("Stories")}
+            </Button>
+          </div>
         </Link>
       </div>
 
@@ -443,42 +479,6 @@ export default function Page() {
             <Crystal className="h-4 w-4" />
           </p>
         </div>
-      </div>
-
-      <div className="flex flex-col items-center gap-4 px-5">
-        <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
-        <Link href="/my-characters/create" className="group w-full lg:block">
-          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
-            <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
-              {t("Create characters and earn crystals.")}
-              <InfoTooltip
-                content={t(
-                  "You can earn crystals whenever other users interact with the characters you've created.",
-                )}
-              />
-            </h2>
-            <Button className="rounded-full px-3">
-              <Plus className="h-5 w-5 p-1" />
-              {t("Create")}
-            </Button>
-          </div>
-        </Link>
-        <Link href="/my-characters/create" className="group w-full lg:block">
-          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
-            <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
-              {t("Create a story and earn crystals")}
-              <InfoTooltip
-                content={t(
-                  "You can earn crystals whenever other users unlock stories you have created.",
-                )}
-              />
-            </h2>
-            <Button className="rounded-full px-3">
-              <BookMarked className="h-5 w-5 p-1" />
-              {t("Stories")}
-            </Button>
-          </div>
-        </Link>
       </div>
 
       <AnimatePresence>{isAuthenticated && <DailyReward />}</AnimatePresence>
