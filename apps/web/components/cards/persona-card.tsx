@@ -63,7 +63,6 @@ const PersonaCard = (props: {
             height={525}
             quality={60}
             className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
-            unoptimized={props.cardImageUrl.includes("r2.openroleplay.ai")}
           />
         )}
       </Card>
