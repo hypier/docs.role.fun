@@ -35,7 +35,7 @@ import {
 } from "@repo/ui/src/components/collapsible";
 import ModelBadge from "../../components/characters/model-badge";
 import { useState } from "react";
-import { ChevronsUpDown, Plus } from "lucide-react";
+import { BookMarked, ChevronsUpDown, Plus } from "lucide-react";
 import Link from "next/link";
 import useImageModelData from "../lib/hooks/use-image-model-data";
 import { packages } from "./packages";
@@ -251,7 +251,7 @@ export default function Page() {
           </section>
         )}
       </AnimatePresence>
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 text-sm">
         {t("If you prefer, you can also support us through Patreon.")}
         <Link
           href={"https://www.patreon.com/openroleplay/membership"}
@@ -447,19 +447,37 @@ export default function Page() {
 
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
-        <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
-          {t("Create characters and earn crystals.")}
-          <InfoTooltip
-            content={t(
-              "You can earn crystals whenever other users interact with the characters you've created.",
-            )}
-          />
-        </h2>
-        <Link href="/my-characters/create" className="hidden lg:block">
-          <Button className="rounded-full px-3">
-            <Plus className="h-5 w-5 p-1" />
-            {t("Create")}
-          </Button>
+        <Link href="/my-characters/create" className="group w-full lg:block">
+          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+            <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+              {t("Create characters and earn crystals.")}
+              <InfoTooltip
+                content={t(
+                  "You can earn crystals whenever other users interact with the characters you've created.",
+                )}
+              />
+            </h2>
+            <Button className="rounded-full px-3">
+              <Plus className="h-5 w-5 p-1" />
+              {t("Create")}
+            </Button>
+          </div>
+        </Link>
+        <Link href="/my-characters/create" className="group w-full lg:block">
+          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+            <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
+              {t("Create a story and earn crystals")}
+              <InfoTooltip
+                content={t(
+                  "You can earn crystals whenever other users unlock stories you have created.",
+                )}
+              />
+            </h2>
+            <Button className="rounded-full px-3">
+              <BookMarked className="h-5 w-5 p-1" />
+              {t("Stories")}
+            </Button>
+          </div>
         </Link>
       </div>
 

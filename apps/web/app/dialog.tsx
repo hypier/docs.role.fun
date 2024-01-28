@@ -714,9 +714,16 @@ export function Dialog({
                 </AlertDialogTrigger>
                 <AlertDialogContent className="max-w-fit">
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Create a story</AlertDialogTitle>
+                    <AlertDialogTitle>
+                      {t("Create a story and earn crystals")}
+                    </AlertDialogTitle>
                     <AlertDialogDescription>
-                      {`When you create a story, anyone will be able to see and continue the story. Messages you send after creating your story won't be shared.`}
+                      {t(
+                        `When you create a story, anyone will be able to see and continue the story. Messages you send after creating your story won't be shared.`,
+                      )}{" "}
+                      {t(
+                        "You can earn crystals whenever other users unlock stories you have created.",
+                      )}
                     </AlertDialogDescription>
                     <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
                       {messages.map((message, i) => (

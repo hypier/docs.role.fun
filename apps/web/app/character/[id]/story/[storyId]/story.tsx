@@ -9,6 +9,8 @@ import Link from "next/link";
 import Spinner from "@repo/ui/src/components/spinner";
 import { useNsfwPreference } from "../../../../lib/hooks/use-nsfw-preference";
 import { useStableQuery } from "../../../../lib/hooks/use-stable-query";
+import { useTranslation } from "react-i18next";
+import { Crystal } from "@repo/ui/src/components/icons";
 
 export function Story({
   name = "",
@@ -27,6 +29,7 @@ export function Story({
   isCard?: boolean;
   isNSFW?: boolean;
 }) {
+  const { t } = useTranslation();
   const character = useStableQuery(
     api.characters.get,
     characterId ? { id: characterId } : "skip",
@@ -78,7 +81,7 @@ ${isNSFW && nsfwPreference !== "allow" ? "blur-md" : ""}
             <div className="mx-auto pb-20 lg:pb-8">
               {chatId ? (
                 <Button
-                  className="w-fit"
+                  className="w-fit gap-1"
                   onClick={() => {
                     const promise = unlock({ chatId, storyId });
                     toast.promise(promise, {
@@ -95,11 +98,14 @@ ${isNSFW && nsfwPreference !== "allow" ? "blur-md" : ""}
                     });
                   }}
                 >
-                  Continue this story
+                  {t("Unlock this story")}
+                  <span className="flex items-center">
+                    <Crystal className="h-4 w-4" /> x {messages?.length}
+                  </span>
                 </Button>
               ) : (
                 <Link href="/sign-in" className="mx-auto">
-                  <Button className="w-fit">Continue this story</Button>
+                  <Button className="w-fit">{t("Unlock this story")}</Button>
                 </Link>
               )}
             </div>
