@@ -295,7 +295,7 @@ export default function Page() {
             </Button>
           </div>
         </Link>
-        <Link href="/my-characters/create" className="group w-full lg:block">
+        <Link href="/stories" className="group w-full lg:block">
           <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
             <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
               {t("Create a story and earn crystals")}
