@@ -100,6 +100,9 @@ export const publish = mutation({
       isDraft: false,
       ...(args.visibility ? { visibility: args.visibility } : {}),
       ...(character.description ? {} : { description: character.greetings[0] }),
+      ...(character.greetings[0]
+        ? { greetings: character.greetings }
+        : { greetings: ["Hi."] }),
       updatedAt,
     });
     !character.languageTag &&
