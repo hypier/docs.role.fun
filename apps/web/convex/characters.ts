@@ -90,6 +90,11 @@ export const publish = mutation({
         message: "User does not have permission to modify this character.",
       });
     }
+    if (!character.cardImageUrl && args.visibility === "public") {
+      throw new ConvexError({
+        message: "Character must have a card image to be published.",
+      });
+    }
     if (!character.name || !character.greetings) {
       throw new ConvexError({
         message: "Character must have a name and greeting.",
