@@ -214,6 +214,8 @@ export const unlock = mutation({
           chatId: args.chatId,
           characterId: message?.characterId,
           text: message?.text as string,
+          ...(message?.speechUrl ? { speechUrl: message.speechUrl } : {}),
+          ...(message?.imageUrl ? { imageUrl: message.imageUrl } : {}),
         }),
       ),
     );
