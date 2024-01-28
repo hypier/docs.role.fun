@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
 } from "@repo/ui/src/components/alert-dialog";
 import { useTranslation } from "react-i18next";
-import { Languages, X } from "lucide-react";
+import { Languages, Lock, X } from "lucide-react";
 import { Button } from "@repo/ui/src/components";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { Rating18Plus } from "@repo/ui/src/components/icons";
@@ -59,6 +59,17 @@ const PreferenceDialog = () => {
             </AlertDialogDescription>
           </div>
           <div className="flex flex-col gap-4">
+            <AlertDialogTitle className="flex flex-col gap-1">
+              <div className="flex items-center gap-1">
+                <Lock className="h-5 w-5 text-green-500" />
+                {t("Privacy")}
+              </div>
+              <div className="text-sm font-normal text-muted-foreground">
+                {t(
+                  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.",
+                )}
+              </div>
+            </AlertDialogTitle>
             <AlertDialogTitle className="flex flex-col gap-1">
               <div className="flex items-center gap-1">
                 <Languages className="h-5 w-5 text-blue-500" />
