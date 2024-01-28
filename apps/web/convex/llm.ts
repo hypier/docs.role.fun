@@ -246,15 +246,13 @@ export const answer = internalAction({
           }
         }
         // Ensure the last mutation is run if the text was updated an odd number of times
-        if (mutationCounter % 10 !== 0) {
-          await ctx.runMutation(internal.llm.updateCharacterMessage, {
-            messageId,
-            text: text
-              .replaceAll("{{user}}", userRole as string)
-              .replaceAll(characterPrefix, "")
-              .replaceAll(userPrefix, ""),
-          });
-        }
+        await ctx.runMutation(internal.llm.updateCharacterMessage, {
+          messageId,
+          text: text
+            .replaceAll("{{user}}", userRole as string)
+            .replaceAll(characterPrefix, "")
+            .replaceAll(userPrefix, ""),
+        });
         if (
           message &&
           messages &&
