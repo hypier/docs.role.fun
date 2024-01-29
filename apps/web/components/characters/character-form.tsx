@@ -541,12 +541,6 @@ export default function CharacterForm() {
                 </FormItem>
               )}
             />
-            <ModelSelect
-              form={form}
-              model={model}
-              isNSFW={form.getValues("isNSFW")}
-            />
-            <VoiceSelect form={form} voiceId={voiceId} />
             <FormField
               control={form.control}
               name="isNSFW"
@@ -572,6 +566,12 @@ export default function CharacterForm() {
                 </div>
               )}
             />
+            <ModelSelect
+              form={form}
+              model={model}
+              isNSFW={form.getValues("isNSFW")}
+            />
+            <VoiceSelect form={form} voiceId={voiceId} />
           </form>
         </Form>
       </CardContent>
