@@ -20,7 +20,11 @@ const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (
 
 export default function Footer() {
   const pathname = usePathname();
-  const showFooter = pathname === "/" || pathname === "/crystals";
+  const showFooter =
+    pathname === "/" ||
+    pathname === "/crystals" ||
+    pathname === "/safety" ||
+    pathname === "/dmca";
   if (!showFooter) return null;
   return (
     <footer className="flex max-w-xs items-center justify-center overflow-x-hidden px-6 py-4 text-xs md:max-w-full 2xl:px-0">
