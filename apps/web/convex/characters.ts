@@ -73,7 +73,6 @@ export const upsert = mutation({
     }
   },
 });
-
 export const publish = mutation({
   args: {
     id: v.id("characters"),
@@ -82,39 +81,43 @@ export const publish = mutation({
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
     const character = await ctx.db.get(args.id);
-    if (!character) {
+
+    if (!character)
       throw new ConvexError({ message: "Character does not exist." });
-    }
-    if (user._id !== character.creatorId) {
+    if (user._id !== character.creatorId)
       throw new ConvexError({
         message: "User does not have permission to modify this character.",
       });
-    }
-    if (!character.cardImageUrl && args.visibility === "public") {
+    if (!character.cardImageUrl && args.visibility === "public")
       throw new ConvexError({
         message: "Character must have a card image to be published.",
       });
-    }
-    if (!character.name || !character.greetings) {
-      throw new ConvexError({
-        message: "Character must have a name and greeting.",
-      });
-    }
+    if (!character.name)
+      throw new ConvexError({ message: "Character must have a name." });
+
+    const greeting = character.greetings?.[0] || "Hi.";
     const updatedAt = new Date().toISOString();
-    const updatedCharacter = await ctx.db.patch(args.id, {
+    const description = character.description ? {} : { description: greeting };
+    const greetings = character?.greetings?.[0]
+      ? { greetings: character.greetings }
+      : { greetings: ["Hi."] };
+    const visibility = args.visibility ? { visibility: args.visibility } : {};
+
+    await ctx.db.patch(args.id, {
       isDraft: false,
-      ...(args.visibility ? { visibility: args.visibility } : {}),
-      ...(character.description ? {} : { description: character.greetings[0] }),
-      ...(character.greetings[0]
-        ? { greetings: character.greetings }
-        : { greetings: ["Hi."] }),
+      ...visibility,
+      ...description,
+      ...greetings,
       updatedAt,
     });
-    !character.languageTag &&
-      (await ctx.scheduler.runAfter(0, internal.llm.generateTags, {
+
+    if (!character.languageTag) {
+      await ctx.scheduler.runAfter(0, internal.llm.generateTags, {
         userId: user._id,
         characterId: character._id,
-      }));
+      });
+    }
+
     return character._id;
   },
 });

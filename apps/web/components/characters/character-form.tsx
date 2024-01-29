@@ -522,6 +522,9 @@ export default function CharacterForm() {
                 <FormItem>
                   <FormLabel className="flex items-center gap-1">
                     {t("Greeting")}
+                    <span className="text-muted-foreground">
+                      {t("(optional)")}
+                    </span>
                     <InfoTooltip
                       content={
                         <TooltipContent
