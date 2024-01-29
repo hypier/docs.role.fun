@@ -3,18 +3,24 @@ import { usePaginatedQuery, useQuery } from "convex/react";
 import { useRef } from "react";
 
 export const useStablePaginatedQuery = ((name, ...args) => {
-  const result = usePaginatedQuery(name, ...args);
-  const stored = useRef(result);
+  try {
+    const result = usePaginatedQuery(name, ...args);
+    const stored = useRef(result);
 
-  // If new data is still loading, wait and do nothing
-  // If data has finished loading, use the ref to store it
-  if (result.status !== "LoadingMore") {
-    stored.current = result;
+    // If new data is still loading, wait and do nothing
+    // If data has finished loading, use the ref to store it
+    if (result.status !== "LoadingMore") {
+      stored.current = result;
+    }
+
+    return stored.current;
+  } catch (error) {
+    // Handle the exception in a way that makes sense for your application
+    console.error("An error occurred in useStablePaginatedQuery: ", error);
+    // Depending on the error handling strategy, you might want to return a default value or rethrow the error
+    return { results: [], status: "failed", loadMore: () => {} };
   }
-
-  return stored.current;
 }) as typeof usePaginatedQuery;
-
 export const useStableQuery = ((name, ...args) => {
   const result = useQuery(name, ...args);
 
