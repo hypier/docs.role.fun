@@ -41,7 +41,10 @@ export const create = mutation({
     const persona = user?.primaryPersonaId
       ? await ctx.db.get(user.primaryPersonaId)
       : undefined;
-    const userRole = persona && "name" in persona ? persona.name : user.name;
+    const userRole =
+      typeof persona === "object" && persona !== null && "name" in persona
+        ? persona.name
+        : user.name;
     const messageId = await ctx.db.insert("messages", {
       text: greeting.replaceAll("{{user}}", userRole),
       chatId: newChat,
