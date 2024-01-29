@@ -134,5 +134,6 @@
   "Test your model here.": "Prova il tuo modello qui.",
   "Mature content": "Contenuto maturo",
   "This character is intended for adult.": "Questo carattere è destinato ad adulti.",
-  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "La tua privacy è importante per noi. Tutte le tue conversazioni sono crittografate a riposo e in transito."
+  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "La tua privacy è importante per noi. Tutte le tue conversazioni sono crittografate a riposo e in transito.",
+  "Check this to enable uncensored models.": "Seleziona questa opzione per abilitare i modelli non censurati."
 }
