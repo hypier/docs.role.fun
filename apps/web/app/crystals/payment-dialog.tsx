@@ -35,7 +35,7 @@ const CrystalDialog: React.FC = () => {
     <Dialog open={isOpen} onOpenChange={closeDialog}>
       <DialogPortal>
         <DialogContent
-          className="min-w-fit bg-white p-8"
+          className="max-h-96 min-w-fit overflow-y-scroll bg-white p-8 lg:max-h-[48rem]"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           {clientSecret && (
