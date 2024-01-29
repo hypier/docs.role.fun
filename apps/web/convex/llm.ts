@@ -674,7 +674,7 @@ export const generateTags = internalAction({
                 },
                 genreTag: {
                   type: "string",
-                  description: `Genre define the character's genre in 1 word, it can be "Anime", "Game", "Original", "VTuber", "History", "Religion", "Language", "LGBTQ+", "Animal", "Philosophy", "Politics", "Assistant", anything.`,
+                  description: `Genre define the character's genre in 1 word, it can be "Anime", "Game", "LGBTQ+", "Original", "VTuber", "History", "Religion", "Language", "Animal", "Philosophy", "Politics", "Assistant", anything.`,
                 },
                 personalityTag: {
                   type: "string",
