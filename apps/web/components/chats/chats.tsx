@@ -5,7 +5,6 @@ import {
   Avatar,
 } from "@repo/ui/src/components/avatar";
 import { api } from "../../convex/_generated/api";
-import { usePaginatedQuery, useQuery } from "convex/react";
 import { formatDistanceToNow } from "date-fns";
 import { Id } from "../../convex/_generated/dataModel";
 import Link from "next/link";

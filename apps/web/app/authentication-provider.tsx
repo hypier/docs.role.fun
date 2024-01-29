@@ -8,6 +8,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import CrystalDialog from "./crystal-dialog";
 import PaymentDialog from "./crystals/payment-dialog";
+import { dark } from "@clerk/themes";
 
 const convex = new ConvexReactClient(
   process.env.NEXT_PUBLIC_CONVEX_URL as string,
@@ -27,7 +28,7 @@ export function AuthenticationProvider({
           : process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
       }
       appearance={{
-        baseTheme: resolvedTheme === "dark" ? ("dark" as any) : undefined,
+        baseTheme: resolvedTheme === "dark" ? dark : undefined,
       }}
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
