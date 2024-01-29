@@ -2,8 +2,8 @@ import { constructMetadata } from "../lib/utils";
 import Characters from "./characters";
 
 export const metadata = constructMetadata({
-  title: "Models - Discover Best AI Models",
-  description: "Explore and find the best models to enhance your AI companion.",
+  title: "Characters - Discover Best AI Characters",
+  description: "Explore and find your personal AI companion.",
 });
 
 export default function Page(): JSX.Element {
