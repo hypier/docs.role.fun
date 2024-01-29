@@ -60,8 +60,8 @@ export const pay = action({
         ],
         ...(user?.email ? { customer_email: user?.email } : {}),
         mode: "payment",
-        success_url: `${domain}?paymentId=${paymentId}`,
-        cancel_url: `${domain}`,
+        ui_mode: "embedded",
+        return_url: `${domain}?session_id={CHECKOUT_SESSION_ID}`,
         automatic_tax: { enabled: true },
       });
 
@@ -69,7 +69,7 @@ export const pay = action({
       paymentId,
       stripeId: session.id,
     });
-    return session.url as string;
+    return session.client_secret as string;
   },
 });
 
