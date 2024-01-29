@@ -119,10 +119,26 @@ export const listImages = query({
         .order("desc")
         .paginate(args.paginationOpts);
     } catch (error) {
-      paginationResult = await query.order("desc").paginate({
-        numItems: 10,
-        cursor: null,
-      });
+      paginationResult = await ctx.db
+        .query("images")
+        .withIndex("by_creation_time")
+        .filter((q) => q.eq(q.field("isBlacklisted"), false))
+        .filter((q) => q.neq(q.field("isArchived"), true))
+        .filter((q) =>
+          q.or(
+            q.and(
+              q.eq(q.field("isPrivate"), true),
+              q.eq(q.field("creatorId"), userId),
+            ),
+            q.neq(q.field("isPrivate"), true),
+          ),
+        )
+        .filter((q) => q.neq(q.field("imageUrl"), ""))
+        .order("desc")
+        .paginate({
+          numItems: 10,
+          cursor: null,
+        });
     }
     const likes = user
       ? await ctx.db
