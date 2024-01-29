@@ -113,9 +113,17 @@ export const listImages = query({
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
 
-    const paginationResult = await query
-      .order("desc")
-      .paginate(args.paginationOpts);
+    let paginationResult;
+    try {
+      paginationResult = await query
+        .order("desc")
+        .paginate(args.paginationOpts);
+    } catch (error) {
+      paginationResult = await query.order("desc").paginate({
+        numItems: 10,
+        cursor: null,
+      });
+    }
     const likes = user
       ? await ctx.db
           .query("imageLikes")
@@ -126,7 +134,6 @@ export const listImages = query({
     const likedImageIds = likes
       .filter((like) => like && like !== null)
       .map((like: any) => like.imageId);
-
     const pageWithIsLiked = paginationResult.page.map((image) => ({
       ...image,
       isLiked: likedImageIds.includes(image._id),
