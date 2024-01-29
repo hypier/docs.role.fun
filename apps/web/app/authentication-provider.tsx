@@ -29,6 +29,15 @@ export function AuthenticationProvider({
       }
       appearance={{
         baseTheme: resolvedTheme === "dark" ? dark : undefined,
+        variables: {
+          colorPrimary: "black",
+        },
+        elements: {
+          formFieldInput: "rounded-lg text-foreground bg-background",
+          formResendCodeLink: "text-foreground",
+          footerActionLink: "text-foreground",
+          otpCodeFieldInput: "rounded-lg text-foreground bg-foreground/10",
+        },
       }}
     >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
