@@ -25,6 +25,7 @@ export const VoiceSelect = ({
 }) => {
   const { t } = useTranslation();
   const voiceData = useVoiceData();
+
   return (
     <FormField
       control={form.control}
@@ -37,7 +38,7 @@ export const VoiceSelect = ({
             defaultValue={field.value ? field.value : voiceId}
           >
             <FormControl>
-              <SelectTrigger>
+              <SelectTrigger className="h-fit">
                 <SelectValue placeholder="Select an AI voice for character." />
               </SelectTrigger>
             </FormControl>
@@ -47,11 +48,20 @@ export const VoiceSelect = ({
                   (voice: {
                     value: string;
                     description: string;
+                    sampleUrl?: string;
                     crystalPrice: number;
                   }) => (
-                    <SelectItem value={voice.value}>
+                    <SelectItem
+                      value={voice.value}
+                      className="flex items-center justify-start gap-2"
+                    >
                       {voice.description} ({voice.crystalPrice}x Crystals per
                       message)
+                      {voice?.sampleUrl && (
+                        <audio autoPlay={false} controls>
+                          <source src={voice?.sampleUrl} type="audio/mpeg" />
+                        </audio>
+                      )}
                     </SelectItem>
                   ),
                 )
