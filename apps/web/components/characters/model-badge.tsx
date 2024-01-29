@@ -8,6 +8,7 @@ import Link from "next/link";
 import useModelData from "../../app/lib/hooks/use-model-data";
 import { Tooltip } from "@repo/ui/src/components";
 import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
+import useAllModels from "../../app/lib/hooks/use-all-models";
 
 const ModelBadge = ({
   modelName,
@@ -23,7 +24,7 @@ const ModelBadge = ({
         .replace("accounts/fireworks/models/", "")
         .replace("openrouter/auto", "auto")
     : "gpt-3.5-turbo-1106";
-  const modelData = useModelData();
+  const modelData = useAllModels();
   const price = useStableQuery(api.crystals.price, { modelName: model });
   const crystalUnit = showCredits && price && (
     <div className="flex gap-[0.5]">
@@ -54,7 +55,7 @@ const ModelBadge = ({
         <Package className="h-4 w-4 p-0.5 text-white" />
       )}
       <span className={collapse ? "hidden group-hover/badge:inline" : ""}>
-        {model}
+        {modelInfo.description || model}
       </span>
       {price ? (
         crystalUnit
