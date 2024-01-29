@@ -124,15 +124,8 @@ export const listImages = query({
         .withIndex("by_creation_time")
         .filter((q) => q.eq(q.field("isBlacklisted"), false))
         .filter((q) => q.neq(q.field("isArchived"), true))
-        .filter((q) =>
-          q.or(
-            q.and(
-              q.eq(q.field("isPrivate"), true),
-              q.eq(q.field("creatorId"), userId),
-            ),
-            q.neq(q.field("isPrivate"), true),
-          ),
-        )
+        .filter((q) => q.neq(q.field("isPrivate"), true))
+        .filter((q) => q.neq(q.field("isNSFW"), true))
         .filter((q) => q.neq(q.field("imageUrl"), ""))
         .order("desc")
         .paginate({
