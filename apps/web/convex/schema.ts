@@ -198,5 +198,7 @@ export default defineSchema({
     type: v.string(),
     userId: v.id("users"),
     elementId: v.string(),
-  }).index("byUserId", ["userId"]),
+  })
+    .index("byUserId", ["userId"])
+    .index("byType", ["type"]),
 });
