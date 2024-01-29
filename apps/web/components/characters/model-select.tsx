@@ -32,10 +32,20 @@ export const ModelSelect = ({
   let modelData = useModelData();
   if (isNSFW) {
     modelData = modelData.filter((model: any) => model.isNSFW);
+  } else {
+    modelData = modelData.filter((model: any) => !model.isNSFW);
   }
   if (modelData.every((modelItem: any) => modelItem.value !== model)) {
     form.setValue("model", modelData[0].value);
   }
+  if (
+    !modelData.some(
+      (modelItem: any) => modelItem.value === form.getValues("model"),
+    )
+  ) {
+    form.setValue("model", modelData[0].value);
+  }
+
   return (
     <FormField
       key={modelData}

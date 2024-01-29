@@ -70,7 +70,7 @@ export const getImageModelCrystalPrice = (modelName: string) => {
 export const modelData = [
   {
     value: "openrouter/auto",
-    description: "Auto (Censored, GPT-4 and Mistral-Medium)",
+    description: "Auto (GPT-4 and Mistral-Medium)",
     crystalPrice: 10,
   },
   {
