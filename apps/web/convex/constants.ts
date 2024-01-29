@@ -376,6 +376,34 @@ export const voiceData = [
       "https://storage.googleapis.com/eleven-public-prod/premade/voices/piTKgcLEGmPE4e6mEKli/c269a54a-e2bc-44d0-bb46-4ed2666d6340.mp3",
   },
   {
+    value: "xSgpoSs990F9DbUdrARh",
+    description: "Natasha - Sassy",
+    crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/CpJRF07XekXZp2RcBTTkntmWfi72/voices/uxKr2vlA4hYgXZR1oPRT/b987a4d1-e94c-44ea-b42c-b40785a8e590.mp3",
+  },
+  {
+    value: "u4ONbbSIwtnCpwS3WTXY",
+    description: "Maya - Meditative",
+    crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/xmZ9WKTVocg4TfoqCt6R9USjZP83/voices/poKwQ6TWTH9zweOZCArv/dfd495f5-e730-43c7-8c9e-7ec56752d105.mp3",
+  },
+  {
+    value: "Q47921UQ6DsbSuEz81hU",
+    description: "Maya - Young, Calm",
+    crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/xcpdkIV6GoPJb4UApYRLpSFQNUO2/voices/mZrq2XCSOTtxoqzNjNPt/b82090cb-0f3c-4f4a-bad7-2436c8193760.mp3",
+  },
+  {
+    value: "9F4C8ztpNUmXkdDDbz3J",
+    description: "Dan - Upbeat, Moduoate",
+    crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/oDQDaQK0SGT9AtdG8VDe17L4KjX2/voices/9F4C8ztpNUmXkdDDbz3J/a5d602ae-a87e-4c19-b485-1b2fa5235400.mp3",
+  },
+  {
     value: "YzIAMwXBjRJLLSZR1E4O",
     description: "Alex - Intense, Narration",
     crystalPrice: 10,
