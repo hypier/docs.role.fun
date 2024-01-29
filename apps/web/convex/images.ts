@@ -113,26 +113,10 @@ export const listImages = query({
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
 
-    let paginationResult;
-    try {
-      paginationResult = await query
-        .order("desc")
-        .paginate(args.paginationOpts);
-    } catch (error) {
-      paginationResult = await ctx.db
-        .query("images")
-        .withIndex("by_creation_time")
-        .filter((q) => q.eq(q.field("isBlacklisted"), false))
-        .filter((q) => q.neq(q.field("isArchived"), true))
-        .filter((q) => q.neq(q.field("isPrivate"), true))
-        .filter((q) => q.neq(q.field("isNSFW"), true))
-        .filter((q) => q.neq(q.field("imageUrl"), ""))
-        .order("desc")
-        .paginate({
-          numItems: 10,
-          cursor: null,
-        });
-    }
+    const paginationResult = await query
+      .order("desc")
+      .paginate(args.paginationOpts);
+
     const likes = user
       ? await ctx.db
           .query("imageLikes")

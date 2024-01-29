@@ -32,6 +32,7 @@ import Link from "next/link";
 import SignInDialog from "../user/sign-in-dialog";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 import PreferenceDialog from "../user/preference-dialog";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -233,7 +234,9 @@ const Discover = () => {
             </Button>
           </Link>
         </div>
-        <Gallery isGenerating={false} />
+        <ErrorBoundary errorComponent={() => ""}>
+          <Gallery isGenerating={false} />
+        </ErrorBoundary>
       </section>
     </div>
   );
