@@ -35,10 +35,12 @@ export const useCrystal = internalMutation(
       name,
     });
     if (creatorId && creatorId !== userId) {
-      const creator = await ctx.db.get(creatorId);
-      const creatorCrystals = creator?.crystals || 0;
-      const dividend = price * DIVIDEND_RATE;
-      await ctx.db.patch(creatorId, { crystals: creatorCrystals + dividend });
+      try {
+        const creator = await ctx.db.get(creatorId);
+        const creatorCrystals = creator?.crystals || 0;
+        const dividend = price * DIVIDEND_RATE;
+        await ctx.db.patch(creatorId, { crystals: creatorCrystals + dividend });
+      } catch (error) {}
     }
     return {
       currentCrystals,
