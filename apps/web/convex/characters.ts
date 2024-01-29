@@ -469,8 +469,8 @@ export const listPopularTags = query({
         (
           [
             "genderTag",
-            "languageTag",
             "genreTag",
+            "languageTag",
             "personalityTag",
             "model",
           ] as const
