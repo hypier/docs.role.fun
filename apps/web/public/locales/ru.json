@@ -134,5 +134,6 @@
   "Test your model here.": "Проверьте модель здесь.",
   "Mature content": "Содержание зрелости",
   "This character is intended for adult.": "Этот символ предназначен для взрослых.",
-  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Ваша конфиденциальность касается нас. Все ваши разговоры зашифрованы на отдыхе и в передаче."
+  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Ваша конфиденциальность касается нас. Все ваши разговоры зашифрованы на отдыхе и в передаче.",
+  "Check this to enable uncensored models.": "Проверьте это, чтобы включить модели цензуры."
 }
