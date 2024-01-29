@@ -358,31 +358,43 @@ export const voiceData = [
     value: "MjxppkSa4IoDSRGySayZ",
     description: "Sally - Relaxed, Conversational",
     crystalPrice: 10,
+    sampleUrl:
+      "https://accurate-camel-290.convex.cloud/api/storage/8c5aeb41-4376-4a23-bc26-a1fb31b39a51",
   },
   {
     value: "Rs8KSvytt4yKbvZosLTw",
     description: "Bria - Soft, Narration",
     crystalPrice: 10,
+    sampleUrl:
+      "https://accurate-camel-290.convex.cloud/api/storage/2e4fe428-4735-4733-bfa9-db970690f5e7",
   },
   {
     value: "piTKgcLEGmPE4e6mEKli",
     description: "Nicole - Whisper, Audiobook",
     crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/premade/voices/piTKgcLEGmPE4e6mEKli/c269a54a-e2bc-44d0-bb46-4ed2666d6340.mp3",
   },
   {
     value: "YzIAMwXBjRJLLSZR1E4O",
     description: "Alex - Intense, Narration",
     crystalPrice: 10,
+    sampleUrl:
+      "https://vivid-jaguar-864.convex.cloud/api/storage/0ecd1d7f-b927-4a49-869a-878d295b45f6",
   },
   {
     value: "TX3LPaxmHKxFdv7VOQHJ",
     description: "Liam - Neutral, Narration",
     crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/premade/voices/TX3LPaxmHKxFdv7VOQHJ/63148076-6363-42db-aea8-31424308b92c.mp3",
   },
   {
     value: "SOYHLrjzK2X1ezoPC6cr",
     description: "Harry - Anxious, Video Games",
     crystalPrice: 10,
+    sampleUrl:
+      "https://storage.googleapis.com/eleven-public-prod/premade/voices/SOYHLrjzK2X1ezoPC6cr/86d178f6-f4b6-4e0e-85be-3de19f490794.mp3",
   },
 ];
 
