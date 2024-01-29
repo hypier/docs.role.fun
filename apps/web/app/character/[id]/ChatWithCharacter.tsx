@@ -39,6 +39,7 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../lib/hooks/use-stable-query";
+import AddToHomeScreen from "../../../components/pwa/add-to-homescreen";
 
 export const Stories = ({
   characterId,
@@ -262,6 +263,7 @@ export default function ChatWithCharacter({
           <CardContent className="h-full w-full p-0">{content}</CardContent>
         </Card>
       )}
+      <AddToHomeScreen />
     </div>
   );
 }
