@@ -365,7 +365,9 @@ export default function Page() {
                   </TableHeader>
                   <TableBody>
                     {modelData
-                      .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
+                      ?.sort(
+                        (a: any, b: any) => a.crystalPrice - b.crystalPrice,
+                      )
                       .map((model: any) => (
                         <TableRow
                           key={model.value}
@@ -433,7 +435,9 @@ export default function Page() {
                   </TableHeader>
                   <TableBody>
                     {imageModelData
-                      .sort((a: any, b: any) => a.crystalPrice - b.crystalPrice)
+                      ?.sort(
+                        (a: any, b: any) => a.crystalPrice - b.crystalPrice,
+                      )
                       .map((model: any) => (
                         <TableRow
                           key={model.value}
