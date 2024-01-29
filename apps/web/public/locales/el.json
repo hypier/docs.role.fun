@@ -134,5 +134,6 @@
   "Test your model here.": "Δοκιμάστε το μοντέλο σας εδώ.",
   "Mature content": "Ώριμο περιεχόμενο",
   "This character is intended for adult.": "Αυτός ο χαρακτήρας προορίζεται για ενήλικα.",
-  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Το απόρρητό σας έχει σημασία για εμάς. Όλες οι συνομιλίες σας είναι κρυπτογραφημένες στην ηρεμία και στη διαμετακόμιση."
+  "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Το απόρρητό σας έχει σημασία για εμάς. Όλες οι συνομιλίες σας είναι κρυπτογραφημένες στην ηρεμία και στη διαμετακόμιση.",
+  "Check this to enable uncensored models.": "Ενεργοποιήστε αυτό για την ενεργοποίηση μη λογοκρισμένων μοντέλων."
 }
