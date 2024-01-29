@@ -13,9 +13,12 @@ import {
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
-const stripePromise = loadStripe(
-  "pk_test_51OJquFDWbs4J5X5ckbKjSEpcjrgOYTsHxRiOq1frxbahPFDtt0perqP7cWLl8FTUIQ0aVP7dMugvauRxpbT54Wjo004FuhU1Ug",
-);
+const stripeKey =
+  process.env.NODE_ENV === "production"
+    ? "pk_live_51OJquFDWbs4J5X5c73h8TpqpRHY5OVpGBiWqia7DkkYMUUAf8yZ5upuDhEK2LRXcFe8qCrlzNLPmkJr0AKVtXn7600AVe2lUmZ"
+    : "pk_test_51OJquFDWbs4J5X5ckbKjSEpcjrgOYTsHxRiOq1frxbahPFDtt0perqP7cWLl8FTUIQ0aVP7dMugvauRxpbT54Wjo004FuhU1Ug";
+
+const stripePromise = loadStripe(stripeKey);
 
 const CrystalDialog: React.FC = () => {
   const { isOpen, clientSecret, closeDialog } = usePaymentDialog();
