@@ -25,6 +25,7 @@ export async function generateMetadata(
     title: `Stories of ${character.name}`,
     description: character.description,
     image: character.cardImageUrl ? character.cardImageUrl : undefined,
+    icon: character.cardImageUrl ? character.cardImageUrl : undefined,
   });
 }
 

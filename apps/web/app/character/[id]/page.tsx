@@ -8,7 +8,7 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // read route params
   const id = params.id;
@@ -17,14 +17,15 @@ export async function generateMetadata(
   const character = await fetch(
     `${process.env.NEXT_PUBLIC_CONVEX_URL?.replace(
       "convex.cloud",
-      "convex.site"
-    )}/character?characterId=${id}`
+      "convex.site",
+    )}/character?characterId=${id}`,
   ).then((res) => res.json());
 
   return constructMetadata({
     title: character.name,
     description: character.description,
     image: character.cardImageUrl ? character.cardImageUrl : undefined,
+    icon: character.cardImageUrl ? character.cardImageUrl : undefined,
   });
 }
 

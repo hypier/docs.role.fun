@@ -84,13 +84,13 @@ export function constructMetadata({
   title = "Openroleplay.ai: AI characters for everyone.",
   description = "Openroleplay.ai is an AI characters and roleplaying platform for everyone.",
   image = "/og.jpg",
-  icons = "/favicon.ico",
+  icon = "/favicon.ico",
   noIndex = false,
 }: {
   title?: string;
   description?: string;
   image?: string;
-  icons?: string;
+  icon?: string;
   noIndex?: boolean;
 } = {}): Metadata {
   return {
@@ -113,6 +113,7 @@ export function constructMetadata({
       creator: "@daun_ai",
     },
     icons: {
+      icon: icon,
       other: [
         {
           url: "/pwa/iphone5_splash.png",
