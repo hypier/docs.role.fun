@@ -32,12 +32,14 @@ const CrystalDialog: React.FC = () => {
     <Dialog open={isOpen} onOpenChange={closeDialog}>
       <DialogPortal>
         <DialogContent className="min-w-fit p-8">
-          <EmbeddedCheckoutProvider
-            stripe={stripePromise}
-            options={{ clientSecret }}
-          >
-            <EmbeddedCheckout />
-          </EmbeddedCheckoutProvider>
+          {clientSecret && (
+            <EmbeddedCheckoutProvider
+              stripe={stripePromise}
+              options={{ clientSecret }}
+            >
+              <EmbeddedCheckout />
+            </EmbeddedCheckoutProvider>
+          )}
         </DialogContent>
       </DialogPortal>
     </Dialog>
