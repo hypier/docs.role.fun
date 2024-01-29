@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ArrowUp, PlusSquare, Share, X } from "lucide-react";
+import { ArrowUp, PlusSquare, Share } from "lucide-react";
 import { Button } from "@repo/ui/src/components";
 
 interface Props {
@@ -13,10 +13,10 @@ export default function AddToMobileChromeIos(props: Props) {
 
   return (
     <div className="fixed left-0 right-0 top-0 z-50 h-[70%] px-4 pt-12 text-foreground">
-      <div className="relative flex h-full flex-col items-center justify-around rounded-xl bg-background p-4 text-center">
+      <div className="relative flex h-full flex-col items-center justify-around rounded-xl border bg-background p-4 text-center">
         <ArrowUp className="absolute -top-[40px] right-0 z-10 animate-bounce text-4xl text-blue-500" />
         <p className="text-lg text-muted-foreground">
-          For the best experience, Install ORP app to your home screen!
+          Install ORP app to your home screen!
         </p>
         <div className="flex items-center gap-2 text-lg">
           <p>Click the</p>
@@ -32,9 +32,7 @@ export default function AddToMobileChromeIos(props: Props) {
             <PlusSquare className="text-2xl" />
           </div>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
       </div>
     </div>
   );

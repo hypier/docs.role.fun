@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ArrowUp, MoreVertical, PlusSquare, X } from "lucide-react";
+import { ArrowUp, MoreVertical, PlusSquare } from "lucide-react";
 import { Button } from "@repo/ui/src/components";
 
 interface Props {
@@ -9,14 +9,14 @@ interface Props {
 }
 
 export default function AddToMobileChrome(props: Props) {
-  const { closePrompt, doNotShowAgain } = props;
+  const { doNotShowAgain } = props;
 
   return (
     <div className="fixed left-0 right-0 top-0 z-50 h-[60%] px-4 pt-12 text-foreground">
       <ArrowUp className="absolute right-[10px] top-[10px] z-10 animate-bounce text-4xl text-blue-500" />
-      <div className="relative flex h-full flex-col items-center justify-around rounded-xl bg-background p-4 text-center">
+      <div className="relative flex h-full flex-col items-center justify-around rounded-xl border bg-background p-4 text-center">
         <p className="text-lg text-muted-foreground">
-          For the best experience, Install ORP app to your home screen!
+          Install ORP app to your home screen!
         </p>
         <div className="flex items-center gap-2 text-lg">
           <p>Click the</p>
@@ -32,9 +32,7 @@ export default function AddToMobileChrome(props: Props) {
             <p>Add to Home Screen</p>
           </div>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
       </div>
     </div>
   );
