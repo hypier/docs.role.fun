@@ -32,9 +32,7 @@ export default function AddToMobileChromeIos(props: Props) {
             <PlusSquare className="text-2xl" />
           </div>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function AddToMobileChrome(props: Props) {
-  const { closePrompt, doNotShowAgain } = props;
+  const { doNotShowAgain } = props;
 
   return (
     <div className="fixed left-0 right-0 top-0 z-50 h-[60%] px-4 pt-12 text-foreground">
@@ -32,9 +32,7 @@ export default function AddToMobileChrome(props: Props) {
             <p>Add to Home Screen</p>
           </div>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
       </div>
     </div>
   );

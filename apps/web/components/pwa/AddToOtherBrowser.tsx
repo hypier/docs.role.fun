@@ -23,9 +23,7 @@ export default function AddToOtherBrowser(props: Props) {
             Find out how
           </Link>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
       </div>
     </div>
   );

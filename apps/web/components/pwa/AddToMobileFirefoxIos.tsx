@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function AddToMobileFirefoxIos(props: Props) {
-  const { closePrompt, doNotShowAgain } = props;
+  const { doNotShowAgain } = props;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 h-[70%] px-4 pb-12 text-foreground">
@@ -38,9 +38,7 @@ export default function AddToMobileFirefoxIos(props: Props) {
             <PlusSquare className="text-2xl" />
           </div>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
         <ArrowDown className="absolute -bottom-[50px] right-[5px] z-10 animate-bounce text-4xl text-blue-500" />
       </div>
     </div>

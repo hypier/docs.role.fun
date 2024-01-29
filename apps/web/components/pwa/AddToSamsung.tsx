@@ -36,9 +36,7 @@ export default function AddToSamsung(props: Props) {
             <p>Home screen</p>
           </div>
         </div>
-        <Button className="border-2 p-1" onClick={doNotShowAgain}>
-          Don&apos;t show again
-        </Button>
+        <Button onClick={doNotShowAgain}>Don&apos;t show again</Button>
         <ArrowDown className="absolute -bottom-[50px] right-[-3px] z-10 animate-bounce text-4xl text-blue-500" />
       </div>
     </div>
