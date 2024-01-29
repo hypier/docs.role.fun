@@ -194,4 +194,9 @@ export default defineSchema({
   })
     .index("byLanguage", ["languageTag"])
     .index("byText", ["text", "languageTag"]),
+  hides: defineTable({
+    type: v.string(),
+    userId: v.id("users"),
+    elementId: v.string(),
+  }).index("byUserId", ["userId"]),
 });
