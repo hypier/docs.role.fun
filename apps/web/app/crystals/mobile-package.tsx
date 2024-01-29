@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { api } from "../../convex/_generated/api";
 import useCurrentUser from "../lib/hooks/use-current-user";
 import { toast } from "sonner";
+import { usePaymentDialog } from "../lib/hooks/use-crystal-dialog";
 
 export const MobilePackage = ({
   src,
@@ -83,6 +84,8 @@ export const MobilePackageWrapper = ({
 }) => {
   const buyCrystal = useAction(api.stripe.pay);
   const currentUser = useCurrentUser();
+  const { setClientSecret, openDialog } = usePaymentDialog();
+
   async function handlePurchaseClick(event: any) {
     event.preventDefault();
     const promise = buyCrystal({
@@ -90,9 +93,10 @@ export const MobilePackageWrapper = ({
       userId: currentUser._id,
     });
     toast.promise(promise, {
-      loading: "Redirecting to purchase page...",
-      success: (paymentUrl) => {
-        window.location.href = paymentUrl!;
+      loading: "Loading purchase details...",
+      success: (clientSecret) => {
+        openDialog();
+        setClientSecret(clientSecret);
         return `Now you can proceed to purchase.`;
       },
       error: (error) => {

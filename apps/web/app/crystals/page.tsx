@@ -39,7 +39,7 @@ import { BookMarked, ChevronsUpDown, Plus } from "lucide-react";
 import Link from "next/link";
 import useImageModelData from "../lib/hooks/use-image-model-data";
 import { packages } from "./packages";
-import CurrentCrystals from "../current-crystals";
+import { usePaymentDialog } from "../lib/hooks/use-crystal-dialog";
 
 const Package = ({
   src,
@@ -116,6 +116,8 @@ const PackageWrapper = ({
 }) => {
   const buyCrystal = useAction(api.stripe.pay);
   const currentUser = useCurrentUser();
+  const { setClientSecret, openDialog } = usePaymentDialog();
+
   async function handlePurchaseClick(event: any) {
     event.preventDefault();
     const promise = buyCrystal({
@@ -123,9 +125,10 @@ const PackageWrapper = ({
       userId: currentUser._id,
     });
     toast.promise(promise, {
-      loading: "Redirecting to purchase page...",
-      success: (paymentUrl) => {
-        window.location.href = paymentUrl!;
+      loading: "Loading purchase details...",
+      success: (clientSecret) => {
+        openDialog();
+        setClientSecret(clientSecret);
         return `Now you can proceed to purchase.`;
       },
       error: (error) => {
@@ -137,13 +140,15 @@ const PackageWrapper = ({
   }
 
   return (
-    <Package
-      src={src}
-      amount={amount}
-      bonus={bonus}
-      price={price}
-      handlePurchaseClick={handlePurchaseClick}
-    />
+    <div>
+      <Package
+        src={src}
+        amount={amount}
+        bonus={bonus}
+        price={price}
+        handlePurchaseClick={handlePurchaseClick}
+      />
+    </div>
   );
 };
 
