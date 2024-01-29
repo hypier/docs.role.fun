@@ -25,7 +25,10 @@ const CrystalDialog: React.FC = () => {
       onPointerDownOutside={closeDialog}
     >
       <DialogPortal>
-        <DialogOrDrawerContent className="min-w-fit p-8">
+        <DialogOrDrawerContent
+          className="min-w-fit p-8"
+          onOpenAutoFocus={(e: any) => e.preventDefault()}
+        >
           <DialogOrDrawerHeader className="p-0 text-left">
             <h2>{t("Buy Crystals")}</h2>
           </DialogOrDrawerHeader>

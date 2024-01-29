@@ -34,7 +34,10 @@ const CrystalDialog: React.FC = () => {
   return (
     <Dialog open={isOpen} onOpenChange={closeDialog}>
       <DialogPortal>
-        <DialogContent className="min-w-fit p-8">
+        <DialogContent
+          className="min-w-fit bg-white p-8"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
           {clientSecret && (
             <EmbeddedCheckoutProvider
               stripe={stripePromise}
