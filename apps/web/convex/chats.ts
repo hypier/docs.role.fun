@@ -45,10 +45,19 @@ export const create = mutation({
       typeof persona === "object" && persona !== null && "name" in persona
         ? persona.name
         : user.name;
+    const formattedText = greeting.replaceAll("{{user}}", userRole);
+    const speech = await ctx.db
+      .query("speeches")
+      .filter((q) => q.eq(q.field("voiceId"), character?.voiceId))
+      .filter((q) =>
+        q.eq(q.field("text"), formattedText?.replace(/\(.*?\)|\*.*?\*/g, "")),
+      )
+      .first();
     const messageId = await ctx.db.insert("messages", {
-      text: greeting.replaceAll("{{user}}", userRole),
+      text: formattedText,
       chatId: newChat,
       characterId: character?._id,
+      speechUrl: speech ? speech.speechUrl : undefined,
     });
 
     const userLanguage =

@@ -64,6 +64,7 @@ import { usePostHog } from "posthog-js/react";
 import { useLanguage } from "./lang-select";
 import { Label } from "@repo/ui/src/components/label";
 import { useStablePaginatedQuery } from "./lib/hooks/use-stable-query";
+import { useVoiceOver } from "./lib/hooks/use-voice-over";
 
 export const FormattedMessage = ({
   message,
@@ -114,12 +115,14 @@ export const FormattedMessage = ({
 };
 
 export const Message = ({
+  index,
   name,
   message,
   cardImageUrl,
   username = "You",
   chatId,
 }: {
+  index?: number;
   name: string;
   message: any;
   cardImageUrl: string;
@@ -132,6 +135,7 @@ export const Message = ({
   const speech = useMutation(api.speeches.generate);
   const imagine = useMutation(api.images.imagine);
   const posthog = usePostHog();
+  const { playVoice, stopVoice, isVoicePlaying } = useVoiceOver();
 
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -160,6 +164,10 @@ export const Message = ({
   useEffect(() => {
     message?.imageUrl && setIsImagining(false);
   }, [message?.imageUrl]);
+
+  useEffect(() => {
+    if (index === 0) playVoice();
+  }, [index]);
 
   return (
     <div
@@ -372,12 +380,15 @@ export const Message = ({
                 </Button>
               </Tooltip>
 
-              {message?.speechUrl && isSpeaking && (
+              {message?.speechUrl && (isSpeaking || isVoicePlaying) && (
                 <audio
                   autoPlay
                   controls
                   hidden
-                  onEnded={() => setIsSpeaking(false)}
+                  onEnded={() => {
+                    setIsSpeaking(false);
+                    stopVoice();
+                  }}
                 >
                   <source src={message?.speechUrl} type="audio/mpeg" />
                 </audio>
@@ -735,6 +746,7 @@ export function Dialog({
                     <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
                       {messages.map((message, i) => (
                         <Message
+                          index={i}
                           key={message._id}
                           name={name}
                           message={message}
@@ -829,6 +841,7 @@ export function Dialog({
           ) : (
             messages.map((message, i) => (
               <Message
+                index={i}
                 key={message._id}
                 name={name}
                 message={message}
