@@ -135,5 +135,6 @@
   "Mature content": "성인 컨텐츠",
   "This character is intended for adult.": "이 캐릭터는 성인용입니다.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "저희는 사용자의 개인정보를 중요하게 생각합니다. 모든 대화는 저장 중이거나 전송 중일 때 암호화됩니다.",
-  "Check this to enable uncensored models.": "Check this to enable uncensored models."
+  "Check this to enable uncensored models.": "무검열 모델을 사용하려면 이 옵션을 선택합니다.",
+  "Affiliate": "제휴"
 }
