@@ -170,6 +170,14 @@ const CharacterCard = (props: {
                 className="rounded-full border-none bg-red-500 text-white hover:bg-red-400 hover:text-white dark:hover:bg-red-600"
                 variant="outline"
                 size="icon"
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  insert({
+                    type: "characters",
+                    elementId: props.id,
+                  });
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
