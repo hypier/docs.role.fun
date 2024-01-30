@@ -8,9 +8,11 @@ import { useTranslation } from "react-i18next";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { initializeTranslationStore } from "./lib/hooks/use-machine-translation";
+import { useConvexAuth } from "convex/react";
 
 function TabsController() {
   const { isMobile } = useMediaQuery();
+  const { isAuthenticated } = useConvexAuth();
   const pathname = usePathname();
   const getFirstDirectory = (urlString: string): string =>
     `/${new URL(urlString, "http://example.com").pathname.split("/")[1] || ""}`;
@@ -65,15 +67,27 @@ function TabsController() {
             {t("Images")}
           </TabsTrigger>
         </Link>
-        <Link href="/crystals">
-          <TabsTrigger
-            className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
-            value="/crystals"
-          >
-            <Crystal className="h-5 w-5 p-1" />
-            {t("Crystals")}
-          </TabsTrigger>
-        </Link>
+        {isAuthenticated ? (
+          <Link href="/crystals">
+            <TabsTrigger
+              className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
+              value="/crystals"
+            >
+              <Crystal className="h-5 w-5 p-1" />
+              {t("Crystals")}
+            </TabsTrigger>
+          </Link>
+        ) : (
+          <Link href="/models" className="lg:hidden">
+            <TabsTrigger
+              className="w-16 flex-col items-center gap-0.5 rounded-full"
+              value="/models"
+            >
+              <Package className="h-5 w-5 p-1" />
+              {t("Models")}
+            </TabsTrigger>
+          </Link>
+        )}
         <Link href="/discord">
           <TabsTrigger
             className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
