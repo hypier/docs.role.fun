@@ -64,6 +64,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/affiliate",
+        destination: "https://tally.so/r/3jPAVR",
+        permanent: true,
+      },
+      {
         source: "/content-rules",
         destination: "/safety",
         permanent: true,

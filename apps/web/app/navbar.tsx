@@ -38,6 +38,12 @@ export default function NavBar({}: {}) {
                 </Badge>
               </Link>
             </Tooltip>
+            <Link
+              href="/affiliate"
+              className="hidden text-base font-normal lg:block"
+            >
+              {t("Affiliate")}
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <Tooltip content="Search characters" desktopOnly>
@@ -59,6 +65,7 @@ export default function NavBar({}: {}) {
                 </Button>
               </Link>
             )}
+
             <UserDropdown />
             <SignedOut>
               <Link href="/sign-in">
