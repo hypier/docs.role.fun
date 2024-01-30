@@ -831,6 +831,7 @@ export const generateImageTags = internalAction({
             prompt: image?.prompt,
             model: image?.model,
             isPrivate: image?.isPrivate,
+            isNSFW: functionArgs?.isNSFW,
           });
         }
       } catch (error) {

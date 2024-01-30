@@ -215,6 +215,7 @@ export const generateByPrompt = internalAction(
       referenceImage,
       model,
       isPrivate,
+      isNSFW,
     }: {
       userId: Id<"users">;
       imageId: Id<"images">;
@@ -223,6 +224,7 @@ export const generateByPrompt = internalAction(
       referenceImage?: string;
       model: string;
       isPrivate?: boolean;
+      isNSFW?: boolean;
     },
   ) => {
     const { currentCrystals } = await ctx.runMutation(
@@ -337,7 +339,7 @@ export const generateByPrompt = internalAction(
           image: referenceImage ?? undefined,
           disable_safety_checker: true,
           negative_prompt:
-            isPrivate || referenceImage
+            isPrivate || referenceImage || isNSFW
               ? "bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"
               : "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name, blushed",
           num_inference_steps: 40,
