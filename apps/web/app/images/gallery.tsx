@@ -57,7 +57,7 @@ const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   return (
-    <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 lg:grid-cols-4 lg:pl-0 xl:grid-cols-5">
+    <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 md:grid lg:grid-cols-3 lg:pl-0 2xl:grid-cols-4">
       <SignInDialog
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}
