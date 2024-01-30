@@ -10,7 +10,7 @@ import CharacterCard from "../../components/cards/character-card";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
 import useCurrentUser from "../lib/hooks/use-current-user";
-import { useQuery } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Carousel,
@@ -31,6 +31,7 @@ const Characters = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchParams();
+  const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
   const filters = {
     languageTag: searchQuery.get("languageTag") || undefined,
@@ -39,11 +40,12 @@ const Characters = () => {
     genderTag: searchQuery.get("genderTag") || undefined,
     model: searchQuery.get("model") || undefined,
     nsfwPreference,
+    isAuthenticated,
   };
   const popularTags = useStableQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);
   const { results, status, loadMore } = useStablePaginatedQuery(
-    api.characters.list,
+    api.characters.listWithHides,
     filters,
     { initialNumItems: 10 },
   );

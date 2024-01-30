@@ -178,11 +178,12 @@ export const listWithHides = query({
     languageTag: v.optional(v.string()),
     model: v.optional(v.string()),
     nsfwPreference: v.optional(v.string()),
+    isAuthenticated: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     let query = ctx.db
       .query("characters")
-      .withIndex("byScore")
+      .withIndex(args?.isAuthenticated ? "byNumChats" : "byScore")
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))

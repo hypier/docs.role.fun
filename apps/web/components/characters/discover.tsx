@@ -48,6 +48,7 @@ const Discover = () => {
     personalityTag: searchQuery.get("personalityTag") || undefined,
     model: searchQuery.get("model") || undefined,
     nsfwPreference,
+    isAuthenticated,
   };
   const popularTags = useStableQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);
