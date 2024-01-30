@@ -54,7 +54,10 @@ const ImageDetail = (props: {
 
   const { t } = useTranslation();
   return (
-    <DialogOrDrawerContent className="max-w-3xl">
+    <DialogOrDrawerContent
+      className="max-w-3xl"
+      onOpenAutoFocus={(e: any) => e.preventDefault()}
+    >
       {props?.isNSFW && <AgeRestriction />}
       <DialogOrDrawerHeader className="flex flex-col gap-4 lg:flex-row">
         {props.imageUrl && (
