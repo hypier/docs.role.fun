@@ -1,11 +1,9 @@
 import { Badge } from "@repo/ui/src/components/badge";
-import { useQuery } from "convex/react";
 import { FilterX, Package } from "lucide-react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Image from "next/image";
 import { api } from "../../convex/_generated/api";
 import Link from "next/link";
-import useModelData from "../../app/lib/hooks/use-model-data";
 import { Tooltip } from "@repo/ui/src/components";
 import { useStableQuery } from "../../app/lib/hooks/use-stable-query";
 import useAllModels from "../../app/lib/hooks/use-all-models";
@@ -25,14 +23,14 @@ const ModelBadge = ({
         .replace("openrouter/auto", "auto")
     : "gpt-3.5-turbo-1106";
   const modelData = useAllModels();
-  const price = useStableQuery(api.crystals.price, { modelName: model });
+  const modelInfo = modelData?.find((item: any) => item.value === model) || {};
+  const price = modelInfo?.crystalPrice;
   const crystalUnit = showCredits && price && (
     <div className="flex gap-[0.5]">
       /<Crystal className="h-4 w-4 p-0.5" />
       {`x ${price}`}
     </div>
   );
-  const modelInfo = modelData?.find((item: any) => item.value === model) || {};
   const { src, alt, isNSFW } = modelInfo;
 
   const tooltipContent = isNSFW
