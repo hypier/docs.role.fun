@@ -84,7 +84,7 @@ export default function Chats() {
   const inView = useInView(ref);
 
   useEffect(() => {
-    if (inView) {
+    if (results?.length > 9 && inView) {
       loadMore(10);
     }
   }, [inView, loadMore]);
