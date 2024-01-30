@@ -169,6 +169,84 @@ export const list = query({
   },
 });
 
+export const listWithHides = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+    genreTag: v.optional(v.string()),
+    personalityTag: v.optional(v.string()),
+    genderTag: v.optional(v.string()),
+    languageTag: v.optional(v.string()),
+    model: v.optional(v.string()),
+    nsfwPreference: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byScore")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isModel"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+    if (args.genreTag) {
+      query = query.filter((q) => q.eq(q.field("genreTag"), args.genreTag));
+    }
+    if (args.personalityTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("personalityTag"), args.personalityTag),
+      );
+    }
+    if (args.genderTag) {
+      query = query.filter((q) => q.eq(q.field("genderTag"), args.genderTag));
+    }
+    if (args.languageTag) {
+      query = query.filter((q) =>
+        q.eq(q.field("languageTag"), args.languageTag),
+      );
+    }
+    if (args.model) {
+      query = query.filter((q) => q.eq(q.field("model"), args.model));
+    }
+
+    if (args.nsfwPreference !== "allow") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+
+    const paginationResult = await query
+      .order("desc")
+      .paginate(args.paginationOpts);
+
+    let user: any;
+    try {
+      user = await getUser(ctx, true);
+    } catch (error) {
+      console.error("Error getting user:", error);
+      return paginationResult;
+    }
+
+    // Fetch all the hides for the current user
+    const hides = user
+      ? await ctx.db
+          .query("hides")
+          .withIndex("byUserId", (q) => q.eq("userId", user._id))
+          .filter((q) => q.eq(q.field("type"), "characters"))
+          .order("desc")
+          .take(512)
+      : [];
+    const hiddenCharacterIds = hides.map((hide: any) => hide.elementId);
+
+    // Filter out the characters that are in the hides list
+    const pageWithFilteredCharacters = paginationResult.page.filter(
+      (character) => !hiddenCharacterIds.includes(character._id),
+    );
+
+    return {
+      ...paginationResult,
+      page: pageWithFilteredCharacters,
+    };
+  },
+});
+
 export const listBackend = query({
   args: {
     genreTag: v.optional(v.string()),

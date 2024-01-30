@@ -21,3 +21,10 @@ export const listVoices = query({
     return voiceData;
   },
 });
+
+export const listAllModels = query({
+  args: {},
+  handler: async (ctx, args) => {
+    return [...modelData, ...imageModelData, ...voiceData];
+  },
+});

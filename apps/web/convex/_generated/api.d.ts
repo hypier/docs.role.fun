@@ -22,6 +22,7 @@ import type * as crons from "../crons.js";
 import type * as crystals from "../crystals.js";
 import type * as followUps from "../followUps.js";
 import type * as helpers from "../helpers.js";
+import type * as hides from "../hides.js";
 import type * as http from "../http.js";
 import type * as image from "../image.js";
 import type * as images from "../images.js";
@@ -59,6 +60,7 @@ declare const fullApi: ApiFromModules<{
   crystals: typeof crystals;
   followUps: typeof followUps;
   helpers: typeof helpers;
+  hides: typeof hides;
   http: typeof http;
   image: typeof image;
   images: typeof images;
