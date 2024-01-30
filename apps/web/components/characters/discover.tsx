@@ -11,7 +11,7 @@ import { useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button } from "@repo/ui/src/components";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MessageSquare, X } from "lucide-react";
 import { MainStories } from "./main-stories";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -52,7 +52,7 @@ const Discover = () => {
   const popularTags = useStableQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);
   const { results, status, loadMore } = useStablePaginatedQuery(
-    api.characters.list,
+    api.characters.listWithHides,
     filters,
     { initialNumItems: 10 },
   );
@@ -174,7 +174,7 @@ const Discover = () => {
                     character.name && (
                       <>
                         <CarouselItem
-                          className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
+                          className="md:basis-1/3 xl:basis-1/4 2xl:basis-1/5"
                           key={character._id}
                         >
                           <CharacterCard
@@ -185,6 +185,7 @@ const Discover = () => {
                             description={character.description}
                             model={character.model}
                             showRemix={true}
+                            showHides={isAuthenticated}
                             isNSFW={
                               character?.isNSFW &&
                               me?.nsfwPreference !== "allow"

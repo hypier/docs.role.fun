@@ -16,13 +16,13 @@ export const list = query({
 export const insert = mutation({
   args: {
     type: v.string(),
-    userId: v.id("users"),
     elementId: v.string(),
   },
   handler: async (ctx, args) => {
+    const user = await getUser(ctx);
     return await ctx.db.insert("hides", {
       type: args.type,
-      userId: args.userId,
+      userId: user._id,
       elementId: args.elementId,
     });
   },
