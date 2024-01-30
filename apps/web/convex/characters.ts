@@ -538,11 +538,17 @@ export const generate = mutation({
 
 export const listPopularTags = query({
   handler: async (ctx) => {
-    const popularCharacters = await ctx.db
-      .query("characters")
-      .withIndex("byScore")
-      .order("desc")
-      .take(300);
+    let user: any;
+    try {
+      user = await getUser(ctx, true);
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
+    let query = ctx.db.query("characters").withIndex("byScore");
+    if (user && user.nsfwPreference !== "allow") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+    const popularCharacters = await query.order("desc").take(300);
     type TagCount = { [key: string]: number };
     type TagCounts = { [key: string]: TagCount };
     const tagCounts: TagCounts = popularCharacters.reduce(

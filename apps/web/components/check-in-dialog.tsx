@@ -34,7 +34,7 @@ const CheckinDialog = () => {
       },
       error: (error) => {
         return error
-          ? (error.data as { message: string }).message
+          ? (error.data as { message: string })?.message
           : "Unexpected error occurred";
       },
     });
