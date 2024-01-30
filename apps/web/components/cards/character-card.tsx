@@ -43,9 +43,9 @@ const CharacterCard = (props: {
   const { translations } = useTranslationStore();
   const { mt } = useMachineTranslation();
   const { nsfwPreference } = useNsfwPreference();
-  const { isMobile } = useMediaQuery();
+  const { isMobile, isTablet } = useMediaQuery();
   const insert = useMutation(api.hides.insert);
-  const hide = props.showHides && isMobile;
+  const hide = props.showHides && (isMobile || isTablet);
 
   return (
     <>

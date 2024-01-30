@@ -102,7 +102,7 @@ export function MainChats() {
               <CarouselContent className="w-full">
                 {results.map((chat) => (
                   <CarouselItem
-                    className="group ml-4 basis-1/2 rounded-lg border bg-background p-4 sm:basis-1/3 lg:basis-1/4"
+                    className="group ml-4 basis-1/2 rounded-lg border bg-background p-4 lg:basis-1/3"
                     key={chat._id}
                   >
                     <Chat

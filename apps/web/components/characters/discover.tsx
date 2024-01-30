@@ -194,7 +194,7 @@ const Discover = () => {
                         </CarouselItem>
                         {index === 5 && (
                           <CarouselItem
-                            className="md:basis-1/3 lg:basis-1/4 2xl:basis-1/5"
+                            className="md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
                             key={"new-character"}
                           >
                             <NewCharacter />
