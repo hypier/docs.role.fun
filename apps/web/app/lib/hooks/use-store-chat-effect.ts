@@ -15,7 +15,7 @@ export default function useStoreChatEffect(
   const [chatId, setChatId] = useState<Id<"chats"> | undefined>(urlChatId);
   const chat = useQuery(
     api.chats.get,
-    chatId ? { id: chatId as Id<"chats"> } : "skip",
+    chatId && isAuthenticated ? { id: chatId as Id<"chats"> } : "skip",
   );
   const createChat = useMutation(api.chats.create);
 
