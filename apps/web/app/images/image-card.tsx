@@ -35,6 +35,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useStableQuery } from "../lib/hooks/use-stable-query";
 import { Badge } from "@repo/ui/src/components/badge";
+import useAllModels from "../lib/hooks/use-all-models";
 
 const ImageDetail = (props: {
   prompt: string;
@@ -47,6 +48,10 @@ const ImageDetail = (props: {
   const creatorName = useStableQuery(api.users.getUsername, {
     id: props.creatorId as Id<"users">,
   });
+  const modelData = useAllModels();
+  const modelInfo =
+    modelData?.find((item: any) => item.value === props.model) || {};
+
   const { t } = useTranslation();
   return (
     <DialogOrDrawerContent className="max-w-3xl">
@@ -135,7 +140,7 @@ const ImageDetail = (props: {
           <div className="flex w-full flex-col gap-2">
             Model
             <DialogOrDrawerDescription>
-              {props?.model}
+              {modelInfo.description || props.model}
             </DialogOrDrawerDescription>
           </div>
           <div className="flex w-full flex-col gap-2">
