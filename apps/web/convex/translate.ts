@@ -68,44 +68,47 @@ export const intercept = internalAction({
     });
     let result;
 
-    if (
-      args.userLanguage !== "en-US" &&
-      args.autoTranslate !== false &&
-      args.userLanguage
-    ) {
-      const { currentCrystals } = await ctx.runMutation(
-        internal.serve.useCrystal,
-        {
-          userId: args.userId,
-          name: "deepl",
-        },
-      );
-      try {
-        const targetLanguage =
-          (args.targetLanguage as deepl.TargetLanguageCode) ||
-          ("en" as deepl.TargetLanguageCode);
-        const translator = new deepl.Translator(
-          process.env.DEEPL_API_KEY as string,
+    try {
+      if (
+        args.userLanguage !== "en-US" &&
+        args.autoTranslate !== false &&
+        args.userLanguage
+      ) {
+        const { currentCrystals } = await ctx.runMutation(
+          internal.serve.useCrystal,
+          {
+            userId: args.userId,
+            name: "deepl",
+          },
         );
-        result = await translator.translateText(
-          message.text as string,
-          null,
-          targetLanguage,
-        );
-        await ctx.runMutation(internal.messages.interceptTranslation, {
-          messageId: args.messageId,
-          translation: message.text as string,
-          text: result.text,
-        });
-      } catch (error) {
-        await ctx.runMutation(internal.serve.refundCrystal, {
-          userId: args.userId,
-          currentCrystals,
-          name: "deepl",
-        });
-        throw error;
-        console.log("translation error:", error);
+        try {
+          const targetLanguage =
+            (args.targetLanguage as deepl.TargetLanguageCode) ||
+            ("en" as deepl.TargetLanguageCode);
+          const translator = new deepl.Translator(
+            process.env.DEEPL_API_KEY as string,
+          );
+          result = await translator.translateText(
+            message.text as string,
+            null,
+            targetLanguage,
+          );
+          await ctx.runMutation(internal.messages.interceptTranslation, {
+            messageId: args.messageId,
+            translation: message.text as string,
+            text: result.text,
+          });
+        } catch (error) {
+          await ctx.runMutation(internal.serve.refundCrystal, {
+            userId: args.userId,
+            currentCrystals,
+            name: "deepl",
+          });
+          console.log("translation error:", error);
+        }
       }
+    } catch (error) {
+      console.log("skipping translation");
     }
     await ctx.scheduler.runAfter(0, internal.llm.answer, {
       chatId: args.chatId,
