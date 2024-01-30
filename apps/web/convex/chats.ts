@@ -120,6 +120,11 @@ export const remove = mutation({
       .filter((q) => q.eq(q.field("userId"), user._id))
       .first();
     if (chat) {
+      const messages = await ctx.db
+        .query("messages")
+        .withIndex("byChatId", (q) => q.eq("chatId", args.id))
+        .collect();
+      await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
       return await ctx.db.delete(args.id);
     }
   },
