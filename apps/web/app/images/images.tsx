@@ -158,7 +158,7 @@ const Images = () => {
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 border-t bg-background p-4 lg:static lg:border-none lg:bg-transparent lg:p-0">
           <CollapsibleTrigger className="flex w-full items-center justify-center gap-2">
-            {t("Imagine anything")}
+            {isMy ? t("My Images") : t("Imagine anything")}
             <ChevronDown
               className={`h-4 w-4 ${
                 isOpen ? "" : "-rotate-90"
