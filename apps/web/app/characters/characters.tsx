@@ -104,7 +104,7 @@ const Characters = () => {
                   <Toggle
                     aria-label={`Toggle ${tag.tagName}`}
                     variant="filled"
-                    className="inline h-7 w-full truncate px-2 text-xs"
+                    className="inline h-7 w-full truncate rounded-full px-2 text-xs"
                     defaultPressed={searchQuery.get(tagKey) === tag.tagName}
                     pressed={searchQuery.get(tagKey) === tag.tagName}
                     onPressedChange={(pressed) => {

@@ -50,6 +50,7 @@ const formSchema = z.object({
 const Images = () => {
   const { t } = useTranslation();
   const searchQuery = useSearchParams();
+  const isMy = searchQuery.get("isMy");
   const posthog = usePostHog();
 
   const [isGenerating, setIsGenerating] = useState(false);
@@ -66,7 +67,7 @@ const Images = () => {
     defaultValues: {
       prompt: searchQuery.get("prompt") || "",
       model: "daun-io/openroleplay.ai-animagine-v3",
-      isPrivate: false,
+      isPrivate: isMy ? true : false,
     },
   });
   const price = useQuery(api.crystals.imageModelPrice, {
@@ -199,7 +200,7 @@ const Images = () => {
         </div>
       </Collapsible>
 
-      <Gallery isGenerating={isGenerating} />
+      <Gallery isGenerating={isGenerating} isMy={Boolean(isMy)} />
     </div>
   );
 };

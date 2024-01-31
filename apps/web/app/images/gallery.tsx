@@ -31,14 +31,20 @@ export const ImagePlaceholder = () => {
   );
 };
 
-const Gallery = ({ isGenerating = false }: { isGenerating: boolean }) => {
+const Gallery = ({
+  isGenerating = false,
+  isMy = false,
+}: {
+  isGenerating: boolean;
+  isMy?: boolean;
+}) => {
   const me = useCurrentUser();
   const ref = useRef(null);
   const inView = useInView(ref);
   const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
   const { results, status, loadMore } = useStablePaginatedQuery(
-    api.images.listImages,
+    isMy ? api.images.listMy : api.images.listImages,
     { nsfwPreference, isAuthenticated },
     { initialNumItems: 10 },
   );
