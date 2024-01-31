@@ -164,7 +164,7 @@ export const answer = internalAction({
           if (conversation.characterId) {
             return {
               ...conversation,
-              text: conversation.text.startsWith(characterPrefix)
+              text: conversation.text.includes(characterPrefix)
                 ? conversation.text.replaceAll("{{user}}", userRole)
                 : characterPrefix +
                   conversation.text.replaceAll("{{user}}", userRole),
@@ -172,7 +172,7 @@ export const answer = internalAction({
           } else {
             return {
               ...conversation,
-              text: conversation.text.startsWith(userPrefix)
+              text: conversation.text.includes(userPrefix)
                 ? conversation.text
                 : userPrefix + conversation.text,
             };
