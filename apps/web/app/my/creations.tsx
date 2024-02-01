@@ -1,16 +1,10 @@
 "use client";
 import { api } from "../../convex/_generated/api";
-import { useEffect, useRef, useState } from "react";
-import {
-  useStablePaginatedQuery,
-  useStableQuery,
-} from "../../app/lib/hooks/use-stable-query";
+import { useEffect, useState } from "react";
+import { useStablePaginatedQuery } from "../../app/lib/hooks/use-stable-query";
 import { useConvexAuth } from "convex/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button } from "@repo/ui/src/components";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Autoplay from "embla-carousel-autoplay";
+import { ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselApi,
@@ -27,6 +21,7 @@ import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { NewCharacter } from "../../components/characters/my-characters";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import CharacterCard from "../../components/cards/character-card";
+import { SignIn } from "@clerk/nextjs";
 
 const Creations = () => {
   const { t } = useTranslation();
@@ -68,6 +63,7 @@ const Creations = () => {
 
   const me = useCurrentUser();
   const username = me?.name;
+  if (!isAuthenticated) return <SignIn />;
 
   return (
     <div className="relative flex flex-col gap-4 lg:gap-8">
