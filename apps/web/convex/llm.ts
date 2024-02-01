@@ -432,9 +432,12 @@ export const generateFollowups = internalAction({
         apiKey,
       });
       try {
-        const followUpId = await ctx.runMutation(internal.followUps.create, {
-          chatId,
-        });
+        const followUpId = await ctx.runQuery(
+          internal.followUps.latestFollowup,
+          {
+            chatId,
+          },
+        );
         for (let i = 1; i <= 1; i++) {
           let additionalGuideline = "";
           switch (i) {

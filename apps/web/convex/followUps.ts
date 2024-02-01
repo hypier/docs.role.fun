@@ -1,5 +1,10 @@
 import { v } from "convex/values";
-import { internalMutation, mutation, query } from "./_generated/server";
+import {
+  internalMutation,
+  internalQuery,
+  mutation,
+  query,
+} from "./_generated/server";
 import { getUser } from "./users";
 import { internal } from "./_generated/api";
 
@@ -74,6 +79,22 @@ export const get = query({
       console.log("followUp::", followUp);
       return followUp;
     }
+  },
+});
+
+export const latestFollowup = internalQuery({
+  args: {
+    chatId: v.id("chats"),
+  },
+  handler: async (ctx, args) => {
+    const followUp = await ctx.db
+      .query("followUps")
+      .withIndex("by_creation_time")
+      .filter((q) => q.eq(q.field("chatId"), args.chatId))
+      .order("desc")
+      .first();
+    console.log("followUp::", followUp);
+    return followUp;
   },
 });
 

@@ -859,34 +859,14 @@ export function Dialog({
             {followUps?.followUp1 && (
               <Button
                 onClick={() => {
-                  setInput(followUps.followUp1 as string);
+                  sendAndReset(followUps?.followUp1 as string);
+                  setScrolled(false);
                 }}
                 variant="outline"
-                className="line-clamp-1 w-96 truncate rounded-full p-2 text-xs"
+                className="flex w-[26rem] gap-1 rounded-full p-2"
               >
-                {followUps.followUp1}
-              </Button>
-            )}
-            {followUps?.followUp2 && (
-              <Button
-                onClick={() => {
-                  setInput(followUps.followUp2 as string);
-                }}
-                variant="outline"
-                className="line-clamp-1 w-96 truncate rounded-full p-2 text-xs"
-              >
-                {followUps.followUp2}
-              </Button>
-            )}
-            {followUps?.followUp3 && (
-              <Button
-                onClick={() => {
-                  setInput(followUps.followUp3 as string);
-                }}
-                variant="outline"
-                className="line-clamp-1 w-96 truncate rounded-full p-2 text-xs"
-              >
-                {followUps.followUp3}
+                <Sparkles className="h-4 w-4" />
+                <span className="w-96 truncate">{followUps.followUp1}</span>
               </Button>
             )}
           </div>

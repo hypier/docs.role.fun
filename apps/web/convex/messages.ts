@@ -106,6 +106,7 @@ export const send = mutation({
       numChats: newNumChats,
       updatedAt,
     });
+    await ctx.db.insert("followUps", { chatId });
   },
 });
 

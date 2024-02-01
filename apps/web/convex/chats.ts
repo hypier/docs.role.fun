@@ -79,6 +79,7 @@ export const create = mutation({
         messageId,
       });
     } else {
+      await ctx.db.insert("followUps", { chatId: newChat });
       await ctx.scheduler.runAfter(0, internal.llm.generateFollowups, {
         personaId: persona?._id as Id<"personas">,
         chatId: newChat as Id<"chats">,
