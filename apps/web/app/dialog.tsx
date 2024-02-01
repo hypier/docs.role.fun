@@ -15,11 +15,13 @@ import {
   Headphones,
   MoreHorizontal,
   Pause,
+  Play,
   Plus,
   Repeat,
   Send,
   Share,
   Sparkles,
+  StepForward,
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
@@ -863,12 +865,25 @@ export function Dialog({
                   setScrolled(false);
                 }}
                 variant="outline"
-                className="flex w-[26rem] gap-1 rounded-full p-2"
+                className="flex w-fit gap-1 rounded-full p-2 text-left"
               >
                 <Sparkles className="h-4 w-4" />
-                <span className="w-96 truncate">{followUps.followUp1}</span>
+                <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  {followUps.followUp1}
+                </span>
               </Button>
             )}
+            <Button
+              onClick={() => {
+                sendAndReset("Tell me more");
+                setScrolled(false);
+              }}
+              variant="outline"
+              className="flex w-fit gap-1 rounded-full p-2 text-left"
+            >
+              <StepForward className="h-4 w-4" />
+              <span className="w-fit truncate">{t("Tell me more")}</span>
+            </Button>
           </div>
         )}
       </div>
@@ -877,7 +892,6 @@ export function Dialog({
         onSubmit={(event) => void handleSend(event)}
       >
         <div className="flex w-full items-center justify-center gap-4 px-4">
-          <Inspirations chatId={chatId} characterId={characterId} />
           <input
             className="my-3 w-full border-none bg-background !text-[16px] focus-visible:ring-0"
             autoFocus
