@@ -136,6 +136,7 @@
   "Mature content": "محتوى ناضج",
   "This character is intended for adult.": "هذه الشخصية مخصصة للبالغين.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "الخصوصية الخاصة بك تهمنا. جميع محادثاتك مشفرة في الراحة والمرور العابر.",
+  "Old messages are automatically deleted from our database.": "يتم حذف الرسائل القديمة تلقائيًا من قاعدة بياناتنا.",
   "Check this to enable uncensored models.": "حدد هذا الخيار لتمكين الموديلات غير الخاضعة للرقابة.",
   "Affiliate": "انتساب"
 }
