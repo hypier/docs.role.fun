@@ -273,14 +273,24 @@ export const answer = internalAction({
             : user?.languageTag === "pt"
               ? "pt-PT"
               : user?.languageTag;
-        user?.languageTag &&
+        if (
+          user?.languageTag &&
           user?.languageTag !== "en" &&
-          user.autoTranslate !== false &&
-          (await ctx.scheduler.runAfter(0, internal.translate.translate, {
+          user.autoTranslate !== false
+        ) {
+          await ctx.scheduler.runAfter(0, internal.translate.translate, {
             targetLanguage: userLanguage,
             userId: user?._id,
             messageId,
-          }));
+          });
+        } else {
+          await ctx.scheduler.runAfter(0, internal.llm.generateFollowups, {
+            personaId,
+            chatId,
+            characterId,
+            userId,
+          });
+        }
       } catch (error) {
         await ctx.runMutation(internal.serve.refundCrystal, {
           userId,
@@ -397,8 +407,13 @@ export const generateFollowups = internalAction({
     personaId: v.optional(v.id("personas")),
   },
   handler: async (ctx, { userId, chatId, characterId, personaId }) => {
+    const user = await ctx.runQuery(internal.users.getUserInternal, {
+      id: userId,
+    });
+    const username = user?.name;
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
+      take: 8,
     });
     const character = await ctx.runQuery(api.characters.get, {
       id: characterId,
@@ -409,101 +424,78 @@ export const generateFollowups = internalAction({
         })
       : undefined;
     try {
-      const model = "gpt-3.5-turbo-1106";
+      const model = "undi95/toppy-m-7b";
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
       const openai = new OpenAI({
         baseURL,
         apiKey,
       });
-      const { currentCrystals } = await ctx.runMutation(
-        internal.serve.useCrystal,
-        {
-          userId,
-          name: model,
-        },
-      );
       try {
-        const instruction = `You are ${
-          persona ? `${persona?.name} (${persona?.description}). You are ` : ""
-        } talking with character.
-        {
-          name: ${character?.name}
-          ${character?.description && `description: ${character.description}`}
-        }
-        respond in JSON as this will be used for function arguments.
-        `;
-
-        const functions = [
-          {
-            name: "generate_answers",
-            description:
-              "This function is always triggered. Always answer in short (maximum: 15 words.) sentence.",
-            parameters: {
-              type: "object",
-              properties: {
-                answer1: {
-                  type: "string",
-                  description:
-                    "Provide a natural follow-up to the previous message, maintaining the flow of the conversation.",
-                },
-                answer2: {
-                  type: "string",
-                  description:
-                    "Craft an engaging and intriguing follow-up to the previous message, designed to captivate the user's interest aware of character's background.",
-                },
-                answer3: {
-                  type: "string",
-                  description:
-                    "Introduce an entirely new idea or pose a question to prevent the conversation from reaching a dead-end.",
-                },
-              },
-              required: ["answer1", "answer2", "answer3"],
-            },
-          },
-        ];
-        const response = await openai.chat.completions.create({
-          model,
-          stream: false,
-          messages: [
-            {
-              role: "system",
-              content: instruction,
-            },
-            ...(messages
-              .map(({ characterId, text }: any, index: any) => {
-                return {
-                  role: characterId ? "user" : "assistant",
-                  content: text,
-                };
-              })
-              .flat() as ChatCompletionMessageParam[]),
-          ],
-          function_call: "auto",
-          response_format: { type: "json_object" },
-          functions,
+        const followUpId = await ctx.runMutation(internal.followUps.create, {
+          chatId,
         });
-        const responseMessage = (response &&
-          response?.choices &&
-          response.choices[0]?.message) as any;
-        if (responseMessage?.function_call) {
-          const functionArgs = JSON.parse(
-            responseMessage.function_call.arguments,
-          );
-          await ctx.runMutation(internal.followUps.create, {
-            chatId,
-            followUp1: functionArgs?.answer1,
-            followUp2: functionArgs?.answer2,
-            followUp3: functionArgs?.answer3,
+        for (let i = 1; i <= 1; i++) {
+          let additionalGuideline = "";
+          switch (i) {
+            case 1:
+              additionalGuideline =
+                "Provide a natural follow-up to the message.";
+              break;
+            case 2:
+              additionalGuideline =
+                "Generate an engaging and intriguing follow-up to the message.";
+              break;
+            case 3:
+              additionalGuideline =
+                "Introduce a new idea or question to the message.";
+              break;
+          }
+          const instruction =
+            getInstruction(character, persona, username as string, true) +
+            ` ${additionalGuideline}`;
+          const response = await openai.chat.completions.create({
+            model,
+            stream: false,
+            messages: [
+              {
+                role: "system",
+                content: instruction,
+              },
+              ...(messages
+                .map(({ characterId, text }: any, index: any) => {
+                  return {
+                    role: characterId ? "user" : "assistant",
+                    content: text,
+                  };
+                })
+                .flat() as ChatCompletionMessageParam[]),
+            ],
           });
+          const responseMessage = (response &&
+            response?.choices &&
+            response.choices[0]?.message) as any;
+
+          // Update followUp responses based on iteration
+          if (i === 1) {
+            await ctx.runMutation(internal.followUps.update, {
+              followUpId,
+              followUp1: responseMessage?.content,
+            });
+          } else if (i === 2) {
+            await ctx.runMutation(internal.followUps.update, {
+              followUpId,
+              followUp2: responseMessage?.content,
+            });
+          } else if (i === 3) {
+            await ctx.runMutation(internal.followUps.update, {
+              followUpId,
+              followUp3: responseMessage?.content,
+            });
+          }
         }
       } catch (error) {
         console.log("error:::", error);
-        await ctx.runMutation(internal.serve.refundCrystal, {
-          userId,
-          currentCrystals,
-          name: model,
-        });
         throw Error;
       }
     } catch (error) {
@@ -846,13 +838,16 @@ export const generateImageTags = internalAction({
 });
 
 export const getMessages = internalQuery(
-  async (ctx, { chatId }: { chatId: Id<"chats"> }) => {
+  async (
+    ctx,
+    { chatId, take = 64 }: { chatId: Id<"chats">; take?: number },
+  ) => {
     const messages = await ctx.db
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", chatId))
       .order("desc")
       .collect();
-    return messages.slice(0, 64).reverse();
+    return messages.slice(0, take).reverse();
   },
 );
 

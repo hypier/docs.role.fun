@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../convex/_generated/api";
-import { useMutation, usePaginatedQuery } from "convex/react";
+import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import { Switch } from "@repo/ui/src/components/switch";
 import remarkGfm from "remark-gfm";
@@ -640,6 +640,8 @@ export function Dialog({
   const username = useMyUsername();
   const sendMessage = useMutation(api.messages.send);
   const posthog = usePostHog();
+
+  const followUps = useQuery(api.followUps.get, { chatId });
   const [isScrolled, setScrolled] = useState(false);
   const [input, setInput] = useState("");
   const { openDialog } = useCrystalDialog();
@@ -852,6 +854,43 @@ export function Dialog({
             ))
           )}
         </div>
+        {followUps && !followUps?.isStale && (
+          <div className="mb-4 flex w-full flex-col justify-center gap-4 px-6">
+            {followUps?.followUp1 && (
+              <Button
+                onClick={() => {
+                  setInput(followUps.followUp1 as string);
+                }}
+                variant="outline"
+                className="line-clamp-1 w-96 truncate rounded-full p-2 text-xs"
+              >
+                {followUps.followUp1}
+              </Button>
+            )}
+            {followUps?.followUp2 && (
+              <Button
+                onClick={() => {
+                  setInput(followUps.followUp2 as string);
+                }}
+                variant="outline"
+                className="line-clamp-1 w-96 truncate rounded-full p-2 text-xs"
+              >
+                {followUps.followUp2}
+              </Button>
+            )}
+            {followUps?.followUp3 && (
+              <Button
+                onClick={() => {
+                  setInput(followUps.followUp3 as string);
+                }}
+                variant="outline"
+                className="line-clamp-1 w-96 truncate rounded-full p-2 text-xs"
+              >
+                {followUps.followUp3}
+              </Button>
+            )}
+          </div>
+        )}
       </div>
       <form
         className="sticky bottom-16 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:bottom-0 lg:rounded-br-lg"

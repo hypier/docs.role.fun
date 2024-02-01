@@ -18,6 +18,21 @@ export const create = internalMutation({
   },
 });
 
+export const update = internalMutation({
+  args: {
+    followUpId: v.id("followUps"),
+    followUp1: v.optional(v.string()),
+    followUp2: v.optional(v.string()),
+    followUp3: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const { followUpId, ...rest } = args;
+    return await ctx.db.patch(followUpId, {
+      ...rest,
+    });
+  },
+});
+
 export const generate = mutation({
   args: {
     chatId: v.id("chats"),
@@ -40,12 +55,25 @@ export const get = query({
     chatId: v.id("chats"),
   },
   handler: async (ctx, args) => {
-    await getUser(ctx);
-    return await ctx.db
-      .query("followUps")
-      .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))
-      .order("desc")
+    const user = await getUser(ctx);
+    const chat = await ctx.db
+      .query("chats")
+      .filter((q) => q.eq(q.field("_id"), args.chatId))
+      .filter((q) => q.eq(q.field("userId"), user._id))
       .first();
+    console.log("chat::", chat);
+    if (chat) {
+      console.log("chatId provided:::", args.chatId);
+      console.log("chatId find:::", chat._id);
+      const followUp = await ctx.db
+        .query("followUps")
+        .withIndex("by_creation_time")
+        .filter((q) => q.eq(q.field("chatId"), args.chatId))
+        .order("desc")
+        .first();
+      console.log("followUp::", followUp);
+      return followUp;
+    }
   },
 });
 
