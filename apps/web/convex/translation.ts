@@ -57,6 +57,7 @@ export const save = internalMutation({
     ctx.db.insert("translations", { text, translation, languageTag });
   },
 });
+
 export const deleteDuplicate = internalMutation({
   args: { languageTag: v.string() },
   handler: async (ctx, { languageTag }) => {
