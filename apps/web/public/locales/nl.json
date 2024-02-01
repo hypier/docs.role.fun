@@ -136,6 +136,7 @@
   "Mature content": "Volwassen inhoud",
   "This character is intended for adult.": "Dit teken is bedoeld voor volwassenen.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Uw privacy is belangrijk voor ons. Al uw gesprekken zijn gecodeerd tot rust en in-transit.",
+  "Old messages are automatically deleted from our database.": "Oude berichten worden automatisch uit onze database verwijderd.",
   "Check this to enable uncensored models.": "Vink dit aan om ongecensureerde modellen te activeren.",
   "Affiliate": "Partner"
 }

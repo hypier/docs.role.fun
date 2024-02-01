@@ -136,6 +136,7 @@
   "Mature content": "Зміст природи",
   "This character is intended for adult.": "Цей персонаж призначений для дорослих.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Ваша конфіденційність має значення для нас. Всі ваші розмови зашифровані для відпочинку та вбудовані в передачу.",
+  "Old messages are automatically deleted from our database.": "Старі повідомлення автоматично видаляються з нашої бази даних.",
   "Check this to enable uncensored models.": "Позначте цей пункт, щоб увімкнути нецензуровані моделі.",
   "Affiliate": "Партнерська програма"
 }

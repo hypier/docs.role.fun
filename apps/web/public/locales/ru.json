@@ -136,6 +136,7 @@
   "Mature content": "Содержание зрелости",
   "This character is intended for adult.": "Этот символ предназначен для взрослых.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Ваша конфиденциальность касается нас. Все ваши разговоры зашифрованы на отдыхе и в передаче.",
+  "Old messages are automatically deleted from our database.": "Старые сообщения автоматически удаляются из нашей базы данных.",
   "Check this to enable uncensored models.": "Проверьте это, чтобы включить модели цензуры.",
   "Affiliate": "Партнёр"
 }
