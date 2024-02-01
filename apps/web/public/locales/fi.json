@@ -136,6 +136,7 @@
   "Mature content": "Kypsä sisältö",
   "This character is intended for adult.": "Tämä merkki on tarkoitettu aikuisille.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Yksityisyytesi on meille tärkeä. Kaikki keskustelut ovat salattuja levossa ja passituksessa.",
+  "Old messages are automatically deleted from our database.": "Vanhat viestit poistetaan automaattisesti tietokannastamme.",
   "Check this to enable uncensored models.": "Valitse tämä ottaaksesi sensuroimattomat mallit käyttöön.",
   "Affiliate": "Kumppani"
 }
