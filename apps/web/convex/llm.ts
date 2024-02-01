@@ -446,27 +446,20 @@ export const generateFollowups = internalAction({
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}: `;
-        for (let i = 1; i <= 1; i++) {
-          let additionalGuideline = "";
-          switch (i) {
-            case 1:
-              additionalGuideline =
-                "Provide a natural follow-up to the message.";
-              break;
-            case 2:
-              additionalGuideline =
-                "Generate an engaging and intriguing follow-up to the message.";
-              break;
-            case 3:
-              additionalGuideline =
-                "Introduce a new idea or question to the message.";
-              break;
-          }
-          const instruction =
-            getInstruction(character, persona, username as string, true) +
-            ` ${additionalGuideline}`;
+        for (let i = 1; i <= 3; i++) {
+          const instruction = getInstruction(
+            character,
+            persona,
+            username as string,
+            true,
+          );
           const response = await openai.chat.completions.create({
-            model,
+            model:
+              i === 1
+                ? model
+                : i === 2
+                  ? "recursal/eagle-7b"
+                  : "nousresearch/nous-capybara-7b:free",
             stream: false,
             messages: [
               {

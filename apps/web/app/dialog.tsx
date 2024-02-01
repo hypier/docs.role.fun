@@ -874,17 +874,51 @@ export function Dialog({
                   </span>
                 </Button>
               )}
-            <Button
-              onClick={() => {
-                sendAndReset("Tell me more");
-                setScrolled(false);
-              }}
-              variant="outline"
-              className="flex w-fit gap-1 rounded-full p-2 text-left"
-            >
-              <StepForward className="h-4 w-4" />
-              <span className="w-fit truncate">{t("Tell me more")}</span>
-            </Button>
+            {followUps?.followUp2 &&
+              followUps?.followUp2 !== "Tell me more" && (
+                <Button
+                  onClick={() => {
+                    sendAndReset(followUps?.followUp2 as string);
+                    setScrolled(false);
+                  }}
+                  variant="outline"
+                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                    {followUps.followUp2}
+                  </span>
+                </Button>
+              )}
+            {followUps?.followUp3 &&
+              followUps?.followUp3 !== "Tell me more" && (
+                <Button
+                  onClick={() => {
+                    sendAndReset(followUps?.followUp3 as string);
+                    setScrolled(false);
+                  }}
+                  variant="outline"
+                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                    {followUps.followUp3}
+                  </span>
+                </Button>
+              )}
+            {!followUps?.followUp2 && (
+              <Button
+                onClick={() => {
+                  sendAndReset("Tell me more");
+                  setScrolled(false);
+                }}
+                variant="outline"
+                className="flex w-fit gap-1 rounded-full p-2 text-left"
+              >
+                <StepForward className="h-4 w-4" />
+                <span className="w-fit truncate">{t("Tell me more")}</span>
+              </Button>
+            )}
           </div>
         )}
       </div>
