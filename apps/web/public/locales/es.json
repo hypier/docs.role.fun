@@ -136,6 +136,7 @@
   "Mature content": "Contenido adulto",
   "This character is intended for adult.": "Este personaje está destinado a adulto.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Su privacidad nos importa. Todas sus conversaciones son cifradas en reposo y en transito.",
+  "Old messages are automatically deleted from our database.": "Los mensajes antiguos se borran automáticamente de nuestra base de datos.",
   "Check this to enable uncensored models.": "Marque esto para habilitar modelos sin censura.",
   "Affiliate": "Afiliado"
 }
