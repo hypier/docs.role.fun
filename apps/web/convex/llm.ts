@@ -436,6 +436,10 @@ export const generateFollowups = internalAction({
           chatId,
         });
         const followUpId = followUp?._id as Id<"followUps">;
+        const characterPrefix = `${character?.name}: `;
+        const userRole =
+          persona && "name" in persona ? persona?.name : username;
+        const userPrefix = `${userRole}: `;
         for (let i = 1; i <= 1; i++) {
           let additionalGuideline = "";
           switch (i) {
@@ -481,17 +485,26 @@ export const generateFollowups = internalAction({
           if (i === 1) {
             await ctx.runMutation(internal.followUps.update, {
               followUpId,
-              followUp1: responseMessage?.content,
+              followUp1: responseMessage?.content
+                .replaceAll("{{user}}", userRole as string)
+                .replaceAll(characterPrefix, "")
+                .replaceAll(userPrefix, ""),
             });
           } else if (i === 2) {
             await ctx.runMutation(internal.followUps.update, {
               followUpId,
-              followUp2: responseMessage?.content,
+              followUp2: responseMessage?.content
+                .replaceAll("{{user}}", userRole as string)
+                .replaceAll(characterPrefix, "")
+                .replaceAll(userPrefix, ""),
             });
           } else if (i === 3) {
             await ctx.runMutation(internal.followUps.update, {
               followUpId,
-              followUp3: responseMessage?.content,
+              followUp3: responseMessage?.content
+                .replaceAll("{{user}}", userRole as string)
+                .replaceAll(characterPrefix, "")
+                .replaceAll(userPrefix, ""),
             });
           }
         }
