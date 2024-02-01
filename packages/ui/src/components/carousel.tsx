@@ -215,7 +215,6 @@ const CarouselPrevious = React.forwardRef<
       disabled={!canScrollPrev}
       onClick={() => {
         scrollPrev();
-        width > 640 && scrollPrev();
         width > 1024 && scrollPrev();
         width > 1280 && scrollPrev();
       }}
