@@ -138,5 +138,6 @@
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Votre vie privée est importante pour nous. Toutes vos conversations sont cryptées au repos et en cours de transit.",
   "Old messages are automatically deleted from our database.": "Les anciens messages sont automatiquement supprimés de notre base de données.",
   "Check this to enable uncensored models.": "Cochez cette case pour activer les modèles non censurés.",
-  "Affiliate": "Affilié"
+  "Affiliate": "Affilié",
+  "Tell me more": "Dites-moi plus"
 }
