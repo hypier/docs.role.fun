@@ -136,6 +136,7 @@
   "Mature content": "Modernt innehåll",
   "This character is intended for adult.": "Denna karaktär är avsedd för vuxen.",
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "Din integritet är viktig för oss. Alla dina konversationer krypteras i vila och på väg.",
+  "Old messages are automatically deleted from our database.": "Gamla meddelanden raderas automatiskt från vår databas.",
   "Check this to enable uncensored models.": "Markera för att aktivera ocensurerade modeller.",
   "Affiliate": "Affiliate"
 }
