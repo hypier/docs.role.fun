@@ -1,5 +1,5 @@
 "use client";
-import { useConvexAuth, useQuery } from "convex/react";
+import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import {
@@ -40,6 +40,10 @@ import {
   useStableQuery,
 } from "../../lib/hooks/use-stable-query";
 import AddToHomeScreen from "../../../components/pwa/add-to-homescreen";
+import {
+  useMachineTranslation,
+  useTranslationStore,
+} from "../../lib/hooks/use-machine-translation";
 
 export const Stories = ({
   characterId,
@@ -95,6 +99,8 @@ export default function ChatWithCharacter({
   const { user } = useUser();
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { isMobile } = useMediaQuery();
+  const { translations } = useTranslationStore();
+  const { mt } = useMachineTranslation();
   const data = useStableQuery(api.characters.get, {
     id: params.id as Id<"characters">,
   });
@@ -173,7 +179,9 @@ export default function ChatWithCharacter({
                     data?.cardImageUrl ? "text-white" : "text-foreground"
                   } z-[1] flex justify-between text-xl`}
                 >
-                  <div className="w-[80%] truncate">{data?.name}</div>
+                  <div className="w-[80%] truncate">
+                    {mt(data?.name as string, translations)}
+                  </div>
                   <Tooltip
                     content={`Number of chats with ${data?.name}`}
                     desktopOnly
@@ -191,7 +199,7 @@ export default function ChatWithCharacter({
                       : "text-muted-foreground"
                   } z-[1] line-clamp-2 text-sm lg:line-clamp-3`}
                 >
-                  {data?.description}
+                  {mt(data?.description as string, translations)}
                 </p>
                 {creatorName && (
                   <div className="flex items-center justify-between">

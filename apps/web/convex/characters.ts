@@ -622,3 +622,33 @@ export const scoreAll = internalMutation({
     });
   },
 });
+
+export const translate = mutation({
+  args: { id: v.id("characters") },
+  handler: async (ctx, args) => {
+    const user = await getUser(ctx);
+    const character = await ctx.db.get(args.id);
+    const userLanguage =
+      user.languageTag === "en"
+        ? "en-US"
+        : user.languageTag === "pt"
+          ? "pt-PT"
+          : user.languageTag;
+    const existingTranslation = await ctx.db
+      .query("translations")
+      .withIndex("byLanguage")
+      .filter((q) => q.eq(q.field("languageTag"), userLanguage))
+      .filter((q) => q.eq(q.field("text"), character?.name))
+      .first();
+    if (!existingTranslation && userLanguage !== "en-US") {
+      await ctx.scheduler.runAfter(0, internal.translate.string, {
+        text: character?.name as string,
+        targetLanguage: userLanguage,
+      });
+      await ctx.scheduler.runAfter(0, internal.translate.string, {
+        text: character?.description as string,
+        targetLanguage: userLanguage,
+      });
+    }
+  },
+});
