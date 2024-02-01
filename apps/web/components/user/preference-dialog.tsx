@@ -68,6 +68,7 @@ const PreferenceDialog = () => {
                 {t(
                   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.",
                 )}
+                {t("Old messages are automatically deleted from our database.")}
               </div>
             </AlertDialogTitle>
             <AlertDialogTitle className="flex flex-col gap-1">
