@@ -162,7 +162,7 @@ export const modelData = [
     value: "undi95/toppy-m-7b:free",
     description: "Uncensored, Toppy M 7B by undi95 with Rate Limit",
     isNSFW: true,
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "pygmalionai/mythalion-13b",
