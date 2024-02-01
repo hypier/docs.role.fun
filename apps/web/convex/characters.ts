@@ -645,6 +645,10 @@ export const translate = mutation({
         text: character?.name as string,
         targetLanguage: userLanguage,
       });
+      await ctx.scheduler.runAfter(0, internal.translate.string, {
+        text: character?.description as string,
+        targetLanguage: userLanguage,
+      });
     }
   },
 });
