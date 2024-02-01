@@ -3,6 +3,7 @@ import { v } from "convex/values";
 import { getUser } from "./users";
 import { paginationOptsValidator } from "convex/server";
 import { internal } from "./_generated/api";
+import { Id } from "./_generated/dataModel";
 
 export const create = mutation({
   args: {
@@ -66,14 +67,25 @@ export const create = mutation({
         : user.languageTag === "pt"
           ? "pt-PT"
           : user.languageTag;
-    user.languageTag &&
-      user.languageTag !== "en" &&
-      user.autoTranslate !== false &&
-      (await ctx.scheduler.runAfter(0, internal.translate.translate, {
+
+    if (
+      user?.languageTag &&
+      user?.languageTag !== "en" &&
+      user.autoTranslate !== false
+    ) {
+      await ctx.scheduler.runAfter(0, internal.translate.translate, {
         targetLanguage: userLanguage,
         userId: user._id,
         messageId,
-      }));
+      });
+    } else {
+      await ctx.scheduler.runAfter(0, internal.llm.generateFollowups, {
+        personaId: persona?._id as Id<"personas">,
+        chatId: newChat as Id<"chats">,
+        characterId: character?._id as Id<"characters">,
+        userId: user._id as Id<"users">,
+      });
+    }
     return newChat;
   },
 });

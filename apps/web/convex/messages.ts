@@ -22,7 +22,15 @@ export const list = query({
     paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
-    await getUser(ctx);
+    const user = await getUser(ctx);
+    const chat = await ctx.db
+      .query("chats")
+      .filter((q) => q.eq(q.field("_id"), args.chatId))
+      .filter((q) => q.eq(q.field("userId"), user._id))
+      .first();
+    if (!chat) {
+      throw new Error("User does not own this chat.");
+    }
     return await ctx.db
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))
