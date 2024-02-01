@@ -18,7 +18,7 @@ export const list = query({
       .withIndex("by_creation_time")
       .filter((q) => q.eq(q.field("languageTag"), languageTag))
       .order("desc")
-      .take(512);
+      .take(768);
 
     return translations;
   },
