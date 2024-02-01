@@ -284,12 +284,14 @@ export const answer = internalAction({
             messageId,
           });
         } else {
-          await ctx.scheduler.runAfter(0, internal.llm.generateFollowups, {
-            personaId,
-            chatId,
-            characterId,
-            userId,
-          });
+          if (!model.includes("free")) {
+            await ctx.scheduler.runAfter(0, internal.llm.generateFollowups, {
+              personaId,
+              chatId,
+              characterId,
+              userId,
+            });
+          }
         }
       } catch (error) {
         await ctx.runMutation(internal.serve.refundCrystal, {
