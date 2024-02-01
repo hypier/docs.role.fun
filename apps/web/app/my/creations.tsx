@@ -28,7 +28,7 @@ const Creations = () => {
   const { isAuthenticated } = useConvexAuth();
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.listMy,
-    {},
+    isAuthenticated ? {} : "skip",
     { initialNumItems: 10 },
   );
   const allCharacters = results || [];
