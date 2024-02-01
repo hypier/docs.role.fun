@@ -18,6 +18,7 @@ export default function useStoreChatEffect(
     chatId && isAuthenticated ? { id: chatId as Id<"chats"> } : "skip",
   );
   const createChat = useMutation(api.chats.create);
+  const translate = useMutation(api.characters.translate);
 
   useEffect(() => {
     if (!isAuthenticated || chatId) {
@@ -30,6 +31,7 @@ export default function useStoreChatEffect(
         storyId,
       });
       setChatId(id);
+      await translate({ id: characterId });
     }
 
     createChatForUser();
