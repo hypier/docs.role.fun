@@ -435,7 +435,7 @@ export const generateFollowups = internalAction({
         const followUp = await ctx.runQuery(internal.followUps.latestFollowup, {
           chatId,
         });
-        const followUpId = followUp?._id;
+        const followUpId = followUp?._id as Id<"followUps">;
         for (let i = 1; i <= 1; i++) {
           let additionalGuideline = "";
           switch (i) {
