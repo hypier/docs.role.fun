@@ -858,21 +858,22 @@ export function Dialog({
         </div>
         {followUps && !followUps?.isStale && (
           <div className="mb-4 flex w-full flex-col justify-center gap-4 px-6">
-            {followUps?.followUp1 && (
-              <Button
-                onClick={() => {
-                  sendAndReset(followUps?.followUp1 as string);
-                  setScrolled(false);
-                }}
-                variant="outline"
-                className="flex w-fit gap-1 rounded-full p-2 text-left"
-              >
-                <Sparkles className="h-4 w-4" />
-                <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
-                  {followUps.followUp1}
-                </span>
-              </Button>
-            )}
+            {followUps?.followUp1 &&
+              followUps?.followUp1 !== "Tell me more" && (
+                <Button
+                  onClick={() => {
+                    sendAndReset(followUps?.followUp1 as string);
+                    setScrolled(false);
+                  }}
+                  variant="outline"
+                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                    {followUps.followUp1}
+                  </span>
+                </Button>
+              )}
             <Button
               onClick={() => {
                 sendAndReset("Tell me more");
