@@ -276,12 +276,17 @@ export const addImage = internalMutation(
 export const removeOldMessages = internalMutation({
   args: {},
   handler: async (ctx) => {
-    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const twoWeeksAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
     const messages = await ctx.db
       .query("messages")
-      .filter((q) => q.lt(q.field("_creationTime"), sevenDaysAgo.getTime()))
+      .filter((q) => q.lt(q.field("_creationTime"), twoWeeksAgo.getTime()))
       .collect();
     await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
+    const oldStories = await ctx.db
+      .query("stories")
+      .filter((q) => q.lt(q.field("_creationTime"), twoWeeksAgo.getTime()))
+      .collect();
+    await Promise.all(oldStories.map((story) => ctx.db.delete(story._id)));
     return { removed: messages.length };
   },
 });
