@@ -138,5 +138,6 @@
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "您的隐私对我们来说很重要。您的所有对话都是随时加密和中途加密的。",
   "Old messages are automatically deleted from our database.": "从我们的数据库中自动删除旧消息。",
   "Check this to enable uncensored models.": "选中此项以启用未检查的模型。",
-  "Affiliate": "联盟会员"
+  "Affiliate": "联盟会员",
+  "Tell me more": "告诉我更多"
 }
