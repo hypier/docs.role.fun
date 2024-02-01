@@ -430,6 +430,10 @@ export const generateFollowups = internalAction({
       const openai = new OpenAI({
         baseURL,
         apiKey,
+        defaultHeaders: {
+          "HTTP-Referer": "https://openroleplay.ai",
+          "X-Title": "Openroleplay.ai",
+        },
       });
       try {
         const followUp = await ctx.runQuery(internal.followUps.latestFollowup, {
