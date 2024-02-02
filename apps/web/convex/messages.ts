@@ -293,14 +293,14 @@ export const removeOldMessages = internalMutation({
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .take(2048);
+      .take(1024);
     await Promise.all(oldStories.map((story) => ctx.db.delete(story._id)));
     const oldChats = await ctx.db
       .query("chats")
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .take(2048);
+      .take(1024);
     await Promise.all(oldChats.map((chat) => ctx.db.delete(chat._id)));
     return { removed: messages.length };
   },
