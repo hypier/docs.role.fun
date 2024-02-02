@@ -135,7 +135,11 @@ export const messages = query({
     const messages = await Promise.all(
       (story?.messageIds ?? []).map((messageId) => ctx.db.get(messageId)),
     );
-    return messages;
+    return messages.map((message) => {
+      if (!message) return null;
+      const { chatId, personaId, ...rest } = message;
+      return rest;
+    });
   },
 });
 
