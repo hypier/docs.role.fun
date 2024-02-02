@@ -621,7 +621,7 @@ export function Dialog({
   const { results, loadMore } = useStablePaginatedQuery(
     api.messages.list,
     { chatId },
-    { initialNumItems: 10 },
+    { initialNumItems: 5 },
   );
   const { currentLanguage, autoTranslate, toggleAutoTranslate } = useLanguage();
   const remoteMessages = results.reverse();
@@ -698,7 +698,7 @@ export function Dialog({
 
   useEffect(() => {
     if (inView && isScrolled) {
-      loadMore(10);
+      loadMore(5);
     }
   }, [inView, loadMore]);
 
