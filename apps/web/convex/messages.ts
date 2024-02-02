@@ -283,17 +283,23 @@ export const removeOldMessages = internalMutation({
     const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const messages = await ctx.db
       .query("messages")
-      .filter((q) => q.lt(q.field("_creationTime"), weekAgo.getTime()))
+      .withIndex("by_creation_time", (q) =>
+        q.lt("_creationTime", weekAgo.getTime()),
+      )
       .take(2048);
     await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
     const oldStories = await ctx.db
       .query("stories")
-      .filter((q) => q.lt(q.field("_creationTime"), weekAgo.getTime()))
+      .withIndex("by_creation_time", (q) =>
+        q.lt("_creationTime", weekAgo.getTime()),
+      )
       .take(2048);
     await Promise.all(oldStories.map((story) => ctx.db.delete(story._id)));
     const oldChats = await ctx.db
       .query("chats")
-      .filter((q) => q.lt(q.field("_creationTime"), weekAgo.getTime()))
+      .withIndex("by_creation_time", (q) =>
+        q.lt("_creationTime", weekAgo.getTime()),
+      )
       .take(2048);
     await Promise.all(oldChats.map((chat) => ctx.db.delete(chat._id)));
     return { removed: messages.length };
