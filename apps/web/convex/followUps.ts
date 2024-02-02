@@ -60,13 +60,7 @@ export const get = query({
     chatId: v.id("chats"),
   },
   handler: async (ctx, args) => {
-    const user = await getUser(ctx);
-    const chat = await ctx.db
-      .query("chats")
-      .filter((q) => q.eq(q.field("_id"), args.chatId))
-      .filter((q) => q.eq(q.field("userId"), user._id))
-      .first();
-    console.log("chat::", chat);
+    const chat = await ctx.db.get(args.chatId);
     if (chat) {
       console.log("chatId provided:::", args.chatId);
       console.log("chatId find:::", chat._id);
