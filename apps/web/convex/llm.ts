@@ -231,7 +231,7 @@ export const answer = internalAction({
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
             mutationCounter++;
-            if (mutationCounter % 20 === 0) {
+            if (mutationCounter % 64 === 0) {
               await ctx.runMutation(internal.llm.updateCharacterMessage, {
                 messageId,
                 text: text
@@ -240,12 +240,11 @@ export const answer = internalAction({
                   .replaceAll(userPrefix, ""),
               });
             }
-            if (mutationCounter >= 1024) {
+            if (mutationCounter >= 2048) {
               break;
             }
           }
         }
-        // Ensure the last mutation is run if the text was updated an odd number of times
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
           text: text
