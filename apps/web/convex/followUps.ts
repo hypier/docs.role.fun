@@ -62,12 +62,9 @@ export const get = query({
   handler: async (ctx, args) => {
     const chat = await ctx.db.get(args.chatId);
     if (chat) {
-      console.log("chatId provided:::", args.chatId);
-      console.log("chatId find:::", chat._id);
       const followUp = await ctx.db
         .query("followUps")
-        .withIndex("by_creation_time")
-        .filter((q) => q.eq(q.field("chatId"), args.chatId))
+        .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))
         .order("desc")
         .first();
       console.log("followUp::", followUp);
