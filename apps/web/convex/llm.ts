@@ -231,7 +231,7 @@ export const answer = internalAction({
           if (typeof replyDelta === "string" && replyDelta.length > 0) {
             text += replyDelta;
             mutationCounter++;
-            if (mutationCounter % 10 === 0) {
+            if (mutationCounter % 20 === 0) {
               await ctx.runMutation(internal.llm.updateCharacterMessage, {
                 messageId,
                 text: text
