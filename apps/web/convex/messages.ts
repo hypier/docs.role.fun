@@ -286,22 +286,38 @@ export const removeOldMessages = internalMutation({
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .take(2048);
+      .take(4000);
     await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
+    return { removed: messages.length };
+  },
+});
+
+export const removeOldStories = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const oldStories = await ctx.db
       .query("stories")
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .take(1024);
+      .take(4000);
     await Promise.all(oldStories.map((story) => ctx.db.delete(story._id)));
+    return { removed: oldStories.length };
+  },
+});
+
+export const removeOldChats = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const oldChats = await ctx.db
       .query("chats")
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .take(1024);
+      .take(4000);
     await Promise.all(oldChats.map((chat) => ctx.db.delete(chat._id)));
-    return { removed: messages.length };
+    return { removed: oldChats.length };
   },
 });

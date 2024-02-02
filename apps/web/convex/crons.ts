@@ -16,4 +16,22 @@ crons.weekly(
   },
   internal.messages.removeOldMessages,
 );
+crons.weekly(
+  "remove stories",
+  {
+    minuteUTC: 0,
+    hourUTC: 0,
+    dayOfWeek: "monday",
+  },
+  internal.messages.removeOldStories,
+);
+crons.weekly(
+  "remove chats",
+  {
+    minuteUTC: 0,
+    hourUTC: 0,
+    dayOfWeek: "monday",
+  },
+  internal.messages.removeOldChats,
+);
 export default crons;
