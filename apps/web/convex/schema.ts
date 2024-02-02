@@ -91,12 +91,13 @@ export default defineSchema({
   }).index("byUserId", ["creatorId"]),
   chats: defineTable({
     chatName: v.optional(v.string()),
-    updatedAt: v.string(),
+    updatedAt: v.optional(v.string()),
     userId: v.optional(v.id("users")),
     storyId: v.optional(v.id("stories")),
+    tokenIdentifier: v.optional(v.string()),
     isUnlocked: v.optional(v.boolean()),
     characterId: v.optional(v.id("characters")),
-    joinedAt: v.string(),
+    joinedAt: v.optional(v.string()),
   })
     .index("byUserId", ["userId"])
     .index("byCharacterId", ["characterId"])

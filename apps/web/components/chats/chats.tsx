@@ -15,15 +15,14 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
+import { useConvexAuth } from "convex/react";
 
 export const Chat = ({
   name,
-  time,
   chatId,
   characterId,
 }: {
   name: string;
-  time: string;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
 }) => {
@@ -33,9 +32,7 @@ export const Chat = ({
   const message = useStableQuery(api.messages.mostRecentMessage, {
     chatId,
   });
-  const recentMessageAt = message?._creationTime
-    ? (message?._creationTime as number)
-    : time;
+  const recentMessageAt = message?._creationTime as number;
   return (
     <Link href={`/character/${characterId}?chatId=${chatId}`}>
       <li className="group p-4 hover:bg-muted">
@@ -75,7 +72,8 @@ export const Chat = ({
 
 export default function Chats() {
   const { t } = useTranslation();
-  const { results, status, loadMore } = useStablePaginatedQuery(
+  const { isAuthenticated } = useConvexAuth();
+  const { results, loadMore } = useStablePaginatedQuery(
     api.chats.list,
     {},
     { initialNumItems: 10 },
@@ -95,14 +93,16 @@ export default function Chats() {
       </CardHeader>
       <ul>
         {results?.length ? (
-          results.map((chat) => (
-            <Chat
-              name={chat.chatName as string}
-              time={chat.updatedAt}
-              characterId={chat.characterId as Id<"characters">}
-              chatId={chat._id as Id<"chats">}
-            />
-          ))
+          results.map(
+            (chat) =>
+              isAuthenticated && (
+                <Chat
+                  name={chat.chatName as string}
+                  characterId={chat.characterId as Id<"characters">}
+                  chatId={chat._id as Id<"chats">}
+                />
+              ),
+          )
         ) : (
           <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-2">
             {t("New chats will appear here.")}

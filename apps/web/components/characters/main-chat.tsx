@@ -1,6 +1,5 @@
-import { usePaginatedQuery, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@repo/ui/src/components";
@@ -25,15 +24,14 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
+import { useConvexAuth } from "convex/react";
 
 export const Chat = ({
   name,
-  time,
   chatId,
   characterId,
 }: {
   name: string;
-  time: string;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
 }) => {
@@ -75,6 +73,7 @@ export const Chat = ({
 
 export function MainChats() {
   const { t } = useTranslation();
+  const { isAuthenticated } = useConvexAuth();
   const { results } = useStablePaginatedQuery(
     api.chats.list,
     {},
@@ -105,12 +104,13 @@ export function MainChats() {
                     className="group ml-4 basis-1/2 rounded-lg border bg-background p-4 lg:basis-1/3"
                     key={chat._id}
                   >
-                    <Chat
-                      name={chat.chatName as string}
-                      time={chat.updatedAt}
-                      characterId={chat.characterId as Id<"characters">}
-                      chatId={chat._id as Id<"chats">}
-                    />
+                    {isAuthenticated && (
+                      <Chat
+                        name={chat.chatName as string}
+                        characterId={chat.characterId as Id<"characters">}
+                        chatId={chat._id as Id<"chats">}
+                      />
+                    )}
                   </CarouselItem>
                 ))}
               </CarouselContent>

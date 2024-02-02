@@ -7,12 +7,11 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
-import { useConvexAuth, useQuery } from "convex/react";
+import { useConvexAuth } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button } from "@repo/ui/src/components";
-import { ChevronLeft, ChevronRight, MessageSquare, X } from "lucide-react";
-import { MainStories } from "./main-stories";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -96,8 +95,8 @@ const Discover = () => {
   return (
     <div className="relative flex flex-col gap-4 lg:gap-8">
       {isAuthenticated && <CheckinDialog />}
-      {username && <MainChats />}
-      {!username && <PreferenceDialog />}
+      {isAuthenticated && <MainChats />}
+      {!isAuthenticated && !username && <PreferenceDialog />}
       <SignInDialog
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}

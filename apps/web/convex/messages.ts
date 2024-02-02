@@ -22,10 +22,16 @@ export const list = query({
     paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
-    const user = await getUser(ctx);
+    const identity = await ctx.auth.getUserIdentity();
     const chat = await ctx.db.get(args.chatId);
-    if (chat?.userId !== user._id) {
-      throw new Error("User does not own this chat.");
+    if (!identity) {
+      throw new Error("User is not authorized");
+    }
+    if (
+      chat?.tokenIdentifier &&
+      chat?.tokenIdentifier !== identity?.tokenIdentifier
+    ) {
+      throw new Error("User is not authorized");
     }
     return await ctx.db
       .query("messages")
@@ -40,14 +46,16 @@ export const mostRecentMessage = query({
     chatId: v.id("chats"),
   },
   handler: async (ctx, args) => {
-    const user = await getUser(ctx);
-    const chat = await ctx.db
-      .query("chats")
-      .filter((q) => q.eq(q.field("_id"), args.chatId))
-      .filter((q) => q.eq(q.field("userId"), user._id))
-      .first();
-    if (!chat) {
-      throw new Error("User does not own this chat.");
+    const identity = await ctx.auth.getUserIdentity();
+    const chat = await ctx.db.get(args.chatId);
+    if (!identity) {
+      throw new Error("User is not authorized");
+    }
+    if (
+      chat?.tokenIdentifier &&
+      chat?.tokenIdentifier !== identity?.tokenIdentifier
+    ) {
+      throw new Error("User is not authorized");
     }
     return await ctx.db
       .query("messages")
@@ -272,17 +280,22 @@ export const addImage = internalMutation(
 export const removeOldMessages = internalMutation({
   args: {},
   handler: async (ctx) => {
-    const twoWeeksAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const messages = await ctx.db
       .query("messages")
-      .filter((q) => q.lt(q.field("_creationTime"), twoWeeksAgo.getTime()))
+      .filter((q) => q.lt(q.field("_creationTime"), weekAgo.getTime()))
       .collect();
     await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
     const oldStories = await ctx.db
       .query("stories")
-      .filter((q) => q.lt(q.field("_creationTime"), twoWeeksAgo.getTime()))
+      .filter((q) => q.lt(q.field("_creationTime"), weekAgo.getTime()))
       .collect();
     await Promise.all(oldStories.map((story) => ctx.db.delete(story._id)));
+    const oldChats = await ctx.db
+      .query("chats")
+      .filter((q) => q.lt(q.field("_creationTime"), weekAgo.getTime()))
+      .collect();
+    await Promise.all(oldChats.map((chat) => ctx.db.delete(chat._id)));
     return { removed: messages.length };
   },
 });
