@@ -65,7 +65,10 @@ import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 import { usePostHog } from "posthog-js/react";
 import { useLanguage } from "./lang-select";
 import { Label } from "@repo/ui/src/components/label";
-import { useStablePaginatedQuery } from "./lib/hooks/use-stable-query";
+import {
+  useStablePaginatedQuery,
+  useStableQuery,
+} from "./lib/hooks/use-stable-query";
 import { useVoiceOver } from "./lib/hooks/use-voice-over";
 
 export const FormattedMessage = ({
@@ -643,7 +646,7 @@ export function Dialog({
   const sendMessage = useMutation(api.messages.send);
   const posthog = usePostHog();
 
-  const followUps = useQuery(api.followUps.get, { chatId });
+  const followUps = useStableQuery(api.followUps.get, { chatId });
   const [isScrolled, setScrolled] = useState(false);
   const [input, setInput] = useState("");
   const { openDialog } = useCrystalDialog();

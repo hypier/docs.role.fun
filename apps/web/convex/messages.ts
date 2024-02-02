@@ -23,12 +23,8 @@ export const list = query({
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
-    const chat = await ctx.db
-      .query("chats")
-      .filter((q) => q.eq(q.field("_id"), args.chatId))
-      .filter((q) => q.eq(q.field("userId"), user._id))
-      .first();
-    if (!chat) {
+    const chat = await ctx.db.get(args.chatId);
+    if (chat?.userId !== user._id) {
       throw new Error("User does not own this chat.");
     }
     return await ctx.db
