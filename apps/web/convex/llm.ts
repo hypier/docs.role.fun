@@ -203,9 +203,9 @@ export const answer = internalAction({
         }
 
         // 4. Start streaming
-        const stream = await openai.chat.completions.create({
+        const response = await openai.chat.completions.create({
           model,
-          stream: true,
+          stream: false,
           messages: [
             {
               role: "system",
@@ -224,33 +224,16 @@ export const answer = internalAction({
           ],
         });
 
-        let text = "";
-        let mutationCounter = 0;
-        for await (const { choices } of stream) {
-          const replyDelta = choices[0] && choices[0].delta?.content;
-          if (typeof replyDelta === "string" && replyDelta.length > 0) {
-            text += replyDelta;
-            mutationCounter++;
-            if (mutationCounter % 64 === 0) {
-              await ctx.runMutation(internal.llm.updateCharacterMessage, {
-                messageId,
-                text: text
-                  .replaceAll("{{user}}", userRole as string)
-                  .replaceAll(characterPrefix, "")
-                  .replaceAll(userPrefix, ""),
-              });
-            }
-            if (mutationCounter >= 2048) {
-              break;
-            }
-          }
-        }
+        const responseMessage = (response &&
+          response?.choices &&
+          response.choices[0]?.message) as any;
+        const content = responseMessage?.content
+          .replaceAll("{{user}}", userRole as string)
+          .replaceAll(characterPrefix, "")
+          .replaceAll(userPrefix, "");
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: text
-            .replaceAll("{{user}}", userRole as string)
-            .replaceAll(characterPrefix, "")
-            .replaceAll(userPrefix, ""),
+          text: content,
         });
         if (
           message &&
@@ -263,7 +246,7 @@ export const answer = internalAction({
             messageId,
             query: originalQuery as string,
             rejectedMessage: message.text,
-            regeneratedMessage: text,
+            regeneratedMessage: content,
           });
         }
         const userLanguage =
