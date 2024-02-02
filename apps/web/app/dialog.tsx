@@ -618,7 +618,7 @@ export function Dialog({
   const { results, loadMore } = useStablePaginatedQuery(
     api.messages.list,
     { chatId },
-    { initialNumItems: 5 },
+    { initialNumItems: 10 },
   );
   const { currentLanguage, autoTranslate, toggleAutoTranslate } = useLanguage();
   const remoteMessages = results.reverse();
