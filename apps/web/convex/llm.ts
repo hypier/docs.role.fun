@@ -446,7 +446,7 @@ export const generateFollowups = internalAction({
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}: `;
-        for (let i = 1; i <= 2; i++) {
+        for (let i = 1; i <= 1; i++) {
           const instruction = getInstruction(
             character,
             persona,
