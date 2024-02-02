@@ -853,7 +853,7 @@ export const generateImageTags = internalAction({
 export const getMessages = internalQuery(
   async (
     ctx,
-    { chatId, take = 32 }: { chatId: Id<"chats">; take?: number },
+    { chatId, take = 16 }: { chatId: Id<"chats">; take?: number },
   ) => {
     const messages = await ctx.db
       .query("messages")
