@@ -105,7 +105,9 @@ export const answer = internalAction({
           id: personaId,
         })
       : user?.primaryPersonaId
-        ? user?.primaryPersonaId
+        ? await ctx.runQuery(internal.personas.getPersona, {
+            id: user?.primaryPersonaId,
+          })
         : undefined;
 
     const message = messageId
