@@ -7,30 +7,27 @@ crons.hourly(
   { minuteUTC: 0 },
   internal.characters.scoreAll,
 );
-crons.weekly(
+crons.daily(
   "remove messages",
   {
     minuteUTC: 0,
     hourUTC: 0,
-    dayOfWeek: "monday",
   },
   internal.messages.removeOldMessages,
 );
-crons.weekly(
+crons.daily(
   "remove stories",
   {
     minuteUTC: 0,
     hourUTC: 0,
-    dayOfWeek: "monday",
   },
   internal.messages.removeOldStories,
 );
-crons.weekly(
+crons.daily(
   "remove chats",
   {
     minuteUTC: 0,
     hourUTC: 0,
-    dayOfWeek: "monday",
   },
   internal.messages.removeOldChats,
 );
