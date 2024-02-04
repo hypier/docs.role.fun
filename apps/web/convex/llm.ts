@@ -399,7 +399,7 @@ export const generateFollowups = internalAction({
     const username = user?.name;
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
-      take: 8,
+      take: 4,
     });
     const character = await ctx.runQuery(api.characters.get, {
       id: characterId,

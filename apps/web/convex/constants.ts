@@ -147,7 +147,7 @@ export const modelData = [
     alt: "Company logo of Anthropic AI",
   },
   {
-    value: "gryphe/mythomax-l2-13b-8k",
+    value: "gryphe/mythomax-l2-13b",
     description: "Uncensored, Mythomax L2 13B by Gryphe",
     crystalPrice: 1,
     isNSFW: true,
