@@ -153,6 +153,12 @@ export const modelData = [
     isNSFW: true,
   },
   {
+    value: "gryphe/mythomax-l2-13b-8k",
+    description: "Uncensored, Mythomax L2 13B 8K by Gryphe",
+    crystalPrice: 1,
+    isNSFW: true,
+  },
+  {
     value: "undi95/toppy-m-7b",
     description: "Uncensored, Toppy M 7B by undi95",
     isNSFW: true,
