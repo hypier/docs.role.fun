@@ -702,6 +702,8 @@ export function Dialog({
     }
   }, [inView, loadMore]);
 
+  const lastMessage = messages?.[messages.length - 1]?.text || "";
+  const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
   return (
     <div className="h-full w-full">
       {cardImageUrl && (
@@ -859,7 +861,7 @@ export function Dialog({
             ))
           )}
         </div>
-        {followUps && !followUps?.isStale && (
+        {followUps && !followUps?.isStale && isLastMessageLoaded && (
           <div className="mb-4 flex w-full flex-col justify-center gap-4 px-6">
             {followUps?.followUp1 &&
               followUps?.followUp1 !== "Tell me more" && (
