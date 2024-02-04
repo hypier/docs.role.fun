@@ -98,7 +98,7 @@ export const list = query({
     const user = await getUser(ctx);
     const results = await ctx.db
       .query("chats")
-      .filter((q) => q.eq(q.field("userId"), user._id))
+      .withIndex("byUserId", (q) => q.eq("userId", user._id))
       .order("desc")
       .paginate(args.paginationOpts);
     return results;
@@ -110,13 +110,18 @@ export const get = query({
     id: v.id("chats"),
   },
   handler: async (ctx, args) => {
-    const user = await getUser(ctx);
-    return await ctx.db
-      .query("chats")
-      .filter((q) => q.eq(q.field("_id"), args.id))
-      .filter((q) => q.eq(q.field("userId"), user._id))
-      .order("desc")
-      .first();
+    const identity = await ctx.auth.getUserIdentity();
+    const chat = await ctx.db.get(args.id);
+    if (!identity) {
+      throw new Error("User is not authorized");
+    }
+    if (
+      chat?.tokenIdentifier &&
+      chat?.tokenIdentifier !== identity?.tokenIdentifier
+    ) {
+      throw new Error("User is not authorized");
+    }
+    return chat;
   },
 });
 
