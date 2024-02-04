@@ -138,5 +138,6 @@
   "Your privacy matters to us. All your conversations are encrypted at-rest and in-transit.": "プライバシーは私たちにとって重要です。すべての会話は休憩と転送中に暗号化されています。",
   "Old messages are automatically deleted from our database.": "古いメッセージは自動的にデータベースから削除されます。",
   "Check this to enable uncensored models.": "無修正モデルを有効にするには、これをチェックしてください。",
-  "Affiliate": "アフィリエイト情報"
+  "Affiliate": "アフィリエイト情報",
+  "Tell me more": "もっと教えてください"
 }
