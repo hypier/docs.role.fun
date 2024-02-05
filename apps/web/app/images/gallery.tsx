@@ -22,8 +22,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
-import { ChevronLeft } from "lucide-react";
-import { Button } from "@repo/ui/src/components";
 import { Toggle } from "@repo/ui/src/components/toggle";
 
 export const ImagePlaceholder = () => {
@@ -72,7 +70,6 @@ const Gallery = ({
   const [_api, setApi] = useState<CarouselApi>();
 
   const popularTags = useStableQuery(api.images.listPopularTags) || {};
-  const [tagPage, setTagPage] = useState(0);
   const { results, status, loadMore } = useStablePaginatedQuery(
     isMy ? api.images.listMy : api.images.listImages,
     filters,
@@ -94,23 +91,13 @@ const Gallery = ({
 
   return (
     <>
-      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+      <div className="relative flex w-full place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
+          className="w-[75%] md:w-[80%] lg:w-full"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
-            {tagPage > 0 && (
-              <Button
-                variant="ghost"
-                aria-label="Previous tags"
-                onClick={() => setTagPage(tagPage - 1)}
-                disabled={tagPage === 0}
-              >
-                <ChevronLeft className="h-4 w-4 p-0.5 text-muted-foreground" />
-              </Button>
-            )}
             {Array.isArray(popularTags) &&
               popularTags.map(
                 (
