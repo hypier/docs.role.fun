@@ -145,28 +145,30 @@ const PlusPlan = () => {
                 ? "Active"
                 : "Subscribe"}{" "}
           </p>
-          <CardDescription
-            className="z-10 text-xs duration-200 hover:opacity-50"
-            onClick={
-              subscription?.cancelsAt
-                ? async (e) => {}
-                : async (e) => {
-                    e.stopPropagation();
-                    const promise = unsubscribe({});
-                    toast.promise(promise, {
-                      loading: "Unsubscribing...",
-                      success: "Unsubscribe successful",
-                      error: "Unsubscribe failed",
-                    });
-                  }
-            }
-          >
-            {subscription?.cancelsAt
-              ? `Cancelling on ${new Date(
-                  subscription.cancelsAt,
-                ).toLocaleDateString()}`
-              : t("Cancel subscription")}
-          </CardDescription>
+          {currentUser?.subscriptionTier === "plus" && (
+            <CardDescription
+              className="z-10 text-xs duration-200 hover:opacity-50"
+              onClick={
+                subscription?.cancelsAt
+                  ? async (e) => {}
+                  : async (e) => {
+                      e.stopPropagation();
+                      const promise = unsubscribe({});
+                      toast.promise(promise, {
+                        loading: "Unsubscribing...",
+                        success: "Unsubscribe successful",
+                        error: "Unsubscribe failed",
+                      });
+                    }
+              }
+            >
+              {subscription?.cancelsAt
+                ? `Cancelling on ${new Date(
+                    subscription.cancelsAt,
+                  ).toLocaleDateString()}`
+                : t("Cancel subscription")}
+            </CardDescription>
+          )}
         </CardFooter>
       </div>
     </Card>
