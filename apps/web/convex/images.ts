@@ -81,6 +81,7 @@ export const listImages = query({
     paginationOpts: paginationOptsValidator,
     isAuthenticated: v.optional(v.boolean()),
     nsfwPreference: v.optional(v.string()),
+    tag: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     let user: any;
@@ -111,6 +112,9 @@ export const listImages = query({
 
     if (args.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+    if (args.tag) {
+      query = query.filter((q) => q.eq(q.field("tag"), args.tag));
     }
 
     const paginationResult = await query
@@ -289,5 +293,35 @@ export const imagine = mutation({
     });
 
     return image;
+  },
+});
+
+export const listPopularTags = query({
+  handler: async (ctx) => {
+    let user: any;
+    try {
+      user = await getUser(ctx, true);
+    } catch (error) {
+      console.error("Error getting user:", error);
+    }
+    let query = ctx.db.query("images").withIndex("byLikes");
+    if (user && user.nsfwPreference !== "allow") {
+      query = query.filter((q) => q.neq(q.field("isNSFW"), true));
+    }
+    const popularImages = await query.order("desc").take(300);
+    const tagCounts = popularImages.reduce<Record<string, number>>(
+      (acc, image) => {
+        const tag = image.tag as string;
+        if (tag) {
+          acc[tag] = (acc[tag] || 0) + 1;
+        }
+        return acc;
+      },
+      {},
+    );
+    const sortedTags = Object.entries(tagCounts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([tagName, count]) => ({ tagName, count }));
+    return sortedTags;
   },
 });
