@@ -43,6 +43,7 @@ import {
   Lock,
   Plus,
   Rabbit,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import useImageModelData from "../lib/hooks/use-image-model-data";
@@ -112,7 +113,7 @@ const PlusPlan = () => {
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex w-full flex-col items-center justify-center gap-2">
-          <ul className="z-10 w-full text-sm text-white">
+          <ul className="z-10 flex w-full flex-col gap-1 text-xs text-white">
             <li className="flex items-center gap-1">
               <Heart className="h-4 w-4" />
               {t("Double Character Memory")}
@@ -124,6 +125,10 @@ const PlusPlan = () => {
             <li className="flex items-center gap-1">
               <Lock className="h-4 w-4" />
               {t("Private Images without Extra Crystals")}
+            </li>
+            <li className="flex items-center gap-1">
+              <Sparkles className="h-4 w-4" />
+              {t("More Follow-up Answers")}
             </li>
             <li className="flex items-center gap-1">
               <Rabbit className="h-4 w-4" />
