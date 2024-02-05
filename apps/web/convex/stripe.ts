@@ -153,12 +153,15 @@ export const unsubscribe = internalAction({
           },
         },
       );
-      await ctx.runMutation(internal.payments.cancelSubscription, {
-        subscriptionId: updatedSubscription.id,
-        cancelsAt: new Date(updatedSubscription.current_period_end * 1000)
-          .toISOString()
-          .split("T")[0],
-      });
+      const cancelsAtDate = new Date(updatedSubscription.current_period_end * 1000)
+        .toISOString()
+        .split("T")[0];
+      if (typeof updatedSubscription.id === 'string' && typeof cancelsAtDate === 'string') {
+        await ctx.runMutation(internal.payments.cancelSubscription, {
+          subscriptionId: updatedSubscription.id,
+          cancelsAt: cancelsAtDate,
+        });
+      }
       return { success: true };
     } catch (err) {
       console.error(err);
