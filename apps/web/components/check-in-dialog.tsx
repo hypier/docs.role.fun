@@ -73,7 +73,7 @@ const CheckinDialog = () => {
             </div>
             <div className="flex w-full flex-col items-center justify-center gap-4 pt-4">
               <AlertDialogAction onClick={onClickHandler}>
-                {t("Claim 25 Crystals")}
+                {t("Claim 15 Crystals")}
               </AlertDialogAction>
             </div>
           </AlertDialogHeader>

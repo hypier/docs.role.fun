@@ -190,7 +190,7 @@ const DailyReward = () => {
         )}
       </AnimatePresence>
       <Button onClick={onClickHandler} disabled={checkedIn}>
-        {t("Claim 25 Crystals")}
+        {t("Claim 15 Crystals")}
       </Button>
     </div>
   );
