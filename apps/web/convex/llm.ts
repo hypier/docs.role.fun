@@ -431,7 +431,7 @@ export const generateFollowups = internalAction({
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}: `;
-        for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 2 : 1); i++) {
+        for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 3 : 1); i++) {
           const instruction = getInstruction(
             character,
             persona,
@@ -444,7 +444,7 @@ export const generateFollowups = internalAction({
                 ? model
                 : i === 2
                   ? "recursal/eagle-7b"
-                  : "nousresearch/nous-capybara-7b:free",
+                  : "huggingfaceh4/zephyr-7b-beta:free",
             stream: false,
             messages: [
               {
