@@ -52,7 +52,6 @@ import useSubscription from "../lib/hooks/use-subscription";
 
 const PlusPlan = () => {
   const { t } = useTranslation();
-  const router = useRouter();
   const subscribe = useAction(api.stripe.subscribe);
   const unsubscribe = useMutation(api.payments.unsubscribe);
   const uncancel = useMutation(api.payments.uncancel);
@@ -89,9 +88,9 @@ const PlusPlan = () => {
       className="relative rounded-lg tabular-nums duration-200 hover:shadow-lg"
       role="button"
       onClick={
-        handlePurchaseClick
-          ? (e) => handlePurchaseClick(e)
-          : () => router.push("/sign-in")
+        currentUser?.subscriptionTier === "plus" && !subscription?.cancelsAt
+          ? undefined
+          : (e) => handlePurchaseClick(e)
       }
     >
       <Image
@@ -108,11 +107,12 @@ const PlusPlan = () => {
             ORP+
           </CardTitle>
           <CardDescription className="z-10">
-            {t("Create your own world.")}
+            9.99$
+            <span className="text-xs">{" +VAT"}</span>
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex w-full flex-col items-center justify-center gap-2">
-          <ul className="z-10 w-full text-sm text-foreground">
+          <ul className="z-10 w-full text-sm text-white">
             <li className="flex items-center gap-1">
               <Heart className="h-4 w-4" />
               {t("Double Memory")}
@@ -143,12 +143,7 @@ const PlusPlan = () => {
               ? t("Renew subscription")
               : currentUser?.subscriptionTier === "plus"
                 ? "Active"
-                : "9.99$"}{" "}
-            {!subscription?.cancelsAt && (
-              <span className="text-xs">
-                {currentUser?.subscriptionTier !== "plus" ? "+VAT" : ""}
-              </span>
-            )}
+                : "Subscribe"}{" "}
           </p>
           <CardDescription
             className="z-10 text-xs duration-200 hover:opacity-50"
