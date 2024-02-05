@@ -29,12 +29,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    {
-      url: "https://empty.app/filter-templates",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
     ...characters.map((character) => ({
       url: `https://openroleplay.ai/character/${character._id}`,
       lastModified: new Date(character.updatedAt),
