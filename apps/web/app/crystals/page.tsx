@@ -2,6 +2,7 @@
 import {
   Button,
   Card,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -35,11 +36,147 @@ import {
 } from "@repo/ui/src/components/collapsible";
 import ModelBadge from "../../components/characters/model-badge";
 import { useState } from "react";
-import { BookMarked, ChevronsUpDown, Plus } from "lucide-react";
+import {
+  BookMarked,
+  ChevronsUpDown,
+  Heart,
+  Lock,
+  Plus,
+  Rabbit,
+} from "lucide-react";
 import Link from "next/link";
 import useImageModelData from "../lib/hooks/use-image-model-data";
 import { packages } from "./packages";
 import { usePaymentDialog } from "../lib/hooks/use-crystal-dialog";
+import useSubscription from "../lib/hooks/use-subscription";
+
+const PlusPlan = () => {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const subscribe = useAction(api.stripe.subscribe);
+  const unsubscribe = useMutation(api.payments.unsubscribe);
+  const uncancel = useMutation(api.payments.uncancel);
+  const currentUser = useCurrentUser();
+  const subscription = useSubscription();
+  const { setClientSecret, openDialog } = usePaymentDialog();
+
+  async function handlePurchaseClick(event: any) {
+    event.preventDefault();
+    const promise = subscription?.cancelsAt
+      ? uncancel({})
+      : subscribe({
+          userId: currentUser._id,
+        });
+    toast.promise(promise, {
+      loading: "Loading purchase details...",
+      success: subscription?.cancelsAt
+        ? () => "Your subscription is renewed."
+        : (clientSecret) => {
+            openDialog();
+            setClientSecret(clientSecret as string);
+            return `Now you can proceed to purchase.`;
+          },
+      error: (error) => {
+        return error
+          ? (error.data as { message: string }).message
+          : "Unexpected error occurred";
+      },
+    });
+  }
+
+  return (
+    <Card
+      className="relative rounded-lg tabular-nums duration-200 hover:shadow-lg"
+      role="button"
+      onClick={
+        handlePurchaseClick
+          ? (e) => handlePurchaseClick(e)
+          : () => router.push("/sign-in")
+      }
+    >
+      <Image
+        src={"/shop/orp+.png"}
+        width={256}
+        height={368}
+        alt={"image for pricing"}
+        className="absolute top-0 h-full w-full rounded-lg object-cover"
+      />
+      <div className="absolute bottom-0 h-[60%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
+      <div className="flex flex-col gap-1 pt-[100%]">
+        <CardHeader className="flex items-center justify-center py-1">
+          <CardTitle className="z-10 font-display text-xl text-white">
+            ORP+
+          </CardTitle>
+          <CardDescription className="z-10">
+            {t("Create your own world.")}
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="flex w-full flex-col items-center justify-center gap-2">
+          <ul className="z-10 w-full text-sm text-foreground">
+            <li className="flex items-center gap-1">
+              <Heart className="h-4 w-4" />
+              {t("Double Memory")}
+            </li>
+            <li className="flex items-center gap-1">
+              <Crystal className="h-4 w-4" />
+              {t("Earn 150 Crystals Everyday")}
+            </li>
+            <li className="flex items-center gap-1">
+              <Lock className="h-4 w-4" />
+              {t("Private Images without Extra Crystals")}
+            </li>
+            <li className="flex items-center gap-1">
+              <Rabbit className="h-4 w-4" />
+              {t("Early Access to Beta Features")}
+            </li>
+          </ul>
+          <p
+            className={`z-10 w-full rounded-full text-center font-semibold ${
+              subscription?.cancelsAt
+                ? `bg-yellow-100 text-yellow-900`
+                : currentUser?.subscriptionTier === "plus"
+                  ? `bg-blue-100/25 text-blue-100`
+                  : `bg-blue-100 text-blue-900`
+            }`}
+          >
+            {subscription?.cancelsAt
+              ? t("Renew subscription")
+              : currentUser?.subscriptionTier === "plus"
+                ? "Active"
+                : "9.99$"}{" "}
+            {!subscription?.cancelsAt && (
+              <span className="text-xs">
+                {currentUser?.subscriptionTier !== "plus" ? "+VAT" : ""}
+              </span>
+            )}
+          </p>
+          <CardDescription
+            className="z-10 text-xs duration-200 hover:opacity-50"
+            onClick={
+              subscription?.cancelsAt
+                ? async (e) => {}
+                : async (e) => {
+                    e.stopPropagation();
+                    const promise = unsubscribe({});
+                    toast.promise(promise, {
+                      loading: "Unsubscribing...",
+                      success: "Unsubscribe successful",
+                      error: "Unsubscribe failed",
+                    });
+                  }
+            }
+          >
+            {subscription?.cancelsAt
+              ? `Cancelling on ${new Date(
+                  subscription.cancelsAt,
+                ).toLocaleDateString()}`
+              : t("Cancel subscription")}
+          </CardDescription>
+        </CardFooter>
+      </div>
+    </Card>
+  );
+};
 
 const Package = ({
   src,
@@ -230,20 +367,23 @@ export default function Page() {
       </div>
       <AnimatePresence>
         {isAuthenticated ? (
-          <motion.section
-            {...FadeInOut}
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {packages.map((pkg) => (
-              <PackageWrapper
-                key={pkg.src}
-                src={pkg.src}
-                amount={pkg.amount as any}
-                bonus={pkg.bonus}
-                price={pkg.price}
-              />
-            ))}
-          </motion.section>
+          <div className="flex flex-col gap-8 xl:flex-row">
+            <PlusPlan />
+            <motion.section
+              {...FadeInOut}
+              className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            >
+              {packages.map((pkg) => (
+                <PackageWrapper
+                  key={pkg.src}
+                  src={pkg.src}
+                  amount={pkg.amount as any}
+                  bonus={pkg.bonus}
+                  price={pkg.price}
+                />
+              ))}
+            </motion.section>
+          </div>
         ) : (
           <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {packages.map((pkg) => (

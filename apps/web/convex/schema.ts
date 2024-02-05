@@ -118,9 +118,13 @@ export default defineSchema({
   payments: defineTable({
     numCrystals: v.number(),
     stripeId: v.optional(v.string()),
+    subscriptionId: v.optional(v.string()),
+    productName: v.optional(v.string()),
+    cancelsAt: v.optional(v.string()),
     userId: v.id("users"),
     isPurchased: v.optional(v.boolean()),
   })
+    .index("bySubscriptionId", ["subscriptionId"])
     .index("byStripeId", ["stripeId"])
     .index("byUserId", ["userId"]),
   checkIn: defineTable({
