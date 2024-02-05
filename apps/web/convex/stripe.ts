@@ -73,6 +73,144 @@ export const pay = action({
   },
 });
 
+export const subscribe = action({
+  args: {
+    userId: v.id("users"),
+  },
+  handler: async (
+    ctx: any,
+    {
+      userId,
+    }: {
+      userId: Id<"users">;
+    },
+  ): Promise<string> => {
+    const domain: string =
+      process.env.HOSTING_URL ?? "http://localhost:3000/shop";
+    const stripe: Stripe = new Stripe(process.env.STRIPE_API_KEY!, {
+      apiVersion: "2023-10-16",
+    });
+    const paymentId: string = await ctx.runMutation(internal.payments.create, {
+      numCrystals: 150,
+      productName: "ORP+",
+      userId,
+    });
+    const user = await ctx.runQuery(internal.users.getUserInternal, {
+      id: userId,
+    });
+    const session: Stripe.Checkout.Session =
+      await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            price_data: {
+              currency: "USD",
+              recurring: { interval: "month" },
+              unit_amount_decimal: "999",
+              tax_behavior: "exclusive",
+              product_data: {
+                name: `ORP+`,
+                description:
+                  "Double memory, Earn more crystals, Unlock exclusive features",
+              },
+            },
+            quantity: 1,
+          },
+        ],
+        ...(user?.email ? { customer_email: user?.email } : {}),
+        mode: "subscription",
+        ui_mode: "embedded",
+        return_url: `${domain}?session_id={CHECKOUT_SESSION_ID}`,
+        automatic_tax: { enabled: true },
+      });
+
+    await ctx.runMutation(internal.payments.markPending, {
+      paymentId,
+      stripeId: session.id,
+    });
+    return session.client_secret as string;
+  },
+});
+
+export const unsubscribe = internalAction({
+  args: { userId: v.id("users") },
+  handler: async (ctx, { userId }) => {
+    const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
+      apiVersion: "2023-10-16",
+    });
+    try {
+      const subscriptionId = (await ctx.runQuery(
+        internal.payments.getSubscriptionId,
+        {
+          userId,
+        },
+      )) as string;
+      const updatedSubscription = await stripe.subscriptions.update(
+        subscriptionId,
+        {
+          cancel_at_period_end: true,
+          cancellation_details: {
+            comment: "Customer canceled their subscription.",
+          },
+        },
+      );
+      await ctx.runMutation(internal.payments.cancelSubscription, {
+        subscriptionId: updatedSubscription.id,
+        cancelsAt: new Date(updatedSubscription.current_period_end * 1000)
+          .toISOString()
+          .split("T")[0],
+      });
+      return { success: true };
+    } catch (err) {
+      console.error(err);
+      return { success: false, error: (err as { message: string }).message };
+    }
+  },
+});
+
+export const uncancel = internalAction({
+  args: { userId: v.id("users") },
+  handler: async (ctx, { userId }) => {
+    const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
+      apiVersion: "2023-10-16",
+    });
+    try {
+      // Retrieve the subscription to check if it's canceled or canceling
+      const subscriptionId = (await ctx.runQuery(
+        internal.payments.getSubscriptionId,
+        {
+          userId,
+        },
+      )) as string;
+      const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+      if (subscription.cancel_at_period_end) {
+        // Update subscription to remove cancel_at_period_end
+        const updatedSubscription = await stripe.subscriptions.update(
+          subscriptionId,
+          {
+            cancel_at_period_end: false,
+          },
+        );
+        // Log successful uncancel
+        console.log(`Subscription ${subscriptionId} uncancelled successfully.`);
+        await ctx.runMutation(internal.payments.cancelSubscription, {
+          subscriptionId: updatedSubscription.id,
+          cancelsAt: "",
+        });
+        return { success: true, subscriptionId: updatedSubscription.id };
+      } else {
+        // Subscription is not in a canceled or canceling state
+        return {
+          success: false,
+          error: "Subscription is not canceled or in the process of canceling.",
+        };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, error: (err as { message: string }).message };
+    }
+  },
+});
+
 export const fulfill = internalAction({
   args: { signature: v.string(), payload: v.string() },
   handler: async ({ runMutation }, { signature, payload }) => {
@@ -89,8 +227,29 @@ export const fulfill = internalAction({
       console.log("event:::", event);
 
       if (event.type === "checkout.session.completed") {
-        const stripeId = (event.data.object as { id: string }).id;
-        await runMutation(internal.payments.fulfill, { stripeId });
+        const session = event.data.object;
+        const stripeId = session?.id;
+        if (session.mode === "payment") {
+          await runMutation(internal.payments.fulfill, { stripeId });
+        } else if (session.mode === "subscription") {
+          const subscriptionId = session.subscription as string;
+          await runMutation(internal.payments.fulfillSubscription, {
+            stripeId,
+            subscriptionId,
+          });
+        }
+      } else if (event.type === "customer.subscription.updated") {
+        const session = event.data.object;
+        const subscriptionId = session?.id;
+        await runMutation(internal.payments.updateSubscription, {
+          subscriptionId,
+        });
+      } else if (event.type === "customer.subscription.deleted") {
+        const session = event.data.object;
+        const subscriptionId = session?.id;
+        await runMutation(internal.payments.deleteSubscription, {
+          subscriptionId,
+        });
       }
       return { success: true };
     } catch (err) {

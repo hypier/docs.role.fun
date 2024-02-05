@@ -119,7 +119,17 @@ export const clear = mutation({
     chatId: v.id("chats"),
   },
   handler: async (ctx, args) => {
-    await getUser(ctx);
+    const identity = await ctx.auth.getUserIdentity();
+    const chat = await ctx.db.get(args.chatId);
+    if (!identity) {
+      throw new Error("User is not authorized");
+    }
+    if (
+      chat?.tokenIdentifier &&
+      chat?.tokenIdentifier !== identity?.tokenIdentifier
+    ) {
+      throw new Error("User is not authorized");
+    }
     const messages = await ctx.db
       .query("messages")
       .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))

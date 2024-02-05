@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { CalendarCheck } from "lucide-react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Image from "next/image";
-import Link from "next/link";
 
 const CheckinDialog = () => {
   const { t } = useTranslation();
@@ -62,7 +61,9 @@ const CheckinDialog = () => {
               <AlertDialogDescription className="flex flex-col items-center justify-center gap-1">
                 <div className="flex items-center gap-1 text-lg text-foreground">
                   <Crystal className="h-5 w-5" />
-                  {`25 ${t("Crystals")}`}
+                  {me?.subscriptionTier === "plus"
+                    ? `150 ${t("Crystals")}`
+                    : `15 ${t("Crystals")}`}
                 </div>
                 <div className="flex text-center">
                   {t(
@@ -73,7 +74,9 @@ const CheckinDialog = () => {
             </div>
             <div className="flex w-full flex-col items-center justify-center gap-4 pt-4">
               <AlertDialogAction onClick={onClickHandler}>
-                {t("Claim 25 Crystals")}
+                {me?.subscriptionTier === "plus"
+                  ? t("Claim 150 Crystals")
+                  : t("Claim 15 Crystals")}
               </AlertDialogAction>
             </div>
           </AlertDialogHeader>

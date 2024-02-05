@@ -25,6 +25,7 @@ export default defineSchema({
   users: defineTable({
     name: v.string(),
     email: v.optional(v.string()),
+    subscriptionTier: v.optional(v.union(v.literal("free"), v.literal("plus"))),
     primaryPersonaId: v.optional(v.id("personas")),
     crystals: v.optional(v.number()),
     tokenIdentifier: v.string(),
@@ -117,9 +118,13 @@ export default defineSchema({
   payments: defineTable({
     numCrystals: v.number(),
     stripeId: v.optional(v.string()),
+    subscriptionId: v.optional(v.string()),
+    productName: v.optional(v.string()),
+    cancelsAt: v.optional(v.string()),
     userId: v.id("users"),
     isPurchased: v.optional(v.boolean()),
   })
+    .index("bySubscriptionId", ["subscriptionId"])
     .index("byStripeId", ["stripeId"])
     .index("byUserId", ["userId"]),
   checkIn: defineTable({

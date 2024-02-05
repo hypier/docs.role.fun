@@ -39,6 +39,7 @@ export const generate = mutation({
     await ctx.scheduler.runAfter(0, internal.llm.generateImageTags, {
       userId: user._id,
       imageId: image,
+      isPlus: user?.subscriptionTier === "plus",
     });
 
     return image;
@@ -290,6 +291,7 @@ export const imagine = mutation({
       prompt: message?.text as string,
       referenceImage: character?.cardImageUrl,
       model: "daun-io/openroleplay.ai-animagine-v3",
+      isPlus: user?.subscriptionTier === "plus",
     });
 
     return image;
