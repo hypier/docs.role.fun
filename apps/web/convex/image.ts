@@ -216,6 +216,7 @@ export const generateByPrompt = internalAction(
       model,
       isPrivate,
       isNSFW,
+      isPlus,
     }: {
       userId: Id<"users">;
       imageId: Id<"images">;
@@ -225,6 +226,7 @@ export const generateByPrompt = internalAction(
       model: string;
       isPrivate?: boolean;
       isNSFW?: boolean;
+      isPlus?: boolean;
     },
   ) => {
     const { currentCrystals } = await ctx.runMutation(
@@ -232,7 +234,7 @@ export const generateByPrompt = internalAction(
       {
         userId,
         name: model,
-        multiplier: isPrivate ? 2 : 1,
+        multiplier: isPrivate ? (isPlus ? 1 : 2) : 1,
       },
     );
 

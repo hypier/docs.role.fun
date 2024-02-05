@@ -96,6 +96,7 @@ export const answer = internalAction({
     const username = user?.name;
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
+      take: user?.subscriptionTier === "plus" ? 32 : 16,
     });
     const character = await ctx.runQuery(api.characters.get, {
       id: characterId,
@@ -736,8 +737,9 @@ export const generateImageTags = internalAction({
   args: {
     userId: v.id("users"),
     imageId: v.id("images"),
+    isPlus: v.optional(v.boolean()),
   },
-  handler: async (ctx, { userId, imageId }) => {
+  handler: async (ctx, { userId, imageId, isPlus }) => {
     try {
       const model = "gpt-3.5-turbo-1106";
       const baseURL = getBaseURL(model);
@@ -821,6 +823,7 @@ export const generateImageTags = internalAction({
             model: image?.model,
             isPrivate: image?.isPrivate,
             isNSFW: functionArgs?.isNSFW,
+            isPlus,
           });
         }
       } catch (error) {

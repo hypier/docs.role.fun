@@ -104,6 +104,7 @@ const Images = () => {
         "daun-io/openroleplay.ai-animagine-v3",
     });
   }, [searchQuery]);
+  const isPlus = me?.subscriptionTier === "plus";
 
   const InputField = React.memo(({ field }: { field: any }) => (
     <FormItem className="flex w-full flex-col">
@@ -124,7 +125,8 @@ const Images = () => {
         <Button className="h-7 w-full gap-1 text-xs" type="submit">
           <>
             {t("Generate")}
-            <Crystal className="h-4 w-4" /> x {field.value ? price * 2 : price}
+            <Crystal className="h-4 w-4" /> x{" "}
+            {field.value ? (isPlus ? price : price * 2) : price}
           </>
         </Button>
       ) : (

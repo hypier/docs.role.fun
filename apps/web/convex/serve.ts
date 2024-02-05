@@ -104,6 +104,9 @@ export const checkin = mutation({
     });
     if (user?.email && user.email.includes("secretmail.net")) return;
     const currentCrystals = user?.crystals || 0;
-    await ctx.db.patch(user._id, { crystals: currentCrystals + 15 });
+    const additionalCrystals = user.subscriptionTier === "plus" ? 150 : 15;
+    await ctx.db.patch(user._id, {
+      crystals: currentCrystals + additionalCrystals,
+    });
   },
 });

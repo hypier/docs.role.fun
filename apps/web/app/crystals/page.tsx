@@ -115,7 +115,7 @@ const PlusPlan = () => {
           <ul className="z-10 w-full text-sm text-white">
             <li className="flex items-center gap-1">
               <Heart className="h-4 w-4" />
-              {t("Double Memory")}
+              {t("Double Character Memory")}
             </li>
             <li className="flex items-center gap-1">
               <Crystal className="h-4 w-4" />
