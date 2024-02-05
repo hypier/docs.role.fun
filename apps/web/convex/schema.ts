@@ -169,7 +169,9 @@ export default defineSchema({
     isNSFW: v.boolean(), // NSFW characters are filtered unless the adult user has explicitly opted in.
     isPrivate: v.optional(v.boolean()),
     isArchived: v.optional(v.boolean()),
-  }).index("byUserId", ["creatorId"]),
+  })
+    .index("byUserId", ["creatorId"])
+    .index("byLikes", ["numLikes"]),
   imageLikes: defineTable({
     imageId: v.id("images"),
     userId: v.id("users"),
