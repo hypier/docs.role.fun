@@ -11,7 +11,7 @@ export const generate = mutation({
     text: v.string(),
   },
   handler: async (ctx, { characterId, messageId, text }) => {
-    text = text.replace(/\(.*?\)|\*.*?\*/g, "");
+    text = text.replace(/\(.*?\)|\*.*?\*/g, "").substring(0, 256);
     const character = await ctx.db.get(characterId);
     const voiceId = character?.voiceId
       ? character.voiceId
