@@ -32,6 +32,7 @@ import type * as messages from "../messages.js";
 import type * as models from "../models.js";
 import type * as payments from "../payments.js";
 import type * as personas from "../personas.js";
+import type * as public from "../public.js";
 import type * as r2 from "../r2.js";
 import type * as random from "../random.js";
 import type * as serve from "../serve.js";
@@ -70,6 +71,7 @@ declare const fullApi: ApiFromModules<{
   models: typeof models;
   payments: typeof payments;
   personas: typeof personas;
+  public: typeof public;
   r2: typeof r2;
   random: typeof random;
   serve: typeof serve;

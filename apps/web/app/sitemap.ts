@@ -8,6 +8,7 @@ const client = new ConvexHttpClient(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const characters = await client.query(api.characters.listBackend, {});
+  const images = await client.query(api.public.listImages, {});
 
   return [
     {
@@ -37,7 +38,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...characters.map((character) => ({
       url: `https://openroleplay.ai/character/${character._id}`,
       lastModified: new Date(character.updatedAt),
-      changeFrequency: "weekly" as "weekly",
+      changeFrequency: "daily" as "daily",
+      priority: 0.8,
+    })),
+    ...images.map((image) => ({
+      url: `https://openroleplay.ai/image/${image._id}`,
+      lastModified: new Date(image._creationTime),
+      changeFrequency: "daily" as "daily",
       priority: 0.8,
     })),
   ];

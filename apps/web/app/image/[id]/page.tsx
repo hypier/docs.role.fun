@@ -1,6 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { constructMetadata } from "../../lib/utils";
-import ChatWithCharacter from "../../character/[id]/ChatWithCharacter";
+import ImageContent from "./image-content";
 
 type Props = {
   params: { id: string };
@@ -30,5 +30,9 @@ export async function generateMetadata(
 }
 
 export default function Page({ params }: { params: { id: string } }) {
-  return <ChatWithCharacter params={params} />;
+  return (
+    <div className="h-full w-full overflow-x-hidden pb-8 lg:pl-16">
+      <ImageContent params={params} />
+    </div>
+  );
 }
