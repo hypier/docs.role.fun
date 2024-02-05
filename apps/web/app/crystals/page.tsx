@@ -107,7 +107,7 @@ const PlusPlan = () => {
           <CardTitle className="z-10 font-display text-xl text-white">
             ORP+
           </CardTitle>
-          <CardDescription className="z-10">
+          <CardDescription className="z-10 text-gray-400">
             9.99$
             <span className="text-xs">{" +VAT"}</span>
           </CardDescription>
