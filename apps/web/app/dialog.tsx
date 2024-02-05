@@ -458,43 +458,6 @@ const ChatOptionsPopover = ({
     <Popover>
       <AlertDialog>
         <PopoverContent className="w-52 p-1">
-          <Button
-            variant="ghost"
-            className="w-full justify-start gap-1 text-muted-foreground"
-            onClick={() => {
-              const promise = newChat({
-                characterId,
-                isNew: true,
-              });
-              toast.promise(promise, {
-                loading: "Creating new chat...",
-                success: (chatId) => {
-                  router.push(`/character/${characterId}?chatId=${chatId}`);
-                  return `New chat has been created.`;
-                },
-                error: (error) => {
-                  console.log("error:::", error);
-                  return error
-                    ? (error.data as { message: string })?.message
-                    : "Unexpected error occurred";
-                },
-              });
-            }}
-          >
-            <Plus className="h-4 w-4 p-0.5" />
-            <span className="w-40 truncate text-left"> {t("New chat")}</span>
-          </Button>
-          <Link href={`/character/${characterId}/stories`}>
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-1 text-muted-foreground"
-            >
-              <BookMarked className="h-4 w-4 p-0.5" />
-              <span className="w-40 truncate text-left">
-                {t(`Stories of ${name}`)}
-              </span>
-            </Button>
-          </Link>
           <Link
             href={`/my-characters/create${
               characterId ? `?remixId=${characterId}` : ""
@@ -616,6 +579,7 @@ export function Dialog({
   const router = useRouter();
   const create = useMutation(api.stories.create);
   const params = useSearchParams();
+  const newChat = useMutation(api.chats.create);
   const urlChatId = params.get("chatId") as Id<"chats">;
   chatId = urlChatId ? urlChatId : chatId;
   const { results, loadMore } = useStablePaginatedQuery(
@@ -731,78 +695,31 @@ export function Dialog({
               chatId={chatId}
               name={name}
             />
-            {isPublic && (
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button className="h-8 gap-1">
-                    <Plus className="h-4 w-4" />
-                    <span className="hidden lg:inline">Create story</span>
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="max-w-fit">
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      {t("Create a story and earn crystals")}
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      {t(
-                        `When you create a story, anyone will be able to see and continue the story. Messages you send after creating your story won't be shared.`,
-                      )}{" "}
-                      {t(
-                        "You can earn crystals whenever other users unlock stories you have created.",
-                      )}
-                    </AlertDialogDescription>
-                    <div className="flex h-72 flex-col gap-4 overflow-y-scroll rounded-lg border p-4 shadow-lg scrollbar-hide">
-                      {messages.map((message, i) => (
-                        <Message
-                          index={i}
-                          key={message._id}
-                          name={name}
-                          message={message}
-                          username={(username as string) || "You"}
-                          cardImageUrl={cardImageUrl as string}
-                        />
-                      ))}
-                    </div>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={() => {
-                        const promise = create({
-                          characterId: characterId as Id<"characters">,
-                          messageIds: messages
-                            .slice(1)
-                            .map((message) => message._id as Id<"messages">),
-                        });
-                        toast.promise(promise, {
-                          loading: "Creating story...",
-                          success: (storyId) => {
-                            router.push(
-                              `/character/${characterId}/story/${storyId}`,
-                            );
-                            if (navigator?.clipboard) {
-                              navigator.clipboard.writeText(
-                                document.location.href,
-                              );
-                              toast.success("Link copied to clipboard");
-                            }
-                            return `Story has been created.`;
-                          },
-                          error: (error) => {
-                            return error?.data
-                              ? (error.data as { message: string })?.message
-                              : "Unexpected error occurred";
-                          },
-                        });
-                      }}
-                    >
-                      Create
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            )}
+            <Button
+              onClick={() => {
+                const promise = newChat({
+                  characterId,
+                  isNew: true,
+                });
+                toast.promise(promise, {
+                  loading: "Creating new chat...",
+                  success: (chatId) => {
+                    router.push(`/character/${characterId}?chatId=${chatId}`);
+                    return `New chat has been created.`;
+                  },
+                  error: (error) => {
+                    console.log("error:::", error);
+                    return error
+                      ? (error.data as { message: string })?.message
+                      : "Unexpected error occurred";
+                  },
+                });
+              }}
+              className="flex h-8"
+            >
+              <Plus className="h-4 w-4 p-0.5" />
+              <span className="hidden lg:inline"> {t("New chat")}</span>
+            </Button>
           </div>
         </div>
       )}
