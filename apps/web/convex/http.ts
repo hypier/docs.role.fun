@@ -55,6 +55,34 @@ http.route({
 });
 
 http.route({
+  path: "/image",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    const url = new URL(request.url);
+    const imageId = url.searchParams.get("imageId") as Id<"images">;
+    const result = await ctx.runQuery(api.images.get, {
+      imageId,
+    });
+    if (result) {
+      return new Response(
+        JSON.stringify({
+          name: result.prompt.split(" ").slice(0, 5).join(" ") + " AI Image",
+          description: result.prompt,
+          imageUrl: result.imageUrl,
+        }),
+        {
+          status: 200,
+        },
+      );
+    } else {
+      return new Response("Image not found", {
+        status: 404,
+      });
+    }
+  }),
+});
+
+http.route({
   path: "/story",
   method: "GET",
   handler: httpAction(async (ctx, request) => {

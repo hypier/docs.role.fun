@@ -14,7 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button, Tooltip } from "@repo/ui/src/components";
+import { Button } from "@repo/ui/src/components";
 import { useMutation, useQuery } from "convex/react";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { Id } from "../../convex/_generated/dataModel";
