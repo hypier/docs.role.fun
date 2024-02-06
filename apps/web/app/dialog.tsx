@@ -850,18 +850,27 @@ export function Dialog({
         onSubmit={(event) => void handleSend(event)}
       >
         <div className="flex w-full items-center justify-center gap-4 px-4">
-          <input
-            className="my-3 w-full border-none bg-background focus-visible:ring-0"
+          <textarea
+            className="my-3 w-full resize-none border-none bg-background scrollbar-hide focus-visible:ring-0"
             style={{
               fontSize: "16px",
               lineHeight: "24px",
               WebkitTextSizeAdjust: "100%",
+              WebkitAppearance: "none",
             }}
             autoFocus
             name="message"
             placeholder="Send a message"
             value={input}
             onChange={(event) => setInput(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && event.metaKey) {
+                event.preventDefault();
+                event.currentTarget.form?.dispatchEvent(
+                  new Event("submit", { cancelable: true, bubbles: true }),
+                );
+              }
+            }}
           />
           <Button disabled={input === ""} size="icon">
             <Send className="h-4 w-4" />
