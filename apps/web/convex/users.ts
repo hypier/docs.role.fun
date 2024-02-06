@@ -55,7 +55,10 @@ export const store = mutation({
       name: args.username,
       email: email,
       tokenIdentifier: identity.tokenIdentifier,
-      crystals: email.includes("secretmail.net") ? 0 : SIGN_UP_FREE_CRYSTALS,
+      crystals:
+        email.includes("secretmail.net") || email.includes("oncemail.co.kr")
+          ? 0
+          : SIGN_UP_FREE_CRYSTALS,
     });
   },
 });

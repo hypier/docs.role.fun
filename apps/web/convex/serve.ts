@@ -102,7 +102,12 @@ export const checkin = mutation({
       userId: user._id as Id<"users">,
       date,
     });
-    if (user?.email && user.email.includes("secretmail.net")) return;
+    if (
+      user?.email &&
+      (user.email.includes("secretmail.net") ||
+        user.email.includes("oncemail.co.kr"))
+    )
+      return;
     const currentCrystals = user?.crystals || 0;
     const additionalCrystals = user.subscriptionTier === "plus" ? 150 : 15;
     await ctx.db.patch(user._id, {
