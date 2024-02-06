@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Моделі",
   "Shop": "Крамниця",
+  "Get ORP+": "Отримати ORP+",
   "Community": "Спільнота",
   "Discord": "Discord",
   "My Characters": "Мої символи",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Старі повідомлення автоматично видаляються з нашої бази даних.",
   "Check this to enable uncensored models.": "Позначте цей пункт, щоб увімкнути нецензуровані моделі.",
   "Affiliate": "Партнерська програма",
-  "Tell me more": "Розкажіть мені ще"
+  "Tell me more": "Розкажіть мені ще",
+  "Double Character Memory": "Подвійна символ пам'яті",
+  "Earn 150 Crystals Everyday": "Заробляйте 150 кристалів кожного дня",
+  "Private Images without Extra Crystals": "Приватні зображення без додаткових кристалів",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Подовжити підписку",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
