@@ -30,5 +30,9 @@ export async function generateMetadata(
 }
 
 export default function Page({ params }: { params: { id: string } }) {
-  return <ChatWithCharacter params={params} />;
+  return (
+    <div className="h-full w-full overflow-x-hidden">
+      <ChatWithCharacter params={params} />
+    </div>
+  );
 }
