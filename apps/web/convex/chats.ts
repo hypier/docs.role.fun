@@ -133,11 +133,10 @@ export const remove = mutation({
   },
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
-    const chat = await ctx.db
-      .query("chats")
-      .filter((q) => q.eq(q.field("_id"), args.id))
-      .filter((q) => q.eq(q.field("userId"), user._id))
-      .first();
+    const chat = await ctx.db.get(args.id);
+    if (chat?.userId !== user._id) {
+      throw new Error("User is not authorized to remove this chat");
+    }
     if (chat) {
       const messages = await ctx.db
         .query("messages")
