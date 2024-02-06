@@ -230,7 +230,7 @@ const Discover = () => {
           </Link>
         </div>
         <ErrorBoundary errorComponent={() => ""}>
-          <Gallery isGenerating={false} />
+          <Gallery />
         </ErrorBoundary>
       </section>
     </div>
