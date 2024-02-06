@@ -149,7 +149,7 @@ const Creations = () => {
           </Link>
         </div>
         <ErrorBoundary errorComponent={() => ""}>
-          <Gallery isGenerating={false} isMy={true} />
+          <Gallery isMy={true} />
         </ErrorBoundary>
       </section>
     </div>
