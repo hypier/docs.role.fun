@@ -203,7 +203,7 @@ const Images = () => {
         </div>
       </Collapsible>
 
-      <Gallery isGenerating={isGenerating} isMy={Boolean(isMy)} />
+      <Gallery isMy={Boolean(isMy)} />
     </div>
   );
 };
