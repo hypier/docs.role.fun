@@ -855,6 +855,7 @@ export function Dialog({
             style={{
               fontSize: "16px",
               lineHeight: "24px",
+              WebkitTextSizeAdjust: "100%",
             }}
             autoFocus
             name="message"

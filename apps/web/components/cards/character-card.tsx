@@ -189,13 +189,18 @@ const CharacterCard = (props: {
               >
                 <X />
               </Button>
-              <Button
-                className="h-12 w-12 rounded-full border-none bg-green-500 text-white hover:bg-green-400 hover:text-white dark:hover:bg-green-600"
-                variant="outline"
-                size="icon"
+              <Link
+                href={`/character/${props?.id}`}
+                onClick={() => posthog.capture("click-character-card")}
               >
-                <MessageSquare className="fill-white" />
-              </Button>
+                <Button
+                  className="h-12 w-12 rounded-full border-none bg-green-500 text-white hover:bg-green-400 hover:text-white dark:hover:bg-green-600"
+                  variant="outline"
+                  size="icon"
+                >
+                  <MessageSquare className="fill-white" />
+                </Button>
+              </Link>
             </div>
           </div>
         )}
