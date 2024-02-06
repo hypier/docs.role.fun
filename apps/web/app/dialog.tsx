@@ -851,7 +851,11 @@ export function Dialog({
       >
         <div className="flex w-full items-center justify-center gap-4 px-4">
           <input
-            className="my-3 w-full border-none bg-background !text-[16px] focus-visible:ring-0"
+            className="my-3 w-full border-none bg-background !text-base focus-visible:ring-0"
+            style={{
+              fontSize:"1rem",
+              lineHeight:"1.5rem"
+            }}
             autoFocus
             name="message"
             placeholder="Send a message"
