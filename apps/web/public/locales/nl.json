@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Model",
   "Shop": "Winkel",
+  "Get ORP+": "Krijg OOR+",
   "Community": "Gemeenschap",
   "Discord": "Onenigheid",
   "My Characters": "Mijn tekens",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Oude berichten worden automatisch uit onze database verwijderd.",
   "Check this to enable uncensored models.": "Vink dit aan om ongecensureerde modellen te activeren.",
   "Affiliate": "Partner",
-  "Tell me more": "Vertel me meer"
+  "Tell me more": "Vertel me meer",
+  "Double Character Memory": "Dubbele Karakter geheugen",
+  "Earn 150 Crystals Everyday": "Verdien elke dag 150 Kristallen",
+  "Private Images without Extra Crystals": "Privé afbeeldingen zonder extra kristallen",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Abonnement verlengen",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
