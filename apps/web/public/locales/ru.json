@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Модели",
   "Shop": "Магазин",
+  "Get ORP+": "Получить ORP+",
   "Community": "Сообщество",
   "Discord": "Discord",
   "My Characters": "Мои символы",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Старые сообщения автоматически удаляются из нашей базы данных.",
   "Check this to enable uncensored models.": "Проверьте это, чтобы включить модели цензуры.",
   "Affiliate": "Партнёр",
-  "Tell me more": "Расскажи ещё"
+  "Tell me more": "Расскажи ещё",
+  "Double Character Memory": "Двойная память персонажа",
+  "Earn 150 Crystals Everyday": "Получите 150 кристаллов каждый день",
+  "Private Images without Extra Crystals": "Частные изображения без дополнительных кристаллов",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Продлить подписку",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
