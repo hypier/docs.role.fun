@@ -1,5 +1,10 @@
 "use client";
-import { useConvexAuth, useMutation, useQuery } from "convex/react";
+import {
+  Authenticated,
+  useConvexAuth,
+  useMutation,
+  useQuery,
+} from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import {
@@ -125,14 +130,16 @@ export default function ChatWithCharacter({
           cardImageUrl={data?.cardImageUrl}
         />
       ) : chatId ? (
-        <Dialog
-          name={data?.name as string}
-          model={data?.model as string}
-          chatId={chatId}
-          characterId={data?._id as any}
-          cardImageUrl={data?.cardImageUrl}
-          isPublic={data?.visibility === "public"}
-        />
+        <Authenticated>
+          <Dialog
+            name={data?.name as string}
+            model={data?.model as string}
+            chatId={chatId}
+            characterId={data?._id as any}
+            cardImageUrl={data?.cardImageUrl}
+            isPublic={data?.visibility === "public"}
+          />
+        </Authenticated>
       ) : isAuthenticated && !isLoading ? (
         <div className="flex h-full w-full items-center justify-center">
           <Spinner />
@@ -156,7 +163,7 @@ export default function ChatWithCharacter({
     <div className="flex w-full flex-col justify-self-start lg:pr-6">
       {data?.isNSFW && <AgeRestriction />}
       {isMobile ? (
-        <ErrorBoundary children={content} errorComponent={undefined} />
+        <ErrorBoundary children={content} errorComponent={() => ""} />
       ) : (
         <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem] 2xl:h-[54rem]">
           <Drawer>
@@ -264,7 +271,7 @@ export default function ChatWithCharacter({
             </DrawerContent>
           </Drawer>
           <CardContent className="h-full w-full p-0">
-            <ErrorBoundary children={content} errorComponent={undefined} />
+            <ErrorBoundary children={content} errorComponent={() => ""} />
           </CardContent>
         </Card>
       )}
