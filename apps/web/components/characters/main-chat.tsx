@@ -77,7 +77,7 @@ export function MainChats() {
   const { results } = useStablePaginatedQuery(
     api.chats.list,
     {},
-    { initialNumItems: 5 },
+    { initialNumItems: 3 },
   );
   const [_api, setApi] = useState<CarouselApi>();
   return (
@@ -114,8 +114,6 @@ export function MainChats() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious variant="ghost" />
-              <CarouselNext variant="ghost" />
             </Carousel>
           </div>
         </motion.div>
