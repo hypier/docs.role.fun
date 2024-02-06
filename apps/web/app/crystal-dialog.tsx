@@ -48,11 +48,11 @@ const CrystalDialog: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="mt-4 flex items-center justify-between">
             <CurrentCrystals />
             <Link href="/crystals">
-              <Button variant="ghost" className="w-fit" onClick={closeDialog}>
-                {t("Shop")}
+              <Button className="w-fit font-display" onClick={closeDialog}>
+                {t("Get ORP+")}
               </Button>
             </Link>
           </div>

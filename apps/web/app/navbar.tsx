@@ -28,22 +28,25 @@ export default function NavBar({}: {}) {
             <Link href="/">
               <TextLogo />
             </Link>
-            <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
+            {isAuthenticated ? (
               <Link
-                className="hidden items-center gap-2 text-base text-muted-foreground hover:opacity-50 lg:flex"
-                href="/github"
+                href="/crystals"
+                className="flex items-center justify-center"
               >
-                <Badge className="font-default">
-                  <span>{t("alpha")}</span>
-                </Badge>
+                <Badge className="w-fit font-display">{t("Get ORP+")}</Badge>
               </Link>
-            </Tooltip>
-            <Link
-              href="/affiliate"
-              className="hidden text-base font-normal lg:block"
-            >
-              {t("Affiliate")}
-            </Link>
+            ) : (
+              <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
+                <Link
+                  className="hidden items-center gap-2 text-base text-muted-foreground hover:opacity-50 lg:flex"
+                  href="/github"
+                >
+                  <Badge className="font-default">
+                    <span>{t("alpha")}</span>
+                  </Badge>
+                </Link>
+              </Tooltip>
+            )}
           </div>
           <div className="flex items-center gap-2">
             <Tooltip content="Search characters" desktopOnly>

@@ -716,6 +716,7 @@ export function Dialog({
                 });
               }}
               className="flex h-8"
+              variant="outline"
             >
               <Plus className="h-4 w-4 p-0.5" />
               <span className="hidden lg:inline"> {t("New chat")}</span>
