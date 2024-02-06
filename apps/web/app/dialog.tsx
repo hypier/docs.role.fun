@@ -846,15 +846,15 @@ export function Dialog({
         )}
       </div>
       <form
-        className="sticky bottom-16 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:bottom-0 lg:rounded-br-lg"
+        className="fixed bottom-0 z-50 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:sticky lg:rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
         <div className="flex w-full items-center justify-center gap-4 px-4">
           <input
             className="my-3 w-full border-none bg-background !text-base focus-visible:ring-0"
             style={{
-              fontSize:"1rem",
-              lineHeight:"1.5rem"
+              fontSize: "1rem",
+              lineHeight: "1.5rem",
             }}
             autoFocus
             name="message"
