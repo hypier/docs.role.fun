@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Vzory",
   "Shop": "Obchod",
+  "Get ORP+": "Získat ORP+",
   "Community": "Komunita",
   "Discord": "Discord",
   "My Characters": "Moje postavy",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Staré zprávy jsou automaticky odstraněny z naší databáze.",
   "Check this to enable uncensored models.": "Zaškrtněte pro povolení necenzurovaných modelů.",
   "Affiliate": "Partnerství",
-  "Tell me more": "Řekněte mi více"
+  "Tell me more": "Řekněte mi více",
+  "Double Character Memory": "Dvojité postavové paměti",
+  "Earn 150 Crystals Everyday": "Získejte 150 krystalů každý den",
+  "Private Images without Extra Crystals": "Soukromé obrázky bez extra krystalů",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Obnovit předplatné",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
