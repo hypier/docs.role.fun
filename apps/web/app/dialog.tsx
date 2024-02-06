@@ -181,7 +181,7 @@ export const Message = ({
       }`}
     >
       <div
-        className={`flex items-center gap-2 text-sm font-medium ${
+        className={`flex items-center gap-2 text-base font-medium lg:text-sm ${
           message?.characterId ? "justify-start" : "justify-end"
         }`}
       >
@@ -250,7 +250,7 @@ export const Message = ({
 
           {isImagining ? (
             <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
-              <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-sm">
+              <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-base lg:text-sm">
                 <Spinner />
                 <div className="flex items-center gap-2">
                   <Camera className="h-4 w-4" />
@@ -852,12 +852,6 @@ export function Dialog({
         <div className="flex w-full items-center justify-center gap-4 px-4">
           <textarea
             className="my-3 w-full resize-none border-none bg-background scrollbar-hide focus-visible:ring-0"
-            style={{
-              fontSize: "16px",
-              lineHeight: "24px",
-              WebkitTextSizeAdjust: "100%",
-              WebkitAppearance: "none",
-            }}
             autoFocus
             name="message"
             placeholder="Send a message"
