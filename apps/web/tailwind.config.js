@@ -141,4 +141,5 @@ module.exports = {
       addVariant("radix-side-bottom", '&[data-side="bottom"]');
     }),
   ],
+  hoverOnlyWhenSupported: true,
 };
