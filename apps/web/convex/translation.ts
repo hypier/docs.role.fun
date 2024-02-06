@@ -15,8 +15,7 @@ export const list = query({
 
     const translations = await ctx.db
       .query("translations")
-      .withIndex("by_creation_time")
-      .filter((q) => q.eq(q.field("languageTag"), languageTag))
+      .withIndex("byLanguage", (q) => q.eq("languageTag", languageTag))
       .order("desc")
       .take(768);
 
