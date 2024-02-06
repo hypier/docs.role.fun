@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modeller",
   "Shop": "Butik",
+  "Get ORP+": "Skaffa ORP+",
   "Community": "Gemenskap",
   "Discord": "Discord",
   "My Characters": "Mina karaktärer",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Gamla meddelanden raderas automatiskt från vår databas.",
   "Check this to enable uncensored models.": "Markera för att aktivera ocensurerade modeller.",
   "Affiliate": "Affiliate",
-  "Tell me more": "Berätta mer"
+  "Tell me more": "Berätta mer",
+  "Double Character Memory": "Minne med dubbla tecken",
+  "Earn 150 Crystals Everyday": "Tjäna 150 kristaller Varje dag",
+  "Private Images without Extra Crystals": "Privata bilder utan extra kristaller",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Förnya prenumeration",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
