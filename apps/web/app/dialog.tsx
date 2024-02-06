@@ -780,7 +780,7 @@ export function Dialog({
           )}
         </div>
         {followUps && !followUps?.isStale && isLastMessageLoaded && (
-          <div className="mb-4 flex w-full flex-col justify-center gap-4 px-6">
+          <div className="mb-24 flex w-full flex-col justify-center gap-4 px-6 lg:mb-4">
             {followUps?.followUp1 &&
               followUps?.followUp1 !== "Tell me more" && (
                 <Button
