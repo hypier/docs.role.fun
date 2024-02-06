@@ -15,6 +15,7 @@
   "Personas": "ペルソナ",
   "Models": "モデル",
   "Shop": "ショップ",
+  "Get ORP+": "ORP+ を取得する",
   "Community": "コミュニティ",
   "Discord": "Discord",
   "My Characters": "マイキャラクター",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "古いメッセージは自動的にデータベースから削除されます。",
   "Check this to enable uncensored models.": "無修正モデルを有効にするには、これをチェックしてください。",
   "Affiliate": "アフィリエイト情報",
-  "Tell me more": "もっと教えてください"
+  "Tell me more": "もっと教えてください",
+  "Double Character Memory": "Double Character Memory",
+  "Earn 150 Crystals Everyday": "毎日150個のクリスタルを獲得する",
+  "Private Images without Extra Crystals": "余分な結晶がないプライベート画像",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "サブスクリプションを更新",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
