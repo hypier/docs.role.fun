@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modelos",
   "Shop": "Tienda",
+  "Get ORP+": "Obtener ORP+",
   "Community": "Comunidad",
   "Discord": "Discordia",
   "My Characters": "Mis caracteres",
@@ -76,7 +77,8 @@
   "Crystal is used whenever you request voice playback for a specific message.": "El cristal se utiliza cada vez que solicita la reproducción de voz para un mensaje específico.",
   "Badge": "Insignia",
   "Daily Rewards": "Recompensas Diarias",
-  "Claim 15 Crystals": "Reclamar 15 Cristales",
+  "Claim 15 Crystals": "Reclamar 15 cristales",
+  "Claim 150 Crystals": "Reclamar 150 cristales",
   "Search": "Buscar",
   "Anime": "Anime",
   "Game": "Juego",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Los mensajes antiguos se borran automáticamente de nuestra base de datos.",
   "Check this to enable uncensored models.": "Marque esto para habilitar modelos sin censura.",
   "Affiliate": "Afiliado",
-  "Tell me more": "Dime más"
+  "Tell me more": "Dime más",
+  "Double Character Memory": "Memoria de Doble Carácter",
+  "Earn 150 Crystals Everyday": "Gana 150 Cristales todos los días",
+  "Private Images without Extra Crystals": "Imágenes privadas sin cristales adicionales",
+  "More Follow-up Answers": "Más respuestas de seguimiento",
+  "Early Access to Beta Features": "Acceso anticipado a características Beta",
+  "Renew subscription": "Renovar suscripción",
+  "Active": "Activo",
+  "Subscribe": "Suscribirse",
+  "Cancel subscription": "Cancelar suscripción"
 }

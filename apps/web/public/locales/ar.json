@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "النماذج",
   "Shop": "متجر",
+  "Get ORP+": "الحصول على ORP+",
   "Community": "المجتمع",
   "Discord": "ديسكورد",
   "My Characters": "أحرف الخاصة بي",
@@ -77,6 +78,7 @@
   "Badge": "شارة",
   "Daily Rewards": "المكافآت اليومية",
   "Claim 15 Crystals": "المطالبة 15 بلورة",
+  "Claim 150 Crystals": "مطالبة 150 بلورة",
   "Search": "البحث",
   "Anime": "أنمي",
   "Game": "المباراة",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "يتم حذف الرسائل القديمة تلقائيًا من قاعدة بياناتنا.",
   "Check this to enable uncensored models.": "حدد هذا الخيار لتمكين الموديلات غير الخاضعة للرقابة.",
   "Affiliate": "انتساب",
-  "Tell me more": "أخبرني بالمزيد"
+  "Tell me more": "أخبرني بالمزيد",
+  "Double Character Memory": "ذاكرة الأحرف المزدوجة",
+  "Earn 150 Crystals Everyday": "اكسب 150 كريستال كل يوم",
+  "Private Images without Extra Crystals": "صور خاصة بدون بلورات إضافية",
+  "More Follow-up Answers": "المزيد من إجابات المتابعة",
+  "Early Access to Beta Features": "الوصول المبكر إلى ميزات بيتا",
+  "Renew subscription": "تجديد الاشتراك",
+  "Active": "نشط",
+  "Subscribe": "اشترك",
+  "Cancel subscription": "إلغاء الاشتراك"
 }

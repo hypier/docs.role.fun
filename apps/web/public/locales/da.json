@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modeller",
   "Shop": "Butik",
+  "Get ORP+": "Hent ORP+",
   "Community": "Fællesskab",
   "Discord": "Uenighed",
   "My Characters": "Mine Tegn",
@@ -77,6 +78,7 @@
   "Badge": "Mærke",
   "Daily Rewards": "Daglige Belønninger",
   "Claim 15 Crystals": "Anprisning 15 Krystaller",
+  "Claim 150 Crystals": "Anprisning 150 Krystaller",
   "Search": "Søg",
   "Anime": "Anime",
   "Game": "Spil",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Gamle beskeder slettes automatisk fra vores database.",
   "Check this to enable uncensored models.": "Markér dette for at aktivere ucensurerede modeller.",
   "Affiliate": "Partner",
-  "Tell me more": "Fortæl mig mere"
+  "Tell me more": "Fortæl mig mere",
+  "Double Character Memory": "Dobbelt Tegn Hukommelse",
+  "Earn 150 Crystals Everyday": "Tjen 150 Krystaller Hverdag",
+  "Private Images without Extra Crystals": "Private billeder uden ekstra krystaller",
+  "More Follow-up Answers": "Flere Opfølgningssvar",
+  "Early Access to Beta Features": "Tidlig adgang til Beta-funktioner",
+  "Renew subscription": "Forny abonnement",
+  "Active": "Aktiv",
+  "Subscribe": "Abonnér",
+  "Cancel subscription": "Annuller abonnement"
 }

@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modelli",
   "Shop": "Negozio",
+  "Get ORP+": "Ottieni ORP+",
   "Community": "Community",
   "Discord": "Discord",
   "My Characters": "I Miei Caratteri",
@@ -77,6 +78,7 @@
   "Badge": "Distintivo",
   "Daily Rewards": "Ricompense Giornaliere",
   "Claim 15 Crystals": "Richiedi 15 Cristalli",
+  "Claim 150 Crystals": "Rivendica 150 Cristalli",
   "Search": "Cerca",
   "Anime": "Anime",
   "Game": "Partita",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "I vecchi messaggi vengono eliminati automaticamente dal nostro database.",
   "Check this to enable uncensored models.": "Seleziona questa opzione per abilitare i modelli non censurati.",
   "Affiliate": "Affiliato",
-  "Tell me more": "Dimmi di più"
+  "Tell me more": "Dimmi di più",
+  "Double Character Memory": "Memoria Del Doppio Carattere",
+  "Earn 150 Crystals Everyday": "Guadagna 150 Cristalli Ogni Giorno",
+  "Private Images without Extra Crystals": "Immagini private senza cristalli extra",
+  "More Follow-up Answers": "Altre Risposte Di Follow-up",
+  "Early Access to Beta Features": "Accesso anticipato alle funzionalità beta",
+  "Renew subscription": "Rinnova abbonamento",
+  "Active": "Attivo",
+  "Subscribe": "Abbonati",
+  "Cancel subscription": "Annulla abbonamento"
 }

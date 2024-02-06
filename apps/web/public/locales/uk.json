@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Моделі",
   "Shop": "Крамниця",
+  "Get ORP+": "Отримати ORP+",
   "Community": "Спільнота",
   "Discord": "Discord",
   "My Characters": "Мої символи",
@@ -76,7 +77,8 @@
   "Crystal is used whenever you request voice playback for a specific message.": "Crystal використовується коли ви запитуєте відтворення голосу для певного повідомлення.",
   "Badge": "Значок",
   "Daily Rewards": "Щоденні Нагороди",
-  "Claim 15 Crystals": "Зажадайте 15 Кристалів",
+  "Claim 15 Crystals": "Оголосити 15 Кристалів",
+  "Claim 150 Crystals": "Запит 150 Кристалів",
   "Search": "Пошук",
   "Anime": "Аніме",
   "Game": "Гра",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Старі повідомлення автоматично видаляються з нашої бази даних.",
   "Check this to enable uncensored models.": "Позначте цей пункт, щоб увімкнути нецензуровані моделі.",
   "Affiliate": "Партнерська програма",
-  "Tell me more": "Розкажіть мені ще"
+  "Tell me more": "Розкажіть мені ще",
+  "Double Character Memory": "Подвійна символ пам'яті",
+  "Earn 150 Crystals Everyday": "Заробляйте 150 кристалів кожного дня",
+  "Private Images without Extra Crystals": "Приватні зображення без додаткових кристалів",
+  "More Follow-up Answers": "Більше фонових відповідей",
+  "Early Access to Beta Features": "Ранній доступ до бета-функцій",
+  "Renew subscription": "Подовжити підписку",
+  "Active": "Активний",
+  "Subscribe": "Підписатися",
+  "Cancel subscription": "Скасувати передплату"
 }

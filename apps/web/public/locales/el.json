@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Μοντέλα",
   "Shop": "Κατάστημα",
+  "Get ORP+": "Λήψη ORP+",
   "Community": "Κοινότητα",
   "Discord": "Discord",
   "My Characters": "Οι Χαρακτήρες Μου",
@@ -77,6 +78,7 @@
   "Badge": "Σήμα",
   "Daily Rewards": "Ημερήσιες Ανταμοιβές",
   "Claim 15 Crystals": "Ισχυρισμός 15 Κρύσταλλοι",
+  "Claim 150 Crystals": "Ισχυρισμός 150 Κρύσταλλοι",
   "Search": "Αναζήτηση",
   "Anime": "Anime",
   "Game": "Παιχνίδι",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Τα παλιά μηνύματα διαγράφονται αυτόματα από τη βάση δεδομένων μας.",
   "Check this to enable uncensored models.": "Ενεργοποιήστε αυτό για την ενεργοποίηση μη λογοκρισμένων μοντέλων.",
   "Affiliate": "Συνεργάτης",
-  "Tell me more": "Πείτε μου περισσότερα"
+  "Tell me more": "Πείτε μου περισσότερα",
+  "Double Character Memory": "Διπλή Μνήμη Χαρακτήρα",
+  "Earn 150 Crystals Everyday": "Κερδίστε 150 Κρύσταλλα Καθημερινά",
+  "Private Images without Extra Crystals": "Ιδιωτικές εικόνες χωρίς επιπλέον κρύσταλλα",
+  "More Follow-up Answers": "Περισσότερες Απαντήσεις Παρακολούθησης",
+  "Early Access to Beta Features": "Πρόωρη Πρόσβαση στις Λειτουργίες Beta",
+  "Renew subscription": "Ανανέωση συνδρομής",
+  "Active": "Ενεργό",
+  "Subscribe": "Εγγραφή",
+  "Cancel subscription": "Ακύρωση συνδρομής"
 }

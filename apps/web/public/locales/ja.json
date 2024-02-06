@@ -15,6 +15,7 @@
   "Personas": "ペルソナ",
   "Models": "モデル",
   "Shop": "ショップ",
+  "Get ORP+": "ORP+ を取得する",
   "Community": "コミュニティ",
   "Discord": "Discord",
   "My Characters": "マイキャラクター",
@@ -76,7 +77,8 @@
   "Crystal is used whenever you request voice playback for a specific message.": "Crystalは、特定のメッセージの音声再生をリクエストするたびに使用されます。",
   "Badge": "バッジ",
   "Daily Rewards": "デイリーボーナス",
-  "Claim 15 Crystals": "25個のクリスタルを入手",
+  "Claim 15 Crystals": "Claim 15 Crystals",
+  "Claim 150 Crystals": "150個のクリスタルを受け取る",
   "Search": "検索",
   "Anime": "アニメ",
   "Game": "ゲーム",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "古いメッセージは自動的にデータベースから削除されます。",
   "Check this to enable uncensored models.": "無修正モデルを有効にするには、これをチェックしてください。",
   "Affiliate": "アフィリエイト情報",
-  "Tell me more": "もっと教えてください"
+  "Tell me more": "もっと教えてください",
+  "Double Character Memory": "Double Character Memory",
+  "Earn 150 Crystals Everyday": "毎日150個のクリスタルを獲得する",
+  "Private Images without Extra Crystals": "余分な結晶がないプライベート画像",
+  "More Follow-up Answers": "フォローアップの回答",
+  "Early Access to Beta Features": "ベータ機能への早期アクセス",
+  "Renew subscription": "サブスクリプションを更新",
+  "Active": "アクティブ",
+  "Subscribe": "購読する",
+  "Cancel subscription": "サブスクリプションをキャンセル"
 }

@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Vzory",
   "Shop": "Obchod",
+  "Get ORP+": "Získat ORP+",
   "Community": "Komunita",
   "Discord": "Discord",
   "My Characters": "Moje postavy",
@@ -76,7 +77,8 @@
   "Crystal is used whenever you request voice playback for a specific message.": "Krystal je použit při požadavku na přehrávání hlasu pro konkrétní zprávu.",
   "Badge": "Odznak",
   "Daily Rewards": "Denní odměny",
-  "Claim 15 Crystals": "Tvrzení 15 krystalů",
+  "Claim 15 Crystals": "Tvrzení 15 Krystaly",
+  "Claim 150 Crystals": "Tvrzení 150 Krystaly",
   "Search": "Hledat",
   "Anime": "Anime",
   "Game": "Hra",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Staré zprávy jsou automaticky odstraněny z naší databáze.",
   "Check this to enable uncensored models.": "Zaškrtněte pro povolení necenzurovaných modelů.",
   "Affiliate": "Partnerství",
-  "Tell me more": "Řekněte mi více"
+  "Tell me more": "Řekněte mi více",
+  "Double Character Memory": "Dvojité postavové paměti",
+  "Earn 150 Crystals Everyday": "Získejte 150 krystalů každý den",
+  "Private Images without Extra Crystals": "Soukromé obrázky bez extra krystalů",
+  "More Follow-up Answers": "Další odpovědi na následná opatření",
+  "Early Access to Beta Features": "Předčasný přístup k Beta funkcím",
+  "Renew subscription": "Obnovit předplatné",
+  "Active": "Aktivní",
+  "Subscribe": "Odebírat",
+  "Cancel subscription": "Zrušit odběr"
 }

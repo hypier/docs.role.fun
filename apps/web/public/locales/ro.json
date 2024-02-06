@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modele",
   "Shop": "Magazin",
+  "Get ORP+": "Obține ORP+",
   "Community": "Comunitate",
   "Discord": "Discord",
   "My Characters": "Caracterele mele",
@@ -76,7 +77,8 @@
   "Crystal is used whenever you request voice playback for a specific message.": "Cristalul este folosit ori de câte ori solicitați redare vocală pentru un anumit mesaj.",
   "Badge": "Insignă",
   "Daily Rewards": "Recompense zilnice",
-  "Claim 15 Crystals": "Solicită 15 de cristale",
+  "Claim 15 Crystals": "Solicită 15 cristale",
+  "Claim 150 Crystals": "Solicită 150 Cristale",
   "Search": "Caută",
   "Anime": "Anime",
   "Game": "Joc",
@@ -140,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Mesajele vechi sunt șterse automat din baza noastră de date.",
   "Check this to enable uncensored models.": "Bifați acest lucru pentru a activa modele necenzurate.",
   "Affiliate": "Afiliați",
-  "Tell me more": "Spune-mi mai multe"
+  "Tell me more": "Spune-mi mai multe",
+  "Double Character Memory": "Memorie cu Dublu Caracter",
+  "Earn 150 Crystals Everyday": "Câștigă 150 Cristale în fiecare zi",
+  "Private Images without Extra Crystals": "Imagini private fără Cristale Extra",
+  "More Follow-up Answers": "Mai multe răspunsuri în continuare",
+  "Early Access to Beta Features": "Acces rapid la caracteristici Beta",
+  "Renew subscription": "Reînnoire abonament",
+  "Active": "Activ",
+  "Subscribe": "Abonează-te",
+  "Cancel subscription": "Anulează abonamentul"
 }
