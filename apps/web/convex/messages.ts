@@ -171,6 +171,10 @@ export const regenerate = mutation({
   },
   handler: async (ctx, { messageId, chatId, characterId, personaId }) => {
     const user = await getUser(ctx);
+    const chat = await ctx.db.get(chatId);
+    if (chat?.userId !== user._id) {
+      throw new Error("User does not own the chat");
+    }
     await ctx.scheduler.runAfter(0, internal.llm.answer, {
       chatId,
       characterId,
