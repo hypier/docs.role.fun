@@ -23,6 +23,8 @@ import {
   CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
 import { Toggle } from "@repo/ui/src/components/toggle";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { useImageStore } from "../lib/hooks/use-image-store";
 
 export const ImagePlaceholder = () => {
   const { t } = useTranslation();
@@ -44,21 +46,15 @@ export const ImagePlaceholder = () => {
   );
 };
 
-const Gallery = ({
-  isGenerating = false,
-  isMy = false,
-}: {
-  isGenerating: boolean;
-  isMy?: boolean;
-}) => {
+const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
   const me = useCurrentUser();
   const ref = useRef(null);
   const inView = useInView(ref);
 
   const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
+  const { isGenerating } = useImageStore();
 
-  const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
   const searchQuery = useSearchParams();

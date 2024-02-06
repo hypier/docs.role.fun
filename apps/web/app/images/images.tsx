@@ -33,6 +33,7 @@ import {
 import { ChevronDown, Lock, Unlock } from "lucide-react";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { usePostHog } from "posthog-js/react";
+import { useImageStore } from "../lib/hooks/use-image-store";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -53,8 +54,8 @@ const Images = () => {
   const isMy = searchQuery.get("isMy");
   const posthog = usePostHog();
 
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [imageId, setImageID] = useState("" as Id<"images">);
+  const { imageId, setImageId, isGenerating, setIsGenerating } =
+    useImageStore();
   const { openDialog } = useCrystalDialog();
   const generate = useMutation(api.images.generate);
   const generatedImage = useQuery(
@@ -81,7 +82,7 @@ const Images = () => {
     setIsGenerating(true);
     promise
       .then((image) => {
-        setImageID(image);
+        setImageId(image);
         toast.success("Your request has been queued");
       })
       .catch((error) => {
