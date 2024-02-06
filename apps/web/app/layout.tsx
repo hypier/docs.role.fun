@@ -31,7 +31,7 @@ export default async function RootLayout({
         <Suspense fallback={<Spinner />}>
           <Providers>
             <NavBar />
-            <main className="flex w-full pt-16 font-default lg:pt-32">
+            <main className="flex w-full pt-16 font-default lg:pt-24">
               <TabsController />
               {children}
               <Pageview />

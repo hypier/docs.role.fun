@@ -115,7 +115,7 @@ const Discover = () => {
       <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
         <Carousel
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
+          className="w-[75%] md:w-[80%] lg:w-[calc(80%+8rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -155,7 +155,7 @@ const Discover = () => {
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="ml-4 w-[95%] md:w-[80%] lg:ml-0 lg:w-[calc(80%+4rem)]"
+          className="ml-4 w-[95%] md:w-[80%] lg:ml-0 lg:w-[calc(80%+8rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -220,7 +220,7 @@ const Discover = () => {
           )}
         </Carousel>
       </div>
-      <section className="flex flex-col gap-4 lg:w-[calc(80%+4rem)] lg:gap-8">
+      <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)] lg:gap-8">
         <div className="flex items-center gap-1 border-b px-4 pb-4 font-medium lg:border-none lg:px-0 lg:pb-0">
           <Link href="/images" className="flex items-center gap-1">
             {t("Images")}
