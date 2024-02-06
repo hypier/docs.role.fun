@@ -681,7 +681,7 @@ export function Dialog({
         />
       )}
       {chatId && (
-        <div className="sticky top-0 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:rounded-t-lg lg:px-6">
+        <div className="fixed top-12 z-50 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:sticky lg:top-0 lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
             <ModelBadge modelName={model as string} showCredits={true} />
             <Badge variant="model">
