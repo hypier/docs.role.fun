@@ -17,7 +17,6 @@ import { z } from "zod";
 import { Button } from "@repo/ui/src/components";
 import { useMutation, useQuery } from "convex/react";
 import { Crystal } from "@repo/ui/src/components/icons";
-import { Id } from "../../convex/_generated/dataModel";
 import React from "react";
 import { toast } from "sonner";
 import Gallery from "./gallery";
@@ -54,14 +53,10 @@ const Images = () => {
   const isMy = searchQuery.get("isMy");
   const posthog = usePostHog();
 
-  const { imageId, setImageId, isGenerating, setIsGenerating } =
-    useImageStore();
+  const { setImageId, setIsGenerating } = useImageStore();
   const { openDialog } = useCrystalDialog();
   const generate = useMutation(api.images.generate);
-  const generatedImage = useQuery(
-    api.images.get,
-    imageId ? { imageId } : "skip",
-  );
+
   const me = useCurrentUser();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -90,12 +85,6 @@ const Images = () => {
         openDialog();
       });
   };
-
-  useEffect(() => {
-    if (generatedImage?.imageUrl) {
-      setIsGenerating(false);
-    }
-  }, [generatedImage]);
 
   useEffect(() => {
     form.reset({

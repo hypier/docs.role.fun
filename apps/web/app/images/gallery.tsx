@@ -12,7 +12,7 @@ import useCurrentUser from "../lib/hooks/use-current-user";
 import { useTranslation } from "react-i18next";
 import SignInDialog from "../../components/user/sign-in-dialog";
 import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Carousel,
@@ -23,7 +23,6 @@ import {
   CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
 import { Toggle } from "@repo/ui/src/components/toggle";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import { useImageStore } from "../lib/hooks/use-image-store";
 
 export const ImagePlaceholder = () => {
@@ -53,7 +52,11 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
 
   const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
-  const { isGenerating } = useImageStore();
+  const { imageId, setIsGenerating, isGenerating } = useImageStore();
+  const generatedImage = useQuery(
+    api.images.get,
+    imageId ? { imageId } : "skip",
+  );
 
   const router = useRouter();
   const pathname = usePathname();
@@ -84,6 +87,12 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
   }, [inView, loadMore]);
 
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (generatedImage?.imageUrl) {
+      setIsGenerating(false);
+    }
+  }, [generatedImage]);
 
   return (
     <>
