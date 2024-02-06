@@ -545,11 +545,19 @@ export const listPopularTags = query({
     } catch (error) {
       console.error("Error getting user:", error);
     }
-    let query = ctx.db.query("characters").withIndex("byScore");
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byScore")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("isModel"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+
     if (user && user.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
-    const popularCharacters = await query.order("desc").take(300);
+    const popularCharacters = await query.order("desc").take(150);
     type TagCount = { [key: string]: number };
     type TagCounts = { [key: string]: TagCount };
     const tagCounts: TagCounts = popularCharacters.reduce(
