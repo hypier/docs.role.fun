@@ -95,7 +95,7 @@ const PlusPlan = () => {
       }
     >
       <Image
-        src={"/shop/orp+.png"}
+        src={"/shop/orp+.jpg"}
         width={256}
         height={368}
         alt={"image for pricing"}
