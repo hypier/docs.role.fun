@@ -44,6 +44,7 @@ import {
   useMachineTranslation,
   useTranslationStore,
 } from "../../lib/hooks/use-machine-translation";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 export const Stories = ({
   characterId,
@@ -155,7 +156,7 @@ export default function ChatWithCharacter({
     <div className="flex w-full flex-col justify-self-start lg:pr-6">
       {data?.isNSFW && <AgeRestriction />}
       {isMobile ? (
-        <>{content}</>
+        <ErrorBoundary children={content} errorComponent={undefined} />
       ) : (
         <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem]">
           <Drawer>
@@ -254,12 +255,6 @@ export default function ChatWithCharacter({
               <DrawerHeader className="gap-4">
                 <DrawerTitle>{data?.name}</DrawerTitle>
                 <DrawerDescription>{`${data?.description}, created by @${creatorName}`}</DrawerDescription>
-                <Stories
-                  characterId={params.id as Id<"characters">}
-                  name={data?.name as string}
-                  cardImageUrl={data?.cardImageUrl as string}
-                  isHorizontal={true}
-                />
               </DrawerHeader>
               <DrawerFooter>
                 <DrawerClose>
@@ -268,7 +263,9 @@ export default function ChatWithCharacter({
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
-          <CardContent className="h-full w-full p-0">{content}</CardContent>
+          <CardContent className="h-full w-full p-0">
+            <ErrorBoundary children={content} errorComponent={undefined} />
+          </CardContent>
         </Card>
       )}
       <AddToHomeScreen />
