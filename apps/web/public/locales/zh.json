@@ -15,6 +15,7 @@
   "Personas": "概况",
   "Models": "模型",
   "Shop": "商店",
+  "Get ORP+": "获取 ORP+",
   "Community": "社区",
   "Discord": "Discord",
   "My Characters": "我的角色",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "从我们的数据库中自动删除旧消息。",
   "Check this to enable uncensored models.": "选中此项以启用未检查的模型。",
   "Affiliate": "联盟会员",
-  "Tell me more": "告诉我更多"
+  "Tell me more": "告诉我更多",
+  "Double Character Memory": "双字符内存",
+  "Earn 150 Crystals Everyday": "每天赚取150个水晶。",
+  "Private Images without Extra Crystals": "没有额外水晶的私有图像",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "更新订阅",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
