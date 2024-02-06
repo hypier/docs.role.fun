@@ -46,7 +46,7 @@ function TabsController() {
             value={isMobile ? "/my-characters" : "/my"}
           >
             <Plus className="h-5 w-5 p-1 text-white dark:text-black sm:text-muted-foreground sm:dark:text-muted-foreground" />
-            {!isMobile && <span>{t("My")}</span>}
+            <span className="hidden lg:inline">{t("My")}</span>
           </TabsTrigger>
         </Link>
         <Link href="/models">
