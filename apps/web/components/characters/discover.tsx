@@ -11,7 +11,7 @@ import { useConvexAuth } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button } from "@repo/ui/src/components";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -32,6 +32,7 @@ import SignInDialog from "../user/sign-in-dialog";
 import { useNsfwPreference } from "../../app/lib/hooks/use-nsfw-preference";
 import PreferenceDialog from "../user/preference-dialog";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 
 const Discover = () => {
   const { t } = useTranslation();
@@ -50,7 +51,6 @@ const Discover = () => {
     isAuthenticated,
   };
   const popularTags = useStableQuery(api.characters.listPopularTags) || {};
-  const [tagPage, setTagPage] = useState(0);
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.listWithHides,
     filters,
@@ -61,6 +61,7 @@ const Discover = () => {
     (character) => character.name && character.cardImageUrl,
   );
 
+  const { isMobile } = useMediaQuery();
   const [_api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -118,16 +119,6 @@ const Discover = () => {
           setApi={setApi}
         >
           <CarouselContent className="w-full">
-            {tagPage > 0 && (
-              <Button
-                variant="ghost"
-                aria-label="Previous tags"
-                onClick={() => setTagPage(tagPage - 1)}
-                disabled={tagPage === 0}
-              >
-                <ChevronLeft className="h-4 w-4 p-0.5 text-muted-foreground" />
-              </Button>
-            )}
             {Object.entries(popularTags).map(([tagKey, tagValues]) =>
               tagValues.map((tag, index) => (
                 <CarouselItem
@@ -164,7 +155,7 @@ const Discover = () => {
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"
+          className="ml-4 w-[95%] md:w-[80%] lg:ml-0 lg:w-[calc(80%+4rem)]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">
@@ -221,8 +212,12 @@ const Discover = () => {
                 </CarouselItem>
               ))}
           </CarouselContent>
-          <CarouselPrevious variant="ghost" />
-          <CarouselNext variant="ghost" />
+          {!isMobile && (
+            <>
+              <CarouselPrevious variant="ghost" />
+              <CarouselNext variant="ghost" />
+            </>
+          )}
         </Carousel>
       </div>
       <section className="flex flex-col gap-4 lg:w-[calc(80%+4rem)] lg:gap-8">

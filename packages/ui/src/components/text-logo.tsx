@@ -1,4 +1,3 @@
-import useCurrentUser from "../../../../apps/web/app/lib/hooks/use-current-user";
 import useMediaQuery from "../hooks/use-media-query";
 
 export default function TextLogo({
