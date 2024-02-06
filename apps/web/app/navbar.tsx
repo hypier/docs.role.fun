@@ -10,11 +10,14 @@ import { SignedOut } from "@clerk/nextjs";
 import { useConvexAuth } from "convex/react";
 import { Plus, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import useCurrentUser from "./lib/hooks/use-current-user";
 
 export default function NavBar({}: {}) {
   const scrolled = useScroll(50);
   const { isAuthenticated } = useConvexAuth();
   const { t } = useTranslation();
+  const currentUser = useCurrentUser();
+  const isPlus = currentUser?.subscriptionTier === "plus";
 
   return (
     <>
@@ -26,15 +29,21 @@ export default function NavBar({}: {}) {
         <div className={`mx-5 flex h-16 w-full items-center justify-between `}>
           <div className="flex items-center gap-4 font-display text-2xl">
             <Link href="/">
-              <TextLogo />
+              <TextLogo isPlus={isPlus} />
             </Link>
             {isAuthenticated ? (
-              <Link
-                href="/crystals"
-                className="flex items-center justify-center"
-              >
-                <Badge className="w-fit font-display">{t("Get ORP+")}</Badge>
-              </Link>
+              <>
+                {!isPlus && (
+                  <Link
+                    href="/crystals"
+                    className="flex items-center justify-center"
+                  >
+                    <Badge className="w-fit font-display">
+                      {t("Get ORP+")}
+                    </Badge>
+                  </Link>
+                )}
+              </>
             ) : (
               <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
                 <Link

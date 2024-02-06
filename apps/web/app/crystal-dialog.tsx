@@ -13,10 +13,13 @@ import { DialogPortal } from "@repo/ui/src/components/dialog";
 import { MobilePackageWrapper } from "./crystals/mobile-package";
 import { packages } from "./crystals/packages";
 import Link from "next/link";
+import useCurrentUser from "./lib/hooks/use-current-user";
 
 const CrystalDialog: React.FC = () => {
   const { t } = useTranslation();
   const { isOpen, closeDialog } = useCrystalDialog();
+  const currentUser = useCurrentUser();
+  const isPlus = currentUser?.subscriptionTier === "plus";
 
   return (
     <DialogOrDrawer
@@ -51,9 +54,15 @@ const CrystalDialog: React.FC = () => {
           <div className="mt-4 flex items-center justify-between">
             <CurrentCrystals />
             <Link href="/crystals">
-              <Button className="w-fit font-display" onClick={closeDialog}>
-                {t("Get ORP+")}
-              </Button>
+              {isPlus ? (
+                <Button variant="ghost" onClick={closeDialog}>
+                  {t("Shop")}
+                </Button>
+              ) : (
+                <Button className="w-fit font-display" onClick={closeDialog}>
+                  {t("Get ORP+")}
+                </Button>
+              )}
             </Link>
           </div>
         </DialogOrDrawerContent>
