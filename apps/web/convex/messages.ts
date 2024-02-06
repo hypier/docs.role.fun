@@ -79,6 +79,10 @@ export const send = mutation({
       chatId,
       personaId,
     });
+    const chat = await ctx.db.get(chatId);
+    if (chat?.userId !== user._id) {
+      throw new Error("User does not own the chat");
+    }
 
     const userLanguage =
       user.languageTag === "en"
