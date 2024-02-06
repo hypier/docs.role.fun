@@ -74,7 +74,6 @@
   }
   body {
     @apply bg-background text-foreground lg:bg-sheet;
-    -webkit-text-size-adjust: 100%;
   }
 
   ::-moz-selection {
@@ -109,4 +108,12 @@
   button {
     user-select: text;
   }
+}
+
+html,
+body {
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -o-text-size-adjust: none;
 }
