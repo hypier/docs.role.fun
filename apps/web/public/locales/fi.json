@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Mallit",
   "Shop": "Kauppa",
+  "Get ORP+": "Hanki ORP+",
   "Community": "Yhteisö",
   "Discord": "Discord",
   "My Characters": "Omat Merkit",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Vanhat viestit poistetaan automaattisesti tietokannastamme.",
   "Check this to enable uncensored models.": "Valitse tämä ottaaksesi sensuroimattomat mallit käyttöön.",
   "Affiliate": "Kumppani",
-  "Tell me more": "Kerro minulle lisää"
+  "Tell me more": "Kerro minulle lisää",
+  "Double Character Memory": "Kaksoishahmon Muisti",
+  "Earn 150 Crystals Everyday": "Ansaitse 150 Kristallia Päivittäin",
+  "Private Images without Extra Crystals": "Yksityiset kuvat ilman ylimääräisiä kiteitä",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Uusi tilaus",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
