@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modele",
   "Shop": "Magazin",
+  "Get ORP+": "Obține ORP+",
   "Community": "Comunitate",
   "Discord": "Discord",
   "My Characters": "Caracterele mele",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Mesajele vechi sunt șterse automat din baza noastră de date.",
   "Check this to enable uncensored models.": "Bifați acest lucru pentru a activa modele necenzurate.",
   "Affiliate": "Afiliați",
-  "Tell me more": "Spune-mi mai multe"
+  "Tell me more": "Spune-mi mai multe",
+  "Double Character Memory": "Memorie cu Dublu Caracter",
+  "Earn 150 Crystals Everyday": "Câștigă 150 Cristale în fiecare zi",
+  "Private Images without Extra Crystals": "Imagini private fără Cristale Extra",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Reînnoire abonament",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
