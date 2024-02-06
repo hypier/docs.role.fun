@@ -380,7 +380,7 @@ export const listMy = query({
     const user = await getUser(ctx);
     return await ctx.db
       .query("characters")
-      .filter((q) => q.eq(q.field("creatorId"), user._id))
+      .withIndex("byUserId", (q) => q.eq("creatorId", user._id))
       .filter((q) => q.neq(q.field("isArchived"), true))
       .order("desc")
       .paginate(args.paginationOpts);
