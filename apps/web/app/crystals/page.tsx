@@ -85,98 +85,113 @@ const PlusPlan = () => {
   }
 
   return (
-    <Card
-      className="relative rounded-lg tabular-nums duration-200 hover:shadow-lg"
-      role="button"
-      onClick={
-        currentUser?.subscriptionTier === "plus" && !subscription?.cancelsAt
-          ? undefined
-          : (e) => handlePurchaseClick(e)
-      }
-    >
-      <Image
-        src={"/shop/orp+.jpg"}
-        width={256}
-        height={368}
-        alt={"image for pricing"}
-        className="absolute top-0 h-full w-full rounded-lg object-cover"
-      />
-      <div className="absolute bottom-0 h-[60%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
-      <div className="flex flex-col gap-1 pt-[100%]">
-        <CardHeader className="flex items-center justify-center py-1">
-          <CardTitle className="z-10 font-display text-xl text-white">
-            ORP+
-          </CardTitle>
-          <CardDescription className="z-10 text-gray-400">
-            9.99$
-            <span className="text-xs">{" +VAT"}</span>
-          </CardDescription>
-        </CardHeader>
-        <CardFooter className="flex w-full flex-col items-center justify-center gap-2">
-          <ul className="z-10 flex w-full flex-col gap-1 text-xs text-white">
-            <li className="flex items-center gap-1">
-              <Heart className="h-4 w-4" />
-              {t("Double Character Memory")}
-            </li>
-            <li className="flex items-center gap-1">
-              <Crystal className="h-4 w-4" />
-              {t("Earn 150 Crystals Everyday")}
-            </li>
-            <li className="flex items-center gap-1">
-              <Lock className="h-4 w-4" />
-              {t("Private Images without Extra Crystals")}
-            </li>
-            <li className="flex items-center gap-1">
-              <Sparkles className="h-4 w-4" />
-              {t("More Follow-up Answers")}
-            </li>
-            <li className="flex items-center gap-1">
-              <Rabbit className="h-4 w-4" />
-              {t("Early Access to Beta Features")}
-            </li>
-          </ul>
-          <p
-            className={`z-10 w-full rounded-full text-center font-semibold ${
-              subscription?.cancelsAt
-                ? `bg-yellow-100 text-yellow-900`
-                : currentUser?.subscriptionTier === "plus"
-                  ? `bg-blue-100/25 text-blue-100`
-                  : `bg-blue-100 text-blue-900`
-            }`}
-          >
-            {subscription?.cancelsAt
-              ? t("Renew subscription")
-              : currentUser?.subscriptionTier === "plus"
-                ? "Active"
-                : "Subscribe"}{" "}
-          </p>
-          {currentUser?.subscriptionTier === "plus" && (
-            <CardDescription
-              className="z-10 text-xs duration-200 hover:opacity-50"
-              onClick={
+    <Tooltip content={`Subscribe ORP+`} desktopOnly>
+      <Card
+        className="relative rounded-lg tabular-nums duration-200 hover:shadow-lg"
+        role="button"
+        onClick={
+          currentUser?.subscriptionTier === "plus" && !subscription?.cancelsAt
+            ? undefined
+            : (e) => handlePurchaseClick(e)
+        }
+      >
+        <Image
+          src={"/shop/orp+.jpg"}
+          width={256}
+          height={368}
+          alt={"image for pricing"}
+          className="absolute top-0 h-full w-full rounded-lg object-cover"
+        />
+        <div className="absolute bottom-0 h-[60%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
+        <div className="flex flex-col gap-1 pt-[100%]">
+          <CardHeader className="flex items-center justify-center py-1">
+            <CardTitle className="z-10 font-display text-xl text-white">
+              ORP+
+            </CardTitle>
+            <CardDescription className="z-10 text-gray-400">
+              9.99$
+              <span className="text-xs">{" +VAT"}</span>
+            </CardDescription>
+          </CardHeader>
+          <CardFooter className="flex w-full flex-col items-center justify-center gap-2">
+            <ul className="z-10 flex w-full flex-col gap-1 text-xs text-white">
+              <li className="flex items-center gap-1">
+                <Heart className="h-4 w-4" />
+                {t("Double Character Memory")}
+                <InfoTooltip
+                  content={t(
+                    "Characters will remember more messages from chat.",
+                  )}
+                />
+              </li>
+              <li className="flex items-center gap-1">
+                <Crystal className="h-4 w-4" />
+                {t("Earn 150 Crystals Everyday")}
+                <InfoTooltip
+                  content={t("Earn upto 4,500 crystals every month.")}
+                />
+              </li>
+              <li className="flex items-center gap-1">
+                <Lock className="h-4 w-4" />
+                {t("Private Images without Extra Crystals")}
+                <InfoTooltip
+                  content={t("Generate and manage images, only for you.")}
+                />
+              </li>
+              <li className="flex items-center gap-1">
+                <Sparkles className="h-4 w-4" />
+                {t("More Follow-up Answers")}
+                <InfoTooltip content={t("Choose from 3 follow-up answers")} />
+              </li>
+              <li className="flex items-center gap-1">
+                <Rabbit className="h-4 w-4" />
+                {t("Early Access to Beta Features")}
+                <InfoTooltip content={t("More features are coming soon!")} />
+              </li>
+            </ul>
+            <p
+              className={`z-10 w-full rounded-full text-center font-semibold ${
                 subscription?.cancelsAt
-                  ? async (e) => {}
-                  : async (e) => {
-                      e.stopPropagation();
-                      const promise = unsubscribe({});
-                      toast.promise(promise, {
-                        loading: "Unsubscribing...",
-                        success: "Unsubscribe successful",
-                        error: "Unsubscribe failed",
-                      });
-                    }
-              }
+                  ? `bg-yellow-100 text-yellow-900`
+                  : currentUser?.subscriptionTier === "plus"
+                    ? `bg-blue-100/25 text-blue-100`
+                    : `bg-blue-100 text-blue-900`
+              }`}
             >
               {subscription?.cancelsAt
-                ? `Cancelling on ${new Date(
-                    subscription.cancelsAt,
-                  ).toLocaleDateString()}`
-                : t("Cancel subscription")}
-            </CardDescription>
-          )}
-        </CardFooter>
-      </div>
-    </Card>
+                ? t("Renew subscription")
+                : currentUser?.subscriptionTier === "plus"
+                  ? "Active"
+                  : "Subscribe"}{" "}
+            </p>
+            {currentUser?.subscriptionTier === "plus" && (
+              <CardDescription
+                className="z-10 text-xs duration-200 hover:opacity-50"
+                onClick={
+                  subscription?.cancelsAt
+                    ? async (e) => {}
+                    : async (e) => {
+                        e.stopPropagation();
+                        const promise = unsubscribe({});
+                        toast.promise(promise, {
+                          loading: "Unsubscribing...",
+                          success: "Unsubscribe successful",
+                          error: "Unsubscribe failed",
+                        });
+                      }
+                }
+              >
+                {subscription?.cancelsAt
+                  ? `Cancelling on ${new Date(
+                      subscription.cancelsAt,
+                    ).toLocaleDateString()}`
+                  : t("Cancel subscription")}
+              </CardDescription>
+            )}
+          </CardFooter>
+        </div>
+      </Card>
+    </Tooltip>
   );
 };
 
