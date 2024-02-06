@@ -183,7 +183,7 @@ export const listWithHides = query({
   handler: async (ctx, args) => {
     let query = ctx.db
       .query("characters")
-      .withIndex("byScore", (q) => q.gt("score", 100))
+      .withIndex("byScore", (q) => q.gt("score", 1))
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
