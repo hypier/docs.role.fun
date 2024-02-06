@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modeller",
   "Shop": "Butikk",
+  "Get ORP+": "Hent ORP+",
   "Community": "Fellesskap",
   "Discord": "Splid",
   "My Characters": "Mine tegn",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Gamle meldinger slettes automatisk fra vår database.",
   "Check this to enable uncensored models.": "Merk av her for å aktivere usensurerte modeller.",
   "Affiliate": "Partner",
-  "Tell me more": "Fortell meg mer"
+  "Tell me more": "Fortell meg mer",
+  "Double Character Memory": "Dobbel karakter-minne",
+  "Earn 150 Crystals Everyday": "Tjen 150 krystaller hverdag",
+  "Private Images without Extra Crystals": "Private bilder uten ekstra krystaller",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Forny abonnement",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
