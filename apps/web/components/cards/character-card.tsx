@@ -46,6 +46,7 @@ const CharacterCard = (props: {
   const { isMobile, isTablet } = useMediaQuery();
   const insert = useMutation(api.hides.insert);
   const hide = props.showHides && (isMobile || isTablet);
+  const hidePC = props.showHides && !(isMobile || isTablet);
 
   return (
     <>
@@ -96,6 +97,31 @@ const CharacterCard = (props: {
                   </Button>
                 </Link>
               </Tooltip>
+            )}
+            {hidePC && (
+              <Button
+                className="absolute bottom-4 right-4 z-[50] hidden h-5 w-fit rounded-full border-none text-xs group-hover:flex md:text-[10px]"
+                variant="outline"
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  insert({
+                    type: "characters",
+                    elementId: props.id,
+                  });
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  insert({
+                    type: "characters",
+                    elementId: props.id,
+                  });
+                }}
+              >
+                <X className="h-3 w-3 p-0.5" />
+                Hide
+              </Button>
             )}
             <div className="absolute top-4 z-[3] hover:z-[4]">
               <ModelBadge modelName={props.model as string} />
