@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modelos",
   "Shop": "Tienda",
+  "Get ORP+": "Obtener ORP+",
   "Community": "Comunidad",
   "Discord": "Discordia",
   "My Characters": "Mis caracteres",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Los mensajes antiguos se borran automáticamente de nuestra base de datos.",
   "Check this to enable uncensored models.": "Marque esto para habilitar modelos sin censura.",
   "Affiliate": "Afiliado",
-  "Tell me more": "Dime más"
+  "Tell me more": "Dime más",
+  "Double Character Memory": "Memoria de Doble Carácter",
+  "Earn 150 Crystals Everyday": "Gana 150 Cristales todos los días",
+  "Private Images without Extra Crystals": "Imágenes privadas sin cristales adicionales",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Renovar suscripción",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
