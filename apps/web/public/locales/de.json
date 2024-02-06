@@ -15,6 +15,7 @@
   "Personas": "Personas",
   "Models": "Modelle",
   "Shop": "Shop",
+  "Get ORP+": "ORP+ holen",
   "Community": "Community",
   "Discord": "Discord",
   "My Characters": "Meine Zeichen",
@@ -141,5 +142,14 @@
   "Old messages are automatically deleted from our database.": "Alte Nachrichten werden automatisch aus unserer Datenbank gelöscht.",
   "Check this to enable uncensored models.": "Aktivieren, um unzensierte Modelle zu aktivieren.",
   "Affiliate": "Affiliate",
-  "Tell me more": "Erzähl mir mehr"
+  "Tell me more": "Erzähl mir mehr",
+  "Double Character Memory": "Doppelter Zeichensatz",
+  "Earn 150 Crystals Everyday": "Verdiene jeden Tag 150 Kristalle",
+  "Private Images without Extra Crystals": "Private Bilder ohne zusätzliche Kristalle",
+  "More Follow-up Answers": "More Follow-up Answers",
+  "Early Access to Beta Features": "Early Access to Beta Features",
+  "Renew subscription": "Abonnement erneuern",
+  "Active": "Active",
+  "Subscribe": "Subscribe",
+  "Cancel subscription": "Cancel subscription"
 }
