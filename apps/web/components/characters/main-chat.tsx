@@ -77,7 +77,7 @@ export function MainChats() {
   const { results } = useStablePaginatedQuery(
     api.chats.list,
     {},
-    { initialNumItems: 10 },
+    { initialNumItems: 5 },
   );
   const [_api, setApi] = useState<CarouselApi>();
   return (
