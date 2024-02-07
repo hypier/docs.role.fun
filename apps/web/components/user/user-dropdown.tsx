@@ -3,6 +3,7 @@
 import { ReactElement, useState } from "react";
 import Image from "next/image";
 import {
+  Book,
   ChevronDown,
   CircleUserRound,
   LogIn,
@@ -132,6 +133,12 @@ export default function UserDropdown() {
               href="/github"
               text={t("Star on GitHub")}
               Icon={<Star className="h-4 w-4 text-muted-foreground" />}
+              onClick={() => setOpenPopover(false)}
+            />
+            <StyledLink
+              href="/docs"
+              text={t("Docs")}
+              Icon={<Book className="h-4 w-4 text-muted-foreground" />}
               onClick={() => setOpenPopover(false)}
             />
             <StyledLink

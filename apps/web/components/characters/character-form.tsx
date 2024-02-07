@@ -9,7 +9,7 @@ import {
 import { Input } from "@repo/ui/src/components/input";
 import { Textarea } from "@repo/ui/src/components/textarea";
 import { Button } from "@repo/ui/src/components/button";
-import { ArrowLeft, Plus, UploadCloud } from "lucide-react";
+import { ArrowLeft, Book, HelpCircle, Plus, UploadCloud } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -241,7 +241,16 @@ export default function CharacterForm() {
             {remixId && <RemixBadge />}
           </div>
           <div className="flex items-center gap-2">
-            {characterId && <ArchiveButton characterId={characterId} />}
+            {characterId ? (
+              <ArchiveButton characterId={characterId} />
+            ) : (
+              <Link href="https://docs.openroleplay.ai">
+                <Button variant="outline" className="gap-1">
+                  <Book className="h-4 w-4" />
+                  {t("Docs")}
+                </Button>
+              </Link>
+            )}
             <Popover
               open={openPopover}
               onOpenChange={() => setOpenPopover(!openPopover)}

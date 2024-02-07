@@ -15,6 +15,7 @@ import { Id } from "../../convex/_generated/dataModel";
 import { toast } from "sonner";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import { useTranslation } from "react-i18next";
 
 export const ArchiveButton = ({
   characterId,
@@ -23,11 +24,12 @@ export const ArchiveButton = ({
 }) => {
   const archive = useMutation(api.characters.archive);
   const router = useRouter();
+  const { t } = useTranslation();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="ghost" className="text-muted-foreground">
-          Archive character
+          {t("Archive")}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
