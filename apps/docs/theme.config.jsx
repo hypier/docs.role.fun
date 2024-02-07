@@ -1,4 +1,5 @@
 export default {
   logo: <span>Openroleplay.ai</span>,
-  feedback: { content: null },
+  docsRepositoryBase:
+    "https://github.com/Open-Roleplay-AI/openroleplay.ai/tree/main/apps/docs",
 };
