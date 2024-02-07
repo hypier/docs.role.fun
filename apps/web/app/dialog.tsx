@@ -7,6 +7,7 @@ import { Switch } from "@repo/ui/src/components/switch";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import {
+  ArrowLeft,
   Camera,
   CircleUserRound,
   ClipboardIcon,
@@ -675,12 +676,17 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-16 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
+          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
         />
       )}
       {chatId && (
-        <div className="fixed top-12 z-50 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:sticky lg:top-0 lg:rounded-t-lg lg:px-6">
+        <div className="fixed top-0 z-50 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:sticky lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
+            <Link href="/" className="lg:hidden">
+              <Button size="icon" variant="ghost">
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </Link>
             <ModelBadge modelName={model as string} showCredits={true} />
             <Badge variant="model">
               <Headphones className="h-4 w-4 p-0.5" /> /
@@ -723,7 +729,7 @@ export function Dialog({
         </div>
       )}
       <div
-        className={`flex h-full min-h-[60vh] flex-col overflow-y-auto lg:h-[calc(100%-12rem)] lg:min-h-fit`}
+        className={`flex h-full min-h-[60vh] flex-col overflow-y-auto lg:h-[calc(100%-12rem)] `}
         ref={listRef}
         onWheel={() => {
           setScrolled(true);

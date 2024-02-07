@@ -165,10 +165,10 @@ export default function ChatWithCharacter({
       {isMobile ? (
         <ErrorBoundary children={content} errorComponent={() => ""} />
       ) : (
-        <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem] 2xl:h-[54rem]">
+        <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem]">
           <Drawer>
             <DrawerTrigger asChild>
-              <CardHeader className="relative cursor-pointer justify-end rounded-l-lg border-b duration-200 hover:opacity-90 lg:h-[calc(42rem-1px)] lg:w-96 lg:border-r xl:h-[calc(50rem-1px)] 2xl:h-[calc(54rem-1px)]">
+              <CardHeader className="relative cursor-pointer justify-end rounded-l-lg border-b duration-200 hover:opacity-90 lg:h-[calc(42rem-1px)] lg:w-96 lg:border-r xl:h-[calc(50rem-1px)]">
                 {data?.cardImageUrl && (
                   <Image
                     src={data.cardImageUrl}

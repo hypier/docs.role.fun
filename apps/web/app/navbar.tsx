@@ -22,7 +22,7 @@ export default function NavBar({}: {}) {
   return (
     <>
       <div
-        className={`fixed top-0 flex w-full justify-center ${
+        className={`absolute top-0 flex w-full justify-center ${
           scrolled ? "border-b bg-background/50 backdrop-blur-xl" : "bg-white/0"
         } z-30 transition-opacity`}
       >
