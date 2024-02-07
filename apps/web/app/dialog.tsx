@@ -1,13 +1,12 @@
 "use client";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../convex/_generated/api";
-import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import { Switch } from "@repo/ui/src/components/switch";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import {
-  BookMarked,
   Camera,
   CircleUserRound,
   ClipboardIcon,
@@ -15,7 +14,6 @@ import {
   Headphones,
   MoreHorizontal,
   Pause,
-  Play,
   Plus,
   Repeat,
   Send,
@@ -204,7 +202,7 @@ export const Message = ({
         </div>
       ) : (
         <>
-          <div className="relative max-w-[20rem] whitespace-pre-wrap rounded-xl rounded-tl-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
+          <div className="relative max-w-[20rem] whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
             <FormattedMessage message={message} username={username} />
             {message?.characterId && chatId && !isRegenerating && (
               <div className="absolute -right-4 -top-4 lg:-right-2.5 lg:-top-2.5">
