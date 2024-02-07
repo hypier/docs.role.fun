@@ -696,6 +696,7 @@ export const generateTags = internalAction({
                 "personalityTag",
                 "genderTag",
                 "isNSFW",
+                "isRestricted",
               ],
             },
           },
