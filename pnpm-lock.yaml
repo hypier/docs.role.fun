@@ -68,6 +68,9 @@ importers:
       eslint:
         specifier: ^8.53.0
         version: 8.56.0
+      tailwindcss:
+        specifier: ^3.4.0
+        version: 3.4.1
       typescript:
         specifier: ^5.2.2
         version: 5.3.3
