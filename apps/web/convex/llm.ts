@@ -297,7 +297,7 @@ export const answer = internalAction({
         console.log("catched other error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: "I cannot reply at this time.",
+          text: "I cannot reply at this time. Try again later.",
         });
       }
     }
