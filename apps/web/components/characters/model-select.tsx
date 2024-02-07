@@ -31,19 +31,19 @@ export const ModelSelect = ({
   const { t } = useTranslation();
   let modelData = useModelData();
   if (isNSFW) {
-    modelData = modelData.filter((model: any) => model.isNSFW);
+    modelData = modelData?.filter((model: any) => model.isNSFW);
   } else {
-    modelData = modelData.filter((model: any) => !model.isNSFW);
+    modelData = modelData?.filter((model: any) => !model.isNSFW);
   }
-  if (modelData.every((modelItem: any) => modelItem.value !== model)) {
+  if (modelData?.every((modelItem: any) => modelItem.value !== model)) {
     form.setValue("model", modelData[0].value);
   }
   if (
-    !modelData.some(
+    !modelData?.some(
       (modelItem: any) => modelItem.value === form.getValues("model"),
     )
   ) {
-    form.setValue("model", modelData[0].value);
+    form.setValue("model", modelData?.[0].value);
   }
 
   return (
