@@ -135,6 +135,8 @@ export const answer = internalAction({
       });
       return;
     }
+
+    let model;
     try {
       const { openai, model, currentCrystals } = await initializeModel(
         character,
@@ -297,7 +299,9 @@ export const answer = internalAction({
         console.log("catched other error:::", error);
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: "I cannot reply at this time. Try again later.",
+          text: `${
+            model ? model : "I"
+          } cannot reply at this time. Try again later.`,
         });
       }
     }
