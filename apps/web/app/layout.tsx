@@ -23,10 +23,7 @@ export default async function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning={true} lang="en">
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=0;"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <body className={cx(calSans.variable, inter.variable)}>
         <Suspense fallback={<Spinner />}>
           <Providers>
