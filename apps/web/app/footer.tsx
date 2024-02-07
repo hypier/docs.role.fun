@@ -38,6 +38,7 @@ export default function Footer() {
               <Github className="inline h-4 w-4 p-[2px]" />
               GitHub
             </FooterLink>
+            <FooterLink href="/docs">Docs</FooterLink>
             <FooterLink href="/privacy.html">Privacy</FooterLink>
             <FooterLink href="/terms.html">Terms</FooterLink>
             <FooterLink href="/crystal/terms">Crystal Terms</FooterLink>
