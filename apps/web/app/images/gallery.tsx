@@ -96,7 +96,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
 
   return (
     <>
-      <div className="relative flex w-full place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+      <div className="relative flex w-full place-content-center py-4 lg:justify-start lg:py-0">
         <Carousel
           opts={{ align: "center" }}
           className="w-[75%] md:w-[80%] lg:w-full"

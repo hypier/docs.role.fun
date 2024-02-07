@@ -78,7 +78,7 @@ const Characters = () => {
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         {t("Characters")}
       </div>
-      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+      <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
         <Carousel
           opts={{ align: "center" }}
           className="w-[75%] md:w-[80%] lg:w-[calc(80%+4rem)]"

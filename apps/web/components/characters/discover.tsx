@@ -112,13 +112,13 @@ const Discover = () => {
         </Link>
       </div>
 
-      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+      <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
         <Carousel
           opts={{ align: "center" }}
           className="w-[75%] md:w-[80%] lg:w-[calc(80%+8rem)]"
           setApi={setApi}
         >
-          <CarouselContent className="w-full">
+          <CarouselContent className="w-full" isOverflowHidden={false}>
             {Object.entries(popularTags).map(([tagKey, tagValues]) =>
               tagValues.map((tag, index) => (
                 <CarouselItem
@@ -151,7 +151,7 @@ const Discover = () => {
           <CarouselNext variant="ghost" />
         </Carousel>
       </div>
-      <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+      <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
@@ -221,7 +221,7 @@ const Discover = () => {
         </Carousel>
       </div>
       <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)] lg:gap-8">
-        <div className="flex items-center gap-1 border-b px-4 pb-4 font-medium lg:border-none lg:px-0 lg:pb-0">
+        <div className="flex items-center gap-1 px-4 pb-4 font-medium lg:px-0 lg:pb-0">
           <Link href="/images" className="flex items-center gap-1">
             {t("Images")}
             <Button variant="ghost" size="icon">
