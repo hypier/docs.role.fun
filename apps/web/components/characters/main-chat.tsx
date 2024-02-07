@@ -25,6 +25,7 @@ import {
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
 import { useConvexAuth } from "convex/react";
+import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 
 export const Chat = ({
   name,
@@ -80,6 +81,8 @@ export function MainChats() {
     { initialNumItems: 3 },
   );
   const [_api, setApi] = useState<CarouselApi>();
+  const { isMobile } = useMediaQuery();
+  if (isMobile) return;
   return (
     <AnimatePresence>
       {results?.length > 0 && (
