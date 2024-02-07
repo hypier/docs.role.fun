@@ -465,6 +465,7 @@ export const generateFollowups = internalAction({
                 })
                 .flat() as ChatCompletionMessageParam[]),
             ],
+            max_tokens: 128,
           });
           const responseMessage = (response &&
             response?.choices &&
