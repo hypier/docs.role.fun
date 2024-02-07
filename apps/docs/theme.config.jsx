@@ -11,4 +11,15 @@ export default {
       />
     </>
   ),
+  footer: {
+    text: (
+      <span>
+        {new Date().getFullYear()} ©{" "}
+        <a href="https://nextra.site" target="_blank">
+          Openroleplay.ai
+        </a>
+        .
+      </span>
+    ),
+  },
 };
