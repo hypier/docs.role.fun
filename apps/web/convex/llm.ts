@@ -683,6 +683,10 @@ export const generateTags = internalAction({
                   type: "boolean",
                   description: `True if character's detail metadata is explicitly sexual content, otherwise false.`,
                 },
+                isRestricted: {
+                  type: "boolean",
+                  description: `True if character is depicting minor, teenager, gore or real person. This is used to ensure safety of platform.`,
+                },
               },
               required: [
                 "languageTag",
@@ -725,6 +729,7 @@ export const generateTags = internalAction({
             personalityTag: functionArgs?.personalityTag,
             genderTag: functionArgs?.genderTag,
             isNSFW: functionArgs?.isNSFW,
+            isBlacklisted: functionArgs?.isRestricted,
           });
         }
       } catch (error) {

@@ -505,6 +505,7 @@ export const tag = internalMutation(
       personalityTag,
       genderTag,
       isNSFW,
+      isBlacklisted,
     }: {
       characterId: Id<"characters">;
       languageTag: string;
@@ -512,6 +513,7 @@ export const tag = internalMutation(
       personalityTag: string;
       genderTag: string;
       isNSFW: boolean;
+      isBlacklisted?: boolean;
     },
   ) => {
     return await ctx.db.patch(characterId, {
@@ -520,6 +522,7 @@ export const tag = internalMutation(
       personalityTag,
       genderTag,
       ...(isNSFW ? { isNSFW } : {}),
+      ...(isBlacklisted ? { isBlacklisted } : {}),
     });
   },
 );
