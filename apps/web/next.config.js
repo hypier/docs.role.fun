@@ -64,6 +64,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/docs",
+        destination: "https://docs.openroleplay.ai",
+        permanent: true,
+      },
+      {
         source: "/affiliate",
         destination: "https://tally.so/r/3jPAVR",
         permanent: true,
