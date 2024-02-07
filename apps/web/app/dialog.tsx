@@ -855,7 +855,7 @@ export function Dialog({
       >
         <div className="flex h-full w-full items-center justify-center gap-4 px-4">
           <input
-            className="h-10 w-full resize-none border-none bg-background scrollbar-hide focus-visible:ring-0"
+            className="h-10 w-full resize-none border-none bg-background text-base scrollbar-hide focus-visible:ring-0"
             autoFocus
             name="message"
             placeholder="Send a message"
