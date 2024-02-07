@@ -847,9 +847,9 @@ export function Dialog({
         className="fixed bottom-0 z-50 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:sticky lg:rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
-        <div className="flex w-full items-center justify-center gap-4 px-4">
-          <textarea
-            className="my-3 w-full resize-none border-none bg-background scrollbar-hide focus-visible:ring-0"
+        <div className="flex h-full w-full items-center justify-center gap-4 px-4">
+          <input
+            className="h-10 w-full resize-none border-none bg-background scrollbar-hide focus-visible:ring-0"
             autoFocus
             name="message"
             placeholder="Send a message"
