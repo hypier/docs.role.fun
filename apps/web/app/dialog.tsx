@@ -197,13 +197,13 @@ export const Message = ({
         {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
       {message?.text === "" ? (
-        <div className="max-w-[20rem] animate-pulse whitespace-pre-wrap rounded-xl rounded-tr-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
+        <div className="animate-pulse whitespace-pre-wrap rounded-xl rounded-tr-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
           {thinkingMessage}
           {thinkingDots}
         </div>
       ) : (
         <>
-          <div className="relative max-w-[20rem] whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
+          <div className="relative whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
             <FormattedMessage message={message} username={username} />
             {message?.characterId && chatId && !isRegenerating && (
               <div className="absolute -right-4 -top-4 lg:-right-2.5 lg:-top-2.5">
