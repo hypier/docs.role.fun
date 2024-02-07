@@ -193,7 +193,7 @@ const CharacterCard = (props: {
           <div className="absolute bottom-0 left-0 z-50 flex w-full items-center justify-center">
             <div className="flex w-full justify-between rounded-lg p-5">
               <Button
-                className="h-12 w-12 rounded-full border-none bg-red-500 text-white hover:bg-red-400 hover:text-white dark:hover:bg-red-600"
+                className="h-16 w-16 rounded-full border-none bg-red-500 text-white hover:bg-red-400 hover:text-white dark:hover:bg-red-600"
                 variant="outline"
                 size="icon"
                 onTouchStart={(e) => {
@@ -213,18 +213,18 @@ const CharacterCard = (props: {
                   });
                 }}
               >
-                <X />
+                <X className="h-8 w-8" />
               </Button>
               <Link
                 href={`/character/${props?.id}`}
                 onClick={() => posthog.capture("click-character-card")}
               >
                 <Button
-                  className="h-12 w-12 rounded-full border-none bg-green-500 text-white hover:bg-green-400 hover:text-white dark:hover:bg-green-600"
+                  className="h-16 w-16 rounded-full border-none bg-green-500 text-white hover:bg-green-400 hover:text-white dark:hover:bg-green-600"
                   variant="outline"
                   size="icon"
                 >
-                  <MessageSquare className="fill-white" />
+                  <MessageSquare className="h-8 w-8 fill-white" />
                 </Button>
               </Link>
             </div>
