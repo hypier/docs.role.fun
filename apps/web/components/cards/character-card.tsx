@@ -46,7 +46,7 @@ const CharacterCard = (props: {
   const { isMobile, isTablet } = useMediaQuery();
   const insert = useMutation(api.hides.insert);
   const hide = props.showHides && (isMobile || isTablet);
-  const hidePC = props.showHides && !(isMobile || isTablet) && !showEdit;
+  const hidePC = props.showHides && !(isMobile || isTablet) && !props.showEdit;
 
   return (
     <>
