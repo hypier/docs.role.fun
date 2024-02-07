@@ -565,18 +565,15 @@ export function Dialog({
   cardImageUrl,
   chatId,
   characterId,
-  isPublic,
 }: {
   name: string;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
-  isPublic?: boolean;
 }) {
   const { t } = useTranslation();
   const router = useRouter();
-  const create = useMutation(api.stories.create);
   const params = useSearchParams();
   const newChat = useMutation(api.chats.create);
   const urlChatId = params.get("chatId") as Id<"chats">;
