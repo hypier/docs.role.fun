@@ -1,5 +1,5 @@
 "use client";
-import { Home, Image, MessageSquare, Package, Plus } from "lucide-react";
+import { Book, Home, Image, MessageSquare, Package, Plus } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/src/components/tabs";
 import Link from "next/link";
@@ -95,6 +95,15 @@ function TabsController() {
           >
             <Discord className="h-5 w-5 p-1" />
             {t("Discord")}
+          </TabsTrigger>
+        </Link>
+        <Link href="/docs">
+          <TabsTrigger
+            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
+            value="/docs"
+          >
+            <Book className="h-5 w-5 p-1" />
+            {t("Docs")}
           </TabsTrigger>
         </Link>
       </TabsList>
