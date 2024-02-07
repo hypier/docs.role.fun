@@ -329,7 +329,7 @@ export const imageModelData = [
     description:
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
     license: "Fair AI Public License 1.0-SD",
-    crystalPrice: 14,
+    crystalPrice: 7,
   },
   {
     value: "charlesmccarthy/animagine-xl",

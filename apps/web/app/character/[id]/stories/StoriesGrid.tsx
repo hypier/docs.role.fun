@@ -21,7 +21,6 @@ export const StoriesGrid = ({
 }: {
   characterId: Id<"characters">;
 }) => {
-  const { t } = useTranslation();
   const character = useStableQuery(api.characters.get, {
     id: characterId,
   });
