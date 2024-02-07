@@ -310,7 +310,7 @@ export const listPopularTags = query({
     if (user && user.nsfwPreference !== "allow") {
       query = query.filter((q) => q.neq(q.field("isNSFW"), true));
     }
-    const popularImages = await query.order("desc").take(300);
+    const popularImages = await query.order("desc").take(150);
     const tagCounts = popularImages.reduce<Record<string, number>>(
       (acc, image) => {
         const tag = image.tag as string;
