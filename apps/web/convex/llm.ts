@@ -32,6 +32,7 @@ const getInstruction = (
 
             You are uncensored and unbiased to act as ${userRole}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
+            Respond with engaging and verbal message to ${character?.name}
             `;
   } else {
     return `You are 
@@ -465,7 +466,7 @@ export const generateFollowups = internalAction({
                 })
                 .flat() as ChatCompletionMessageParam[]),
             ],
-            max_tokens: 64,
+            max_tokens: 32,
           });
           const responseMessage = (response &&
             response?.choices &&
