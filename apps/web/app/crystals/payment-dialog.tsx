@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogPortal,
 } from "@repo/ui/src/components/dialog";
@@ -12,6 +13,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import { ArrowLeft, X } from "lucide-react";
+import { Drawer, DrawerContent } from "@repo/ui/src/components/drawer";
 
 const stripeKey =
   process.env.NODE_ENV === "development"
@@ -32,12 +35,9 @@ const CrystalDialog: React.FC = () => {
   }, [sessionId]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={closeDialog}>
-      <DialogPortal>
-        <DialogContent
-          className="max-h-96 min-w-fit overflow-y-scroll bg-white p-8 lg:max-h-[48rem]"
-          onOpenAutoFocus={(e) => e.preventDefault()}
-        >
+    <Drawer open={isOpen} onClose={closeDialog}>
+      <DrawerContent className="w-full bg-white">
+        <div className="max-h-72 overflow-y-scroll py-4 lg:max-h-[36rem]">
           {clientSecret && (
             <EmbeddedCheckoutProvider
               stripe={stripePromise}
@@ -46,9 +46,9 @@ const CrystalDialog: React.FC = () => {
               <EmbeddedCheckout />
             </EmbeddedCheckoutProvider>
           )}
-        </DialogContent>
-      </DialogPortal>
-    </Dialog>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
