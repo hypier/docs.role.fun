@@ -392,7 +392,16 @@ export const get = query({
     id: v.id("characters"),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
+    const character = await ctx.db.get(args.id);
+    if (character?.visibility === "private") {
+      const user = await getUser(ctx);
+      if (user._id !== character?.creatorId) {
+        throw new ConvexError({
+          message: "You do not have permission to view this character.",
+        });
+      }
+    }
+    return character;
   },
 });
 
