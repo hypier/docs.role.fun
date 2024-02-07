@@ -393,14 +393,6 @@ export const get = query({
   },
   handler: async (ctx, args) => {
     const character = await ctx.db.get(args.id);
-    if (character?.visibility === "private") {
-      const user = await getUser(ctx);
-      if (user._id !== character?.creatorId) {
-        throw new ConvexError({
-          message: "You do not have permission to view this character.",
-        });
-      }
-    }
     return character;
   },
 });
@@ -670,5 +662,28 @@ export const translate = mutation({
         targetLanguage: userLanguage,
       });
     }
+  },
+});
+
+export const removeOldCharacters = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const oldCharacters = await ctx.db
+      .query("characters")
+      .withIndex("by_creation_time", (q) =>
+        q.lt("_creationTime", weekAgo.getTime()),
+      )
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("isArchived"), true),
+          q.eq(q.field("isBlacklisted"), true),
+        ),
+      )
+      .take(4000);
+    await Promise.all(
+      oldCharacters.map((character) => ctx.db.delete(character._id)),
+    );
+    return { removed: oldCharacters.length };
   },
 });

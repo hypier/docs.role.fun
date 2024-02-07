@@ -31,4 +31,12 @@ crons.daily(
   },
   internal.messages.removeOldChats,
 );
+crons.daily(
+  "remove characters",
+  {
+    minuteUTC: 0,
+    hourUTC: 0,
+  },
+  internal.characters.removeOldCharacters,
+);
 export default crons;
