@@ -136,6 +136,13 @@ export const answer = internalAction({
       });
       return;
     }
+    if (character?.isBlacklisted) {
+      await ctx.runMutation(internal.llm.updateCharacterMessage, {
+        messageId,
+        text: "This character has been banned for violating our community guidelines and content policy.",
+      });
+      return;
+    }
 
     let model;
     try {
