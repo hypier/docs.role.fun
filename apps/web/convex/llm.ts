@@ -153,7 +153,7 @@ export const answer = internalAction({
     if (character?.isBlacklisted) {
       await ctx.runMutation(internal.llm.updateCharacterMessage, {
         messageId,
-        text: "This character has been banned for violating our community guidelines and content policy.",
+        text: "This character is automatically classified as violating our community guidelines and content policy. You can ask questions on our Discord if this classification is a false positive.",
       });
       return;
     }
