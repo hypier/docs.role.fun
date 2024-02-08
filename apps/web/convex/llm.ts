@@ -129,6 +129,16 @@ export const answer = internalAction({
             characterId,
           });
 
+    if (
+      character?.creatorId !== userId &&
+      character?.visibility === "private"
+    ) {
+      await ctx.runMutation(internal.llm.updateCharacterMessage, {
+        messageId,
+        text: "You can't interact with other people's character.",
+      });
+      return;
+    }
     if (character?.isArchived) {
       await ctx.runMutation(internal.llm.updateCharacterMessage, {
         messageId,
