@@ -162,7 +162,7 @@ const PlusPlan = () => {
                 ? t("Renew subscription")
                 : currentUser?.subscriptionTier === "plus"
                   ? "Active"
-                  : "Subscribe"}{" "}
+                  : t("Subscribe")}{" "}
             </p>
             {currentUser?.subscriptionTier === "plus" && (
               <CardDescription
