@@ -245,7 +245,7 @@ export const answer = internalAction({
               content: text,
             })) as ChatCompletionMessageParam[]),
           ],
-          max_tokens: 128,
+          max_tokens: 192,
         });
 
         const responseMessage = (response &&
@@ -483,7 +483,7 @@ export const generateFollowups = internalAction({
                 })
                 .flat() as ChatCompletionMessageParam[]),
             ],
-            max_tokens: 32,
+            max_tokens: 64,
           });
           const responseMessage = (response &&
             response?.choices &&
