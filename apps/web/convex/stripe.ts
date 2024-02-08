@@ -10,12 +10,18 @@ import { Id } from "./_generated/dataModel";
 export const pay = action({
   args: {
     numCrystals: v.union(
+      // v.literal(300),
+      // v.literal(1650),
+      // v.literal(5450),
+      // v.literal(11200),
+      // v.literal(19400),
+      // v.literal(90000),
       v.literal(300),
-      v.literal(1650),
-      v.literal(5450),
-      v.literal(11200),
-      v.literal(19400),
-      v.literal(90000),
+      v.literal(1800),
+      v.literal(6000),
+      v.literal(12500),
+      v.literal(22400),
+      v.literal(98000),
     ),
     userId: v.id("users"),
   },
@@ -25,7 +31,8 @@ export const pay = action({
       numCrystals,
       userId,
     }: {
-      numCrystals: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+      // numCrystals: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+      numCrystals: 300 | 1800 | 6000 | 12500 | 22400 | 98000;
       userId: Id<"users">;
     },
   ): Promise<string> => {
@@ -153,10 +160,15 @@ export const unsubscribe = internalAction({
           },
         },
       );
-      const cancelsAtDate = new Date(updatedSubscription.current_period_end * 1000)
+      const cancelsAtDate = new Date(
+        updatedSubscription.current_period_end * 1000,
+      )
         .toISOString()
         .split("T")[0];
-      if (typeof updatedSubscription.id === 'string' && typeof cancelsAtDate === 'string') {
+      if (
+        typeof updatedSubscription.id === "string" &&
+        typeof cancelsAtDate === "string"
+      ) {
         await ctx.runMutation(internal.payments.cancelSubscription, {
           subscriptionId: updatedSubscription.id,
           cancelsAt: cancelsAtDate,

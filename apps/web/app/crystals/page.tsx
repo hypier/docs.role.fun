@@ -203,7 +203,8 @@ const Package = ({
   handlePurchaseClick,
 }: {
   src: string;
-  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  // amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  amount: 300 | 1800 | 6000 | 12500 | 22400 | 98000;
   bonus: number;
   price: number;
   handlePurchaseClick?: any;
@@ -264,7 +265,8 @@ const PackageWrapper = ({
   price,
 }: {
   src: string;
-  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  // amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  amount: 300 | 1800 | 6000 | 12500 | 22400 | 98000;
   bonus: number;
   price: number;
 }) => {
@@ -382,6 +384,15 @@ export default function Page() {
           />
         </h2>
       </div>
+
+      <p className="text-center">
+        <strong className="bg-gradient-to-b from-red-400 to-rose-500 bg-clip-text text-lg text-transparent">
+          🎊 Lunar New Year Crystal Event 🎊
+        </strong>
+        <br />
+        From February 8, 2024, to February 10, 2024 (PDT) <br />
+        Earn up to 8,000 more crystals.
+      </p>
       <AnimatePresence>
         {isAuthenticated ? (
           <div className="flex flex-col gap-8 xl:flex-row">
