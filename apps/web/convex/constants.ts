@@ -159,6 +159,12 @@ export const modelData = [
     isNSFW: true,
   },
   {
+    value: "jondurbin/airoboros-l2-70b",
+    description: "Airobos L2 70B by Jon Durbin",
+    crystalPrice: 1,
+    isNSFW: true,
+  },
+  {
     value: "undi95/toppy-m-7b",
     description: "Uncensored, Toppy M 7B by undi95",
     isNSFW: true,
@@ -294,11 +300,6 @@ export const modelData = [
   {
     value: "nousresearch/nous-capybara-34b",
     description: "Capybara 34B by Nous Research",
-    crystalPrice: 1,
-  },
-  {
-    value: "jondurbin/airoboros-l2-70b",
-    description: "Airobos L2 70B by Jon Durbin",
     crystalPrice: 1,
   },
   {
