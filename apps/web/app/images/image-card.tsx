@@ -258,9 +258,9 @@ const ImageCard = (props: {
                     }}
                   >
                     {props.isLiked ? (
-                      <Heart className="aspect-square h-5 w-5 fill-red-500 stroke-red-500 p-1 group-hover/like:fill-transparent group-hover/like:stroke-white" />
+                      <Heart className="aspect-square h-5 w-5 fill-red-500 stroke-red-500 p-0.5 group-hover/like:fill-transparent group-hover/like:stroke-white" />
                     ) : (
-                      <Heart className="aspect-square h-5 w-5 p-1 group-hover/like:fill-red-500 group-hover/like:stroke-red-500" />
+                      <Heart className="aspect-square h-5 w-5 p-0.5 group-hover/like:fill-red-500 group-hover/like:stroke-red-500" />
                     )}
                     {nFormatter(props?.numLikes as number)}
                   </div>
