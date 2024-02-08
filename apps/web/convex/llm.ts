@@ -466,8 +466,8 @@ export const generateFollowups = internalAction({
               i === 1
                 ? model
                 : i === 2
-                  ? "recursal/eagle-7b"
-                  : "huggingfaceh4/zephyr-7b-beta:free",
+                  ? "huggingfaceh4/zephyr-7b-beta:free"
+                  : "recursal/eagle-7b",
             stream: false,
             messages: [
               {
