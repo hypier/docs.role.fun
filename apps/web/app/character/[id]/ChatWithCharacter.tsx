@@ -137,7 +137,6 @@ export default function ChatWithCharacter({
             chatId={chatId}
             characterId={data?._id as any}
             cardImageUrl={data?.cardImageUrl}
-            isPublic={data?.visibility === "public"}
           />
         </Authenticated>
       ) : isAuthenticated && !isLoading ? (
