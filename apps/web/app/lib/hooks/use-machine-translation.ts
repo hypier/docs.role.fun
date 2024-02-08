@@ -24,13 +24,15 @@ export const useTranslationStore = create<State>((set) => ({
 
 export const initializeTranslationStore = () => {
   const { currentLanguage } = useLanguage();
-  const { setTranslations } = useTranslationStore();
+  const { setTranslations, translations } = useTranslationStore();
   const allTranslations = useQuery(
     api.translation.list,
     currentLanguage
-      ? {
-          targetLanguage: currentLanguage,
-        }
+      ? Object.keys(translations).length === 0
+        ? {
+            targetLanguage: currentLanguage,
+          }
+        : "skip"
       : "skip",
   );
 
