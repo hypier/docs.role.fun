@@ -53,7 +53,7 @@ import { VoiceSelect } from "./voice-select";
 
 const formSchema = z.object({
   name: z.string().max(24),
-  description: z.string().max(64),
+  description: z.string().max(128),
   instructions: z.string().max(512),
   greetings: z.optional(z.string().max(1024)),
   model: z.string(),

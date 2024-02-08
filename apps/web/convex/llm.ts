@@ -40,9 +40,13 @@ const getInstruction = (
               name: ${character?.name}
               ${
                 character?.instruction
-                  ? `instruction: ${character.instruction}`
+                  ? `instruction: ${
+                      character?.instruction.substring(0, 1024) as string
+                    }`
                   : character?.description &&
-                    `description: ${character.description}`
+                    `description: ${
+                      character?.description.substring(0, 128) as string
+                    }`
               }
             }
 
