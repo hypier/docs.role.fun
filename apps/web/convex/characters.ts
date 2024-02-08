@@ -52,9 +52,17 @@ export const upsert = mutation({
       });
       return character;
     } else {
-      const { cardImageStorageId, cardImageUrl, ...rest } = args;
+      const {
+        cardImageStorageId,
+        cardImageUrl,
+        description,
+        instructions,
+        ...rest
+      } = args;
       const character = await ctx.db.insert("characters", {
         ...rest,
+        description: description?.substring(0, 128),
+        instructions: instructions?.substring(0, 1024),
         ...(cardImageStorageId
           ? {
               cardImageUrl: (await ctx.storage.getUrl(
