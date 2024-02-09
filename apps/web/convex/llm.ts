@@ -708,7 +708,7 @@ export const generateTags = internalAction({
                 },
                 isRestricted: {
                   type: "boolean",
-                  description: `True if character is explicitly depicting minor, teenager, gore or real person.`,
+                  description: `True if character is explicitly depicting minor, teenager, gore.`,
                 },
               },
               required: [
