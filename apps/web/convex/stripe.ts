@@ -151,6 +151,7 @@ export const unsubscribe = internalAction({
           userId,
         },
       )) as string;
+      console.log(`Subscription ID: ${subscriptionId}`);
       const updatedSubscription = await stripe.subscriptions.update(
         subscriptionId,
         {
