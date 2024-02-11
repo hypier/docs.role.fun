@@ -341,9 +341,7 @@ export const generateByPrompt = internalAction(
           image: referenceImage ?? undefined,
           disable_safety_checker: true,
           negative_prompt:
-            isPrivate || referenceImage || isNSFW
-              ? "bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"
-              : "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name, blushed",
+            "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
           num_inference_steps: 40,
         },
       });
