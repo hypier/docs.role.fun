@@ -293,7 +293,7 @@ export const listBackend = query({
       query = query.filter((q) => q.eq(q.field("model"), args.model));
     }
 
-    return await query.order("desc").take(100);
+    return await query.order("desc").take(300);
   },
 });
 
