@@ -126,9 +126,9 @@ const PlusPlan = () => {
               </li>
               <li className="flex items-center gap-1">
                 <Crystal className="h-4 w-4" />
-                {t("Earn 150 Crystals Everyday")}
+                {t("Earn 200 Crystals Everyday")}
                 <InfoTooltip
-                  content={t("Earn upto 4,500 crystals every month.")}
+                  content={t("Earn upto 6,000 crystals every month.")}
                 />
               </li>
               <li className="flex items-center gap-1">

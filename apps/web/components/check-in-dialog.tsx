@@ -75,7 +75,7 @@ const CheckinDialog = () => {
             <div className="flex w-full flex-col items-center justify-center gap-4 pt-4">
               <AlertDialogAction onClick={onClickHandler}>
                 {me?.subscriptionTier === "plus"
-                  ? t("Claim 150 Crystals")
+                  ? t("Claim 200 Crystals")
                   : t("Claim 15 Crystals")}
               </AlertDialogAction>
             </div>
