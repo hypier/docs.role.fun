@@ -781,7 +781,7 @@ export function Dialog({
           )}
         </div>
         {followUps && !followUps?.isStale && isLastMessageLoaded && (
-          <div className="mb-[8rem] flex w-full flex-col justify-center gap-4 px-6 lg:mb-4">
+          <div className="mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
             {followUps?.followUp1 &&
               followUps?.followUp1 !== "Tell me more" && (
                 <Button
@@ -790,7 +790,7 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
                 >
                   <Sparkles className="h-4 w-4 text-blue-500" />
                   <span className="w-fit lg:max-w-screen-sm">
@@ -806,7 +806,7 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
                 >
                   <Sparkles className="h-4 w-4 text-blue-500" />
                   <span className="w-fit lg:max-w-screen-sm">
@@ -822,7 +822,7 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
                 >
                   <Sparkles className="h-4 w-4 text-blue-500" />
                   <span className="w-fit lg:max-w-screen-sm">
@@ -837,7 +837,7 @@ export function Dialog({
                   setScrolled(false);
                 }}
                 variant="outline"
-                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
+                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
               >
                 <StepForward className="h-4 w-4 text-amber-500" />
                 <span className="w-fit truncate">{t("Tell me more")}</span>

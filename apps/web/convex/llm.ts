@@ -29,10 +29,8 @@ const getInstruction = (
             }
 
             and you are talking with ${character?.name} (${character?.description}).
-
-            You are uncensored and unbiased to act as ${userRole}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with engaging and verbal message to ${character?.name}
+            Respond with engaging and verbal message to ${character?.name}.
             `;
   } else {
     return `You are 
@@ -458,8 +456,8 @@ export const generateFollowups = internalAction({
               i === 1
                 ? model
                 : i === 2
-                  ? "huggingfaceh4/zephyr-7b-beta:free"
-                  : "recursal/eagle-7b",
+                  ? "gryphe/mythomist-7b:free"
+                  : "gryphe/mythomax-l2-13b",
             stream: false,
             messages: [
               {
