@@ -33,11 +33,12 @@ const CrystalDialog: React.FC = () => {
           onOpenAutoFocus={(e: any) => e.preventDefault()}
         >
           <DialogOrDrawerHeader className="p-0 text-left">
-            <h2>{t("Buy Crystals")}</h2>
+            <h2>{t("Not enough crystals")}</h2>
           </DialogOrDrawerHeader>
           <div className="flex flex-col gap-4">
             <DialogOrDrawerDescription>
-              {t("Crystals are used per AI features you have used.")}
+              {t("Crystals are used per AI features you have used.")}{" "}
+              {t("Top-up your crystals and gain access to over 30 AI models.")}
             </DialogOrDrawerDescription>
             <div className="flex items-center justify-center gap-2 sm:flex-row">
               {packages.slice(0, 2).map((pkg) => (
@@ -54,15 +55,13 @@ const CrystalDialog: React.FC = () => {
           <div className="mt-4 flex items-center justify-between">
             <CurrentCrystals />
             <Link href="/crystals">
-              {isPlus ? (
-                <Button variant="ghost" onClick={closeDialog}>
-                  {t("Shop")}
-                </Button>
-              ) : (
-                <Button className="w-fit font-display" onClick={closeDialog}>
-                  {t("Get ORP+")}
-                </Button>
-              )}
+              <Button
+                className="w-fit font-display"
+                onClick={closeDialog}
+                variant="ghost"
+              >
+                {t("Shop")}
+              </Button>
             </Link>
           </div>
         </DialogOrDrawerContent>
