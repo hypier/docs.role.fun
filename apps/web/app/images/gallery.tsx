@@ -49,6 +49,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
   const me = useCurrentUser();
   const ref = useRef(null);
   const inView = useInView(ref);
+  const { t } = useTranslation();
 
   const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
@@ -129,7 +130,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
                         router.push(`${pathname}?${query.toString()}`);
                       }}
                     >
-                      {tagName}
+                      {t(tagName)}
                     </Toggle>
                   </CarouselItem>
                 ),
