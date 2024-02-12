@@ -561,12 +561,14 @@ const ChatOptionsPopover = ({
 
 export function Dialog({
   name,
+  description,
   model,
   cardImageUrl,
   chatId,
   characterId,
 }: {
   name: string;
+  description?: string;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
@@ -753,6 +755,9 @@ export function Dialog({
             </div>
           </div>
         )}
+        <div className="m-4 my-6 rounded-lg bg-black/50 p-4 italic text-white backdrop-blur-md sm:hidden">
+          <strong>{name}</strong> {description}
+        </div>
         <div
           className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
           ref={listRef}
