@@ -350,21 +350,14 @@ export const generateInstruction = internalAction({
   },
   handler: async (ctx, { userId, name, description, characterId }) => {
     try {
-      const model = DEFAULT_MODEL;
+      const model = "jondurbin/airoboros-l2-70b";
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
       const openai = new OpenAI({
         baseURL,
         apiKey,
       });
-      const instruction = `Create specific and detailed character instruction (what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
-      const { currentCrystals } = await ctx.runMutation(
-        internal.serve.useCrystal,
-        {
-          userId,
-          name: model,
-        },
-      );
+      const instruction = `Create specific and detailed character instruction (ex: what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
       try {
         const stream = await openai.chat.completions.create({
           model,
@@ -389,11 +382,6 @@ export const generateInstruction = internalAction({
           }
         }
       } catch (error) {
-        await ctx.runMutation(internal.serve.refundCrystal, {
-          userId,
-          currentCrystals,
-          name: model,
-        });
         throw Error;
       }
     } catch (error) {
@@ -405,7 +393,7 @@ export const generateInstruction = internalAction({
       } else {
         await ctx.runMutation(internal.llm.updateCharacterInstruction, {
           characterId,
-          text: "I cannot generate instruction at this time. You may have not enough crystals.",
+          text: "I cannot generate instruction at this time.",
         });
       }
       throw error;

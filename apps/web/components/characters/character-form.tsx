@@ -505,7 +505,7 @@ export default function CharacterForm() {
                         ) : (
                           <>
                             {t("Generate")}
-                            <Crystal className="h-4 w-4" /> x 10
+                            <Crystal className="h-4 w-4" />
                           </>
                         )}
                       </Button>
