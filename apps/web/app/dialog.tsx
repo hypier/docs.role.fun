@@ -790,10 +790,10 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
                     {followUps.followUp1}
                   </span>
                 </Button>
@@ -806,10 +806,10 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
                     {followUps.followUp2}
                   </span>
                 </Button>
@@ -822,10 +822,10 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
                     {followUps.followUp3}
                   </span>
                 </Button>
@@ -837,9 +837,9 @@ export function Dialog({
                   setScrolled(false);
                 }}
                 variant="outline"
-                className="flex w-fit gap-1 rounded-full p-2 text-left"
+                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-4 text-left"
               >
-                <StepForward className="h-4 w-4" />
+                <StepForward className="h-4 w-4 text-amber-500" />
                 <span className="w-fit truncate">{t("Tell me more")}</span>
               </Button>
             )}
