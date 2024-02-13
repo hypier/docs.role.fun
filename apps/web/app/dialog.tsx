@@ -856,9 +856,7 @@ export function Dialog({
             className="h-10 w-full resize-none border-none bg-background !text-[16px] text-base scrollbar-hide focus-visible:ring-0"
             autoFocus
             name="message"
-            placeholder={
-              followUps?.followUp1 ? followUps?.followUp1 : t("Send a message")
-            }
+            placeholder={t("Send a message")}
             value={input}
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={(event) => {
