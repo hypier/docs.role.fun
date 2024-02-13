@@ -674,7 +674,7 @@ export function Dialog({
   const lastMessage = messages?.[messages.length - 1]?.text || "";
   const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
   return (
-    <div className="h-full w-full sm:overflow-hidden lg:relative lg:rounded-lg lg:border lg:bg-background">
+    <div className="h-full w-full lg:relative lg:overflow-hidden lg:rounded-lg lg:border lg:bg-background">
       {cardImageUrl && (
         <Image
           src={cardImageUrl}

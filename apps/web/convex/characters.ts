@@ -401,6 +401,14 @@ export const get = query({
   },
   handler: async (ctx, args) => {
     const character = await ctx.db.get(args.id);
+    if (character?.visibility !== "public") {
+      const user = await getUser(ctx);
+      if (character?.creatorId !== user._id) {
+        throw new ConvexError({
+          message: "You do not have permission to view this character.",
+        });
+      }
+    }
     return character;
   },
 });

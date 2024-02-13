@@ -1,54 +1,23 @@
 "use client";
-import {
-  Authenticated,
-  useConvexAuth,
-  useMutation,
-  useQuery,
-} from "convex/react";
+import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Tooltip,
-} from "@repo/ui/src/components";
-import Image from "next/image";
 import { Dialog } from "../../dialog";
 import Spinner from "@repo/ui/src/components/spinner";
 import useStoreChatEffect from "../../lib/hooks/use-store-chat-effect";
-import { BookMarked, MessagesSquare, Share } from "lucide-react";
-import { FadeInOut, nFormatter } from "../../lib/utils";
+import { FadeInOut } from "../../lib/utils";
 import { SignIn, useUser } from "@clerk/nextjs";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@repo/ui/src/components/drawer";
 import { AnimatePresence, motion } from "framer-motion";
-import { toast } from "sonner";
 import { Story } from "./story/[storyId]/story";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import AgeRestriction from "../../../components/characters/age-restriction";
-import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { useNsfwPreference } from "../../lib/hooks/use-nsfw-preference";
 import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../lib/hooks/use-stable-query";
 import AddToHomeScreen from "../../../components/pwa/add-to-homescreen";
-import {
-  useMachineTranslation,
-  useTranslationStore,
-} from "../../lib/hooks/use-machine-translation";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import useCurrentUser from "../../lib/hooks/use-current-user";
 
@@ -103,15 +72,24 @@ export default function ChatWithCharacter({
 }: {
   params: { id: string; storyId?: string };
 }) {
-  const { user } = useUser();
   const currentUser = useCurrentUser();
   const { isAuthenticated, isLoading } = useConvexAuth();
-  const data = useStableQuery(api.characters.get, {
-    id: params.id as Id<"characters">,
-  });
-  const creatorName = useStableQuery(api.users.getUsername, {
-    id: data?.creatorId as Id<"users">,
-  });
+  const data = useStableQuery(
+    api.characters.get,
+    currentUser?.name
+      ? {
+          id: params.id as Id<"characters">,
+        }
+      : "skip",
+  );
+  const creatorName = useStableQuery(
+    api.users.getUsername,
+    currentUser?.name
+      ? {
+          id: data?.creatorId as Id<"users">,
+        }
+      : "skip",
+  );
   const searchParams = useSearchParams();
   const urlChatId = searchParams.get("chatId");
   const { chatId, isUnlocked } = useStoreChatEffect(
@@ -161,7 +139,9 @@ export default function ChatWithCharacter({
               >{`Sign in and start chat with ${data?.name}`}</motion.span>
             )}
           </AnimatePresence>
-          {!user && <SignIn />}
+          <Unauthenticated>
+            <SignIn />
+          </Unauthenticated>
         </div>
       )}
     </>
