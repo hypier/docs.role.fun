@@ -161,5 +161,8 @@
   "Help": "Ajutor",
   "Docs": "Documente",
   "Archive": "Arhivează",
-  "Send a message": "Trimite un mesaj"
+  "Send a message": "Trimite un mesaj",
+  "Loading purchase details...": "Se încarcă detaliile cumpărături...",
+  "Now you can proceed to purchase.": "Acum poți trece la achiziție.",
+  "Unexpected error occurred": "Eroare neașteptată"
 }
