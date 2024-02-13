@@ -37,7 +37,6 @@ import {
 import ModelBadge from "../../components/characters/model-badge";
 import { useState } from "react";
 import {
-  BookMarked,
   ChevronsUpDown,
   Heart,
   Lock,
@@ -68,18 +67,18 @@ const PlusPlan = () => {
           userId: currentUser._id,
         });
     toast.promise(promise, {
-      loading: "Loading purchase details...",
+      loading: t("Loading purchase details..."),
       success: subscription?.cancelsAt
-        ? () => "Your subscription is renewed."
+        ? () => t("Your subscription is renewed.")
         : (clientSecret) => {
             openDialog();
             setClientSecret(clientSecret as string);
-            return `Now you can proceed to purchase.`;
+            return t(`Now you can proceed to purchase.`);
           },
       error: (error) => {
         return error
           ? (error.data as { message: string }).message
-          : "Unexpected error occurred";
+          : t("Unexpected error occurred");
       },
     });
   }
@@ -270,6 +269,7 @@ const PackageWrapper = ({
 }) => {
   const buyCrystal = useAction(api.stripe.pay);
   const currentUser = useCurrentUser();
+  const { t } = useTranslation();
   const { setClientSecret, openDialog } = usePaymentDialog();
 
   async function handlePurchaseClick(event: any) {
@@ -279,16 +279,16 @@ const PackageWrapper = ({
       userId: currentUser._id,
     });
     toast.promise(promise, {
-      loading: "Loading purchase details...",
+      loading: t("Loading purchase details..."),
       success: (clientSecret) => {
         openDialog();
         setClientSecret(clientSecret);
-        return `Now you can proceed to purchase.`;
+        return t(`Now you can proceed to purchase.`);
       },
       error: (error) => {
         return error
           ? (error.data as { message: string }).message
-          : "Unexpected error occurred";
+          : t("Unexpected error occurred");
       },
     });
   }

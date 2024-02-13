@@ -162,5 +162,8 @@
   "Help": "Help",
   "Docs": "Docs",
   "Archive": "Archive",
-  "Send a message": "Send a message"
+  "Send a message": "Send a message",
+  "Loading purchase details...": "Loading purchase details...",
+  "Now you can proceed to purchase.": "Now you can proceed to purchase.",
+  "Unexpected error occurred": "Unexpected error occurred"
 }
