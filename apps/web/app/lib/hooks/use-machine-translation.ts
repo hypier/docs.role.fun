@@ -28,7 +28,7 @@ export const initializeTranslationStore = () => {
   const allTranslations = useQuery(
     api.translation.list,
     currentLanguage
-      ? Object.keys(translations).length === 0
+      ? Object.keys(translations).length === 0 && currentLanguage !== "en"
         ? {
             targetLanguage: currentLanguage,
           }
