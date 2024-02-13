@@ -161,5 +161,8 @@
   "Help": "Hjelp",
   "Docs": "Dokumenter",
   "Archive": "Arkiv",
-  "Send a message": "Send en melding"
+  "Send a message": "Send en melding",
+  "Loading purchase details...": "Laster kjøpsdetaljer...",
+  "Now you can proceed to purchase.": "Nå kan du fortsette med å kjøpe.",
+  "Unexpected error occurred": "En uventet feil oppstod"
 }
