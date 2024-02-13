@@ -565,6 +565,7 @@ const ChatOptionsPopover = ({
 export function Dialog({
   name,
   description,
+  creatorName,
   model,
   cardImageUrl,
   chatId,
@@ -572,6 +573,7 @@ export function Dialog({
 }: {
   name: string;
   description?: string;
+  creatorName?: string;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
@@ -761,9 +763,12 @@ export function Dialog({
           </div>
         )}
         {description && (
-          <div className="m-4 my-6 flex flex-col rounded-lg bg-background/25 p-4 ring-1 ring-foreground/10 backdrop-blur-md">
+          <div className="m-4 my-6 flex flex-col rounded-lg bg-background/50 p-4 ring-1 ring-foreground/10 backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
             <div>{mt(description, translations)}</div>
+            {creatorName && (
+              <div className="text-muted-foreground">by @{creatorName}</div>
+            )}
           </div>
         )}
         <div
@@ -794,7 +799,7 @@ export function Dialog({
           )}
         </div>
         {followUps && !followUps?.isStale && isLastMessageLoaded && (
-          <div className="mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
+          <div className="z-10 mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
             {followUps?.followUp1 &&
               followUps?.followUp1 !== "Tell me more" && (
                 <Button

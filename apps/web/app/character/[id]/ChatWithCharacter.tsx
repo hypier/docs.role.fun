@@ -50,6 +50,7 @@ import {
   useTranslationStore,
 } from "../../lib/hooks/use-machine-translation";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import useCurrentUser from "../../lib/hooks/use-current-user";
 
 export const Stories = ({
   characterId,
@@ -103,10 +104,8 @@ export default function ChatWithCharacter({
   params: { id: string; storyId?: string };
 }) {
   const { user } = useUser();
+  const currentUser = useCurrentUser();
   const { isAuthenticated, isLoading } = useConvexAuth();
-  const { isMobile } = useMediaQuery();
-  const { translations } = useTranslationStore();
-  const { mt } = useMachineTranslation();
   const data = useStableQuery(api.characters.get, {
     id: params.id as Id<"characters">,
   });
@@ -130,16 +129,24 @@ export default function ChatWithCharacter({
           cardImageUrl={data?.cardImageUrl}
         />
       ) : chatId ? (
-        <Authenticated>
-          <Dialog
-            name={data?.name as string}
-            description={data?.description as string}
-            model={data?.model as string}
-            chatId={chatId}
-            characterId={data?._id as any}
-            cardImageUrl={data?.cardImageUrl}
-          />
-        </Authenticated>
+        data?.visibility === "private" &&
+        currentUser?._id !== data?.creatorId ? (
+          <div className="text-error text-sm">
+            This character is private and you do not have permission to view it.
+          </div>
+        ) : (
+          <Authenticated>
+            <Dialog
+              name={data?.name as string}
+              description={data?.description as string}
+              creatorName={creatorName}
+              model={data?.model as string}
+              chatId={chatId}
+              characterId={data?._id as any}
+              cardImageUrl={data?.cardImageUrl}
+            />
+          </Authenticated>
+        )
       ) : isAuthenticated && !isLoading ? (
         <div className="flex h-full w-full items-center justify-center">
           <Spinner />
