@@ -844,19 +844,6 @@ export function Dialog({
                   </span>
                 </Button>
               )}
-            {!followUps?.followUp2 && (
-              <Button
-                onClick={() => {
-                  sendAndReset("Tell me more");
-                  setScrolled(false);
-                }}
-                variant="outline"
-                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
-              >
-                <StepForward className="h-4 w-4 text-amber-500" />
-                <span className="w-fit truncate">{t("Tell me more")}</span>
-              </Button>
-            )}
           </div>
         )}
       </div>
