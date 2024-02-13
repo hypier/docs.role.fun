@@ -161,5 +161,8 @@
   "Help": "Nápověda",
   "Docs": "Dokumenty",
   "Archive": "Archiv",
-  "Send a message": "Odeslat zprávu"
+  "Send a message": "Odeslat zprávu",
+  "Loading purchase details...": "Načítání detailů nákupu...",
+  "Now you can proceed to purchase.": "Nyní můžete pokračovat v nákupu.",
+  "Unexpected error occurred": "Došlo k neočekávané chybě"
 }
