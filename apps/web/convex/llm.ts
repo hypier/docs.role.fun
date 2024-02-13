@@ -30,7 +30,7 @@ const getInstruction = (
 
             and you are talking with ${character?.name} (${character?.description}).
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with engaging and short verbal message to ${character?.name}.
+            Respond with realistic, engaging and short verbal message to ${character?.name}.
             `;
   } else {
     return `You are 
