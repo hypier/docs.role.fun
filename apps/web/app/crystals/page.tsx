@@ -103,7 +103,7 @@ const PlusPlan = () => {
           className="absolute top-0 h-full w-full rounded-lg object-cover"
         />
         <div className="absolute bottom-0 h-[70%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
-        <div className="flex flex-col gap-1 pt-[50%] lg:pt-[30%]">
+        <div className="flex flex-col gap-1 pt-[50%] lg:pt-[30%] xl:pt-[100%]">
           <CardHeader className="flex items-center justify-center py-1">
             <CardTitle className="z-10 font-display text-xl text-white">
               ORP+
