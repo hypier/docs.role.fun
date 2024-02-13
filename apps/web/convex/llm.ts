@@ -76,7 +76,13 @@ const initializeModel = async (character: any, userId: string, ctx: any) => {
       "X-Title": "Openroleplay.ai",
     },
   });
-  return { openai, model, currentCrystals };
+  let updatedModel = model;
+  if (model === "gpt-4-1106-preview") {
+    updatedModel = "gpt-4-turbo-preview";
+  } else if (model === "gpt-3.5-turbo-1106") {
+    updatedModel = "gpt-3.5-turbo";
+  }
+  return { openai, model: updatedModel, currentCrystals };
 };
 
 export const answer = internalAction({

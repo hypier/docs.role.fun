@@ -79,14 +79,14 @@ export const modelData = [
     crystalPrice: 1,
   },
   {
-    value: "gpt-3.5-turbo-1106",
+    value: "gpt-3.5-turbo",
     description: "GPT-3.5 Turbo by OpenAI",
     src: "/models/openai.png",
     alt: "Company logo of Open AI",
     crystalPrice: 1,
   },
   {
-    value: "gpt-4-1106-preview",
+    value: "gpt-4-turbo-preview",
     description: "GPT-4 Turbo by OpenAI",
     src: "/models/openai.png",
     alt: "Company logo of Open AI",
