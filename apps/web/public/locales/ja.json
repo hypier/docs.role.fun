@@ -161,5 +161,8 @@
   "Help": "ヘルプ",
   "Docs": "ドキュメント",
   "Archive": "アーカイブ",
-  "Send a message": "メッセージを送信"
+  "Send a message": "メッセージを送信",
+  "Loading purchase details...": "購入情報を読み込み中...",
+  "Now you can proceed to purchase.": "今、あなたは購入に進むことができます。",
+  "Unexpected error occurred": "予期しないエラーが発生しました"
 }
