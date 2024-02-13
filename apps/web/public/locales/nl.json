@@ -161,5 +161,8 @@
   "Help": "Hulp",
   "Docs": "Documentatie",
   "Archive": "Archief",
-  "Send a message": "Stuur een bericht"
+  "Send a message": "Stuur een bericht",
+  "Loading purchase details...": "Aankoopgegevens worden geladen...",
+  "Now you can proceed to purchase.": "U kunt nu verdergaan met de aankoop.",
+  "Unexpected error occurred": "Onverwachte fout opgetreden"
 }
