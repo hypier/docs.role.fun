@@ -870,7 +870,7 @@ export function Dialog({
             autoFocus
             name="message"
             placeholder={
-              followUps?.followUp1 ? followUps?.followUp1 : "Send a message"
+              followUps?.followUp1 ? followUps?.followUp1 : t("Send a message")
             }
             value={input}
             onChange={(event) => setInput(event.target.value)}
