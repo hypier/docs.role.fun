@@ -1,6 +1,6 @@
 import { api } from "../../convex/_generated/api";
 import { useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@repo/ui/src/components";
 import { Id } from "../../convex/_generated/dataModel";
@@ -14,8 +14,6 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@repo/ui/src/components/carousel";
 import { useTranslation } from "react-i18next";
 import { FadeInOut } from "../../app/lib/utils";
@@ -36,12 +34,23 @@ export const Chat = ({
   chatId: Id<"chats">;
   characterId: Id<"characters">;
 }) => {
-  const character = useStableQuery(api.characters.get, {
-    id: characterId as Id<"characters">,
-  });
-  const message = useStableQuery(api.messages.mostRecentMessage, {
-    chatId,
-  });
+  const { isAuthenticated } = useConvexAuth();
+  const character = useStableQuery(
+    api.characters.get,
+    isAuthenticated
+      ? {
+          id: characterId as Id<"characters">,
+        }
+      : "skip",
+  );
+  const message = useStableQuery(
+    api.messages.mostRecentMessage,
+    isAuthenticated
+      ? {
+          chatId,
+        }
+      : "skip",
+  );
   return (
     <Link href={`/character/${characterId}?chatId=${chatId}`}>
       <div className="flex flex-col items-start justify-start overflow-hidden">
