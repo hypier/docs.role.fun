@@ -459,7 +459,7 @@ export const generateFollowups = internalAction({
                 ? model
                 : i === 2
                   ? "gryphe/mythomist-7b:free"
-                  : "gryphe/mythomax-l2-13b",
+                  : "togethercomputer/stripedhyena-nous-7b",
             stream: false,
             messages: [
               {
