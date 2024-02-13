@@ -24,7 +24,7 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
-import { useConvexAuth } from "convex/react";
+import { Authenticated, useConvexAuth } from "convex/react";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 
 export const Chat = ({
@@ -74,7 +74,6 @@ export const Chat = ({
 
 export function MainChats() {
   const { t } = useTranslation();
-  const { isAuthenticated } = useConvexAuth();
   const { results } = useStablePaginatedQuery(
     api.chats.list,
     {},
@@ -107,13 +106,13 @@ export function MainChats() {
                     className="group ml-4 basis-1/2 rounded-lg border bg-background p-4 lg:basis-1/3"
                     key={chat._id}
                   >
-                    {isAuthenticated && (
+                    <Authenticated>
                       <Chat
                         name={chat.chatName as string}
                         characterId={chat.characterId as Id<"characters">}
                         chatId={chat._id as Id<"chats">}
                       />
-                    )}
+                    </Authenticated>
                   </CarouselItem>
                 ))}
               </CarouselContent>
