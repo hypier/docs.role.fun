@@ -161,5 +161,8 @@
   "Help": "도움",
   "Docs": "문서",
   "Archive": "보관하기",
-  "Send a message": "메시지 보내기"
+  "Send a message": "메시지 보내기",
+  "Loading purchase details...": "Loading purchase details...",
+  "Now you can proceed to purchase.": "Now you can proceed to purchase.",
+  "Unexpected error occurred": "Unexpected error occurred"
 }
