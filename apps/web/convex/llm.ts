@@ -101,7 +101,7 @@ export const answer = internalAction({
       chatId,
       take: user?.subscriptionTier === "plus" ? 32 : 16,
     });
-    const character = await ctx.runQuery(api.characters.get, {
+    const character = await ctx.runQuery(internal.characters.getCharacter, {
       id: characterId,
     });
     const persona = personaId
