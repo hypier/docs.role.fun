@@ -69,6 +69,10 @@ import {
   useStableQuery,
 } from "./lib/hooks/use-stable-query";
 import { useVoiceOver } from "./lib/hooks/use-voice-over";
+import {
+  useMachineTranslation,
+  useTranslationStore,
+} from "./lib/hooks/use-machine-translation";
 
 export const FormattedMessage = ({
   message,
@@ -274,7 +278,7 @@ export const Message = ({
             )
           )}
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1">
+            <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1 backdrop-blur">
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
@@ -578,6 +582,8 @@ export function Dialog({
   const router = useRouter();
   const params = useSearchParams();
   const newChat = useMutation(api.chats.create);
+  const { translations } = useTranslationStore();
+  const { mt } = useMachineTranslation();
   const urlChatId = params.get("chatId") as Id<"chats">;
   chatId = urlChatId ? urlChatId : chatId;
   const { results, loadMore } = useStablePaginatedQuery(
@@ -755,9 +761,12 @@ export function Dialog({
             </div>
           </div>
         )}
-        <div className="m-4 my-6 rounded-lg bg-black/50 p-4 italic text-white backdrop-blur-md sm:hidden">
-          <strong>{name}</strong> {description}
-        </div>
+        {description && (
+          <div className="m-4 my-6 rounded-lg bg-black/50 p-4 italic text-white backdrop-blur-md sm:hidden">
+            <strong>{mt(name, translations)}</strong>{" "}
+            {mt(description, translations)}
+          </div>
+        )}
         <div
           className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
           ref={listRef}
