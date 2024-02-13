@@ -1,12 +1,13 @@
 "use node";
 import Replicate from "replicate";
-import { internalAction } from "./_generated/server";
+import { action, internalAction } from "./_generated/server";
 import { internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
 import { STABILITY_AI_API_URL, getAPIKey, getBaseURL } from "./constants";
 import { Buffer } from "buffer";
 import { OpenAI } from "openai";
 import { getUploadUrl } from "./r2";
+import { v } from "convex/values";
 
 export const generate = internalAction(
   async (
@@ -406,3 +407,25 @@ export const generateByPrompt = internalAction(
     }
   },
 );
+
+export const upload = action({
+  args: { file: v.bytes(), filename: v.string(), fileType: v.string() },
+  handler: async (_, { file, filename, fileType }) => {
+    console.log("Getting upload URL for", filename);
+    const uploadUrl = await getUploadUrl(filename);
+    console.log("Uploading image to obtained URL");
+    const response = await fetch(uploadUrl, {
+      method: "PUT",
+      body: Buffer.from(file),
+      headers: {
+        "Content-Type": fileType,
+      },
+    });
+    console.log("Image uploaded, extracting image URL");
+    const urlParts = response.url.split("/");
+    const uploadedFilename = urlParts[urlParts.length - 1];
+    const imageUrl = `https://r2.openroleplay.ai/${uploadedFilename}`;
+    console.log(`Image URL extracted: ${imageUrl}`);
+    return imageUrl;
+  },
+});
