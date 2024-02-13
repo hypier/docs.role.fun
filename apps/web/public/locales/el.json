@@ -161,5 +161,8 @@
   "Help": "Βοήθεια",
   "Docs": "Έγγραφα",
   "Archive": "Αρχειοθέτηση",
-  "Send a message": "Αποστολή μηνύματος"
+  "Send a message": "Αποστολή μηνύματος",
+  "Loading purchase details...": "Φόρτωση λεπτομερειών αγοράς...",
+  "Now you can proceed to purchase.": "Τώρα μπορείτε να προχωρήσετε στην αγορά.",
+  "Unexpected error occurred": "Παρουσιάστηκε μη αναμενόμενο σφάλμα"
 }
