@@ -800,54 +800,51 @@ export function Dialog({
         </div>
         {followUps && !followUps?.isStale && isLastMessageLoaded && (
           <div className="z-10 mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
-            {followUps?.followUp1 &&
-              followUps?.followUp1 !== "Tell me more" && (
-                <Button
-                  onClick={() => {
-                    sendAndReset(followUps?.followUp1 as string);
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps.followUp1}
-                  </span>
-                </Button>
-              )}
-            {followUps?.followUp2 &&
-              followUps?.followUp2 !== "Tell me more" && (
-                <Button
-                  onClick={() => {
-                    sendAndReset(followUps?.followUp2 as string);
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps.followUp2}
-                  </span>
-                </Button>
-              )}
-            {followUps?.followUp3 &&
-              followUps?.followUp3 !== "Tell me more" && (
-                <Button
-                  onClick={() => {
-                    sendAndReset(followUps?.followUp3 as string);
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps.followUp3}
-                  </span>
-                </Button>
-              )}
+            {followUps?.followUp1 && (
+              <Button
+                onClick={() => {
+                  sendAndReset(followUps?.followUp1 as string);
+                  setScrolled(false);
+                }}
+                variant="outline"
+                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
+              >
+                <Sparkles className="h-4 w-4 text-blue-500" />
+                <span className="w-fit lg:max-w-screen-sm">
+                  {followUps.followUp1}
+                </span>
+              </Button>
+            )}
+            {followUps?.followUp2 && (
+              <Button
+                onClick={() => {
+                  sendAndReset(followUps?.followUp2 as string);
+                  setScrolled(false);
+                }}
+                variant="outline"
+                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
+              >
+                <Sparkles className="h-4 w-4 text-blue-500" />
+                <span className="w-fit lg:max-w-screen-sm">
+                  {followUps.followUp2}
+                </span>
+              </Button>
+            )}
+            {followUps?.followUp3 && (
+              <Button
+                onClick={() => {
+                  sendAndReset(followUps?.followUp3 as string);
+                  setScrolled(false);
+                }}
+                variant="outline"
+                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
+              >
+                <Sparkles className="h-4 w-4 text-blue-500" />
+                <span className="w-fit lg:max-w-screen-sm">
+                  {followUps.followUp3}
+                </span>
+              </Button>
+            )}
           </div>
         )}
       </div>

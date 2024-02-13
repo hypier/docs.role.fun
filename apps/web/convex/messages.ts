@@ -182,15 +182,6 @@ export const regenerate = mutation({
       userId: user._id,
       messageId,
     });
-    const followUp = await ctx.db
-      .query("followUps")
-      .withIndex("byChatId", (q) => q.eq("chatId", chatId))
-      .order("desc")
-      .first();
-    followUp &&
-      (await ctx.db.patch(followUp._id, {
-        isStale: true,
-      }));
   },
 });
 
