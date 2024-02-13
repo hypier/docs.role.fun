@@ -210,7 +210,7 @@ export const Message = ({
                 <Tooltip
                   content={
                     <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 14 )
+                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 4 )
                     </span>
                   }
                   desktopOnly={true}
@@ -561,12 +561,14 @@ const ChatOptionsPopover = ({
 
 export function Dialog({
   name,
+  description,
   model,
   cardImageUrl,
   chatId,
   characterId,
 }: {
   name: string;
+  description?: string;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
@@ -753,6 +755,9 @@ export function Dialog({
             </div>
           </div>
         )}
+        <div className="m-4 my-6 rounded-lg bg-black/50 p-4 italic text-white backdrop-blur-md sm:hidden">
+          <strong>{name}</strong> {description}
+        </div>
         <div
           className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
           ref={listRef}
@@ -781,7 +786,7 @@ export function Dialog({
           )}
         </div>
         {followUps && !followUps?.isStale && isLastMessageLoaded && (
-          <div className="mb-[8rem] flex w-full flex-col justify-center gap-4 px-6 lg:mb-4">
+          <div className="mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
             {followUps?.followUp1 &&
               followUps?.followUp1 !== "Tell me more" && (
                 <Button
@@ -790,10 +795,10 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
                     {followUps.followUp1}
                   </span>
                 </Button>
@@ -806,10 +811,10 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
                     {followUps.followUp2}
                   </span>
                 </Button>
@@ -822,10 +827,10 @@ export function Dialog({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex w-fit gap-1 rounded-full p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
                 >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="w-fit max-w-80 truncate lg:max-w-screen-sm">
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
                     {followUps.followUp3}
                   </span>
                 </Button>
@@ -837,9 +842,9 @@ export function Dialog({
                   setScrolled(false);
                 }}
                 variant="outline"
-                className="flex w-fit gap-1 rounded-full p-2 text-left"
+                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
               >
-                <StepForward className="h-4 w-4" />
+                <StepForward className="h-4 w-4 text-amber-500" />
                 <span className="w-fit truncate">{t("Tell me more")}</span>
               </Button>
             )}
@@ -855,7 +860,9 @@ export function Dialog({
             className="h-10 w-full resize-none border-none bg-background !text-[16px] text-base scrollbar-hide focus-visible:ring-0"
             autoFocus
             name="message"
-            placeholder="Send a message"
+            placeholder={
+              followUps?.followUp1 ? followUps?.followUp1 : "Send a message"
+            }
             value={input}
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={(event) => {

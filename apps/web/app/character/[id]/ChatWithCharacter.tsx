@@ -133,6 +133,7 @@ export default function ChatWithCharacter({
         <Authenticated>
           <Dialog
             name={data?.name as string}
+            description={data?.description as string}
             model={data?.model as string}
             chatId={chatId}
             characterId={data?._id as any}

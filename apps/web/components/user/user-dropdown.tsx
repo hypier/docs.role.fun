@@ -130,12 +130,6 @@ export default function UserDropdown() {
               </div>
             )}
             <StyledLink
-              href="/github"
-              text={t("Star on GitHub")}
-              Icon={<Star className="h-4 w-4 text-muted-foreground" />}
-              onClick={() => setOpenPopover(false)}
-            />
-            <StyledLink
               href="/docs"
               text={t("Docs")}
               Icon={<Book className="h-4 w-4 text-muted-foreground" />}

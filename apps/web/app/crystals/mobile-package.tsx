@@ -23,8 +23,7 @@ export const MobilePackage = ({
   handlePurchaseClick,
 }: {
   src: string;
-  // amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
-  amount: 300 | 1800 | 6000 | 12500 | 22400 | 98000;
+  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
   bonus: number;
   price: number;
   handlePurchaseClick?: any;
@@ -79,8 +78,7 @@ export const MobilePackageWrapper = ({
   price,
 }: {
   src: string;
-  // amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
-  amount: 300 | 1800 | 6000 | 12500 | 22400 | 98000;
+  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
   bonus: number;
   price: number;
 }) => {

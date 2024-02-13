@@ -53,7 +53,7 @@ import { VoiceSelect } from "./voice-select";
 
 const formSchema = z.object({
   name: z.string().max(24),
-  description: z.string().max(64),
+  description: z.string().max(128),
   instructions: z.string().max(512),
   greetings: z.optional(z.string().max(1024)),
   model: z.string(),
@@ -500,7 +500,7 @@ export default function CharacterForm() {
                         ) : (
                           <>
                             {t("Generate")}
-                            <Crystal className="h-4 w-4" /> x 10
+                            <Crystal className="h-4 w-4" />
                           </>
                         )}
                       </Button>

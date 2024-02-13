@@ -109,7 +109,7 @@ export const checkin = mutation({
     )
       return;
     const currentCrystals = user?.crystals || 0;
-    const additionalCrystals = user.subscriptionTier === "plus" ? 150 : 15;
+    const additionalCrystals = user.subscriptionTier === "plus" ? 200 : 15;
     await ctx.db.patch(user._id, {
       crystals: currentCrystals + additionalCrystals,
     });

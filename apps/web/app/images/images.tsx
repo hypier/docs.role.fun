@@ -33,6 +33,13 @@ import { ChevronDown, Lock, Unlock } from "lucide-react";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { usePostHog } from "posthog-js/react";
 import { useImageStore } from "../lib/hooks/use-image-store";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@repo/ui/src/components/select";
 
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
@@ -109,39 +116,67 @@ const Images = () => {
       <FormMessage />
     </FormItem>
   ));
-  const ToggleField = React.memo(({ field }: { field: any }) => (
-    <div className="flex w-full justify-between gap-1">
-      {me?.name ? (
-        <Button className="h-7 w-full gap-1 text-xs" type="submit">
-          <>
-            {t("Generate")}
-            <Crystal className="h-4 w-4" /> x{" "}
-            {field.value ? (isPlus ? price : price * 2) : price}
-          </>
-        </Button>
-      ) : (
-        <Link href="/sign-in" className="w-full">
-          <Button className="h-7 w-full gap-1 text-xs">{t("Generate")}</Button>
-        </Link>
-      )}
-      <Toggle
-        className="h-7 gap-1 text-xs"
-        variant="outline"
-        pressed={field.value}
-        onPressedChange={field.onChange}
-      >
-        {field.value ? (
-          <>
-            <Lock className="h-4 w-4 p-0.5" /> {t("Private")}
-          </>
-        ) : (
-          <>
-            <Unlock className="h-4 w-4 p-0.5" /> {t("Public")}
-          </>
-        )}
-      </Toggle>
-    </div>
-  ));
+  const [selectedImages, setSelectedImages] = useState("1");
+  const ToggleField = React.memo(({ field }: { field: any }) => {
+    return (
+      <div className="flex w-full flex-col justify-between gap-1">
+        <div className="flex items-center gap-1">
+          <Toggle
+            className="h-8 gap-1 bg-background text-xs"
+            variant="outline"
+            pressed={field.value}
+            onPressedChange={field.onChange}
+          >
+            {field.value ? (
+              <>
+                <Lock className="h-4 w-4 p-0.5" /> {t("Private")}
+              </>
+            ) : (
+              <>
+                <Unlock className="h-4 w-4 p-0.5" /> {t("Public")}
+              </>
+            )}
+          </Toggle>
+          {me?.name ? (
+            <Button
+              className="w-full gap-1 text-xs"
+              type="submit"
+              onClick={() => {
+                for (let i = 0; i < Number(selectedImages); i++) {
+                  onSubmitHandler(form.getValues());
+                }
+              }}
+            >
+              {t("Generate")}
+              <Crystal className="h-4 w-4" /> x{" "}
+              {field.value
+                ? isPlus
+                  ? price * Number(selectedImages)
+                  : price * 2 * Number(selectedImages)
+                : price * Number(selectedImages)}
+            </Button>
+          ) : (
+            <Link href="/sign-in" className="w-full">
+              <Button className="w-full gap-1 text-xs">{t("Generate")}</Button>
+            </Link>
+          )}
+          <Select
+            value={selectedImages.toString()}
+            onValueChange={(value: string) => setSelectedImages(value)}
+          >
+            <SelectTrigger className="h-8 max-w-fit bg-background text-xs font-normal">
+              <SelectValue placeholder={t("Select number of images")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value={"1"}>1 Image</SelectItem>
+              <SelectItem value={"4"}>4 Images</SelectItem>
+              <SelectItem value={"8"}>8 Images</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+    );
+  });
 
   const [isOpen, setIsOpen] = useState(true);
 

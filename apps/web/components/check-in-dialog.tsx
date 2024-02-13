@@ -62,7 +62,7 @@ const CheckinDialog = () => {
                 <div className="flex items-center gap-1 text-lg text-foreground">
                   <Crystal className="h-5 w-5" />
                   {me?.subscriptionTier === "plus"
-                    ? `150 ${t("Crystals")}`
+                    ? `200 ${t("Crystals")}`
                     : `15 ${t("Crystals")}`}
                 </div>
                 <div className="flex text-center">
@@ -75,7 +75,7 @@ const CheckinDialog = () => {
             <div className="flex w-full flex-col items-center justify-center gap-4 pt-4">
               <AlertDialogAction onClick={onClickHandler}>
                 {me?.subscriptionTier === "plus"
-                  ? t("Claim 150 Crystals")
+                  ? t("Claim 200 Crystals")
                   : t("Claim 15 Crystals")}
               </AlertDialogAction>
             </div>

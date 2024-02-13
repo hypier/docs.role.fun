@@ -29,10 +29,8 @@ const getInstruction = (
             }
 
             and you are talking with ${character?.name} (${character?.description}).
-
-            You are uncensored and unbiased to act as ${userRole}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with engaging and verbal message to ${character?.name}
+            Respond with engaging and verbal message to ${character?.name}.
             `;
   } else {
     return `You are 
@@ -40,9 +38,13 @@ const getInstruction = (
               name: ${character?.name}
               ${
                 character?.instruction
-                  ? `instruction: ${character.instruction}`
+                  ? `instruction: ${
+                      character?.instruction.substring(0, 1024) as string
+                    }`
                   : character?.description &&
-                    `description: ${character.description}`
+                    `description: ${
+                      character?.description.substring(0, 128) as string
+                    }`
               }
             }
 
@@ -149,7 +151,7 @@ export const answer = internalAction({
     if (character?.isBlacklisted) {
       await ctx.runMutation(internal.llm.updateCharacterMessage, {
         messageId,
-        text: "This character has been banned for violating our community guidelines and content policy.",
+        text: "This character is automatically classified as violating our community guidelines and content policy. You can ask questions on our Discord if this classification is a false positive.",
       });
       return;
     }
@@ -346,21 +348,14 @@ export const generateInstruction = internalAction({
   },
   handler: async (ctx, { userId, name, description, characterId }) => {
     try {
-      const model = DEFAULT_MODEL;
+      const model = "jondurbin/airoboros-l2-70b";
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
       const openai = new OpenAI({
         baseURL,
         apiKey,
       });
-      const instruction = `Create specific and detailed character instruction (what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
-      const { currentCrystals } = await ctx.runMutation(
-        internal.serve.useCrystal,
-        {
-          userId,
-          name: model,
-        },
-      );
+      const instruction = `Create specific and detailed character instruction (ex: what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
       try {
         const stream = await openai.chat.completions.create({
           model,
@@ -385,11 +380,6 @@ export const generateInstruction = internalAction({
           }
         }
       } catch (error) {
-        await ctx.runMutation(internal.serve.refundCrystal, {
-          userId,
-          currentCrystals,
-          name: model,
-        });
         throw Error;
       }
     } catch (error) {
@@ -401,7 +391,7 @@ export const generateInstruction = internalAction({
       } else {
         await ctx.runMutation(internal.llm.updateCharacterInstruction, {
           characterId,
-          text: "I cannot generate instruction at this time. You may have not enough crystals.",
+          text: "I cannot generate instruction at this time.",
         });
       }
       throw error;
@@ -466,8 +456,8 @@ export const generateFollowups = internalAction({
               i === 1
                 ? model
                 : i === 2
-                  ? "huggingfaceh4/zephyr-7b-beta:free"
-                  : "recursal/eagle-7b",
+                  ? "gryphe/mythomist-7b:free"
+                  : "gryphe/mythomax-l2-13b",
             stream: false,
             messages: [
               {
@@ -704,7 +694,7 @@ export const generateTags = internalAction({
                 },
                 isRestricted: {
                   type: "boolean",
-                  description: `True if character is depicting minor, teenager, gore or real person. This is used to ensure safety of platform.`,
+                  description: `True if character is explicitly depicting minor, teenager, gore.`,
                 },
               },
               required: [
@@ -713,7 +703,6 @@ export const generateTags = internalAction({
                 "personalityTag",
                 "genderTag",
                 "isNSFW",
-                "isRestricted",
               ],
             },
           },

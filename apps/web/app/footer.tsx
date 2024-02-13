@@ -34,10 +34,7 @@ export default function Footer() {
             <FooterLink href="/">
               © {new Date().getFullYear()} Empty Canvas, Inc.
             </FooterLink>
-            <FooterLink href="/github">
-              <Github className="inline h-4 w-4 p-[2px]" />
-              GitHub
-            </FooterLink>
+            <FooterLink href="/github">GitHub</FooterLink>
             <FooterLink href="/docs">Docs</FooterLink>
             <FooterLink href="/privacy.html">Privacy</FooterLink>
             <FooterLink href="/terms.html">Terms</FooterLink>

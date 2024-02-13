@@ -159,6 +159,12 @@ export const modelData = [
     isNSFW: true,
   },
   {
+    value: "jondurbin/airoboros-l2-70b",
+    description: "Airobos L2 70B by Jon Durbin",
+    crystalPrice: 1,
+    isNSFW: true,
+  },
+  {
     value: "undi95/toppy-m-7b",
     description: "Uncensored, Toppy M 7B by undi95",
     isNSFW: true,
@@ -297,11 +303,6 @@ export const modelData = [
     crystalPrice: 1,
   },
   {
-    value: "jondurbin/airoboros-l2-70b",
-    description: "Airobos L2 70B by Jon Durbin",
-    crystalPrice: 1,
-  },
-  {
     value: "teknium/openhermes-2-mistral-7b",
     description: "Openhermes 2 7B by Teknium",
     crystalPrice: 1,
@@ -329,7 +330,7 @@ export const imageModelData = [
     description:
       "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
     license: "Fair AI Public License 1.0-SD",
-    crystalPrice: 7,
+    crystalPrice: 4,
   },
   {
     value: "charlesmccarthy/animagine-xl",
@@ -440,21 +441,11 @@ export const TranslationModelData = [
   },
 ];
 
-// export const crystalDollarPrice = {
-//   300: "99",
-//   1650: "499",
-//   5450: "1499",
-//   11200: "2999",
-//   19400: "4999",
-//   90000: "9999",
-// };
-
-// Special Event
 export const crystalDollarPrice = {
   300: "99",
-  1800: "499",
-  6000: "1499",
-  12500: "2999",
-  22400: "4999",
-  98000: "9999",
+  1650: "499",
+  5450: "1499",
+  11200: "2999",
+  19400: "4999",
+  90000: "9999",
 };
