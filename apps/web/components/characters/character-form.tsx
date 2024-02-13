@@ -22,7 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@repo/ui/src/components/form";
-import { useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -93,6 +93,7 @@ export default function CharacterForm() {
     visibility: _visibility = searchParams.get("visibility") || "public",
   } = character || remixCharacter || {};
 
+  const upload = useAction(api.image.upload);
   const upsert = useMutation(api.characters.upsert);
   const publish = useMutation(api.characters.publish);
   const generateInstruction = useMutation(api.characters.generateInstruction);
@@ -183,26 +184,20 @@ export default function CharacterForm() {
       toast.error("File size should be less than 5MB");
       return;
     }
-    const promise = generateUploadUrl()
-      .then((postUrl) =>
-        fetch(postUrl, {
-          method: "POST",
-          headers: { "Content-Type": uploadedImage!.type },
-          body: uploadedImage,
-        }),
-      )
-      .then((result) => result.json())
-      .then(({ storageId }) =>
-        upsert({
-          ...(characterId
-            ? { id: characterId }
-            : newCharacterId
-              ? { id: newCharacterId as Id<"characters"> }
-              : {}),
-          cardImageStorageId: storageId,
-        }),
-      );
-
+    const imageBytes = await uploadedImage.arrayBuffer();
+    const characterCardImageUrl = await upload({
+      file: imageBytes,
+      filename: uploadedImage?.name,
+      fileType: uploadedImage?.type,
+    });
+    const promise = upsert({
+      ...(characterId
+        ? { id: characterId }
+        : newCharacterId
+          ? { id: newCharacterId as Id<"characters"> }
+          : {}),
+      cardImageUrl: characterCardImageUrl,
+    });
     toast.promise(promise, {
       loading: "Uploading character card...",
       success: (character) => {
