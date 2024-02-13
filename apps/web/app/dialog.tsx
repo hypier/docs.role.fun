@@ -278,7 +278,7 @@ export const Message = ({
             )
           )}
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1 backdrop-blur">
+            <div className="flex w-fit items-center justify-start rounded-full bg-background/25 p-1 backdrop-blur">
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2 text-xs text-muted-foreground">
@@ -673,7 +673,7 @@ export function Dialog({
   const lastMessage = messages?.[messages.length - 1]?.text || "";
   const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full sm:overflow-hidden sm:rounded-lg sm:border sm:bg-background">
       {cardImageUrl && (
         <Image
           src={cardImageUrl}
@@ -762,7 +762,7 @@ export function Dialog({
           </div>
         )}
         {description && (
-          <div className="m-4 my-6 rounded-lg bg-black/50 p-4 italic text-white backdrop-blur-md sm:hidden">
+          <div className="m-4 my-6 rounded-lg bg-background/25 p-4 italic backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
             {mt(description, translations)}
           </div>
