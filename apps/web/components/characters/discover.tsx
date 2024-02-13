@@ -99,7 +99,9 @@ const Discover = () => {
         <CheckinDialog />
       </Authenticated>
       <Authenticated>
-        <MainChats />
+        <ErrorBoundary errorComponent={() => ""}>
+          <MainChats />
+        </ErrorBoundary>
       </Authenticated>
       <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
       <Unauthenticated>
