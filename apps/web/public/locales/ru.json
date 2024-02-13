@@ -161,5 +161,8 @@
   "Help": "Справка",
   "Docs": "Документ",
   "Archive": "Архивировать",
-  "Send a message": "Отправить сообщение"
+  "Send a message": "Отправить сообщение",
+  "Loading purchase details...": "Загрузка деталей покупки...",
+  "Now you can proceed to purchase.": "Теперь вы можете перейти к покупке.",
+  "Unexpected error occurred": "Произошла непредвиденная ошибка"
 }
