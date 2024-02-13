@@ -357,9 +357,9 @@ export const generateInstruction = internalAction({
       });
       const instruction = `Create specific and detailed character instruction (ex: what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
       try {
-        const stream = await openai.chat.completions.create({
+        const response = await openai.chat.completions.create({
           model,
-          stream: true,
+          stream: false,
           messages: [
             {
               role: "system",
@@ -368,16 +368,12 @@ export const generateInstruction = internalAction({
           ],
         });
 
-        let text = "";
-        for await (const { choices } of stream) {
-          const replyDelta = choices[0] && choices[0].delta.content;
-          if (typeof replyDelta === "string" && replyDelta.length > 0) {
-            text += replyDelta;
-            await ctx.runMutation(internal.llm.updateCharacterInstruction, {
-              characterId,
-              text,
-            });
-          }
+        const text = response.choices[0]?.message?.content || "";
+        if (text.length > 0) {
+          await ctx.runMutation(internal.llm.updateCharacterInstruction, {
+            characterId,
+            text,
+          });
         }
       } catch (error) {
         throw Error;
