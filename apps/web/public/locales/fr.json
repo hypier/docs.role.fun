@@ -161,5 +161,8 @@
   "Help": "Aide",
   "Docs": "Documents",
   "Archive": "Archive",
-  "Send a message": "Envoyer un message"
+  "Send a message": "Envoyer un message",
+  "Loading purchase details...": "Chargement des détails d'achat...",
+  "Now you can proceed to purchase.": "Vous pouvez maintenant procéder à l'achat.",
+  "Unexpected error occurred": "Une erreur inattendue s'est produite"
 }
