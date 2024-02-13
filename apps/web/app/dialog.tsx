@@ -573,7 +573,7 @@ export function Dialog({
 }: {
   name: string;
   description?: string;
-  creatorName?: string;
+  creatorName?: string | null | undefined;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;

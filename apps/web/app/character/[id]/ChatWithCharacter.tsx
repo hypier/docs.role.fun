@@ -154,7 +154,7 @@ export default function ChatWithCharacter({
       ) : (
         <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-8 lg:min-h-fit">
           <AnimatePresence>
-            {data?.name && (
+            {data?.name && data?.visibility === "public" && (
               <motion.span
                 {...FadeInOut}
                 className="mt-16 font-medium lg:mt-0"
