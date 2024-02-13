@@ -161,5 +161,8 @@
   "Help": "Довідка",
   "Docs": "Документація",
   "Archive": "Архів",
-  "Send a message": "Надіслати повідомлення"
+  "Send a message": "Надіслати повідомлення",
+  "Loading purchase details...": "Завантаження деталей про покупку...",
+  "Now you can proceed to purchase.": "Тепер ви можете продовжити покупку.",
+  "Unexpected error occurred": "Сталася неочікувана помилка"
 }
