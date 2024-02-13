@@ -20,7 +20,6 @@ import {
   Send,
   Share,
   Sparkles,
-  StepForward,
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
@@ -673,7 +672,7 @@ export function Dialog({
   const lastMessage = messages?.[messages.length - 1]?.text || "";
   const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
   return (
-    <div className="h-full w-full sm:overflow-hidden lg:rounded-lg lg:border lg:bg-background">
+    <div className="h-full w-full sm:overflow-hidden lg:relative lg:rounded-lg lg:border lg:bg-background">
       {cardImageUrl && (
         <Image
           src={cardImageUrl}
@@ -681,7 +680,7 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50"
+          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 lg:absolute lg:z-0"
         />
       )}
       {chatId && (
