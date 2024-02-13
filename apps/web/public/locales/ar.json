@@ -161,5 +161,8 @@
   "Help": "مساعدة",
   "Docs": "الوثائق",
   "Archive": "أرشيف",
-  "Send a message": "إرسال رسالة"
+  "Send a message": "إرسال رسالة",
+  "Loading purchase details...": "تحميل تفاصيل الشراء...",
+  "Now you can proceed to purchase.": "الآن يمكنك المضي قدما في الشراء.",
+  "Unexpected error occurred": "حدث خطأ غير متوقع"
 }
