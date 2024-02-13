@@ -188,7 +188,7 @@ export const Message = ({
           message?.characterId ? "justify-start" : "justify-end"
         }`}
       >
-        <Avatar className="h-8 w-8">
+        <Avatar className="h-6 w-6">
           <AvatarImage
             alt={`Character card of ${name}`}
             src={message?.characterId ? cardImageUrl : "undefined"}
@@ -673,7 +673,7 @@ export function Dialog({
   const lastMessage = messages?.[messages.length - 1]?.text || "";
   const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
   return (
-    <div className="h-full w-full sm:overflow-hidden sm:rounded-lg sm:border sm:bg-background">
+    <div className="h-full w-full sm:overflow-hidden lg:rounded-lg lg:border lg:bg-background">
       {cardImageUrl && (
         <Image
           src={cardImageUrl}
@@ -681,7 +681,7 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
+          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50"
         />
       )}
       {chatId && (
@@ -762,9 +762,9 @@ export function Dialog({
           </div>
         )}
         {description && (
-          <div className="m-4 my-6 rounded-lg bg-background/25 p-4 italic backdrop-blur-md">
+          <div className="m-4 my-6 flex flex-col rounded-lg bg-background/25 p-4 ring-1 ring-foreground/10 backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
-            {mt(description, translations)}
+            <div>{mt(description, translations)}</div>
           </div>
         )}
         <div
