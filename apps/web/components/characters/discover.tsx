@@ -7,7 +7,7 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
-import { useConvexAuth } from "convex/react";
+import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button } from "@repo/ui/src/components";
@@ -95,13 +95,19 @@ const Discover = () => {
 
   return (
     <div className="relative flex flex-col gap-4 lg:gap-8">
-      {isAuthenticated && <CheckinDialog />}
-      {isAuthenticated && <MainChats />}
-      {!isAuthenticated && !username && <PreferenceDialog />}
-      <SignInDialog
-        isOpen={isSignInModalOpen}
-        setIsOpen={setIsSignInModalOpen}
-      />
+      <Authenticated>
+        <CheckinDialog />
+      </Authenticated>
+      <Authenticated>
+        <MainChats />
+      </Authenticated>
+      <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
+      <Unauthenticated>
+        <SignInDialog
+          isOpen={isSignInModalOpen}
+          setIsOpen={setIsSignInModalOpen}
+        />
+      </Unauthenticated>
 
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         <Link href="/characters" className="flex items-center gap-1">
