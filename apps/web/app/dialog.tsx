@@ -199,9 +199,11 @@ export const Message = ({
         {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
       {message?.text === "" ? (
-        <div className="animate-pulse whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[36rem] lg:max-w-[48rem]">
-          {thinkingMessage}
-          {thinkingDots}
+        <div className="whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[36rem] lg:max-w-[48rem]">
+          <span className="animate-pulse">
+            {thinkingMessage}
+            {thinkingDots}
+          </span>
         </div>
       ) : (
         <>
@@ -759,7 +761,7 @@ export function Dialog({
                   },
                 });
               }}
-              className="flex h-8"
+              className="flex aspect-square h-8 lg:aspect-auto"
               variant="outline"
             >
               <Plus className="h-4 w-4 p-0.5" />
@@ -815,8 +817,8 @@ export function Dialog({
           <div ref={ref} />
           {remoteMessages === undefined ? (
             <>
-              <div className="h-5 animate-pulse rounded-md bg-black/10" />
-              <div className="h-9 animate-pulse rounded-md bg-black/10" />
+              <div className="h-5 rounded-md bg-black/10" />
+              <div className="h-9 rounded-md bg-black/10" />
             </>
           ) : (
             messages.map((message, i) => (
@@ -849,7 +851,7 @@ export function Dialog({
       >
         <div className="flex h-full w-full items-center justify-center gap-4 px-4">
           <input
-            className="h-10 w-full resize-none border-none bg-background !text-[16px] text-base scrollbar-hide focus-visible:ring-0"
+            className="h-10 w-full resize-none border-none bg-background text-lg scrollbar-hide focus-visible:ring-0"
             autoFocus
             name="message"
             placeholder={t("Send a message")}
@@ -865,7 +867,7 @@ export function Dialog({
             }}
           />
           <Button disabled={input === ""} size="icon">
-            <Send className="h-4 w-4" />
+            <Send className="h-5 w-5" />
           </Button>
         </div>
       </form>
