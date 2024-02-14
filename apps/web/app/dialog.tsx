@@ -690,7 +690,7 @@ export function Dialog({
             width={300}
             height={525}
             quality={60}
-            className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 lg:inset-0 lg:top-20 lg:mx-auto lg:w-auto"
+            className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 lg:inset-0 lg:top-20 lg:mx-auto lg:w-auto lg:opacity-75"
           />
           <Image
             src={cardImageUrl}
