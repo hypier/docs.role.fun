@@ -113,6 +113,7 @@ export const persona = query({
   args: {},
   handler: async (ctx, args) => {
     const user = await getUser(ctx);
+    if (!user.personaId) return user;
     const persona = await ctx.db.get(user?.primaryPersonaId);
     if (!persona) return user;
     return persona;
