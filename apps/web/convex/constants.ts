@@ -1,4 +1,4 @@
-export const SIGN_UP_FREE_CRYSTALS = 25;
+export const SIGN_UP_FREE_CRYSTALS = 35;
 export const DIVIDEND_RATE = 0.25;
 export const DEFAULT_MODEL = "openrouter/auto";
 export const PERPLEXITY_API_URL = "https://api.perplexity.ai";
@@ -165,7 +165,7 @@ export const modelData = [
   {
     value: "jondurbin/airoboros-l2-70b",
     description: "Airobos L2 70B by Jon Durbin",
-    crystalPrice: 1,
+    crystalPrice: 2,
     isNSFW: true,
   },
   {
@@ -190,7 +190,7 @@ export const modelData = [
     value: "lizpreciatior/lzlv-70b-fp16-hf",
     description: "Uncensored, lzlv 70B by lizpreciatior",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "neversleep/noromaid-20b",
@@ -202,7 +202,7 @@ export const modelData = [
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
