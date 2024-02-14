@@ -109,6 +109,16 @@ export const me = query({
   },
 });
 
+export const persona = query({
+  args: {},
+  handler: async (ctx, args) => {
+    const user = await getUser(ctx);
+    const persona = await ctx.db.get(user?.primaryPersonaId);
+    if (!persona) return user;
+    return persona;
+  },
+});
+
 export const setLanguage = mutation({
   args: {
     languageTag: v.string(),

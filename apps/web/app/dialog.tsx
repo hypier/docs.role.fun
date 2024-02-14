@@ -72,6 +72,7 @@ import {
   useMachineTranslation,
   useTranslationStore,
 } from "./lib/hooks/use-machine-translation";
+import usePersona from "./lib/hooks/use-persona";
 
 export const FormattedMessage = ({
   message,
@@ -188,7 +189,7 @@ export const Message = ({
         <Avatar className="h-6 w-6">
           <AvatarImage
             alt={`Character card of ${name}`}
-            src={message?.characterId ? cardImageUrl : "undefined"}
+            src={cardImageUrl ? cardImageUrl : "undefined"}
             className="object-cover"
           />
           <AvatarFallback>
@@ -609,7 +610,8 @@ export function Dialog({
       ),
     [remoteMessages, ""],
   );
-  const username = useMyUsername();
+  const persona = usePersona();
+  const username = persona?.name;
   const sendMessage = useMutation(api.messages.send);
   const posthog = usePostHog();
 
@@ -808,7 +810,11 @@ export function Dialog({
                 key={message._id}
                 name={name}
                 message={message}
-                cardImageUrl={cardImageUrl as string}
+                cardImageUrl={
+                  message?.characterId
+                    ? (cardImageUrl as string)
+                    : (persona?.cardImageUrl as string)
+                }
                 username={(username as string) || "You"}
                 chatId={chatId}
               />
