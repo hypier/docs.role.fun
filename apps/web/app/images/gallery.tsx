@@ -79,7 +79,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
   const images = allImages.filter((image) => image.imageUrl);
   useEffect(() => {
     if (inView) {
-      if (!me?.name && results?.length > 21) {
+      if (!me?.name && results?.length > 31) {
         setIsSignInModalOpen(true);
       } else {
         loadMore(10);
