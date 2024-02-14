@@ -89,13 +89,13 @@ export function MainChats() {
     { initialNumItems: 3 },
   );
   const [_api, setApi] = useState<CarouselApi>();
-  const { isMobile } = useMediaQuery();
-  if (isMobile) return;
+  const { isDesktop } = useMediaQuery();
+  if (!isDesktop) return;
   return (
     <AnimatePresence>
       {results?.length > 0 && (
         <motion.div {...FadeInOut} className="flex flex-col gap-4">
-          <div className="flex items-center gap-1 border-y px-4 py-4 font-medium lg:mt-2 lg:border-none lg:px-0 lg:py-0">
+          <div className="flex items-center gap-1 px-4 py-4 font-medium lg:mt-2 lg:px-0 lg:py-0">
             <Link href="/chats" className="flex items-center gap-1">
               {t("Continue chat")}
               <Button variant="ghost" size="icon">
@@ -104,7 +104,7 @@ export function MainChats() {
             </Link>
           </div>
 
-          <div className="relative flex place-content-center border-y py-4 lg:justify-start lg:border-none lg:py-0">
+          <div className="relative flex place-content-center lg:justify-start lg:py-0">
             <Carousel
               className="w-[75%] md:w-[80%] lg:w-[calc(80%+8rem)]"
               setApi={setApi}
