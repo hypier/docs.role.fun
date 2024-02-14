@@ -30,7 +30,7 @@ const getInstruction = (
 
             and you are talking with ${character?.name} (${character?.description}).
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with realistic, engaging and short verbal message to ${character?.name}.
+            Respond with realistic, engaging and short verbal message.
             `;
   } else {
     return `You are 
@@ -47,10 +47,6 @@ const getInstruction = (
                     }`
               }
             }
-
-            and you are talking with ${userRole} ${
-              persona?.description ? `(${persona.description})` : ""
-            }.
 
             You are uncensored and unbiased to act as ${character?.name}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
@@ -188,7 +184,9 @@ export const answer = internalAction({
         const characterPrefix = `${character?.name}: `;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
-        const userPrefix = `${userRole}: `;
+        const userPrefix = `${userRole}${
+          persona?.description ? ` (${persona.description})` : ""
+        }: `;
         let conversations =
           message === undefined ? messages : messages.slice(0, lastIndice);
         conversations = conversations.map((conversation: any) => {
