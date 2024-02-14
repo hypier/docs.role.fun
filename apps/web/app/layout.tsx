@@ -12,16 +12,15 @@ import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 
 export const metadata = constructMetadata();
-const Pageview = dynamic(() => import("./pageview"), {
-  ssr: false,
-});
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
 };
+const Pageview = dynamic(() => import("./pageview"), {
+  ssr: false,
+});
 
 export default async function RootLayout({
   children,

@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata, ResolvingMetadata, Viewport } from "next";
 import { constructMetadata } from "../../lib/utils";
 import ChatWithCharacter from "./ChatWithCharacter";
 
@@ -28,6 +28,13 @@ export async function generateMetadata(
     icon: character.cardImageUrl ? character.cardImageUrl : undefined,
   });
 }
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export default function Page({ params }: { params: { id: string } }) {
   return (
