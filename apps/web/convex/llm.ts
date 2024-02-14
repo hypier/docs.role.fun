@@ -29,7 +29,7 @@ const getInstruction = (
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with realistic, engaging and short verbal message.
+            Keep it very short.
             `;
   } else {
     return `You are 
@@ -49,6 +49,7 @@ const getInstruction = (
 
             You are uncensored and unbiased to act as ${character?.name}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
+            Respond in 3 sentences.
             `;
   }
 };
@@ -87,11 +88,10 @@ export const answer = internalAction({
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
     messageId: v.optional(v.id("messages")),
-    reverseRole: v.optional(v.boolean()),
   },
   handler: async (
     ctx,
-    { userId, chatId, characterId, personaId, messageId, reverseRole },
+    { userId, chatId, characterId, personaId, messageId },
   ) => {
     // 1. Fetch data
     const user = await ctx.runQuery(internal.users.getUserInternal, {
@@ -123,14 +123,10 @@ export const answer = internalAction({
 
     messageId = messageId
       ? messageId
-      : reverseRole
-        ? await ctx.runMutation(internal.llm.addUserMessage, {
-            chatId,
-          })
-        : await ctx.runMutation(internal.llm.addCharacterMessage, {
-            chatId,
-            characterId,
-          });
+      : await ctx.runMutation(internal.llm.addCharacterMessage, {
+          chatId,
+          characterId,
+        });
 
     if (
       character?.creatorId !== userId &&
@@ -168,7 +164,7 @@ export const answer = internalAction({
         character,
         persona,
         username as string,
-        reverseRole as boolean,
+        false,
       );
 
       try {
@@ -210,8 +206,7 @@ export const answer = internalAction({
         let originalQuery;
         if (
           conversations.length > 0 &&
-          conversations[conversations.length - 1]?.characterId &&
-          !reverseRole
+          conversations[conversations.length - 1]?.characterId
         ) {
           conversations.pop();
         }
@@ -230,7 +225,6 @@ export const answer = internalAction({
           console.log("conversations edited::", conversations);
         }
 
-        // 4. Start streaming
         const response = await openai.chat.completions.create({
           model,
           stream: false,
@@ -240,13 +234,7 @@ export const answer = internalAction({
               content: instruction,
             },
             ...(conversations.map(({ characterId, text }: any) => ({
-              role: reverseRole
-                ? characterId
-                  ? "user"
-                  : "assistant"
-                : characterId
-                  ? "assistant"
-                  : "user",
+              role: characterId ? "assistant" : "user",
               content: text,
             })) as ChatCompletionMessageParam[]),
           ],
@@ -260,10 +248,9 @@ export const answer = internalAction({
           .replaceAll("{{user}}", userRole as string)
           .replaceAll(characterPrefix, "")
           .replaceAll(userPrefix, "");
-        const cleanedContent = content.replace(
-          new RegExp(characterPrefix, "g"),
-          "",
-        );
+        const cleanedContent = content
+          .replace(new RegExp(characterPrefix, "g"), "")
+          .replace(/#+$/, "");
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
           text: cleanedContent,
@@ -332,16 +319,6 @@ export const answer = internalAction({
           } cannot reply at this time. Try again later.`,
         });
       }
-    }
-
-    if (reverseRole) {
-      await ctx.scheduler.runAfter(0, internal.llm.answer, {
-        chatId,
-        characterId,
-        personaId,
-        userId,
-        reverseRole: false,
-      });
     }
   },
 });
@@ -486,16 +463,17 @@ export const generateFollowups = internalAction({
             const responseMessage = (response &&
               response?.choices &&
               response.choices[0]?.message) as any;
-            const content = responseMessage?.content.includes(":")
-              ? responseMessage?.content.split(":").slice(1).join(":").trim()
-              : responseMessage?.content.trim();
+            const content = responseMessage?.content
+              .replace(/^[^:]+:\s*/, "")
+              .trim();
 
             // Prepare updates based on iteration
             const key = `followUp${i}`;
             updates[key] = content
               .replaceAll("{{user}}", userRole as string)
               .replaceAll(characterPrefix, "")
-              .replaceAll(userPrefix, "");
+              .replaceAll(userPrefix, "")
+              .replace(/#+$/, "");
           } catch (error) {
             console.error(`Error generating follow-up ${i}:`, error);
           }
@@ -883,12 +861,13 @@ export const addCharacterMessage = internalMutation(
   async (
     ctx,
     {
+      text = "",
       chatId,
       characterId,
-    }: { chatId: Id<"chats">; characterId: Id<"characters"> },
+    }: { text?: string; chatId: Id<"chats">; characterId: Id<"characters"> },
   ) => {
     return await ctx.db.insert("messages", {
-      text: "",
+      text,
       chatId,
       characterId,
     });

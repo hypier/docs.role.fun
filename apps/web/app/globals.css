@@ -88,10 +88,6 @@
     user-select: none;
   }
 
-  em {
-    @apply select-text text-muted-foreground;
-  }
-
   p,
   h1,
   h2,

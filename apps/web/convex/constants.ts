@@ -164,7 +164,7 @@ export const modelData = [
   },
   {
     value: "jondurbin/airoboros-l2-70b",
-    description: "Airobos L2 70B by Jon Durbin",
+    description: "Uncensored, Airobos L2 70B by Jon Durbin",
     crystalPrice: 2,
     isNSFW: true,
   },

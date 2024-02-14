@@ -5,7 +5,6 @@ import { useMutation } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import { Switch } from "@repo/ui/src/components/switch";
 import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
 import {
   ArrowLeft,
   Camera,
@@ -53,7 +52,6 @@ import { MemoizedReactMarkdown } from "./markdown";
 import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
-import useMyUsername from "./lib/hooks/use-my-username";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
@@ -89,34 +87,64 @@ export const FormattedMessage = ({
     ? `${message?.translation} *[${message?.text.trim()}]*`
     : "";
   const textContent = translationText ? translationText : baseText;
-  const formattedText = textContent?.replaceAll("{{user}}", username);
+  const formattedText = textContent
+    ?.replaceAll("{{user}}", username)
+    .replace(/#+$/, "");
   return (
-    <MemoizedReactMarkdown
-      className="prose break-words dark:prose-invert prose-p:m-0 prose-p:leading-relaxed prose-pre:p-0 prose-ol:my-0 prose-ol:flex prose-ol:flex-col prose-ol:gap-1 prose-ul:my-0 prose-ul:flex prose-ul:flex-col prose-ul:gap-1 prose-li:my-0"
-      remarkPlugins={[remarkGfm, remarkMath]}
-      components={{
-        a({ children, href, target, rel }) {
-          return (
-            <a href={href} rel={rel} target={target} className="underline">
-              {children}
-            </a>
-          );
-        },
-        code({ node, className, children, ...props }: any) {
-          const match = /language-(\w+)/.exec(className || "");
-          return (
-            <CodeBlock
-              key={Math.random()}
-              language={(match && match[1]) || ""}
-              value={String(children).replace(/\n$/, "")}
-              {...props}
-            />
-          );
-        },
-      }}
-    >
-      {formattedText}
-    </MemoizedReactMarkdown>
+    <div className="mb-1 flex flex-col gap-1">
+      {(message?.characterId
+        ? formattedText?.split(/\. |\n/)
+        : [formattedText]
+      ).map((sentence: string, index: number) => (
+        <>
+          {sentence?.length > 0 && (
+            <div
+              key={index}
+              className={`w-fit whitespace-pre-wrap rounded-xl ${
+                message?.characterId
+                  ? "bg-gradient-to-b from-background to-muted shadow-lg"
+                  : "dark bg-gradient-to-t from-blue-400 to-blue-500 shadow-lg"
+              } px-3 py-2 md:max-w-[36rem] lg:max-w-[48rem]`}
+            >
+              <MemoizedReactMarkdown
+                className="prose break-words text-foreground dark:prose-invert prose-p:m-0 prose-p:leading-relaxed prose-em:select-text prose-em:pr-0.5 prose-em:text-foreground/50 prose-pre:p-0 prose-ol:my-0 prose-ol:flex prose-ol:flex-col prose-ol:gap-1 prose-ul:my-0 prose-ul:flex prose-ul:flex-col prose-ul:gap-1 prose-li:my-0"
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  a({ children, href, target, rel }) {
+                    return (
+                      <a
+                        href={href}
+                        rel={rel}
+                        target={target}
+                        className="underline"
+                      >
+                        {children}
+                      </a>
+                    );
+                  },
+                  code({ node, className, children, ...props }: any) {
+                    const match = /language-(\w+)/.exec(className || "");
+                    return (
+                      <CodeBlock
+                        key={Math.random()}
+                        language={(match && match[1]) || ""}
+                        value={String(children).replace(/\n$/, "")}
+                        {...props}
+                      />
+                    );
+                  },
+                }}
+              >
+                {index !== formattedText.split(/\. |\n/).length - 1 &&
+                !sentence.match(/[.!?]$/)
+                  ? `${sentence}.`
+                  : sentence}
+              </MemoizedReactMarkdown>
+            </div>
+          )}
+        </>
+      ))}
+    </div>
   );
 };
 
@@ -207,50 +235,7 @@ export const Message = ({
         </div>
       ) : (
         <>
-          <div className="relative whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[36rem] lg:max-w-[48rem]">
-            <FormattedMessage message={message} username={username} />
-            {message?.characterId && chatId && !isRegenerating && (
-              <div className="absolute -right-4 -top-4 lg:-right-2.5 lg:-top-2.5">
-                <Tooltip
-                  content={
-                    <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 4 )
-                    </span>
-                  }
-                  desktopOnly={true}
-                >
-                  <Button
-                    className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
-                    variant="outline"
-                    onClick={async () => {
-                      setIsImagining(true);
-                      try {
-                        await imagine({
-                          messageId: message?._id as Id<"messages">,
-                        });
-                        posthog.capture("imagine");
-                      } catch (error) {
-                        setIsImagining(false);
-                        if (error instanceof ConvexError) {
-                          openDialog();
-                        } else {
-                          toast.error("An unknown error occurred");
-                        }
-                      }
-                    }}
-                    disabled={message?.imageUrl || isImagining}
-                  >
-                    {isImagining ? (
-                      <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
-                    ) : (
-                      <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
-                    )}
-                  </Button>
-                </Tooltip>
-              </div>
-            )}
-          </div>
-
+          <FormattedMessage message={message} username={username} />
           {isImagining ? (
             <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-base lg:text-sm">
@@ -387,7 +372,6 @@ export const Message = ({
                   )}
                 </Button>
               </Tooltip>
-
               {message?.speechUrl && (isSpeaking || isVoicePlaying) && (
                 <audio
                   autoPlay
@@ -400,6 +384,45 @@ export const Message = ({
                 >
                   <source src={message?.speechUrl} type="audio/mpeg" />
                 </audio>
+              )}
+              {message?.characterId && chatId && !isRegenerating && (
+                <Tooltip
+                  content={
+                    <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 4 )
+                    </span>
+                  }
+                  desktopOnly={true}
+                >
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                    onClick={async () => {
+                      setIsImagining(true);
+                      try {
+                        await imagine({
+                          messageId: message?._id as Id<"messages">,
+                        });
+                        posthog.capture("imagine");
+                      } catch (error) {
+                        setIsImagining(false);
+                        if (error instanceof ConvexError) {
+                          openDialog();
+                        } else {
+                          toast.error("An unknown error occurred");
+                        }
+                      }
+                    }}
+                    disabled={message?.imageUrl || isImagining}
+                  >
+                    {isImagining ? (
+                      <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
+                    ) : (
+                      <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
+                    )}
+                  </Button>
+                </Tooltip>
               )}
             </div>
           )}
@@ -424,7 +447,6 @@ const ChatOptionsPopover = ({
   const router = useRouter();
   const goBack = router.back;
   const remove = useMutation(api.chats.remove);
-  const newChat = useMutation(api.chats.create);
   return (
     <Popover>
       <AlertDialog>

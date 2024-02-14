@@ -89,30 +89,6 @@ export const latestFollowup = internalQuery({
   },
 });
 
-export const autopilot = mutation({
-  args: {
-    chatId: v.id("chats"),
-    characterId: v.id("characters"),
-    personaId: v.optional(v.id("personas")),
-  },
-  handler: async (ctx, { chatId, characterId, personaId }) => {
-    const user = await getUser(ctx);
-    await ctx.scheduler.runAfter(0, internal.llm.answer, {
-      chatId,
-      characterId,
-      personaId: personaId ? personaId : user?.primaryPersonaId,
-      userId: user._id,
-      reverseRole: true,
-    });
-    const character = await ctx.db.get(characterId);
-    const updatedAt = new Date().toISOString();
-    await ctx.db.patch(characterId, {
-      numChats: character?.numChats ? character?.numChats + 1 : 1,
-      updatedAt,
-    });
-  },
-});
-
 export const choose = mutation({
   args: {
     chosen: v.string(),
