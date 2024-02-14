@@ -98,11 +98,6 @@ const Discover = () => {
       <Authenticated>
         <CheckinDialog />
       </Authenticated>
-      <Authenticated>
-        <ErrorBoundary errorComponent={() => ""}>
-          <MainChats />
-        </ErrorBoundary>
-      </Authenticated>
       <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
       <Unauthenticated>
         <SignInDialog
@@ -119,7 +114,6 @@ const Discover = () => {
           </Button>
         </Link>
       </div>
-
       <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
         <Carousel
           opts={{ align: "center" }}
@@ -228,6 +222,12 @@ const Discover = () => {
           )}
         </Carousel>
       </div>
+
+      <Authenticated>
+        <ErrorBoundary errorComponent={() => ""}>
+          <MainChats />
+        </ErrorBoundary>
+      </Authenticated>
       <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)] lg:gap-8">
         <div className="flex items-center gap-1 px-4 pb-4 font-medium lg:px-0 lg:pb-0">
           <Link href="/images" className="flex items-center gap-1">
