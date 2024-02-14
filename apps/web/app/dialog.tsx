@@ -682,7 +682,7 @@ export function Dialog({
           width={300}
           height={525}
           quality={60}
-          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 lg:absolute lg:z-0"
+          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 lg:absolute lg:z-0 lg:opacity-25"
         />
       )}
       {chatId && (
