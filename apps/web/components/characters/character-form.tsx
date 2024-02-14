@@ -352,26 +352,29 @@ export default function CharacterForm() {
             htmlFor="card"
             className="relative flex h-[350px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded border border-dashed duration-200 hover:-translate-y-1 hover:border-border hover:shadow-lg"
           >
-            <Plus />
-            <div className="flex flex-col items-center justify-center">
-              {t("Add character card")}
-              <span className="text-xs text-muted-foreground">
-                Best size: 1024x1792
-              </span>
-              {cardImageUrl && (
-                <Image
-                  src={cardImageUrl}
-                  alt={"Preview of character card"}
-                  width={300}
-                  height={525}
-                  className="absolute h-full w-full rounded object-cover"
-                />
-              )}
-            </div>
-            <span className="text-xs">or</span>
-            <Link href="/images">
-              <Button variant="outline">{t("Generate")}</Button>
-            </Link>
+            {cardImageUrl ? (
+              <Image
+                src={cardImageUrl}
+                alt={"Preview of character card"}
+                width={300}
+                height={525}
+                className="absolute h-full w-full rounded object-cover"
+              />
+            ) : (
+              <>
+                <Plus />
+                <div className="flex flex-col items-center justify-center">
+                  {t("Add character card")}
+                  <span className="text-xs text-muted-foreground">
+                    Best size: 1024x1792
+                  </span>
+                </div>
+                <span className="text-xs">or</span>
+                <Link href="/images">
+                  <Button variant="outline">{t("Generate")}</Button>
+                </Link>
+              </>
+            )}
           </Label>
           <Input
             id="card"
