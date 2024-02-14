@@ -181,7 +181,7 @@ const CharacterCard = (props: {
                     alt={""}
                     width={300}
                     height={525}
-                    quality={60}
+                    quality={80}
                     className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
                   />
                 )}

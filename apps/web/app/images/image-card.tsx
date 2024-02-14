@@ -67,7 +67,7 @@ const ImageDetail = (props: {
               alt={props.prompt}
               width={300}
               height={525}
-              quality={60}
+              quality={90}
               className="h-[15rem] w-[10rem] rounded-lg object-cover lg:h-full lg:w-full"
             />
           </div>
@@ -233,7 +233,7 @@ const ImageCard = (props: {
                     alt={""}
                     width={300}
                     height={525}
-                    quality={60}
+                    quality={80}
                     className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
                   />
                 )}
