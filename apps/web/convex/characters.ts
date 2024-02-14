@@ -240,7 +240,7 @@ export const listWithHides = query({
           .withIndex("byUserId", (q) => q.eq("userId", user._id))
           .filter((q) => q.eq(q.field("type"), "characters"))
           .order("desc")
-          .take(512)
+          .take(256)
       : [];
     const hiddenCharacterIds = hides.map((hide: any) => hide.elementId);
 
