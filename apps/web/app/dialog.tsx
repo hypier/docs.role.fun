@@ -698,7 +698,7 @@ export function Dialog({
             width={300}
             height={525}
             quality={60}
-            className="pointer-events-none fixed left-0 top-0 -z-20 hidden w-[100vw] opacity-25 blur-md lg:inset-0 lg:top-20 lg:mx-auto lg:block"
+            className="pointer-events-none fixed left-0 top-0 -z-20 hidden w-[100vw] opacity-15 blur-md lg:inset-0 lg:top-20 lg:mx-auto lg:block"
           />
         </>
       )}
