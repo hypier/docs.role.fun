@@ -29,7 +29,7 @@ const getInstruction = (
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond to ${character?.name} with realistic, engaging and short verbal message.
+            Respond with realistic, engaging and short verbal message.
             `;
   } else {
     return `You are 
@@ -443,12 +443,10 @@ export const generateFollowups = internalAction({
           chatId,
         });
         const followUpId = followUp?._id as Id<"followUps">;
-        const characterPrefix = `${character?.name} ${
-          character?.description ? `(${character?.description})` : ""
-        }:`;
+        const characterPrefix = `${character?.name}:`;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
-        const userPrefix = `${userRole}: `;
+        const userPrefix = `${userRole}:`;
         let updates: { [key: string]: string } = {};
         for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 3 : 2); i++) {
           try {
@@ -475,7 +473,10 @@ export const generateFollowups = internalAction({
                   .map(({ characterId, text }: any, index: any) => {
                     return {
                       role: characterId ? "user" : "assistant",
-                      content: text,
+                      content: characterId
+                        ? characterPrefix +
+                          text.replaceAll("{{user}}", userRole)
+                        : text.replaceAll("{{user}}", userRole),
                     };
                   })
                   .flat() as ChatCompletionMessageParam[]),
@@ -485,10 +486,13 @@ export const generateFollowups = internalAction({
             const responseMessage = (response &&
               response?.choices &&
               response.choices[0]?.message) as any;
+            const content = responseMessage?.content.includes(":")
+              ? responseMessage?.content.split(":").slice(1).join(":").trim()
+              : responseMessage?.content.trim();
 
             // Prepare updates based on iteration
             const key = `followUp${i}`;
-            updates[key] = responseMessage?.content
+            updates[key] = content
               .replaceAll("{{user}}", userRole as string)
               .replaceAll(characterPrefix, "")
               .replaceAll(userPrefix, "");
