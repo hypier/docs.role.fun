@@ -12,7 +12,9 @@ export const OPENROUTER_API_URL = "https://openrouter.ai/api/v1";
 export const getBaseURL = (modelName: string) => {
   switch (modelName) {
     case "gpt-3.5-turbo-1106":
+    case "gpt-3.5-turbo":
     case "gpt-4-1106-preview":
+    case "gpt-4-turbo-preview":
     case "dall-e-3":
       return OPENAI_API_URL;
     case "mistral-tiny":
@@ -32,7 +34,9 @@ export const getBaseURL = (modelName: string) => {
 export const getAPIKey = (modelName: string) => {
   switch (modelName) {
     case "gpt-3.5-turbo-1106":
+    case "gpt-3.5-turbo":
     case "gpt-4-1106-preview":
+    case "gpt-4-turbo-preview":
     case "dall-e-3":
       return process.env.OPENAI_API_KEY;
     case "pplx-7b-online":
