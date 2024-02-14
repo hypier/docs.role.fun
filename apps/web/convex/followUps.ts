@@ -112,3 +112,15 @@ export const autopilot = mutation({
     });
   },
 });
+
+export const choose = mutation({
+  args: {
+    chosen: v.string(),
+    followUpId: v.id("followUps"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.followUpId, {
+      chosen: args.chosen,
+    });
+  },
+});

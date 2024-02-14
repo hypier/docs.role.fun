@@ -446,67 +446,67 @@ export const generateFollowups = internalAction({
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}: `;
+        let updates: { [key: string]: string } = {};
         for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 3 : 2); i++) {
-          const instruction = getInstruction(
-            character,
-            persona,
-            username as string,
-            true,
-          );
-          const response = await openai.chat.completions.create({
-            model:
-              i === 1
-                ? model
-                : i === 2
-                  ? "gryphe/mythomist-7b:free"
-                  : "togethercomputer/stripedhyena-nous-7b",
-            stream: false,
-            messages: [
-              {
-                role: "system",
-                content: instruction,
-              },
-              ...(messages
-                .map(({ characterId, text }: any, index: any) => {
-                  return {
-                    role: characterId ? "user" : "assistant",
-                    content: text,
-                  };
-                })
-                .flat() as ChatCompletionMessageParam[]),
-            ],
-            max_tokens: 64,
-          });
-          const responseMessage = (response &&
-            response?.choices &&
-            response.choices[0]?.message) as any;
+          try {
+            const instruction = getInstruction(
+              character,
+              persona,
+              username as string,
+              true,
+            );
+            const response = await openai.chat.completions.create({
+              model:
+                i === 1
+                  ? model
+                  : i === 2
+                    ? "gryphe/mythomist-7b:free"
+                    : "togethercomputer/stripedhyena-nous-7b",
+              stream: false,
+              messages: [
+                {
+                  role: "system",
+                  content: instruction,
+                },
+                ...(messages
+                  .map(({ characterId, text }: any, index: any) => {
+                    return {
+                      role: characterId ? "user" : "assistant",
+                      content: text,
+                    };
+                  })
+                  .flat() as ChatCompletionMessageParam[]),
+              ],
+              max_tokens: 128,
+            });
+            const responseMessage = (response &&
+              response?.choices &&
+              response.choices[0]?.message) as any;
 
-          // Update followUp responses based on iteration
-          if (i === 1) {
-            await ctx.runMutation(internal.followUps.update, {
-              followUpId,
-              followUp1: responseMessage?.content
-                .replaceAll("{{user}}", userRole as string)
-                .replaceAll(characterPrefix, "")
-                .replaceAll(userPrefix, ""),
-            });
-          } else if (i === 2) {
-            await ctx.runMutation(internal.followUps.update, {
-              followUpId,
-              followUp2: responseMessage?.content
-                .replaceAll("{{user}}", userRole as string)
-                .replaceAll(characterPrefix, "")
-                .replaceAll(userPrefix, ""),
-            });
-          } else if (i === 3) {
-            await ctx.runMutation(internal.followUps.update, {
-              followUpId,
-              followUp3: responseMessage?.content
-                .replaceAll("{{user}}", userRole as string)
-                .replaceAll(characterPrefix, "")
-                .replaceAll(userPrefix, ""),
-            });
+            // Prepare updates based on iteration
+            const key = `followUp${i}`;
+            updates[key] = responseMessage?.content
+              .replaceAll("{{user}}", userRole as string)
+              .replaceAll(characterPrefix, "")
+              .replaceAll(userPrefix, "");
+          } catch (error) {
+            console.error(`Error generating follow-up ${i}:`, error);
           }
+        }
+        // Update followUps in batch outside the loop
+        if (Object.keys(updates).length > 0) {
+          await ctx.runMutation(internal.followUps.update, {
+            followUpId,
+            ...Object.keys(updates)
+              .sort(() => 0.5 - Math.random())
+              .reduce(
+                (obj, key) => {
+                  obj[key] = updates[key];
+                  return obj;
+                },
+                {} as Record<string, any>,
+              ),
+          });
         }
       } catch (error) {
         console.log("error:::", error);

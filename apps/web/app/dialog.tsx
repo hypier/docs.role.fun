@@ -407,38 +407,6 @@ export const Message = ({
   );
 };
 
-export const Inspirations = ({
-  chatId,
-  characterId,
-}: {
-  chatId: Id<"chats">;
-  characterId: Id<"characters">;
-}) => {
-  const { t } = useTranslation();
-  const autopilot = useMutation(api.followUps.autopilot);
-  return (
-    <Tooltip
-      content={
-        <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-          <Crystal className="h-4 w-4" /> {t("Continue")}
-        </span>
-      }
-      desktopOnly={true}
-    >
-      <Button
-        variant="outline"
-        onClick={() => {
-          autopilot({ chatId, characterId });
-        }}
-        size="icon"
-        type="button"
-      >
-        <Sparkles className="h-4 w-4" />
-      </Button>
-    </Tooltip>
-  );
-};
-
 interface ChatOptionsPopoverProps {
   characterId: Id<"characters">;
   chatId: Id<"chats">;
@@ -558,6 +526,53 @@ const ChatOptionsPopover = ({
         </Button>
       </PopoverTrigger>
     </Popover>
+  );
+};
+
+interface FollowUpsProps {
+  followUps: any;
+  sendAndReset: (message: string) => void;
+  setScrolled: (scrolled: boolean) => void;
+  isLastMessageLoaded: boolean;
+}
+
+const FollowUps = ({
+  followUps,
+  sendAndReset,
+  setScrolled,
+  isLastMessageLoaded,
+}: FollowUpsProps) => {
+  const choose = useMutation(api.followUps.choose);
+  return (
+    <>
+      {followUps && !followUps?.isStale && isLastMessageLoaded && (
+        <div className="z-10 mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
+          {["followUp1", "followUp2", "followUp3"].map(
+            (followUpKey) =>
+              followUps[followUpKey] && (
+                <Button
+                  key={followUpKey}
+                  onClick={() => {
+                    sendAndReset(followUps[followUpKey] as string);
+                    choose({
+                      followUpId: followUps._id,
+                      chosen: followUps[followUpKey] as string,
+                    });
+                    setScrolled(false);
+                  }}
+                  variant="outline"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
+                >
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
+                    {followUps[followUpKey]}
+                  </span>
+                </Button>
+              ),
+          )}
+        </div>
+      )}
+    </>
   );
 };
 
@@ -821,55 +836,12 @@ export function Dialog({
             ))
           )}
         </div>
-        {followUps && !followUps?.isStale && isLastMessageLoaded && (
-          <div className="z-10 mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
-            {followUps?.followUp1 && (
-              <Button
-                onClick={() => {
-                  sendAndReset(followUps?.followUp1 as string);
-                  setScrolled(false);
-                }}
-                variant="outline"
-                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
-              >
-                <Sparkles className="h-4 w-4 text-blue-500" />
-                <span className="w-fit lg:max-w-screen-sm">
-                  {followUps.followUp1}
-                </span>
-              </Button>
-            )}
-            {followUps?.followUp2 && (
-              <Button
-                onClick={() => {
-                  sendAndReset(followUps?.followUp2 as string);
-                  setScrolled(false);
-                }}
-                variant="outline"
-                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
-              >
-                <Sparkles className="h-4 w-4 text-blue-500" />
-                <span className="w-fit lg:max-w-screen-sm">
-                  {followUps.followUp2}
-                </span>
-              </Button>
-            )}
-            {followUps?.followUp3 && (
-              <Button
-                onClick={() => {
-                  sendAndReset(followUps?.followUp3 as string);
-                  setScrolled(false);
-                }}
-                variant="outline"
-                className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
-              >
-                <Sparkles className="h-4 w-4 text-blue-500" />
-                <span className="w-fit lg:max-w-screen-sm">
-                  {followUps.followUp3}
-                </span>
-              </Button>
-            )}
-          </div>
-        )}
+        <FollowUps
+          followUps={followUps}
+          sendAndReset={sendAndReset}
+          setScrolled={setScrolled}
+          isLastMessageLoaded={isLastMessageLoaded}
+        />
       </div>
       <form
         className="fixed bottom-0 z-50 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:sticky lg:rounded-br-lg"
