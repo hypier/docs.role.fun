@@ -289,7 +289,7 @@ export const imagine = mutation({
       imageId: image,
       messageId,
       prompt: character?.genderTag
-        ? `1 ${character?.genderTag}, best quality, high quality, ${message?.text}`
+        ? `1 ${character?.genderTag}, masterpiece, ${message?.text}`
         : (message?.text as string),
       referenceImage: character?.cardImageUrl,
       model: "daun-io/openroleplay.ai-animagine-v3",
