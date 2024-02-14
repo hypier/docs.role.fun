@@ -28,7 +28,6 @@ const getInstruction = (
               ${persona?.description && `description: ${persona.description}`}
             }
 
-            and you are talking with ${character?.name} (${character?.description}).
             Use asterisks for narration and emotions like *sad* or *laughing*.
             Respond with realistic, engaging and short verbal message.
             `;
@@ -261,9 +260,13 @@ export const answer = internalAction({
           .replaceAll("{{user}}", userRole as string)
           .replaceAll(characterPrefix, "")
           .replaceAll(userPrefix, "");
+        const cleanedContent = content.replace(
+          new RegExp(characterPrefix, "g"),
+          "",
+        );
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: content,
+          text: cleanedContent,
         });
         if (
           message &&
@@ -440,7 +443,11 @@ export const generateFollowups = internalAction({
           chatId,
         });
         const followUpId = followUp?._id as Id<"followUps">;
-        const characterPrefix = `${character?.name}: `;
+        const characterPrefix = `${character?.name} (${
+          character?.instructions
+            ? character?.instructions
+            : character?.description
+        }):`;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}: `;
@@ -475,7 +482,7 @@ export const generateFollowups = internalAction({
                   })
                   .flat() as ChatCompletionMessageParam[]),
               ],
-              max_tokens: 128,
+              max_tokens: 64,
             });
             const responseMessage = (response &&
               response?.choices &&
