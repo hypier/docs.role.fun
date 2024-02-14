@@ -91,7 +91,7 @@ export const FormattedMessage = ({
   const formattedText = textContent?.replaceAll("{{user}}", username);
   return (
     <MemoizedReactMarkdown
-      className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 "
+      className="prose break-words dark:prose-invert prose-p:m-0 prose-p:leading-relaxed prose-pre:p-0 prose-ol:my-0 prose-ol:flex prose-ol:flex-col prose-ol:gap-1 prose-ul:my-0 prose-ul:flex prose-ul:flex-col prose-ul:gap-1 prose-li:my-0"
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
         a({ children, href, target, rel }) {
@@ -100,9 +100,6 @@ export const FormattedMessage = ({
               {children}
             </a>
           );
-        },
-        p({ children }) {
-          return <p className="mb-2 last:mb-0">{children}</p>;
         },
         code({ node, className, children, ...props }: any) {
           const match = /language-(\w+)/.exec(className || "");
