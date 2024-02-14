@@ -29,7 +29,7 @@ const getInstruction = (
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with realistic, engaging and short verbal message.
+            Respond to ${character?.name} with realistic, engaging and short verbal message.
             `;
   } else {
     return `You are 
@@ -443,11 +443,9 @@ export const generateFollowups = internalAction({
           chatId,
         });
         const followUpId = followUp?._id as Id<"followUps">;
-        const characterPrefix = `${character?.name} (${
-          character?.instructions
-            ? character?.instructions
-            : character?.description
-        }):`;
+        const characterPrefix = `${character?.name} ${
+          character?.description ? `(${character?.description})` : ""
+        }:`;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}: `;
