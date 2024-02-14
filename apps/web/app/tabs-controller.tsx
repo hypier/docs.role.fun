@@ -21,7 +21,13 @@ function TabsController() {
 
   return (
     <Tabs value={getFirstDirectory(pathname)}>
-      <TabsList className="shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-16 w-full gap-2 rounded-none border-t bg-background/90 backdrop-blur-md backdrop-saturate-150 sm:dark:backdrop-blur-0 lg:static lg:h-full lg:w-32 lg:flex-col lg:items-start lg:justify-start lg:rounded-none lg:border-none lg:bg-none lg:shadow-none lg:backdrop-blur-0 lg:dark:bg-none">
+      <TabsList
+        className={`shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-16 w-full gap-2 rounded-none border-t ${
+          isMobile
+            ? "bg-background/90 backdrop-blur-md backdrop-saturate-150"
+            : "bg-none"
+        } lg:static lg:h-full lg:w-32 lg:flex-col lg:items-start lg:justify-start lg:rounded-none lg:border-none lg:shadow-none`}
+      >
         <Link href="/">
           <TabsTrigger
             className="flex w-16 flex-col items-center gap-0.5 rounded-full lg:w-full lg:flex-row lg:items-start"
