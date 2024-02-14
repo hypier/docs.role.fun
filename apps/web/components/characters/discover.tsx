@@ -125,7 +125,7 @@ const Discover = () => {
               tagValues.map((tag, index) => (
                 <CarouselItem
                   key={index + "tag"}
-                  className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6 2xl:basis-1/12"
+                  className="2xl:basis-1/8 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
                 >
                   <Toggle
                     aria-label={`Toggle ${tag.tagName}`}
