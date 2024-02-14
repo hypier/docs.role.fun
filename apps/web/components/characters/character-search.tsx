@@ -5,8 +5,6 @@ import {
   Avatar,
 } from "@repo/ui/src/components/avatar";
 import { api } from "../../convex/_generated/api";
-import { useQuery } from "convex/react";
-import { formatDistanceToNow } from "date-fns";
 import { Id } from "../../convex/_generated/dataModel";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -24,12 +22,10 @@ import {
 export const Chat = ({
   name,
   description,
-  time,
   characterId,
 }: {
   name: string;
   description: string;
-  time: string;
   characterId: Id<"characters">;
 }) => {
   const character = useStableQuery(api.characters.get, {
@@ -52,11 +48,6 @@ export const Chat = ({
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-medium">{name ? name : "Loading"}</h2>
-              <p className="text-xs text-muted-foreground">
-                {formatDistanceToNow(new Date(time), {
-                  addSuffix: true,
-                })}
-              </p>
             </div>
             <p className="line-clamp-1 text-sm text-muted-foreground">
               {description ? description : "Click here to chat."}
@@ -103,7 +94,6 @@ export default function CharacterSearch() {
           results.map((character) => (
             <Chat
               name={character.name as string}
-              time={character.updatedAt}
               characterId={character._id as Id<"characters">}
               description={character.description as string}
             />
