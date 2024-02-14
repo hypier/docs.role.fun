@@ -14,7 +14,7 @@ export default function TextLogo({
     >
       {isMobile
         ? `ORP${isPlus ? "+" : ""}`
-        : `openroleplay.ai${isPlus ? "+" : ""}`}
+        : `OpenRoleplay${isPlus ? "+" : ""}`}
     </span>
   );
 }
