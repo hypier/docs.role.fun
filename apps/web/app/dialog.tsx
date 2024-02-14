@@ -91,7 +91,11 @@ export const FormattedMessage = ({
     ?.replaceAll("{{user}}", username)
     .replace(/#+$/, "");
   return (
-    <div className="mb-1 flex flex-col gap-1">
+    <div
+      className={`mb-1 flex flex-col gap-1 ${
+        message?.characterId ? "items-start" : "items-end"
+      }`}
+    >
       {(message?.characterId
         ? formattedText?.split(/\. |\n/)
         : [formattedText]
@@ -570,7 +574,7 @@ const FollowUps = ({
   return (
     <>
       {followUps && !followUps?.isStale && isLastMessageLoaded && (
-        <div className="z-10 mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
+        <div className="z-10 flex w-full flex-col justify-center gap-2 px-6">
           {["followUp1", "followUp2", "followUp3"].map(
             (followUpKey) =>
               followUps[followUpKey] && (
@@ -866,6 +870,7 @@ export function Dialog({
           setScrolled={setScrolled}
           isLastMessageLoaded={isLastMessageLoaded}
         />
+        <div className="mb-[8rem] lg:mb-4" />
       </div>
       <form
         className="fixed bottom-0 z-50 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:sticky lg:rounded-br-lg"
