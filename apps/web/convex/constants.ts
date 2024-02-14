@@ -153,13 +153,13 @@ export const modelData = [
   {
     value: "gryphe/mythomax-l2-13b",
     description: "Uncensored, Mythomax L2 13B by Gryphe",
-    crystalPrice: 0.5,
+    crystalPrice: 1,
     isNSFW: true,
   },
   {
     value: "gryphe/mythomax-l2-13b-8k",
     description: "Uncensored, Mythomax L2 13B 8K by Gryphe",
-    crystalPrice: 1,
+    crystalPrice: 2,
     isNSFW: true,
   },
   {
@@ -184,7 +184,7 @@ export const modelData = [
     value: "pygmalionai/mythalion-13b",
     description: "Uncensored, Mythalion 13B by PygmalionAI",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "lizpreciatior/lzlv-70b-fp16-hf",
