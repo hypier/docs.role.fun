@@ -222,7 +222,7 @@ const Images = () => {
                 <Link href="/content-rules">
                   <span className="hidden lg:inline">
                     {t(
-                      "By clicking 'Generate', you agree to our content rules and community guidelines. Offending content will be removed.",
+                      "By clicking 'Generate', you agree to our content rules and community guidelines.",
                     )}
                   </span>
                   <span className="inline lg:hidden">
