@@ -107,7 +107,7 @@ const Images = () => {
     <FormItem className="flex w-full flex-col">
       <FormControl>
         <Input
-          placeholder="a pixel room for gamer girl"
+          placeholder="Self-portrait of an AI"
           className="w-full truncate"
           {...field}
           autoFocus
@@ -183,7 +183,7 @@ const Images = () => {
   return (
     <div className="flex flex-col gap-8">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 border-t bg-background p-4 lg:static lg:border-none lg:bg-transparent lg:p-0">
+        <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 rounded-t-xl border-t bg-background/90 p-4 backdrop-blur lg:static lg:border-none lg:bg-transparent lg:p-0">
           <CollapsibleTrigger className="flex w-full items-center justify-center gap-2">
             {isMy ? t("My Images") : t("Imagine anything")}
             <ChevronDown
@@ -217,12 +217,20 @@ const Images = () => {
                 </form>
               </Form>
             </div>
-            <span className="text-xs text-muted-foreground underline">
-              <Link href="/content-rules">
-                By clicking 'Generate', you agree to our content rules.
-                Offending content will be removed.
-              </Link>
-            </span>
+            <div className="w-full pt-2 text-center">
+              <span className="text-xs text-muted-foreground underline">
+                <Link href="/content-rules">
+                  <span className="hidden lg:inline">
+                    {t(
+                      "By clicking 'Generate', you agree to our content rules and community guidelines. Offending content will be removed.",
+                    )}
+                  </span>
+                  <span className="inline lg:hidden">
+                    {t("Content Policy")}
+                  </span>
+                </Link>
+              </span>
+            </div>
           </CollapsibleContent>
         </div>
       </Collapsible>
