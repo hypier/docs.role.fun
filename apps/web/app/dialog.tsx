@@ -787,10 +787,10 @@ export function Dialog({
                   },
                 });
               }}
-              className="flex aspect-square h-8 lg:aspect-auto"
+              className="flex aspect-square h-8 gap-0.5 lg:aspect-auto"
               variant="outline"
             >
-              <Plus className="h-4 w-4 p-0.5" />
+              <Plus className="h-4 w-4" />
               <span className="hidden lg:inline"> {t("New chat")}</span>
             </Button>
           </div>
