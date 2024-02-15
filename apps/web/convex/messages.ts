@@ -330,3 +330,26 @@ export const removeOldChats = internalMutation({
     return { removed: oldChats.length };
   },
 });
+
+export const edit = mutation({
+  args: {
+    messageId: v.id("messages"),
+    editedText: v.string(),
+  },
+  handler: async (ctx, { messageId, editedText }) => {
+    const user = await getUser(ctx);
+    const message = await ctx.db.get(messageId);
+    if (!message) {
+      throw new Error("Message not found");
+    }
+    const chat = await ctx.db.get(message.chatId);
+    if (!chat) {
+      throw new Error("Chat not found");
+    }
+    if (chat.userId !== user._id) {
+      throw new Error("User does not own the chat");
+    }
+    await ctx.db.patch(messageId, { text: editedText });
+    return { messageId, editedText };
+  },
+});
