@@ -63,7 +63,12 @@ const Creations = () => {
 
   const me = useCurrentUser();
   const username = me?.name;
-  if (!isAuthenticated) return <SignIn />;
+  if (!isAuthenticated)
+    return (
+      <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-8 py-32 lg:min-h-fit">
+        <SignIn />
+      </div>
+    );
 
   return (
     <div className="relative flex flex-col gap-4 lg:gap-8">
