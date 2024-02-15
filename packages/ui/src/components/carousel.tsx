@@ -158,7 +158,9 @@ const CarouselContent = React.forwardRef<
   return (
     <div
       ref={carouselRef}
-      className={isOverflowHidden ? "overflow-hidden" : "overflow-x-hidden"}
+      className={
+        isOverflowHidden ? "overflow-hidden" : "overflow-x-hidden py-2"
+      }
     >
       <div
         ref={ref}

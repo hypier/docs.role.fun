@@ -71,7 +71,7 @@ export default function NavBar({}: {}) {
             </Tooltip>
             {isAuthenticated && (
               <Link href="/my-characters/create" className="hidden lg:block">
-                <Button className="rounded-full px-3">
+                <Button className="rounded-full px-3" variant="cta">
                   <Plus className="h-5 w-5 p-1" />
                   {t("Create")}
                 </Button>
