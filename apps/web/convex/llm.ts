@@ -584,16 +584,13 @@ export const generateCharacter = internalAction({
           functions,
           temperature: 1,
         });
-        console.log("response:::", response);
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
-        console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
             responseMessage.function_call.arguments,
           );
-          console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.characters.autofill, {
             characterId,
             name: functionArgs?.name,
@@ -708,16 +705,13 @@ export const generateTags = internalAction({
           functions,
           temperature: 1,
         });
-        console.log("response:::", response);
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
-        console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
             responseMessage.function_call.arguments,
           );
-          console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.characters.tag, {
             characterId,
             languageTag: functionArgs?.languageTag,
@@ -804,16 +798,13 @@ export const generateImageTags = internalAction({
           functions,
           temperature: 1,
         });
-        console.log("response:::", response);
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
-        console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
             responseMessage.function_call.arguments,
           );
-          console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.images.tag, {
             imageId,
             tag: functionArgs?.tag,
