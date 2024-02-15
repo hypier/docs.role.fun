@@ -68,7 +68,7 @@ const ImageDetail = (props: {
               width={300}
               height={525}
               quality={90}
-              className="h-[15rem] w-[10rem] rounded-lg object-cover lg:h-full lg:w-full"
+              className="h-[15rem] w-[10rem] rounded-xl object-cover lg:h-full lg:w-full"
             />
           </div>
         )}
@@ -107,7 +107,7 @@ const ImageDetail = (props: {
                 >
                   <Button className="w-full gap-1" variant="outline">
                     <Plus className="h-4 w-4" />
-                    {t("New Character")}
+                    {t("Character")}
                   </Button>
                 </Link>
               </Tooltip>
@@ -118,7 +118,7 @@ const ImageDetail = (props: {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <Button className="h-7 w-full gap-1" variant="outline">
+                  <Button className="w-full gap-1" variant="outline">
                     <Download className="h-4 w-4" />
                     Download
                   </Button>
@@ -225,7 +225,7 @@ const ImageCard = (props: {
                     width={7.5}
                     height={13}
                     quality={25}
-                    className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
+                    className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-xl object-cover blur-md"
                   />
                 ) : (
                   <Image
@@ -234,14 +234,14 @@ const ImageCard = (props: {
                     width={300}
                     height={525}
                     quality={80}
-                    className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
+                    className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-xl object-cover"
                   />
                 )}
               </>
             )}
             <CardHeader className="relative z-[2] w-full p-4">
               {props.imageUrl && (
-                <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-lg bg-gradient-to-b from-transparent via-black/30 to-black" />
+                <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-xl bg-gradient-to-b from-transparent via-black/30 to-black" />
               )}
               <CardTitle
                 className={`${
