@@ -395,7 +395,7 @@ export const generateFollowups = internalAction({
       chatId,
       take: 4,
     });
-    const character = await ctx.runQuery(api.characters.get, {
+    const character = await ctx.runQuery(internal.characters.getCharacter, {
       id: characterId,
     });
     const persona = personaId
