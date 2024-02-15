@@ -6,9 +6,6 @@
 import { FC, memo } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-
-import { Button } from ".";
-import { Check, Copy, Download } from "lucide-react";
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard";
 
 interface Props {
