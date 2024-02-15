@@ -683,7 +683,7 @@ export function Dialog({
             <ModelBadge modelName={model as string} showCredits={true} />
             <Badge variant="model">
               <Headphones className="h-4 w-4 p-0.5" /> /
-              <Crystal className="h-4 w-4 p-0.5" /> x 10
+              <Crystal className="h-4 w-4 p-0.5" /> x 15
             </Badge>
           </div>
           <div className="flex items-center gap-1">
