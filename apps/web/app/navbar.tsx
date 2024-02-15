@@ -81,7 +81,10 @@ export default function NavBar({}: {}) {
             <UserDropdown />
             <SignedOut>
               <Link href="/sign-in">
-                <Button className="hidden rounded-full px-3 md:block">
+                <Button
+                  className="hidden rounded-full px-3 md:block"
+                  variant="cta"
+                >
                   {t("Log in")}
                 </Button>
               </Link>
