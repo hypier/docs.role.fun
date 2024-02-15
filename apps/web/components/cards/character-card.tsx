@@ -52,13 +52,13 @@ const CharacterCard = (props: {
     <>
       <AspectRatio
         ratio={1 / 1.75}
-        className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
+        className="group h-full w-full place-content-center overflow-hidden rounded-xl duration-200 hover:shadow-lg lg:overflow-visible"
       >
         <Link
           href={`/character/${props?.id}`}
           onClick={() => posthog.capture("click-character-card")}
         >
-          <Card className="flex h-full w-full items-end rounded-lg p-2">
+          <Card className="flex h-full w-full items-end rounded-xl p-2">
             {props.showEdit && (
               <Link
                 href={`/my-characters/create${
@@ -100,8 +100,8 @@ const CharacterCard = (props: {
             )}
             {hidePC && (
               <Button
-                className="absolute bottom-4 right-4 z-[50] hidden h-5 w-fit rounded-full border-none text-xs group-hover:flex md:text-[10px]"
-                variant="outline"
+                className="absolute -right-1 -top-1 z-[50] hidden h-4 w-4 rounded-full bg-white p-[3px] text-xs shadow-lg ring-1 ring-foreground/10 hover:bg-white/90 group-hover:flex md:text-[10px]"
+                size="icon"
                 onTouchStart={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
@@ -119,8 +119,7 @@ const CharacterCard = (props: {
                   });
                 }}
               >
-                <X className="h-3 w-3 p-0.5" />
-                Hide
+                <X className="h-4 w-4 text-muted-foreground" />
               </Button>
             )}
             <div className="absolute top-4 z-[3] hover:z-[4]">

@@ -159,7 +159,7 @@ const Discover = () => {
           className="ml-4 w-[95%] md:w-[80%] lg:ml-0 lg:w-[calc(80%+8rem)]"
           setApi={setApi}
         >
-          <CarouselContent className="w-full">
+          <CarouselContent className="w-full" isOverflowHidden={false}>
             {characters?.length > 0
               ? characters.map(
                   (character, index) =>

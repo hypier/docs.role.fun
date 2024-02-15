@@ -828,7 +828,7 @@ export function Dialog({
           </div>
         )}
         {description && (
-          <div className="m-4 my-6 flex flex-col rounded-lg bg-background/50 p-4 ring-1 ring-foreground/10 backdrop-blur-md">
+          <div className="m-4 my-6 flex flex-col rounded-lg bg-background/50 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
             <div>{mt(description, translations)}</div>
             {creatorName && (

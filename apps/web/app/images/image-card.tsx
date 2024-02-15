@@ -177,9 +177,9 @@ const ImageCard = (props: {
       <DialogOrDrawerTrigger>
         <AspectRatio
           ratio={1 / 1.75}
-          className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
+          className="group h-full w-full place-content-center overflow-hidden rounded-xl duration-200 hover:shadow-lg"
         >
-          <Card className="flex h-full w-full items-end rounded-lg p-2">
+          <Card className="flex h-full w-full items-end rounded-xl p-2">
             <div className="absolute top-4 z-[3] hover:z-[4]">
               {props?.isPrivate ? (
                 <Tooltip content="This image is private.">

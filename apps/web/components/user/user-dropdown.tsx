@@ -89,7 +89,7 @@ export default function UserDropdown() {
         onOpenChange={() => setOpenPopover(!openPopover)}
       >
         <PopoverContent asChild>
-          <div className="w-full rounded-lg bg-background p-2 sm:w-40 sm:p-1">
+          <div className="w-full rounded-xl bg-background p-2 sm:w-40 sm:p-1">
             {user && (
               <div className="p-2">
                 {user?.username && (
