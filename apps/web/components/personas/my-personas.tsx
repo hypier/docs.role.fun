@@ -22,11 +22,11 @@ const NewPersona = ({ onClick }: { onClick: any }) => {
   return (
     <AspectRatio
       ratio={1 / 1.75}
-      className="group w-full h-full hover:-translate-y-1 duration-200 border border-dashed hover:shadow-lg place-content-center rounded-lg"
+      className="group h-full w-full place-content-center rounded-lg border border-dashed duration-200 hover:-translate-y-1 hover:shadow-lg"
       role="button"
       onClick={onClick}
     >
-      <Card className="rounded-lg p-2 w-full h-full flex items-center justify-center border-none gap-2">
+      <Card className="flex h-full w-full items-center justify-center gap-2 rounded-lg border-none p-2">
         <Plus /> Create persona
       </Card>
     </AspectRatio>
@@ -52,24 +52,20 @@ export function MyPersonas() {
           onClickGoBack={() => setDraftPersona(false)}
         />
       ) : (
-        <Card className="w-full h-full shadow-none lg:shadow-xl border-transparent lg:border-border overflow-hidden">
+        <Card className="h-full w-full overflow-hidden border-transparent shadow-none lg:border-border lg:shadow-xl">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               My personas
               <InfoTooltip
                 content={
-                  <TooltipContent
-                    title={
-                      "You can be anyone you want to be. By updating your persona with specific personality traits, preferences, and physical characteristics, your interactions with characters become more personalized and immersive. Whether you want to explore new identities, immerse yourself in your favorite fictional stories, or simply add a creative twist to your conversations, Personas are the way to go."
-                    }
-                  />
+                  "You can be anyone you want to be. By updating your persona with specific personality traits, preferences, and physical characteristics, your interactions with characters become more personalized and immersive. Whether you want to explore new identities, immerse yourself in your favorite fictional stories, or simply add a creative twist to your conversations, Personas are the way to go."
                 }
               />
             </CardTitle>
 
             <CardDescription>Create and customize personas.</CardDescription>
           </CardHeader>
-          <CardContent className="px-4 flex flex-col sm:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
+          <CardContent className="flex w-full grid-cols-2 flex-col gap-4 px-4 sm:grid md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             <NewPersona onClick={() => setDraftPersona(true)} />
             {personas
               ? personas.map(
@@ -86,7 +82,7 @@ export function MyPersonas() {
                         }
                         onEdit={() => setDraftPersona(persona)}
                       />
-                    )
+                    ),
                 )
               : Array.from({ length: 12 }).map((_, index) => (
                   <CharacterCardPlaceholder key={index} />
@@ -94,7 +90,7 @@ export function MyPersonas() {
             {Array.from({ length: 10 - personas?.length - 1 }).map(
               (_, index) => (
                 <CharacterCardPlaceholder key={index} />
-              )
+              ),
             )}
           </CardContent>
         </Card>

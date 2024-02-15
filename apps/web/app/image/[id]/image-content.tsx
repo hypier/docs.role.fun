@@ -63,13 +63,7 @@ const ImageContent = ({ params }: Props) => {
                 <Label className="text-foreground">Prompt</Label>
                 {image?.prompt}
                 <div className="grid w-full grid-cols-3 justify-between gap-2">
-                  <Tooltip
-                    content={
-                      <TooltipContent
-                        title={"Create new image by remixing this image"}
-                      />
-                    }
-                  >
+                  <Tooltip content={"Create new image by remixing this image"}>
                     <Link
                       href={`/images?prompt=${image.prompt}&model=${image.model}`}
                       className="w-full"
@@ -80,13 +74,7 @@ const ImageContent = ({ params }: Props) => {
                       </Button>
                     </Link>
                   </Tooltip>
-                  <Tooltip
-                    content={
-                      <TooltipContent
-                        title={"Create character using this image"}
-                      />
-                    }
-                  >
+                  <Tooltip content={"Create character using this image"}>
                     <Link
                       href={`/my-characters/create?cardImageUrl=${image.imageUrl}`}
                       className="w-full"

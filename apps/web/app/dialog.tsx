@@ -201,11 +201,7 @@ export const Message = ({
           {message?.characterId && chatId && !isRegenerating && (
             <div className="flex w-fit items-center justify-start rounded-full bg-background/25 p-1 backdrop-blur">
               <Tooltip
-                content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t("Copy message to clipboard")}
-                  </span>
-                }
+                content={t("Copy message to clipboard")}
                 desktopOnly={true}
               >
                 <Button
@@ -266,7 +262,7 @@ export const Message = ({
               </Button>
               <Tooltip
                 content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                  <span className="flex gap-1 p-2">
                     {t("Listen")} (<Crystal className="h-4 w-4" /> x 10 )
                   </span>
                 }
@@ -324,7 +320,7 @@ export const Message = ({
               {message?.characterId && chatId && !isRegenerating && (
                 <Tooltip
                   content={
-                    <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                    <span className="flex gap-1 p-2">
                       {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 4 )
                     </span>
                   }

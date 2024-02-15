@@ -76,11 +76,7 @@ const CharacterCard = (props: {
             )}
             {props.showRemix && (
               <Tooltip
-                content={
-                  <TooltipContent
-                    title={"Create new character by remixing this character"}
-                  />
-                }
+                content={"Create new character by remixing this character"}
               >
                 <Link
                   href={`/my-characters/create${

@@ -79,13 +79,7 @@ const ImageDetail = (props: {
               {props?.prompt}
             </DialogOrDrawerDescription>
             <div className="grid w-full grid-cols-3 justify-between gap-2">
-              <Tooltip
-                content={
-                  <TooltipContent
-                    title={"Create new image by remixing this image"}
-                  />
-                }
-              >
+              <Tooltip content={"Create new image by remixing this image"}>
                 <Link
                   href={`/images?prompt=${props.prompt}&model=${props.model}`}
                   className="w-full"
@@ -96,11 +90,7 @@ const ImageDetail = (props: {
                   </Button>
                 </Link>
               </Tooltip>
-              <Tooltip
-                content={
-                  <TooltipContent title={"Create character using this image"} />
-                }
-              >
+              <Tooltip content={"Create character using this image"}>
                 <Link
                   href={`/my-characters/create?cardImageUrl=${props.imageUrl}`}
                   className="w-full"
@@ -196,13 +186,7 @@ const ImageCard = (props: {
                 <ModelBadge modelName={props.model as string} />
               )}
             </div>
-            <Tooltip
-              content={
-                <TooltipContent
-                  title={"Create new image by remixing this image"}
-                />
-              }
-            >
+            <Tooltip content={"Create new image by remixing this image"}>
               <Link
                 href={`/images?prompt=${props.prompt}&model=${props.model}`}
                 className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"

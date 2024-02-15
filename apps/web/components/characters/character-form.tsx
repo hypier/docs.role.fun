@@ -401,11 +401,7 @@ export default function CharacterForm() {
                     {t("Name")}
                     <InfoTooltip
                       content={
-                        <TooltipContent
-                          title={
-                            "Name used by the character in conversations and what other users will see if the character is public."
-                          }
-                        />
+                        "Name used by the character in conversations and what other users will see if the character is public."
                       }
                     />
                   </FormLabel>
@@ -428,11 +424,7 @@ export default function CharacterForm() {
                     </span>
                     <InfoTooltip
                       content={
-                        <TooltipContent
-                          title={
-                            "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
-                          }
-                        />
+                        "Description is a brief way to describe the Character and scenario. It acts like a name in character listings."
                       }
                     />
                   </FormLabel>
@@ -461,11 +453,7 @@ export default function CharacterForm() {
                       </span>
                       <InfoTooltip
                         content={
-                          <TooltipContent
-                            title={
-                              "With Instructions, you can have the Character describe themselves (traits, history, example quotes, mannerisms, etc.) and specify the topics they prefer to talk about."
-                            }
-                          />
+                          "With Instructions, you can have the Character describe themselves (traits, history, example quotes, mannerisms, etc.) and specify the topics they prefer to talk about."
                         }
                       />
                     </FormLabel>
@@ -534,11 +522,7 @@ export default function CharacterForm() {
                     </span>
                     <InfoTooltip
                       content={
-                        <TooltipContent
-                          title={
-                            "The first thing your Character will say when starting a new conversation. Greeting can have a large impact on chat."
-                          }
-                        />
+                        "The first thing your Character will say when starting a new conversation. Greeting can have a large impact on chat."
                       }
                     />
                   </FormLabel>
