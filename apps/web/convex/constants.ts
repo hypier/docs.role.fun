@@ -443,7 +443,7 @@ export const TranslationModelData = [
 ];
 
 export const crystalDollarPrice = {
-  300: "99",
+  150: "99",
   1650: "499",
   5450: "1499",
   11200: "2999",

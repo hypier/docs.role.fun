@@ -1,5 +1,5 @@
 export const packages = [
-  { src: "/shop/tier1.png", amount: 300, bonus: 0, price: 0.99 },
+  { src: "/shop/tier1.png", amount: 150, bonus: 0, price: 0.99 },
   { src: "/shop/tier2.png", amount: 1650, bonus: 150, price: 4.99 },
   { src: "/shop/tier3.png", amount: 5450, bonus: 550, price: 14.99 },
   { src: "/shop/tier4.png", amount: 11200, bonus: 1300, price: 29.99 },
