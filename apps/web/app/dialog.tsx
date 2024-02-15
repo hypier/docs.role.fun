@@ -97,7 +97,7 @@ export const FormattedMessage = ({
       }`}
     >
       {(message?.characterId
-        ? formattedText?.split(/(?<=[.?!]|\n)/)
+        ? formattedText?.split(/(?<=[.?!])(?![.?!])|\n/)
         : [formattedText]
       ).map((sentence: string, index: number) => (
         <>
