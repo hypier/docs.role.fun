@@ -142,7 +142,9 @@ export default function ChatWithCharacter({
             )}
           </AnimatePresence>
           <Unauthenticated>
-            <SignIn />
+            <div className="py-32">
+              <SignIn />
+            </div>
           </Unauthenticated>
         </div>
       )}
