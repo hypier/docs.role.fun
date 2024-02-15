@@ -574,7 +574,7 @@ const FollowUps = ({
   return (
     <>
       {followUps && !followUps?.isStale && isLastMessageLoaded && (
-        <div className="z-10 flex w-full flex-col justify-center gap-2 px-6">
+        <div className="z-10 flex w-full flex-col justify-center gap-2 px-6 xl:flex-row xl:justify-start">
           {["followUp1", "followUp2", "followUp3"].map(
             (followUpKey) =>
               followUps[followUpKey] && (
@@ -589,7 +589,7 @@ const FollowUps = ({
                     setScrolled(false);
                   }}
                   variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg bg-background p-2 text-left"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-xl border-b-2 bg-background p-2 text-left font-normal"
                 >
                   <Sparkles className="h-4 w-4 text-blue-500" />
                   <span className="w-fit lg:max-w-screen-sm">
