@@ -97,7 +97,7 @@ export const FormattedMessage = ({
       }`}
     >
       {(message?.characterId
-        ? formattedText?.split(/\. |\n/)
+        ? formattedText?.split(/(?<=[.?!]|\n)/)
         : [formattedText]
       ).map((sentence: string, index: number) => (
         <>
@@ -139,10 +139,7 @@ export const FormattedMessage = ({
                   },
                 }}
               >
-                {index !== formattedText.split(/\. |\n/).length - 1 &&
-                !sentence.match(/[.!?]$/)
-                  ? `${sentence}.`
-                  : sentence}
+                {sentence}
               </MemoizedReactMarkdown>
             </div>
           )}
