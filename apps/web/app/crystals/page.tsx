@@ -86,7 +86,7 @@ const PlusPlan = () => {
   return (
     <Tooltip content={`Subscribe ORP+`} desktopOnly>
       <Card
-        className="relative rounded-lg tabular-nums duration-200 hover:shadow-lg"
+        className="relative rounded-xl tabular-nums duration-200 hover:shadow-lg"
         role="button"
         onClick={
           currentUser?.subscriptionTier === "plus" && !subscription?.cancelsAt
@@ -99,7 +99,7 @@ const PlusPlan = () => {
           width={256}
           height={368}
           alt={"image for pricing"}
-          className="absolute top-0 h-full w-full rounded-lg object-cover"
+          className="absolute top-0 h-full w-full rounded-xl object-cover"
         />
         <div className="absolute bottom-0 h-[70%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
         <div className="flex flex-col gap-1 pt-[50%] lg:pt-[30%] xl:pt-[100%]">
@@ -217,7 +217,7 @@ const Package = ({
       desktopOnly
     >
       <Card
-        className="relative aspect-square h-[23rem] w-[23rem] rounded-lg tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
+        className="relative aspect-square h-[23rem] w-[23rem] rounded-xl tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
         role="button"
         onClick={
           handlePurchaseClick
@@ -230,7 +230,7 @@ const Package = ({
           width={256}
           height={256}
           alt={"image for pricing"}
-          className="absolute top-0 h-full w-full rounded-lg object-cover"
+          className="absolute top-0 h-full w-full rounded-xl object-cover"
         />
         <div className="absolute bottom-0 h-[50%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-white/95 to-white" />
         <div className="flex flex-col gap-1 pt-[70%]">
@@ -361,7 +361,7 @@ export default function Page() {
   const crystals = currentUser?.crystals;
 
   return (
-    <div className="relative flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
+    <div className="relative flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-xl lg:border lg:shadow-lg">
       {typeof crystals === "number" && (
         <div
           className={`absolute right-8 top-8 mx-auto flex items-center gap-0.5 font-medium`}
@@ -419,7 +419,7 @@ export default function Page() {
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
         <Link href="/my-characters/create" className="group w-full lg:block">
-          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+          <div className="flex w-full flex-col items-center gap-4 rounded-xl border p-4 shadow duration-200 group-hover:shadow-lg">
             <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
               {t("Create characters and earn crystals.")}
               <InfoTooltip
@@ -436,15 +436,15 @@ export default function Page() {
         </Link>
         <AnimatePresence>
           {isAuthenticated && (
-            <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+            <div className="flex w-full flex-col items-center gap-4 rounded-xl border p-4 shadow duration-200 group-hover:shadow-lg">
               <DailyReward />
             </div>
           )}
         </AnimatePresence>
       </div>
 
-      <div className="flex flex-col items-center gap-16 rounded-lg px-5">
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+      <div className="flex flex-col items-center gap-16 rounded-xl px-5">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Text models")}
@@ -517,7 +517,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Image models")}
             <InfoTooltip
@@ -587,7 +587,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("AI Voice")}
             <InfoTooltip
@@ -601,7 +601,7 @@ export default function Page() {
             <Crystal className="h-4 w-4" />
           </p>
         </div>
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Machine Translation")}
             <InfoTooltip

@@ -118,6 +118,8 @@ export default function ChatWithCharacter({
               name={data?.name as string}
               description={data?.description as string}
               creatorName={creatorName}
+              userId={currentUser?._id}
+              creatorId={data?.creatorId}
               model={data?.model as string}
               chatId={chatId}
               characterId={data?._id as any}

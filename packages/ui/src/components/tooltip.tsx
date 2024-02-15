@@ -34,8 +34,8 @@ export function Tooltip({
         </Drawer.Trigger>
         <Drawer.Overlay className="fixed inset-0 z-40 bg-secondary bg-opacity-10 backdrop-blur" />
         <Drawer.Portal>
-          <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 rounded-t-[10px] border-t bg-background">
-            <div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-t-[10px] bg-inherit">
+          <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 mt-24 rounded-xl border-t bg-background">
+            <div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-xl bg-inherit">
               <div className="my-3 h-1 w-12 rounded-full bg-secondary" />
             </div>
             <div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-background align-middle shadow-xl">
@@ -61,7 +61,7 @@ export function Tooltip({
           <TooltipPrimitive.Content
             sideOffset={8}
             side={side}
-            className="z-50 overflow-hidden rounded-md bg-background px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 border"
+            className="z-50 overflow-hidden rounded-lg bg-background px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 border"
           >
             {typeof content === "string" ? (
               <div className="block max-w-xs px-4 py-2 text-center text-sm text-secondary-foreground">

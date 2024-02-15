@@ -173,7 +173,7 @@ export const Message = ({
         <>
           <FormattedMessage message={message} username={username} />
           {isImagining ? (
-            <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
+            <div className="relative h-[30rem] w-[20rem] rounded-xl bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-base lg:text-sm">
                 <Spinner />
                 <div className="flex items-center gap-2">
@@ -194,7 +194,7 @@ export const Message = ({
                 alt={message?.text}
                 width={525}
                 height={300}
-                className="h-[30rem] w-[20rem] rounded-lg"
+                className="h-[30rem] w-[20rem] rounded-xl"
               />
             )
           )}
@@ -438,12 +438,14 @@ interface ChatOptionsPopoverProps {
   characterId: Id<"characters">;
   chatId: Id<"chats">;
   name: string;
+  showEdit: boolean;
 }
 
 const ChatOptionsPopover = ({
   characterId,
   chatId,
   name,
+  showEdit,
 }: ChatOptionsPopoverProps) => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -453,6 +455,21 @@ const ChatOptionsPopover = ({
     <Popover>
       <AlertDialog>
         <PopoverContent className="w-52 p-1">
+          {showEdit && (
+            <Link
+              href={`/my-characters/create${
+                characterId ? `?id=${characterId}` : ""
+              }`}
+            >
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-1 text-muted-foreground"
+              >
+                <Edit className="h-4 w-4 p-0.5" />
+                {t("Edit character")}
+              </Button>
+            </Link>
+          )}
           <Link
             href={`/my-characters/create${
               characterId ? `?remixId=${characterId}` : ""
@@ -609,6 +626,8 @@ export function Dialog({
   name,
   description,
   creatorName,
+  userId,
+  creatorId,
   model,
   cardImageUrl,
   chatId,
@@ -617,6 +636,8 @@ export function Dialog({
   name: string;
   description?: string;
   creatorName?: string | null | undefined;
+  userId?: Id<"users">;
+  creatorId?: Id<"users">;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
@@ -727,7 +748,7 @@ export function Dialog({
   const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
 
   return (
-    <div className="h-full w-full lg:fixed lg:left-0 lg:right-0 lg:top-16 lg:h-[calc(100%-0.875rem)] lg:overflow-hidden lg:rounded-lg lg:border lg:bg-background">
+    <div className="h-full w-full lg:fixed lg:left-0 lg:right-0 lg:top-16 lg:h-[calc(100%-0.875rem)] lg:overflow-hidden lg:rounded-xl lg:border lg:bg-background">
       {cardImageUrl && (
         <>
           <Image
@@ -767,6 +788,7 @@ export function Dialog({
               characterId={characterId}
               chatId={chatId}
               name={name}
+              showEdit={userId == creatorId}
             />
             <Button
               onClick={() => {
@@ -826,7 +848,7 @@ export function Dialog({
           </div>
         )}
         {description && (
-          <div className="m-4 my-6 flex flex-col rounded-lg bg-background/50 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
+          <div className="m-4 my-6 flex flex-col rounded-xl bg-background/50 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
             <div>{mt(description, translations)}</div>
             {creatorName && (
@@ -835,7 +857,7 @@ export function Dialog({
           </div>
         )}
         <div
-          className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
+          className="mx-2 flex h-fit flex-col gap-8 rounded-xl p-4"
           ref={listRef}
           onWheel={() => {
             setScrolled(true);

@@ -63,7 +63,7 @@ const CharacterCard = (props: {
               <Link
                 href={`/my-characters/create${
                   props.id ? `?id=${props.id}` : ""
-                }${props.model ? `&model=${props.model}` : ""}`}
+                }`}
                 className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
               >
                 <Button
