@@ -395,9 +395,9 @@ export const Message = ({
                                 messageId: message?._id as Id<"messages">,
                                 editedText,
                               });
-                              toast.success("Message updated successfully");
+                              toast.success(t("Message updated successfully"));
                             } catch (error) {
-                              toast.error("Failed to update message");
+                              toast.error(t("Failed to update message"));
                             }
                           }
                         }}
@@ -406,18 +406,19 @@ export const Message = ({
                           <Textarea
                             name="editedText"
                             defaultValue={message?.text.trim()}
-                            className="resize-none rounded border p-2"
+                            className="resize-none"
+                            rows={5}
                           />
                         </div>
                         <DrawerFooter className="flex w-full items-center gap-2">
                           <DrawerClose className="w-full">
                             <Button type="submit" className="w-full">
-                              Save
+                              {t("Save")}
                             </Button>
                           </DrawerClose>
                           <DrawerClose className="w-full">
                             <Button variant="outline" className="w-full">
-                              Cancel
+                              {t("Cancel")}
                             </Button>
                           </DrawerClose>
                         </DrawerFooter>
