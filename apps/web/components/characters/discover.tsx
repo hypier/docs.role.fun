@@ -94,7 +94,7 @@ const Discover = () => {
   const username = me?.name;
 
   return (
-    <div className="relative flex flex-col gap-4 lg:gap-8">
+    <div className="relative flex flex-col gap-4">
       <Authenticated>
         <CheckinDialog />
       </Authenticated>
@@ -105,7 +105,6 @@ const Discover = () => {
           setIsOpen={setIsSignInModalOpen}
         />
       </Unauthenticated>
-
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         <Link href="/characters" className="flex items-center gap-1">
           {t("Characters")}
@@ -228,8 +227,8 @@ const Discover = () => {
           <MainChats />
         </ErrorBoundary>
       </Authenticated>
-      <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)] lg:gap-8">
-        <div className="flex items-center gap-1 px-4 pb-4 font-medium lg:px-0 lg:pb-0">
+      <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)]">
+        <div className="flex items-center gap-1 px-4 font-medium lg:px-0">
           <Link href="/images" className="flex items-center gap-1">
             {t("Images")}
             <Button variant="ghost" size="icon">
