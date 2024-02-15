@@ -562,6 +562,7 @@ interface FollowUpsProps {
   sendAndReset: (message: string) => void;
   setScrolled: (scrolled: boolean) => void;
   isLastMessageLoaded: boolean;
+  query: string;
 }
 
 const FollowUps = ({
@@ -569,6 +570,7 @@ const FollowUps = ({
   sendAndReset,
   setScrolled,
   isLastMessageLoaded,
+  query,
 }: FollowUpsProps) => {
   const choose = useMutation(api.followUps.choose);
   return (
@@ -585,6 +587,7 @@ const FollowUps = ({
                     choose({
                       followUpId: followUps._id,
                       chosen: followUps[followUpKey] as string,
+                      query,
                     });
                     setScrolled(false);
                   }}
@@ -869,6 +872,7 @@ export function Dialog({
           sendAndReset={sendAndReset}
           setScrolled={setScrolled}
           isLastMessageLoaded={isLastMessageLoaded}
+          query={messages[messages.length - 1]?.text || ""}
         />
         <div className="mb-[8rem] lg:mb-4" />
       </div>

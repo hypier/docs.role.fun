@@ -92,11 +92,13 @@ export const latestFollowup = internalQuery({
 export const choose = mutation({
   args: {
     chosen: v.string(),
+    query: v.string(),
     followUpId: v.id("followUps"),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.followUpId, {
       chosen: args.chosen,
+      query: args.query,
     });
   },
 });
