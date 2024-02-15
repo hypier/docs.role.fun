@@ -45,7 +45,7 @@ const PreferenceDialog = () => {
         >
           <X />
         </Button>
-        <AlertDialogHeader>
+        <AlertDialogHeader className="text-left">
           <AlertDialogTitle className="flex items-center justify-center gap-1 text-3xl">
             {t("Openroleplay.ai")}
           </AlertDialogTitle>
