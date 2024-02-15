@@ -153,7 +153,7 @@ const Discover = () => {
           <CarouselNext variant="ghost" />
         </Carousel>
       </div>
-      <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
+      <div className="relative flex place-content-center lg:justify-start">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
