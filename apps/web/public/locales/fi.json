@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Tervetuloa Openroleplay.ai, avoimen lähdekoodin tekoäly-alustasi.",
+  "Welcome to Openroleplay.ai": "Tervetuloa Openroleplay.ai",
   "opensource ai characters": "opensource ai merkkiä",
   "alpha": "alfa",
   "Create": "Luo",
@@ -46,6 +46,9 @@
   "Remix character": "Remix merkki",
   "Delete chat": "Poista keskustelu",
   "Save": "Tallenna",
+  "Cancel": "Peruuta",
+  "Change the story as you wish.": "Muuta tarinaa niin kuin haluat.",
+  "Edit message": "Muokkaa viestiä",
   "Generate": "Luo",
   "(optional)": "(valinnainen)",
   "Configure your character details.": "Määritä hahmosi tiedot.",
@@ -126,7 +129,7 @@
   "Show": "Näytä",
   "Hide": "Piilota",
   "Sign up and continue browsing": "Rekisteröidy ja jatka selausta",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Luo Openroleplay.ai tili olla vuorovaikutuksessa caracters ja löytää tekoälyn luojia rakastat.",
+  "Create an account to have fun with characters you'll love!": "Luo tili pitääksesi hauskaa hahmojen kanssa rakastat!",
   "Already have an account?": "Onko sinulla jo tili?",
   "Sign up": "Rekisteröidy nyt",
   "Sign in": "Kirjaudu sisään",
@@ -161,5 +164,9 @@
   "Help": "Ohje",
   "Docs": "Asiakirjat",
   "Archive": "Arkistoi",
-  "Send a message": "Lähetä viesti"
+  "Send a message": "Lähetä viesti",
+  "Loading purchase details...": "Ladataan ostoksia...",
+  "Now you can proceed to purchase.": "Nyt voit jatkaa ostamista.",
+  "Unexpected error occurred": "Odottamaton virhe",
+  "Automatic translation": "Automaattinen käännös"
 }

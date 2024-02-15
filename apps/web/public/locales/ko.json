@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "오픈 소스 AI 캐릭터 플랫폼 Openroleplay.ai에 오신 것을 환영합니다.",
+  "Welcome to Openroleplay.ai": "Openroleplay.ai에 오신 것을 환영합니다.",
   "opensource ai characters": "오픈소스 AI 캐릭터",
   "alpha": "알파",
   "Create": "만들기",
@@ -46,6 +46,9 @@
   "Remix character": "캐릭터 리믹스",
   "Delete chat": "채팅 삭제하기",
   "Save": "저장",
+  "Cancel": "취소",
+  "Change the story as you wish.": "원하는대로 이야기를 만들어보세요.",
+  "Edit message": "메시지 수정",
   "Generate": "생성",
   "(optional)": "(선택)",
   "Configure your character details.": "캐릭터를 설정해보세요.",
@@ -126,7 +129,7 @@
   "Show": "보이기",
   "Hide": "숨기기",
   "Sign up and continue browsing": "가입하고 더 둘러보기",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Openroleplay.ai 계정을 만들어 캐릭터와 상호작용하고 마음에 드는 AI 크리에이터를 찾아보세요.",
+  "Create an account to have fun with characters you'll love!": "계정을 만들어 마음에 드는 캐릭터와 함께 즐거운 시간을 보내세요!",
   "Already have an account?": "이미 계정이 있나요?",
   "Sign up": "가입",
   "Sign in": "로그인",
@@ -161,5 +164,9 @@
   "Help": "도움",
   "Docs": "문서",
   "Archive": "보관하기",
-  "Send a message": "Send a message"
+  "Send a message": "메시지 보내기",
+  "Loading purchase details...": "구매 세부 정보 불러오는 중...",
+  "Now you can proceed to purchase.": "이제 구매를 진행할 수 있습니다.",
+  "Unexpected error occurred": "예상치 못한 에러가 발생했습니다.",
+  "Automatic translation": "자동 번역"
 }

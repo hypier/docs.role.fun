@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Witamy w Openroleplay.ai, Twojej platformy postaciowej AI open source.",
+  "Welcome to Openroleplay.ai": "Witamy w Openroleplay.ai",
   "opensource ai characters": "znaki z opensource",
   "alpha": "alfa",
   "Create": "Utwórz",
@@ -46,6 +46,9 @@
   "Remix character": "Zremiksowy znak",
   "Delete chat": "Usuń czat",
   "Save": "Zapisz",
+  "Cancel": "Anuluj",
+  "Change the story as you wish.": "Zmień historię zgodnie z życzeniem.",
+  "Edit message": "Edytuj wiadomość",
   "Generate": "Wygeneruj",
   "(optional)": "(nieobowiązkowo)",
   "Configure your character details.": "Skonfiguruj dane swojej postaci.",
@@ -126,7 +129,7 @@
   "Show": "Pokaż",
   "Hide": "Ukryj",
   "Sign up and continue browsing": "Zarejestruj się i kontynuuj przeglądanie",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Utwórz konto Openroleplay.ai, aby wchodzić w interakcje z samochodami i odkryć twórców AI, których pokochasz.",
+  "Create an account to have fun with characters you'll love!": "Utwórz konto, aby mieć zabawne znaki, które pokochasz!",
   "Already have an account?": "Masz już konto?",
   "Sign up": "Zarejestruj",
   "Sign in": "Zaloguj się",
@@ -161,5 +164,9 @@
   "Help": "Pomoc",
   "Docs": "Dokumentacja",
   "Archive": "Archiwum",
-  "Send a message": "Wyślij wiadomość"
+  "Send a message": "Wyślij wiadomość",
+  "Loading purchase details...": "Ładowanie szczegółów zakupu...",
+  "Now you can proceed to purchase.": "Teraz możesz dokonać zakupu.",
+  "Unexpected error occurred": "Wystąpił nieoczekiwany błąd",
+  "Automatic translation": "Automatyczne tłumaczenie"
 }

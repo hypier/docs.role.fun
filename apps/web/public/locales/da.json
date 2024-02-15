@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Velkommen til Openroleplay.ai, din open source AI karakter platform.",
+  "Welcome to Openroleplay.ai": "Velkommen til Openroleplay.ai",
   "opensource ai characters": "opensource ai tegn",
   "alpha": "alfa",
   "Create": "Opret",
@@ -46,6 +46,9 @@
   "Remix character": "Remix tegn",
   "Delete chat": "Slet chat",
   "Save": "Gem",
+  "Cancel": "Annuller",
+  "Change the story as you wish.": "Ændre historien som du ønsker.",
+  "Edit message": "Rediger besked",
   "Generate": "Generer",
   "(optional)": "(valgfrit)",
   "Configure your character details.": "Konfigurer dine karakterdetaljer.",
@@ -126,7 +129,7 @@
   "Show": "Vis",
   "Hide": "Skjul",
   "Sign up and continue browsing": "Tilmeld dig og fortsæt med at gennemse",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Opret en Openroleplay.ai konto til at interagere med caracters og opdage AI skabere, du vil elske.",
+  "Create an account to have fun with characters you'll love!": "Opret en konto for at have det sjovt med tegn, du vil elske!",
   "Already have an account?": "Har du allerede en konto?",
   "Sign up": "Tilmeld dig",
   "Sign in": "Log ind",
@@ -161,5 +164,9 @@
   "Help": "Hjælp",
   "Docs": "Dokumenter",
   "Archive": "Arkiv",
-  "Send a message": "Send en besked"
+  "Send a message": "Send en besked",
+  "Loading purchase details...": "Indlæser købsdetaljer...",
+  "Now you can proceed to purchase.": "Nu kan du fortsætte med at købe.",
+  "Unexpected error occurred": "Uventet fejl opstod",
+  "Automatic translation": "Automatisk oversættelse"
 }

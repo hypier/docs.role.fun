@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Välkommen till Openroleplay.ai, din AI-plattform med öppen källkod.",
+  "Welcome to Openroleplay.ai": "Välkommen till Openroleplay.ai",
   "opensource ai characters": "Opensource ai tecken",
   "alpha": "alfa",
   "Create": "Skapa",
@@ -46,6 +46,9 @@
   "Remix character": "Remix tecken",
   "Delete chat": "Ta bort chatt",
   "Save": "Spara",
+  "Cancel": "Avbryt",
+  "Change the story as you wish.": "Ändra berättelsen som du önskar.",
+  "Edit message": "Redigera meddelande",
   "Generate": "Generera",
   "(optional)": "(valfritt)",
   "Configure your character details.": "Konfigurera dina karaktärsdetaljer.",
@@ -126,7 +129,7 @@
   "Show": "Visa",
   "Hide": "Dölj",
   "Sign up and continue browsing": "Registrera dig och fortsätt surfa",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Skapa ett Openroleplay.ai-konto för att interagera med caracters och upptäck AI-skapare som du kommer att älska.",
+  "Create an account to have fun with characters you'll love!": "Skapa ett konto för att ha kul med karaktärer du älskar!",
   "Already have an account?": "Har du redan ett konto?",
   "Sign up": "Registrera dig",
   "Sign in": "Logga in",
@@ -161,5 +164,9 @@
   "Help": "Hjälp",
   "Docs": "Dokument",
   "Archive": "Arkivera",
-  "Send a message": "Skicka ett meddelande"
+  "Send a message": "Skicka ett meddelande",
+  "Loading purchase details...": "Laddar inköpsdetaljer...",
+  "Now you can proceed to purchase.": "Nu kan du fortsätta att köpa.",
+  "Unexpected error occurred": "Oväntat fel uppstod",
+  "Automatic translation": "Automatisk översättning"
 }

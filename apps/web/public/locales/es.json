@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Bienvenido a Openroleplay.ai, tu plataforma de personaje de AI-código abierto.",
+  "Welcome to Openroleplay.ai": "Bienvenido a Openroleplay.ai",
   "opensource ai characters": "caracteres ai de código abierto",
   "alpha": "alfa",
   "Create": "Crear",
@@ -46,6 +46,9 @@
   "Remix character": "Carácter de Remix",
   "Delete chat": "Eliminar chat",
   "Save": "Guardar",
+  "Cancel": "Cancelar",
+  "Change the story as you wish.": "Cambia la historia como desees.",
+  "Edit message": "Editar mensaje",
   "Generate": "Generar",
   "(optional)": "(opcional)",
   "Configure your character details.": "Configura los detalles de tu personaje.",
@@ -126,7 +129,7 @@
   "Show": "Mostrar",
   "Hide": "Ocultar",
   "Sign up and continue browsing": "Regístrate y continúa navegando",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Crea una cuenta Openroleplay.ai para interactuar con carácteres y descubrir creadores de IA que te encantarán.",
+  "Create an account to have fun with characters you'll love!": "¡Crea una cuenta para divertirte con los personajes que te encantarán!",
   "Already have an account?": "¿Ya tienes una cuenta?",
   "Sign up": "Regístrate",
   "Sign in": "Iniciar sesión",
@@ -161,5 +164,9 @@
   "Help": "Ayuda",
   "Docs": "Documentos",
   "Archive": "Archivar",
-  "Send a message": "Enviar un mensaje"
+  "Send a message": "Enviar un mensaje",
+  "Loading purchase details...": "Cargando detalles de compra...",
+  "Now you can proceed to purchase.": "Ahora puedes proceder a la compra.",
+  "Unexpected error occurred": "Ocurrió un error inesperado",
+  "Automatic translation": "Traducción automática"
 }

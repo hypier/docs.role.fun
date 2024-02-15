@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Benvenuto in Openroleplay.ai, la tua piattaforma di personaggio AI open-source.",
+  "Welcome to Openroleplay.ai": "Benvenuto in Openroleplay.ai",
   "opensource ai characters": "caratteri opensource ai",
   "alpha": "alfa",
   "Create": "Crea",
@@ -46,6 +46,9 @@
   "Remix character": "Carattere Remix",
   "Delete chat": "Elimina chat",
   "Save": "Salva",
+  "Cancel": "Annulla",
+  "Change the story as you wish.": "Cambia la storia come vuoi.",
+  "Edit message": "Modifica messaggio",
   "Generate": "Genera",
   "(optional)": "(facoltativo)",
   "Configure your character details.": "Configura i dettagli del tuo personaggio.",
@@ -78,7 +81,7 @@
   "Badge": "Distintivo",
   "Daily Rewards": "Ricompense Giornaliere",
   "Claim 15 Crystals": "Richiedi 15 Cristalli",
-  "Claim 200 Crystals": "Rivendica 200 Cristalli",
+  "Claim 200 Crystals": "Richiedi 200 Cristalli",
   "Search": "Cerca",
   "Anime": "Anime",
   "Male": "Maschio",
@@ -126,7 +129,7 @@
   "Show": "Mostra",
   "Hide": "Nascondi",
   "Sign up and continue browsing": "Iscriviti e continua a navigare",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Crea un account Openroleplay.ai per interagire con i caratteri e scoprire i creatori di AI che amerai.",
+  "Create an account to have fun with characters you'll love!": "Crea un account per divertirti con i personaggi che ti piaceranno!",
   "Already have an account?": "Hai già un account?",
   "Sign up": "Registrati",
   "Sign in": "Accedi",
@@ -161,5 +164,9 @@
   "Help": "Aiuto",
   "Docs": "Documenti",
   "Archive": "Archivio",
-  "Send a message": "Invia un messaggio"
+  "Send a message": "Invia un messaggio",
+  "Loading purchase details...": "Caricamento dettagli acquisto...",
+  "Now you can proceed to purchase.": "Ora è possibile procedere all'acquisto.",
+  "Unexpected error occurred": "Errore inatteso",
+  "Automatic translation": "Traduzione automatica"
 }

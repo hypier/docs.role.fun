@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "OpenrolePlay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Ласкаво просимо в Openroleplay.ai, вашу платформу з відкритим вихідним кодом AI.",
+  "Welcome to Openroleplay.ai": "Ласкаво просимо в Openroleplay.ai",
   "opensource ai characters": "символів відкритим початковим кодом",
   "alpha": "альфа",
   "Create": "Створити",
@@ -46,6 +46,9 @@
   "Remix character": "Характеристики повторення",
   "Delete chat": "Видалити чат",
   "Save": "Зберегти",
+  "Cancel": "Скасувати",
+  "Change the story as you wish.": "Змініть історію за бажанням.",
+  "Edit message": "Редагувати повідомлення",
   "Generate": "Генерувати",
   "(optional)": "(необов'язково)",
   "Configure your character details.": "Налаштуйте відомості про ваш персонаж.",
@@ -126,7 +129,7 @@
   "Show": "Показати",
   "Hide": "Приховати",
   "Sign up and continue browsing": "Зареєструйтеся та продовжуйте перегляд",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Створіть обліковий запис Openroleplay.ai для взаємодії з картерами і знайдіть авторів ШІ Вам сподобається.",
+  "Create an account to have fun with characters you'll love!": "Створіть обліковий запис, щоб весело проводити з персонажами, яких ви любите!",
   "Already have an account?": "Вже маєте обліковий запис?",
   "Sign up": "Зареєструватися",
   "Sign in": "Увійти",
@@ -161,5 +164,9 @@
   "Help": "Довідка",
   "Docs": "Документація",
   "Archive": "Архів",
-  "Send a message": "Надіслати повідомлення"
+  "Send a message": "Надіслати повідомлення",
+  "Loading purchase details...": "Завантаження деталей про покупку...",
+  "Now you can proceed to purchase.": "Тепер ви можете продовжити покупку.",
+  "Unexpected error occurred": "Сталася неочікувана помилка",
+  "Automatic translation": "Автоматичний переклад"
 }

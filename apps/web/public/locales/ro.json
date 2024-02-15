@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Bine ai venit la Openroleplay.ai, platforma ta de personaj AI open-source.",
+  "Welcome to Openroleplay.ai": "Bun venit la Openroleplay.ai",
   "opensource ai characters": "Caractere opensource ai",
   "alpha": "alfa",
   "Create": "Crează",
@@ -46,6 +46,9 @@
   "Remix character": "Caracterul Remix",
   "Delete chat": "Șterge conversația",
   "Save": "Salvează",
+  "Cancel": "Anulează",
+  "Change the story as you wish.": "Schimbă povestirea după cum dorești.",
+  "Edit message": "Editare mesaj",
   "Generate": "Genereaza",
   "(optional)": "(opţional)",
   "Configure your character details.": "Configurați detaliile personajului.",
@@ -126,7 +129,7 @@
   "Show": "Afișare",
   "Hide": "Ascunde",
   "Sign up and continue browsing": "Înregistrează-te și continuă navigarea",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Creează un cont Openroleplay.ai pentru a interacționa cu caractere și descoperă creatorii de AI pe care îi vei iubi.",
+  "Create an account to have fun with characters you'll love!": "Creează un cont pentru a te distra cu personaje pe care le vei iubi!",
   "Already have an account?": "Ai deja un cont?",
   "Sign up": "Înscrie-te",
   "Sign in": "Autentificare",
@@ -161,5 +164,9 @@
   "Help": "Ajutor",
   "Docs": "Documente",
   "Archive": "Arhivează",
-  "Send a message": "Trimite un mesaj"
+  "Send a message": "Trimite un mesaj",
+  "Loading purchase details...": "Se încarcă detaliile cumpărături...",
+  "Now you can proceed to purchase.": "Acum poți trece la achiziție.",
+  "Unexpected error occurred": "Eroare neașteptată",
+  "Automatic translation": "Traducere automată"
 }

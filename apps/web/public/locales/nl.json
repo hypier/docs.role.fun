@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Welkom bij Openroleplay.ai, uw open-source AI karakter platform.",
+  "Welcome to Openroleplay.ai": "Welkom bij Openroleplay.ai",
   "opensource ai characters": "opensource ai tekens",
   "alpha": "alfabetisch",
   "Create": "Aanmaken",
@@ -46,6 +46,9 @@
   "Remix character": "Remix karakter",
   "Delete chat": "Chat verwijderen",
   "Save": "Opslaan",
+  "Cancel": "annuleren",
+  "Change the story as you wish.": "Verander het verhaal zoals je wilt.",
+  "Edit message": "Bericht bewerken",
   "Generate": "Genereren",
   "(optional)": "(optioneel)",
   "Configure your character details.": "Configureer je karakter gegevens.",
@@ -126,7 +129,7 @@
   "Show": "Weergeven",
   "Hide": "Verbergen",
   "Sign up and continue browsing": "Meld je aan en ga verder met browsen",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Maak een Openroleplay.ai account aan om interactie te hebben met tekens en ontdek AI makers waar je van zult houden.",
+  "Create an account to have fun with characters you'll love!": "Maak een account aan om plezier te hebben met tekens die u leuk vindt!",
   "Already have an account?": "Heeft u al een account?",
   "Sign up": "Registreer nu",
   "Sign in": "Log in",
@@ -161,5 +164,9 @@
   "Help": "Hulp",
   "Docs": "Documentatie",
   "Archive": "Archief",
-  "Send a message": "Stuur een bericht"
+  "Send a message": "Stuur een bericht",
+  "Loading purchase details...": "Aankoopgegevens worden geladen...",
+  "Now you can proceed to purchase.": "U kunt nu verdergaan met de aankoop.",
+  "Unexpected error occurred": "Onverwachte fout opgetreden",
+  "Automatic translation": "Automatische vertaling"
 }

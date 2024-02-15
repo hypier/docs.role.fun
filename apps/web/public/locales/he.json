@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "Welcome to Openroleplay.ai, your open-source AI character platform.",
+  "Welcome to Openroleplay.ai": "Welcome to Openroleplay.ai",
   "opensource ai characters": "opensource ai characters",
   "alpha": "alpha",
   "Create": "Create",
@@ -46,6 +46,9 @@
   "Remix character": "Remix character",
   "Delete chat": "Delete chat",
   "Save": "Save",
+  "Cancel": "Cancel",
+  "Change the story as you wish.": "Change the story as you wish.",
+  "Edit message": "Edit message",
   "Generate": "Generate",
   "(optional)": "(optional)",
   "Configure your character details.": "Configure your character details.",
@@ -126,7 +129,7 @@
   "Show": "Show",
   "Hide": "Hide",
   "Sign up and continue browsing": "Sign up and continue browsing",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.",
+  "Create an account to have fun with characters you'll love!": "Create an account to have fun with characters you'll love!",
   "Already have an account?": "Already have an account?",
   "Sign up": "Sign up",
   "Sign in": "Sign in",
@@ -161,5 +164,9 @@
   "Help": "Help",
   "Docs": "Docs",
   "Archive": "Archive",
-  "Send a message": "Send a message"
+  "Send a message": "Send a message",
+  "Loading purchase details...": "Loading purchase details...",
+  "Now you can proceed to purchase.": "Now you can proceed to purchase.",
+  "Unexpected error occurred": "Unexpected error occurred",
+  "Automatic translation": "Automatic translation"
 }

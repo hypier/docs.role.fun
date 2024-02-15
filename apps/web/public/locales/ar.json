@@ -1,6 +1,6 @@
 {
   "Openroleplay.ai": "Openroleplay.ai",
-  "Welcome to Openroleplay.ai, your open-source AI character platform.": "مرحبا بكم في Openroleplay.ai، منصة أحرف AI مفتوحة المصدر.",
+  "Welcome to Openroleplay.ai": "مرحبا بكم في Openroleplay.ai",
   "opensource ai characters": "أحرف تايلندية مفتوحة المصدر",
   "alpha": "ألفا",
   "Create": "إنشاء",
@@ -46,6 +46,9 @@
   "Remix character": "ريمكس الحرف",
   "Delete chat": "حذف المحادثة",
   "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "Change the story as you wish.": "قم بتغيير القصة كما تريد.",
+  "Edit message": "تعديل الرسالة",
   "Generate": "توليد",
   "(optional)": "(اختياري)",
   "Configure your character details.": "تكوين تفاصيل الشخصية الخاصة بك.",
@@ -126,7 +129,7 @@
   "Show": "إظهار",
   "Hide": "إخفاء",
   "Sign up and continue browsing": "قم بالتسجيل ومواصلة التصفح",
-  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.": "إنشاء حساب Openroleplay.ai للتفاعل مع الأحرف واكتشف منشئي الذكاء الاصطناعي الذي ستحبه.",
+  "Create an account to have fun with characters you'll love!": "قم بإنشاء حساب للحصول على متعة مع الأحرف التي ستحبها!",
   "Already have an account?": "لديك حساب بالفعل؟",
   "Sign up": "تسجيل الدخول",
   "Sign in": "تسجيل الدخول",
@@ -161,5 +164,9 @@
   "Help": "مساعدة",
   "Docs": "الوثائق",
   "Archive": "أرشيف",
-  "Send a message": "إرسال رسالة"
+  "Send a message": "إرسال رسالة",
+  "Loading purchase details...": "تحميل تفاصيل الشراء...",
+  "Now you can proceed to purchase.": "الآن يمكنك المضي قدما في الشراء.",
+  "Unexpected error occurred": "حدث خطأ غير متوقع",
+  "Automatic translation": "الترجمة التلقائية"
 }
