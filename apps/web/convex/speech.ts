@@ -47,7 +47,12 @@ export const convertTextToSpeech = internalAction(
         },
       );
 
-      console.log("response:::", response);
+      if (
+        !response.ok ||
+        response.headers.get("Content-Type") !== "audio/mpeg"
+      ) {
+        throw new Error("Invalid audio file response");
+      }
 
       const audioData = await response.arrayBuffer();
       const audioBlob = new Blob([audioData], { type: "audio/mpeg" });
