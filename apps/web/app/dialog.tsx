@@ -4,13 +4,13 @@ import { api } from "../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import { Switch } from "@repo/ui/src/components/switch";
-import remarkGfm from "remark-gfm";
 import {
   ArrowLeft,
   Camera,
   CircleUserRound,
   ClipboardIcon,
   Delete,
+  Edit,
   Headphones,
   MoreHorizontal,
   Pause,
@@ -24,7 +24,6 @@ import {
 } from "lucide-react";
 import { useInView } from "framer-motion";
 import { Button, InfoTooltip, Tooltip } from "@repo/ui/src/components";
-import { CodeBlock } from "@repo/ui/src/components/codeblock";
 import {
   Avatar,
   AvatarFallback,
@@ -48,7 +47,6 @@ import {
   PopoverTrigger,
 } from "@repo/ui/src/components/popover";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MemoizedReactMarkdown } from "./markdown";
 import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
@@ -73,6 +71,17 @@ import {
 import usePersona from "./lib/hooks/use-persona";
 import React from "react";
 import { FormattedMessage } from "../components/formatted-message";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@repo/ui/src/components/drawer";
+import { Textarea } from "@repo/ui/src/components/textarea";
 
 export const Message = ({
   index,
@@ -94,6 +103,7 @@ export const Message = ({
   const react = useMutation(api.messages.react);
   const speech = useMutation(api.speeches.generate);
   const imagine = useMutation(api.images.imagine);
+  const edit = useMutation(api.messages.edit);
   const posthog = usePostHog();
   const { playVoice, stopVoice, isVoicePlaying } = useVoiceOver();
 
@@ -349,6 +359,72 @@ export const Message = ({
                     )}
                   </Button>
                 </Tooltip>
+              )}
+              {message?.characterId && chatId && (
+                <Drawer>
+                  <DrawerTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                    >
+                      <Edit className="h-5 w-5 lg:h-4 lg:w-4" />
+                    </Button>
+                  </DrawerTrigger>
+                  <DrawerContent>
+                    <div className="mx-auto w-full">
+                      <DrawerHeader>
+                        <DrawerTitle>{t("Edit message")}</DrawerTitle>
+                        <DrawerDescription>
+                          {t("Change the story as you wish.")}
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <form
+                        onSubmit={async (e) => {
+                          e.preventDefault();
+                          const formData = new FormData(
+                            e.target as HTMLFormElement,
+                          );
+                          const editedText = formData.get("editedText");
+                          if (
+                            typeof editedText === "string" &&
+                            editedText.trim() !== ""
+                          ) {
+                            try {
+                              await edit({
+                                messageId: message?._id as Id<"messages">,
+                                editedText,
+                              });
+                              toast.success("Message updated successfully");
+                            } catch (error) {
+                              toast.error("Failed to update message");
+                            }
+                          }
+                        }}
+                      >
+                        <div className="p-4">
+                          <Textarea
+                            name="editedText"
+                            defaultValue={message?.text.trim()}
+                            className="resize-none rounded border p-2"
+                          />
+                        </div>
+                        <DrawerFooter className="flex w-full items-center gap-2">
+                          <DrawerClose className="w-full">
+                            <Button type="submit" className="w-full">
+                              Save
+                            </Button>
+                          </DrawerClose>
+                          <DrawerClose className="w-full">
+                            <Button variant="outline" className="w-full">
+                              Cancel
+                            </Button>
+                          </DrawerClose>
+                        </DrawerFooter>
+                      </form>
+                    </div>
+                  </DrawerContent>
+                </Drawer>
               )}
             </div>
           )}
