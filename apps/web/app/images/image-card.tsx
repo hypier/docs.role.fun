@@ -67,8 +67,8 @@ const ImageDetail = (props: {
               alt={props.prompt}
               width={300}
               height={525}
-              quality={60}
-              className="h-[15rem] w-[10rem] rounded-lg object-cover lg:h-full lg:w-full"
+              quality={90}
+              className="h-[15rem] w-[10rem] rounded-xl object-cover lg:h-full lg:w-full"
             />
           </div>
         )}
@@ -79,13 +79,7 @@ const ImageDetail = (props: {
               {props?.prompt}
             </DialogOrDrawerDescription>
             <div className="grid w-full grid-cols-3 justify-between gap-2">
-              <Tooltip
-                content={
-                  <TooltipContent
-                    title={"Create new image by remixing this image"}
-                  />
-                }
-              >
+              <Tooltip content={"Create new image by remixing this image"}>
                 <Link
                   href={`/images?prompt=${props.prompt}&model=${props.model}`}
                   className="w-full"
@@ -96,18 +90,14 @@ const ImageDetail = (props: {
                   </Button>
                 </Link>
               </Tooltip>
-              <Tooltip
-                content={
-                  <TooltipContent title={"Create character using this image"} />
-                }
-              >
+              <Tooltip content={"Create character using this image"}>
                 <Link
                   href={`/my-characters/create?cardImageUrl=${props.imageUrl}`}
                   className="w-full"
                 >
                   <Button className="w-full gap-1" variant="outline">
                     <Plus className="h-4 w-4" />
-                    {t("New Character")}
+                    {t("Character")}
                   </Button>
                 </Link>
               </Tooltip>
@@ -118,7 +108,7 @@ const ImageDetail = (props: {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <Button className="h-7 w-full gap-1" variant="outline">
+                  <Button className="w-full gap-1" variant="outline">
                     <Download className="h-4 w-4" />
                     Download
                   </Button>
@@ -177,9 +167,9 @@ const ImageCard = (props: {
       <DialogOrDrawerTrigger>
         <AspectRatio
           ratio={1 / 1.75}
-          className="group h-full w-full place-content-center overflow-hidden rounded-lg duration-200 hover:shadow-lg"
+          className="group h-full w-full place-content-center overflow-hidden rounded-xl duration-200 hover:shadow-lg"
         >
-          <Card className="flex h-full w-full items-end rounded-lg p-2">
+          <Card className="flex h-full w-full items-end rounded-xl p-2">
             <div className="absolute top-4 z-[3] hover:z-[4]">
               {props?.isPrivate ? (
                 <Tooltip content="This image is private.">
@@ -196,13 +186,7 @@ const ImageCard = (props: {
                 <ModelBadge modelName={props.model as string} />
               )}
             </div>
-            <Tooltip
-              content={
-                <TooltipContent
-                  title={"Create new image by remixing this image"}
-                />
-              }
-            >
+            <Tooltip content={"Create new image by remixing this image"}>
               <Link
                 href={`/images?prompt=${props.prompt}&model=${props.model}`}
                 className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
@@ -225,7 +209,7 @@ const ImageCard = (props: {
                     width={7.5}
                     height={13}
                     quality={25}
-                    className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-lg object-cover blur-md"
+                    className="pointer-events-none absolute left-0 top-0 h-full w-full rounded-xl object-cover blur-md"
                   />
                 ) : (
                   <Image
@@ -233,15 +217,15 @@ const ImageCard = (props: {
                     alt={""}
                     width={300}
                     height={525}
-                    quality={60}
-                    className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-lg object-cover"
+                    quality={80}
+                    className="pointer-events-none absolute left-0 top-0 z-[1] h-full w-full rounded-xl object-cover"
                   />
                 )}
               </>
             )}
             <CardHeader className="relative z-[2] w-full p-4">
               {props.imageUrl && (
-                <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-lg bg-gradient-to-b from-transparent via-black/30 to-black" />
+                <div className="absolute -bottom-[9px] -left-[10px] h-[calc(100%+2rem)] w-[calc(100%+20px)] rounded-b-xl bg-gradient-to-b from-transparent via-black/30 to-black" />
               )}
               <CardTitle
                 className={`${

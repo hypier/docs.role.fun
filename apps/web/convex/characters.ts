@@ -240,7 +240,7 @@ export const listWithHides = query({
           .withIndex("byUserId", (q) => q.eq("userId", user._id))
           .filter((q) => q.eq(q.field("type"), "characters"))
           .order("desc")
-          .take(512)
+          .take(256)
       : [];
     const hiddenCharacterIds = hides.map((hide: any) => hide.elementId);
 
@@ -401,6 +401,14 @@ export const get = query({
   },
   handler: async (ctx, args) => {
     const character = await ctx.db.get(args.id);
+    if (character?.visibility !== "public") {
+      const user = await getUser(ctx);
+      if (character?.creatorId !== user._id) {
+        throw new ConvexError({
+          message: "You do not have permission to view this character.",
+        });
+      }
+    }
     return character;
   },
 });

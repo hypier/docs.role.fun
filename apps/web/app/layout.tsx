@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { calSans, inter } from "./fonts";
 import { Providers } from "./providers";
@@ -10,8 +9,15 @@ import TabsController from "./tabs-controller";
 import { Suspense } from "react";
 import Spinner from "@repo/ui/src/components/spinner";
 import dynamic from "next/dynamic";
+import type { Viewport } from "next";
 
 export const metadata = constructMetadata();
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 const Pageview = dynamic(() => import("./pageview"), {
   ssr: false,
 });
@@ -23,7 +29,6 @@ export default async function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning={true} lang="en">
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <body className={cx(calSans.variable, inter.variable)}>
         <Suspense fallback={<Spinner />}>
           <Providers>

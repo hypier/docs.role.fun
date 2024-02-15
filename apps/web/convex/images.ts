@@ -288,7 +288,9 @@ export const imagine = mutation({
       userId: user._id,
       imageId: image,
       messageId,
-      prompt: message?.text as string,
+      prompt: character?.genderTag
+        ? `1 ${character?.genderTag}, masterpiece, ${message?.text}`
+        : (message?.text as string),
       referenceImage: character?.cardImageUrl,
       model: "daun-io/openroleplay.ai-animagine-v3",
       isPlus: user?.subscriptionTier === "plus",

@@ -79,7 +79,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
   const images = allImages.filter((image) => image.imageUrl);
   useEffect(() => {
     if (inView) {
-      if (!me?.name && results?.length > 21) {
+      if (!me?.name && results?.length > 31) {
         setIsSignInModalOpen(true);
       } else {
         loadMore(10);
@@ -97,7 +97,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
 
   return (
     <>
-      <div className="relative flex w-full place-content-center py-4 lg:justify-start lg:py-0">
+      <div className="relative flex w-full place-content-center lg:justify-start">
         <Carousel
           opts={{ align: "center" }}
           className="w-[75%] md:w-[80%] lg:w-full"
@@ -112,7 +112,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
                 ) => (
                   <CarouselItem
                     key={tagName + index}
-                    className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6 2xl:basis-1/12"
+                    className="2xl:basis-1/8 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
                   >
                     <Toggle
                       aria-label={`Toggle ${tagName}`}

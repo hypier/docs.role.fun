@@ -89,26 +89,16 @@ export const latestFollowup = internalQuery({
   },
 });
 
-export const autopilot = mutation({
+export const choose = mutation({
   args: {
-    chatId: v.id("chats"),
-    characterId: v.id("characters"),
-    personaId: v.optional(v.id("personas")),
+    chosen: v.string(),
+    query: v.string(),
+    followUpId: v.id("followUps"),
   },
-  handler: async (ctx, { chatId, characterId, personaId }) => {
-    const user = await getUser(ctx);
-    await ctx.scheduler.runAfter(0, internal.llm.answer, {
-      chatId,
-      characterId,
-      personaId: personaId ? personaId : user?.primaryPersonaId,
-      userId: user._id,
-      reverseRole: true,
-    });
-    const character = await ctx.db.get(characterId);
-    const updatedAt = new Date().toISOString();
-    await ctx.db.patch(characterId, {
-      numChats: character?.numChats ? character?.numChats + 1 : 1,
-      updatedAt,
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.followUpId, {
+      chosen: args.chosen,
+      query: args.query,
     });
   },
 });

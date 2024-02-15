@@ -16,6 +16,7 @@ import {
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
 import { useConvexAuth } from "convex/react";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 export const Chat = ({
   name,
@@ -96,16 +97,17 @@ export default function Chats() {
       </CardHeader>
       <ul>
         {results?.length ? (
-          results.map(
-            (chat) =>
-              isAuthenticated && (
+          results.map((chat) => (
+            <ErrorBoundary errorComponent={() => undefined}>
+              {isAuthenticated && (
                 <Chat
                   name={chat.chatName as string}
                   characterId={chat.characterId as Id<"characters">}
                   chatId={chat._id as Id<"chats">}
                 />
-              ),
-          )
+              )}
+            </ErrorBoundary>
+          ))
         ) : (
           <div className="flex h-[100vh] w-full flex-col items-center justify-center gap-2">
             {t("New chats will appear here.")}

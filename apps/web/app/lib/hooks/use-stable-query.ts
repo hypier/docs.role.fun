@@ -21,6 +21,7 @@ export const useStablePaginatedQuery = ((name, ...args) => {
     return { results: [], status: "failed", loadMore: () => {} };
   }
 }) as typeof usePaginatedQuery;
+
 export const useStableQuery = ((name, ...args) => {
   const result = useQuery(name, ...args);
 

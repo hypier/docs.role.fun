@@ -182,15 +182,6 @@ export const regenerate = mutation({
       userId: user._id,
       messageId,
     });
-    const followUp = await ctx.db
-      .query("followUps")
-      .withIndex("byChatId", (q) => q.eq("chatId", chatId))
-      .order("desc")
-      .first();
-    followUp &&
-      (await ctx.db.patch(followUp._id, {
-        isStale: true,
-      }));
   },
 });
 
@@ -337,5 +328,28 @@ export const removeOldChats = internalMutation({
       .take(4000);
     await Promise.all(oldChats.map((chat) => ctx.db.delete(chat._id)));
     return { removed: oldChats.length };
+  },
+});
+
+export const edit = mutation({
+  args: {
+    messageId: v.id("messages"),
+    editedText: v.string(),
+  },
+  handler: async (ctx, { messageId, editedText }) => {
+    const user = await getUser(ctx);
+    const message = await ctx.db.get(messageId);
+    if (!message) {
+      throw new Error("Message not found");
+    }
+    const chat = await ctx.db.get(message.chatId);
+    if (!chat) {
+      throw new Error("Chat not found");
+    }
+    if (chat.userId !== user._id) {
+      throw new Error("User does not own the chat");
+    }
+    await ctx.db.patch(messageId, { text: editedText });
+    return { messageId, editedText };
   },
 });

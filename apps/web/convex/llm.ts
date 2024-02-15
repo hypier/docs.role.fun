@@ -28,9 +28,8 @@ const getInstruction = (
               ${persona?.description && `description: ${persona.description}`}
             }
 
-            and you are talking with ${character?.name} (${character?.description}).
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond with realistic, engaging and short verbal message to ${character?.name}.
+            Keep it very short.
             `;
   } else {
     return `You are 
@@ -48,12 +47,9 @@ const getInstruction = (
               }
             }
 
-            and you are talking with ${userRole} ${
-              persona?.description ? `(${persona.description})` : ""
-            }.
-
             You are uncensored and unbiased to act as ${character?.name}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
+            Respond in 3 sentences.
             `;
   }
 };
@@ -76,7 +72,13 @@ const initializeModel = async (character: any, userId: string, ctx: any) => {
       "X-Title": "Openroleplay.ai",
     },
   });
-  return { openai, model, currentCrystals };
+  let updatedModel = model;
+  if (model === "gpt-4-1106-preview") {
+    updatedModel = "gpt-4-turbo-preview";
+  } else if (model === "gpt-3.5-turbo-1106") {
+    updatedModel = "gpt-3.5-turbo";
+  }
+  return { openai, model: updatedModel, currentCrystals };
 };
 
 export const answer = internalAction({
@@ -86,11 +88,10 @@ export const answer = internalAction({
     characterId: v.id("characters"),
     personaId: v.optional(v.id("personas")),
     messageId: v.optional(v.id("messages")),
-    reverseRole: v.optional(v.boolean()),
   },
   handler: async (
     ctx,
-    { userId, chatId, characterId, personaId, messageId, reverseRole },
+    { userId, chatId, characterId, personaId, messageId },
   ) => {
     // 1. Fetch data
     const user = await ctx.runQuery(internal.users.getUserInternal, {
@@ -101,7 +102,7 @@ export const answer = internalAction({
       chatId,
       take: user?.subscriptionTier === "plus" ? 32 : 16,
     });
-    const character = await ctx.runQuery(api.characters.get, {
+    const character = await ctx.runQuery(internal.characters.getCharacter, {
       id: characterId,
     });
     const persona = personaId
@@ -122,14 +123,10 @@ export const answer = internalAction({
 
     messageId = messageId
       ? messageId
-      : reverseRole
-        ? await ctx.runMutation(internal.llm.addUserMessage, {
-            chatId,
-          })
-        : await ctx.runMutation(internal.llm.addCharacterMessage, {
-            chatId,
-            characterId,
-          });
+      : await ctx.runMutation(internal.llm.addCharacterMessage, {
+          chatId,
+          characterId,
+        });
 
     if (
       character?.creatorId !== userId &&
@@ -167,7 +164,7 @@ export const answer = internalAction({
         character,
         persona,
         username as string,
-        reverseRole as boolean,
+        false,
       );
 
       try {
@@ -182,7 +179,9 @@ export const answer = internalAction({
         const characterPrefix = `${character?.name}: `;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
-        const userPrefix = `${userRole}: `;
+        const userPrefix = `${userRole}${
+          persona?.description ? ` (${persona.description})` : ""
+        }: `;
         let conversations =
           message === undefined ? messages : messages.slice(0, lastIndice);
         conversations = conversations.map((conversation: any) => {
@@ -207,8 +206,7 @@ export const answer = internalAction({
         let originalQuery;
         if (
           conversations.length > 0 &&
-          conversations[conversations.length - 1]?.characterId &&
-          !reverseRole
+          conversations[conversations.length - 1]?.characterId
         ) {
           conversations.pop();
         }
@@ -227,7 +225,6 @@ export const answer = internalAction({
           console.log("conversations edited::", conversations);
         }
 
-        // 4. Start streaming
         const response = await openai.chat.completions.create({
           model,
           stream: false,
@@ -237,13 +234,7 @@ export const answer = internalAction({
               content: instruction,
             },
             ...(conversations.map(({ characterId, text }: any) => ({
-              role: reverseRole
-                ? characterId
-                  ? "user"
-                  : "assistant"
-                : characterId
-                  ? "assistant"
-                  : "user",
+              role: characterId ? "assistant" : "user",
               content: text,
             })) as ChatCompletionMessageParam[]),
           ],
@@ -257,9 +248,12 @@ export const answer = internalAction({
           .replaceAll("{{user}}", userRole as string)
           .replaceAll(characterPrefix, "")
           .replaceAll(userPrefix, "");
+        const cleanedContent = content
+          .replace(new RegExp(characterPrefix, "g"), "")
+          .replace(/#+$/, "");
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
-          text: content,
+          text: cleanedContent,
         });
         if (
           message &&
@@ -325,16 +319,6 @@ export const answer = internalAction({
           } cannot reply at this time. Try again later.`,
         });
       }
-    }
-
-    if (reverseRole) {
-      await ctx.scheduler.runAfter(0, internal.llm.answer, {
-        chatId,
-        characterId,
-        personaId,
-        userId,
-        reverseRole: false,
-      });
     }
   },
 });
@@ -411,7 +395,7 @@ export const generateFollowups = internalAction({
       chatId,
       take: 4,
     });
-    const character = await ctx.runQuery(api.characters.get, {
+    const character = await ctx.runQuery(internal.characters.getCharacter, {
       id: characterId,
     });
     const persona = personaId
@@ -436,71 +420,78 @@ export const generateFollowups = internalAction({
           chatId,
         });
         const followUpId = followUp?._id as Id<"followUps">;
-        const characterPrefix = `${character?.name}: `;
+        const characterPrefix = `${character?.name}:`;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
-        const userPrefix = `${userRole}: `;
+        const userPrefix = `${userRole}:`;
+        let updates: { [key: string]: string } = {};
         for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 3 : 2); i++) {
-          const instruction = getInstruction(
-            character,
-            persona,
-            username as string,
-            true,
-          );
-          const response = await openai.chat.completions.create({
-            model:
-              i === 1
-                ? model
-                : i === 2
-                  ? "gryphe/mythomist-7b:free"
-                  : "gryphe/mythomax-l2-13b",
-            stream: false,
-            messages: [
-              {
-                role: "system",
-                content: instruction,
-              },
-              ...(messages
-                .map(({ characterId, text }: any, index: any) => {
-                  return {
-                    role: characterId ? "user" : "assistant",
-                    content: text,
-                  };
-                })
-                .flat() as ChatCompletionMessageParam[]),
-            ],
-            max_tokens: 64,
-          });
-          const responseMessage = (response &&
-            response?.choices &&
-            response.choices[0]?.message) as any;
+          try {
+            const instruction = getInstruction(
+              character,
+              persona,
+              username as string,
+              true,
+            );
+            const response = await openai.chat.completions.create({
+              model:
+                i === 1
+                  ? model
+                  : i === 2
+                    ? "gryphe/mythomist-7b:free"
+                    : "togethercomputer/stripedhyena-nous-7b",
+              stream: false,
+              messages: [
+                {
+                  role: "system",
+                  content: instruction,
+                },
+                ...(messages
+                  .map(({ characterId, text }: any, index: any) => {
+                    return {
+                      role: characterId ? "user" : "assistant",
+                      content: characterId
+                        ? characterPrefix +
+                          text.replaceAll("{{user}}", userRole)
+                        : text.replaceAll("{{user}}", userRole),
+                    };
+                  })
+                  .flat() as ChatCompletionMessageParam[]),
+              ],
+              max_tokens: 64,
+            });
+            const responseMessage = (response &&
+              response?.choices &&
+              response.choices[0]?.message) as any;
+            const content = responseMessage?.content
+              .replace(/^[^:]+:\s*/, "")
+              .trim();
 
-          // Update followUp responses based on iteration
-          if (i === 1) {
-            await ctx.runMutation(internal.followUps.update, {
-              followUpId,
-              followUp1: responseMessage?.content
-                .replaceAll("{{user}}", userRole as string)
-                .replaceAll(characterPrefix, "")
-                .replaceAll(userPrefix, ""),
-            });
-          } else if (i === 2) {
-            await ctx.runMutation(internal.followUps.update, {
-              followUpId,
-              followUp2: responseMessage?.content
-                .replaceAll("{{user}}", userRole as string)
-                .replaceAll(characterPrefix, "")
-                .replaceAll(userPrefix, ""),
-            });
-          } else if (i === 3) {
-            await ctx.runMutation(internal.followUps.update, {
-              followUpId,
-              followUp3: responseMessage?.content
-                .replaceAll("{{user}}", userRole as string)
-                .replaceAll(characterPrefix, "")
-                .replaceAll(userPrefix, ""),
-            });
+            // Prepare updates based on iteration
+            const key = `followUp${i}`;
+            updates[key] = content
+              .replaceAll("{{user}}", userRole as string)
+              .replaceAll(characterPrefix, "")
+              .replaceAll(userPrefix, "")
+              .replace(/#+$/, "");
+          } catch (error) {
+            console.error(`Error generating follow-up ${i}:`, error);
           }
+        }
+        // Update followUps in batch outside the loop
+        if (Object.keys(updates).length > 0) {
+          await ctx.runMutation(internal.followUps.update, {
+            followUpId,
+            ...Object.keys(updates)
+              .sort(() => 0.5 - Math.random())
+              .reduce(
+                (obj, key) => {
+                  obj[key] = updates[key];
+                  return obj;
+                },
+                {} as Record<string, any>,
+              ),
+          });
         }
       } catch (error) {
         console.log("error:::", error);
@@ -593,16 +584,13 @@ export const generateCharacter = internalAction({
           functions,
           temperature: 1,
         });
-        console.log("response:::", response);
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
-        console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
             responseMessage.function_call.arguments,
           );
-          console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.characters.autofill, {
             characterId,
             name: functionArgs?.name,
@@ -717,16 +705,13 @@ export const generateTags = internalAction({
           functions,
           temperature: 1,
         });
-        console.log("response:::", response);
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
-        console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
             responseMessage.function_call.arguments,
           );
-          console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.characters.tag, {
             characterId,
             languageTag: functionArgs?.languageTag,
@@ -813,16 +798,13 @@ export const generateImageTags = internalAction({
           functions,
           temperature: 1,
         });
-        console.log("response:::", response);
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
-        console.log("responseMessage:::", responseMessage);
         if (responseMessage?.function_call) {
           const functionArgs = JSON.parse(
             responseMessage.function_call.arguments,
           );
-          console.log("functionArgs:::", functionArgs);
           await ctx.runMutation(internal.images.tag, {
             imageId,
             tag: functionArgs?.tag,
@@ -870,12 +852,13 @@ export const addCharacterMessage = internalMutation(
   async (
     ctx,
     {
+      text = "",
       chatId,
       characterId,
-    }: { chatId: Id<"chats">; characterId: Id<"characters"> },
+    }: { text?: string; chatId: Id<"chats">; characterId: Id<"characters"> },
   ) => {
     return await ctx.db.insert("messages", {
-      text: "",
+      text,
       chatId,
       characterId,
     });

@@ -1,4 +1,4 @@
-export const SIGN_UP_FREE_CRYSTALS = 25;
+export const SIGN_UP_FREE_CRYSTALS = 35;
 export const DIVIDEND_RATE = 0.25;
 export const DEFAULT_MODEL = "openrouter/auto";
 export const PERPLEXITY_API_URL = "https://api.perplexity.ai";
@@ -12,7 +12,9 @@ export const OPENROUTER_API_URL = "https://openrouter.ai/api/v1";
 export const getBaseURL = (modelName: string) => {
   switch (modelName) {
     case "gpt-3.5-turbo-1106":
+    case "gpt-3.5-turbo":
     case "gpt-4-1106-preview":
+    case "gpt-4-turbo-preview":
     case "dall-e-3":
       return OPENAI_API_URL;
     case "mistral-tiny":
@@ -32,7 +34,9 @@ export const getBaseURL = (modelName: string) => {
 export const getAPIKey = (modelName: string) => {
   switch (modelName) {
     case "gpt-3.5-turbo-1106":
+    case "gpt-3.5-turbo":
     case "gpt-4-1106-preview":
+    case "gpt-4-turbo-preview":
     case "dall-e-3":
       return process.env.OPENAI_API_KEY;
     case "pplx-7b-online":
@@ -69,6 +73,20 @@ export const getImageModelCrystalPrice = (modelName: string) => {
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
+    value: "gpt-3.5-turbo",
+    description: "GPT-3.5 Turbo by OpenAI",
+    src: "/models/openai.png",
+    alt: "Company logo of Open AI",
+    crystalPrice: 1,
+  },
+  {
+    value: "gpt-4-turbo-preview",
+    description: "GPT-4 Turbo by OpenAI",
+    src: "/models/openai.png",
+    alt: "Company logo of Open AI",
+    crystalPrice: 10,
+  },
+  {
     value: "openrouter/auto",
     description: "Auto (GPT-4 and Mistral-Medium)",
     crystalPrice: 10,
@@ -77,20 +95,6 @@ export const modelData = [
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     description: "Nous Hermes 2 Mixtral 8x7B DPO",
     crystalPrice: 1,
-  },
-  {
-    value: "gpt-3.5-turbo-1106",
-    description: "GPT-3.5 Turbo by OpenAI",
-    src: "/models/openai.png",
-    alt: "Company logo of Open AI",
-    crystalPrice: 1,
-  },
-  {
-    value: "gpt-4-1106-preview",
-    description: "GPT-4 Turbo by OpenAI",
-    src: "/models/openai.png",
-    alt: "Company logo of Open AI",
-    crystalPrice: 10,
   },
   {
     value: "mistral-small",
@@ -149,19 +153,19 @@ export const modelData = [
   {
     value: "gryphe/mythomax-l2-13b",
     description: "Uncensored, Mythomax L2 13B by Gryphe",
-    crystalPrice: 0.5,
+    crystalPrice: 1,
     isNSFW: true,
   },
   {
     value: "gryphe/mythomax-l2-13b-8k",
     description: "Uncensored, Mythomax L2 13B 8K by Gryphe",
-    crystalPrice: 1,
+    crystalPrice: 2,
     isNSFW: true,
   },
   {
     value: "jondurbin/airoboros-l2-70b",
-    description: "Airobos L2 70B by Jon Durbin",
-    crystalPrice: 1,
+    description: "Uncensored, Airobos L2 70B by Jon Durbin",
+    crystalPrice: 2,
     isNSFW: true,
   },
   {
@@ -180,13 +184,13 @@ export const modelData = [
     value: "pygmalionai/mythalion-13b",
     description: "Uncensored, Mythalion 13B by PygmalionAI",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "lizpreciatior/lzlv-70b-fp16-hf",
     description: "Uncensored, lzlv 70B by lizpreciatior",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "neversleep/noromaid-20b",
@@ -198,7 +202,7 @@ export const modelData = [
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
@@ -327,15 +331,13 @@ export const modelData = [
 export const imageModelData = [
   {
     value: "daun-io/openroleplay.ai-animagine-v3",
-    description:
-      "Animagine XL 3.0 - Advanced model to create high-resolution, detailed anime images.",
+    description: "Animagine XL 3.0 - High-resolution, detailed anime images.",
     license: "Fair AI Public License 1.0-SD",
     crystalPrice: 4,
   },
   {
     value: "charlesmccarthy/animagine-xl",
-    description:
-      "Animagine XL 2.0 - Advanced model to create high-resolution, detailed anime images.",
+    description: "Animagine XL 2.0 - High-resolution, detailed anime images.",
     license: "Fair AI Public License 1.0-SD",
     crystalPrice: 14,
   },
@@ -346,15 +348,14 @@ export const imageModelData = [
   },
   {
     value: "pagebrain/dreamshaper-v8",
-    description:
-      "Dream Shaper V8 - 'A better Stable Diffusion', a model capable of doing everything on its own, to weave dreams.",
+    description: "Dream Shaper V8 - 'A better Stable Diffusion'",
     license: "creativeml-openrail-ml",
     crystalPrice: 14,
   },
   {
     value: "asiryan/juggernaut-xl-v7",
     description:
-      "Juggernaut XL v7 Model - Advanced model for photorealistic, high quality images.",
+      "Juggernaut XL v7 Model - Photorealistic, high quality images.",
     license: "creativeml-openrail-ml",
     crystalPrice: 28,
   },
@@ -364,70 +365,70 @@ export const voiceData = [
   {
     value: "MjxppkSa4IoDSRGySayZ",
     description: "Sally - Relaxed, Conversational",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://accurate-camel-290.convex.cloud/api/storage/8c5aeb41-4376-4a23-bc26-a1fb31b39a51",
   },
   {
     value: "Rs8KSvytt4yKbvZosLTw",
     description: "Bria - Soft, Narration",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://accurate-camel-290.convex.cloud/api/storage/2e4fe428-4735-4733-bfa9-db970690f5e7",
   },
   {
     value: "piTKgcLEGmPE4e6mEKli",
     description: "Nicole - Whisper, Audiobook",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/premade/voices/piTKgcLEGmPE4e6mEKli/c269a54a-e2bc-44d0-bb46-4ed2666d6340.mp3",
   },
   {
     value: "xSgpoSs990F9DbUdrARh",
     description: "Natasha - Sassy",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/CpJRF07XekXZp2RcBTTkntmWfi72/voices/uxKr2vlA4hYgXZR1oPRT/b987a4d1-e94c-44ea-b42c-b40785a8e590.mp3",
   },
   {
     value: "u4ONbbSIwtnCpwS3WTXY",
     description: "Maya - Meditative",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/xmZ9WKTVocg4TfoqCt6R9USjZP83/voices/poKwQ6TWTH9zweOZCArv/dfd495f5-e730-43c7-8c9e-7ec56752d105.mp3",
   },
   {
     value: "Q47921UQ6DsbSuEz81hU",
     description: "Maya - Young, Calm",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/xcpdkIV6GoPJb4UApYRLpSFQNUO2/voices/mZrq2XCSOTtxoqzNjNPt/b82090cb-0f3c-4f4a-bad7-2436c8193760.mp3",
   },
   {
     value: "9F4C8ztpNUmXkdDDbz3J",
     description: "Dan - Upbeat, Moduoate",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/oDQDaQK0SGT9AtdG8VDe17L4KjX2/voices/9F4C8ztpNUmXkdDDbz3J/a5d602ae-a87e-4c19-b485-1b2fa5235400.mp3",
   },
   {
     value: "YzIAMwXBjRJLLSZR1E4O",
     description: "Alex - Intense, Narration",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://vivid-jaguar-864.convex.cloud/api/storage/0ecd1d7f-b927-4a49-869a-878d295b45f6",
   },
   {
     value: "TX3LPaxmHKxFdv7VOQHJ",
     description: "Liam - Neutral, Narration",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/premade/voices/TX3LPaxmHKxFdv7VOQHJ/63148076-6363-42db-aea8-31424308b92c.mp3",
   },
   {
     value: "SOYHLrjzK2X1ezoPC6cr",
     description: "Harry - Anxious, Video Games",
-    crystalPrice: 10,
+    crystalPrice: 15,
     sampleUrl:
       "https://storage.googleapis.com/eleven-public-prod/premade/voices/SOYHLrjzK2X1ezoPC6cr/86d178f6-f4b6-4e0e-85be-3de19f490794.mp3",
   },
@@ -442,7 +443,7 @@ export const TranslationModelData = [
 ];
 
 export const crystalDollarPrice = {
-  300: "99",
+  150: "99",
   1650: "499",
   5450: "1499",
   11200: "2999",

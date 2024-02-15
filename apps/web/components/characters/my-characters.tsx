@@ -64,11 +64,7 @@ export function MyCharacters() {
           {t("My Characters")}
           <InfoTooltip
             content={
-              <TooltipContent
-                title={
-                  "Create interactive characters using our tools. All characters on the home page were made this way."
-                }
-              />
+              "Create interactive characters using our tools. All characters on the home page were made this way."
             }
           />
         </CardTitle>

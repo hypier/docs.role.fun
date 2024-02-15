@@ -4,14 +4,13 @@ import { api } from "../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { Id } from "../convex/_generated/dataModel";
 import { Switch } from "@repo/ui/src/components/switch";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
 import {
   ArrowLeft,
   Camera,
   CircleUserRound,
   ClipboardIcon,
   Delete,
+  Edit,
   Headphones,
   MoreHorizontal,
   Pause,
@@ -20,13 +19,11 @@ import {
   Send,
   Share,
   Sparkles,
-  StepForward,
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
 import { useInView } from "framer-motion";
 import { Button, InfoTooltip, Tooltip } from "@repo/ui/src/components";
-import { CodeBlock } from "@repo/ui/src/components/codeblock";
 import {
   Avatar,
   AvatarFallback,
@@ -50,11 +47,9 @@ import {
   PopoverTrigger,
 } from "@repo/ui/src/components/popover";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MemoizedReactMarkdown } from "./markdown";
 import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
-import useMyUsername from "./lib/hooks/use-my-username";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Image from "next/image";
@@ -73,54 +68,20 @@ import {
   useMachineTranslation,
   useTranslationStore,
 } from "./lib/hooks/use-machine-translation";
-
-export const FormattedMessage = ({
-  message,
-  username,
-}: {
-  message: any;
-  username?: string;
-}) => {
-  const { t } = useTranslation();
-  const baseText = message?.text?.startsWith("Not enough crystals.")
-    ? `${message?.text} [${t("Crystal Top-up")}](/crystals)`
-    : message?.text;
-  const translationText = message?.translation
-    ? `${message?.translation} *[${message?.text.trim()}]*`
-    : "";
-  const textContent = translationText ? translationText : baseText;
-  return (
-    <MemoizedReactMarkdown
-      className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 "
-      remarkPlugins={[remarkGfm, remarkMath]}
-      components={{
-        a({ children, href, target, rel }) {
-          return (
-            <a href={href} rel={rel} target={target} className="underline">
-              {children}
-            </a>
-          );
-        },
-        p({ children }) {
-          return <p className="mb-2 last:mb-0">{children}</p>;
-        },
-        code({ node, className, children, ...props }: any) {
-          const match = /language-(\w+)/.exec(className || "");
-          return (
-            <CodeBlock
-              key={Math.random()}
-              language={(match && match[1]) || ""}
-              value={String(children).replace(/\n$/, "")}
-              {...props}
-            />
-          );
-        },
-      }}
-    >
-      {textContent?.replaceAll("{{user}}", username)}
-    </MemoizedReactMarkdown>
-  );
-};
+import usePersona from "./lib/hooks/use-persona";
+import React from "react";
+import { FormattedMessage } from "../components/formatted-message";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@repo/ui/src/components/drawer";
+import { Textarea } from "@repo/ui/src/components/textarea";
 
 export const Message = ({
   index,
@@ -142,6 +103,7 @@ export const Message = ({
   const react = useMutation(api.messages.react);
   const speech = useMutation(api.speeches.generate);
   const imagine = useMutation(api.images.imagine);
+  const edit = useMutation(api.messages.edit);
   const posthog = usePostHog();
   const { playVoice, stopVoice, isVoicePlaying } = useVoiceOver();
 
@@ -188,10 +150,10 @@ export const Message = ({
           message?.characterId ? "justify-start" : "justify-end"
         }`}
       >
-        <Avatar className="h-8 w-8">
+        <Avatar className="h-6 w-6">
           <AvatarImage
             alt={`Character card of ${name}`}
-            src={message?.characterId ? cardImageUrl : "undefined"}
+            src={cardImageUrl ? cardImageUrl : "undefined"}
             className="object-cover"
           />
           <AvatarFallback>
@@ -201,58 +163,17 @@ export const Message = ({
         {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
       {message?.text === "" ? (
-        <div className="animate-pulse whitespace-pre-wrap rounded-xl rounded-tr-none bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
-          {thinkingMessage}
-          {thinkingDots}
+        <div className="whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[36rem] lg:max-w-[48rem]">
+          <span className="animate-pulse">
+            {thinkingMessage}
+            {thinkingDots}
+          </span>
         </div>
       ) : (
         <>
-          <div className="relative whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[30rem] lg:max-w-[40rem]">
-            <FormattedMessage message={message} username={username} />
-            {message?.characterId && chatId && !isRegenerating && (
-              <div className="absolute -right-4 -top-4 lg:-right-2.5 lg:-top-2.5">
-                <Tooltip
-                  content={
-                    <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 4 )
-                    </span>
-                  }
-                  desktopOnly={true}
-                >
-                  <Button
-                    className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
-                    variant="outline"
-                    onClick={async () => {
-                      setIsImagining(true);
-                      try {
-                        await imagine({
-                          messageId: message?._id as Id<"messages">,
-                        });
-                        posthog.capture("imagine");
-                      } catch (error) {
-                        setIsImagining(false);
-                        if (error instanceof ConvexError) {
-                          openDialog();
-                        } else {
-                          toast.error("An unknown error occurred");
-                        }
-                      }
-                    }}
-                    disabled={message?.imageUrl || isImagining}
-                  >
-                    {isImagining ? (
-                      <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
-                    ) : (
-                      <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
-                    )}
-                  </Button>
-                </Tooltip>
-              </div>
-            )}
-          </div>
-
+          <FormattedMessage message={message} username={username} />
           {isImagining ? (
-            <div className="relative h-[30rem] w-[20rem] rounded-lg bg-muted">
+            <div className="relative h-[30rem] w-[20rem] rounded-xl bg-muted">
               <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-2 text-base lg:text-sm">
                 <Spinner />
                 <div className="flex items-center gap-2">
@@ -273,18 +194,14 @@ export const Message = ({
                 alt={message?.text}
                 width={525}
                 height={300}
-                className="h-[30rem] w-[20rem] rounded-lg"
+                className="h-[30rem] w-[20rem] rounded-xl"
               />
             )
           )}
           {message?.characterId && chatId && !isRegenerating && (
-            <div className="flex w-fit items-center justify-start rounded-full bg-foreground/10 p-1 backdrop-blur">
+            <div className="flex w-fit items-center justify-start rounded-full bg-background/25 p-1 backdrop-blur">
               <Tooltip
-                content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-                    {t("Copy message to clipboard")}
-                  </span>
-                }
+                content={t("Copy message to clipboard")}
                 desktopOnly={true}
               >
                 <Button
@@ -345,7 +262,7 @@ export const Message = ({
               </Button>
               <Tooltip
                 content={
-                  <span className="flex gap-1 p-2 text-xs text-muted-foreground">
+                  <span className="flex gap-1 p-2">
                     {t("Listen")} (<Crystal className="h-4 w-4" /> x 10 )
                   </span>
                 }
@@ -387,7 +304,6 @@ export const Message = ({
                   )}
                 </Button>
               </Tooltip>
-
               {message?.speechUrl && (isSpeaking || isVoicePlaying) && (
                 <audio
                   autoPlay
@@ -401,6 +317,112 @@ export const Message = ({
                   <source src={message?.speechUrl} type="audio/mpeg" />
                 </audio>
               )}
+              {message?.characterId && chatId && !isRegenerating && (
+                <Tooltip
+                  content={
+                    <span className="flex gap-1 p-2">
+                      {t(`Selfie`)} ( <Crystal className="h-4 w-4" /> x 4 )
+                    </span>
+                  }
+                  desktopOnly={true}
+                >
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                    onClick={async () => {
+                      setIsImagining(true);
+                      try {
+                        await imagine({
+                          messageId: message?._id as Id<"messages">,
+                        });
+                        posthog.capture("imagine");
+                      } catch (error) {
+                        setIsImagining(false);
+                        if (error instanceof ConvexError) {
+                          openDialog();
+                        } else {
+                          toast.error("An unknown error occurred");
+                        }
+                      }
+                    }}
+                    disabled={message?.imageUrl || isImagining}
+                  >
+                    {isImagining ? (
+                      <Spinner className="h-5 w-5 lg:h-4 lg:w-4" />
+                    ) : (
+                      <Camera className="h-5 w-5 lg:h-4 lg:w-4" />
+                    )}
+                  </Button>
+                </Tooltip>
+              )}
+              {message?.characterId && chatId && (
+                <Drawer>
+                  <DrawerTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                    >
+                      <Edit className="h-5 w-5 lg:h-4 lg:w-4" />
+                    </Button>
+                  </DrawerTrigger>
+                  <DrawerContent>
+                    <div className="mx-auto w-full">
+                      <DrawerHeader>
+                        <DrawerTitle>{t("Edit message")}</DrawerTitle>
+                        <DrawerDescription>
+                          {t("Change the story as you wish.")}
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <form
+                        onSubmit={async (e) => {
+                          e.preventDefault();
+                          const formData = new FormData(
+                            e.target as HTMLFormElement,
+                          );
+                          const editedText = formData.get("editedText");
+                          if (
+                            typeof editedText === "string" &&
+                            editedText.trim() !== ""
+                          ) {
+                            try {
+                              await edit({
+                                messageId: message?._id as Id<"messages">,
+                                editedText,
+                              });
+                              toast.success(t("Message updated successfully"));
+                            } catch (error) {
+                              toast.error(t("Failed to update message"));
+                            }
+                          }
+                        }}
+                      >
+                        <div className="p-4">
+                          <Textarea
+                            name="editedText"
+                            defaultValue={message?.text.trim()}
+                            className="resize-none"
+                            rows={5}
+                          />
+                        </div>
+                        <DrawerFooter className="flex w-full items-center gap-2">
+                          <DrawerClose className="w-full">
+                            <Button type="submit" className="w-full">
+                              {t("Save")}
+                            </Button>
+                          </DrawerClose>
+                          <DrawerClose className="w-full">
+                            <Button variant="outline" className="w-full">
+                              {t("Cancel")}
+                            </Button>
+                          </DrawerClose>
+                        </DrawerFooter>
+                      </form>
+                    </div>
+                  </DrawerContent>
+                </Drawer>
+              )}
             </div>
           )}
         </>
@@ -409,58 +431,42 @@ export const Message = ({
   );
 };
 
-export const Inspirations = ({
-  chatId,
-  characterId,
-}: {
-  chatId: Id<"chats">;
-  characterId: Id<"characters">;
-}) => {
-  const { t } = useTranslation();
-  const autopilot = useMutation(api.followUps.autopilot);
-  return (
-    <Tooltip
-      content={
-        <span className="flex gap-1 p-2 text-xs text-muted-foreground">
-          <Crystal className="h-4 w-4" /> {t("Continue")}
-        </span>
-      }
-      desktopOnly={true}
-    >
-      <Button
-        variant="outline"
-        onClick={() => {
-          autopilot({ chatId, characterId });
-        }}
-        size="icon"
-        type="button"
-      >
-        <Sparkles className="h-4 w-4" />
-      </Button>
-    </Tooltip>
-  );
-};
-
 interface ChatOptionsPopoverProps {
   characterId: Id<"characters">;
   chatId: Id<"chats">;
   name: string;
+  showEdit: boolean;
 }
 
 const ChatOptionsPopover = ({
   characterId,
   chatId,
   name,
+  showEdit,
 }: ChatOptionsPopoverProps) => {
   const { t } = useTranslation();
   const router = useRouter();
   const goBack = router.back;
   const remove = useMutation(api.chats.remove);
-  const newChat = useMutation(api.chats.create);
   return (
     <Popover>
       <AlertDialog>
         <PopoverContent className="w-52 p-1">
+          {showEdit && (
+            <Link
+              href={`/my-characters/create${
+                characterId ? `?id=${characterId}` : ""
+              }`}
+            >
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-1 text-muted-foreground"
+              >
+                <Edit className="h-4 w-4 p-0.5" />
+                {t("Edit character")}
+              </Button>
+            </Link>
+          )}
           <Link
             href={`/my-characters/create${
               characterId ? `?remixId=${characterId}` : ""
@@ -563,9 +569,62 @@ const ChatOptionsPopover = ({
   );
 };
 
+interface FollowUpsProps {
+  followUps: any;
+  sendAndReset: (message: string) => void;
+  setScrolled: (scrolled: boolean) => void;
+  isLastMessageLoaded: boolean;
+  query: string;
+}
+
+const FollowUps = ({
+  followUps,
+  sendAndReset,
+  setScrolled,
+  isLastMessageLoaded,
+  query,
+}: FollowUpsProps) => {
+  const choose = useMutation(api.followUps.choose);
+  return (
+    <>
+      {followUps && !followUps?.isStale && isLastMessageLoaded && (
+        <div className="z-10 flex w-full flex-col justify-center gap-2 px-6 xl:flex-row xl:justify-start">
+          {["followUp1", "followUp2", "followUp3"].map(
+            (followUpKey) =>
+              followUps[followUpKey] && (
+                <Button
+                  key={followUpKey}
+                  onClick={() => {
+                    sendAndReset(followUps[followUpKey] as string);
+                    choose({
+                      followUpId: followUps._id,
+                      chosen: followUps[followUpKey] as string,
+                      query,
+                    });
+                    setScrolled(false);
+                  }}
+                  variant="outline"
+                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-xl border-b-2 bg-background p-2 text-left font-normal"
+                >
+                  <Sparkles className="h-4 w-4 text-blue-500" />
+                  <span className="w-fit lg:max-w-screen-sm">
+                    {followUps[followUpKey]}
+                  </span>
+                </Button>
+              ),
+          )}
+        </div>
+      )}
+    </>
+  );
+};
+
 export function Dialog({
   name,
   description,
+  creatorName,
+  userId,
+  creatorId,
   model,
   cardImageUrl,
   chatId,
@@ -573,6 +632,9 @@ export function Dialog({
 }: {
   name: string;
   description?: string;
+  creatorName?: string | null | undefined;
+  userId?: Id<"users">;
+  creatorId?: Id<"users">;
   model: string;
   cardImageUrl?: string;
   chatId: Id<"chats">;
@@ -610,7 +672,8 @@ export function Dialog({
       ),
     [remoteMessages, ""],
   );
-  const username = useMyUsername();
+  const persona = usePersona();
+  const username = persona?.name;
   const sendMessage = useMutation(api.messages.send);
   const posthog = usePostHog();
 
@@ -641,6 +704,10 @@ export function Dialog({
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setScrolled(false);
+  }, [followUps]);
+
+  useEffect(() => {
     if (isScrolled) {
       return;
     }
@@ -658,6 +725,10 @@ export function Dialog({
           top: listRef.current.scrollHeight,
           behavior: "smooth",
         });
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
       }
     }, 0);
   }, [messages, isScrolled]);
@@ -672,17 +743,28 @@ export function Dialog({
 
   const lastMessage = messages?.[messages.length - 1]?.text || "";
   const isLastMessageLoaded = lastMessage?.length > 0 ?? false;
+
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full lg:fixed lg:left-0 lg:right-0 lg:top-16 lg:h-[calc(100%-0.875rem)] lg:overflow-hidden lg:rounded-xl lg:border lg:bg-background">
       {cardImageUrl && (
-        <Image
-          src={cardImageUrl}
-          alt={`Character card of ${name}`}
-          width={300}
-          height={525}
-          quality={60}
-          className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 sm:hidden"
-        />
+        <>
+          <Image
+            src={cardImageUrl}
+            alt={`Character card of ${name}`}
+            width={300}
+            height={525}
+            quality={60}
+            className="pointer-events-none fixed left-0 top-0 -z-10 h-[100vh] w-[100vw] object-cover opacity-50 lg:inset-0 lg:top-20 lg:mx-auto lg:w-auto lg:opacity-75"
+          />
+          <Image
+            src={cardImageUrl}
+            alt={`Character card of ${name}`}
+            width={300}
+            height={525}
+            quality={60}
+            className="pointer-events-none fixed left-0 top-0 -z-20 hidden w-[100vw] opacity-15 blur-md lg:inset-0 lg:top-20 lg:mx-auto lg:block"
+          />
+        </>
       )}
       {chatId && (
         <div className="fixed top-0 z-50 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:sticky lg:rounded-t-lg lg:px-6">
@@ -695,7 +777,7 @@ export function Dialog({
             <ModelBadge modelName={model as string} showCredits={true} />
             <Badge variant="model">
               <Headphones className="h-4 w-4 p-0.5" /> /
-              <Crystal className="h-4 w-4 p-0.5" /> x 10
+              <Crystal className="h-4 w-4 p-0.5" /> x 15
             </Badge>
           </div>
           <div className="flex items-center gap-1">
@@ -703,6 +785,7 @@ export function Dialog({
               characterId={characterId}
               chatId={chatId}
               name={name}
+              showEdit={userId == creatorId}
             />
             <Button
               onClick={() => {
@@ -724,10 +807,10 @@ export function Dialog({
                   },
                 });
               }}
-              className="flex h-8"
+              className="flex aspect-square h-8 gap-0.5 lg:aspect-auto"
               variant="outline"
             >
-              <Plus className="h-4 w-4 p-0.5" />
+              <Plus className="h-4 w-4" />
               <span className="hidden lg:inline"> {t("New chat")}</span>
             </Button>
           </div>
@@ -762,13 +845,16 @@ export function Dialog({
           </div>
         )}
         {description && (
-          <div className="m-4 my-6 rounded-lg bg-black/50 p-4 italic text-white backdrop-blur-md sm:hidden">
+          <div className="m-4 my-6 flex flex-col rounded-xl bg-background/50 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
-            {mt(description, translations)}
+            <div>{mt(description, translations)}</div>
+            {creatorName && (
+              <div className="text-muted-foreground">by @{creatorName}</div>
+            )}
           </div>
         )}
         <div
-          className="mx-2 flex h-fit flex-col gap-8 rounded-lg p-4"
+          className="mx-2 flex h-fit flex-col gap-8 rounded-xl p-4"
           ref={listRef}
           onWheel={() => {
             setScrolled(true);
@@ -777,8 +863,8 @@ export function Dialog({
           <div ref={ref} />
           {remoteMessages === undefined ? (
             <>
-              <div className="h-5 animate-pulse rounded-md bg-black/10" />
-              <div className="h-9 animate-pulse rounded-md bg-black/10" />
+              <div className="h-5 rounded-md bg-black/10" />
+              <div className="h-9 rounded-md bg-black/10" />
             </>
           ) : (
             messages.map((message, i) => (
@@ -787,65 +873,25 @@ export function Dialog({
                 key={message._id}
                 name={name}
                 message={message}
-                cardImageUrl={cardImageUrl as string}
+                cardImageUrl={
+                  message?.characterId
+                    ? (cardImageUrl as string)
+                    : (persona?.cardImageUrl as string)
+                }
                 username={(username as string) || "You"}
                 chatId={chatId}
               />
             ))
           )}
         </div>
-        {followUps && !followUps?.isStale && isLastMessageLoaded && (
-          <div className="mb-[8rem] flex w-full flex-col justify-center gap-2 px-6 lg:mb-4">
-            {followUps?.followUp1 &&
-              followUps?.followUp1 !== "Tell me more" && (
-                <Button
-                  onClick={() => {
-                    sendAndReset(followUps?.followUp1 as string);
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps.followUp1}
-                  </span>
-                </Button>
-              )}
-            {followUps?.followUp2 &&
-              followUps?.followUp2 !== "Tell me more" && (
-                <Button
-                  onClick={() => {
-                    sendAndReset(followUps?.followUp2 as string);
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps.followUp2}
-                  </span>
-                </Button>
-              )}
-            {followUps?.followUp3 &&
-              followUps?.followUp3 !== "Tell me more" && (
-                <Button
-                  onClick={() => {
-                    sendAndReset(followUps?.followUp3 as string);
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-lg p-2 text-left"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps.followUp3}
-                  </span>
-                </Button>
-              )}
-          </div>
-        )}
+        <FollowUps
+          followUps={followUps}
+          sendAndReset={sendAndReset}
+          setScrolled={setScrolled}
+          isLastMessageLoaded={isLastMessageLoaded}
+          query={messages[messages.length - 1]?.text || ""}
+        />
+        <div className="mb-[8rem] lg:mb-4" />
       </div>
       <form
         className="fixed bottom-0 z-50 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:sticky lg:rounded-br-lg"
@@ -853,7 +899,7 @@ export function Dialog({
       >
         <div className="flex h-full w-full items-center justify-center gap-4 px-4">
           <input
-            className="h-10 w-full resize-none border-none bg-background !text-[16px] text-base scrollbar-hide focus-visible:ring-0"
+            className="h-10 w-full resize-none border-none bg-background text-[16px] scrollbar-hide focus-visible:ring-0 lg:text-base"
             autoFocus
             name="message"
             placeholder={t("Send a message")}
@@ -869,7 +915,7 @@ export function Dialog({
             }}
           />
           <Button disabled={input === ""} size="icon">
-            <Send className="h-4 w-4" />
+            <Send className="h-5 w-5" />
           </Button>
         </div>
       </form>

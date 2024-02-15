@@ -7,7 +7,7 @@ import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../app/lib/hooks/use-stable-query";
-import { useConvexAuth } from "convex/react";
+import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import { Button } from "@repo/ui/src/components";
@@ -94,15 +94,17 @@ const Discover = () => {
   const username = me?.name;
 
   return (
-    <div className="relative flex flex-col gap-4 lg:gap-8">
-      {isAuthenticated && <CheckinDialog />}
-      {isAuthenticated && <MainChats />}
-      {!isAuthenticated && !username && <PreferenceDialog />}
-      <SignInDialog
-        isOpen={isSignInModalOpen}
-        setIsOpen={setIsSignInModalOpen}
-      />
-
+    <div className="relative flex flex-col gap-4">
+      <Authenticated>
+        <CheckinDialog />
+      </Authenticated>
+      <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
+      <Unauthenticated>
+        <SignInDialog
+          isOpen={isSignInModalOpen}
+          setIsOpen={setIsSignInModalOpen}
+        />
+      </Unauthenticated>
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         <Link href="/characters" className="flex items-center gap-1">
           {t("Characters")}
@@ -111,8 +113,7 @@ const Discover = () => {
           </Button>
         </Link>
       </div>
-
-      <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
+      <div className="relative flex place-content-center lg:justify-start">
         <Carousel
           opts={{ align: "center" }}
           className="w-[75%] md:w-[80%] lg:w-[calc(80%+8rem)]"
@@ -123,7 +124,7 @@ const Discover = () => {
               tagValues.map((tag, index) => (
                 <CarouselItem
                   key={index + "tag"}
-                  className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6 2xl:basis-1/12"
+                  className="2xl:basis-1/8 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
                 >
                   <Toggle
                     aria-label={`Toggle ${tag.tagName}`}
@@ -151,14 +152,14 @@ const Discover = () => {
           <CarouselNext variant="ghost" />
         </Carousel>
       </div>
-      <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">
+      <div className="relative flex place-content-center lg:justify-start">
         <Carousel
           plugins={[plugin.current]}
           opts={{ align: "center" }}
           className="ml-4 w-[95%] md:w-[80%] lg:ml-0 lg:w-[calc(80%+8rem)]"
           setApi={setApi}
         >
-          <CarouselContent className="w-full">
+          <CarouselContent className="w-full" isOverflowHidden={false}>
             {characters?.length > 0
               ? characters.map(
                   (character, index) =>
@@ -220,8 +221,14 @@ const Discover = () => {
           )}
         </Carousel>
       </div>
-      <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)] lg:gap-8">
-        <div className="flex items-center gap-1 px-4 pb-4 font-medium lg:px-0 lg:pb-0">
+
+      <Authenticated>
+        <ErrorBoundary errorComponent={() => ""}>
+          <MainChats />
+        </ErrorBoundary>
+      </Authenticated>
+      <section className="flex flex-col gap-4 lg:w-[calc(80%+8rem)]">
+        <div className="flex items-center gap-1 px-4 font-medium lg:px-0">
           <Link href="/images" className="flex items-center gap-1">
             {t("Images")}
             <Button variant="ghost" size="icon">

@@ -37,7 +37,6 @@ import {
 import ModelBadge from "../../components/characters/model-badge";
 import { useState } from "react";
 import {
-  BookMarked,
   ChevronsUpDown,
   Heart,
   Lock,
@@ -68,18 +67,18 @@ const PlusPlan = () => {
           userId: currentUser._id,
         });
     toast.promise(promise, {
-      loading: "Loading purchase details...",
+      loading: t("Loading purchase details..."),
       success: subscription?.cancelsAt
-        ? () => "Your subscription is renewed."
+        ? () => t("Your subscription is renewed.")
         : (clientSecret) => {
             openDialog();
             setClientSecret(clientSecret as string);
-            return `Now you can proceed to purchase.`;
+            return t(`Now you can proceed to purchase.`);
           },
       error: (error) => {
         return error
           ? (error.data as { message: string }).message
-          : "Unexpected error occurred";
+          : t("Unexpected error occurred");
       },
     });
   }
@@ -87,7 +86,7 @@ const PlusPlan = () => {
   return (
     <Tooltip content={`Subscribe ORP+`} desktopOnly>
       <Card
-        className="relative rounded-lg tabular-nums duration-200 hover:shadow-lg"
+        className="relative rounded-xl tabular-nums duration-200 hover:shadow-lg"
         role="button"
         onClick={
           currentUser?.subscriptionTier === "plus" && !subscription?.cancelsAt
@@ -100,10 +99,10 @@ const PlusPlan = () => {
           width={256}
           height={368}
           alt={"image for pricing"}
-          className="absolute top-0 h-full w-full rounded-lg object-cover"
+          className="absolute top-0 h-full w-full rounded-xl object-cover"
         />
-        <div className="absolute bottom-0 h-[60%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
-        <div className="flex flex-col gap-1 pt-[100%]">
+        <div className="absolute bottom-0 h-[70%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-gray-900/95 to-gray-900" />
+        <div className="flex flex-col gap-1 pt-[50%] lg:pt-[30%] xl:pt-[100%]">
           <CardHeader className="flex items-center justify-center py-1">
             <CardTitle className="z-10 font-display text-xl text-white">
               ORP+
@@ -203,7 +202,7 @@ const Package = ({
   handlePurchaseClick,
 }: {
   src: string;
-  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  amount: 150 | 1650 | 5450 | 11200 | 19400 | 90000;
   bonus: number;
   price: number;
   handlePurchaseClick?: any;
@@ -218,7 +217,7 @@ const Package = ({
       desktopOnly
     >
       <Card
-        className="relative aspect-square h-[23rem] w-[23rem] rounded-lg tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
+        className="relative aspect-square h-[23rem] w-[23rem] rounded-xl tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
         role="button"
         onClick={
           handlePurchaseClick
@@ -231,7 +230,7 @@ const Package = ({
           width={256}
           height={256}
           alt={"image for pricing"}
-          className="absolute top-0 h-full w-full rounded-lg object-cover"
+          className="absolute top-0 h-full w-full rounded-xl object-cover"
         />
         <div className="absolute bottom-0 h-[50%] w-full rounded-b-lg bg-gradient-to-b from-transparent via-white/95 to-white" />
         <div className="flex flex-col gap-1 pt-[70%]">
@@ -264,12 +263,13 @@ const PackageWrapper = ({
   price,
 }: {
   src: string;
-  amount: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+  amount: 150 | 1650 | 5450 | 11200 | 19400 | 90000;
   bonus: number;
   price: number;
 }) => {
   const buyCrystal = useAction(api.stripe.pay);
   const currentUser = useCurrentUser();
+  const { t } = useTranslation();
   const { setClientSecret, openDialog } = usePaymentDialog();
 
   async function handlePurchaseClick(event: any) {
@@ -279,16 +279,16 @@ const PackageWrapper = ({
       userId: currentUser._id,
     });
     toast.promise(promise, {
-      loading: "Loading purchase details...",
+      loading: t("Loading purchase details..."),
       success: (clientSecret) => {
         openDialog();
         setClientSecret(clientSecret);
-        return `Now you can proceed to purchase.`;
+        return t(`Now you can proceed to purchase.`);
       },
       error: (error) => {
         return error
           ? (error.data as { message: string }).message
-          : "Unexpected error occurred";
+          : t("Unexpected error occurred");
       },
     });
   }
@@ -361,7 +361,7 @@ export default function Page() {
   const crystals = currentUser?.crystals;
 
   return (
-    <div className="relative flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-lg lg:border lg:shadow-lg">
+    <div className="relative flex w-full flex-col items-center gap-24 justify-self-start bg-background px-2 pb-32 pt-16 lg:mr-4 lg:rounded-xl lg:border lg:shadow-lg">
       {typeof crystals === "number" && (
         <div
           className={`absolute right-8 top-8 mx-auto flex items-center gap-0.5 font-medium`}
@@ -416,34 +416,10 @@ export default function Page() {
           </section>
         )}
       </AnimatePresence>
-      <div className="flex flex-col items-center justify-center gap-4 text-sm">
-        {t("If you prefer, you can also support us through Patreon.")}
-        <Link
-          href={"https://www.patreon.com/openroleplay/membership"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button className="flex w-fit gap-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1080 1080"
-              className="h-4 w-4 fill-white dark:fill-black"
-            >
-              <path
-                d="M1033.05,324.45c-0.19-137.9-107.59-250.92-233.6-291.7c-156.48-50.64-362.86-43.3-512.28,27.2
-    C106.07,145.41,49.18,332.61,47.06,519.31c-1.74,153.5,13.58,557.79,241.62,560.67c169.44,2.15,194.67-216.18,273.07-321.33
-    c55.78-74.81,127.6-95.94,216.01-117.82C929.71,603.22,1033.27,483.3,1033.05,324.45z"
-              />
-            </svg>
-            {t("Become a Patreon")}
-          </Button>
-        </Link>
-      </div>
-
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Free Crystals")}</h1>
         <Link href="/my-characters/create" className="group w-full lg:block">
-          <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+          <div className="flex w-full flex-col items-center gap-4 rounded-xl border p-4 shadow duration-200 group-hover:shadow-lg">
             <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text text-center font-display text-3xl text-transparent">
               {t("Create characters and earn crystals.")}
               <InfoTooltip
@@ -460,15 +436,15 @@ export default function Page() {
         </Link>
         <AnimatePresence>
           {isAuthenticated && (
-            <div className="flex w-full flex-col items-center gap-4 rounded-lg border p-4 shadow duration-200 group-hover:shadow-lg">
+            <div className="flex w-full flex-col items-center gap-4 rounded-xl border p-4 shadow duration-200 group-hover:shadow-lg">
               <DailyReward />
             </div>
           )}
         </AnimatePresence>
       </div>
 
-      <div className="flex flex-col items-center gap-16 rounded-lg px-5">
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+      <div className="flex flex-col items-center gap-16 rounded-xl px-5">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h1 className="font-display text-5xl">{t("Crystal Price")}</h1>
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Text models")}
@@ -541,7 +517,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Image models")}
             <InfoTooltip
@@ -611,7 +587,7 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
         </div>
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("AI Voice")}
             <InfoTooltip
@@ -621,11 +597,11 @@ export default function Page() {
             />
           </h2>
           <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            10 x
+            15 x
             <Crystal className="h-4 w-4" />
           </p>
         </div>
-        <div className="flex flex-col items-center gap-4 rounded-lg">
+        <div className="flex flex-col items-center gap-4 rounded-xl">
           <h2 className="flex items-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
             {t("Machine Translation")}
             <InfoTooltip

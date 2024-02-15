@@ -2,11 +2,7 @@ import { cronJobs } from "convex/server";
 import { internal } from "./_generated/api";
 
 const crons = cronJobs();
-crons.hourly(
-  "score characters",
-  { minuteUTC: 0 },
-  internal.characters.scoreAll,
-);
+crons.interval("score characters", { hours: 6 }, internal.characters.scoreAll);
 crons.daily(
   "remove messages",
   {

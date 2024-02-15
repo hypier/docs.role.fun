@@ -109,6 +109,7 @@ export default defineSchema({
     followUp2: v.optional(v.string()),
     followUp3: v.optional(v.string()),
     chosen: v.optional(v.string()),
+    query: v.optional(v.string()),
     isStale: v.optional(v.boolean()),
   }).index("byChatId", ["chatId"]),
   usage: defineTable({

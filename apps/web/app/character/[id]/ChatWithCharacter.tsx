@@ -1,55 +1,25 @@
 "use client";
-import {
-  Authenticated,
-  useConvexAuth,
-  useMutation,
-  useQuery,
-} from "convex/react";
+import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Tooltip,
-} from "@repo/ui/src/components";
-import Image from "next/image";
 import { Dialog } from "../../dialog";
 import Spinner from "@repo/ui/src/components/spinner";
 import useStoreChatEffect from "../../lib/hooks/use-store-chat-effect";
-import { BookMarked, MessagesSquare, Share } from "lucide-react";
-import { FadeInOut, nFormatter } from "../../lib/utils";
+import { FadeInOut } from "../../lib/utils";
 import { SignIn, useUser } from "@clerk/nextjs";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@repo/ui/src/components/drawer";
 import { AnimatePresence, motion } from "framer-motion";
-import { toast } from "sonner";
 import { Story } from "./story/[storyId]/story";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import AgeRestriction from "../../../components/characters/age-restriction";
-import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { useNsfwPreference } from "../../lib/hooks/use-nsfw-preference";
 import {
   useStablePaginatedQuery,
   useStableQuery,
 } from "../../lib/hooks/use-stable-query";
 import AddToHomeScreen from "../../../components/pwa/add-to-homescreen";
-import {
-  useMachineTranslation,
-  useTranslationStore,
-} from "../../lib/hooks/use-machine-translation";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import useCurrentUser from "../../lib/hooks/use-current-user";
 
 export const Stories = ({
   characterId,
@@ -102,17 +72,24 @@ export default function ChatWithCharacter({
 }: {
   params: { id: string; storyId?: string };
 }) {
-  const { user } = useUser();
+  const currentUser = useCurrentUser();
   const { isAuthenticated, isLoading } = useConvexAuth();
-  const { isMobile } = useMediaQuery();
-  const { translations } = useTranslationStore();
-  const { mt } = useMachineTranslation();
-  const data = useStableQuery(api.characters.get, {
-    id: params.id as Id<"characters">,
-  });
-  const creatorName = useStableQuery(api.users.getUsername, {
-    id: data?.creatorId as Id<"users">,
-  });
+  const data = useStableQuery(
+    api.characters.get,
+    currentUser?.name
+      ? {
+          id: params.id as Id<"characters">,
+        }
+      : "skip",
+  );
+  const creatorName = useStableQuery(
+    api.users.getUsername,
+    currentUser?.name
+      ? {
+          id: data?.creatorId as Id<"users">,
+        }
+      : "skip",
+  );
   const searchParams = useSearchParams();
   const urlChatId = searchParams.get("chatId");
   const { chatId, isUnlocked } = useStoreChatEffect(
@@ -130,16 +107,26 @@ export default function ChatWithCharacter({
           cardImageUrl={data?.cardImageUrl}
         />
       ) : chatId ? (
-        <Authenticated>
-          <Dialog
-            name={data?.name as string}
-            description={data?.description as string}
-            model={data?.model as string}
-            chatId={chatId}
-            characterId={data?._id as any}
-            cardImageUrl={data?.cardImageUrl}
-          />
-        </Authenticated>
+        data?.visibility === "private" &&
+        currentUser?._id !== data?.creatorId ? (
+          <div className="text-error text-sm">
+            This character is private and you do not have permission to view it.
+          </div>
+        ) : (
+          <Authenticated>
+            <Dialog
+              name={data?.name as string}
+              description={data?.description as string}
+              creatorName={creatorName}
+              userId={currentUser?._id}
+              creatorId={data?.creatorId}
+              model={data?.model as string}
+              chatId={chatId}
+              characterId={data?._id as any}
+              cardImageUrl={data?.cardImageUrl}
+            />
+          </Authenticated>
+        )
       ) : isAuthenticated && !isLoading ? (
         <div className="flex h-full w-full items-center justify-center">
           <Spinner />
@@ -147,14 +134,18 @@ export default function ChatWithCharacter({
       ) : (
         <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-8 lg:min-h-fit">
           <AnimatePresence>
-            {data?.name && (
+            {data?.name && data?.visibility === "public" && (
               <motion.span
                 {...FadeInOut}
                 className="mt-16 font-medium lg:mt-0"
               >{`Sign in and start chat with ${data?.name}`}</motion.span>
             )}
           </AnimatePresence>
-          {!user && <SignIn />}
+          <Unauthenticated>
+            <div className="py-32">
+              <SignIn />
+            </div>
+          </Unauthenticated>
         </div>
       )}
     </>
@@ -162,119 +153,7 @@ export default function ChatWithCharacter({
   return (
     <div className="flex w-full flex-col justify-self-start lg:pr-6">
       {data?.isNSFW && <AgeRestriction />}
-      {isMobile ? (
-        <ErrorBoundary children={content} errorComponent={() => ""} />
-      ) : (
-        <Card className="flex h-full w-full flex-col border-transparent shadow-none lg:h-[42rem] lg:flex-row lg:border-border lg:shadow-xl xl:h-[50rem]">
-          <Drawer>
-            <DrawerTrigger asChild>
-              <CardHeader className="relative cursor-pointer justify-end rounded-l-lg border-b duration-200 hover:opacity-90 lg:h-[calc(42rem-1px)] lg:w-96 lg:border-r xl:h-[calc(50rem-1px)]">
-                {data?.cardImageUrl && (
-                  <Image
-                    src={data.cardImageUrl}
-                    alt={`Character card of ${data?.name}`}
-                    width={300}
-                    height={525}
-                    quality={60}
-                    className="pointer-events-none absolute left-0 top-0 h-full w-full object-cover lg:rounded-l-lg"
-                  />
-                )}
-                {data?.cardImageUrl && (
-                  <div className="absolute -bottom-0 -left-0 h-full w-full bg-gradient-to-b from-transparent to-black/75 lg:rounded-l-lg" />
-                )}
-                <CardTitle
-                  className={`${
-                    data?.cardImageUrl ? "text-white" : "text-foreground"
-                  } z-[1] flex justify-between text-xl`}
-                >
-                  <div className="w-[80%] truncate">
-                    {mt(data?.name as string, translations)}
-                  </div>
-                  <Tooltip
-                    content={`Number of chats with ${data?.name}`}
-                    desktopOnly
-                  >
-                    <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
-                      <MessagesSquare className="aspect-square h-5 w-5 p-1" />
-                      {nFormatter(data?.numChats as number)}
-                    </div>
-                  </Tooltip>
-                </CardTitle>
-                <p
-                  className={`${
-                    data?.cardImageUrl
-                      ? "text-white/80"
-                      : "text-muted-foreground"
-                  } z-[1] line-clamp-2 text-sm lg:line-clamp-3`}
-                >
-                  {mt(data?.description as string, translations)}
-                </p>
-                {creatorName && (
-                  <div className="flex items-center justify-between">
-                    <p
-                      className={`${
-                        data?.cardImageUrl
-                          ? "text-white/60"
-                          : "text-muted-foreground"
-                      } z-[1] line-clamp-1 text-xs`}
-                    >
-                      Created by @{creatorName}
-                    </p>
-                    <div className="z-10 flex items-center gap-1">
-                      <Tooltip content={`About ${data?.name}`} desktopOnly>
-                        <Button
-                          className="z-10 text-white"
-                          variant="ghost"
-                          size="icon"
-                        >
-                          <BookMarked className="h-4 w-4" />
-                        </Button>
-                      </Tooltip>
-                      <Tooltip content={`Share ${data?.name}`} desktopOnly>
-                        <Button
-                          className="z-10 text-white"
-                          variant="ghost"
-                          size="icon"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (navigator.share) {
-                              navigator.share({
-                                title: document.title,
-                                url: document.location.href,
-                              });
-                            } else {
-                              navigator.clipboard.writeText(
-                                document.location.href,
-                              );
-                              toast.success("Link copied to clipboard");
-                            }
-                          }}
-                        >
-                          <Share className="h-4 w-4" />
-                        </Button>
-                      </Tooltip>
-                    </div>
-                  </div>
-                )}
-              </CardHeader>
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className="gap-4">
-                <DrawerTitle>{data?.name}</DrawerTitle>
-                <DrawerDescription>{`${data?.description}, created by @${creatorName}`}</DrawerDescription>
-              </DrawerHeader>
-              <DrawerFooter>
-                <DrawerClose>
-                  <Button variant="outline">Close</Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </DrawerContent>
-          </Drawer>
-          <CardContent className="h-full w-full p-0">
-            <ErrorBoundary children={content} errorComponent={() => ""} />
-          </CardContent>
-        </Card>
-      )}
+      <ErrorBoundary children={content} errorComponent={() => ""} />
       <AddToHomeScreen />
     </div>
   );

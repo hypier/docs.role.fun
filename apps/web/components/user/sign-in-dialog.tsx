@@ -51,7 +51,7 @@ const SignInDialog = ({
             <AlertDialogDescription className="flex flex-col items-center justify-center gap-4">
               <div className="flex text-center">
                 {t(
-                  "Create an Openroleplay.ai account to interact with caracters and discover AI creators you'll love.",
+                  "Create an account to have fun with characters you'll love!",
                 )}
               </div>
             </AlertDialogDescription>
