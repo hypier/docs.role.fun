@@ -10,7 +10,7 @@ import { Id } from "./_generated/dataModel";
 export const pay = action({
   args: {
     numCrystals: v.union(
-      v.literal(300),
+      v.literal(150),
       v.literal(1650),
       v.literal(5450),
       v.literal(11200),
@@ -25,7 +25,7 @@ export const pay = action({
       numCrystals,
       userId,
     }: {
-      numCrystals: 300 | 1650 | 5450 | 11200 | 19400 | 90000;
+      numCrystals: 150 | 1650 | 5450 | 11200 | 19400 | 90000;
       userId: Id<"users">;
     },
   ): Promise<string> => {
@@ -91,7 +91,7 @@ export const subscribe = action({
       apiVersion: "2023-10-16",
     });
     const paymentId: string = await ctx.runMutation(internal.payments.create, {
-      numCrystals: 150,
+      numCrystals: 200,
       productName: "ORP+",
       userId,
     });
