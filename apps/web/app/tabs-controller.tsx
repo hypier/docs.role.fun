@@ -33,7 +33,7 @@ function TabsController() {
             className="flex w-16 flex-col items-center gap-0.5 rounded-full lg:w-full lg:flex-row lg:items-start"
             value="/"
           >
-            <Home className="h-5 w-5 p-1" />
+            <Home className="h-5 w-5 p-0.5 lg:p-1" />
             {t("Discover")}
           </TabsTrigger>
         </Link>
@@ -42,7 +42,7 @@ function TabsController() {
             className="flex w-16 flex-col items-center gap-0.5 rounded-full lg:w-full lg:flex-row lg:items-start"
             value="/chats"
           >
-            <MessageSquare className="h-5 w-5 p-1" />
+            <MessageSquare className="h-5 w-5 p-0.5 lg:p-1" />
             {t("Chats")}
           </TabsTrigger>
         </Link>
@@ -60,7 +60,7 @@ function TabsController() {
             className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/models"
           >
-            <Package className="h-5 w-5 p-1" />
+            <Package className="h-5 w-5 p-0.5 lg:p-1" />
             {t("Models")}
           </TabsTrigger>
         </Link>
@@ -69,7 +69,7 @@ function TabsController() {
             className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
             value="/images"
           >
-            <Image className="h-5 w-5 p-1" />
+            <Image className="h-5 w-5 p-0.5 lg:p-1" />
             {t("Images")}
           </TabsTrigger>
         </Link>
@@ -79,7 +79,7 @@ function TabsController() {
               className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
               value="/crystals"
             >
-              <Crystal className="h-5 w-5 p-1" />
+              <Crystal className="h-5 w-5 p-0.5 lg:p-1" />
               {t("Crystals")}
             </TabsTrigger>
           </Link>
@@ -89,7 +89,7 @@ function TabsController() {
               className="w-16 flex-col items-center gap-0.5 rounded-full"
               value="/models"
             >
-              <Package className="h-5 w-5 p-1" />
+              <Package className="h-5 w-5 p-0.5 lg:p-1" />
               {t("Models")}
             </TabsTrigger>
           </Link>
@@ -99,7 +99,7 @@ function TabsController() {
             className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/discord"
           >
-            <Discord className="h-5 w-5 p-1" />
+            <Discord className="h-5 w-5 p-0.5 lg:p-1" />
             {t("Discord")}
           </TabsTrigger>
         </Link>
@@ -108,7 +108,7 @@ function TabsController() {
             className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
             value="/docs"
           >
-            <Book className="h-5 w-5 p-1" />
+            <Book className="h-5 w-5 p-0.5 lg:p-1" />
             {t("Docs")}
           </TabsTrigger>
         </Link>
