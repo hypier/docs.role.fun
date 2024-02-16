@@ -676,6 +676,7 @@ export function Dialog({
   );
   const persona = usePersona();
   const username = persona?.name;
+  const choose = useMutation(api.followUps.choose);
   const sendMessage = useMutation(api.messages.send);
   const posthog = usePostHog();
 
@@ -688,6 +689,13 @@ export function Dialog({
     setInput("");
     try {
       await sendMessage({ message: input, chatId, characterId });
+      followUps?.followUp1 &&
+        messages[messages.length - 1]?.text &&
+        (await choose({
+          chosen: input,
+          followUpId: followUps?._id,
+          query: messages[messages.length - 1]?.text as string,
+        }));
       posthog.capture("send_message");
     } catch (error) {
       if (error instanceof ConvexError) {
