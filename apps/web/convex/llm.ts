@@ -180,7 +180,7 @@ export const answer = internalAction({
             }, -1)
           : -1;
 
-        const characterPrefix = `${character?.name}: `;
+        const characterPrefix = `${character?.name}:`;
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}${
