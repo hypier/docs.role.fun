@@ -10,6 +10,6 @@ export const listImages = query({
       .filter((q) => q.neq(q.field("imageUrl"), ""))
       .filter((q) => q.neq(q.field("isPrivate"), true))
       .order("desc")
-      .take(300);
+      .take(500);
   },
 });

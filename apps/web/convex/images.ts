@@ -211,15 +211,18 @@ export const tag = internalMutation(
     {
       imageId,
       tag,
+      title,
       isNSFW,
     }: {
       imageId: Id<"images">;
       tag: string;
+      title: string;
       isNSFW: boolean;
     },
   ) => {
     return await ctx.db.patch(imageId, {
       tag,
+      title,
       ...(isNSFW ? { isNSFW } : {}),
     });
   },

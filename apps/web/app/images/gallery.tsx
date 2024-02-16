@@ -100,7 +100,7 @@ const Gallery = ({ isMy = false }: { isMy?: boolean }) => {
       <div className="relative flex w-full place-content-center lg:justify-start">
         <Carousel
           opts={{ align: "center" }}
-          className="w-[75%] md:w-[80%] lg:w-full"
+          className="w-[75%] md:w-[80%] lg:w-[96%]"
           setApi={setApi}
         >
           <CarouselContent className="w-full">

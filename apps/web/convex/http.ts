@@ -66,7 +66,9 @@ http.route({
     if (result) {
       return new Response(
         JSON.stringify({
-          name: result.prompt.split(" ").slice(0, 5).join(" ") + " AI Image",
+          name: result.title
+            ? result.title
+            : result.prompt.split(" ").slice(0, 5).join(" ") + " AI Image",
           description: result.prompt,
           imageUrl: result.imageUrl,
         }),

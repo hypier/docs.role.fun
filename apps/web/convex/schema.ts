@@ -164,6 +164,7 @@ export default defineSchema({
     ),
   }).index("byMessageId", ["messageId"]),
   images: defineTable({
+    title: v.optional(v.string()),
     prompt: v.string(),
     model: v.string(),
     imageUrl: v.string(),

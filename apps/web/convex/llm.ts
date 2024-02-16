@@ -771,6 +771,10 @@ export const generateImageTags = internalAction({
                   type: "string",
                   description: `Tag the image. it can be "Anime", "Game", "Characters", "Landscape", "Cyberpunk", "Space", "Paintings", "Modern", anything.`,
                 },
+                title: {
+                  type: "string",
+                  description: `Easy to understand, searchable title of the image.`,
+                },
                 isNSFW: {
                   type: "boolean",
                   description: `True if altText is explicitly sexual content, otherwise false.`,
@@ -780,7 +784,7 @@ export const generateImageTags = internalAction({
                   description: `True if altText is depicting minor, teenager, gore or real person.`,
                 },
               },
-              required: ["tag", "isNSFW"],
+              required: ["title", "tag", "isNSFW"],
             },
           },
         ];
@@ -808,6 +812,7 @@ export const generateImageTags = internalAction({
           await ctx.runMutation(internal.images.tag, {
             imageId,
             tag: functionArgs?.tag,
+            title: functionArgs?.title,
             isNSFW: functionArgs?.isNSFW,
           });
           if (functionArgs?.isRestricted) {

@@ -46,9 +46,11 @@ const ImageContent = ({ params }: Props) => {
       {image && (
         <Card className="flex w-fit flex-col items-center justify-center self-center">
           <CardHeader>
-            {image.prompt.split(" ").slice(0, 5).join(" ") +
-              " " +
-              t("AI Image")}
+            {image?.title
+              ? image?.title
+              : image.prompt.split(" ").slice(0, 5).join(" ") +
+                " " +
+                t("AI Image")}
           </CardHeader>
           <CardFooter className="flex flex-col items-center gap-4 p-4 text-sm lg:flex-row lg:items-start">
             {image.imageUrl && (
