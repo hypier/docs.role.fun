@@ -140,7 +140,7 @@ const CharacterCard = (props: {
                   {mt(props.name, translations)}
                 </div>
                 <div className="flex gap-1 font-normal">
-                  {(props?.numChats as number) > 10 && (
+                  {(props?.numChats as number) > 0 && (
                     <Tooltip content={`Number of chats with ${props.name}`}>
                       <div className="z-[3] flex items-center gap-0.5 rounded-full text-xs text-white duration-200 group-hover:opacity-80">
                         <MessagesSquare className="aspect-square h-5 w-5 p-1" />
