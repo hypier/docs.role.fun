@@ -115,7 +115,7 @@ const Images = () => {
       <FormMessage />
     </FormItem>
   ));
-  const [selectedImages, setSelectedImages] = useState("4");
+  const [selectedImages, setSelectedImages] = useState("2");
   const ToggleField = React.memo(({ field }: { field: any }) => {
     return (
       <div className="flex w-full flex-col justify-between gap-1">
@@ -168,6 +168,7 @@ const Images = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={"1"}>1 Image</SelectItem>
+              <SelectItem value={"2"}>2 Images</SelectItem>
               <SelectItem value={"4"}>4 Images</SelectItem>
               <SelectItem value={"8"}>8 Images</SelectItem>
             </SelectContent>
