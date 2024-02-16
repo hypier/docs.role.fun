@@ -359,13 +359,15 @@ export const Message = ({
               {message?.characterId && chatId && (
                 <Drawer>
                   <DrawerTrigger asChild>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
-                    >
-                      <Edit className="h-5 w-5 lg:h-4 lg:w-4" />
-                    </Button>
+                    <Tooltip content={t("Edit message")} desktopOnly>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                      >
+                        <Edit className="h-5 w-5 lg:h-4 lg:w-4" />
+                      </Button>
+                    </Tooltip>
                   </DrawerTrigger>
                   <DrawerContent>
                     <div className="mx-auto w-full">
