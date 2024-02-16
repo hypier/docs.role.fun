@@ -643,7 +643,7 @@ export const scoreAll = internalMutation({
           Math.pow(
             (new Date().getTime() - createdAt + 2 * 60 * 60 * 1000) /
               (7 * 24 * 60 * 60 * 1000),
-            1.8,
+            1.2,
           ),
         updatedAt: new Date().toISOString(),
       });
