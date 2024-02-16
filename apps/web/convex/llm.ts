@@ -33,7 +33,7 @@ const getInstruction = (
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Keep it very short.
+            Keep your answer short but try to be very intriguing and engaging.
             `;
   } else {
     return `You are 
