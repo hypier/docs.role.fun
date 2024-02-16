@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const useImageModelData = () => {
   const [modelData, saveModelData] = useLocalStorage(
-    "imageModelData",
+    "image-model",
     null as any,
   );
   const fetchedModelData = useQuery(api.models.listImageModels);

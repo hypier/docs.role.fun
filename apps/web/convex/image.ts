@@ -321,6 +321,10 @@ export const generateByPrompt = internalAction(
           modelHash =
             "pagebrain/dreamshaper-v8:6cb38fe374c4fd4d5bb6a18dcdd71b08512f25bbf1753f8db4bb22f1d5fea9be";
           break;
+        case "asiryan/meina-mix-v11":
+          modelHash =
+            "asiryan/meina-mix-v11:f0eba373c70464e12e48defa5520bef59f727018779afb9c5b6bddb80523a8f7";
+          break;
         default:
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
@@ -347,7 +351,7 @@ export const generateByPrompt = internalAction(
         },
       });
       console.log("replicate output:::", output);
-      const response = await fetch(output[0]);
+      const response = await fetch(Array.isArray(output) ? output[0] : output);
       console.log("replicate response:::", response);
       const buffer = await response.arrayBuffer();
       return Buffer.from(buffer).toString("base64");

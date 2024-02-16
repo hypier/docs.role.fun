@@ -49,7 +49,9 @@ export const ModelSelect = ({ form }: { form: any }) => {
                   ),
                 )
               ) : (
-                <SelectItem value="openrouter/auto">Loading...</SelectItem>
+                <SelectItem value="asiryan/meina-mix-v11">
+                  Loading...
+                </SelectItem>
               )}
             </SelectContent>
           </Select>

@@ -16,6 +16,7 @@ export const generate = mutation({
       v.literal("asiryan/juggernaut-xl-v7"),
       v.literal("daun-io/openroleplay.ai-animagine-v3"),
       v.literal("pagebrain/dreamshaper-v8"),
+      v.literal("asiryan/meina-mix-v11"),
     ),
     isPrivate: v.boolean(),
   },

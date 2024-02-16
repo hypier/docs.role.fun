@@ -336,15 +336,10 @@ export const imageModelData = [
     crystalPrice: 4,
   },
   {
-    value: "charlesmccarthy/animagine-xl",
-    description: "Animagine XL 2.0 - High-resolution, detailed anime images.",
-    license: "Fair AI Public License 1.0-SD",
-    crystalPrice: 14,
-  },
-  {
-    value: "dall-e-3",
-    description: "Dall-E 3 by Open AI",
-    crystalPrice: 75,
+    value: "asiryan/meina-mix-v11",
+    description: "MeinaMix V11 - High-resolution, detailed anime images.",
+    license: "creativeml-openrail-ml",
+    crystalPrice: 7,
   },
   {
     value: "pagebrain/dreamshaper-v8",
@@ -358,6 +353,11 @@ export const imageModelData = [
       "Juggernaut XL v7 Model - Photorealistic, high quality images.",
     license: "creativeml-openrail-ml",
     crystalPrice: 28,
+  },
+  {
+    value: "dall-e-3",
+    description: "Dall-E 3 by Open AI",
+    crystalPrice: 75,
   },
 ];
 

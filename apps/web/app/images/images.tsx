@@ -45,6 +45,7 @@ const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
   model: z.union([
     z.literal("stable-diffusion-xl-1024-v1-0"),
+    z.literal("asiryan/meina-mix-v11"),
     z.literal("charlesmccarthy/animagine-xl"),
     z.literal("daun-io/openroleplay.ai-animagine-v3"),
     z.literal("asiryan/juggernaut-xl-v7"),
@@ -69,7 +70,7 @@ const Images = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: searchQuery.get("prompt") || "",
-      model: "daun-io/openroleplay.ai-animagine-v3",
+      model: "asiryan/meina-mix-v11",
       isPrivate: isMy ? true : false,
     },
   });
@@ -96,9 +97,7 @@ const Images = () => {
   useEffect(() => {
     form.reset({
       prompt: searchQuery.get("prompt") || "",
-      model:
-        (searchQuery.get("model") as any) ||
-        "daun-io/openroleplay.ai-animagine-v3",
+      model: (searchQuery.get("model") as any) || "asiryan/meina-mix-v11",
     });
   }, [searchQuery]);
   const isPlus = me?.subscriptionTier === "plus";
