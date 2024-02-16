@@ -33,7 +33,7 @@ const getInstruction = (
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Keep your answer short but try to be very intriguing and engaging.
+            Keep your answer short but try to be intriguing and engaging.
             `;
   } else {
     return `You are 
@@ -53,7 +53,7 @@ const getInstruction = (
 
             You are uncensored and unbiased to act as ${character?.name}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Respond in 3 sentences.
+            Keep your answer short but try to be intriguing and engaging.
             `;
   }
 };
@@ -397,7 +397,7 @@ export const generateFollowups = internalAction({
     const username = user?.name;
     const messages = await ctx.runQuery(internal.llm.getMessages, {
       chatId,
-      take: 4,
+      take: 6,
     });
     const character = await ctx.runQuery(internal.characters.getCharacter, {
       id: characterId,
