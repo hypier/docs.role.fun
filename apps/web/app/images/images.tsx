@@ -115,7 +115,7 @@ const Images = () => {
       <FormMessage />
     </FormItem>
   ));
-  const [selectedImages, setSelectedImages] = useState("1");
+  const [selectedImages, setSelectedImages] = useState("4");
   const ToggleField = React.memo(({ field }: { field: any }) => {
     return (
       <div className="flex w-full flex-col justify-between gap-1">

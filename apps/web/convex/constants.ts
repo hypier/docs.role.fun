@@ -339,7 +339,7 @@ export const imageModelData = [
     value: "asiryan/meina-mix-v11",
     description: "MeinaMix V11 - High-resolution, detailed anime images.",
     license: "creativeml-openrail-ml",
-    crystalPrice: 7,
+    crystalPrice: 6,
   },
   {
     value: "pagebrain/dreamshaper-v8",
