@@ -25,7 +25,11 @@ const getInstruction = (
     return `You are 
             {
               name: ${userRole} 
-              ${persona?.description && `description: ${persona.description}`}
+              ${
+                persona?.description
+                  ? `description: ${persona.description}`
+                  : ""
+              }
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
@@ -425,9 +429,10 @@ export const generateFollowups = internalAction({
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}:`;
         let updates: { [key: string]: string } = {};
+        let instruction;
         for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 3 : 2); i++) {
           try {
-            const instruction = getInstruction(
+            instruction = getInstruction(
               character,
               persona,
               username as string,
@@ -482,6 +487,7 @@ export const generateFollowups = internalAction({
         if (Object.keys(updates).length > 0) {
           await ctx.runMutation(internal.followUps.update, {
             followUpId,
+            instruction,
             ...Object.keys(updates)
               .sort(() => 0.5 - Math.random())
               .reduce(

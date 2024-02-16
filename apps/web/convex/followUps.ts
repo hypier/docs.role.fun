@@ -26,6 +26,7 @@ export const create = internalMutation({
 export const update = internalMutation({
   args: {
     followUpId: v.id("followUps"),
+    instruction: v.optional(v.string()),
     followUp1: v.optional(v.string()),
     followUp2: v.optional(v.string()),
     followUp3: v.optional(v.string()),
