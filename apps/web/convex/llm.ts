@@ -444,7 +444,7 @@ export const generateFollowups = internalAction({
                   ? model
                   : i === 2
                     ? "gryphe/mythomist-7b:free"
-                    : "togethercomputer/stripedhyena-nous-7b",
+                    : "teknium/openhermes-2-mistral-7b",
               stream: false,
               messages: [
                 {
