@@ -289,11 +289,11 @@ export const addImage = internalMutation(
 export const removeOldMessages = internalMutation({
   args: {},
   handler: async (ctx) => {
-    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const messages = await ctx.db
       .query("messages")
       .withIndex("by_creation_time", (q) =>
-        q.lt("_creationTime", weekAgo.getTime()),
+        q.lt("_creationTime", monthAgo.getTime()),
       )
       .take(4000);
     await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
@@ -304,11 +304,11 @@ export const removeOldMessages = internalMutation({
 export const removeOldStories = internalMutation({
   args: {},
   handler: async (ctx) => {
-    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const oldStories = await ctx.db
       .query("stories")
       .withIndex("by_creation_time", (q) =>
-        q.lt("_creationTime", weekAgo.getTime()),
+        q.lt("_creationTime", monthAgo.getTime()),
       )
       .take(4000);
     await Promise.all(oldStories.map((story) => ctx.db.delete(story._id)));
@@ -319,11 +319,11 @@ export const removeOldStories = internalMutation({
 export const removeOldChats = internalMutation({
   args: {},
   handler: async (ctx) => {
-    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const oldChats = await ctx.db
       .query("chats")
       .withIndex("by_creation_time", (q) =>
-        q.lt("_creationTime", weekAgo.getTime()),
+        q.lt("_creationTime", monthAgo.getTime()),
       )
       .take(4000);
     await Promise.all(oldChats.map((chat) => ctx.db.delete(chat._id)));
