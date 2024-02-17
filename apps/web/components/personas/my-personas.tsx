@@ -1,11 +1,9 @@
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  TooltipContent,
 } from "@repo/ui/src/components";
 import { InfoTooltip } from "@repo/ui/src/components/tooltip";
 import { useQuery } from "convex/react";

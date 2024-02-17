@@ -22,6 +22,7 @@ import { NewCharacter } from "../../components/characters/my-characters";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import CharacterCard from "../../components/cards/character-card";
 import { SignIn } from "@clerk/nextjs";
+import { MyPersonas } from "../../components/personas/my-personas";
 
 const Creations = () => {
   const { t } = useTranslation();
@@ -39,7 +40,6 @@ const Creations = () => {
   const [_api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   useEffect(() => {
     if (!_api) {
@@ -49,11 +49,7 @@ const Creations = () => {
     setCount(_api.scrollSnapList().length);
     setCurrent(_api.selectedScrollSnap() + 1);
     if (_api.selectedScrollSnap() + 1 >= _api.scrollSnapList().length - 10) {
-      if (!me?.name && count > 31) {
-        setIsSignInModalOpen(true);
-      } else {
-        loadMore(10);
-      }
+      loadMore(10);
     }
 
     _api.on("select", () => {
@@ -142,6 +138,15 @@ const Creations = () => {
           <CarouselPrevious variant="ghost" />
           <CarouselNext variant="ghost" />
         </Carousel>
+      </div>
+
+      <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
+        <Link href="/my-personas" className="flex items-center gap-1">
+          {t("My Personas")}
+          <Button variant="ghost" size="icon">
+            <ChevronRight />
+          </Button>
+        </Link>
       </div>
       {/* <MainStories /> */}
       <section className="flex flex-col gap-4 lg:w-[calc(80%+4rem)] lg:gap-8">
