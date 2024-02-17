@@ -259,6 +259,91 @@ export const Message = ({
                   <ThumbsDown className="h-5 w-5 lg:h-4 lg:w-4" />
                 )}
               </Button>
+              {message?.characterId && chatId && (
+                <Drawer>
+                  <DrawerTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
+                    >
+                      <Edit className="h-5 w-5 lg:h-4 lg:w-4" />
+                    </Button>
+                  </DrawerTrigger>
+                  <DrawerContent>
+                    <div className="mx-auto w-full">
+                      <DrawerHeader>
+                        <DrawerTitle>{t("Edit message")}</DrawerTitle>
+                        <DrawerDescription>
+                          {t("Change the story as you wish.")}
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <form
+                        onSubmit={async (e) => {
+                          e.preventDefault();
+                          const formData = new FormData(
+                            e.target as HTMLFormElement,
+                          );
+                          const editedText = formData.get("editedText");
+                          if (
+                            typeof editedText === "string" &&
+                            editedText.trim() !== ""
+                          ) {
+                            try {
+                              await edit({
+                                messageId: message?._id as Id<"messages">,
+                                editedText,
+                              });
+                              toast.success(t("Message updated successfully"));
+                            } catch (error) {
+                              toast.error(t("Failed to update message"));
+                            }
+                          }
+                        }}
+                      >
+                        <div className="flex w-full justify-center px-4">
+                          <Button
+                            variant="outline"
+                            onClick={() => {
+                              const textarea = document.querySelector(
+                                'textarea[name="editedText"]',
+                              ) as HTMLTextAreaElement;
+                              if (textarea) {
+                                textarea.value = "";
+                                textarea.focus();
+                              }
+                            }}
+                            className="w-fit gap-0.5"
+                          >
+                            <Eraser className="h-4 w-4" />
+                            {t("Clear")}
+                          </Button>
+                        </div>
+                        <div className="p-4">
+                          <Textarea
+                            name="editedText"
+                            defaultValue={message?.text.trim()}
+                            className="resize-none"
+                            rows={5}
+                          />
+                        </div>
+                        <DrawerFooter className="flex w-full items-center gap-2">
+                          <DrawerClose className="w-full">
+                            <Button type="submit" className="w-full">
+                              {t("Save")}
+                            </Button>
+                          </DrawerClose>
+                          <DrawerClose className="w-full">
+                            <Button variant="outline" className="w-full">
+                              {t("Cancel")}
+                            </Button>
+                          </DrawerClose>
+                        </DrawerFooter>
+                      </form>
+                    </div>
+                  </DrawerContent>
+                </Drawer>
+              )}
               <Tooltip
                 content={
                   <span className="flex gap-1 p-2">
@@ -354,91 +439,6 @@ export const Message = ({
                     )}
                   </Button>
                 </Tooltip>
-              )}
-              {message?.characterId && chatId && (
-                <Drawer>
-                  <DrawerTrigger asChild>
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className="h-8 w-8 rounded-full p-1 hover:bg-foreground/10 disabled:opacity-90 lg:h-6 lg:w-6"
-                    >
-                      <Edit className="h-5 w-5 lg:h-4 lg:w-4" />
-                    </Button>
-                  </DrawerTrigger>
-                  <DrawerContent>
-                    <div className="mx-auto w-full">
-                      <DrawerHeader>
-                        <DrawerTitle>{t("Edit message")}</DrawerTitle>
-                        <DrawerDescription>
-                          {t("Change the story as you wish.")}
-                        </DrawerDescription>
-                      </DrawerHeader>
-                      <form
-                        onSubmit={async (e) => {
-                          e.preventDefault();
-                          const formData = new FormData(
-                            e.target as HTMLFormElement,
-                          );
-                          const editedText = formData.get("editedText");
-                          if (
-                            typeof editedText === "string" &&
-                            editedText.trim() !== ""
-                          ) {
-                            try {
-                              await edit({
-                                messageId: message?._id as Id<"messages">,
-                                editedText,
-                              });
-                              toast.success(t("Message updated successfully"));
-                            } catch (error) {
-                              toast.error(t("Failed to update message"));
-                            }
-                          }
-                        }}
-                      >
-                        <div className="flex w-full justify-center px-4">
-                          <Button
-                            variant="outline"
-                            onClick={() => {
-                              const textarea = document.querySelector(
-                                'textarea[name="editedText"]',
-                              ) as HTMLTextAreaElement;
-                              if (textarea) {
-                                textarea.value = "";
-                                textarea.focus();
-                              }
-                            }}
-                            className="w-fit gap-0.5"
-                          >
-                            <Eraser className="h-4 w-4" />
-                            {t("Clear")}
-                          </Button>
-                        </div>
-                        <div className="p-4">
-                          <Textarea
-                            name="editedText"
-                            defaultValue={message?.text.trim()}
-                            className="resize-none"
-                            rows={5}
-                          />
-                        </div>
-                        <DrawerFooter className="flex w-full items-center gap-2">
-                          <DrawerClose className="w-full">
-                            <Button type="submit" className="w-full">
-                              {t("Save")}
-                            </Button>
-                          </DrawerClose>
-                          <DrawerClose className="w-full">
-                            <Button variant="outline" className="w-full">
-                              {t("Cancel")}
-                            </Button>
-                          </DrawerClose>
-                        </DrawerFooter>
-                      </form>
-                    </div>
-                  </DrawerContent>
-                </Drawer>
               )}
             </div>
           )}
