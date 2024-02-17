@@ -248,10 +248,16 @@ export const answer = internalAction({
         const responseMessage = (response &&
           response?.choices &&
           response.choices[0]?.message) as any;
+
+        function escapeRegExp(string: string) {
+          return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escapes special characters for regex
+        }
+
         const content = responseMessage?.content
           .replaceAll("{{user}}", userRole as string)
-          .replaceAll(characterPrefix, "")
-          .replaceAll(userPrefix, "");
+          // Use a regex with 'gi' for global, case-insensitive replacement
+          .replaceAll(new RegExp(escapeRegExp(characterPrefix), "gi"), "")
+          .replaceAll(new RegExp(escapeRegExp(userPrefix), "gi"), "");
         const cleanedContent = content
           .replace(new RegExp(characterPrefix, "g"), "")
           .replace(/#+$/, "");
@@ -259,6 +265,7 @@ export const answer = internalAction({
           messageId,
           text: cleanedContent,
         });
+
         if (
           message &&
           messages &&
