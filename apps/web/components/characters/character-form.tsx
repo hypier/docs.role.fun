@@ -63,7 +63,6 @@ const formSchema = z.object({
 
 export default function CharacterForm() {
   const { t } = useTranslation();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const id = searchParams.get("id") as Id<"characters">;
   const remixId = searchParams.get("remixId") as Id<"characters">;
