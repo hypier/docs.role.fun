@@ -73,6 +73,11 @@ export const getImageModelCrystalPrice = (modelName: string) => {
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
+    value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
+    description: "Nous Hermes 2 Mixtral 8x7B DPO",
+    crystalPrice: 1,
+  },
+  {
     value: "gpt-3.5-turbo",
     description: "GPT-3.5 Turbo by OpenAI",
     src: "/models/openai.png",
@@ -90,11 +95,6 @@ export const modelData = [
     value: "openrouter/auto",
     description: "Auto (GPT-4 and Mistral-Medium)",
     crystalPrice: 10,
-  },
-  {
-    value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
-    description: "Nous Hermes 2 Mixtral 8x7B DPO",
-    crystalPrice: 1,
   },
   {
     value: "mistral-small",
