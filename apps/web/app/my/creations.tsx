@@ -111,7 +111,7 @@ const Creations = () => {
                             description={character.description}
                             model={character.model}
                             showEdit={true}
-                            showHides={isAuthenticated}
+                            showHides={false}
                             isNSFW={
                               character?.isNSFW &&
                               me?.nsfwPreference !== "allow"

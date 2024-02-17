@@ -46,10 +46,10 @@ function TabsController() {
             {t("Chats")}
           </TabsTrigger>
         </Link>
-        <Link href={isMobile ? "/my-characters/create" : "/my"}>
+        <Link href={"/my"}>
           <TabsTrigger
             className="flex w-full flex-col items-center gap-0.5 rounded-full border bg-black dark:bg-white sm:border-none sm:bg-transparent sm:dark:bg-transparent lg:flex-row lg:items-start"
-            value={isMobile ? "/my-characters" : "/my"}
+            value={"/my"}
           >
             <Plus className="h-6 w-6 p-0.5 text-white dark:text-black sm:text-muted-foreground sm:dark:text-muted-foreground lg:h-5 lg:w-5 lg:p-1" />
             <span className="hidden lg:inline">{t("My")}</span>
