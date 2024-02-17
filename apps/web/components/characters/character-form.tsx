@@ -85,7 +85,8 @@ export default function CharacterForm() {
     instructions = searchParams.get("instructions") || "",
     greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
-    model = (searchParams.get("model") as any) || "gpt-3.5-turbo",
+    model = (searchParams.get("model") as any) ||
+      "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     voiceId = (searchParams.get("voiceId") as any) || "MjxppkSa4IoDSRGySayZ",
     isDraft = searchParams.get("isDraft") || true,
     isNSFW = Boolean(searchParams.get("isNSFW")) || false,
@@ -96,7 +97,6 @@ export default function CharacterForm() {
   const upsert = useMutation(api.characters.upsert);
   const publish = useMutation(api.characters.publish);
   const generateInstruction = useMutation(api.characters.generateInstruction);
-  const generateUploadUrl = useMutation(api.characters.generateUploadUrl);
   const [visibility, setVisibility] = useState(_visibility);
 
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
