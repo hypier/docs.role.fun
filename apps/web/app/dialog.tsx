@@ -11,6 +11,7 @@ import {
   ClipboardIcon,
   Delete,
   Edit,
+  Eraser,
   Headphones,
   MoreHorizontal,
   Pause,
@@ -396,6 +397,24 @@ export const Message = ({
                           }
                         }}
                       >
+                        <div className="flex w-full justify-center px-4">
+                          <Button
+                            variant="outline"
+                            onClick={() => {
+                              const textarea = document.querySelector(
+                                'textarea[name="editedText"]',
+                              ) as HTMLTextAreaElement;
+                              if (textarea) {
+                                textarea.value = "";
+                                textarea.focus();
+                              }
+                            }}
+                            className="w-fit gap-0.5"
+                          >
+                            <Eraser className="h-4 w-4" />
+                            {t("Clear")}
+                          </Button>
+                        </div>
                         <div className="p-4">
                           <Textarea
                             name="editedText"
