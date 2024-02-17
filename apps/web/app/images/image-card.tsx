@@ -92,7 +92,7 @@ const ImageDetail = (props: {
               </Tooltip>
               <Tooltip content={"Create character using this image"}>
                 <Link
-                  href={`/my-characters/create?cardImageUrl=${props.imageUrl}`}
+                  href={`/my-characters/create?cardImageUrl=${props.imageUrl}&description=${props.prompt}`}
                   className="w-full"
                 >
                   <Button className="w-full gap-1" variant="outline">
