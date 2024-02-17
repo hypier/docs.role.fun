@@ -76,6 +76,7 @@ export const modelData = [
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     description: "Nous Hermes 2 Mixtral 8x7B DPO",
     crystalPrice: 1,
+    isNSFW: true,
   },
   {
     value: "gpt-3.5-turbo",
