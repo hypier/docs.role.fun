@@ -105,7 +105,8 @@ export const checkin = mutation({
     if (
       user?.email &&
       (user.email.includes("secretmail.net") ||
-        user.email.includes("oncemail.co.kr"))
+        user.email.includes("oncemail.co.kr") ||
+        user.email.includes("duck.com"))
     )
       return;
     const currentCrystals = user?.crystals || 0;
