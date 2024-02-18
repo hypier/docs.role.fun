@@ -325,6 +325,10 @@ export const generateByPrompt = internalAction(
           modelHash =
             "asiryan/meina-mix-v11:f0eba373c70464e12e48defa5520bef59f727018779afb9c5b6bddb80523a8f7";
           break;
+        case "asiryan/blue-pencil-xl-v2":
+          modelHash =
+            "asiryan/blue-pencil-xl-v2:06db33e3cd56700e2b0de541e65e2fc377604bebc97eb87b40e1d190fafa7ef4";
+          break;
         default:
           modelHash =
             "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";

@@ -343,6 +343,12 @@ export const imageModelData = [
     crystalPrice: 4,
   },
   {
+    value: "asiryan/blue-pencil-xl-v2",
+    description: "Blue Pencil XL V2 - High-resolution, detailed anime images.",
+    license: "creativeml-openrail-ml",
+    crystalPrice: 6,
+  },
+  {
     value: "asiryan/meina-mix-v11",
     description: "MeinaMix V11 - High-resolution, detailed anime images.",
     license: "creativeml-openrail-ml",
