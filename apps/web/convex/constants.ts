@@ -352,14 +352,14 @@ export const imageModelData = [
     value: "pagebrain/dreamshaper-v8",
     description: "Dream Shaper V8 - 'A better Stable Diffusion'",
     license: "creativeml-openrail-ml",
-    crystalPrice: 14,
+    crystalPrice: 7,
   },
   {
     value: "asiryan/juggernaut-xl-v7",
     description:
       "Juggernaut XL v7 Model - Photorealistic, high quality images.",
     license: "creativeml-openrail-ml",
-    crystalPrice: 28,
+    crystalPrice: 8,
   },
   {
     value: "dall-e-3",
