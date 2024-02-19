@@ -42,11 +42,6 @@ import {
   AlertDialogTrigger,
 } from "@repo/ui/src/components/alert-dialog";
 import { toast } from "sonner";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@repo/ui/src/components/popover";
 import { useRouter, useSearchParams } from "next/navigation";
 import ModelBadge from "../components/characters/model-badge";
 import { Crystal } from "@repo/ui/src/components/icons";
@@ -83,6 +78,7 @@ import {
   DrawerTrigger,
 } from "@repo/ui/src/components/drawer";
 import { Textarea } from "@repo/ui/src/components/textarea";
+import { useResponsivePopover } from "@repo/ui/src/hooks/use-responsive-popover";
 
 export const Message = ({
   index,
@@ -465,10 +461,11 @@ const ChatOptionsPopover = ({
   const router = useRouter();
   const goBack = router.back;
   const remove = useMutation(api.chats.remove);
+  const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover();
   return (
     <Popover>
       <AlertDialog>
-        <PopoverContent className="w-52 p-1">
+        <PopoverContent className="p-4 lg:w-52 lg:p-1">
           {showEdit && (
             <Link
               href={`/my-characters/create${

@@ -26,11 +26,7 @@ import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@repo/ui/src/components/popover";
+import { useResponsivePopover } from "@repo/ui/src/hooks/use-responsive-popover";
 import { RadioGroup, RadioGroupItem } from "@repo/ui/src/components/radio";
 import { Label } from "@repo/ui/src/components/label";
 import { toast } from "sonner";
@@ -98,6 +94,8 @@ export default function CharacterForm() {
   const publish = useMutation(api.characters.publish);
   const generateInstruction = useMutation(api.characters.generateInstruction);
   const [visibility, setVisibility] = useState(_visibility);
+  const { Popover, PopoverContent, PopoverTrigger, isMobile } =
+    useResponsivePopover();
 
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [isGeneratingInstructions, setIsGeneratingInstructions] =
@@ -247,86 +245,86 @@ export default function CharacterForm() {
             )}
             <Popover
               open={openPopover}
-              onOpenChange={() => setOpenPopover(!openPopover)}
+              onOpenChange={
+                isMobile ? undefined : () => setOpenPopover(!openPopover)
+              }
+              onClose={isMobile ? () => setOpenPopover(false) : undefined}
             >
-              <PopoverContent asChild>
-                <div className="w-full rounded-lg bg-background p-2">
-                  <RadioGroup
-                    defaultValue={visibility ?? "public"}
-                    className="p-1"
-                    value={visibility}
-                    onValueChange={(value) => setVisibility(value)}
-                  >
-                    <span className="text-sm font-medium text-muted-foreground">
-                      {t("Publish to")}
-                    </span>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="public" id="public" />
-                      <Label
-                        className="flex items-center justify-center gap-1 font-normal"
-                        htmlFor="public"
-                      >
-                        {t("Public")}
-                        <Tooltip
-                          content={t(
-                            "You can earn crystals whenever other users interact with the characters you've created.",
-                          )}
-                        >
-                          <div className="flex items-center justify-center text-[8px] text-muted-foreground">
-                            ({t("Earn")}{" "}
-                            <Crystal className="h-3 w-3 text-muted-foreground" />
-                            )
-                          </div>
-                        </Tooltip>
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="private" id="private" />
-                      <Label className="font-normal" htmlFor="private">
-                        {t("Only me")}
-                      </Label>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground/75 underline">
-                      <Link href="/content-rules">
-                        By clicking 'Publish', you agree to our content rules.
-                      </Link>
-                    </span>
-                  </RadioGroup>
-                  <div className="flex flex-col justify-center pt-4">
-                    <Button
-                      onClick={async () => {
-                        const newCharacterId = await onSubmit(form.getValues());
-                        const charId = characterId
-                          ? characterId
-                          : (newCharacterId as Id<"characters">);
-                        charId &&
-                          (() => {
-                            const promise = publish({
-                              id: charId,
-                              visibility: visibility as any,
-                            });
-                            toast.promise(promise, {
-                              loading: "Publishing character...",
-                              success: (data: any) => {
-                                data
-                                  ? router.push(`/character/${data}`)
-                                  : router.back();
-                                return `Character has been saved.`;
-                              },
-                              error: (error) => {
-                                return error
-                                  ? (error.data as { message: string }).message
-                                  : "Unexpected error occurred";
-                              },
-                            });
-                          })();
-                      }}
-                      className="flex h-7 w-full gap-1 text-xs"
+              <PopoverContent className="p-4 lg:w-full lg:rounded-lg lg:bg-background lg:p-2">
+                <RadioGroup
+                  defaultValue={visibility ?? "public"}
+                  className="p-1"
+                  value={visibility}
+                  onValueChange={(value) => setVisibility(value)}
+                >
+                  <span className="text-sm font-medium text-muted-foreground">
+                    {t("Publish to")}
+                  </span>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="public" id="public" />
+                    <Label
+                      className="flex items-center justify-center gap-1 font-normal"
+                      htmlFor="public"
                     >
-                      <UploadCloud className="text-foreground-primary h-4 w-4" />
-                      {t("Publish")}
-                    </Button>
+                      {t("Public")}
+                      <Tooltip
+                        content={t(
+                          "You can earn crystals whenever other users interact with the characters you've created.",
+                        )}
+                      >
+                        <div className="flex items-center justify-center text-[8px] text-muted-foreground">
+                          ({t("Earn")}{" "}
+                          <Crystal className="h-3 w-3 text-muted-foreground" />)
+                        </div>
+                      </Tooltip>
+                    </Label>
                   </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="private" id="private" />
+                    <Label className="font-normal" htmlFor="private">
+                      {t("Only me")}
+                    </Label>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground/75 underline">
+                    <Link href="/content-rules">
+                      By clicking 'Publish', you agree to our content rules.
+                    </Link>
+                  </span>
+                </RadioGroup>
+                <div className="flex flex-col justify-center pt-4">
+                  <Button
+                    onClick={async () => {
+                      const newCharacterId = await onSubmit(form.getValues());
+                      const charId = characterId
+                        ? characterId
+                        : (newCharacterId as Id<"characters">);
+                      charId &&
+                        (() => {
+                          const promise = publish({
+                            id: charId,
+                            visibility: visibility as any,
+                          });
+                          toast.promise(promise, {
+                            loading: "Publishing character...",
+                            success: (data: any) => {
+                              data
+                                ? router.push(`/character/${data}`)
+                                : router.back();
+                              return `Character has been saved.`;
+                            },
+                            error: (error) => {
+                              return error
+                                ? (error.data as { message: string }).message
+                                : "Unexpected error occurred";
+                            },
+                          });
+                        })();
+                    }}
+                    className="flex h-7 w-full gap-1 text-xs"
+                  >
+                    <UploadCloud className="text-foreground-primary h-4 w-4" />
+                    {t("Publish")}
+                  </Button>
                 </div>
               </PopoverContent>
               <PopoverTrigger asChild>

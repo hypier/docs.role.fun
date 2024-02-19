@@ -9,14 +9,8 @@ import {
   LogIn,
   LogOut,
   Menu,
-  Star,
 } from "lucide-react";
 import { Discord } from "@repo/ui/src/components/social-icons";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@repo/ui/src/components/popover";
 import Link from "next/link";
 import { SignedOut, useClerk, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/src/components";
@@ -25,6 +19,7 @@ import { Crystal } from "@repo/ui/src/components/icons";
 import { LanguageSelect } from "../../app/lang-select";
 import { PreferenceSelect } from "../characters/age-restriction";
 import { usePostHog } from "posthog-js/react";
+import { useResponsivePopover } from "@repo/ui/src/hooks/use-responsive-popover";
 
 type StyledLinkProps = {
   href: string;
@@ -81,76 +76,77 @@ export default function UserDropdown() {
 
   const [openPopover, setOpenPopover] = useState(false);
   const { signOut } = useClerk();
+  const { Popover, PopoverContent, PopoverTrigger, isMobile } =
+    useResponsivePopover();
 
   return (
     <div className="relative inline-block text-left">
       <Popover
         open={openPopover}
-        onOpenChange={() => setOpenPopover(!openPopover)}
+        onOpenChange={isMobile ? undefined : () => setOpenPopover(!openPopover)}
+        onClose={isMobile ? () => setOpenPopover(false) : undefined}
       >
-        <PopoverContent asChild>
-          <div className="w-full rounded-xl bg-background p-2 sm:w-40 sm:p-1">
-            {user && (
-              <div className="p-2">
-                {user?.username && (
-                  <p className="truncate text-sm font-medium text-foreground">
-                    {`@${user?.username}`}
-                  </p>
-                )}
-              </div>
-            )}
-            {user ? (
-              <>
-                <StyledButton
-                  text={t("Logout")}
-                  Icon={<LogOut className="h-4 w-4 text-muted-foreground" />}
-                  onClick={() => {
-                    setOpenPopover(false);
-                    signOut();
-                  }}
-                />
-                <StyledLink
-                  text={t("Personas")}
-                  Icon={
-                    <CircleUserRound className="h-4 w-4 text-muted-foreground" />
-                  }
-                  href="/my-personas"
-                />
-              </>
-            ) : (
-              <div className="md:hidden">
-                <StyledLink
-                  text={t("Log in")}
-                  Icon={<LogIn className="h-4 w-4 text-muted-foreground" />}
-                  onClick={() => {
-                    setOpenPopover(false);
-                  }}
-                  href="/sign-in"
-                />
-              </div>
-            )}
-            <StyledLink
-              href="/docs"
-              text={t("Docs")}
-              Icon={<Book className="h-4 w-4 text-muted-foreground" />}
-              onClick={() => setOpenPopover(false)}
-            />
-            <StyledLink
-              href="/discord"
-              text={t("Join Discord")}
-              Icon={<Discord className="h-4 w-4 text-muted-foreground" />}
-              onClick={() => setOpenPopover(false)}
-            />
-            <StyledLink
-              href="/crystals"
-              text={t("Get Crystals")}
-              Icon={<Crystal className="h-4 w-4 text-muted-foreground" />}
-              onClick={() => setOpenPopover(false)}
-            />
-            <div className="flex flex-col gap-2">
-              <PreferenceSelect />
-              <LanguageSelect />
+        <PopoverContent className="p-2 sm:w-40 sm:p-1">
+          {user && (
+            <div className="p-2">
+              {user?.username && (
+                <p className="truncate text-sm font-medium text-foreground">
+                  {`@${user?.username}`}
+                </p>
+              )}
             </div>
+          )}
+          {user ? (
+            <>
+              <StyledButton
+                text={t("Logout")}
+                Icon={<LogOut className="h-4 w-4 text-muted-foreground" />}
+                onClick={() => {
+                  setOpenPopover(false);
+                  signOut();
+                }}
+              />
+              <StyledLink
+                text={t("Personas")}
+                Icon={
+                  <CircleUserRound className="h-4 w-4 text-muted-foreground" />
+                }
+                href="/my-personas"
+              />
+            </>
+          ) : (
+            <div className="md:hidden">
+              <StyledLink
+                text={t("Log in")}
+                Icon={<LogIn className="h-4 w-4 text-muted-foreground" />}
+                onClick={() => {
+                  setOpenPopover(false);
+                }}
+                href="/sign-in"
+              />
+            </div>
+          )}
+          <StyledLink
+            href="/docs"
+            text={t("Docs")}
+            Icon={<Book className="h-4 w-4 text-muted-foreground" />}
+            onClick={() => setOpenPopover(false)}
+          />
+          <StyledLink
+            href="/discord"
+            text={t("Join Discord")}
+            Icon={<Discord className="h-4 w-4 text-muted-foreground" />}
+            onClick={() => setOpenPopover(false)}
+          />
+          <StyledLink
+            href="/crystals"
+            text={t("Get Crystals")}
+            Icon={<Crystal className="h-4 w-4 text-muted-foreground" />}
+            onClick={() => setOpenPopover(false)}
+          />
+          <div className="flex flex-col gap-2">
+            <PreferenceSelect />
+            <LanguageSelect />
           </div>
         </PopoverContent>
         <PopoverTrigger
