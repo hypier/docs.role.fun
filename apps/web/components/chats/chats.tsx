@@ -57,14 +57,14 @@ export const Chat = ({
               </h2>
               {recentMessageAt &&
                 !isNaN(new Date(recentMessageAt).getTime()) && (
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     {formatDistanceToNow(new Date(recentMessageAt), {
                       addSuffix: true,
                     })}
                   </p>
                 )}
             </div>
-            <p className="line-clamp-1 text-sm text-muted-foreground">
+            <p className="line-clamp-1 text-base text-muted-foreground">
               {message?.text ? message?.text : "Click here to chat."}
             </p>
           </div>
