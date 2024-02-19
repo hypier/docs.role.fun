@@ -161,7 +161,7 @@ export const modelData = [
     value: "undi95/remm-slerp-l2-13b",
     description: "Uncensored, Re:MythoMax (ReMM) L2 13B",
     isNSFW: true,
-    crystalPrice: 1,
+    crystalPrice: 2,
   },
   {
     value: "gryphe/mythomax-l2-13b-8k",
