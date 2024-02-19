@@ -122,7 +122,7 @@ const Images = () => {
       <div className="flex w-full flex-col justify-between gap-1">
         <div className="flex items-center gap-1">
           <Toggle
-            className="h-8 gap-1 bg-background text-xs"
+            className="h-8 min-w-fit gap-1 bg-background text-xs"
             variant="outline"
             pressed={field.value}
             onPressedChange={field.onChange}
@@ -184,7 +184,7 @@ const Images = () => {
   return (
     <div className="flex flex-col gap-8">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="fixed bottom-16 z-10 flex w-full flex-col gap-4 rounded-t-xl border-t bg-background/90 p-4 backdrop-blur lg:static lg:border-none lg:bg-transparent lg:p-0">
+        <div className="fixed bottom-20 z-10 flex w-full flex-col gap-4 rounded-t-xl border-t bg-background/90 p-4 backdrop-blur lg:static lg:border-none lg:bg-transparent lg:p-0">
           <CollapsibleTrigger className="flex w-full items-center justify-center gap-2">
             {isMy ? t("My Images") : t("Imagine anything")}
             <ChevronDown
