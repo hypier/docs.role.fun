@@ -414,7 +414,7 @@ export const generateFollowups = internalAction({
         })
       : undefined;
     try {
-      const model = "undi95/toppy-m-7b";
+      const model = "gryphe/mythomax-l2-13b";
       const baseURL = getBaseURL(model);
       const apiKey = getAPIKey(model);
       const openai = new OpenAI({
