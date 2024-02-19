@@ -222,14 +222,17 @@ export const answer = internalAction({
         ) {
           // @ts-ignore
           originalQuery = conversations[conversations.length - 1].text;
-          // @ts-ignore
-          conversations[conversations.length - 1].text +=
-            ` (don't answer like "${message.text})"`;
-          console.log("conversations edited::", conversations);
         }
 
+        const modelWithFallback =
+          originalQuery &&
+          model !== "nousresearch/nous-hermes-2-mixtral-8x7b-dpo"
+            ? "nousresearch/nous-hermes-2-mixtral-8x7b-dpo"
+            : originalQuery
+              ? "gryphe/mythomax-l2-13b"
+              : model;
         const response = await openai.chat.completions.create({
-          model,
+          model: modelWithFallback,
           stream: false,
           messages: [
             {
