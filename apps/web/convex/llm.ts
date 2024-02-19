@@ -42,7 +42,7 @@ const getInstruction = (
               ${
                 character?.instruction
                   ? `instruction: ${
-                      character?.instruction.substring(0, 1024) as string
+                      character?.instruction.substring(0, 512) as string
                     }`
                   : character?.description &&
                     `description: ${
