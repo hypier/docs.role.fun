@@ -40,6 +40,7 @@ import {
   ChevronsUpDown,
   Heart,
   Lock,
+  MessageSquare,
   Plus,
   Rabbit,
   Sparkles,
@@ -114,6 +115,15 @@ const PlusPlan = () => {
           </CardHeader>
           <CardFooter className="flex w-full flex-col items-center justify-center gap-2">
             <ul className="z-10 flex w-full flex-col gap-1 text-xs text-white">
+              <li className="flex items-center gap-1">
+                <MessageSquare className="h-4 w-4" />
+                {t("30+ Top AI Models Access")}
+                <InfoTooltip
+                  content={t(
+                    "Plus users will get priority access to newly released models.",
+                  )}
+                />
+              </li>
               <li className="flex items-center gap-1">
                 <Heart className="h-4 w-4" />
                 {t("Double Character Memory")}
