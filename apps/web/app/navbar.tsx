@@ -8,9 +8,10 @@ import UserDropdown from "../components/user/user-dropdown";
 import { Button, Tooltip } from "@repo/ui/src/components";
 import { SignedOut } from "@clerk/nextjs";
 import { useConvexAuth } from "convex/react";
-import { Plus, Search } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import useCurrentUser from "./lib/hooks/use-current-user";
+import { Search } from "@repo/ui/src/components/icons";
 
 export default function NavBar({}: {}) {
   const scrolled = useScroll(50);
