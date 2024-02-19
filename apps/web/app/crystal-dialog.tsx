@@ -55,11 +55,7 @@ const CrystalDialog: React.FC = () => {
           <div className="mt-4 flex items-center justify-between">
             <CurrentCrystals />
             <Link href="/crystals">
-              <Button
-                className="w-fit font-display"
-                onClick={closeDialog}
-                variant="ghost"
-              >
+              <Button className="w-fit" onClick={closeDialog} variant="ghost">
                 {t("Shop")}
               </Button>
             </Link>

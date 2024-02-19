@@ -323,7 +323,7 @@ const DailyReward = () => {
   const onClickHandler = async () => {
     const promise = checkin();
     toast.promise(promise, {
-      loading: "Claiming your daily reward...",
+      loading: t("Claiming your daily reward..."),
       success: () => {
         return t(
           `Daily reward claimed successfully! Don't forget to return tomorrow for more rewards.`,
