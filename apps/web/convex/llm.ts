@@ -353,7 +353,7 @@ export const generateInstruction = internalAction({
         baseURL,
         apiKey,
       });
-      const instruction = `Create specific and detailed character instruction (ex: what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
+      const instruction = `Create concise character instruction (ex: what does the character do, how does they behave, what should they avoid doing, example quotes from character.) for ${name} (description: ${description}). `;
       try {
         const response = await openai.chat.completions.create({
           model,
@@ -364,6 +364,7 @@ export const generateInstruction = internalAction({
               content: instruction,
             },
           ],
+          max_tokens: 192,
         });
 
         const text = response.choices[0]?.message?.content || "";
