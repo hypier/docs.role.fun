@@ -709,7 +709,7 @@ export function Dialog({
         (await choose({
           chosen: input,
           followUpId: followUps?._id,
-          query: messages[messages.length - 1]?.text as string,
+          query: `${name}: ${messages[messages.length - 1]?.text as string}`,
         }));
       posthog.capture("send_message");
     } catch (error) {
@@ -914,7 +914,7 @@ export function Dialog({
           sendAndReset={sendAndReset}
           setScrolled={setScrolled}
           isLastMessageLoaded={isLastMessageLoaded}
-          query={messages[messages.length - 1]?.text || ""}
+          query={`${name}: ${messages[messages.length - 1]?.text}` || ""}
         />
         <div className="mb-[8rem] lg:mb-4" />
       </div>
