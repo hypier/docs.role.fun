@@ -259,7 +259,8 @@ export const answer = internalAction({
           .replaceAll(new RegExp(escapeRegExp(userPrefix), "gi"), "");
         const cleanedContent = content
           .replace(new RegExp(characterPrefix, "g"), "")
-          .replace(/#+$/, "");
+          .replace(/#+$/, "")
+          .trim();
         await ctx.runMutation(internal.llm.updateCharacterMessage, {
           messageId,
           text: cleanedContent,
