@@ -203,19 +203,19 @@ export const modelData = [
     value: "neversleep/noromaid-20b",
     description: "Uncensored, Noromaid 20B by Never Sleep",
     isNSFW: true,
-    crystalPrice: 3,
+    crystalPrice: 4,
   },
   {
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
     isNSFW: true,
-    crystalPrice: 2,
+    crystalPrice: 1,
   },
   {
     value: "neversleep/noromaid-mixtral-8x7b-instruct",
     description: "Uncensored, Noromaid 8x7B by Never Sleep",
     isNSFW: true,
-    crystalPrice: 3,
+    crystalPrice: 4,
   },
   {
     value: "nousresearch/nous-capybara-7b:free",
