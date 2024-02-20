@@ -35,10 +35,10 @@ import { Id } from "../../convex/_generated/dataModel";
 import DraftBadge from "./saving-badge";
 import SavingBadge from "./saving-badge";
 import Image from "next/image";
-import { InfoTooltip, Tooltip, TooltipContent } from "@repo/ui/src/components";
+import { InfoTooltip, Tooltip } from "@repo/ui/src/components";
 import { Crystal } from "@repo/ui/src/components/icons";
 import Spinner from "@repo/ui/src/components/spinner";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import RemixBadge from "./remix-badge";
 import { ModelSelect } from "./model-select";
@@ -250,7 +250,7 @@ export default function CharacterForm() {
               }
               onClose={isMobile ? () => setOpenPopover(false) : undefined}
             >
-              <PopoverContent className="p-4 lg:w-full lg:rounded-lg lg:bg-background lg:p-2">
+              <PopoverContent className="p-4 pb-8 lg:w-full lg:rounded-lg lg:bg-background lg:p-2 lg:pb-2">
                 <RadioGroup
                   defaultValue={visibility ?? "public"}
                   className="p-1"

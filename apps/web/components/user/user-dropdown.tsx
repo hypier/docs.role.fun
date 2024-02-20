@@ -86,7 +86,7 @@ export default function UserDropdown() {
         onOpenChange={isMobile ? undefined : () => setOpenPopover(!openPopover)}
         onClose={isMobile ? () => setOpenPopover(false) : undefined}
       >
-        <PopoverContent className="p-2 sm:w-40 sm:p-1">
+        <PopoverContent className="p-4 pb-8 sm:w-40 sm:p-1 lg:p-2 lg:pb-2">
           {user && (
             <div className="p-2">
               {user?.username && (

@@ -465,7 +465,7 @@ const ChatOptionsPopover = ({
   return (
     <Popover>
       <AlertDialog>
-        <PopoverContent className="p-4 lg:w-52 lg:p-1">
+        <PopoverContent className="p-4 pb-8 lg:w-52 lg:p-1 lg:pb-1">
           {showEdit && (
             <Link
               href={`/my-characters/create${
