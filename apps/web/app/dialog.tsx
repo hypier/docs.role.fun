@@ -154,7 +154,7 @@ export const Message = ({
             className="object-cover"
           />
           <AvatarFallback>
-            {message?.characterId ? name[0] : username[0]}
+            {message?.characterId ? name?.[0] : username?.[0]}
           </AvatarFallback>
         </Avatar>
         {message?.characterId ? <>{name}</> : <>{username}</>}
