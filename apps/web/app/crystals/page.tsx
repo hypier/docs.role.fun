@@ -621,7 +621,7 @@ export default function Page() {
             />
           </h2>
           <p className="flex items-center gap-1 text-center text-sm text-muted-foreground">
-            2 x
+            3 x
             <Crystal className="h-4 w-4" />
           </p>
         </div>
