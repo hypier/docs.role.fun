@@ -68,7 +68,6 @@ export const get = query({
         .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))
         .order("desc")
         .first();
-      console.log("followUp::", followUp);
       return followUp;
     }
   },
@@ -85,7 +84,6 @@ export const latestFollowup = internalQuery({
       .filter((q) => q.eq(q.field("chatId"), args.chatId))
       .order("desc")
       .first();
-    console.log("followUp::", followUp);
     return followUp;
   },
 });
