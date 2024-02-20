@@ -916,7 +916,7 @@ export function Dialog({
         <div className="mb-[8rem] lg:mb-4" />
       </div>
       <form
-        className="fixed bottom-0 z-50 flex h-24 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background lg:sticky lg:rounded-br-lg"
+        className="fixed bottom-0 z-50 flex h-28 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background pb-4 lg:sticky lg:rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
         <div className="flex h-full w-full items-center justify-center gap-4 px-4">
