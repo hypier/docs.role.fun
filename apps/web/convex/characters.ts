@@ -667,7 +667,7 @@ export const translate = mutation({
       .withIndex("byLanguage", (q) => q.eq("languageTag", userLanguage))
       .filter((q) => q.eq(q.field("text"), character?.name))
       .first();
-    if (!existingTranslation && userLanguage !== "en-US") {
+    if (userLanguage && !existingTranslation && userLanguage !== "en-US") {
       await ctx.scheduler.runAfter(0, internal.translate.string, {
         text: character?.name as string,
         targetLanguage: userLanguage,
