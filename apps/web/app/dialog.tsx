@@ -704,11 +704,11 @@ export function Dialog({
     try {
       await sendMessage({ message: input, chatId, characterId });
       followUps?.followUp1 &&
-        messages[messages.length - 1]?.text &&
+        messages[messages?.length - 1]?.text &&
         (await choose({
           chosen: input,
           followUpId: followUps?._id,
-          query: `${name}: ${messages[messages.length - 1]?.text as string}`,
+          query: `${name}: ${messages[messages?.length - 1]?.text as string}`,
         }));
       posthog.capture("send_message");
     } catch (error) {
