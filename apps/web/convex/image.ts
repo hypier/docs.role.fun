@@ -331,7 +331,7 @@ export const generateByPrompt = internalAction(
           break;
         default:
           modelHash =
-            "asiryan/juggernaut-xl-v7:6a52feace43ce1f6bbc2cdabfc68423cb2319d7444a1a1dae529c5e88b976382";
+            "daun-io/openroleplay.ai-animagine-v3:559becf07bc8ce089dc37afcdaf8f83bf1038ffcee22730ec5d1b42507b5465c";
       }
 
       const dimensions = {

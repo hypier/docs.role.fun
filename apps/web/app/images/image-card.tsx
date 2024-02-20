@@ -81,7 +81,7 @@ const ImageDetail = (props: {
             <div className="grid w-full grid-cols-3 justify-between gap-2">
               <Tooltip content={"Create new image by remixing this image"}>
                 <Link
-                  href={`/images?prompt=${props.prompt}&model=${props.model}`}
+                  href={`/images?prompt=${props.prompt}&model="${props.model}"`}
                   className="w-full"
                 >
                   <Button className="w-full gap-1" variant="outline">

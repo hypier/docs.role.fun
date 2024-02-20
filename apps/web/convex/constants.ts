@@ -67,7 +67,7 @@ export const getCrystalPrice = (modelName: string) => {
 
 export const getImageModelCrystalPrice = (modelName: string) => {
   const model = imageModelData.find((m) => m.value === modelName);
-  return model ? model.crystalPrice : 25;
+  return model ? model.crystalPrice : 4;
 };
 
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
