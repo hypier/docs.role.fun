@@ -664,8 +664,7 @@ export const translate = mutation({
           : user.languageTag;
     const existingTranslation = await ctx.db
       .query("translations")
-      .withIndex("byLanguage")
-      .filter((q) => q.eq(q.field("languageTag"), userLanguage))
+      .withIndex("byLanguage", (q) => q.eq("languageTag", userLanguage))
       .filter((q) => q.eq(q.field("text"), character?.name))
       .first();
     if (!existingTranslation && userLanguage !== "en-US") {
