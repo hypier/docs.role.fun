@@ -107,6 +107,7 @@ export const answer = internalAction({
     });
     const character = await ctx.runQuery(internal.characters.getCharacter, {
       id: characterId,
+      userId: user?._id,
     });
     const persona = personaId
       ? await ctx.runQuery(internal.personas.getPersona, {
@@ -163,6 +164,7 @@ export const answer = internalAction({
         userId,
         ctx,
       );
+      console.log("model:::", model);
       const instruction = getInstruction(
         character,
         persona,

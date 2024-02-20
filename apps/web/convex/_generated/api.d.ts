@@ -15,6 +15,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as characterCard from "../characterCard.js";
+import type * as characterCustomization from "../characterCustomization.js";
 import type * as characters from "../characters.js";
 import type * as chats from "../chats.js";
 import type * as constants from "../constants.js";
@@ -54,6 +55,7 @@ import type * as users from "../users.js";
  */
 declare const fullApi: ApiFromModules<{
   characterCard: typeof characterCard;
+  characterCustomization: typeof characterCustomization;
   characters: typeof characters;
   chats: typeof chats;
   constants: typeof constants;

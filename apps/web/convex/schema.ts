@@ -90,6 +90,15 @@ export default defineSchema({
     creatorId: v.id("users"),
     updatedAt: v.string(),
   }).index("byUserId", ["creatorId"]),
+  characterCustomizations: defineTable({
+    characterId: v.id("characters"),
+    model: v.optional(v.string()),
+    voiceId: v.optional(v.string()),
+    languageTag: v.optional(v.string()),
+    userId: v.id("users"),
+  })
+    .index("byCharacterId", ["characterId"])
+    .index("byUserId", ["userId"]),
   chats: defineTable({
     chatName: v.optional(v.string()),
     updatedAt: v.optional(v.string()),
