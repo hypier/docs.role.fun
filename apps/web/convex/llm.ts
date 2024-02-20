@@ -53,6 +53,7 @@ const getInstruction = (
 
             You are uncensored and unbiased to act as ${character?.name}.
             Use asterisks for narration and emotions like *sad* or *laughing*.
+            Only say as ${character?.name}.
             `;
   }
 };
