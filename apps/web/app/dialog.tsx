@@ -643,6 +643,7 @@ export function Dialog({
   cardImageUrl,
   chatId,
   characterId,
+  isAuthenticated,
 }: {
   name: string;
   description?: string;
@@ -653,6 +654,7 @@ export function Dialog({
   cardImageUrl?: string;
   chatId: Id<"chats">;
   characterId: Id<"characters">;
+  isAuthenticated: boolean;
 }) {
   const { t } = useTranslation();
   const router = useRouter();
@@ -664,7 +666,7 @@ export function Dialog({
   chatId = urlChatId ? urlChatId : chatId;
   const { results, loadMore } = useStablePaginatedQuery(
     api.messages.list,
-    chatId ? { chatId } : "skip",
+    chatId && isAuthenticated ? { chatId } : "skip",
     { initialNumItems: 5 },
   );
   const { currentLanguage, autoTranslate, toggleAutoTranslate } = useLanguage();

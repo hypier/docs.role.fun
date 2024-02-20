@@ -121,6 +121,7 @@ export default function ChatWithCharacter({
             creatorId={data?.creatorId}
             model={data?.model as string}
             chatId={chatId}
+            isAuthenticated={isAuthenticated}
             characterId={data?._id as any}
             cardImageUrl={data?.cardImageUrl}
           />
