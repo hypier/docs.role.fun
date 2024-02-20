@@ -1,10 +1,10 @@
 import { Card } from "@repo/ui/src/components";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 
-const CharacterCardPlaceholder = (props: {}) => {
+const CharacterCardPlaceholder = ({ ratio = 1 / 1.5 }: { ratio?: number }) => {
   return (
     <AspectRatio
-      ratio={1 / 1.5}
+      ratio={ratio}
       className="group h-full w-full place-content-center rounded-xl duration-200 hover:-translate-y-1 hover:shadow-lg"
     >
       <Card className="flex h-full w-full items-end rounded-xl p-2">
