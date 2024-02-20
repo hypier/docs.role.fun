@@ -693,8 +693,10 @@ export function Dialog({
   const choose = useMutation(api.followUps.choose);
   const sendMessage = useMutation(api.messages.send);
   const posthog = usePostHog();
-
-  const followUps = useStableQuery(api.followUps.get, { chatId });
+  const followUps = useStableQuery(
+    api.followUps.get,
+    chatId && isAuthenticated ? { chatId } : "skip",
+  );
   const [isScrolled, setScrolled] = useState(false);
   const [input, setInput] = useState("");
   const { openDialog } = useCrystalDialog();
