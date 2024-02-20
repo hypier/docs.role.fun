@@ -78,8 +78,10 @@ const Images = () => {
   const price = useQuery(api.crystals.imageModelPrice, {
     modelName: form.getValues("model"),
   }) as number;
-
-  const onSubmitHandler = (values: z.infer<typeof formSchema>) => {
+  const onSubmitHandler = (
+    values: z.infer<typeof formSchema>,
+    showToast: boolean = true,
+  ) => {
     const { prompt, model, isPrivate } = values;
     const promise = generate({ prompt, model, isPrivate });
     posthog.capture("imagine");
@@ -87,7 +89,9 @@ const Images = () => {
     promise
       .then((image) => {
         setImageId(image);
-        toast.success("Your request has been queued");
+        if (showToast) {
+          toast.success("Your request has been queued");
+        }
       })
       .catch((error) => {
         setIsGenerating(false);
@@ -143,7 +147,7 @@ const Images = () => {
               type="submit"
               onClick={() => {
                 for (let i = 0; i < Number(selectedImages); i++) {
-                  onSubmitHandler(form.getValues());
+                  onSubmitHandler(form.getValues(), i === 0 ? true : false);
                 }
               }}
             >
@@ -197,7 +201,9 @@ const Images = () => {
             <div className="flex items-center gap-2 lg:pl-0 lg:pr-4">
               <Form {...form}>
                 <form
-                  onSubmit={form.handleSubmit(onSubmitHandler)}
+                  onSubmit={form.handleSubmit((value) =>
+                    onSubmitHandler(value),
+                  )}
                   className="mt-1 flex w-full flex-col items-center gap-4"
                   autoFocus
                 >
