@@ -50,7 +50,7 @@ export const CustomModelSelect = ({
 
   return (
     <Select onValueChange={handleModelChange} defaultValue={selectedModel}>
-      <SelectTrigger className="h-6 max-w-72 text-[9px] text-muted-foreground lg:max-w-fit lg:text-xs">
+      <SelectTrigger className="h-6 max-w-72 text-xs text-muted-foreground lg:max-w-fit">
         <SelectValue placeholder="Select an AI model for character." />
       </SelectTrigger>
       <SelectContent>
