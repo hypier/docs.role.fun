@@ -113,18 +113,20 @@ export default function ChatWithCharacter({
             This character is private and you do not have permission to view it.
           </div>
         ) : (
-          <Dialog
-            name={data?.name as string}
-            description={data?.description as string}
-            creatorName={creatorName}
-            userId={currentUser?._id}
-            creatorId={data?.creatorId}
-            model={data?.model as string}
-            chatId={chatId}
-            isAuthenticated={isAuthenticated}
-            characterId={data?._id as any}
-            cardImageUrl={data?.cardImageUrl}
-          />
+          <Authenticated>
+            <Dialog
+              name={data?.name as string}
+              description={data?.description as string}
+              creatorName={creatorName}
+              userId={currentUser?._id}
+              creatorId={data?.creatorId}
+              model={data?.model as string}
+              chatId={chatId}
+              isAuthenticated={isAuthenticated}
+              characterId={data?._id as any}
+              cardImageUrl={data?.cardImageUrl}
+            />
+          </Authenticated>
         )
       ) : isAuthenticated && !isLoading ? (
         <div className="flex h-full w-full items-center justify-center">

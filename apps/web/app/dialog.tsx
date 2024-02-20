@@ -874,9 +874,9 @@ export function Dialog({
           <div className="m-4 my-6 flex flex-col rounded-xl bg-background/50 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
             <strong>{mt(name, translations)}</strong>{" "}
             <div>{mt(description, translations)}</div>
-            {creatorName && (
-              <div className="text-muted-foreground">by @{creatorName}</div>
-            )}
+            <div className="text-muted-foreground">
+              by @{creatorName ? creatorName : "anonymous"}
+            </div>
           </div>
         )}
         <div
