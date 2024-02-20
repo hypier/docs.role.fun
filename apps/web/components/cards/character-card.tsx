@@ -50,7 +50,7 @@ const CharacterCard = (props: {
   return (
     <>
       <AspectRatio
-        ratio={1 / 1.75}
+        ratio={1 / 1.5}
         className="group h-full w-full place-content-center overflow-hidden rounded-xl duration-200 hover:shadow-lg lg:overflow-visible"
       >
         <Link

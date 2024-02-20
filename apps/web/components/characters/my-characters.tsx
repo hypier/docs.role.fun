@@ -23,7 +23,7 @@ export const NewCharacter = () => {
   return (
     <Link href="/my-characters/create">
       <AspectRatio
-        ratio={1 / 1.75}
+        ratio={1 / 1.5}
         className="group group h-full w-full place-content-center rounded-lg border border-dashed"
         role="button"
       >
