@@ -43,11 +43,11 @@ const StyledLink: React.FC<StyledLinkProps> = ({
   return (
     <Link
       href={href}
-      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-secondary sm:p-1"
+      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-base transition-all duration-75 hover:bg-secondary sm:p-1"
       onClick={onClick}
     >
       {Icon}
-      <p className="text-sm">{text}</p>
+      <p className="text-base">{text}</p>
     </Link>
   );
 };
@@ -59,11 +59,11 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
 }) => {
   return (
     <button
-      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-secondary sm:p-1"
+      className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-base transition-all duration-75 hover:bg-secondary sm:p-1"
       onClick={onClick}
     >
       {Icon}
-      <p className="text-sm">{text}</p>
+      <p className="text-base">{text}</p>
     </button>
   );
 };
@@ -90,7 +90,7 @@ export default function UserDropdown() {
           {user && (
             <div className="p-2">
               {user?.username && (
-                <p className="truncate text-sm font-medium text-foreground">
+                <p className="truncate text-base font-medium text-foreground">
                   {`@${user?.username}`}
                 </p>
               )}

@@ -36,7 +36,7 @@ export const PreferenceSelect = ({
   return (
     <div className="flex flex-col gap-2 pt-4">
       {showLabel && (
-        <Label htmlFor="nsfwPreference" className="text-[10px]">
+        <Label htmlFor="nsfwPreference" className="text-xs">
           {t("Mature Content")}
         </Label>
       )}
