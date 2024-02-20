@@ -40,7 +40,7 @@ export const ImagePlaceholder = () => {
           )}
         </span>
       </div>
-      <CharacterCardPlaceholder key={"my"} />
+      <CharacterCardPlaceholder key={"my"} ratio={1 / 1.75} />
     </div>
   );
 };
