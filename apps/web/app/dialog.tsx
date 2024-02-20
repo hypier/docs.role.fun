@@ -160,7 +160,7 @@ export const Message = ({
         {message?.characterId ? <>{name}</> : <>{username}</>}
       </div>
       {message?.text === "" ? (
-        <div className="whitespace-pre-wrap rounded-xl bg-muted px-3 py-2 md:max-w-[36rem] lg:max-w-[48rem]">
+        <div className="whitespace-pre-wrap rounded-xl bg-gradient-to-b from-background to-muted px-3 py-2 shadow-lg md:max-w-[36rem] lg:max-w-[48rem]">
           {thinkingMessage}
           {thinkingDots}
         </div>
