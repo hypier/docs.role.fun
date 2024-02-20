@@ -45,6 +45,10 @@ export const translate = internalAction({
         currentCrystals,
         name: "deepl",
       });
+      await ctx.runMutation(internal.messages.addTranslation, {
+        messageId: args.messageId,
+        translation: `Not enough crystals. You need 3 crystals to use translation.`,
+      });
       throw error;
     }
     return result.text;
