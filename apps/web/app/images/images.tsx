@@ -144,6 +144,7 @@ const Images = () => {
           {me?.name ? (
             <Button
               className="w-full gap-1 text-xs"
+              variant="cta"
               type="submit"
               onClick={() => {
                 for (let i = 0; i < Number(selectedImages); i++) {
