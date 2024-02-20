@@ -567,7 +567,7 @@ export const listPopularTags = query({
     }
     let query = ctx.db
       .query("characters")
-      .withIndex("byScore")
+      .withIndex("byScore", (q) => q.gt("score", 0))
       .filter((q) => q.eq(q.field("isDraft"), false))
       .filter((q) => q.eq(q.field("isBlacklisted"), false))
       .filter((q) => q.neq(q.field("isArchived"), true))
