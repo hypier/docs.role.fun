@@ -416,9 +416,26 @@ export const get = query({
 export const getCharacter = internalQuery({
   args: {
     id: v.id("characters"),
+    userId: v.optional(v.id("users")),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
+    let character = await ctx.db.get(args.id);
+    if (args.userId && character) {
+      const customizations = await ctx.db
+        .query("characterCustomizations")
+        .withIndex("byUserId", (q) =>
+          q.eq("userId", args.userId as Id<"users">),
+        )
+        .filter((q) => q.eq(q.field("characterId"), args.id))
+        .unique();
+      if (customizations) {
+        character.model = customizations.model || character.model;
+        character.voiceId = customizations.voiceId || character.voiceId;
+        character.languageTag =
+          customizations.languageTag || character.languageTag;
+      }
+    }
+    return character;
   },
 });
 

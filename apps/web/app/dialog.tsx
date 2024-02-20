@@ -79,6 +79,7 @@ import {
 } from "@repo/ui/src/components/drawer";
 import { Textarea } from "@repo/ui/src/components/textarea";
 import { useResponsivePopover } from "@repo/ui/src/hooks/use-responsive-popover";
+import { CustomModelSelect } from "../components/characters/custom-model-select";
 
 export const Message = ({
   index,
@@ -800,7 +801,6 @@ export function Dialog({
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
-            <ModelBadge modelName={model as string} showCredits={true} />
             <Badge variant="model">
               <Headphones className="h-4 w-4 p-0.5" /> /
               <Crystal className="h-4 w-4 p-0.5" /> x 15
@@ -920,7 +920,7 @@ export function Dialog({
         <div className="mb-[8rem] lg:mb-4" />
       </div>
       <form
-        className="fixed bottom-0 z-50 flex h-28 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background pb-4 lg:sticky lg:rounded-br-lg"
+        className="fixed bottom-0 z-50 flex h-32 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background pb-6 lg:rounded-br-lg"
         onSubmit={(event) => void handleSend(event)}
       >
         <div className="flex h-full w-full items-center justify-center gap-4 px-4">
@@ -943,6 +943,12 @@ export function Dialog({
           <Button disabled={input === ""} size="icon">
             <Send className="h-5 w-5" />
           </Button>
+        </div>
+        <div className="flex w-full items-end justify-end px-4">
+          <CustomModelSelect
+            initialModel={model as string}
+            characterId={characterId}
+          />
         </div>
       </form>
     </div>
