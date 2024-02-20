@@ -664,7 +664,7 @@ export function Dialog({
   chatId = urlChatId ? urlChatId : chatId;
   const { results, loadMore } = useStablePaginatedQuery(
     api.messages.list,
-    { chatId },
+    chatId ? { chatId } : "skip",
     { initialNumItems: 5 },
   );
   const { currentLanguage, autoTranslate, toggleAutoTranslate } = useLanguage();
