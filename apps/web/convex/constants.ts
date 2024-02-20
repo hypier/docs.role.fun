@@ -61,7 +61,6 @@ export const getCrystalPrice = (modelName: string) => {
     ...TranslationModelData,
   ];
   const model = allModels.find((m) => m.value === modelName);
-  console.log("modelName", modelName, model);
   return model ? model.crystalPrice : modelName === "auto" ? 10 : 5;
 };
 
