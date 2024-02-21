@@ -78,6 +78,7 @@
   "Crystal Price": "クリスタル価格",
   "Crystal Price Table": "クリスタル価格表",
   "Text models": "テキストモデル",
+  "Crystal is used when you send message and character answers.": "クリスタルは、メッセージや文字の応答を送信するときに使用されます。",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "クリスタルは、キャラクターにメッセージを送信したり、応答を再生成したり、会話を続けたりするたびに使用されます。",
   "Crystal is used whenever you generate an image.": "クリスタルは、画像を生成するたびに使用されます。",
   "Crystal is used whenever you request voice playback for a specific message.": "Crystalは、特定のメッセージの音声再生をリクエストするたびに使用されます。",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "購入情報を読み込み中...",
   "Now you can proceed to purchase.": "今、あなたは購入に進むことができます。",
   "Unexpected error occurred": "予期しないエラーが発生しました",
-  "Automatic translation": "自動翻訳"
+  "Automatic translation": "自動翻訳",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "ほとんどのAIモデルは、英語入力で最高品質の結果を生成します。自動翻訳を有効にすると、より高い品質の結果を得ることができます。"
 }
