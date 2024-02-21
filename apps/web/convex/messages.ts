@@ -114,7 +114,9 @@ export const send = mutation({
       numChats: newNumChats,
       updatedAt,
     });
-    await ctx.db.insert("followUps", { chatId });
+    if (crystalPrice >= 1) {
+      await ctx.db.insert("followUps", { chatId });
+    }
   },
 });
 
