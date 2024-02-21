@@ -367,7 +367,13 @@ export default function CharacterForm() {
                   </span>
                 </div>
                 <span className="text-xs">or</span>
-                <Link href="/images">
+                <Link
+                  href={`/images${
+                    form.getValues()?.description
+                      ? `?prompt=${form.getValues()?.description}`
+                      : ""
+                  }`}
+                >
                   <Button variant="outline">{t("Generate")}</Button>
                 </Link>
               </>
