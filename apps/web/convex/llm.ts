@@ -447,11 +447,7 @@ export const generateFollowups = internalAction({
           "gryphe/mythomist-7b:free",
           "huggingfaceh4/zephyr-7b-beta:free",
           "teknium/openhermes-2-mistral-7b",
-        ];
-        for (let i = models.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [models[i], models[j]] = [models[j], models[i]]; // ES6 destructuring assignment syntax to swap elements
-        }
+        ].sort(() => Math.random() - 0.5);
         let instruction;
         for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 4 : 3); i++) {
           try {
