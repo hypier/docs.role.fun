@@ -78,6 +78,7 @@
   "Crystal Price": "크리스탈 가격",
   "Crystal Price Table": "크리스탈 가격표",
   "Text models": "텍스트 모델",
+  "Crystal is used when you send message and character answers.": "Crystal is used when you send message and character answers.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "크리스탈은 캐릭터에게 메시지를 보내거나, 응답을 다시 생성하거나, 대화를 계속할 때마다 사용됩니다.",
   "Crystal is used whenever you generate an image.": "크리스탈은 이미지를 생성할 때마다 사용됩니다.",
   "Crystal is used whenever you request voice playback for a specific message.": "크리스탈은 특정 메시지에 대한 음성 재생을 요청할 때마다 사용됩니다.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "구매 세부 정보 불러오는 중...",
   "Now you can proceed to purchase.": "이제 구매를 진행할 수 있습니다.",
   "Unexpected error occurred": "예상치 못한 에러가 발생했습니다.",
-  "Automatic translation": "자동 번역"
+  "Automatic translation": "자동 번역",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results."
 }
