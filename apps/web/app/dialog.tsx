@@ -899,28 +899,35 @@ export function Dialog({
           }}
         >
           <div ref={ref} />
-          {remoteMessages === undefined ? (
-            <>
-              <div className="h-5 rounded-md bg-black/10" />
-              <div className="h-9 rounded-md bg-black/10" />
-            </>
-          ) : (
-            messages.map((message, i) => (
-              <Message
-                index={i}
-                key={message._id}
-                name={name}
-                message={message}
-                cardImageUrl={
-                  message?.characterId
-                    ? (cardImageUrl as string)
-                    : (persona?.cardImageUrl as string)
-                }
-                username={(username as string) || "You"}
-                chatId={chatId}
-              />
-            ))
-          )}
+          <AnimatePresence>
+            {remoteMessages === undefined ? (
+              <>
+                <div className="h-5 rounded-md bg-black/10" />
+                <div className="h-9 rounded-md bg-black/10" />
+              </>
+            ) : (
+              messages.map((message, i) => (
+                <motion.div
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                >
+                  <Message
+                    index={i}
+                    key={message._id}
+                    name={name}
+                    message={message}
+                    cardImageUrl={
+                      message?.characterId
+                        ? (cardImageUrl as string)
+                        : (persona?.cardImageUrl as string)
+                    }
+                    username={(username as string) || "You"}
+                    chatId={chatId}
+                  />
+                </motion.div>
+              ))
+            )}
+          </AnimatePresence>
         </div>
         <FollowUps
           followUps={followUps}
