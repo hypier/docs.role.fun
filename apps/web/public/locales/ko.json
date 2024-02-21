@@ -19,7 +19,7 @@
   "Community": "커뮤니티",
   "Discord": "디스코드",
   "My Characters": "내 캐릭터",
-  "My Personas": "My Personas",
+  "My Personas": "내 페르소나",
   "Create character": "캐릭터 만들기",
   "Create and customize characters.": "캐릭터를 만들고 설정해보세요.",
   "My Images": "내 이미지",
@@ -56,7 +56,7 @@
   "Configure your character details.": "캐릭터를 설정해보세요.",
   "Publish to": "게시하기",
   "Public": "전체 공개",
-  "Private": "Private",
+  "Private": "나만 보기",
   "Publish": "게시",
   "Only me": "나에게만 공개",
   "Add character card": "캐릭터 카드 업로드",
@@ -78,7 +78,7 @@
   "Crystal Price": "크리스탈 가격",
   "Crystal Price Table": "크리스탈 가격표",
   "Text models": "텍스트 모델",
-  "Crystal is used when you send message and character answers.": "Crystal is used when you send message and character answers.",
+  "Crystal is used when you send message and character answers.": "크리스탈은 메시지를 보내거나 캐릭터가 대답할 때 사용됩니다.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "크리스탈은 캐릭터에게 메시지를 보내거나, 응답을 다시 생성하거나, 대화를 계속할 때마다 사용됩니다.",
   "Crystal is used whenever you generate an image.": "크리스탈은 이미지를 생성할 때마다 사용됩니다.",
   "Crystal is used whenever you request voice playback for a specific message.": "크리스탈은 특정 메시지에 대한 음성 재생을 요청할 때마다 사용됩니다.",
@@ -176,5 +176,5 @@
   "Now you can proceed to purchase.": "이제 구매를 진행할 수 있습니다.",
   "Unexpected error occurred": "예상치 못한 에러가 발생했습니다.",
   "Automatic translation": "자동 번역",
-  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results."
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "대부분의 AI 모델은 영어 입력에 대해 최고 품질의 결과를 생성합니다. 자동 번역을 활성화하면 더 높은 품질의 결과를 얻을 수 있습니다."
 }
