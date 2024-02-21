@@ -73,7 +73,11 @@ export const Chat = ({
             </h2>
           </div>
           <p className="line-clamp-2 text-sm text-muted-foreground lg:line-clamp-3">
-            {message?.text ? message?.text : "Click here to chat."}
+            {message?.translation
+              ? message?.translation
+              : message?.text
+                ? message?.text
+                : "Click here to chat."}
           </p>
         </div>
       </div>
