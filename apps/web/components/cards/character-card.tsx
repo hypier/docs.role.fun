@@ -57,7 +57,7 @@ const CharacterCard = (props: {
           href={`/character/${props?.id}`}
           onClick={() => posthog.capture("click-character-card")}
         >
-          <Card className="flex h-full w-full items-end rounded-xl p-2">
+          <Card className="flex h-full w-full items-end rounded-xl p-2 tracking-tight">
             {props.showEdit && (
               <Link
                 href={`/my-characters/create${
