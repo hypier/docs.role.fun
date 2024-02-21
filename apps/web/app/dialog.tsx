@@ -624,7 +624,7 @@ const FollowUps = ({
                         setScrolled(false);
                       }}
                       variant="outline"
-                      className="flex h-fit w-fit gap-2 whitespace-normal border-none bg-background p-2 text-left text-xs font-normal tracking-tighter text-foreground/75 shadow dark:shadow-gray-800"
+                      className="flex h-fit w-fit gap-2 whitespace-normal border-none bg-background p-2 text-left text-sm font-normal tracking-tighter text-foreground/75 shadow dark:shadow-gray-800"
                     >
                       <Sparkles className="h-4 w-4 text-blue-500" />
                       <span className="w-fit lg:max-w-screen-sm">
