@@ -851,7 +851,7 @@ export function Dialog({
       >
         {currentLanguage !== "en" && (
           <div className="flex w-full items-center justify-center pt-8">
-            <div className="flex flex-col items-center gap-1">
+            <div className="mx-4 flex w-full flex-col items-center gap-1 rounded-xl bg-background/75 p-4 shadow-lg ring-1 ring-foreground/10 backdrop-blur-md">
               <div className="flex items-center gap-1">
                 <Label htmlFor="automatic-translation">
                   {t("Automatic translation")}
@@ -862,6 +862,11 @@ export function Dialog({
                   )}
                 />
               </div>
+              <span className="text-center text-xs">
+                {t(
+                  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.",
+                )}
+              </span>
               <Switch
                 id="automatic-translation"
                 value={autoTranslate}
