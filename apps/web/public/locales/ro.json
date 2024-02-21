@@ -78,6 +78,7 @@
   "Crystal Price": "Preț cristal",
   "Crystal Price Table": "Tabel Preț Cristal",
   "Text models": "Modele text",
+  "Crystal is used when you send message and character answers.": "Cristalul este folosit atunci când trimiți mesaje și răspunsuri de personaj.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Cristalul este folosit ori de câte ori trimiteți mesaje pentru caracter, regenerați răspunsul sau continuați conversația.",
   "Crystal is used whenever you generate an image.": "Cristalul este folosit ori de câte ori generați o imagine.",
   "Crystal is used whenever you request voice playback for a specific message.": "Cristalul este folosit ori de câte ori solicitați redare vocală pentru un anumit mesaj.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Se încarcă detaliile cumpărături...",
   "Now you can proceed to purchase.": "Acum poți trece la achiziție.",
   "Unexpected error occurred": "Eroare neașteptată",
-  "Automatic translation": "Traducere automată"
+  "Automatic translation": "Traducere automată",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Majoritatea modelelor AI produc rezultate de cea mai înaltă calitate pentru intrarea în engleză. Activarea traducerii automate vă va ajuta să obțineți rezultate de calitate superioară."
 }
