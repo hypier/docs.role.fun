@@ -78,6 +78,7 @@
   "Crystal Price": "Цена кристалла",
   "Crystal Price Table": "Таблица цен на кристаллы",
   "Text models": "Модели текста",
+  "Crystal is used when you send message and character answers.": "Кристалл используется при отправке сообщений и ответов на персонаж.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Crystal используется всякий раз, когда вы отправляете сообщение персонажу, восстанавливаете ответ или продолжаете разговор.",
   "Crystal is used whenever you generate an image.": "Кристалл используется при создании изображения.",
   "Crystal is used whenever you request voice playback for a specific message.": "Crystal используется всякий раз, когда вы запрашиваете воспроизведение голоса для конкретного сообщения.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Загрузка деталей покупки...",
   "Now you can proceed to purchase.": "Теперь вы можете перейти к покупке.",
   "Unexpected error occurred": "Произошла непредвиденная ошибка",
-  "Automatic translation": "Автоматический перевод"
+  "Automatic translation": "Автоматический перевод",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Most AI models produce the highest quality results for Russian input. Enabling automatic translation will help you get the higher quality results."
 }
