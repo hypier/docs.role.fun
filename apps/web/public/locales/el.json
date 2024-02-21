@@ -78,6 +78,7 @@
   "Crystal Price": "Τιμή Κρύσταλλο",
   "Crystal Price Table": "Τραπέζι Τιμών Κρύσταλλο",
   "Text models": "Μοντέλα κειμένου",
+  "Crystal is used when you send message and character answers.": "Το Crystal χρησιμοποιείται όταν στέλνετε μηνύματα και απαντήσεις χαρακτήρων.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Το Crystal χρησιμοποιείται κάθε φορά που στέλνετε μήνυμα σε χαρακτήρα, αναγέννηση απόκρισης ή συνέχιση της συνομιλίας.",
   "Crystal is used whenever you generate an image.": "Το Crystal χρησιμοποιείται όποτε δημιουργείτε μια εικόνα.",
   "Crystal is used whenever you request voice playback for a specific message.": "Το Crystal χρησιμοποιείται κάθε φορά που ζητάτε αναπαραγωγή φωνής για συγκεκριμένο μήνυμα.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Φόρτωση λεπτομερειών αγοράς...",
   "Now you can proceed to purchase.": "Τώρα μπορείτε να προχωρήσετε στην αγορά.",
   "Unexpected error occurred": "Παρουσιάστηκε μη αναμενόμενο σφάλμα",
-  "Automatic translation": "Αυτόματη μετάφραση"
+  "Automatic translation": "Αυτόματη μετάφραση",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Τα περισσότερα μοντέλα τεχνητής νοημοσύνης παράγουν τα υψηλότερα ποιοτικά αποτελέσματα για την αγγλική εισαγωγή. \" ενεργοποίηση της αυτόματης μετάφρασης θα σας βοηθήσει να πάρετε τα υψηλότερα ποιοτικά αποτελέσματα."
 }
