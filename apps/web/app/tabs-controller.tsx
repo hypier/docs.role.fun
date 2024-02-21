@@ -22,7 +22,7 @@ function TabsController() {
   return (
     <Tabs value={getFirstDirectory(pathname)}>
       <TabsList
-        className={`shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-24 w-full gap-2 rounded-none border-t py-4 ${
+        className={`shadow-t-2xl fixed bottom-0 left-0 right-0 z-20 mx-auto flex h-20 w-full gap-2 rounded-none border-t py-4 ${
           isMobile
             ? "bg-background/90 backdrop-blur-md backdrop-saturate-150"
             : "bg-none"

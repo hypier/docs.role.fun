@@ -189,7 +189,7 @@ const Images = () => {
   return (
     <div className="flex flex-col gap-8">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="fixed bottom-24 z-10 flex w-full flex-col gap-4 rounded-t-xl border-t bg-background/90 p-4 shadow-[0_-8px_30px_rgb(0,0,0,0.36)] backdrop-blur lg:static lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none">
+        <div className="fixed bottom-20 z-10 flex w-full flex-col gap-4 rounded-t-xl border-t bg-background/90 p-4 shadow-[0_-8px_30px_rgb(0,0,0,0.36)] backdrop-blur lg:static lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none">
           <CollapsibleTrigger className="flex w-full items-center justify-center gap-2">
             {isMy ? t("My Images") : t("Imagine anything")}
             <ChevronDown
