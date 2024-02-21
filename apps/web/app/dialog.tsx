@@ -929,7 +929,7 @@ export function Dialog({
           isLastMessageLoaded={isLastMessageLoaded}
           query={`${name}: ${messages[messages.length - 1]?.text}` || ""}
         />
-        <div className="mb-[10rem] lg:mb-16" />
+        <div className="mb-[11rem] lg:mb-16" />
       </div>
       <form
         className="fixed bottom-0 z-50 flex h-32 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background pb-6 lg:rounded-br-lg"
