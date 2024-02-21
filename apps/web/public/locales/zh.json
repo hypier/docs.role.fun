@@ -78,6 +78,7 @@
   "Crystal Price": "水晶价格",
   "Crystal Price Table": "水晶价格表",
   "Text models": "文本模型",
+  "Crystal is used when you send message and character answers.": "当您发送消息和字符答案时使用水晶。",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "每当您向角色发送消息、重新生成响应或继续对话时，都会使用水晶。",
   "Crystal is used whenever you generate an image.": "每当您生成图像时都会使用水晶。",
   "Crystal is used whenever you request voice playback for a specific message.": "每当您请求播放特定消息时都会使用水晶。",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "正在加载购买详细信息...",
   "Now you can proceed to purchase.": "现在您可以继续购买。",
   "Unexpected error occurred": "发生意外错误",
-  "Automatic translation": "自动翻译"
+  "Automatic translation": "自动翻译",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "大多数的 AI 模型生成了高质量的英语输入结果。启用自动翻译将帮助您获得更高质量的结果。"
 }
