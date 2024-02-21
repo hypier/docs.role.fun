@@ -23,7 +23,7 @@ import {
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
-import { useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Button, InfoTooltip, Tooltip } from "@repo/ui/src/components";
 import {
   Avatar,
@@ -603,31 +603,38 @@ const FollowUps = ({
   return (
     <>
       {followUps && !followUps?.isStale && isLastMessageLoaded && (
-        <div className="z-10 flex w-full flex-col justify-center gap-2 px-6 xl:flex-row xl:justify-start">
-          {["followUp1", "followUp2", "followUp3"].map(
-            (followUpKey) =>
-              followUps[followUpKey] && (
-                <Button
-                  key={followUpKey}
-                  onClick={() => {
-                    sendAndReset(followUps[followUpKey] as string);
-                    choose({
-                      followUpId: followUps._id,
-                      chosen: followUps[followUpKey] as string,
-                      query,
-                    });
-                    setScrolled(false);
-                  }}
-                  variant="outline"
-                  className="flex h-fit w-fit gap-2 whitespace-normal rounded-xl border-b-2 bg-background p-2 text-left font-normal"
-                >
-                  <Sparkles className="h-4 w-4 text-blue-500" />
-                  <span className="w-fit lg:max-w-screen-sm">
-                    {followUps[followUpKey]}
-                  </span>
-                </Button>
-              ),
-          )}
+        <div className="z-10 flex w-full flex-col justify-center gap-1 px-6">
+          <AnimatePresence>
+            {["followUp1", "followUp2", "followUp3", "followUp4"].map(
+              (followUpKey) =>
+                followUps[followUpKey] && (
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                  >
+                    <Button
+                      key={followUpKey}
+                      onClick={() => {
+                        sendAndReset(followUps[followUpKey] as string);
+                        choose({
+                          followUpId: followUps._id,
+                          chosen: followUps[followUpKey] as string,
+                          query,
+                        });
+                        setScrolled(false);
+                      }}
+                      variant="outline"
+                      className="flex h-fit w-fit gap-2 whitespace-normal border-none bg-background p-2 text-left text-xs font-normal tracking-tighter text-foreground/75 shadow dark:shadow-gray-800"
+                    >
+                      <Sparkles className="h-4 w-4 text-blue-500" />
+                      <span className="w-fit lg:max-w-screen-sm">
+                        {followUps[followUpKey]}
+                      </span>
+                    </Button>
+                  </motion.div>
+                ),
+            )}
+          </AnimatePresence>
         </div>
       )}
     </>
@@ -922,7 +929,7 @@ export function Dialog({
           isLastMessageLoaded={isLastMessageLoaded}
           query={`${name}: ${messages[messages.length - 1]?.text}` || ""}
         />
-        <div className="mb-[10rem] lg:mb-12" />
+        <div className="mb-[10rem] lg:mb-16" />
       </div>
       <form
         className="fixed bottom-0 z-50 flex h-32 min-h-fit w-full flex-col items-center border-0 border-t-[1px] border-solid bg-background pb-6 lg:rounded-br-lg"

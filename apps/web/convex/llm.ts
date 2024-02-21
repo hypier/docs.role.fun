@@ -33,7 +33,7 @@ const getInstruction = (
             }
 
             Use asterisks for narration and emotions like *sad* or *laughing*.
-            Keep your answer very short but try to be intriguing and engaging.
+            Keep your answer very very short.
             `;
   } else {
     return `You are 
@@ -442,9 +442,18 @@ export const generateFollowups = internalAction({
         const userRole =
           persona && "name" in persona ? persona?.name : username;
         const userPrefix = `${userRole}:`;
-        let updates: { [key: string]: string } = {};
+        const models = [
+          "gryphe/mythomax-l2-13b",
+          "gryphe/mythomist-7b:free",
+          "huggingfaceh4/zephyr-7b-beta:free",
+          "teknium/openhermes-2-mistral-7b",
+        ];
+        for (let i = models.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [models[i], models[j]] = [models[j], models[i]]; // ES6 destructuring assignment syntax to swap elements
+        }
         let instruction;
-        for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 3 : 2); i++) {
+        for (let i = 1; i <= (user?.subscriptionTier === "plus" ? 4 : 3); i++) {
           try {
             instruction = getInstruction(
               character,
@@ -452,13 +461,9 @@ export const generateFollowups = internalAction({
               username as string,
               true,
             );
+            const modelToUse = models[i - 1];
             const response = await openai.chat.completions.create({
-              model:
-                i === 1
-                  ? model
-                  : i === 2
-                    ? "gryphe/mythomist-7b:free"
-                    : "teknium/openhermes-2-mistral-7b",
+              model: modelToUse,
               stream: false,
               messages: [
                 {
@@ -466,22 +471,17 @@ export const generateFollowups = internalAction({
                   content: instruction,
                 },
                 ...(messages
-                  .map(({ characterId, text }: any, index: any) => {
-                    return {
-                      role: characterId ? "user" : "assistant",
-                      content: characterId
-                        ? characterPrefix +
-                          text.replaceAll("{{user}}", userRole)
-                        : text.replaceAll("{{user}}", userRole),
-                    };
-                  })
+                  .map(({ characterId, text }: any, index: any) => ({
+                    role: characterId ? "user" : "assistant",
+                    content: characterId
+                      ? characterPrefix + text.replaceAll("{{user}}", userRole)
+                      : text.replaceAll("{{user}}", userRole),
+                  }))
                   .flat() as ChatCompletionMessageParam[]),
               ],
-              max_tokens: 64,
+              max_tokens: 48,
             });
-            const responseMessage = (response &&
-              response?.choices &&
-              response.choices[0]?.message) as any;
+            const responseMessage = response?.choices?.[0]?.message as any;
 
             function escapeRegExp(string: string) {
               return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // Escapes special characters for regex
@@ -489,7 +489,6 @@ export const generateFollowups = internalAction({
 
             const content = responseMessage?.content
               .replaceAll("{{user}}", userRole as string)
-              // Use a regex with 'gi' for global, case-insensitive replacement
               .replaceAll(new RegExp(escapeRegExp(characterPrefix), "gi"), "")
               .replaceAll(new RegExp(escapeRegExp(userPrefix), "gi"), "");
             const cleanedContent = content
@@ -497,32 +496,20 @@ export const generateFollowups = internalAction({
               .replace(/#+$/, "")
               .trim();
 
-            // Prepare updates based on iteration
-            const key = `followUp${i}`;
-            updates[key] = cleanedContent
-              .replaceAll("{{user}}", userRole as string)
-              .replaceAll(characterPrefix, "")
-              .replaceAll(userPrefix, "")
-              .replace(/#+$/, "");
+            // Update followUp immediately after response is generated
+            const updateKey = `followUp${i}`;
+            await ctx.runMutation(internal.followUps.update, {
+              followUpId,
+              instruction,
+              [updateKey]: cleanedContent
+                .replaceAll("{{user}}", userRole as string)
+                .replaceAll(characterPrefix, "")
+                .replaceAll(userPrefix, "")
+                .replace(/#+$/, ""),
+            });
           } catch (error) {
             console.error(`Error generating follow-up ${i}:`, error);
           }
-        }
-        // Update followUps in batch outside the loop
-        if (Object.keys(updates).length > 0) {
-          await ctx.runMutation(internal.followUps.update, {
-            followUpId,
-            instruction,
-            ...Object.keys(updates)
-              .sort(() => 0.5 - Math.random())
-              .reduce(
-                (obj, key) => {
-                  obj[key] = updates[key];
-                  return obj;
-                },
-                {} as Record<string, any>,
-              ),
-          });
         }
       } catch (error) {
         console.log("error:::", error);

@@ -30,6 +30,7 @@ export const update = internalMutation({
     followUp1: v.optional(v.string()),
     followUp2: v.optional(v.string()),
     followUp3: v.optional(v.string()),
+    followUp4: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const { followUpId, ...rest } = args;
@@ -61,15 +62,12 @@ export const get = query({
     chatId: v.id("chats"),
   },
   handler: async (ctx, args) => {
-    const chat = await ctx.db.get(args.chatId);
-    if (chat) {
-      const followUp = await ctx.db
-        .query("followUps")
-        .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))
-        .order("desc")
-        .first();
-      return followUp;
-    }
+    const followUp = await ctx.db
+      .query("followUps")
+      .withIndex("byChatId", (q) => q.eq("chatId", args.chatId))
+      .order("desc")
+      .first();
+    return followUp;
   },
 });
 

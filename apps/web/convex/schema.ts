@@ -117,6 +117,7 @@ export default defineSchema({
     followUp1: v.optional(v.string()),
     followUp2: v.optional(v.string()),
     followUp3: v.optional(v.string()),
+    followUp4: v.optional(v.string()),
     chosen: v.optional(v.string()),
     query: v.optional(v.string()),
     instruction: v.optional(v.string()),
