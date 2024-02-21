@@ -459,7 +459,7 @@ export const generateFollowups = internalAction({
             );
             const modelToUse = models[i - 1];
             const response = await openai.chat.completions.create({
-              model: modelToUse,
+              model: modelToUse as string,
               stream: false,
               messages: [
                 {
