@@ -78,6 +78,7 @@
   "Crystal Price": "سعر الكريستال",
   "Crystal Price Table": "منضدة سعر كريستال",
   "Text models": "نماذج النص",
+  "Crystal is used when you send message and character answers.": "يتم استخدام البلورة عند إرسال رسالة وإجابات عن الشخصية.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "يتم استخدام الكريستال كلما قمت بإرسال رسالة إلى الشخصية، أو تجديد الاستجابة أو مواصلة المحادثة.",
   "Crystal is used whenever you generate an image.": "يتم استخدام الكريستال كلما قمت بإنشاء صورة.",
   "Crystal is used whenever you request voice playback for a specific message.": "يتم استخدام كريستال كلما طلبت تشغيل صوتي لرسالة معينة.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "تحميل تفاصيل الشراء...",
   "Now you can proceed to purchase.": "الآن يمكنك المضي قدما في الشراء.",
   "Unexpected error occurred": "حدث خطأ غير متوقع",
-  "Automatic translation": "الترجمة التلقائية"
+  "Automatic translation": "الترجمة التلقائية",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "معظم نماذج الذكاء الاصطناعي تنتج أعلى النتائج جودة للمدخلات الإنجليزية. تمكين الترجمة التلقائية سيساعدك على الحصول على نتائج عالية الجودة."
 }
