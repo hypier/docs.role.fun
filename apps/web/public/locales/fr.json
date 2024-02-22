@@ -78,6 +78,7 @@
   "Crystal Price": "Prix du cristal",
   "Crystal Price Table": "Tableau de prix en cristal",
   "Text models": "Modèles de texte",
+  "Crystal is used when you send message and character answers.": "Le cristal est utilisé lorsque vous envoyez des messages et des réponses de personnage.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Le cristal est utilisé chaque fois que vous envoyez un message à un personnage, régénérez une réponse ou continuez la conversation.",
   "Crystal is used whenever you generate an image.": "Le cristal est utilisé chaque fois que vous générez une image.",
   "Crystal is used whenever you request voice playback for a specific message.": "Le cristal est utilisé chaque fois que vous demandez une lecture vocale pour un message spécifique.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Chargement des détails d'achat...",
   "Now you can proceed to purchase.": "Vous pouvez maintenant procéder à l'achat.",
   "Unexpected error occurred": "Une erreur inattendue s'est produite",
-  "Automatic translation": "Traduction automatique"
+  "Automatic translation": "Traduction automatique",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "La plupart des modèles AI produisent des résultats de qualité supérieure pour les entrées anglaises. Activer la traduction automatique vous aidera à obtenir des résultats de meilleure qualité."
 }

@@ -78,6 +78,7 @@
   "Crystal Price": "Cena krystalu",
   "Crystal Price Table": "Cenová tabulka Crystal",
   "Text models": "Textové modely",
+  "Crystal is used when you send message and character answers.": "Krystal se používá při odesílání zpráv a odpovědí na znaky.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Krystal se používá při odesílání zprávy do postavy, regeneraci odpovědi nebo pokračování v konverzaci.",
   "Crystal is used whenever you generate an image.": "Krystal se používá při generování obrázku.",
   "Crystal is used whenever you request voice playback for a specific message.": "Krystal je použit při požadavku na přehrávání hlasu pro konkrétní zprávu.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Načítání detailů nákupu...",
   "Now you can proceed to purchase.": "Nyní můžete pokračovat v nákupu.",
   "Unexpected error occurred": "Došlo k neočekávané chybě",
-  "Automatic translation": "Automatický překlad"
+  "Automatic translation": "Automatický překlad",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Most AI models produkují nejvyšší kvalitativní výsledky pro anglický vstup. Enabling automatic translation will help you get the higher quality results."
 }

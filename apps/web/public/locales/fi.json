@@ -78,6 +78,7 @@
   "Crystal Price": "Kristallin Hinta",
   "Crystal Price Table": "Kristallin Hintataulukko",
   "Text models": "Tekstin mallit",
+  "Crystal is used when you send message and character answers.": "Kristallia käytetään, kun lähetät viestin ja merkin vastauksia.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Kristallia käytetään aina kun lähetät viestin luonnetta, uudista vastausta tai jatka keskustelua.",
   "Crystal is used whenever you generate an image.": "Kristallia käytetään aina kun luot kuvan.",
   "Crystal is used whenever you request voice playback for a specific message.": "Kristallia käytetään aina, kun pyydät puhelun toistoa tiettyyn viestiin.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Ladataan ostoksia...",
   "Now you can proceed to purchase.": "Nyt voit jatkaa ostamista.",
   "Unexpected error occurred": "Odottamaton virhe",
-  "Automatic translation": "Automaattinen käännös"
+  "Automatic translation": "Automaattinen käännös",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Useimmat tekoälyn mallit tuottavat korkealaatuisia tuloksia englanninkieliselle panokselle. Automaattisen käännöksen käyttöönotto auttaa sinua saamaan laadukkaampia tuloksia."
 }

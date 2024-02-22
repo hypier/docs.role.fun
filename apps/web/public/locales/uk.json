@@ -78,6 +78,7 @@
   "Crystal Price": "Кристал ціна",
   "Crystal Price Table": "Кристал прейскуранта",
   "Text models": "Текстові моделі",
+  "Crystal is used when you send message and character answers.": "Кристал використовується, коли ви відправляєте повідомлення і відповіді на символ.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Кристал використовується тоді, коли ви відправляєте повідомлення до персонажа, відновлення відповіді або продовження розмови.",
   "Crystal is used whenever you generate an image.": "Кристал використовується тоді, коли ви створюєте зображення.",
   "Crystal is used whenever you request voice playback for a specific message.": "Crystal використовується коли ви запитуєте відтворення голосу для певного повідомлення.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Завантаження деталей про покупку...",
   "Now you can proceed to purchase.": "Тепер ви можете продовжити покупку.",
   "Unexpected error occurred": "Сталася неочікувана помилка",
-  "Automatic translation": "Автоматичний переклад"
+  "Automatic translation": "Автоматичний переклад",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "Більшість ШІ моделей створюють максимальну якість результатів для введення англійської мови. Увімкнення автоматичного перекладу допоможе вам отримати результати вищої якості."
 }

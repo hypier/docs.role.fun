@@ -78,6 +78,7 @@
   "Crystal Price": "Krystal Pris",
   "Crystal Price Table": "Krystal Pris Tabel",
   "Text models": "Tekst modeller",
+  "Crystal is used when you send message and character answers.": "Krystal bruges, når du sender besked og tegn svar.",
   "Crystal is used whenever you send message to character, regenerate response or continue conversation.": "Krystal bruges, når du sender besked til at tegne, regenerere svar eller fortsætte samtalen.",
   "Crystal is used whenever you generate an image.": "Krystal bruges, når du genererer et billede.",
   "Crystal is used whenever you request voice playback for a specific message.": "Krystal bruges, når du anmoder om stemmeafspilning for en bestemt besked.",
@@ -174,5 +175,6 @@
   "Loading purchase details...": "Indlæser købsdetaljer...",
   "Now you can proceed to purchase.": "Nu kan du fortsætte med at købe.",
   "Unexpected error occurred": "Uventet fejl opstod",
-  "Automatic translation": "Automatisk oversættelse"
+  "Automatic translation": "Automatisk oversættelse",
+  "Most AI models produce the highest quality results for English input. Enabling automatic translation will help you get the higher quality results.": "De fleste AI-modeller giver de højeste resultater af høj kvalitet til engelsk input. Aktivering af automatisk oversættelse vil hjælpe dig med at få de højere kvalitetsresultater."
 }
