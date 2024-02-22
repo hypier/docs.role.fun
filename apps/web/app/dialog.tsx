@@ -53,7 +53,7 @@ import { Badge } from "@repo/ui/src/components/badge";
 import { ConvexError } from "convex/values";
 import { useCrystalDialog } from "./lib/hooks/use-crystal-dialog";
 import { usePostHog } from "posthog-js/react";
-import { useLanguage } from "./lang-select";
+import { LanguageSelect, useLanguage } from "./lang-select";
 import { Label } from "@repo/ui/src/components/label";
 import {
   useStablePaginatedQuery,
@@ -808,6 +808,9 @@ export function Dialog({
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
+            <div>
+              <LanguageSelect isCompact />
+            </div>
             <Badge variant="model">
               <Headphones className="h-4 w-4 p-0.5" /> /
               <Crystal className="h-4 w-4 p-0.5" /> x 15

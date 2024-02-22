@@ -13,6 +13,7 @@ import useCurrentUser from "./lib/hooks/use-current-user";
 import { api } from "../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { useEffect } from "react";
+import { Languages } from "lucide-react";
 
 export function useLanguage() {
   const { i18n } = useTranslation();
@@ -37,7 +38,7 @@ export function useLanguage() {
   };
 }
 
-export function LanguageSelect() {
+export function LanguageSelect({ isCompact = false }: { isCompact?: boolean }) {
   const { t } = useTranslation();
   const { currentLanguage, setLanguage, i18n } = useLanguage();
   return (
@@ -49,7 +50,7 @@ export function LanguageSelect() {
       defaultValue={currentLanguage}
       value={currentLanguage}
     >
-      <SelectTrigger>
+      <SelectTrigger className={isCompact ? "h-7 text-xs" : ""}>
         <SelectValue placeholder={t("Select a language")} />
       </SelectTrigger>
       <SelectContent>
