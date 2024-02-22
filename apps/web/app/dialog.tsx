@@ -804,7 +804,7 @@ export function Dialog({
       {chatId && (
         <div className="fixed top-0 z-50 flex h-12 w-full items-center justify-between border-b bg-background p-2 px-4 lg:sticky lg:rounded-t-lg lg:px-6">
           <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground lg:text-xs">
-            <Link href="/" className="lg:hidden">
+            <Link href="/chats" className="lg:hidden">
               <Button size="icon" variant="ghost">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
