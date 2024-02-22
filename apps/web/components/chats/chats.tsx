@@ -91,7 +91,7 @@ export default function Chats() {
     }
   }, [inView, loadMore]);
   return (
-    <Card className="h-full w-full overflow-hidden rounded-b-none border-transparent shadow-none lg:border-border lg:shadow-xl">
+    <Card className="h-full w-full overflow-scroll rounded-b-none border-transparent shadow-none scrollbar-hide lg:border-border lg:shadow-xl">
       <CardHeader>
         <CardTitle>{t("Chats")}</CardTitle>
       </CardHeader>
