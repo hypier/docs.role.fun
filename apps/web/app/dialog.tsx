@@ -80,6 +80,7 @@ import {
 import { Textarea } from "@repo/ui/src/components/textarea";
 import { useResponsivePopover } from "@repo/ui/src/hooks/use-responsive-popover";
 import { CustomModelSelect } from "../components/characters/custom-model-select";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 export const Message = ({
   index,
@@ -967,10 +968,17 @@ export function Dialog({
           </Button>
         </div>
         <div className="flex w-full items-end justify-end px-4">
-          <CustomModelSelect
-            initialModel={model as string}
-            characterId={characterId}
-          />
+          {characterId && (
+            <ErrorBoundary
+              children={
+                <CustomModelSelect
+                  initialModel={model as string}
+                  characterId={characterId}
+                />
+              }
+              errorComponent={() => ""}
+            />
+          )}
         </div>
       </form>
     </div>
