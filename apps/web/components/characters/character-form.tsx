@@ -323,7 +323,7 @@ export default function CharacterForm() {
                     className="flex h-7 w-full gap-1 text-xs"
                   >
                     <UploadCloud className="text-foreground-primary h-4 w-4" />
-                    {t("Publish")}
+                    {visibility === "public" ? t("Publish") : t("Save")}
                   </Button>
                 </div>
               </PopoverContent>
