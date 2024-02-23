@@ -653,9 +653,10 @@ export const scoreAll = internalMutation({
     characters.forEach(async (character) => {
       const createdAt = character?._creationTime as number;
       const numChats = character?.numChats || 1;
+      const numUsers = character?.numUsers || 1;
       await ctx.db.patch(character._id, {
         score:
-          numChats /
+          (numChats + numUsers * 10) /
           Math.pow(
             (new Date().getTime() - createdAt + 2 * 60 * 60 * 1000) /
               (7 * 24 * 60 * 60 * 1000),
