@@ -341,7 +341,6 @@ export const search = query({
         .filter((q) => q.eq(q.field("isDraft"), false))
         .filter((q) => q.eq(q.field("isBlacklisted"), false))
         .filter((q) => q.neq(q.field("isArchived"), true))
-        .filter((q) => q.neq(q.field("isNSFW"), true))
         .filter((q) => q.neq(q.field("visibility"), "private"));
     } else {
       query = ctx.db
