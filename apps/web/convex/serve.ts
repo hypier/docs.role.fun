@@ -71,6 +71,13 @@ export const checkedIn = query({
   handler: async (ctx, args) => {
     try {
       const user = await getUser(ctx);
+      if (
+        user?.email &&
+        (user.email.includes("secretmail.net") ||
+          user.email.includes("oncemail.co.kr") ||
+          user.email.includes("duck.com"))
+      )
+        return false;
       const date = new Date().toISOString().split("T")[0];
       const checkIn = await ctx.db
         .query("checkIn")
