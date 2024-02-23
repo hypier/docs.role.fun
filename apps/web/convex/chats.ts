@@ -88,6 +88,9 @@ export const create = mutation({
         userId: user._id as Id<"users">,
       });
     }
+    ctx.db.patch(args.characterId, {
+      numUsers: character?.numUsers ? character?.numUsers : 0 + 1,
+    });
     return newChat;
   },
 });

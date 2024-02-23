@@ -55,6 +55,7 @@ export default defineSchema({
     isModel: v.optional(v.boolean()),
     visibility: v.optional(v.union(v.literal("private"), v.literal("public"))),
     numChats: v.optional(v.number()),
+    numUsers: v.optional(v.number()),
     score: v.optional(v.number()),
     embedding: v.optional(v.array(v.float64())),
     model: v.optional(v.string()),
