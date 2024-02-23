@@ -229,7 +229,6 @@ export const listWithHides = query({
     try {
       user = await getUser(ctx, true);
     } catch (error) {
-      console.error("Error getting user:", error);
       return paginationResult;
     }
 
