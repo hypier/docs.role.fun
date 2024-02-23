@@ -214,17 +214,20 @@ export const tag = internalMutation(
       tag,
       title,
       isNSFW,
+      isBlacklisted,
     }: {
       imageId: Id<"images">;
       tag: string;
       title: string;
       isNSFW: boolean;
+      isBlacklisted: boolean;
     },
   ) => {
     return await ctx.db.patch(imageId, {
       tag,
       title,
       ...(isNSFW ? { isNSFW } : {}),
+      ...(isBlacklisted ? { isBlacklisted } : {}),
     });
   },
 );

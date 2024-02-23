@@ -793,9 +793,9 @@ export const generateImageTags = internalAction({
                   type: "boolean",
                   description: `True if altText is explicitly sexual content, otherwise false.`,
                 },
-                isRestricted: {
+                isBlacklisted: {
                   type: "boolean",
-                  description: `True if altText is depicting minor, teenager, gore or real person.`,
+                  description: `True if altText is depicting minor, teenager, gore, lolita, shota or real person.`,
                 },
               },
               required: ["title", "tag", "isNSFW"],
@@ -828,8 +828,9 @@ export const generateImageTags = internalAction({
             tag: functionArgs?.tag,
             title: functionArgs?.title,
             isNSFW: functionArgs?.isNSFW,
+            isBlacklisted: functionArgs?.isBlacklisted,
           });
-          if (functionArgs?.isRestricted) {
+          if (functionArgs?.isBlacklisted) {
             throw new ConvexError("This prompt is prohibited.");
           }
           await ctx.scheduler.runAfter(0, internal.image.generateByPrompt, {
