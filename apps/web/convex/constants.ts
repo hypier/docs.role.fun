@@ -336,6 +336,12 @@ export const modelData = [
 
 export const imageModelData = [
   {
+    value: "lucataco/sdxl-lightning-4step",
+    description: "SDXL Lightning - Generate High quality images very fast.",
+    license: "openrail++",
+    crystalPrice: 1,
+  },
+  {
     value: "daun-io/openroleplay.ai-animagine-v3",
     description: "Animagine XL 3.0 - High-resolution, detailed anime images.",
     license: "Fair AI Public License 1.0-SD",

@@ -52,6 +52,7 @@ const formSchema = z.object({
     z.literal("asiryan/juggernaut-xl-v7"),
     z.literal("dall-e-3"),
     z.literal("pagebrain/dreamshaper-v8"),
+    z.literal("lucataco/sdxl-lightning-4step"),
   ]),
   isPrivate: z.boolean(),
 });

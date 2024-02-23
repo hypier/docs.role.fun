@@ -18,6 +18,7 @@ export const generate = mutation({
       v.literal("pagebrain/dreamshaper-v8"),
       v.literal("asiryan/meina-mix-v11"),
       v.literal("asiryan/blue-pencil-xl-v2"),
+      v.literal("lucataco/sdxl-lightning-4step"),
     ),
     isPrivate: v.boolean(),
   },

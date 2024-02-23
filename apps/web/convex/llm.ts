@@ -773,7 +773,6 @@ export const generateImageTags = internalAction({
           altText: ${image?.prompt},
         }
         `;
-
         const functions = [
           {
             name: "tag_image",

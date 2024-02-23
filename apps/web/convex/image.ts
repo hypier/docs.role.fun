@@ -329,6 +329,10 @@ export const generateByPrompt = internalAction(
           modelHash =
             "asiryan/blue-pencil-xl-v2:06db33e3cd56700e2b0de541e65e2fc377604bebc97eb87b40e1d190fafa7ef4";
           break;
+        case "lucataco/sdxl-lightning-4step":
+          modelHash =
+            "lucataco/sdxl-lightning-4step:727e49a643e999d602a896c774a0658ffefea21465756a6ce24b7ea4165eba6a";
+          break;
         default:
           modelHash =
             "daun-io/openroleplay.ai-animagine-v3:559becf07bc8ce089dc37afcdaf8f83bf1038ffcee22730ec5d1b42507b5465c";
@@ -336,6 +340,7 @@ export const generateByPrompt = internalAction(
 
       const dimensions = {
         "pagebrain/dreamshaper-v8": { width: 512, height: 768 },
+        "lucataco/sdxl-lightning-4step": { width: 1024, height: 1280 },
         default: { width: 768, height: 1344 },
       };
 
@@ -351,7 +356,8 @@ export const generateByPrompt = internalAction(
           disable_safety_checker: true,
           negative_prompt:
             "nsfw, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, artist name",
-          num_inference_steps: 40,
+          num_inference_steps:
+            model === "lucataco/sdxl-lightning-4step" ? 4 : 40,
         },
       });
       console.log("replicate output:::", output);
