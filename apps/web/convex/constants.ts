@@ -337,7 +337,7 @@ export const modelData = [
 export const imageModelData = [
   {
     value: "lucataco/sdxl-lightning-4step",
-    description: "SDXL Lightning - Generate High quality images very fast.",
+    description: "SDXL Lightning - Cost efficient, High quality images.",
     license: "openrail++",
     crystalPrice: 1,
   },
