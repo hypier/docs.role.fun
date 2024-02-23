@@ -214,12 +214,14 @@ export const tag = internalMutation(
       tag,
       title,
       isNSFW,
+      isPrivate,
       imageUrl,
     }: {
       imageId: Id<"images">;
       tag: string;
       title: string;
       isNSFW: boolean;
+      isPrivate: boolean;
       imageUrl: string;
     },
   ) => {
@@ -228,6 +230,7 @@ export const tag = internalMutation(
       title,
       ...(imageUrl ? { imageUrl } : {}),
       ...(isNSFW ? { isNSFW } : {}),
+      ...(isPrivate ? { isPrivate } : {}),
     });
   },
 );

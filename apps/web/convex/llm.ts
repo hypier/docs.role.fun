@@ -828,6 +828,7 @@ export const generateImageTags = internalAction({
             tag: functionArgs?.tag,
             title: functionArgs?.title,
             isNSFW: functionArgs?.isNSFW,
+            isPrivate: functionArgs?.isBlacklisted,
             imageUrl: functionArgs?.isBlacklisted
               ? "https://openroleplay.ai/image-failed.jpg"
               : "",
