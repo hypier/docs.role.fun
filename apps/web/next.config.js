@@ -28,6 +28,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "openroleplay.ai",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "*.r2.cloudflarestorage.com",
         port: "",
         pathname: "/**",

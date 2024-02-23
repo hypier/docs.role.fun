@@ -828,7 +828,9 @@ export const generateImageTags = internalAction({
             tag: functionArgs?.tag,
             title: functionArgs?.title,
             isNSFW: functionArgs?.isNSFW,
-            isBlacklisted: functionArgs?.isBlacklisted,
+            imageUrl: functionArgs?.isBlacklisted
+              ? "https://openroleplay.ai/image-failed.jpg"
+              : "",
           });
           if (functionArgs?.isBlacklisted) {
             throw new ConvexError("This prompt is prohibited.");
