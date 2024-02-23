@@ -12,6 +12,14 @@ crons.daily(
   internal.messages.removeOldMessages,
 );
 crons.daily(
+  "remove followUps",
+  {
+    minuteUTC: 0,
+    hourUTC: 0,
+  },
+  internal.messages.removeOldFollowUps,
+);
+crons.daily(
   "remove stories",
   {
     minuteUTC: 0,

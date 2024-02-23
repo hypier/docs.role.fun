@@ -303,6 +303,22 @@ export const removeOldMessages = internalMutation({
   },
 });
 
+export const removeOldFollowUps = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const followUps = await ctx.db
+      .query("followUps")
+      .withIndex("by_creation_time", (q) =>
+        q.lt("_creationTime", weekAgo.getTime()),
+      )
+      .filter((q) => q.neq(q.field("chosen"), undefined))
+      .take(4000);
+    await Promise.all(followUps.map((followUp) => ctx.db.delete(followUp._id)));
+    return { removed: followUps.length };
+  },
+});
+
 export const removeOldStories = internalMutation({
   args: {},
   handler: async (ctx) => {
