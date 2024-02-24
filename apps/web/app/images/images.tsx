@@ -177,7 +177,6 @@ const Images = () => {
               <SelectItem value={"1"}>1 Image</SelectItem>
               <SelectItem value={"2"}>2 Images</SelectItem>
               <SelectItem value={"4"}>4 Images</SelectItem>
-              <SelectItem value={"8"}>8 Images</SelectItem>
             </SelectContent>
           </Select>
         </div>
