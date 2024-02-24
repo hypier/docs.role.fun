@@ -794,7 +794,7 @@ export const generateImageTags = internalAction({
                 },
                 isBlacklisted: {
                   type: "boolean",
-                  description: `True if altText is depicting minor, teenager, gore, lolita, shota or real person.`,
+                  description: `True if altText is depicting minor, teenager, gore, lolita, shota, real person or popular anime title or character name.`,
                 },
               },
               required: ["title", "tag", "isNSFW"],
