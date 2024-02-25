@@ -43,4 +43,12 @@ crons.daily(
   },
   internal.characters.removeOldCharacters,
 );
+crons.daily(
+  "delete old images",
+  {
+    minuteUTC: 0,
+    hourUTC: 0,
+  },
+  internal.images.removeOldImages,
+);
 export default crons;

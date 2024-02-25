@@ -1,4 +1,8 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const s3Client = new S3Client({
@@ -28,4 +32,18 @@ export const getUploadUrl = async (filename: string) => {
     expiresIn: 60,
   });
   return signedUrl;
+};
+
+export const deleteImage = async (imageUrl: string) => {
+  const urlParts = imageUrl.split("/");
+  const filename = urlParts[urlParts.length - 1];
+  const params = {
+    Bucket:
+      process.env.NODE_ENV === "development"
+        ? process.env.R2_BUCKET_NAME_DEV
+        : process.env.R2_BUCKET_NAME,
+    Key: filename,
+  };
+  const command = new DeleteObjectCommand(params);
+  await s3Client.send(command);
 };

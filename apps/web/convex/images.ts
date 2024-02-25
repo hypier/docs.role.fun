@@ -341,3 +341,36 @@ export const listPopularTags = query({
     return sortedTags;
   },
 });
+
+export const removeOldImages = internalMutation({
+  handler: async (ctx) => {
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const imagesToDelete = await ctx.db
+      .query("images")
+      .withIndex("by_creation_time", (q) =>
+        q.lt("_creationTime", weekAgo.getTime()),
+      )
+      .filter((q) =>
+        q.and(
+          q.or(
+            q.eq(q.field("isNSFW"), true),
+            q.eq(q.field("isBlacklisted"), true),
+          ),
+          q.eq(q.field("isPrivate"), true),
+        ),
+      )
+      .collect();
+
+    await Promise.all(
+      imagesToDelete.map((image) =>
+        ctx.scheduler
+          .runAfter(0, internal.image.deleteImageAction, {
+            imageUrl: image.imageUrl,
+          })
+          .then(() => ctx.db.delete(image?._id)),
+      ),
+    );
+
+    return { deletedCount: imagesToDelete.length };
+  },
+});

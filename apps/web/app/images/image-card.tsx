@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import {
   ClipboardIcon,
   Download,
+  FilterX,
   Heart,
   Lock,
   Plus,
@@ -174,7 +175,13 @@ const ImageCard = (props: {
           <Card className="flex h-full w-full items-end rounded-xl p-2">
             <div className="absolute top-4 z-[3] hover:z-[4]">
               {props?.isPrivate ? (
-                <Tooltip content="This image is private.">
+                <Tooltip
+                  content={
+                    props?.isNSFW
+                      ? "This image will be removed in 7 days."
+                      : "This image is private."
+                  }
+                >
                   <div>
                     <Badge
                       className="group/badge flex w-fit gap-1"

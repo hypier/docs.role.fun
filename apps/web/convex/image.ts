@@ -6,7 +6,7 @@ import { Id } from "./_generated/dataModel";
 import { STABILITY_AI_API_URL, getAPIKey, getBaseURL } from "./constants";
 import { Buffer } from "buffer";
 import { OpenAI } from "openai";
-import { getUploadUrl } from "./r2";
+import { deleteImage, getUploadUrl } from "./r2";
 import { v } from "convex/values";
 
 export const generate = internalAction(
@@ -441,3 +441,15 @@ export const upload = action({
     return imageUrl;
   },
 });
+
+export const deleteImageAction = internalAction(
+  async (ctx, { imageUrl }: { imageUrl: string }) => {
+    try {
+      await deleteImage(imageUrl);
+      console.log(`Image deleted successfully: ${imageUrl}`);
+    } catch (error) {
+      console.error(`Failed to delete image: ${imageUrl}`, error);
+      throw new Error(`Failed to delete image: ${imageUrl}`);
+    }
+  },
+);
