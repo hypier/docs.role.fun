@@ -59,6 +59,7 @@ export const store = mutation({
         email.includes("secretmail.net") ||
         email.includes("oncemail.co.kr") ||
         email.includes("duck.com") ||
+        email.includes("slmail.me") ||
         email.includes("protonmail")
           ? 0
           : SIGN_UP_FREE_CRYSTALS,
