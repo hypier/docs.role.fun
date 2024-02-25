@@ -79,17 +79,19 @@ const ImageDetail = (props: {
               {props?.prompt}
             </DialogOrDrawerDescription>
             <div className="grid w-full grid-cols-3 justify-between gap-2">
-              <Tooltip content={"Create new image by remixing this image"}>
-                <Link
-                  href={`/images?prompt=${props.prompt}&model=${props.model}`}
-                  className="w-full"
-                >
-                  <Button className="w-full gap-1" variant="outline">
-                    <Repeat className="h-4 w-4" />
-                    {t("Remix")}
-                  </Button>
-                </Link>
-              </Tooltip>
+              {!props?.isNSFW && (
+                <Tooltip content={"Create new image by remixing this image"}>
+                  <Link
+                    href={`/images?prompt=${props.prompt}&model=${props.model}`}
+                    className="w-full"
+                  >
+                    <Button className="w-full gap-1" variant="outline">
+                      <Repeat className="h-4 w-4" />
+                      {t("Remix")}
+                    </Button>
+                  </Link>
+                </Tooltip>
+              )}
               <Tooltip content={"Create character using this image"}>
                 <Link
                   href={`/my-characters/create?cardImageUrl=${props.imageUrl}&description=${props.prompt}`}
@@ -186,20 +188,23 @@ const ImageCard = (props: {
                 <ModelBadge modelName={props.model as string} />
               )}
             </div>
-            <Tooltip content={"Create new image by remixing this image"}>
-              <Link
-                href={`/images?prompt=${props.prompt}&model=${props.model}`}
-                className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
-              >
-                <Button
-                  variant="outline"
-                  className="h-5 rounded-full border-none text-xs md:text-[10px]"
+
+            {!props?.isNSFW && (
+              <Tooltip content={"Create new image by remixing this image"}>
+                <Link
+                  href={`/images?prompt=${props.prompt}&model=${props.model}`}
+                  className="absolute right-4 top-4 z-[4] hidden items-center group-hover:flex"
                 >
-                  <Repeat className="h-3 w-3 p-0.5" />
-                  {t("Remix")}
-                </Button>
-              </Link>
-            </Tooltip>
+                  <Button
+                    variant="outline"
+                    className="h-5 rounded-full border-none text-xs md:text-[10px]"
+                  >
+                    <Repeat className="h-3 w-3 p-0.5" />
+                    {t("Remix")}
+                  </Button>
+                </Link>
+              </Tooltip>
+            )}
             {props.imageUrl && (
               <>
                 {props?.isNSFW ? (
