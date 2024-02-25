@@ -75,6 +75,7 @@ export default defineSchema({
     .index("byGenre", ["genreTag"])
     .index("byPersonality", ["personalityTag"])
     .index("byGender", ["genderTag"])
+    .index("byCardImageUrl", ["cardImageUrl"])
     .vectorIndex("byEmbedding", {
       vectorField: "embedding",
       dimensions: 512,

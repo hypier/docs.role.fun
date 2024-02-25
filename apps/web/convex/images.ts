@@ -362,13 +362,20 @@ export const removeOldImages = internalMutation({
       .collect();
 
     await Promise.all(
-      imagesToDelete.map((image) =>
-        ctx.scheduler
-          .runAfter(0, internal.image.deleteImageAction, {
+      imagesToDelete.map(async (image) => {
+        const characterWithImage = await ctx.db
+          .query("characters")
+          .withIndex("byCardImageUrl", (q) =>
+            q.lt("cardImageUrl", image.imageUrl),
+          )
+          .first();
+        if (!characterWithImage) {
+          await ctx.scheduler.runAfter(0, internal.image.deleteImageAction, {
             imageUrl: image.imageUrl,
-          })
-          .then(() => ctx.db.delete(image?._id)),
-      ),
+          });
+          await ctx.db.delete(image?._id);
+        }
+      }),
     );
 
     return { deletedCount: imagesToDelete.length };
