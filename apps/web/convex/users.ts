@@ -108,7 +108,11 @@ export const getUsername = query({
 export const me = query({
   args: {},
   handler: async (ctx, args) => {
-    return await getUser(ctx);
+    const user = await getUser(ctx);
+    if (user?.isBanned) {
+      throw new Error("User is banned");
+    }
+    return user;
   },
 });
 

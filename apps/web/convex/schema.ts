@@ -33,6 +33,7 @@ export default defineSchema({
     nsfwPreference: v.optional(
       v.union(v.literal("block"), v.literal("auto"), v.literal("allow")),
     ),
+    isBanned: v.optional(v.boolean()),
     autoTranslate: v.optional(v.boolean()),
   })
     .index("byToken", ["tokenIdentifier"])
