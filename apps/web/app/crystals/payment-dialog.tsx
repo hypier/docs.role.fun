@@ -37,7 +37,7 @@ const CrystalDialog: React.FC = () => {
   return (
     <Drawer open={isOpen} onClose={closeDialog}>
       <DrawerContent className="w-full bg-white">
-        <div className="max-h-96 overflow-y-scroll py-4 lg:max-h-[36rem]">
+        <div className="max-h-96 overflow-y-scroll py-4 lg:max-h-[36rem] xl:max-h-[48rem]">
           {clientSecret && (
             <EmbeddedCheckoutProvider
               stripe={stripePromise}
