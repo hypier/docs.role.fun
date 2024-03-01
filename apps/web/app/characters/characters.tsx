@@ -48,7 +48,7 @@ const Characters = () => {
   const { results, status, loadMore } = useStablePaginatedQuery(
     api.characters.listWithHides,
     filters,
-    { initialNumItems: 10 },
+    { initialNumItems: 25 },
   );
   const allCharacters = results || [];
   const characters = allCharacters.filter(
