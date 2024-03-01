@@ -15,18 +15,23 @@ import {
 import useMediaQuery from "../hooks/use-media-query";
 
 const DialogOrDrawer: React.FC<any> = (props) => {
-  const { isMobile } = useMediaQuery();
-  return isMobile ? <Drawer {...props} /> : <Dialog {...props} />;
+  const { isMobile, isTablet } = useMediaQuery();
+  return isMobile || isTablet ? <Drawer {...props} /> : <Dialog {...props} />;
 };
 
 const DialogOrDrawerContent: React.FC<any> = (props) => {
-  const { isMobile } = useMediaQuery();
-  return isMobile ? <DrawerContent {...props} /> : <DialogContent {...props} />;
+  const { isMobile, isTablet } = useMediaQuery();
+  return isMobile || isTablet ? (
+    <DrawerContent {...props} />
+  ) : (
+    <DialogContent {...props} />
+  );
 };
 
 const DialogOrDrawerDescription: React.FC<any> = (props) => {
-  const { isMobile } = useMediaQuery();
-  return isMobile ? (
+  const { isMobile, isTablet } = useMediaQuery();
+
+  return isMobile || isTablet ? (
     <DrawerDescription {...props} />
   ) : (
     <DialogDescription {...props} />
@@ -34,13 +39,21 @@ const DialogOrDrawerDescription: React.FC<any> = (props) => {
 };
 
 const DialogOrDrawerHeader: React.FC<any> = (props) => {
-  const { isMobile } = useMediaQuery();
-  return isMobile ? <DrawerHeader {...props} /> : <DialogHeader {...props} />;
+  const { isMobile, isTablet } = useMediaQuery();
+  return isMobile || isTablet ? (
+    <DrawerHeader {...props} />
+  ) : (
+    <DialogHeader {...props} />
+  );
 };
 
 const DialogOrDrawerTrigger: React.FC<any> = (props) => {
-  const { isMobile } = useMediaQuery();
-  return isMobile ? <DrawerTrigger {...props} /> : <DialogTrigger {...props} />;
+  const { isMobile, isTablet } = useMediaQuery();
+  return isMobile || isTablet ? (
+    <DrawerTrigger {...props} />
+  ) : (
+    <DialogTrigger {...props} />
+  );
 };
 
 export {
