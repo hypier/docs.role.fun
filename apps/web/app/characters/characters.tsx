@@ -25,6 +25,7 @@ import { ChevronLeft } from "lucide-react";
 import { Toggle } from "@repo/ui/src/components/toggle";
 import SignInDialog from "../../components/user/sign-in-dialog";
 import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
+import { NewCharacter } from "../../components/characters/my-characters";
 
 const Characters = () => {
   const { t } = useTranslation();
@@ -129,9 +130,9 @@ const Characters = () => {
       </div>
       <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 md:grid md:grid-cols-2 lg:grid-cols-3 lg:pl-0 2xl:grid-cols-4">
         {characters?.length > 0
-          ? characters.map(
-              (character, index) =>
-                character.name && (
+          ? characters.map((character, index) => {
+              if (character.name) {
+                return (
                   <CharacterCard
                     id={character._id}
                     key={character._id}
@@ -143,8 +144,13 @@ const Characters = () => {
                     showRemix={true}
                     isNSFW={character?.isNSFW}
                   />
-                ),
-            )
+                );
+              }
+              if (index === 7) {
+                return <NewCharacter />;
+              }
+              return null;
+            })
           : Array.from({ length: 10 }).map((_, index) => (
               <CharacterCardPlaceholder key={index} />
             ))}
