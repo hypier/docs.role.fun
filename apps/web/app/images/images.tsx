@@ -227,14 +227,9 @@ const Images = () => {
             </div>
             <div className="w-full pt-2 text-center">
               <span className="text-xs text-muted-foreground underline">
-                <Link href="/content-rules">
-                  <span className="hidden lg:inline">
-                    {t(
-                      "By clicking 'Generate', you agree to our content rules and community guidelines.",
-                    )}
-                  </span>
-                  <span className="inline lg:hidden">
-                    {t("Content Policy")}
+                <Link href="/empty-canvas">
+                  <span>
+                    {t("Or, generate stunning images at Empty Canvas")}
                   </span>
                 </Link>
               </span>

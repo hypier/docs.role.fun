@@ -54,6 +54,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/empty-canvas",
+        destination: "https://emptycanvas.art/",
+        permanent: true,
+      },
+      {
         source: "/star",
         destination:
           "https://github.com/open-roleplay-ai/openroleplay.ai/stargazers",
