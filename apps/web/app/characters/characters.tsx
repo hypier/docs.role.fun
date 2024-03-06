@@ -149,7 +149,7 @@ const Characters = () => {
                   />
                 );
               }
-              if (index === 7) {
+              if (index === 0) {
                 return <NewCharacter />;
               }
               return null;
