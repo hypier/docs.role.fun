@@ -98,7 +98,9 @@ const Discover = () => {
       <Authenticated>
         <CheckinDialog />
       </Authenticated>
-      <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
+      <Unauthenticated>
+        <PreferenceDialog />
+      </Unauthenticated>
       <Unauthenticated>
         <SignInDialog
           isOpen={isSignInModalOpen}
