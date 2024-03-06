@@ -141,13 +141,6 @@ const PlusPlan = () => {
                 />
               </li>
               <li className="flex items-center gap-1">
-                <Lock className="h-4 w-4" />
-                {t("Private Images without Extra Crystals")}
-                <InfoTooltip
-                  content={t("Generate and manage images, only for you.")}
-                />
-              </li>
-              <li className="flex items-center gap-1">
                 <Sparkles className="h-4 w-4" />
                 {t("More Follow-up Answers")}
                 <InfoTooltip content={t("Choose from 3 follow-up answers")} />

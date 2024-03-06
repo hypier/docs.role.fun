@@ -37,7 +37,7 @@ export const generate = mutation({
       isNSFW: false,
       isBlacklisted: false,
       isArchived: false,
-      isPrivate,
+      isPrivate: true,
     });
     await ctx.scheduler.runAfter(0, internal.llm.generateImageTags, {
       userId: user._id,

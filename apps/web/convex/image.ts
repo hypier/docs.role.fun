@@ -235,7 +235,6 @@ export const generateByPrompt = internalAction(
       {
         userId,
         name: model,
-        multiplier: isPrivate ? (isPlus ? 1 : 2) : 1,
       },
     );
 
