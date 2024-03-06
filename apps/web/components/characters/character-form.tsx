@@ -86,7 +86,7 @@ export default function CharacterForm() {
     voiceId = (searchParams.get("voiceId") as any) || "MjxppkSa4IoDSRGySayZ",
     isDraft = searchParams.get("isDraft") || true,
     isNSFW = Boolean(searchParams.get("isNSFW")) || false,
-    visibility: _visibility = searchParams.get("visibility") || "public",
+    visibility: _visibility = searchParams.get("visibility") || "private",
   } = character || remixCharacter || {};
 
   const upload = useAction(api.image.upload);
@@ -252,7 +252,7 @@ export default function CharacterForm() {
             >
               <PopoverContent className="p-4 pb-8 lg:w-full lg:rounded-lg lg:bg-background lg:p-2 lg:pb-2">
                 <RadioGroup
-                  defaultValue={visibility ?? "public"}
+                  defaultValue={visibility ?? "private"}
                   className="p-1"
                   value={visibility}
                   onValueChange={(value) => setVisibility(value)}
