@@ -10,7 +10,7 @@ import CharacterCard from "../../components/cards/character-card";
 import CharacterCardPlaceholder from "../../components/cards/character-card-placeholder";
 import { useTranslation } from "react-i18next";
 import useCurrentUser from "../lib/hooks/use-current-user";
-import { useConvexAuth, useQuery } from "convex/react";
+import { Unauthenticated, useConvexAuth, useQuery } from "convex/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Carousel,
@@ -26,6 +26,7 @@ import { Toggle } from "@repo/ui/src/components/toggle";
 import SignInDialog from "../../components/user/sign-in-dialog";
 import { useNsfwPreference } from "../lib/hooks/use-nsfw-preference";
 import { NewCharacter } from "../../components/characters/my-characters";
+import PreferenceDialog from "../../components/user/preference-dialog";
 
 const Characters = () => {
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ const Characters = () => {
   const ref = useRef(null);
   const inView = useInView(ref);
   const me = useCurrentUser();
+  const username = me?.name;
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   useEffect(() => {
@@ -76,6 +78,7 @@ const Characters = () => {
         isOpen={isSignInModalOpen}
         setIsOpen={setIsSignInModalOpen}
       />
+      <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
       <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
         {t("Characters")}
       </div>
