@@ -95,7 +95,7 @@ const CharacterCard = (props: {
             )}
             {hidePC && (
               <Button
-                className="absolute -right-1.5 -top-1.5 z-[50] hidden h-5 w-5 rounded-full bg-white p-[3px] text-xs shadow-lg ring-1 ring-foreground/10 hover:bg-white/90 group-hover:flex md:text-[10px]"
+                className="absolute -right-1.5 -top-1.5 z-[10] hidden h-5 w-5 rounded-full bg-white p-[3px] text-xs shadow-lg ring-1 ring-foreground/10 hover:bg-white/90 group-hover:flex md:text-[10px]"
                 size="icon"
                 onTouchStart={(e) => {
                   e.stopPropagation();
@@ -184,7 +184,7 @@ const CharacterCard = (props: {
           </Card>
         </Link>
         {hide && (
-          <div className="absolute bottom-0 left-0 z-50 flex w-full items-center justify-center">
+          <div className="absolute bottom-0 left-0 z-10 flex w-full items-center justify-center">
             <div className="flex w-full justify-between rounded-lg p-5">
               <Button
                 className="h-16 w-16 rounded-full border-none bg-gradient-to-b from-red-400 to-red-600 text-white hover:to-red-400 hover:text-white dark:hover:bg-red-600"
