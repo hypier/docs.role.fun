@@ -146,6 +146,7 @@ const Characters = () => {
                     model={character.model}
                     showRemix={true}
                     isNSFW={character?.isNSFW}
+                    showHides={true}
                   />
                 );
               }
