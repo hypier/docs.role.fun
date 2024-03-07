@@ -79,7 +79,7 @@ const Characters = () => {
         setIsOpen={setIsSignInModalOpen}
       />
       <Unauthenticated>{!username && <PreferenceDialog />}</Unauthenticated>
-      <div className="flex items-center gap-1 px-4 font-medium lg:mt-2 lg:px-0">
+      <div className="flex items-center gap-1 px-4 font-medium lg:mt-6 lg:px-0">
         {t("Characters")}
       </div>
       <div className="relative flex place-content-center py-4 lg:justify-start lg:py-0">

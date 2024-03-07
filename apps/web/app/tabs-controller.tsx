@@ -73,27 +73,15 @@ function TabsController() {
             {t("Images")}
           </TabsTrigger>
         </Link>
-        {isAuthenticated ? (
-          <Link href="/crystals">
-            <TabsTrigger
-              className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
-              value="/crystals"
-            >
-              <Crystal className="h-5 w-5 p-0.5 lg:p-1" />
-              {t("Crystals")}
-            </TabsTrigger>
-          </Link>
-        ) : (
-          <Link href="/models" className="lg:hidden">
-            <TabsTrigger
-              className="w-16 flex-col items-center gap-0.5 rounded-full"
-              value="/models"
-            >
-              <Package className="h-5 w-5 p-0.5 lg:p-1" />
-              {t("Models")}
-            </TabsTrigger>
-          </Link>
-        )}
+        <Link href="/crystals">
+          <TabsTrigger
+            className="w-16 flex-col items-center gap-0.5 rounded-full lg:flex lg:w-full lg:flex-row lg:items-start"
+            value="/crystals"
+          >
+            <Crystal className="h-5 w-5 p-0.5 lg:p-1" />
+            {t("Crystals")}
+          </TabsTrigger>
+        </Link>
         <Link href="/discord">
           <TabsTrigger
             className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"

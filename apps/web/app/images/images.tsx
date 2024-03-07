@@ -126,22 +126,6 @@ const Images = () => {
     return (
       <div className="flex w-full flex-col justify-between gap-1">
         <div className="flex items-center gap-1">
-          <Toggle
-            className="h-8 min-w-fit gap-1 bg-background text-xs"
-            variant="outline"
-            pressed={field.value}
-            onPressedChange={field.onChange}
-          >
-            {field.value ? (
-              <>
-                <Lock className="h-4 w-4 p-0.5" /> {t("Private")}
-              </>
-            ) : (
-              <>
-                <Unlock className="h-4 w-4 p-0.5" /> {t("Public")}
-              </>
-            )}
-          </Toggle>
           {me?.name ? (
             <Button
               className="w-full gap-1 text-xs"
