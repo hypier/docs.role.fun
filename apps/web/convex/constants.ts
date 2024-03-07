@@ -219,7 +219,7 @@ export const modelData = [
   {
     value: "nousresearch/nous-capybara-7b:free",
     description: "Copybara 7B by Nous Research",
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "mistralai/mistral-7b-instruct:free",
