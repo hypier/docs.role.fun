@@ -224,27 +224,27 @@ export const modelData = [
   {
     value: "mistralai/mistral-7b-instruct:free",
     description: "Mistral 7B by Mistral AI",
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "huggingfaceh4/zephyr-7b-beta:free",
     description: "Zephyr 7B by Hugging Face",
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "openchat/openchat-7b:free",
     description: "Openchat 7B by Open Chat",
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "gryphe/mythomist-7b:free",
     description: "Mythomist 7B by Gryphe",
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "openrouter/cinematika-7b",
     description: "Cinematika 7B by Open Router",
-    crystalPrice: 0,
+    crystalPrice: 0.05,
   },
   {
     value: "nousresearch/nous-hermes-llama2-13b",
