@@ -1,4 +1,4 @@
-export const SIGN_UP_FREE_CRYSTALS = 0;
+export const SIGN_UP_FREE_CRYSTALS = 15;
 export const DIVIDEND_RATE = 0.25;
 export const DEFAULT_MODEL = "openrouter/auto";
 export const PERPLEXITY_API_URL = "https://api.perplexity.ai";
