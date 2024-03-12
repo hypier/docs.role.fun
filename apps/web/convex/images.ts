@@ -351,7 +351,7 @@ export const removeOldImages = internalMutation({
         q.lt("_creationTime", weekAgo.getTime()),
       )
       .filter((q) =>
-        q.and(
+        q.or(
           q.or(
             q.eq(q.field("isNSFW"), true),
             q.eq(q.field("isBlacklisted"), true),
