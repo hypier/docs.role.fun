@@ -345,19 +345,19 @@ export const imageModelData = [
     value: "daun-io/openroleplay.ai-animagine-v3",
     description: "Animagine XL 3.0 - High-resolution, detailed anime images.",
     license: "Fair AI Public License 1.0-SD",
-    crystalPrice: 4,
+    crystalPrice: 6,
   },
   {
     value: "asiryan/blue-pencil-xl-v2",
     description: "Blue Pencil XL V2 - High-resolution, detailed anime images.",
     license: "creativeml-openrail-ml",
-    crystalPrice: 4,
+    crystalPrice: 6,
   },
   {
     value: "asiryan/meina-mix-v11",
     description: "MeinaMix V11 - High-resolution, detailed anime images.",
     license: "creativeml-openrail-ml",
-    crystalPrice: 4,
+    crystalPrice: 6,
   },
   {
     value: "pagebrain/dreamshaper-v8",
