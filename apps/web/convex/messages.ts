@@ -312,7 +312,7 @@ export const removeOldFollowUps = internalMutation({
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .filter((q) => q.neq(q.field("chosen"), undefined))
+      // .filter((q) => q.neq(q.field("chosen"), undefined))
       .take(4000);
     await Promise.all(followUps.map((followUp) => ctx.db.delete(followUp._id)));
     return { removed: followUps.length };
