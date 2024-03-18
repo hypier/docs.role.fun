@@ -362,7 +362,7 @@ export const removeOldImages = internalMutation({
       .collect();
 
     await Promise.all(
-      imagesToDelete.map(async (image) => {
+      imagesToDelete.slice(0, 512).map(async (image) => {
         console.log("Querying for character with image...");
         const characterWithImage = await ctx.db
           .query("characters")
