@@ -333,7 +333,7 @@ export const answer = internalAction({
           messageId,
           text: `${
             model ? model : "I"
-          } cannot reply at this time. Try again later.`,
+          } cannot reply at this time. Try different model or try again later.`,
         });
       }
     }
