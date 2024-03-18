@@ -350,15 +350,15 @@ export const removeOldImages = internalMutation({
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      .filter((q) =>
-        q.or(
-          q.or(
-            q.eq(q.field("isNSFW"), true),
-            q.eq(q.field("isBlacklisted"), true),
-          ),
-          q.eq(q.field("isPrivate"), true),
-        ),
-      )
+      // .filter((q) =>
+      //   q.or(
+      //     q.or(
+      //       q.eq(q.field("isNSFW"), true),
+      //       q.eq(q.field("isBlacklisted"), true),
+      //     ),
+      //     q.eq(q.field("isPrivate"), true),
+      //   ),
+      // )
       .collect();
 
     await Promise.all(
