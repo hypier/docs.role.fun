@@ -134,6 +134,9 @@ const Characters = () => {
       <div className="flex w-full grid-cols-2 flex-col gap-4 px-4 md:grid md:grid-cols-2 lg:grid-cols-3 lg:pl-0 2xl:grid-cols-4">
         {characters?.length > 0
           ? characters.map((character, index) => {
+              if (index === 0) {
+                return <NewCharacter />;
+              }
               if (character.name) {
                 return (
                   <CharacterCard
@@ -149,9 +152,6 @@ const Characters = () => {
                     showHides={true}
                   />
                 );
-              }
-              if (index === 0) {
-                return <NewCharacter />;
               }
               return null;
             })
