@@ -8,11 +8,9 @@ import { useTranslation } from "react-i18next";
 import useMediaQuery from "@repo/ui/src/hooks/use-media-query";
 import { Crystal } from "@repo/ui/src/components/icons";
 import { initializeTranslationStore } from "./lib/hooks/use-machine-translation";
-import { useConvexAuth } from "convex/react";
 
 function TabsController() {
   const { isMobile } = useMediaQuery();
-  const { isAuthenticated } = useConvexAuth();
   const pathname = usePathname();
   const getFirstDirectory = (urlString: string): string =>
     `/${new URL(urlString, "http://example.com").pathname.split("/")[1] || ""}`;

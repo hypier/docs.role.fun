@@ -5,14 +5,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/src/components";
-import { usePaginatedQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import CharacterCardPlaceholder from "../cards/character-card-placeholder";
 import CharacterCard from "../cards/character-card";
 import { AspectRatio } from "@repo/ui/src/components/aspect-ratio";
 import { Plus } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { InfoTooltip, TooltipContent } from "@repo/ui/src/components/tooltip";
+import { InfoTooltip } from "@repo/ui/src/components/tooltip";
 import { useInView } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -31,9 +30,6 @@ export const NewCharacter = () => {
           <div className="flex gap-2">
             <Plus /> {t("Create character")}
           </div>
-          <span className="text-center text-[10px] text-muted-foreground">
-            {t("Create characters and earn crystals.")}
-          </span>
         </Card>
       </AspectRatio>
     </Link>
