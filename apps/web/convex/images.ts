@@ -350,15 +350,6 @@ export const removeOldImages = internalMutation({
       .withIndex("by_creation_time", (q) =>
         q.lt("_creationTime", weekAgo.getTime()),
       )
-      // .filter((q) =>
-      //   q.or(
-      //     q.or(
-      //       q.eq(q.field("isNSFW"), true),
-      //       q.eq(q.field("isBlacklisted"), true),
-      //     ),
-      //     q.eq(q.field("isPrivate"), true),
-      //   ),
-      // )
       .collect();
 
     await Promise.all(
@@ -379,9 +370,9 @@ export const removeOldImages = internalMutation({
           await ctx.scheduler.runAfter(0, internal.image.deleteImageAction, {
             imageUrl: image.imageUrl,
           });
-          console.log("Deleting image with ID:", image?._id);
-          await ctx.db.delete(image?._id);
         }
+        console.log("Deleting image with ID:", image?._id);
+        await ctx.db.delete(image?._id);
       }),
     );
 
