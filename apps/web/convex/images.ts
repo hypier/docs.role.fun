@@ -367,7 +367,7 @@ export const removeOldImages = internalMutation({
         const characterWithImage = await ctx.db
           .query("characters")
           .withIndex("byCardImageUrl", (q) =>
-            q.lt("cardImageUrl", image.imageUrl),
+            q.eq("cardImageUrl", image.imageUrl),
           )
           .first();
         console.log("Character with image query result:", characterWithImage);
