@@ -291,11 +291,11 @@ export const addImage = internalMutation(
 export const removeOldMessages = internalMutation({
   args: {},
   handler: async (ctx) => {
-    const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const messages = await ctx.db
       .query("messages")
       .withIndex("by_creation_time", (q) =>
-        q.lt("_creationTime", monthAgo.getTime()),
+        q.lt("_creationTime", weekAgo.getTime()),
       )
       .take(4000);
     await Promise.all(messages.map((message) => ctx.db.delete(message._id)));
