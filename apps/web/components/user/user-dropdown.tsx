@@ -5,6 +5,7 @@ import Image from "next/image";
 import {
   Book,
   ChevronDown,
+  CircleUser,
   CircleUserRound,
   LogIn,
   LogOut,
@@ -98,6 +99,11 @@ export default function UserDropdown() {
           )}
           {user ? (
             <>
+              <StyledLink
+                text={t("Account Portal")}
+                Icon={<CircleUser className="h-4 w-4 text-muted-foreground" />}
+                href="https://accounts.openroleplay.ai/user"
+              />
               <StyledButton
                 text={t("Logout")}
                 Icon={<LogOut className="h-4 w-4 text-muted-foreground" />}
