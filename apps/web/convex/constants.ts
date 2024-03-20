@@ -72,6 +72,12 @@ export const getImageModelCrystalPrice = (modelName: string) => {
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
   {
+    value: "anthropic/claude-3-haiku",
+    description: "Anthropic Haiku",
+    crystalPrice: 1,
+    isNSFW: false,
+  },
+  {
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     description: "Nous Hermes 2 Mixtral 8x7B DPO",
     crystalPrice: 1,
