@@ -81,8 +81,7 @@ export default function CharacterForm() {
     instructions = searchParams.get("instructions") || "",
     greetings = searchParams.get("greetings") || "Hi.",
     cardImageUrl = searchParams.get("cardImageUrl") || "",
-    model = (searchParams.get("model") as any) ||
-      "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
+    model = (searchParams.get("model") as any) || "anthropic/claude-3-haiku",
     voiceId = (searchParams.get("voiceId") as any) || "MjxppkSa4IoDSRGySayZ",
     isDraft = searchParams.get("isDraft") || true,
     isNSFW = Boolean(searchParams.get("isNSFW")) || false,
