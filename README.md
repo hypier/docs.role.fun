@@ -118,9 +118,3 @@ Openroleplay.ai is open-source under the GNU Affero General Public License Versi
 - Prevent corporations from taking the code and using it as part of their closed-source proprietary products
 - Prevent corporations from offering Openroleplay.ai as a service without contributing to the open source project
 - Prevent corporations from confusing people and making them think that the service they sell is in any shape or form approved by the original team
-
-## When you'd like to commercialize your own version of Openroleplay.ai
-
-- You need to open-source your modifications.
-- After your users registration, you should provide a prominent mention and link to the original project (https://openroleplay.ai). You should clearly mention that you provide a modified version of the official project, Typebot. It would be also a good place to explain your version advantages comparing to the original project.
-- You need to provide a link to your forked repository somewhere in the landing page or the app. This way, interested users can easily access and review the modifications you’ve made.
