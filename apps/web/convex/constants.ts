@@ -469,7 +469,7 @@ export const TranslationModelData = [
   {
     value: "deepl",
     description: "DeepL - Machine Translation API",
-    crystalPrice: 3,
+    crystalPrice: 2,
   },
 ];
 
