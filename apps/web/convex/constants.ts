@@ -78,6 +78,18 @@ export const modelData = [
     isNSFW: false,
   },
   {
+    value: "anthropic/claude-3-sonnet",
+    description: "Anthropic Sonnet",
+    crystalPrice: 5,
+    isNSFW: false,
+  },
+  {
+    value: "anthropic/claude-3-opus",
+    description: "Anthropic Opus",
+    crystalPrice: 10,
+    isNSFW: false,
+  },
+  {
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     description: "Nous Hermes 2 Mixtral 8x7B DPO",
     crystalPrice: 1,
@@ -136,11 +148,6 @@ export const modelData = [
     crystalPrice: 1,
     src: "/models/google.png",
     alt: "Company logo of Google",
-  },
-  {
-    value: "01-ai/yi-34b-chat",
-    description: "Yi 34B by 01.AI",
-    crystalPrice: 1,
   },
   {
     value: "anthropic/claude-instant-v1",
