@@ -109,11 +109,10 @@ export const publish = mutation({
     const greetings = character?.greetings?.[0]
       ? { greetings: character.greetings }
       : { greetings: ["Hi."] };
-    const visibility = args.visibility ? { visibility: args.visibility } : {};
 
     await ctx.db.patch(args.id, {
       isDraft: false,
-      ...visibility,
+      visibility: "private",
       ...description,
       ...greetings,
       updatedAt,
