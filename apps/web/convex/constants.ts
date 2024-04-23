@@ -8,6 +8,7 @@ export const STABILITY_AI_API_URL =
   "https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image";
 export const MISTRAL_AI_API_URL = "https://api.mistral.ai/v1";
 export const OPENROUTER_API_URL = "https://openrouter.ai/api/v1";
+export const MONOLYTH_API_URL = "https://api.monolyth.ai/v1";
 
 export const getBaseURL = (modelName: string) => {
   switch (modelName) {
