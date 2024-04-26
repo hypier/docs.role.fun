@@ -27,6 +27,8 @@ export const getBaseURL = (modelName: string) => {
     case "pplx-70b-online":
     case "pplx-70b-chat":
       return PERPLEXITY_API_URL;
+    case "soliloquy-l3":
+      return MONOLYTH_API_URL;
     default:
       return OPENROUTER_API_URL;
   }
@@ -49,6 +51,8 @@ export const getAPIKey = (modelName: string) => {
     case "mistral-small":
     case "mistral-medium":
       return process.env.MISTRAL_API_KEY;
+    case "soliloquy-l3":
+      return process.env.MONOLYTH_API_KEY;
     default:
       return process.env.OPENROUTER_API_KEY;
   }
@@ -72,6 +76,12 @@ export const getImageModelCrystalPrice = (modelName: string) => {
 
 // Model metadata is hard-coded due to frequent updates in open-source LLM.
 export const modelData = [
+  {
+    value: "soliloquy-l3",
+    description: "Soliloquy L3 by Monolyth",
+    crystalPrice: 1,
+    isNSFW: false,
+  },
   {
     value: "anthropic/claude-3-haiku",
     description: "Anthropic Haiku",
