@@ -78,8 +78,8 @@ export const getImageModelCrystalPrice = (modelName: string) => {
 export const modelData = [
   {
     value: "soliloquy-l3",
-    description: "Soliloquy L3 by Monolyth",
-    crystalPrice: 1,
+    description: "Soliloquy L3 by Lynn",
+    crystalPrice: 0,
     isNSFW: false,
   },
   {
