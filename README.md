@@ -104,11 +104,9 @@ Check out [Convex Clerk](https://docs.convex.dev/auth/clerk) for detailed guide.
 
 Let's shape our roadmap [together](https://github.com/open-roleplay-ai/openroleplay.ai/issues).
 
-## Support This Project
+## Want to build model-agnostic AI app? Check out [monolyth.ai](https://monolyth.ai/)
 
-This project is entirely bootstrapped and was initiated out of personal passion and effort. Your contributions are invaluable and will ensure the continued vitality of this project.
-
-Any contributions you make are greatly appreciated. There are many ways to contribute, from improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into Openroleplay.ai itself.
+Dozens of new AI models are trained and fine-tuned daily, with the process only accelerating. Your app deserves to remain functional even when an AI model becomes outdated. [Build with the best models for each moment](https://monolyth.ai/models).
 
 ## License
 
