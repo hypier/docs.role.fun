@@ -34,7 +34,7 @@ You have full control over your data, model, and characters.
 
 ## Features
 
-- **Open source models:** Choose from a variety of AI models supported by [monolyth.ai](https://monolyth.ai/) or bring yours, create your very own AI characters.
+- **Open source models:** Choose from a variety of AI models supported by [OpenRouter](https://openrouter.ai/) or bring yours, create your very own AI characters.
 - **Customize Characters:** Create your own characters, personas and UI unique.
 - **Generate Images:** Create images with open-source AI models.
 - **ElevenLabs Voice:** Create characters that can talk to users with a realistic voice.
@@ -103,10 +103,6 @@ Check out [Convex Clerk](https://docs.convex.dev/auth/clerk) for detailed guide.
 ## Roadmap and Feedback
 
 Let's shape our roadmap [together](https://github.com/open-roleplay-ai/openroleplay.ai/issues).
-
-## Want to build model-agnostic AI app? Check out [monolyth.ai](https://monolyth.ai/)
-
-Dozens of new AI models are trained and fine-tuned daily, with the process only accelerating. Your app deserves to remain functional even when an AI model becomes outdated. [Build with the best models for each moment](https://monolyth.ai/models).
 
 ## License
 
