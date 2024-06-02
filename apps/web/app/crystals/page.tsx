@@ -220,13 +220,14 @@ const Package = ({
       desktopOnly
     >
       <Card
-        className="relative aspect-square h-[23rem] w-[23rem] rounded-xl tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
+        className="relative aspect-square h-[23rem] w-[23rem] cursor-not-allowed rounded-xl tabular-nums duration-200 hover:shadow-lg md:h-64 md:w-64"
         role="button"
         onClick={
           handlePurchaseClick
             ? (e) => handlePurchaseClick(e)
             : () => router.push("/sign-in")
         }
+        aria-disabled={true}
       >
         <Image
           src={src}
@@ -375,7 +376,6 @@ export default function Page() {
       )}
       <div className="flex flex-col items-center gap-4 px-5">
         <h1 className="font-display text-5xl">{t("Crystals")}</h1>
-
         <h2 className="flex items-center justify-center gap-1 bg-gradient-to-b from-gray-400 to-gray-600 bg-clip-text font-display text-3xl text-transparent">
           {t("Crystal Top-Up")}
           <InfoTooltip
@@ -384,6 +384,21 @@ export default function Page() {
             )}
           />
         </h2>
+        We regret to inform you that openroleplay.ai will be sunsetting on
+        August 1st. Unfortunately, it has become challenging for us to maintain
+        the high standards of user experience, security, and content that our
+        community deserves.
+        <br />
+        <br /> As part of this transition: <br />
+        <br />
+        - The purchase of new products and subscriptions will be gradually
+        limited. <br />- The creation of new accounts will also be restricted
+        over time. <br />
+        We recommend refraining from making new purchases or creating new
+        accounts to avoid any inconvenience. <br />- The websites, accounts,
+        data and this discord channel will be permanently deleted and will be
+        inaccessible by August 1st. <br />
+        Thank you for your support and understanding.
       </div>
 
       <AnimatePresence>
@@ -392,7 +407,7 @@ export default function Page() {
             <PlusPlan />
             <motion.section
               {...FadeInOut}
-              className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+              className="grid cursor-not-allowed gap-8 opacity-50 md:grid-cols-2 lg:grid-cols-3"
             >
               {packages.map((pkg) => (
                 <PackageWrapper
@@ -406,7 +421,7 @@ export default function Page() {
             </motion.section>
           </div>
         ) : (
-          <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <section className="grid cursor-not-allowed gap-8 opacity-50 md:grid-cols-2 lg:grid-cols-3">
             {packages.map((pkg) => (
               <Package
                 key={pkg.src}
