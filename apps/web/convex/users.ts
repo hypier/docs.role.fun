@@ -16,7 +16,7 @@ import { SIGN_UP_FREE_CRYSTALS } from "./constants";
  * by the JWT token's Claims config.
  */
 export const store = mutation({
-  args: { name: v.string() },
+  args: { username: v.string() },
   handler: async (ctx, args) => {
     console.log("0 server identity", await ctx.auth.getUserIdentity());
     const identity = await ctx.auth.getUserIdentity();
@@ -34,8 +34,8 @@ export const store = mutation({
 
     if (user !== null) {
       // If we've seen this identity before but the name has changed, patch the value.
-      if (user.name !== args.name) {
-        await ctx.db.patch(user._id, { name: args.name });
+      if (user.name !== args.username) {
+        await ctx.db.patch(user._id, { name: args.username });
       }
       return user._id;
     }
@@ -45,7 +45,7 @@ export const store = mutation({
       .unique();
     if (userByEmail !== null) {
       return await ctx.db.insert("users", {
-        name: args.name,
+        name: args.username,
         tokenIdentifier: identity.tokenIdentifier,
         crystals: 0,
       });
@@ -53,7 +53,7 @@ export const store = mutation({
     // If it's a new identity, create a new `User`.
     const email = identity?.email ?? ""; // Handle potentially undefined email
     return await ctx.db.insert("users", {
-      name: args.name,
+      name: args.username,
       email: email,
       tokenIdentifier: identity.tokenIdentifier,
       crystals:
