@@ -24,7 +24,7 @@ export default function useStoreUserEffect() {
     // object on the server. You don't need to pass anything manually here.
     async function createUser() {
       console.log("11 user ", user);
-      const id = await storeUser({ username: user?.username as string });
+      const id = await storeUser({ username: user?.fullName as string });
       setUserId(id);
     }
     createUser();
