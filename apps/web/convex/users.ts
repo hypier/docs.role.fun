@@ -18,6 +18,7 @@ import { SIGN_UP_FREE_CRYSTALS } from "./constants";
 export const store = mutation({
   args: { username: v.string() },
   handler: async (ctx, args) => {
+    console.log("store server identity", await ctx.auth.getUserIdentity());
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Called storeUser without authentication present");
