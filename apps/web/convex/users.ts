@@ -18,7 +18,6 @@ import { SIGN_UP_FREE_CRYSTALS } from "./constants";
 export const store = mutation({
   args: { username: v.string() },
   handler: async (ctx, args) => {
-    console.log("0 server identity", await ctx.auth.getUserIdentity());
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Called storeUser without authentication present");
@@ -73,14 +72,12 @@ export const getUserInternal = internalQuery({
     id: v.id("users"),
   },
   handler: async (ctx, args) => {
-    console.log("2 server identity", await ctx.auth.getUserIdentity());
     const user = await ctx.db.get(args.id);
     return user ? user : null;
   },
 });
 
 export const getUser = async (ctx: any, doNotThrow?: boolean) => {
-  console.log("3 server identity", await ctx.auth.getUserIdentity());
   const identity = await ctx.auth.getUserIdentity();
   if (!identity && !doNotThrow) {
     throw new Error(
@@ -104,7 +101,6 @@ export const getUsername = query({
     id: v.id("users"),
   },
   handler: async (ctx, args) => {
-    console.log("4 server identity", await ctx.auth.getUserIdentity());
     const user = await ctx.db.get(args.id);
     return user ? user.name : null;
   },
@@ -113,7 +109,6 @@ export const getUsername = query({
 export const me = query({
   args: {},
   handler: async (ctx, args) => {
-    console.log("5 server identity", await ctx.auth.getUserIdentity());
     const user = await getUser(ctx);
     if (user?.isBanned) {
       throw new Error("User is banned");
@@ -125,7 +120,6 @@ export const me = query({
 export const persona = query({
   args: {},
   handler: async (ctx, args) => {
-    console.log("6 server identity", await ctx.auth.getUserIdentity());
     const user = await getUser(ctx);
     if (!user.primaryPersonaId) return user;
     const persona = await ctx.db.get(user?.primaryPersonaId);
@@ -139,7 +133,6 @@ export const setLanguage = mutation({
     languageTag: v.string(),
   },
   handler: async (ctx, { languageTag }) => {
-    console.log("7 server identity", await ctx.auth.getUserIdentity());
     const user = await getUser(ctx);
     if (!user) {
       throw new Error("User not found");
@@ -151,7 +144,6 @@ export const setLanguage = mutation({
 
 export const toggleAutoTranslate = mutation({
   handler: async (ctx) => {
-    console.log("8 server identity", await ctx.auth.getUserIdentity());
     const user = await getUser(ctx);
     if (!user) {
       throw new Error("User not found");
@@ -170,7 +162,6 @@ export const updateNSFWPreference = mutation({
     ),
   },
   handler: async (ctx, { nsfwPreference }) => {
-    console.log("9 server identity", await ctx.auth.getUserIdentity());
     const user = await getUser(ctx);
     if (!user) {
       throw new Error("User not found");
