@@ -396,9 +396,7 @@ export const generateByPrompt = internalAction(
       console.log("Image uploaded, extracting image URL");
       const urlParts = response.url.split("/");
       const filename = urlParts[urlParts.length - 1];
-      const domain =process.env.NODE_ENV === "development"
-          ? process.env.R2_DOMAIN_DEV
-          : process.env.R2_DOMAIN;
+      const domain = process.env.R2_DOMAIN;
       const imageUrl = `${domain}/${filename}`;
       // const imageUrl = `https://r2.openroleplay.ai/${filename}`;
       console.log(`Image URL extracted: ${imageUrl}`);
@@ -439,9 +437,7 @@ export const upload = action({
     console.log("Image uploaded, extracting image URL");
     const urlParts = response.url.split("/");
     const uploadedFilename = urlParts[urlParts.length - 1];
-    const domain =process.env.NODE_ENV === "development"
-        ? process.env.R2_DOMAIN_DEV
-        : process.env.R2_DOMAIN;
+    const domain =  process.env.R2_DOMAIN;
     const imageUrl = `${domain}/${uploadedFilename}`;
     console.log(`Image URL extracted: ${imageUrl}`);
     return imageUrl;

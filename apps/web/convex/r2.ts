@@ -6,10 +6,7 @@ import {
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const s3Client = new S3Client({
-  endpoint:
-    process.env.NODE_ENV === "development"
-      ? (process.env.R2_ENDPOINT_DEV as string)
-      : (process.env.R2_ENDPOINT as string),
+  endpoint: process.env.R2_ENDPOINT,
   region: "auto",
   credentials: {
     accessKeyId: process.env.R2_ACCESS_KEY_ID as string,
@@ -19,10 +16,7 @@ export const s3Client = new S3Client({
 
 export const getUploadUrl = async (filename: string) => {
   const params = {
-    Bucket:
-      process.env.NODE_ENV === "development"
-        ? process.env.R2_BUCKET_NAME_DEV
-        : process.env.R2_BUCKET_NAME,
+    Bucket: process.env.R2_BUCKET_NAME,
     Key: `${Math.random().toString(36).substring(2, 15)}${filename.substring(
       filename.lastIndexOf("."),
     )}`,
@@ -41,10 +35,7 @@ export const deleteImage = async (imageUrl: string) => {
   const urlParts = imageUrl.split("/");
   const filename = urlParts[urlParts.length - 1];
   const params = {
-    Bucket:
-      process.env.NODE_ENV === "development"
-        ? process.env.R2_BUCKET_NAME_DEV
-        : process.env.R2_BUCKET_NAME,
+    Bucket: process.env.R2_BUCKET_NAME,
     Key: filename,
   };
   const command = new DeleteObjectCommand(params);
