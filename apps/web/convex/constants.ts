@@ -1,4 +1,4 @@
-export const SIGN_UP_FREE_CRYSTALS = 150000;
+export const SIGN_UP_FREE_CRYSTALS = 15;
 export const DIVIDEND_RATE = 0.25;
 export const DEFAULT_MODEL = "openrouter/auto";
 export const PERPLEXITY_API_URL = "https://api.perplexity.ai";
@@ -85,6 +85,18 @@ export const modelData = [
   {
     value: "anthropic/claude-3-haiku",
     description: "Anthropic Haiku",
+    crystalPrice: 1,
+    isNSFW: false,
+  },
+  {
+    value: "mistralai/mistral-7b-instruct:free",
+    description: "Mistral 7B Instruct (free)",
+    crystalPrice: 0,
+    isNSFW: false,
+  },
+  {
+    value: "microsoft/phi-3-medium-128k-instruct:free",
+    description: "Phi-3 Medium Instruct (free)",
     crystalPrice: 1,
     isNSFW: false,
   },
