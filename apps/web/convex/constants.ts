@@ -97,7 +97,7 @@ export const modelData = [
   {
     value: "microsoft/phi-3-medium-128k-instruct:free",
     description: "Phi-3 Medium Instruct (free)",
-    crystalPrice: 1,
+    crystalPrice: 0,
     isNSFW: false,
   },
   // {
