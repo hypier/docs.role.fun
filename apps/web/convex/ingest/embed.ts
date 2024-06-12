@@ -5,7 +5,7 @@ export async function embedTexts(texts: string[]) {
   const openai = new OpenAI();
   const { data } = await openai.embeddings.create({
     input: texts,
-    model: "text-embedding-ada-002",
+    model: "text-embedding-3-small",
   });
   return data.map(({ embedding }) => embedding);
 }
@@ -15,7 +15,7 @@ export async function embedText(text: string) {
   const openai = new OpenAI();
   const { data } = await openai.embeddings.create({
     input: text,
-    model: "text-embedding-ada-002",
+    model: "text-embedding-3-small",
   });
   return data.map(({ embedding }) => embedding);
 }
