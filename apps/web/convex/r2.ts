@@ -27,7 +27,10 @@ export const getUploadUrl = async (filename: string) => {
       filename.lastIndexOf("."),
     )}`,
   };
+
   const command = new PutObjectCommand(params);
+
+  console.log("getUploadUrl params", params, command, s3Client);
   const signedUrl = await getSignedUrl(s3Client, command, {
     expiresIn: 60,
   });
