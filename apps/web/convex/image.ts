@@ -424,7 +424,7 @@ export const generateByPrompt = internalAction(
 export const upload = action({
   args: { file: v.bytes(), filename: v.string(), fileType: v.string() },
   handler: async (_, { file, filename, fileType }) => {
-    console.log("Getting upload URL for", filename);
+    console.log("Getting upload URL for", filename, process.env.R2_DOMAIN);
     const uploadUrl = await getUploadUrl(filename);
     console.log("Uploading image to obtained URL");
     const response = await fetch(uploadUrl, {
