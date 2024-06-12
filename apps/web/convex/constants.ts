@@ -88,18 +88,18 @@ export const modelData = [
     crystalPrice: 1,
     isNSFW: false,
   },
-  {
-    value: "anthropic/claude-3-sonnet",
-    description: "Anthropic Sonnet",
-    crystalPrice: 5,
-    isNSFW: false,
-  },
-  {
-    value: "anthropic/claude-3-opus",
-    description: "Anthropic Opus",
-    crystalPrice: 10,
-    isNSFW: false,
-  },
+  // {
+  //   value: "anthropic/claude-3-sonnet",
+  //   description: "Anthropic Sonnet",
+  //   crystalPrice: 5,
+  //   isNSFW: false,
+  // },
+  // {
+  //   value: "anthropic/claude-3-opus",
+  //   description: "Anthropic Opus",
+  //   crystalPrice: 10,
+  //   isNSFW: false,
+  // },
   {
     value: "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
     description: "Nous Hermes 2 Mixtral 8x7B DPO",
@@ -113,18 +113,18 @@ export const modelData = [
     alt: "Company logo of Open AI",
     crystalPrice: 1,
   },
-  {
-    value: "gpt-4-turbo-preview",
-    description: "GPT-4 Turbo by OpenAI",
-    src: "/models/openai.png",
-    alt: "Company logo of Open AI",
-    crystalPrice: 10,
-  },
-  {
-    value: "openrouter/auto",
-    description: "Auto (GPT-4 and Mistral-Medium)",
-    crystalPrice: 10,
-  },
+  // {
+  //   value: "gpt-4-turbo-preview",
+  //   description: "GPT-4 Turbo by OpenAI",
+  //   src: "/models/openai.png",
+  //   alt: "Company logo of Open AI",
+  //   crystalPrice: 10,
+  // },
+  // {
+  //   value: "openrouter/auto",
+  //   description: "Auto (GPT-4 and Mistral-Medium)",
+  //   crystalPrice: 10,
+  // },
   {
     value: "mistral-small",
     description: "Mistral Small by Mistral AI",
@@ -132,13 +132,13 @@ export const modelData = [
     alt: "Company logo of Mistral AI",
     crystalPrice: 1,
   },
-  {
-    value: "mistral-medium",
-    description: "Mistral Medium by Mistral AI",
-    src: "/models/mistral.png",
-    alt: "Company logo of Mistral AI",
-    crystalPrice: 5,
-  },
+  // {
+  //   value: "mistral-medium",
+  //   description: "Mistral Medium by Mistral AI",
+  //   src: "/models/mistral.png",
+  //   alt: "Company logo of Mistral AI",
+  //   crystalPrice: 5,
+  // },
   {
     value: "pplx-70b-online",
     description: "Perplexity 70B Online by Perplexity AI",
@@ -167,13 +167,13 @@ export const modelData = [
     src: "/models/claude.png",
     alt: "Company logo of Anthropic AI",
   },
-  {
-    value: "anthropic/claude-2",
-    description: "Claude 2 by Anthropic",
-    crystalPrice: 10,
-    src: "/models/claude.png",
-    alt: "Company logo of Anthropic AI",
-  },
+  // {
+  //   value: "anthropic/claude-2",
+  //   description: "Claude 2 by Anthropic",
+  //   crystalPrice: 10,
+  //   src: "/models/claude.png",
+  //   alt: "Company logo of Anthropic AI",
+  // },
   {
     value: "gryphe/mythomax-l2-13b",
     description: "Uncensored, Mythomax L2 13B by Gryphe",
@@ -222,24 +222,24 @@ export const modelData = [
     isNSFW: true,
     crystalPrice: 2,
   },
-  {
-    value: "neversleep/noromaid-20b",
-    description: "Uncensored, Noromaid 20B by Never Sleep",
-    isNSFW: true,
-    crystalPrice: 4,
-  },
+  // {
+  //   value: "neversleep/noromaid-20b",
+  //   description: "Uncensored, Noromaid 20B by Never Sleep",
+  //   isNSFW: true,
+  //   crystalPrice: 4,
+  // },
   {
     value: "cognitivecomputations/dolphin-mixtral-8x7b",
     description: "Uncensored, Dolphin Mixtral 8x7B by Eric Hartford",
     isNSFW: true,
     crystalPrice: 1,
   },
-  {
-    value: "neversleep/noromaid-mixtral-8x7b-instruct",
-    description: "Uncensored, Noromaid 8x7B by Never Sleep",
-    isNSFW: true,
-    crystalPrice: 4,
-  },
+  // {
+  //   value: "neversleep/noromaid-mixtral-8x7b-instruct",
+  //   description: "Uncensored, Noromaid 8x7B by Never Sleep",
+  //   isNSFW: true,
+  //   crystalPrice: 4,
+  // },
   {
     value: "nousresearch/nous-capybara-7b:free",
     description: "Copybara 7B by Nous Research",
@@ -346,16 +346,16 @@ export const modelData = [
     description: "Synthia 70B by Migtissera",
     crystalPrice: 3,
   },
-  {
-    value: "haotian-liu/llava-13b",
-    description: "Llava 13B by Haotian Liu",
-    crystalPrice: 5,
-  },
-  {
-    value: "nousresearch/nous-hermes-2-vision-7b",
-    description: "Hermes 2 Vision 7B by Nous Research",
-    crystalPrice: 5,
-  },
+  // {
+  //   value: "haotian-liu/llava-13b",
+  //   description: "Llava 13B by Haotian Liu",
+  //   crystalPrice: 5,
+  // },
+  // {
+  //   value: "nousresearch/nous-hermes-2-vision-7b",
+  //   description: "Hermes 2 Vision 7B by Nous Research",
+  //   crystalPrice: 5,
+  // },
 ];
 
 export const imageModelData = [
@@ -389,18 +389,18 @@ export const imageModelData = [
     license: "creativeml-openrail-ml",
     crystalPrice: 7,
   },
-  {
-    value: "asiryan/juggernaut-xl-v7",
-    description:
-      "Juggernaut XL v7 Model - Photorealistic, high quality images.",
-    license: "creativeml-openrail-ml",
-    crystalPrice: 8,
-  },
-  {
-    value: "dall-e-3",
-    description: "Dall-E 3 by Open AI",
-    crystalPrice: 75,
-  },
+  // {
+  //   value: "asiryan/juggernaut-xl-v7",
+  //   description:
+  //     "Juggernaut XL v7 Model - Photorealistic, high quality images.",
+  //   license: "creativeml-openrail-ml",
+  //   crystalPrice: 8,
+  // },
+  // {
+  //   value: "dall-e-3",
+  //   description: "Dall-E 3 by Open AI",
+  //   crystalPrice: 75,
+  // },
 ];
 
 export const voiceData = [
