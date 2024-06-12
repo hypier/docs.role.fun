@@ -7,6 +7,7 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   transpilePackages: ["@repo/ui"],
   images: {
+    domains: ['d.byte.im','r.byte.im'],
     remotePatterns: [
       {
         protocol: "https",
