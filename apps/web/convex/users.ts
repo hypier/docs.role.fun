@@ -78,6 +78,7 @@ export const getUserInternal = internalQuery({
 });
 
 export const getUser = async (ctx: any, doNotThrow?: boolean) => {
+  console.log("server identity", await ctx.auth.getUserIdentity());
   const identity = await ctx.auth.getUserIdentity();
   if (!identity && !doNotThrow) {
     throw new Error(
