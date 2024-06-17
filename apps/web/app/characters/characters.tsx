@@ -51,6 +51,7 @@ const Characters = () => {
     filters,
     { initialNumItems: 25 },
   );
+  console.log("xxx characters: ",results);
   const allCharacters = results || [];
   const characters = allCharacters.filter(
     (character) => character.name && character.cardImageUrl,
