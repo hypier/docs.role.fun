@@ -112,7 +112,7 @@ export const publish = mutation({
 
     await ctx.db.patch(args.id, {
       isDraft: false,
-      visibility: "private",
+      visibility: args.visibility,
       ...description,
       ...greetings,
       updatedAt,
