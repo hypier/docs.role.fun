@@ -22,6 +22,7 @@ const SignInDialog = ({
 }) => {
   const { t } = useTranslation();
   const [isIgnored, setIsIgnored] = useSessionStorage("sign-in-dialog", false);
+  const domain = process.env.DOMAIN || "openroleplay.ai";
 
   return (
     <AlertDialog
@@ -57,7 +58,7 @@ const SignInDialog = ({
             </AlertDialogDescription>
           </div>
           <div className="flex flex-col items-center gap-4">
-            <Link href="https://accounts.openroleplay.ai/sign-up">
+            <Link href={`https://${domain}/sign-up`}>
               <AlertDialogAction>{t("Sign up")}</AlertDialogAction>
             </Link>
             <Link
