@@ -133,18 +133,6 @@ export default function UserDropdown() {
             </div>
           )}
           <StyledLink
-            href="/docs"
-            text={t("Docs")}
-            Icon={<Book className="h-4 w-4 text-muted-foreground" />}
-            onClick={() => setOpenPopover(false)}
-          />
-          <StyledLink
-            href="/discord"
-            text={t("Join Discord")}
-            Icon={<Discord className="h-4 w-4 text-muted-foreground" />}
-            onClick={() => setOpenPopover(false)}
-          />
-          <StyledLink
             href="/crystals"
             text={t("Get Crystals")}
             Icon={<Crystal className="h-4 w-4 text-muted-foreground" />}

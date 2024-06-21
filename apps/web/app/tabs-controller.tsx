@@ -80,24 +80,6 @@ function TabsController() {
             {t("Crystals")}
           </TabsTrigger>
         </Link>
-        <Link href="/discord">
-          <TabsTrigger
-            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
-            value="/discord"
-          >
-            <Discord className="h-5 w-5 p-0.5 lg:p-1" />
-            {t("Discord")}
-          </TabsTrigger>
-        </Link>
-        <Link href="/docs">
-          <TabsTrigger
-            className="hidden w-full flex-col items-center gap-0.5 rounded-full lg:flex lg:flex-row lg:items-start"
-            value="/docs"
-          >
-            <Book className="h-5 w-5 p-0.5 lg:p-1" />
-            {t("Docs")}
-          </TabsTrigger>
-        </Link>
       </TabsList>
     </Tabs>
   );
