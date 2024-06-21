@@ -32,10 +32,8 @@ export default function Footer() {
         <div className="flex flex-col gap-8 sm:flex-row xl:gap-24">
           <div className="flex gap-8">
             <FooterLink href="/">
-              © {new Date().getFullYear()} Empty Canvas, Inc.
+              © {new Date().getFullYear()} Role.Fun
             </FooterLink>
-            <FooterLink href="/github">GitHub</FooterLink>
-            <FooterLink href="/docs">Docs</FooterLink>
             <FooterLink href="/privacy.html">Privacy</FooterLink>
             <FooterLink href="/terms.html">Terms</FooterLink>
             <FooterLink href="/crystal/terms">Crystal Terms</FooterLink>

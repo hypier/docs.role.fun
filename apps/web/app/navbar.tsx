@@ -46,16 +46,19 @@ export default function NavBar({}: {}) {
                 )}
               </>
             ) : (
-              <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
-                <Link
-                  className="hidden items-center gap-2 text-base text-muted-foreground hover:opacity-50 lg:flex"
-                  href="/github"
-                >
-                  <Badge className="font-default">
-                    <span>{t("alpha")}</span>
-                  </Badge>
-                </Link>
-              </Tooltip>
+              // <Tooltip content="Star openroleplay.ai on GitHub" desktopOnly>
+              //   <Link
+              //     className="hidden items-center gap-2 text-base text-muted-foreground hover:opacity-50 lg:flex"
+              //     href="/github"
+              //   >
+              //     <Badge className="font-default">
+              //       <span>{t("alpha")}</span>
+              //     </Badge>
+              //   </Link>
+              // </Tooltip>
+              <Badge className="font-default">
+                {t("alpha")}
+              </Badge>
             )}
           </div>
           <div className="flex items-center gap-2">

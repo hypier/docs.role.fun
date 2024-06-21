@@ -21,12 +21,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-        {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-        port: "",
-        pathname: "/**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "lh3.googleusercontent.com",
+      //   port: "",
+      //   pathname: "/**",
+      // },
       {
         protocol: "https",
         hostname: "img.clerk.com",
@@ -39,24 +39,24 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "openroleplay.ai",
-        port: "",
-        pathname: "/**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "openroleplay.ai",
+      //   port: "",
+      //   pathname: "/**",
+      // },
       {
         protocol: "https",
         hostname: "*.r2.cloudflarestorage.com",
         port: "",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "r2.openroleplay.ai",
-        port: "",
-        pathname: "/**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "r2.openroleplay.ai",
+      //   port: "",
+      //   pathname: "/**",
+      // },
     ],
   },
   async redirects() {
@@ -66,37 +66,7 @@ const nextConfig = {
         destination: "/crystals",
         permanent: true,
       },
-      {
-        source: "/empty-canvas",
-        destination: "https://emptycanvas.art/",
-        permanent: true,
-      },
-      {
-        source: "/star",
-        destination:
-          "https://github.com/open-roleplay-ai/openroleplay.ai/stargazers",
-        permanent: true,
-      },
-      {
-        source: "/github",
-        destination: "https://github.com/open-roleplay-ai/openroleplay.ai",
-        permanent: true,
-      },
-      {
-        source: "/discord",
-        destination: "https://discord.gg/bM5zzMEtdW",
-        permanent: true,
-      },
-      {
-        source: "/docs",
-        destination: "https://docs.openroleplay.ai",
-        permanent: true,
-      },
-      {
-        source: "/affiliate",
-        destination: "https://tally.so/r/3jPAVR",
-        permanent: true,
-      },
+
       {
         source: "/content-rules",
         destination: "/safety",

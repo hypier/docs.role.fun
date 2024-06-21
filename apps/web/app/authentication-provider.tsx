@@ -1,3 +1,4 @@
+// 用户验证器
 import { Toaster } from "@repo/ui/src/components/toaster";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ClerkProvider, useAuth } from "@clerk/nextjs";
@@ -23,9 +24,7 @@ export function AuthenticationProvider({
   return (
     <ClerkProvider
       publishableKey={
-        process.env.NODE_ENV === "development"
-          ? "pk_test_bmF0aW9uYWwtbW9zcXVpdG8tMjUuY2xlcmsuYWNjb3VudHMuZGV2JA"
-          : process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
       }
       appearance={{
         baseTheme: resolvedTheme === "dark" ? dark : undefined,

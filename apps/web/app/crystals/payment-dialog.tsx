@@ -16,10 +16,7 @@ import { toast } from "sonner";
 import { ArrowLeft, X } from "lucide-react";
 import { Drawer, DrawerContent } from "@repo/ui/src/components/drawer";
 
-const stripeKey =
-  process.env.NODE_ENV === "development"
-    ? "pk_test_51OJquFDWbs4J5X5ckbKjSEpcjrgOYTsHxRiOq1frxbahPFDtt0perqP7cWLl8FTUIQ0aVP7dMugvauRxpbT54Wjo004FuhU1Ug"
-    : "pk_live_51OJquFDWbs4J5X5c73h8TpqpRHY5OVpGBiWqia7DkkYMUUAf8yZ5upuDhEK2LRXcFe8qCrlzNLPmkJr0AKVtXn7600AVe2lUmZ";
+const stripeKey = process.env.STRIPE_KEY as string;
 
 const stripePromise = loadStripe(stripeKey);
 

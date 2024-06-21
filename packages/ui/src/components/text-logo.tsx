@@ -10,7 +10,7 @@ export default function TextLogo({
       className={`flex items-center font-medium ${className} hover:opacity-50`}
     >
       <span className="lg:hidden">{`ORP${isPlus ? "+" : ""}`}</span>
-      <span className="hidden lg:inline">{`OpenRoleplay${
+      <span className="hidden lg:inline">{`RoleFun${
         isPlus ? "+" : ""
       }`}</span>
     </span>
