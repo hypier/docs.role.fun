@@ -81,8 +81,8 @@ export const FadeInOut = {
 };
 
 export function constructMetadata({
-  title = "Openroleplay.ai: AI characters for everyone.",
-  description = "Openroleplay.ai is an AI characters and roleplaying platform for everyone.",
+  title = "Role.fun: AI characters for everyone.",
+  description = "Role.fun is an AI characters and roleplaying platform for everyone.",
   image = "/og.jpg",
   icon = "/favicon.ico",
   noIndex = false,
@@ -177,7 +177,7 @@ export function constructMetadata({
         },
       ],
     },
-    metadataBase: new URL("https://openroleplay.ai"),
+    metadataBase: new URL("https://Role.fun"),
     ...(noIndex && {
       robots: {
         index: false,

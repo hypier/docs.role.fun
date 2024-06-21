@@ -72,8 +72,8 @@ const initializeModel = async (character: any, userId: string, ctx: any) => {
     baseURL,
     apiKey,
     defaultHeaders: {
-      "HTTP-Referer": "https://openroleplay.ai",
-      "X-Title": "Openroleplay.ai",
+      "HTTP-Referer": "https://role.fun",
+      "X-Title": "Role.fun",
     },
   });
   let updatedModel = model;
@@ -429,8 +429,8 @@ export const generateFollowups = internalAction({
         baseURL,
         apiKey,
         defaultHeaders: {
-          "HTTP-Referer": "https://openroleplay.ai",
-          "X-Title": "Openroleplay.ai",
+          "HTTP-Referer": "https://role.fun",
+          "X-Title": "Role.fun",
         },
       });
       try {
@@ -829,7 +829,7 @@ export const generateImageTags = internalAction({
             isNSFW: functionArgs?.isNSFW,
             isPrivate: functionArgs?.isBlacklisted || functionArgs?.isNSFW,
             imageUrl: functionArgs?.isBlacklisted
-              ? "https://openroleplay.ai/image-failed.jpg"
+              ? "https://Role.fun/image-failed.jpg"
               : "",
           });
           if (functionArgs?.isBlacklisted) {

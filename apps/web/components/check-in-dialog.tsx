@@ -69,7 +69,7 @@ const CheckinDialog = () => {
                 </div>
                 <div className="flex text-center">
                   {t(
-                    "Crystal is an universal currency for calling AI features in openroleplay.ai.",
+                    "Crystal is an universal currency for calling AI features in Role.fun.",
                   )}
                 </div>
               </AlertDialogDescription>

@@ -21,12 +21,6 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-      // {
-      //   protocol: "https",
-      //   hostname: "lh3.googleusercontent.com",
-      //   port: "",
-      //   pathname: "/**",
-      // },
       {
         protocol: "https",
         hostname: "img.clerk.com",
@@ -39,24 +33,13 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-      // {
-      //   protocol: "https",
-      //   hostname: "openroleplay.ai",
-      //   port: "",
-      //   pathname: "/**",
-      // },
+
       {
         protocol: "https",
         hostname: "*.r2.cloudflarestorage.com",
         port: "",
         pathname: "/**",
       },
-      // {
-      //   protocol: "https",
-      //   hostname: "r2.openroleplay.ai",
-      //   port: "",
-      //   pathname: "/**",
-      // },
     ],
   },
   async redirects() {

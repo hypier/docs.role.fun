@@ -52,7 +52,7 @@ export const pay = action({
               product_data: {
                 name: `${numCrystals} Crystals`,
                 description:
-                  "Crystal is an universal currency for calling AI features in openroleplay.ai",
+                  "Crystal is an universal currency for calling AI features in Role.fun",
               },
             },
             quantity: 1,

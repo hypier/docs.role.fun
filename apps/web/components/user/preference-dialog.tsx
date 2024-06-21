@@ -47,12 +47,12 @@ const PreferenceDialog = () => {
         </Button>
         <AlertDialogHeader className="text-left">
           <AlertDialogTitle className="flex items-center justify-center gap-1 text-3xl">
-            {t("Openroleplay.ai")}
+            {t("Role.fun")}
           </AlertDialogTitle>
           <div className="flex w-full flex-col items-center justify-center">
             <AlertDialogDescription className="flex flex-col items-center justify-center gap-4">
               <div className="flex text-center text-lg">
-                {t("Openroleplay.ai will be sunsetting on August 1st. ")}
+                {t("Role.fun will be sunsetting on August 1st. ")}
               </div>
             </AlertDialogDescription>
           </div>

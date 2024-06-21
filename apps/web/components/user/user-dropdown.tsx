@@ -102,7 +102,7 @@ export default function UserDropdown() {
               <StyledLink
                 text={t("Account Portal")}
                 Icon={<CircleUser className="h-4 w-4 text-muted-foreground" />}
-                href="https://accounts.openroleplay.ai/user"
+                href="https://accounts.Role.fun/user"
               />
               <StyledButton
                 text={t("Logout")}

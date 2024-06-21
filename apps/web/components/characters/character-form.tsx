@@ -235,7 +235,7 @@ export default function CharacterForm() {
             {characterId ? (
               <ArchiveButton characterId={characterId} />
             ) : (
-              <Link href="https://docs.openroleplay.ai">
+              <Link href="https://docs.role.fun">
                 <Button variant="outline" className="gap-1">
                   <Book className="h-4 w-4" />
                   {t("Docs")}
