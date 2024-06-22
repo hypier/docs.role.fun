@@ -36,13 +36,13 @@ const Characters = () => {
   const { isAuthenticated } = useConvexAuth();
   const { nsfwPreference } = useNsfwPreference();
   const filters = {
-    languageTag: searchQuery.get("languageTag") || undefined,
-    genreTag: searchQuery.get("genreTag") || undefined,
-    personalityTag: searchQuery.get("personalityTag") || undefined,
-    genderTag: searchQuery.get("genderTag") || undefined,
-    model: searchQuery.get("model") || undefined,
-    nsfwPreference,
-    isAuthenticated,
+    languageTag: searchQuery.get("languageTag") || undefined, // 语言标签过滤器
+    genreTag: searchQuery.get("genreTag") || undefined, // 类型标签过滤器
+    personalityTag: searchQuery.get("personalityTag") || undefined, // 性格标签过滤器
+    genderTag: searchQuery.get("genderTag") || undefined, // 性别标签过滤器
+    model: searchQuery.get("model") || undefined, // 模型过滤器
+    nsfwPreference, // NSFW偏好过滤器
+    isAuthenticated, // 认证状态过滤器
   };
   const popularTags = useStableQuery(api.characters.listPopularTags) || {};
   const [tagPage, setTagPage] = useState(0);
@@ -65,9 +65,9 @@ const Characters = () => {
   useEffect(() => {
     if (inView) {
       if (!me?.name) {
-        setIsSignInModalOpen(true);
+        setIsSignInModalOpen(true); // 如果用户未登录，打开登录模态框
       } else {
-        loadMore(10);
+        loadMore(10); // 加载更多角色
       }
     }
   }, [inView, loadMore]);
