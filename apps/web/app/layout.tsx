@@ -11,17 +11,23 @@ import Spinner from "@repo/ui/src/components/spinner";
 import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 
+// Metadata for the document
 export const metadata = constructMetadata();
+
+// Viewport settings for the document
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
 };
+
+// Dynamically import Pageview component
 const Pageview = dynamic(() => import("./pageview"), {
   ssr: false,
 });
 
+// Root layout component
 export default async function RootLayout({
   children,
 }: {
