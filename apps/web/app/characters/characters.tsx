@@ -1,3 +1,4 @@
+// 这是一个客户端组件，用于显示角色列表和相关功能
 "use client";
 import { api } from "../../convex/_generated/api";
 import { useInView } from "framer-motion";
