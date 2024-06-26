@@ -22,7 +22,7 @@ const SignInDialog = ({
 }) => {
   const { t } = useTranslation();
   const [isIgnored, setIsIgnored] = useSessionStorage("sign-in-dialog", false);
-  const domain = process.env.DOMAIN || "role.fun";
+  const domain = process.env.NEXT_PUBLIC_DOMAIN || "role.fun";
 
   return (
     <AlertDialog
