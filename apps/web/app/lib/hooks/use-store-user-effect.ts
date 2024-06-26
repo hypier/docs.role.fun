@@ -34,7 +34,7 @@ export default function useStoreUserEffect() {
     // 异步函数以存储用户至数据库
     async function createUser() {
       // 打印用户信息日志（可视为调试信息）
-      console.log("服务器端身份标识", user);
+      // console.log("服务器端身份标识", user);
       // 调用storeUser突变存储用户，并获取返回的ID
       const id = await storeUser({ username: user?.fullName as string });
       // 设置存储后用户的ID至本地状态
