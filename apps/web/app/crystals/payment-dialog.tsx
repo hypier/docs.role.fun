@@ -19,6 +19,8 @@ import { Drawer, DrawerContent } from "@repo/ui/src/components/drawer";
 
 const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string;
 
+console.log("stripeKey: ", stripeKey)
+
 const stripePromise = loadStripe(stripeKey);
 
 const CrystalDialog: React.FC = () => {
