@@ -16,7 +16,7 @@ export const subscription = query({
     const payment = await ctx.db
       .query("payments")
       .withIndex("byUserId", (q) => q.eq("userId", user._id))
-      .filter((q) => q.neq(q.field("subscriptionId"), ""))
+      .filter((q) => q.neq(q.field("subscriptionId"), undefined))
       .filter((q) => q.eq(q.field("isPurchased"), true))
       .order("desc")
       .first();
@@ -159,7 +159,7 @@ export const getSubscriptionId = internalQuery({
     const { subscriptionId } = (await ctx.db
       .query("payments")
       .withIndex("byUserId", (q) => q.eq("userId", userId))
-      .filter((q) => q.neq(q.field("subscriptionId"), ""))
+      .filter((q) => q.neq(q.field("subscriptionId"), undefined))
       .filter((q) => q.eq(q.field("isPurchased"), true))
       .order("desc")
       .first())!;
