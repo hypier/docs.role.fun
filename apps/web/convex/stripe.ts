@@ -223,7 +223,7 @@ export const uncancel = internalAction({
 export const fulfill = internalAction({
   args: { signature: v.string(), payload: v.string() },
   handler: async ({ runMutation }, { signature, payload }) => {
-    const stripe = new Stripe(process.env.STRIPE_KEY!, {
+    const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
       apiVersion: "2023-10-16",
     });
     const webhookSecret = process.env.STRIPE_WEBHOOKS_SECRET as string;
