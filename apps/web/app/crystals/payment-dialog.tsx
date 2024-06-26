@@ -16,7 +16,8 @@ import { toast } from "sonner";
 import { ArrowLeft, X } from "lucide-react";
 import { Drawer, DrawerContent } from "@repo/ui/src/components/drawer";
 
-const stripeKey = process.env.STRIPE_API_KEY as string;
+
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string;
 
 const stripePromise = loadStripe(stripeKey);
 
