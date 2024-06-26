@@ -232,16 +232,6 @@ export default function CharacterForm() {
             {remixId && <RemixBadge />}
           </div>
           <div className="flex items-center gap-2">
-            {characterId ? (
-              <ArchiveButton characterId={characterId} />
-            ) : (
-              <Link href="https://docs.role.fun">
-                <Button variant="outline" className="gap-1">
-                  <Book className="h-4 w-4" />
-                  {t("Docs")}
-                </Button>
-              </Link>
-            )}
             <Popover
               open={openPopover}
               onOpenChange={
