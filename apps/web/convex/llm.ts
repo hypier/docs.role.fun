@@ -247,7 +247,7 @@ export const answer = internalAction({
               content: text,
             })) as ChatCompletionMessageParam[]),
           ],
-          max_tokens: 192,
+          max_tokens: 512,
         });
 
         const responseMessage = (response &&
