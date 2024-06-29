@@ -310,6 +310,7 @@ export default function CharacterForm() {
                         })();
                     }}
                     className="flex h-7 w-full gap-1 text-xs"
+                    id="publish"
                   >
                     <UploadCloud className="text-foreground-primary h-4 w-4" />
                     {visibility === "public" ? t("Publish") : t("Save")}
