@@ -7,7 +7,7 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   transpilePackages: ["@repo/ui"],
   images: {
-    domains: ['d.byte.im','r.byte.im'],
+    domains: ['d.byte.im','r.byte.im','d.role.fun', 'p.role.fun'],
     remotePatterns: [
       {
         protocol: "https",
@@ -18,6 +18,18 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "r.byte.im",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "d.role.fun",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "p.role.fun",
         port: "",
         pathname: "/**",
       },
