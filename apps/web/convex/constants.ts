@@ -418,6 +418,27 @@ export const voiceData = [
     sampleUrl:
       "https://p.role.fun/voice/female_monika_2zRM7PkgwBPiau2jvVXc.mp3",
   },
+  {
+    value: "Ca5bKgudqKJzq8YRFoAz",
+    description: "Coco Li - Female",
+    crystalPrice: 15,
+    sampleUrl:
+        "https://p.role.fun/voice/Coco_Li_Female_Ca5bKgudqKJzq8YRFoAz.mp3",
+  },
+  {
+    value: "ByhETIclHirOlWnWKhHc",
+    description: "Shan Shan - Female",
+    crystalPrice: 15,
+    sampleUrl:
+        "https://p.role.fun/voice/ShanShan_Female_ByhETIclHirOlWnWKhHc.mp3",
+  },
+  {
+    value: "5mZxJZhSmJTjL7GoYfYI",
+    description: "Karo Yang - Male",
+    crystalPrice: 15,
+    sampleUrl:
+        "https://p.role.fun/voice/KaroYang_Male_5mZxJZhSmJTjL7GoYfYI.mp3",
+  },
 ];
 
 export const TranslationModelData = [
