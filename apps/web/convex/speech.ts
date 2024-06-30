@@ -7,7 +7,7 @@ export const convertTextToSpeech = internalAction(
     ctx,
     {
       userId,
-      voiceId = "MjxppkSa4IoDSRGySayZ",
+      voiceId = "4JVOFy4SLQs9my0OLhEw",
       speechId,
       messageId,
       text,
@@ -33,6 +33,8 @@ export const convertTextToSpeech = internalAction(
         name: voiceId,
       },
     );
+
+    console.log("speech: ", voiceId, text)
 
     try {
       const response = await fetch(
