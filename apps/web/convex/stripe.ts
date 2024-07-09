@@ -60,7 +60,7 @@ export const pay = action({
         ],
         ...(user?.email ? { customer_email: user?.email } : {}),
         mode: "payment",
-        payment_method_types: ["card"],
+        payment_method_types: ["card", "alipay"],
         ui_mode: "embedded",
         return_url: `${domain}?session_id={CHECKOUT_SESSION_ID}`,
         automatic_tax: { enabled: true },
