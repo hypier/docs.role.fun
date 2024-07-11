@@ -37,3 +37,8 @@ yarn-error.log*
 .DS_Store
 *.pem
 bak
+.idea
+workbox*.js
+workbox*.js.map
+apps/web/public/sw.js
+apps/web/public/sw.js.map

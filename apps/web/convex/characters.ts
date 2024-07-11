@@ -317,6 +317,22 @@ export const listModels = query({
   },
 });
 
+export const listAllModels = query({
+  args: {},
+  handler: async (ctx, args) => {
+    let query = ctx.db
+      .query("characters")
+      .withIndex("byScore")
+      .filter((q) => q.eq(q.field("isDraft"), false))
+      .filter((q) => q.eq(q.field("isModel"), true))
+      .filter((q) => q.eq(q.field("isBlacklisted"), false))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .filter((q) => q.neq(q.field("visibility"), "private"));
+    
+    return await query.order("desc").take(500);
+  },
+});
+
 export const search = query({
   args: {
     paginationOpts: paginationOptsValidator,
