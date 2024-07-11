@@ -225,4 +225,11 @@ export default defineSchema({
   })
     .index("byUserId", ["userId"])
     .index("byType", ["type"]),
+  cards: defineTable({
+    characterId: v.id("characters"),
+    imageUrl: v.string(),
+    introduces: v.optional(v.string()),
+    isHide: v.optional(v.boolean()),
+  })
+    .index("byCharacterId", ["characterId"]),
 });
