@@ -15,6 +15,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "convex/auth.config.js"
-  ],
+, "app/sitemap.ts.bak"  ],
   "exclude": ["node_modules"]
 }
