@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...models.map((character) => ({
       url: `https://Role.fun/character/${character._id}`,
       lastModified: new Date(character.updatedAt),
-      changeFrequency: "weekly" as "weekly",
+      changeFrequency: "daily" as "daily",
       priority: 0.8,
     })),
     ...images.map((image) => ({
