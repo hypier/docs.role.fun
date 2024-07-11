@@ -8,7 +8,7 @@ const client = new ConvexHttpClient(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const characters = await client.query(api.characters.listBackend, {});
-  // const models = await client.query(api.characters.listAllModels);
+  const models = await client.query(api.characters.listAllModels);
   const images = await client.query(api.public.listImages, {});
 
   return [
