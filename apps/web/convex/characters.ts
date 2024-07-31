@@ -12,6 +12,12 @@ import { paginationOptsValidator } from "convex/server";
 import { internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
 
+/**
+ * 定义了一个用于插入或更新角色信息的突变（mutation）函数。
+ * 
+ * @param args - 包含角色各种属性的参数对象，其中id的存在与否决定是更新还是插入操作。
+ * @returns 返回更新或插入后的角色数据。
+ */
 export const upsert = mutation({
   args: {
     id: v.optional(v.id("characters")),
@@ -29,15 +35,22 @@ export const upsert = mutation({
     isNSFW: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
+    // 获取当前操作用户的信息
     const user = await getUser(ctx);
+    // 获取当前时间，用于更新角色的更新时间字段
     const updatedAt = new Date().toISOString();
+
+    // 如果提供了角色id，则执行更新操作
     if (args.id) {
+      // 从数据库中获取对应的角色草稿
       const characterDraft = await ctx.db.get(args.id);
+      // 检查当前用户是否有权限修改这个角色
       if (characterDraft && user._id !== characterDraft.creatorId) {
         throw new ConvexError({
           message: "User does not have permission to modify this character.",
         });
       }
+      // 构建要更新的角色信息，处理cardImageUrl的获取和设置
       const { id, cardImageUrl, cardImageStorageId, ...rest } = args;
       const character = await ctx.db.patch(id, {
         ...rest,
@@ -52,6 +65,8 @@ export const upsert = mutation({
       });
       return character;
     } else {
+      // 如果没有提供角色id，则执行插入操作
+      // 从args中解构出用于插入角色的信息，并处理description和instructions的长度限制
       const {
         cardImageStorageId,
         cardImageUrl,
@@ -59,6 +74,7 @@ export const upsert = mutation({
         instructions,
         ...rest
       } = args;
+      // 插入新的角色信息到数据库，包括创建者id、更新时间等字段
       const character = await ctx.db.insert("characters", {
         ...rest,
         description: description?.substring(0, 128),
@@ -81,35 +97,59 @@ export const upsert = mutation({
     }
   },
 });
+
+
+/**
+ * 发布角色信息的突变函数。
+ * 
+ * 此函数允许用户将角色从草稿状态发布为公开或私有状态。在发布过程中，它会验证用户是否有权限发布该角色，
+ * 确保角色具有必要的信息（如名称和卡牌图像），并更新角色的状态和相关信息。
+ * 
+ * @param ctx 上下文对象，包含数据库访问和用户信息等。
+ * @param args 函数参数，包括角色ID和可见性设置。
+ * @returns 返回发布角色的ID。
+ * @throws 如果角色不存在、用户无权限修改、角色缺少必要信息或设置为公开但缺少卡牌图像，则抛出错误。
+ */
 export const publish = mutation({
   args: {
     id: v.id("characters"),
     visibility: v.optional(v.union(v.literal("private"), v.literal("public"))),
   },
   handler: async (ctx, args) => {
+    // 获取当前操作用户的信息。
     const user = await getUser(ctx);
+    // 根据角色ID从数据库中获取角色信息。
     const character = await ctx.db.get(args.id);
 
+    // 验证角色是否存在。
     if (!character)
       throw new ConvexError({ message: "Character does not exist." });
+    // 验证用户是否有权限修改该角色。
     if (user._id !== character.creatorId)
       throw new ConvexError({
         message: "User does not have permission to modify this character.",
       });
+    // 如果角色设置为公开，验证是否具有卡牌图像。
     if (!character.cardImageUrl && args.visibility === "public")
       throw new ConvexError({
         message: "Character must have a card image to be published.",
       });
+    // 验证角色是否具有名称。
     if (!character.name)
       throw new ConvexError({ message: "Character must have a name." });
 
+    // 默认问候语设置。
     const greeting = character.greetings?.[0] || "Hi.";
+    // 更新角色的更新时间。
     const updatedAt = new Date().toISOString();
+    // 根据角色描述是否为空，决定是否更新描述信息。
     const description = character.description ? {} : { description: greeting };
+    // 根据角色是否已有问候语，决定是否更新问候语信息。
     const greetings = character?.greetings?.[0]
       ? { greetings: character.greetings }
       : { greetings: ["Hi."] };
 
+    // 更新角色状态和相关信息。
     await ctx.db.patch(args.id, {
       isDraft: false,
       visibility: args.visibility,
@@ -118,6 +158,7 @@ export const publish = mutation({
       updatedAt,
     });
 
+    // 如果角色没有语言标签，安排生成标签的任务。
     if (!character.languageTag) {
       await ctx.scheduler.runAfter(0, internal.llm.generateTags, {
         userId: user._id,
@@ -125,6 +166,7 @@ export const publish = mutation({
       });
     }
 
+    // 返回角色ID。
     return character._id;
   },
 });

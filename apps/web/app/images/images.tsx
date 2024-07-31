@@ -41,6 +41,16 @@ import {
   SelectValue,
 } from "@repo/ui/src/components/select";
 
+/**
+ * 定义了一个表单 schema，用于验证表单数据的结构和类型。
+ * 
+ * schema 包含三个字段：
+ * - prompt: 一个字符串字段，用于输入提示信息。它必须在5到1024个字符之间。
+ * - model: 一个联合类型字段，表示可用的模型列表。用户只能从这些预定义的模型中选择。
+ * - isPrivate: 一个布尔字段，表示模型是否为私有。
+ * 
+ * 使用 z.object 和 z.union 来定义字段的类型和约束。
+ */
 const formSchema = z.object({
   prompt: z.string().max(1024).min(5),
   model: z.union([
@@ -56,7 +66,6 @@ const formSchema = z.object({
   ]),
   isPrivate: z.boolean(),
 });
-
 const Images = () => {
   const { t } = useTranslation();
   const searchQuery = useSearchParams();
