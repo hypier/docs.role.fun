@@ -1,0 +1,8 @@
+{
+  "name": "名称",
+  "greeting": "问候语",
+  "description": "描述",
+  "instruction": "指令",
+  "visibility": "可见性",
+  "character_card": "角色卡"
+}
